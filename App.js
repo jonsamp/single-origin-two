@@ -17,9 +17,9 @@ const { store, persistor } = configureStore();
 function App() {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <AppContainer />
-      </PersistGate>
+      {/* <PersistGate loading={null} persistor={persistor}> */}
+      <AppContainer />
+      {/* </PersistGate> */}
     </Provider>
   );
 }
