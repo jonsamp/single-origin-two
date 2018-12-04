@@ -6046,6 +6046,11 @@ react-native-debugger-open@0.3.17:
     minimist "^1.2.0"
     semver "^5.4.1"
 
+react-native-fade@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-fade/-/react-native-fade-1.0.2.tgz#c21dcd3c3c7ba1e12abd5857dee80748b51b2635"
+  integrity sha512-8vB1BhhDOktqu7mFoLfvHowCd/77WretxRAsvW2PxolbW8tz1BDG8RGHpnFPj1yuHn7OeKPL9XqVm1kX8VyPUQ==
+
 react-native-gesture-handler@1.0.9:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.0.9.tgz#ddec4d19d51cb6fb54df6eca792ebd76aaef083f"
@@ -6063,6 +6068,11 @@ react-native-gesture-handler@^1.0.0:
     hoist-non-react-statics "^2.3.1"
     invariant "^2.2.2"
     prop-types "^15.5.10"
+
+react-native-iphone-x-helper@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.0.tgz#9f8a376eb00bc712115abff4420318a0063fa796"
+  integrity sha512-xIeTo4s77wwKgBZLVRIZC9tM9/PkXS46Ul76NXmvmixEb3ZwqGdQesR3zRiLMOoIdfOURB6N9bba9po7+x9Bag==
 
 react-native-maps@expo/react-native-maps#v0.22.1-exp.0:
   version "0.22.1"

@@ -28,7 +28,7 @@ class TabBar extends Component {
         style={{
           backgroundColor: theme.background,
           borderTopWidth: 1,
-          borderTopColor: theme.grey3,
+          borderTopColor: theme.grey2,
         }}
       />
     );

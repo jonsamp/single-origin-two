@@ -9,6 +9,7 @@ const greys = {
 
 export default {
   light: {
+    name: 'light',
     foreground: greys.grey5,
     background: greys.grey1,
     primary: '#00B890',
@@ -20,8 +21,9 @@ export default {
     grey6: '#000000',
   },
   dark: {
+    name: 'dark',
     foreground: greys.grey3,
-    background: greys.grey5,
+    background: greys.grey6,
     primary: '#00CA9D',
     grey1: greys.grey6,
     grey2: greys.grey5,
