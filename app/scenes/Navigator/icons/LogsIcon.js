@@ -15,15 +15,7 @@ const propTypes = {
 };
 
 const LogsIcon = ({ focused, theme }) => (
-  <Svg width="21" height="21">
-    <Svg.G
-      fill={focused ? themes[theme].primary : themes[theme].foreground}
-      fillRule="nonzero"
-    >
-      <Svg.Path d="M2.942 2.942V18.41H18.41V2.942H2.942zM1.722.5H19.63c.674 0 1.22.547 1.22 1.221v17.91c0 .674-.546 1.22-1.22 1.22H1.72A1.221 1.221 0 0 1 .5 19.632V1.72C.5 1.047 1.047.5 1.721.5z" />
-      <Svg.Path d="M4.163 7.07V4.629h12.64v2.443zM4.163 11.141V8.699h12.64v2.442zM4.163 15.211V12.77h8.955v2.442z" />
-    </Svg.G>
-  </Svg>
+  <Svg width="22" height="22"><Svg.G fill={focused ? themes[theme].primary : themes[theme].foreground} fillRule="nonzero"><Svg.Path d="M4.848 3.393c-.803 0-1.455.652-1.455 1.455v12.604c0 .803.652 1.455 1.455 1.455h12.604c.803 0 1.455-.652 1.455-1.455V4.848c0-.803-.652-1.455-1.455-1.455H4.848zm0-2.908h12.604a4.363 4.363 0 0 1 4.363 4.363v12.604a4.363 4.363 0 0 1-4.363 4.363H4.848a4.363 4.363 0 0 1-4.363-4.363V4.848A4.363 4.363 0 0 1 4.848.485z"/><Svg.Path d="M6.21 7.917V5.794h9.88v2.123zM6.21 11.796V9.672h9.88v2.124zM6.21 15.674V13.55h7.456v2.124z"/></Svg.G></Svg>
 );
 
 LogsIcon.propTypes = propTypes;

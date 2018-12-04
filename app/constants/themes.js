@@ -11,7 +11,7 @@ export default {
   light: {
     foreground: greys.grey5,
     background: greys.grey1,
-    primary: '#00CA9D',
+    primary: '#00B890',
     grey1: '#F7F7F7',
     grey2: '#EFEFEF',
     grey3: '#CFCFCF',
