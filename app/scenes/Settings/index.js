@@ -1,32 +1,34 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { View, Text, Button } from 'react-native';
 import withTheme from 'providers/theme';
 
-class AppContainer extends Component {
-  static propTypes = {
-    theme: PropTypes.object,
-  };
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {};
+
+class Settings extends Component {
+  static propTypes = {};
 
   state = {};
 
   render() {
     const { theme, toggleTheme } = this.props;
-
     return (
       <View
         style={{
-          flex: 1,
+          backgroundColor: theme.background,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: theme.background,
+          flex: 1,
         }}
       >
-        <Text style={{ color: theme.foreground }}>hello 👋</Text>
-        <Button title="toggle theme" onPress={toggleTheme} />
+        <Text style={{ color: theme.foreground }}>Settings</Text>
+        <Button onPress={() => toggleTheme()} title="toggle" />
       </View>
     );
   }
 }
 
-export default withTheme(AppContainer);
+export default withTheme(Settings);

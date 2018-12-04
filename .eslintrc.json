@@ -38,6 +38,10 @@
       }
     ],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "jsx-a11y/accessible-emoji": "off"
+    "jsx-a11y/accessible-emoji": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "react/forbid-prop-types": "off",
+    "react/prefer-stateless-function": "off"
   }
 }

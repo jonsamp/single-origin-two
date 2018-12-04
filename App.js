@@ -3,7 +3,7 @@ import Sentry from 'sentry-expo';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import configureStore from './app/store/configureStore';
-import AppContainer from './app/scenes/App';
+import Navigator from 'scenes/Navigator';
 
 const { store, persistor } = configureStore();
 
@@ -18,7 +18,7 @@ function App() {
   return (
     <Provider store={store}>
       {/* <PersistGate loading={null} persistor={persistor}> */}
-      <AppContainer />
+      <Navigator />
       {/* </PersistGate> */}
     </Provider>
   );
