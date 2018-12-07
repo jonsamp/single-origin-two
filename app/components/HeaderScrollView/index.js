@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView, Text, Animated, Dimensions } from 'react-native';
 import Fade from 'react-native-fade';
 import styles from './styles';
+
+const { height } = Dimensions.get('window');
 
 class HeaderScrollView extends Component {
   static propTypes = {
@@ -17,9 +19,9 @@ class HeaderScrollView extends Component {
   };
 
   state = {
-    scrollOffset: 0,
     headerHeight: 0,
     headerY: 0,
+    isHeaderScrolled: false,
   };
 
   onLayout = event => {
@@ -29,10 +31,24 @@ class HeaderScrollView extends Component {
     });
   };
 
+  scrollAnimatedValue = new Animated.Value(0);
+
   handleScroll = event => {
-    this.setState({
-      scrollOffset: event.nativeEvent.contentOffset.y,
-    });
+    const offset = event.nativeEvent.contentOffset.y;
+    const scrollHeaderOffset = this.state.headerHeight + this.state.headerY - 8;
+    const isHeaderScrolled = scrollHeaderOffset < offset;
+
+    if (!this.state.isHeaderScrolled && isHeaderScrolled) {
+      this.setState({
+        isHeaderScrolled,
+      });
+    }
+
+    if (this.state.isHeaderScrolled && !isHeaderScrolled) {
+      this.setState({
+        isHeaderScrolled,
+      });
+    }
   };
 
   render() {
@@ -47,13 +63,16 @@ class HeaderScrollView extends Component {
       scrollContainerStyle,
     } = this.props;
 
-    const scrollHeaderOffset = this.state.headerHeight + this.state.headerY - 8;
-    const isHeaderScrolled = scrollHeaderOffset < this.state.scrollOffset;
+    const animatedFontSize = this.scrollAnimatedValue.interpolate({
+      inputRange: [-height, 0],
+      outputRange: [60, 34],
+      extrapolate: 'clamp',
+    });
 
     return (
       <View style={[styles.container, containerStyle]}>
         <View style={[styles.headerContainer, headerContainerStyle]}>
-          <Fade visible={isHeaderScrolled} direction="up">
+          <Fade visible={this.state.isHeaderScrolled} direction="up">
             <View
               style={[
                 styles.headerComponentContainer,
@@ -67,17 +86,32 @@ class HeaderScrollView extends Component {
           </Fade>
         </View>
         <ScrollView
-          scrollEventThrottle={250}
-          onScroll={this.handleScroll}
+          onScroll={Animated.event(
+            [
+              {
+                nativeEvent: { contentOffset: { y: this.scrollAnimatedValue } },
+              },
+            ],
+            {
+              listener: this.handleScroll,
+            }
+          )}
+          scrollEventThrottle={8}
           style={scrollContainerStyle}
         >
           <View>
-            <Text
-              style={[styles.headerTitle, headerTitleStyle]}
+            <Animated.Text
+              style={[
+                styles.headerTitle,
+                headerTitleStyle,
+                {
+                  fontSize: animatedFontSize,
+                },
+              ]}
               onLayout={this.onLayout}
             >
               {headerTitle}
-            </Text>
+            </Animated.Text>
           </View>
           {children}
         </ScrollView>

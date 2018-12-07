@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { ifIphoneX } from 'react-native-iphone-x-helper';
+import type from 'constants/type';
 
 const headerHeight = ifIphoneX(88, 60);
 
@@ -20,10 +21,8 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   headerTitle: {
-    fontWeight: 'bold',
-    fontSize: 36,
+    ...type.largeTitle,
     marginLeft: 16,
-    marginBottom: 16,
   },
 });
 
