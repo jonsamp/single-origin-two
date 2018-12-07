@@ -21,12 +21,16 @@ class TabBar extends Component {
 
   render() {
     const theme = themes[this.props.theme];
+    const colorMap = {
+      light: theme.grey1,
+      dark: theme.background,
+    }
 
     return (
       <BottomTabBar
         {...this.props}
         style={{
-          backgroundColor: theme.background,
+          backgroundColor: colorMap[this.props.theme],
           borderTopWidth: 1,
           borderTopColor: theme.grey2,
         }}

@@ -32,6 +32,8 @@ function withTheme(WrappedComponent) {
         <WrappedComponent
           theme={themes[this.props.theme]}
           toggleTheme={this.toggleTheme}
+          isDarkTheme={this.props.theme === 'dark'}
+          isLightTheme={this.props.theme === 'light'}
         />
       );
     }
