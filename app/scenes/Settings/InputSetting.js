@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, TextInput } from 'react-native';
 import withTheme from 'providers/theme';
-import type from 'constants/type';
 import styles from './styles';
 
 const propTypes = {
