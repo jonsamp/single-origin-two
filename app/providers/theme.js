@@ -25,11 +25,12 @@ function withTheme(WrappedComponent) {
     };
 
     render() {
-      const { theme } = this.props;
+      const { theme, ...rest } = this.props;
       const statusBarTheme = theme === 'dark' ? 'light' : 'dark';
       StatusBar.setBarStyle(`${statusBarTheme}-content`);
       return (
         <WrappedComponent
+          {...rest}
           theme={themes[this.props.theme]}
           toggleTheme={this.toggleTheme}
           isDarkTheme={this.props.theme === 'dark'}

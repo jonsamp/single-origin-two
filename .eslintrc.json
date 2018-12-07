@@ -42,6 +42,7 @@
     "import/no-unresolved": "off",
     "import/extensions": "off",
     "react/forbid-prop-types": "off",
-    "react/prefer-stateless-function": "off"
+    "react/prefer-stateless-function": "off",
+    "react/require-default-props": "off"
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, StyleSheet, Switch, Dimensions } from 'react-native';
+import withTheme from 'providers/theme';
 
 const { width } = Dimensions.get('window');
 
@@ -8,13 +9,12 @@ const styles = StyleSheet.create({
   container: {
     padding: 18,
     paddingVertical: 24,
-    borderTopWidth: 1,
     borderBottomWidth: 1,
   },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
   title: {
     fontSize: 18,
@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     opacity: 0.8,
     width: width * 0.7,
+    marginTop: 6,
   },
 });
 
@@ -66,4 +67,4 @@ const SwitchSetting = ({
 
 SwitchSetting.propTypes = propTypes;
 
-export default SwitchSetting;
+export default withTheme(SwitchSetting);
