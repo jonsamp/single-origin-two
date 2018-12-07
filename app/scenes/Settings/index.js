@@ -130,9 +130,8 @@ class Settings extends Component {
             valueName="darkMode"
           />
         </Section>
-        <View style={{ padding: 16 }}>
-          <Text>App Version: ##.##</Text>
-          <Text>Made with ☕️ by Jon Samp</Text>
+        <View style={{ padding: 16, paddingBottom: 120 }}>
+          <Text style={{ color: theme.foreground }}>App Version: ##.##</Text>
         </View>
       </HeaderScrollView>
     );
