@@ -19,6 +19,7 @@
     "react-native-debugger-open": "0.3.17",
     "react-native-fade": "^1.0.2",
     "react-native-iphone-x-helper": "^1.2.0",
+    "react-native-header-scroll-view": "2.0.0",
     "react-navigation": "^3.0.5",
     "react-navigation-tabs": "^1.0.1",
     "react-redux": "5.1.0",

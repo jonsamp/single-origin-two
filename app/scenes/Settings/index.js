@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
 import withTheme from 'providers/theme';
-import HeaderScrollView from 'components/HeaderScrollView';
+import HeaderScrollView from 'react-native-header-scroll-view';
 import Section from './Section';
 import SwitchSetting from './SwitchSetting';
 import InputSetting from './InputSetting';
@@ -25,12 +24,18 @@ class Settings extends Component {
     const { theme, toggleTheme, isDarkTheme } = this.props;
     return (
       <HeaderScrollView
-        headerTitle="Settings"
+        title="Settings"
         containerStyle={{ backgroundColor: theme.grey1 }}
-        headerComponentContainerStyle={{ backgroundColor: theme.grey1 }}
-        headerComponentStle={{ backgroundColor: theme.grey1 }}
-        headerTextStyle={{ color: theme.foreground }}
-        headerTitleStyle={{
+        headerComponentContainerStyle={{
+          backgroundColor: theme.grey1,
+          borderBottomWidth: 1,
+          borderBottomColor: theme.grey2,
+        }}
+        headerComponentStyle={{
+          backgroundColor: theme.grey1,
+        }}
+        headlineStyle={{ color: theme.foreground }}
+        titleStyle={{
           color: theme.foreground,
           marginBottom: 0,
         }}
