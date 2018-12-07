@@ -42,6 +42,7 @@ class Settings extends Component {
         scrollContainerStyle={{
           backgroundColor: theme.grey1,
         }}
+        fadeDirection="up"
       >
         <Section title="Brew Settings">
           <InputSetting
