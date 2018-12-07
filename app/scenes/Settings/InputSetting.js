@@ -1,35 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, StyleSheet, TextInput, Dimensions } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import withTheme from 'providers/theme';
-
-const { width } = Dimensions.get('window');
-
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  description: {
-    fontSize: 14,
-    opacity: 0.8,
-    width: width * 0.7,
-    marginTop: 6,
-  },
-  input: {
-    width: 48,
-    height: 40,
-    borderWidth: 1,
-    borderRadius: 4,
-    fontSize: 18,
-    paddingLeft: 12,
-  },
-});
+import type from 'constants/type';
+import styles from './styles';
 
 const propTypes = {
   value: PropTypes.number,
@@ -57,7 +31,7 @@ const InputSetting = ({
     }}
   >
     <View style={styles.row}>
-      <View>
+      <View style={styles.subContainer}>
         <Text style={[styles.title, { color: theme.foreground }]}>{title}</Text>
         <Text style={[styles.description, { color: theme.foreground }]}>
           {description}

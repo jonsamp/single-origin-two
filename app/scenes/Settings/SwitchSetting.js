@@ -1,32 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, StyleSheet, Switch, Dimensions } from 'react-native';
+import { View, Text, Switch } from 'react-native';
 import withTheme from 'providers/theme';
-
-const { width } = Dimensions.get('window');
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 18,
-    paddingVertical: 24,
-    borderBottomWidth: 1,
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  description: {
-    fontSize: 14,
-    opacity: 0.8,
-    width: width * 0.7,
-    marginTop: 6,
-  },
-});
+import styles from './styles';
 
 const propTypes = {
   value: PropTypes.bool,
@@ -52,7 +28,7 @@ const SwitchSetting = ({
     ]}
   >
     <View style={styles.row}>
-      <View>
+      <View style={styles.subContainer}>
         <Text style={[styles.title, { color: theme.foreground }]}>{title}</Text>
         {description ? (
           <Text style={[styles.description, { color: theme.foreground }]}>
