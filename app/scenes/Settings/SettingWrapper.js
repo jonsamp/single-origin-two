@@ -9,9 +9,10 @@ const propTypes = {
   theme: PropTypes.object,
   title: PropTypes.string,
   description: PropTypes.string,
+  borderTop: PropTypes.bool,
 };
 
-const SettingWrapper = ({ children, theme, title, description }) => (
+const SettingWrapper = ({ children, theme, title, description, borderTop }) => (
   <View style={{ backgroundColor: theme.grey1 }}>
     <View
       style={{
@@ -19,6 +20,8 @@ const SettingWrapper = ({ children, theme, title, description }) => (
         borderBottomWidth: 1,
         borderBottomColor: theme.grey2,
         backgroundColor: theme.background,
+        borderTopWidth: borderTop ? 1 : 0,
+        borderTopColor: theme.grey2,
       }}
     >
       <View style={styles.row}>

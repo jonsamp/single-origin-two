@@ -8,10 +8,11 @@ const propTypes = {
   onChange: PropTypes.func,
   title: PropTypes.string,
   description: PropTypes.string,
+  borderTop: PropTypes.bool,
 };
 
-const SwitchSetting = ({ title, description, value, onChange }) => (
-  <SettingWrapper title={title} description={description}>
+const SwitchSetting = ({ title, description, value, onChange, borderTop }) => (
+  <SettingWrapper title={title} description={description} borderTop={borderTop}>
     <Switch value={value} onChange={v => onChange(v.nativeEvent.value)} />
   </SettingWrapper>
 );

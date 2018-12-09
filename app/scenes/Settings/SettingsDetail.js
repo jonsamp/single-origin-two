@@ -61,7 +61,7 @@ class Settings extends Component {
           <Fragment>
             <Section>
               <InputSetting
-                title="Coffee water ratio"
+                title="Coffee to water ratio"
                 description="Grams of water to grams of coffee ratio. Smaller numbers produce stronger coffee. Default: 16."
                 value={settings.ratio}
                 onChange={value => settingUpdated({ setting: 'ratio', value })}
@@ -73,6 +73,25 @@ class Settings extends Component {
                 onChange={value =>
                   settingUpdated({ setting: 'bloomDuration', value })
                 }
+                borderTop
+              />
+              <SwitchSetting
+                title="Record grind setting"
+                description="Record grind setting while you brew."
+                value={settings.grinder}
+                onChange={value =>
+                  settingUpdated({ setting: 'grinder', value })
+                }
+                borderTop
+              />
+              <SwitchSetting
+                title="Record temperature"
+                description="Record temperature setting while you brew."
+                value={settings.waterTemp}
+                onChange={value =>
+                  settingUpdated({ setting: 'waterTemp', value })
+                }
+                borderTop
               />
             </Section>
           </Fragment>
@@ -81,17 +100,7 @@ class Settings extends Component {
       case 'grinder':
         children = (
           <Fragment>
-            <Section>
-              <SwitchSetting
-                title="Grinder"
-                description="Record grind setting while you brew."
-                value={settings.grinder}
-                onChange={value =>
-                  settingUpdated({ setting: 'grinder', value })
-                }
-              />
-            </Section>
-            <Section title="Grinder Type">
+            <Section title="Grinder type">
               <ChecklistSetting
                 items={this.createChecklistItems({
                   list: grinders,

@@ -11,10 +11,18 @@ const propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   theme: PropTypes.object,
+  borderTop: PropTypes.bool,
 };
 
-const InputSetting = ({ title, description, value, onChange, theme }) => (
-  <SettingWrapper title={title} description={description}>
+const InputSetting = ({
+  title,
+  description,
+  value,
+  onChange,
+  theme,
+  borderTop,
+}) => (
+  <SettingWrapper title={title} description={description} borderTop={borderTop}>
     <TextInput
       value={value.toString()}
       style={[
