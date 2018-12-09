@@ -94,6 +94,24 @@ class Settings extends Component {
                 }
                 borderTop
               />
+              <SwitchSetting
+                title="Restore last brew"
+                description="Automatically inserts grind setting and water temp from your most previous brew."
+                value={settings.restoreLastBrew}
+                onChange={value =>
+                  settingUpdated({ setting: 'restoreLastBrew', value })
+                }
+                borderTop
+              />
+              <SwitchSetting
+                title="Tasting reminder"
+                description="Receive a notification to taste and rate your brew once your brew has cooled to tasting temperature."
+                value={settings.reminders}
+                onChange={value =>
+                  settingUpdated({ setting: 'reminders', value })
+                }
+                borderTop
+              />
             </Section>
           </Fragment>
         );
@@ -162,7 +180,9 @@ class Settings extends Component {
     return (
       <View style={{ backgroundColor: theme.grey1, flex: 1 }}>
         <Header title={groupName} />
-        <ScrollView>{children}</ScrollView>
+        <ScrollView contentContainerStyle={{ paddingBottom: 32 }}>
+          {children}
+        </ScrollView>
       </View>
     );
   }

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from 'providers/theme';
-import { View, Text } from 'react-native';
 import HeaderScrollView from 'react-native-header-scroll-view';
-import type from 'constants/type';
 import Section from './Section';
 import Group from './Group';
 import SettingWrapper from './SettingWrapper';
