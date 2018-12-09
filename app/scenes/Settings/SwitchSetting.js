@@ -5,21 +5,14 @@ import SettingWrapper from './SettingWrapper';
 
 const propTypes = {
   value: PropTypes.bool,
-  onValueChange: PropTypes.func,
-  valueName: PropTypes.string,
+  onChange: PropTypes.func,
   title: PropTypes.string,
   description: PropTypes.string,
 };
 
-const SwitchSetting = ({
-  title,
-  description,
-  value,
-  onValueChange,
-  valueName,
-}) => (
+const SwitchSetting = ({ title, description, value, onChange }) => (
   <SettingWrapper title={title} description={description}>
-    <Switch value={value} onValueChange={v => onValueChange(valueName, v)} />
+    <Switch value={value} onChange={v => onChange(v.nativeEvent.value)} />
   </SettingWrapper>
 );
 

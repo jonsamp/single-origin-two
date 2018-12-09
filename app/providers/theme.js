@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { View, StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 import themes from 'constants/themes';
 import { themeUpdated } from 'state/settings/actions';
 import { selectSettings } from 'state/settings/selectors';

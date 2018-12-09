@@ -1,33 +1,61 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, ScrollView } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { View, ScrollView } from 'react-native';
+import grinders from 'constants/grinders';
+import { weightUnits, tempUnits } from 'constants/units';
+import recipes from 'constants/recipes';
 import withTheme from 'providers/theme';
+import withSettings from 'providers/settings';
 import Header from 'components/Header';
 import Section from './Section';
 import SwitchSetting from './SwitchSetting';
 import InputSetting from './InputSetting';
-
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = {};
+import ChecklistSetting from './ChecklistSetting';
 
 class Settings extends Component {
   static propTypes = {
     theme: PropTypes.object,
     toggleTheme: PropTypes.func,
     isDarkTheme: PropTypes.bool,
-    navigation: PropTypes.object,
+    settings: PropTypes.object,
+    settingUpdated: PropTypes.func,
   };
 
   state = {};
 
+  createChecklistItems = ({ list, settingName }) =>
+    Object.values(list).map(item => ({
+      ...item,
+      value: item.id === this.props.settings[settingName],
+    }));
+
+  createRecipesCheckList = () =>
+    Object.values(recipes).map(recipe => ({
+      ...recipe,
+      value: this.props.settings.recipes[recipe.id],
+    }));
+
+  recipeUpdated = ({ recipe }) =>
+    this.props.settingUpdated({
+      setting: 'recipes',
+      value: {
+        ...this.props.settings.recipes,
+        [recipe]: !this.props.settings.recipes[recipe],
+      },
+    });
+
   render() {
-    const { theme, toggleTheme, isDarkTheme, navigation } = this.props;
-    const group = this.props.navigation.state.params;
+    const {
+      theme,
+      toggleTheme,
+      isDarkTheme,
+      settings,
+      settingUpdated,
+    } = this.props;
+    const groupName = this.props.navigation.state.params;
     let children;
 
-    switch (group.toLowerCase().replace(' ', '-')) {
+    switch (groupName.toLowerCase().replace(' ', '-')) {
       case 'recipe-settings':
         children = (
           <Fragment>
@@ -35,31 +63,43 @@ class Settings extends Component {
               <InputSetting
                 title="Coffee water ratio"
                 description="Grams of water to grams of coffee ratio. Smaller numbers produce stronger coffee. Default: 16."
-                value={15}
-                onValueChange={() => {}}
-                valueName="ratio"
+                value={settings.ratio}
+                onChange={value => settingUpdated({ setting: 'ratio', value })}
               />
               <InputSetting
                 title="Bloom time"
                 description="The number of seconds for the bloom. Default: 45 seconds."
-                value={45}
-                onValueChange={() => {}}
-                valueName="bloomTime"
+                value={settings.bloomDuration}
+                onChange={value =>
+                  settingUpdated({ setting: 'bloomDuration', value })
+                }
               />
             </Section>
           </Fragment>
         );
         break;
-      case 'grind':
+      case 'grinder':
         children = (
           <Fragment>
             <Section>
               <SwitchSetting
                 title="Grinder"
-                description="Record your grind setting each brew"
-                value={isDarkTheme}
-                onValueChange={toggleTheme}
-                valueName="darkMode"
+                description="Record grind setting while you brew."
+                value={settings.grinder}
+                onChange={value =>
+                  settingUpdated({ setting: 'grinder', value })
+                }
+              />
+            </Section>
+            <Section title="Grinder Type">
+              <ChecklistSetting
+                items={this.createChecklistItems({
+                  list: grinders,
+                  settingName: 'grinderType',
+                })}
+                onChange={value =>
+                  settingUpdated({ setting: 'grinderType', value })
+                }
               />
             </Section>
           </Fragment>
@@ -68,20 +108,26 @@ class Settings extends Component {
       case 'units':
         children = (
           <Fragment>
-            <Section>
-              <SwitchSetting
-                title="Temperature Units"
-                description="Restore your previous brew's coffee weight, grind, and water temperature."
-                value={isDarkTheme}
-                onValueChange={toggleTheme}
-                valueName="darkMode"
+            <Section title="Temperature Units">
+              <ChecklistSetting
+                items={this.createChecklistItems({
+                  list: tempUnits,
+                  settingName: 'tempUnit',
+                })}
+                onChange={value =>
+                  settingUpdated({ setting: 'tempUnit', value })
+                }
               />
-              <SwitchSetting
-                title="Weight Units"
-                description="Restore your previous brew's coffee weight, grind, and water temperature."
-                value={isDarkTheme}
-                onValueChange={toggleTheme}
-                valueName="darkMode"
+            </Section>
+            <Section title="Weight Units">
+              <ChecklistSetting
+                items={this.createChecklistItems({
+                  list: weightUnits,
+                  settingName: 'weightUnit',
+                })}
+                onChange={value =>
+                  settingUpdated({ setting: 'weightUnit', value })
+                }
               />
             </Section>
           </Fragment>
@@ -90,30 +136,10 @@ class Settings extends Component {
       case 'menu':
         children = (
           <Fragment>
-            <Section>
-              <SwitchSetting
-                title="Chemex"
-                value={isDarkTheme}
-                onValueChange={toggleTheme}
-                valueName="darkMode"
-              />
-              <SwitchSetting
-                title="Clever"
-                value={isDarkTheme}
-                onValueChange={toggleTheme}
-                valueName="darkMode"
-              />
-              <SwitchSetting
-                title="French Press"
-                value={isDarkTheme}
-                onValueChange={toggleTheme}
-                valueName="darkMode"
-              />
-              <SwitchSetting
-                title="V60"
-                value={isDarkTheme}
-                onValueChange={toggleTheme}
-                valueName="darkMode"
+            <Section title="Menu Recipes">
+              <ChecklistSetting
+                items={this.createRecipesCheckList()}
+                onChange={recipe => this.recipeUpdated({ recipe })}
               />
             </Section>
           </Fragment>
@@ -125,11 +151,11 @@ class Settings extends Component {
 
     return (
       <View style={{ backgroundColor: theme.grey1, flex: 1 }}>
-        <Header title={group} />
+        <Header title={groupName} />
         <ScrollView>{children}</ScrollView>
       </View>
     );
   }
 }
 
-export default withNavigation(withTheme(Settings));
+export default withTheme(withSettings(Settings));

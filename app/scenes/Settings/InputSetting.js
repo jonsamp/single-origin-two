@@ -7,21 +7,13 @@ import styles from './styles';
 
 const propTypes = {
   value: PropTypes.number,
-  onValueChange: PropTypes.func,
-  valueName: PropTypes.string,
+  onChange: PropTypes.func,
   title: PropTypes.string,
   description: PropTypes.string,
   theme: PropTypes.object,
 };
 
-const InputSetting = ({
-  title,
-  description,
-  value,
-  onValueChange,
-  valueName,
-  theme,
-}) => (
+const InputSetting = ({ title, description, value, onChange, theme }) => (
   <SettingWrapper title={title} description={description}>
     <TextInput
       value={value.toString()}
@@ -31,7 +23,7 @@ const InputSetting = ({
       ]}
       keyboardType="number-pad"
       maxLength={2}
-      onChangeText={v => onValueChange(valueName, v)}
+      onChangeText={v => onChange(Number(v))}
       returnKeyType="done"
     />
   </SettingWrapper>

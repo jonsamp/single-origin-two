@@ -2,26 +2,31 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text } from 'react-native';
 import withTheme from 'providers/theme';
+import withSettings from 'providers/settings';
 import HeaderScrollView from 'react-native-header-scroll-view';
 import Section from './Section';
 import Group from './Group';
 import SwitchSetting from './SwitchSetting';
 
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = {};
-
 class Settings extends Component {
   static propTypes = {
     theme: PropTypes.object,
-    toggleTheme: PropTypes.func,
     isDarkTheme: PropTypes.bool,
+    settings: PropTypes.object,
+    settingUpdated: PropTypes.func,
+    toggleTheme: PropTypes.func,
   };
 
   state = {};
 
   render() {
-    const { theme, toggleTheme, isDarkTheme } = this.props;
+    const {
+      theme,
+      toggleTheme,
+      isDarkTheme,
+      settings,
+      settingUpdated,
+    } = this.props;
     return (
       <HeaderScrollView
         title="Settings"
@@ -46,7 +51,7 @@ class Settings extends Component {
       >
         <Section title="Brewing">
           <Group title="Recipe settings" />
-          <Group title="Grind" />
+          <Group title="Grinder" />
           <Group title="Units" />
           <Group title="Menu" />
         </Section>
@@ -54,8 +59,14 @@ class Settings extends Component {
           <SwitchSetting
             title="Dark Mode"
             value={isDarkTheme}
-            onValueChange={toggleTheme}
+            onChange={toggleTheme}
             valueName="darkMode"
+          />
+          <SwitchSetting
+            title="Expert Mode"
+            description="Displays only calculations and timers within recipes."
+            value={settings.expertMode}
+            onChange={value => settingUpdated({ setting: 'expertMode', value })}
           />
           {/* <Text>Rate Single Origin</Text>
           <Text>About this app</Text> */}
@@ -65,4 +76,4 @@ class Settings extends Component {
   }
 }
 
-export default withTheme(Settings);
+export default withSettings(withTheme(Settings));
