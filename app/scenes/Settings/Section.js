@@ -19,7 +19,7 @@ class Section extends Component {
     const { title, theme, children } = this.props;
 
     return (
-      <View style={{ flex: 1 }}>
+      <View>
         <View
           style={{
             marginTop: 24,

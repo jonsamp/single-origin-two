@@ -15,10 +15,9 @@ import ChecklistSetting from './ChecklistSetting';
 class Settings extends Component {
   static propTypes = {
     theme: PropTypes.object,
-    toggleTheme: PropTypes.func,
-    isDarkTheme: PropTypes.bool,
     settings: PropTypes.object,
     settingUpdated: PropTypes.func,
+    navigation: PropTypes.object,
   };
 
   state = {};
@@ -45,13 +44,7 @@ class Settings extends Component {
     });
 
   render() {
-    const {
-      theme,
-      toggleTheme,
-      isDarkTheme,
-      settings,
-      settingUpdated,
-    } = this.props;
+    const { theme, settings, settingUpdated } = this.props;
     const groupName = this.props.navigation.state.params;
     let children;
 
@@ -60,6 +53,14 @@ class Settings extends Component {
         children = (
           <Fragment>
             <Section>
+              <SwitchSetting
+                title="Expert Mode"
+                description="Displays only calculations and timers within recipes."
+                value={settings.expertMode}
+                onChange={value =>
+                  settingUpdated({ setting: 'expertMode', value })
+                }
+              />
               <InputSetting
                 title="Coffee to water ratio"
                 description="Grams of water to grams of coffee ratio. Smaller numbers produce stronger coffee. Default: 16."

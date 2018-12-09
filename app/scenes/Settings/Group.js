@@ -36,7 +36,7 @@ class Group extends Component {
         <Text style={[type.headline, { color: theme.foreground }]}>
           {title}
         </Text>
-        <Feather name="chevron-right" size={26} color={theme.grey3} />
+        <Feather name="chevron-right" size={22} color={theme.grey3} />
       </TouchableOpacity>
     );
   }

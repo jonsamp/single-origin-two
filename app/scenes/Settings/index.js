@@ -1,32 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text } from 'react-native';
 import withTheme from 'providers/theme';
-import withSettings from 'providers/settings';
+import { View, Text } from 'react-native';
 import HeaderScrollView from 'react-native-header-scroll-view';
+import type from 'constants/type';
 import Section from './Section';
 import Group from './Group';
+import SettingWrapper from './SettingWrapper';
 import SwitchSetting from './SwitchSetting';
 
 class Settings extends Component {
   static propTypes = {
     theme: PropTypes.object,
     isDarkTheme: PropTypes.bool,
-    settings: PropTypes.object,
-    settingUpdated: PropTypes.func,
     toggleTheme: PropTypes.func,
   };
 
   state = {};
 
   render() {
-    const {
-      theme,
-      toggleTheme,
-      isDarkTheme,
-      settings,
-      settingUpdated,
-    } = this.props;
+    const { theme, toggleTheme, isDarkTheme } = this.props;
     return (
       <HeaderScrollView
         title="Settings"
@@ -46,6 +39,7 @@ class Settings extends Component {
         }}
         scrollContainerStyle={{
           backgroundColor: theme.grey1,
+          paddingBottom: 32,
         }}
         fadeDirection="up"
       >
@@ -62,18 +56,14 @@ class Settings extends Component {
             onChange={toggleTheme}
             valueName="darkMode"
           />
-          <SwitchSetting
-            title="Expert Mode"
-            description="Displays only calculations and timers within recipes."
-            value={settings.expertMode}
-            onChange={value => settingUpdated({ setting: 'expertMode', value })}
-          />
-          {/* <Text>Rate Single Origin</Text>
-          <Text>About this app</Text> */}
+          <SettingWrapper title="Send feedback">{/* */}</SettingWrapper>
+          <SettingWrapper title="Rate Single Origin">{/* */}</SettingWrapper>
+          <Group title="Privacy Policy" />
+          <Group title="About" />
         </Section>
       </HeaderScrollView>
     );
   }
 }
 
-export default withSettings(withTheme(Settings));
+export default withTheme(Settings);

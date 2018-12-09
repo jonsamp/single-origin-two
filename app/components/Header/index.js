@@ -29,8 +29,11 @@ function Header({ navigation, theme, title, leftText = '', right }) {
       <View style={styles.headerContainer}>
         <View />
         <View style={styles.left}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Feather name="chevron-left" size={26} color={theme.grey4} />
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={{ padding: 12, top: 12, right: 12 }}
+          >
+            <Feather name="chevron-left" size={26} color={theme.foreground} />
           </TouchableOpacity>
         </View>
         <Text style={[styles.title, { color: theme.foreground }]}>{title}</Text>

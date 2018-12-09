@@ -27,7 +27,7 @@ const InputSetting = ({
       value={value.toString()}
       style={[
         styles.input,
-        { borderColor: theme.grey3, color: theme.foreground },
+        { borderColor: theme.grey2, color: theme.foreground },
       ]}
       keyboardType="number-pad"
       maxLength={2}
