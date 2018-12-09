@@ -1,7 +1,7 @@
 const greys = {
   grey1: '#F7F7F7',
   grey2: '#EFEFEF',
-  grey3: '#CFCFCF',
+  grey3: '#adadad',
   grey4: '#595959',
   grey5: '#262626',
   grey6: '#000000',
@@ -13,12 +13,7 @@ export default {
     foreground: greys.grey5,
     background: '#FFFFFF',
     primary: '#00B890',
-    grey1: '#F7F7F7',
-    grey2: '#EFEFEF',
-    grey3: '#CFCFCF',
-    grey4: '#595959',
-    grey5: '#262626',
-    grey6: '#000000',
+    ...greys,
   },
   dark: {
     name: 'dark',

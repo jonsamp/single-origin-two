@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Button, Image } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { Text } from 'react-native';
 import withTheme from 'providers/theme';
 import HeaderScrollView from 'react-native-header-scroll-view';
-import { Feather } from '@expo/vector-icons';
 import Section from './Section';
 import Group from './Group';
 import SwitchSetting from './SwitchSetting';
-import InputSetting from './InputSetting';
 
 const mapStateToProps = state => ({});
 
@@ -19,13 +16,12 @@ class Settings extends Component {
     theme: PropTypes.object,
     toggleTheme: PropTypes.func,
     isDarkTheme: PropTypes.bool,
-    navigation: PropTypes.object,
   };
 
   state = {};
 
   render() {
-    const { theme, toggleTheme, isDarkTheme, navigation } = this.props;
+    const { theme, toggleTheme, isDarkTheme } = this.props;
     return (
       <HeaderScrollView
         title="Settings"
@@ -52,15 +48,21 @@ class Settings extends Component {
           <Group title="Recipe settings" />
           <Group title="Grind" />
           <Group title="Units" />
+          <Group title="Menu" />
         </Section>
         <Section title="General">
-          <Group title="Menu" />
-          <Group title="App" />
-          <Group title="About" />
+          <SwitchSetting
+            title="Dark Mode"
+            value={isDarkTheme}
+            onValueChange={toggleTheme}
+            valueName="darkMode"
+          />
+          {/* <Text>Rate Single Origin</Text>
+          <Text>About this app</Text> */}
         </Section>
       </HeaderScrollView>
     );
   }
 }
 
-export default withNavigation(withTheme(Settings));
+export default withTheme(Settings);

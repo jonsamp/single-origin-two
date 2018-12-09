@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { View, Text, ScrollView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import withTheme from 'providers/theme';
+import Header from 'components/Header';
 import Section from './Section';
 import SwitchSetting from './SwitchSetting';
 import InputSetting from './InputSetting';
@@ -118,39 +119,14 @@ class Settings extends Component {
           </Fragment>
         );
         break;
-      case 'app':
-        children = (
-          <Fragment>
-            <Section>
-              <SwitchSetting
-                title="Dark Mode"
-                value={isDarkTheme}
-                onValueChange={toggleTheme}
-                valueName="darkMode"
-              />
-            </Section>
-          </Fragment>
-        );
-        break;
-      case 'about':
-        children = (
-          <Fragment>
-            <Section>
-              <Text>About this app</Text>
-            </Section>
-          </Fragment>
-        );
-        break;
       default:
         children = null;
     }
 
     return (
       <View style={{ backgroundColor: theme.grey1, flex: 1 }}>
-        <ScrollView>
-          {/* HEADER */}
-          {children}
-        </ScrollView>
+        <Header title={group} />
+        <ScrollView>{children}</ScrollView>
       </View>
     );
   }
