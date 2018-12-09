@@ -12,13 +12,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
   },
-  title: type.title,
+  title: type.headline,
   subContainer: {
     flex: 1,
   },
   description: {
-    ...type.text,
-    marginTop: 4,
+    ...type.callout,
     marginRight: 16,
     opacity: 0.8,
   },

@@ -1,9 +1,13 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import {
+  createBottomTabNavigator,
+  createStackNavigator,
+  createAppContainer,
+} from 'react-navigation';
 import Brew from 'scenes/Brew';
 import Logs from 'scenes/Logs';
 import Settings from 'scenes/Settings';
+import SettingsDetail from 'scenes/Settings/SettingsDetail';
 import BrewIcon from './icons/BrewIcon';
 import LogsIcon from './icons/LogsIcon';
 import SettingsIcon from './icons/SettingsIcon';
@@ -36,4 +40,9 @@ const TabNavigator = createBottomTabNavigator(
   }
 );
 
-export default createAppContainer(TabNavigator);
+const StackNavigator = createStackNavigator(
+  { TabNavigator, SettingsDetail },
+  { defaultNavigationOptions: { header: null } }
+);
+
+export default createAppContainer(StackNavigator);

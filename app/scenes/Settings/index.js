@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
+import { View, Text, Button, Image } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import withTheme from 'providers/theme';
 import HeaderScrollView from 'react-native-header-scroll-view';
+import { Feather } from '@expo/vector-icons';
 import Section from './Section';
+import Group from './Group';
 import SwitchSetting from './SwitchSetting';
 import InputSetting from './InputSetting';
 
@@ -16,12 +19,13 @@ class Settings extends Component {
     theme: PropTypes.object,
     toggleTheme: PropTypes.func,
     isDarkTheme: PropTypes.bool,
+    navigation: PropTypes.object,
   };
 
   state = {};
 
   render() {
-    const { theme, toggleTheme, isDarkTheme } = this.props;
+    const { theme, toggleTheme, isDarkTheme, navigation } = this.props;
     return (
       <HeaderScrollView
         title="Settings"
@@ -44,104 +48,19 @@ class Settings extends Component {
         }}
         fadeDirection="up"
       >
-        <Section title="Brew Settings">
-          <InputSetting
-            title="Coffee water ratio"
-            description="Grams of water to grams of coffee ratio. Smaller numbers produce stronger coffee. Default: 16."
-            value={15}
-            onValueChange={() => {}}
-            valueName="ratio"
-          />
-          <InputSetting
-            title="Bloom time"
-            description="The number of seconds for the bloom. Default: 45 seconds."
-            value={45}
-            onValueChange={() => {}}
-            valueName="bloomTime"
-          />
-          <SwitchSetting
-            title="Grind setting"
-            description="Expert mode removes preparation steps, leaving only calculations and timers."
-            value={isDarkTheme}
-            onValueChange={toggleTheme}
-            valueName="darkMode"
-          />
-          <SwitchSetting
-            title="Temperature Units"
-            description="Restore your previous brew's coffee weight, grind, and water temperature."
-            value={isDarkTheme}
-            onValueChange={toggleTheme}
-            valueName="darkMode"
-          />
+        <Section title="Brewing">
+          <Group title="Recipe settings" />
+          <Group title="Grind" />
+          <Group title="Units" />
         </Section>
-        <Section title="Recipe Settings">
-          <SwitchSetting
-            title="Expert mode"
-            description="Expert mode removes preparation steps, leaving only calculations and timers."
-            value={isDarkTheme}
-            onValueChange={toggleTheme}
-            valueName="darkMode"
-          />
-          <SwitchSetting
-            title="Restore last brew"
-            description="Restore your previous brew's coffee weight, grind, and water temperature."
-            value={isDarkTheme}
-            onValueChange={toggleTheme}
-            valueName="darkMode"
-          />
+        <Section title="General">
+          <Group title="Menu" />
+          <Group title="App" />
+          <Group title="About" />
         </Section>
-        <Section title="Recipe Visibility">
-          <SwitchSetting
-            title="Chemex"
-            value={isDarkTheme}
-            onValueChange={toggleTheme}
-            valueName="darkMode"
-          />
-          <SwitchSetting
-            title="Clever"
-            value={isDarkTheme}
-            onValueChange={toggleTheme}
-            valueName="darkMode"
-          />
-          <SwitchSetting
-            title="French Press"
-            value={isDarkTheme}
-            onValueChange={toggleTheme}
-            valueName="darkMode"
-          />
-          <SwitchSetting
-            title="V60"
-            value={isDarkTheme}
-            onValueChange={toggleTheme}
-            valueName="darkMode"
-          />
-        </Section>
-        <Section title="App Settings">
-          <SwitchSetting
-            title="Dark Mode"
-            value={isDarkTheme}
-            onValueChange={toggleTheme}
-            valueName="darkMode"
-          />
-          <SwitchSetting
-            title="Save to Health"
-            value={isDarkTheme}
-            onValueChange={toggleTheme}
-            valueName="darkMode"
-          />
-          <SwitchSetting
-            title="Send feedback"
-            value={isDarkTheme}
-            onValueChange={toggleTheme}
-            valueName="darkMode"
-          />
-        </Section>
-        <View style={{ padding: 16, paddingBottom: 120 }}>
-          <Text style={{ color: theme.foreground }}>App Version: ##.##</Text>
-        </View>
       </HeaderScrollView>
     );
   }
 }
 
-export default withTheme(Settings);
+export default withNavigation(withTheme(Settings));
