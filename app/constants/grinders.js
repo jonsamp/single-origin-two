@@ -1,7 +1,7 @@
 export default {
-  general: {
+  generic: {
     title: 'Generic grinder (1-10)',
-    id: 'general',
+    id: 'generic',
     min: 1,
     max: 10,
   },
