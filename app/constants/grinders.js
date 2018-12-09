@@ -1,6 +1,6 @@
 export default {
   general: {
-    title: 'No grinder (1-10)',
+    title: 'Generic grinder (1-10)',
     id: 'general',
     min: 1,
     max: 10,
