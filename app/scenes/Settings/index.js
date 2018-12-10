@@ -39,10 +39,10 @@ class Settings extends Component {
         fadeDirection="up"
       >
         <Section title="Brewing">
-          <Group title="Recipe settings" />
+          <Group title="Brew settings" />
           <Group title="Grinder" />
           <Group title="Units" />
-          <Group title="Menu" />
+          <Group title="Recipes" />
         </Section>
         <Section title="General">
           <Group title="App" />

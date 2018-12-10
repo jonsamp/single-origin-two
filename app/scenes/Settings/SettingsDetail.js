@@ -56,7 +56,7 @@ class Settings extends Component {
     let children;
 
     switch (groupName.toLowerCase().replace(' ', '-')) {
-      case 'recipe-settings':
+      case 'brew-settings':
         children = (
           <Fragment>
             <Section title="Brewing">
@@ -168,7 +168,7 @@ class Settings extends Component {
           </Fragment>
         );
         break;
-      case 'menu':
+      case 'recipes':
         children = (
           <Fragment>
             <Section title="Menu Recipes">
