@@ -201,9 +201,8 @@ class PrivacyPolicy extends Component {
           the right to request a copy of any information about you that the
           Group holds at any time, and also to have that information corrected
           if it is inaccurate. To ask for your information, please contact Data
-          Manager support@filtru.coffee. To ask for your information to be
-          amended, please update your online account, or contact our Support
-          team.
+          Manager sampjon@gmail.com. To ask for your information to be amended,
+          please update your online account, or contact our Support team.
           {'\n\n'}
           If we choose not to action your request we will explain to you the
           reasons for our refusal.
@@ -339,8 +338,8 @@ class PrivacyPolicy extends Component {
         <Text
           style={[type.text, { color: theme.foreground, marginBottom: 16 }]}
         >
-          By using Filtru and providing your information, you authorize us to
-          collect, use, and store your information outside of the European
+          By using Single Origin and providing your information, you authorize
+          us to collect, use, and store your information outside of the European
           Union.
         </Text>
 
