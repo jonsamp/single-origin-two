@@ -2,22 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import withTheme from 'providers/theme';
 import HeaderScrollView from 'react-native-header-scroll-view';
+import { TouchableOpacity, Linking } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 import Section from './Section';
 import Group from './Group';
 import SettingWrapper from './SettingWrapper';
-import SwitchSetting from './SwitchSetting';
 
 class Settings extends Component {
   static propTypes = {
     theme: PropTypes.object,
-    isDarkTheme: PropTypes.bool,
-    toggleTheme: PropTypes.func,
   };
 
-  state = {};
-
   render() {
-    const { theme, toggleTheme, isDarkTheme } = this.props;
+    const { theme } = this.props;
     return (
       <HeaderScrollView
         title="Settings"
@@ -48,16 +45,37 @@ class Settings extends Component {
           <Group title="Menu" />
         </Section>
         <Section title="General">
-          <SwitchSetting
-            title="Dark Mode"
-            value={isDarkTheme}
-            onChange={toggleTheme}
-            valueName="darkMode"
-          />
-          <SettingWrapper title="Send feedback">{/* */}</SettingWrapper>
-          <SettingWrapper title="Rate Single Origin">{/* */}</SettingWrapper>
+          <Group title="App" />
+          <TouchableOpacity
+            onPress={() =>
+              Linking.openURL(
+                'mailto:sampjon@gmail.com?subject=Single%20Origin%20Feedback'
+              )
+            }
+          >
+            <SettingWrapper title="Send feedback">
+              <Feather name="mail" size={22} color={theme.grey3} />
+            </SettingWrapper>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              Linking.openURL(
+                'https://itunes.apple.com/us/app/appName/id1316843624?mt=8&action=write-review'
+              )
+            }
+          >
+            <SettingWrapper title="Rate Single Origin">
+              <Feather name="star" size={22} color={theme.grey3} />
+            </SettingWrapper>
+          </TouchableOpacity>
           <Group title="Privacy Policy" />
-          <Group title="About" />
+          <TouchableOpacity
+            onPress={() => Linking.openURL('http://mbox.coffee/OGCC')}
+          >
+            <SettingWrapper title="$10 off Mistobox">
+              <Feather name="external-link" size={22} color={theme.grey3} />
+            </SettingWrapper>
+          </TouchableOpacity>
         </Section>
       </HeaderScrollView>
     );

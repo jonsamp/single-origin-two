@@ -11,6 +11,7 @@ import Section from './Section';
 import SwitchSetting from './SwitchSetting';
 import InputSetting from './InputSetting';
 import ChecklistSetting from './ChecklistSetting';
+import PrivacyPolicy from './PrivacyPolicy';
 
 class Settings extends Component {
   static propTypes = {
@@ -18,9 +19,9 @@ class Settings extends Component {
     settings: PropTypes.object,
     settingUpdated: PropTypes.func,
     navigation: PropTypes.object,
+    isDarkTheme: PropTypes.bool,
+    toggleTheme: PropTypes.func,
   };
-
-  state = {};
 
   createChecklistItems = ({ list, settingName }) =>
     Object.values(list).map(item => ({
@@ -44,7 +45,13 @@ class Settings extends Component {
     });
 
   render() {
-    const { theme, settings, settingUpdated } = this.props;
+    const {
+      theme,
+      settings,
+      settingUpdated,
+      isDarkTheme,
+      toggleTheme,
+    } = this.props;
     const groupName = this.props.navigation.state.params;
     let children;
 
@@ -52,15 +59,7 @@ class Settings extends Component {
       case 'recipe-settings':
         children = (
           <Fragment>
-            <Section>
-              <SwitchSetting
-                title="Expert Mode"
-                description="Displays only calculations and timers within recipes."
-                value={settings.expertMode}
-                onChange={value =>
-                  settingUpdated({ setting: 'expertMode', value })
-                }
-              />
+            <Section title="Brewing">
               <InputSetting
                 title="Coffee to water ratio"
                 description="Grams of water to grams of coffee ratio. Smaller numbers produce stronger coffee. Default: 16."
@@ -78,7 +77,6 @@ class Settings extends Component {
               />
               <SwitchSetting
                 title="Record grind setting"
-                description="Record grind setting while you brew."
                 value={settings.grinder}
                 onChange={value =>
                   settingUpdated({ setting: 'grinder', value })
@@ -87,12 +85,21 @@ class Settings extends Component {
               />
               <SwitchSetting
                 title="Record temperature"
-                description="Record temperature setting while you brew."
+                description="Record temperature and grind setting while brewing."
                 value={settings.waterTemp}
                 onChange={value =>
                   settingUpdated({ setting: 'waterTemp', value })
                 }
-                borderTop
+              />
+            </Section>
+            <Section title="General">
+              <SwitchSetting
+                title="Expert Mode"
+                description="Displays only calculations and timers within recipes."
+                value={settings.expertMode}
+                onChange={value =>
+                  settingUpdated({ setting: 'expertMode', value })
+                }
               />
               <SwitchSetting
                 title="Restore last brew"
@@ -169,6 +176,43 @@ class Settings extends Component {
                 items={this.createRecipesCheckList()}
                 onChange={recipe => this.recipeUpdated({ recipe })}
               />
+            </Section>
+          </Fragment>
+        );
+        break;
+      case 'app':
+        children = (
+          <Fragment>
+            <Section>
+              <SwitchSetting
+                title="Dark Mode"
+                value={isDarkTheme}
+                onChange={toggleTheme}
+              />
+              <SwitchSetting
+                title="Sounds enabled"
+                value={settings.soundsEnabled}
+                onChange={value =>
+                  settingUpdated({ setting: 'soundsEnabled', value })
+                }
+              />
+              <SwitchSetting
+                title="Share Anonymous Data"
+                description="Single Origin anonymously collects usage analytics of the app. This helps us develop new features and improve the overall user experience. If you prefer not to share your data, tap the toggle button to opt-out."
+                value={settings.shareTrackingData}
+                onChange={value =>
+                  settingUpdated({ setting: 'shareTrackingData', value })
+                }
+              />
+            </Section>
+          </Fragment>
+        );
+        break;
+      case 'privacy-policy':
+        children = (
+          <Fragment>
+            <Section>
+              <PrivacyPolicy />
             </Section>
           </Fragment>
         );

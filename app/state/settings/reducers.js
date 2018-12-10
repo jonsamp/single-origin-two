@@ -14,6 +14,8 @@ const initialState = {
   waterTemp: false,
   tempUnit: 'fahrenheit',
   weightUnit: 'grams',
+  soundsEnabled: true,
+  shareTrackingData: true,
   recipes: Object.values(recipes).reduce(
     (acc, r) => ({ ...acc, [r.id]: true }),
     {}
