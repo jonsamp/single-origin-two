@@ -68,7 +68,7 @@ class Settings extends Component {
               <Feather name="star" size={22} color={theme.grey3} />
             </SettingWrapper>
           </TouchableOpacity>
-          <Group title="Privacy Policy" />
+          <Group title="Privacy policy" />
           <TouchableOpacity
             onPress={() => Linking.openURL('http://mbox.coffee/OGCC')}
           >

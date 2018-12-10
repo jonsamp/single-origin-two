@@ -10,7 +10,7 @@ const initialState = {
   bloomDuration: 45,
   reminders: false,
   grinder: false,
-  grinderType: 'general',
+  grinderType: 'generic',
   waterTemp: false,
   tempUnit: 'fahrenheit',
   weightUnit: 'grams',

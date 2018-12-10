@@ -94,7 +94,7 @@ class Settings extends Component {
             </Section>
             <Section title="General">
               <SwitchSetting
-                title="Expert Mode"
+                title="Expert mode"
                 description="Displays only calculations and timers within recipes."
                 value={settings.expertMode}
                 onChange={value =>
@@ -185,7 +185,7 @@ class Settings extends Component {
           <Fragment>
             <Section>
               <SwitchSetting
-                title="Dark Mode"
+                title="Dark mode"
                 value={isDarkTheme}
                 onChange={toggleTheme}
               />
@@ -197,7 +197,7 @@ class Settings extends Component {
                 }
               />
               <SwitchSetting
-                title="Share Anonymous Data"
+                title="Share anonymous data"
                 description="Single Origin anonymously collects usage analytics of the app. This helps us develop new features and improve the overall user experience. If you prefer not to share your data, tap the toggle button to opt-out."
                 value={settings.shareTrackingData}
                 onChange={value =>
