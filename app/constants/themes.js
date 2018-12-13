@@ -6,25 +6,33 @@ const greys = {
   grey5: '#262626',
   grey6: '#000000',
 };
+const iconSize = 22;
 
 export default {
+  default: {
+    ...greys,
+  },
   light: {
     name: 'light',
     foreground: greys.grey5,
     background: '#FFFFFF',
     primary: '#00B890',
+    warning: '#FFE982',
     ...greys,
+    iconSize,
   },
   dark: {
     name: 'dark',
     foreground: greys.grey3,
     background: greys.grey6,
     primary: '#00CA9D',
+    warning: '#D8BF4A',
     grey1: greys.grey6,
     grey2: greys.grey5,
     grey3: greys.grey4,
     grey4: greys.grey3,
     grey5: greys.grey2,
     grey6: greys.grey1,
+    iconSize,
   },
 };

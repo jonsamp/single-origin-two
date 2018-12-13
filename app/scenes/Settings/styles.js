@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
   description: type.caption,
   input: {
-    ...type.text,
+    ...type.body,
     width: 48,
     height: 40,
     borderWidth: 1,

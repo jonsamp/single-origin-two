@@ -19,7 +19,7 @@ class Logs extends Component {
     const { theme } = this.props;
     return (
       <HeaderScrollView title="For You">
-        <Text style={[type.text, { padding: 16 }]}>
+        <Text style={[type.body, { padding: 16 }]}>
           Between them and the beasts behind me there was little choice, but at
           least there was a doubt as to the reception these grotesque parodies
           on humanity would accord me, while there was none as to the fate which

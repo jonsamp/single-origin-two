@@ -22,7 +22,7 @@ const ChecklistSetting = ({ theme, onChange, items }) =>
     <TouchableOpacity onPress={() => onChange(item.id)} key={item.id}>
       <SettingWrapper title={item.title}>
         {item.value ? (
-          <Feather name="check" size={22} color={theme.primary} />
+          <Feather name="check" size={theme.iconSize} color={theme.primary} />
         ) : null}
       </SettingWrapper>
     </TouchableOpacity>

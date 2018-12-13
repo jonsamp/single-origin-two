@@ -54,7 +54,7 @@ class Settings extends Component {
             }
           >
             <SettingWrapper title="Send feedback">
-              <Feather name="mail" size={22} color={theme.grey3} />
+              <Feather name="mail" size={theme.iconSize} color={theme.grey3} />
             </SettingWrapper>
           </TouchableOpacity>
           <TouchableOpacity
@@ -65,7 +65,7 @@ class Settings extends Component {
             }
           >
             <SettingWrapper title="Rate Single Origin">
-              <Feather name="star" size={22} color={theme.grey3} />
+              <Feather name="star" size={theme.iconSize} color={theme.grey3} />
             </SettingWrapper>
           </TouchableOpacity>
           <Group title="Privacy policy" />
@@ -73,7 +73,11 @@ class Settings extends Component {
             onPress={() => Linking.openURL('http://mbox.coffee/OGCC')}
           >
             <SettingWrapper title="$10 off Mistobox">
-              <Feather name="external-link" size={22} color={theme.grey3} />
+              <Feather
+                name="external-link"
+                size={theme.iconSize}
+                color={theme.grey3}
+              />
             </SettingWrapper>
           </TouchableOpacity>
         </Section>

@@ -31,7 +31,7 @@ export default {
     fontWeight: '500',
     letterSpacing: 0.019,
   },
-  text: {
+  body: {
     fontSize: 17,
     lineHeight: 22,
     letterSpacing: -0.024,

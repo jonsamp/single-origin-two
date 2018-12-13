@@ -17,7 +17,7 @@ class PrivacyPolicy extends Component {
       <View style={{ padding: 16 }}>
         <Text style={[type.title, paragraph]}>Privacy Policy</Text>
 
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           This privacy policy governs your use of the software application
           Single Origin (“Application”) for mobile devices that was created by
           Jon Samp. Please read this policy and our Mobile Terms and Conditions
@@ -31,7 +31,7 @@ class PrivacyPolicy extends Component {
         <Text style={[type.headline, paragraph]}>
           User Provided Information
         </Text>
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           The Application obtains the information you provide when you download
           and register the Application. Registration with us is optional.
           However, please keep in mind that you may not be able to use some of
@@ -53,7 +53,7 @@ class PrivacyPolicy extends Component {
         <Text style={[type.headline, paragraph]}>
           Automatically Collected Information
         </Text>
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           In addition, the Application may collect certain information
           automatically, including, but not limited to, the type of mobile
           device you use, your mobile devices unique device ID, your mobile
@@ -77,7 +77,7 @@ class PrivacyPolicy extends Component {
           Does the Application collect precise real time location information of
           the device?
         </Text>
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           This Application does not collect precise, real-time information about
           the location of your mobile device using either IP address or GPS
           (Global Positioning System). However we do collect IP address
@@ -90,7 +90,7 @@ class PrivacyPolicy extends Component {
           Do third parties see and/or have access to information obtained by the
           Application?
         </Text>
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           Only aggregated, anonymized data is periodically transmitted to
           external services to help us improve the Application and our service.
           We will share your information with third parties only in the ways
@@ -116,7 +116,7 @@ class PrivacyPolicy extends Component {
         <Text style={[type.headline, paragraph]}>
           What are my opt-out rights?
         </Text>
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           You can stop all collection of information by the Application easily
           by uninstalling the Application. You may use the standard uninstall
           processes as may be available as part of your mobile device or via the
@@ -129,7 +129,7 @@ class PrivacyPolicy extends Component {
         <Text style={[type.headline, paragraph]}>
           Data Retention Policy, Managing Your Information
         </Text>
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           We will retain User Provided data for as long as you use the
           Application and no longer that is essential in compliance to law.
           {'\n\n'}
@@ -146,7 +146,7 @@ class PrivacyPolicy extends Component {
         <Text style={[type.headline, paragraph]}>
           An overview of your different rights
         </Text>
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           You have the right to request:
           {'\n\n'}
           Access to the personal data we hold about you, free of charge in most
@@ -174,7 +174,7 @@ class PrivacyPolicy extends Component {
         <Text style={[type.headline, paragraph]}>
           Your right to withdraw consent
         </Text>
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           Whenever you have given us your consent to use your personal data, you
           have the right to change your mind at any time and withdraw that
           consent.
@@ -182,7 +182,7 @@ class PrivacyPolicy extends Component {
         <Text style={[type.headline, paragraph]}>
           Where we rely on our legitimate interest
         </Text>
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           In cases where we are processing your personal data on the basis of
           our legitimate interest, you can ask us to stop for reasons connected
           to your individual situation. We must then do so unless we believe we
@@ -191,7 +191,7 @@ class PrivacyPolicy extends Component {
         </Text>
 
         <Text style={[type.headline, paragraph]}>Checking your identity</Text>
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           To protect the confidentiality of your information, we will ask you to
           verify your identity before proceeding with any request you make under
           this Privacy Policy. If you have authorised a third party to submit a
@@ -200,7 +200,7 @@ class PrivacyPolicy extends Component {
         </Text>
 
         <Text style={[type.headline, paragraph]}>Security</Text>
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           We are concerned about safeguarding the confidentiality of your
           information. We provide physical, electronic, and procedural
           safeguards to protect information we process and maintain. For
@@ -213,7 +213,7 @@ class PrivacyPolicy extends Component {
         </Text>
 
         <Text style={[type.headline, paragraph]}>Changes</Text>
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           This Privacy Policy may be updated from time to time for any reason.
           We will notify you of any changes to our Privacy Policy by posting the
           new Privacy Policy located at
@@ -223,7 +223,7 @@ class PrivacyPolicy extends Component {
         </Text>
 
         <Text style={[type.headline, paragraph]}>Your Consent</Text>
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           By using the Application, you are consenting to our processing of your
           information as set forth in this Privacy Policy now and as amended by
           us. "Processing,” means using cookies on a computer/hand held device
@@ -238,7 +238,7 @@ class PrivacyPolicy extends Component {
         <Text style={[type.headline, paragraph]}>
           California Online Privacy Protection Act Compliance
         </Text>
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           We comply with the California Online Privacy Protection Act. We
           therefore will not distribute your personal information to outside
           parties without your consent.
@@ -247,7 +247,7 @@ class PrivacyPolicy extends Component {
         <Text style={[type.headline, paragraph]}>
           Children’s Online Privacy Protection Act Compliance
         </Text>
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           We never collect or maintain information at our website from those we
           actually know are under 16, and no part of our website is structured
           to attract anyone under 16.
@@ -256,7 +256,7 @@ class PrivacyPolicy extends Component {
         <Text style={[type.headline, paragraph]}>
           Information for European Union Customers
         </Text>
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           By using Single Origin and providing your information, you authorize
           us to collect, use, and store your information outside of the European
           Union.
@@ -265,7 +265,7 @@ class PrivacyPolicy extends Component {
         <Text style={[type.headline, paragraph]}>
           International Transfers of Information
         </Text>
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           Information may be processed, stored, and used outside of the country
           in which you are located. Data privacy laws vary across jurisdictions,
           and different laws may be applicable to your data depending on where
@@ -273,7 +273,7 @@ class PrivacyPolicy extends Component {
         </Text>
 
         <Text style={[type.headline, paragraph]}>Contact us</Text>
-        <Text style={[type.text, paragraph]}>
+        <Text style={[type.body, paragraph]}>
           If you have any questions regarding privacy while using the
           Application, or have questions about our practices, please contact us
           via email at sampjon@gmail.com
