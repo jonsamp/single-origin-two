@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  View,
-  LayoutAnimation,
-  Text,
-  Animated,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, Animated, TouchableOpacity } from 'react-native';
+import { Haptic } from 'expo';
 import withTheme from 'providers/theme';
 import { width } from 'constants/layout';
 import styles from './styles';
 
-const xOffset = new Animated.Value(0);
 const SCREEN_WIDTH = width / 3;
 
 class ScrollSelect extends Component {
@@ -47,7 +41,7 @@ class ScrollSelect extends Component {
         {
           rotate: this.xOffset.interpolate({
             inputRange: ranges,
-            outputRange: ['25deg', '12deg', '0deg', '-12deg', '-25deg'],
+            outputRange: ['30deg', '17deg', '0deg', '-17deg', '-30deg'],
             extrapolate: 'clamp',
           }),
         },
@@ -74,6 +68,7 @@ class ScrollSelect extends Component {
             { useNativeDriver: true }
           )}
           onMomentumScrollEnd={event => {
+            Haptic.selection();
             this.setState({
               currentIndex: Math.round(
                 event.nativeEvent.contentOffset.x / SCREEN_WIDTH
@@ -111,7 +106,7 @@ class ScrollSelect extends Component {
                       styles.selectionText,
                       { color: theme.foreground },
                       this.state.currentIndex === index
-                        ? { color: theme.primary }
+                        ? { color: theme.primary, transform: [{ scale: 1.25 }] }
                         : null,
                     ]}
                   >
@@ -122,7 +117,7 @@ class ScrollSelect extends Component {
             </TouchableOpacity>
           ))}
         </Animated.ScrollView>
-        <View style={[styles.label, { backgroundColor: theme.grey5 }]}>
+        <View style={[styles.label, { backgroundColor: theme.foreground }]}>
           <Text style={[styles.labelText, { color: theme.background }]}>
             CUPS
           </Text>

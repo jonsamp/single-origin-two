@@ -44,7 +44,7 @@ class Brew extends Component {
         }}
       >
         <Card>
-          <Image source={footerImage} />
+          {/* <Image source={footerImage} /> */}
           <Question
             title="How many cups would you like to brew?"
             description="One cup is measured at 12 oz"

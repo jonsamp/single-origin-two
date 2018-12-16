@@ -4,8 +4,8 @@ import type from 'constants/type';
 
 const styles = StyleSheet.create({
   container: {
-    borderTopLeftRadius: 60,
-    borderTopRightRadius: 60,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
     alignItems: 'center',
   },
   scrollContainer: {
@@ -32,13 +32,11 @@ const styles = StyleSheet.create({
   },
   label: {
     backgroundColor: 'white',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
-    width: width / 3.5,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
     alignItems: 'center',
     padding: 8,
+    paddingHorizontal: 24,
   },
   labelText: {
     ...type.label,
