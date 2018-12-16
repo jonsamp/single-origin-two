@@ -54,7 +54,7 @@ class ScrollSelect extends Component {
         {
           translateY: this.xOffset.interpolate({
             inputRange: ranges,
-            outputRange: [60, 15, 0, 15, 60],
+            outputRange: [60, 12, 0, 12, 60],
           }),
         },
       ],
