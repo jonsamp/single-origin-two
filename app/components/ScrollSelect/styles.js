@@ -8,10 +8,26 @@ const styles = StyleSheet.create({
   },
   selection: {
     marginHorizontal: 16,
-    width: width / 3.5,
-    borderWidth: 1,
     alignItems: 'center',
     padding: 12,
+  },
+  selectionText: {
+    ...type.largeTitle,
+    fontSize: 42,
+  },
+  scrollPage: {
+    width: width / 3,
+    // borderWidth: 1,
+  },
+  firstPage: {
+    // borderWidth: 1,
+    // borderColor: 'red',
+    marginLeft: width / 4.5,
+  },
+  lastPage: {
+    // borderWidth: 1,
+    // borderColor: 'blue',
+    marginRight: width / 4.5,
   },
 });
 
