@@ -13,20 +13,16 @@ const styles = StyleSheet.create({
   },
   selectionText: {
     ...type.largeTitle,
-    fontSize: 42,
+    fontSize: 56,
+    lineHeight: 56,
   },
   scrollPage: {
     width: width / 3,
-    // borderWidth: 1,
   },
   firstPage: {
-    // borderWidth: 1,
-    // borderColor: 'red',
     marginLeft: width / 4.5,
   },
   lastPage: {
-    // borderWidth: 1,
-    // borderColor: 'blue',
     marginRight: width / 4.5,
   },
 });
