@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Button, Text, Animated, TouchableOpacity } from 'react-native';
+import {
+  View,
+  LayoutAnimation,
+  Text,
+  Animated,
+  TouchableOpacity,
+} from 'react-native';
 import withTheme from 'providers/theme';
 import { width } from 'constants/layout';
 import styles from './styles';
@@ -41,13 +47,14 @@ class ScrollSelect extends Component {
         {
           rotate: this.xOffset.interpolate({
             inputRange: ranges,
-            outputRange: ['30deg', '15deg', '0deg', '-15deg', '-30deg'],
+            outputRange: ['25deg', '10deg', '0deg', '-10deg', '-25deg'],
+            extrapolate: 'clamp',
           }),
         },
         {
           translateY: this.xOffset.interpolate({
             inputRange: ranges,
-            outputRange: [70, 12, 0, 12, 70],
+            outputRange: [60, 15, 0, 15, 60],
           }),
         },
       ],
@@ -59,7 +66,7 @@ class ScrollSelect extends Component {
   render() {
     const { theme, min, max, onChange } = this.props;
     return (
-      <View style={{ backgroundColor: theme.grey3 }}>
+      <View style={[styles.container, { backgroundColor: theme.grey2 }]}>
         <Animated.ScrollView
           scrollEventThrottle={16}
           onScroll={Animated.event(
@@ -103,17 +110,20 @@ class ScrollSelect extends Component {
                     style={[
                       styles.selectionText,
                       this.state.currentIndex === index
-                        ? { color: 'white' }
+                        ? { color: theme.primary }
                         : null,
                     ]}
                   >
-                    {index}
+                    {index + 1}
                   </Text>
                 </View>
               </Animated.View>
             </TouchableOpacity>
           ))}
         </Animated.ScrollView>
+        <View style={[styles.label, { backgroundColor: theme.grey5 }]}>
+          <Text style={styles.labelText}>CUPS</Text>
+        </View>
       </View>
     );
   }

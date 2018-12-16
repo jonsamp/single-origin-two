@@ -12,7 +12,7 @@ function Card({ theme, children }) {
   return (
     <View
       style={{
-        backgroundColor: theme.grey2,
+        backgroundColor: theme.grey1,
         borderRadius: 26,
         minHeight: 16,
         overflow: 'hidden',
