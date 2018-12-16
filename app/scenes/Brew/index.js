@@ -40,6 +40,7 @@ class Brew extends Component {
           flex: 1,
           justifyContent: 'center',
           padding: 12,
+          backgroundColor: theme.background,
         }}
       >
         <Card>

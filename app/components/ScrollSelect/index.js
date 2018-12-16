@@ -47,14 +47,14 @@ class ScrollSelect extends Component {
         {
           rotate: this.xOffset.interpolate({
             inputRange: ranges,
-            outputRange: ['25deg', '10deg', '0deg', '-10deg', '-25deg'],
+            outputRange: ['25deg', '12deg', '0deg', '-12deg', '-25deg'],
             extrapolate: 'clamp',
           }),
         },
         {
           translateY: this.xOffset.interpolate({
             inputRange: ranges,
-            outputRange: [60, 12, 0, 12, 60],
+            outputRange: [60, 15, 0, 15, 60],
           }),
         },
       ],
@@ -109,6 +109,7 @@ class ScrollSelect extends Component {
                   <Text
                     style={[
                       styles.selectionText,
+                      { color: theme.foreground },
                       this.state.currentIndex === index
                         ? { color: theme.primary }
                         : null,
@@ -122,7 +123,9 @@ class ScrollSelect extends Component {
           ))}
         </Animated.ScrollView>
         <View style={[styles.label, { backgroundColor: theme.grey5 }]}>
-          <Text style={styles.labelText}>CUPS</Text>
+          <Text style={[styles.labelText, { color: theme.background }]}>
+            CUPS
+          </Text>
         </View>
       </View>
     );
