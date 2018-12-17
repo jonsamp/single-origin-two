@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { LayoutAnimation, Text, Animated } from 'react-native';
+import { LayoutAnimation, Text, View } from 'react-native';
 import withTheme from 'providers/theme';
 import type from 'constants/type';
 
@@ -26,7 +26,7 @@ class Warning extends Component {
     const { text, theme, defaultTheme, isVisible } = this.props;
 
     return (
-      <Animated.View
+      <View
         style={{
           backgroundColor: theme.warning,
         }}
@@ -42,7 +42,7 @@ class Warning extends Component {
             {text}
           </Text>
         )}
-      </Animated.View>
+      </View>
     );
   }
 }

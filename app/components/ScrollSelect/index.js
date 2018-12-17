@@ -55,6 +55,26 @@ class ScrollSelect extends Component {
     };
   };
 
+  textAnimation = index => {
+    const ranges = [
+      (index - 1) * SCREEN_WIDTH,
+      index * SCREEN_WIDTH,
+      (index + 1) * SCREEN_WIDTH,
+    ];
+
+    return {
+      transform: [
+        {
+          scale: this.xOffset.interpolate({
+            inputRange: ranges,
+            outputRange: [1, 1.25, 1],
+            extrapolate: 'clamp',
+          }),
+        },
+      ],
+    };
+  };
+
   xOffset = new Animated.Value(0);
 
   render() {
@@ -86,41 +106,38 @@ class ScrollSelect extends Component {
             }
           }}
         >
-          {[0, 1, 2, 3, 4, 5].map(index => (
-            <TouchableOpacity
-              style={[
-                styles.scrollPage,
-                index === 0 ? styles.firstPage : null,
-                index === 5 ? styles.lastPage : null,
-              ]}
-              key={index}
-              onPress={() => this.onSelectionTap(index)}
-              activeOpacity={1}
-            >
-              <Animated.View
-                style={[styles.screen, this.transitionAnimation(index)]}
+          {[0, 1, 2, 3, 4, 5].map(index => {
+            if (this.state.currentIndex === index) {
+              // Animated.timing(this.state.selection[index])
+            }
+            return (
+              <TouchableOpacity
+                style={[
+                  styles.scrollPage,
+                  index === 0 ? styles.firstPage : null,
+                  index === 5 ? styles.lastPage : null,
+                ]}
+                key={index}
+                onPress={() => this.onSelectionTap(index)}
+                activeOpacity={1}
               >
-                <View style={styles.selection}>
-                  <Text
-                    style={[
-                      styles.selectionText,
-                      { color: theme.foreground },
-                      this.state.currentIndex === index
-                        ? { color: theme.primary, transform: [{ scale: 1.25 }] }
-                        : null,
-                    ]}
-                  >
-                    {index + 1}
-                  </Text>
-                </View>
-              </Animated.View>
-            </TouchableOpacity>
-          ))}
+                <Animated.View
+                  style={[styles.screen, this.transitionAnimation(index)]}
+                >
+                  <View style={styles.selection}>
+                    <Animated.Text
+                      style={[styles.selectionText, this.textAnimation(index)]}
+                    >
+                      {index + 1}
+                    </Animated.Text>
+                  </View>
+                </Animated.View>
+              </TouchableOpacity>
+            );
+          })}
         </Animated.ScrollView>
         <View style={[styles.label, { backgroundColor: theme.foreground }]}>
-          <Text style={[styles.labelText, { color: theme.background }]}>
-            CUPS
-          </Text>
+          <Text style={[styles.labelText, { color: theme.grey2 }]}>CUPS</Text>
         </View>
       </View>
     );
