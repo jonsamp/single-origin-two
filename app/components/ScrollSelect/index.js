@@ -16,10 +16,6 @@ class ScrollSelect extends Component {
     onChange: PropTypes.func,
   };
 
-  state = {
-    currentIndex: 0,
-  };
-
   onSelectionTap = index => {
     const itemPosition = index * SCREEN_WIDTH;
 
@@ -89,11 +85,10 @@ class ScrollSelect extends Component {
           )}
           onMomentumScrollEnd={event => {
             Haptic.selection();
-            this.setState({
-              currentIndex: Math.round(
-                event.nativeEvent.contentOffset.x / SCREEN_WIDTH
-              ),
-            });
+            const selectionNumber = Math.round(
+              event.nativeEvent.contentOffset.x / SCREEN_WIDTH
+            );
+            onChange(selectionNumber + 1);
           }}
           horizontal
           contentContainerStyle={styles.scrollContainer}
@@ -106,35 +101,34 @@ class ScrollSelect extends Component {
             }
           }}
         >
-          {[0, 1, 2, 3, 4, 5].map(index => {
-            if (this.state.currentIndex === index) {
-              // Animated.timing(this.state.selection[index])
-            }
-            return (
-              <TouchableOpacity
-                style={[
-                  styles.scrollPage,
-                  index === 0 ? styles.firstPage : null,
-                  index === 5 ? styles.lastPage : null,
-                ]}
-                key={index}
-                onPress={() => this.onSelectionTap(index)}
-                activeOpacity={1}
+          {[0, 1, 2, 3, 4, 5].map(index => (
+            <TouchableOpacity
+              style={[
+                styles.scrollPage,
+                index === 0 ? styles.firstPage : null,
+                index === 5 ? styles.lastPage : null,
+              ]}
+              key={index}
+              onPress={() => this.onSelectionTap(index)}
+              activeOpacity={1}
+            >
+              <Animated.View
+                style={[styles.screen, this.transitionAnimation(index)]}
               >
-                <Animated.View
-                  style={[styles.screen, this.transitionAnimation(index)]}
-                >
-                  <View style={styles.selection}>
-                    <Animated.Text
-                      style={[styles.selectionText, this.textAnimation(index)]}
-                    >
-                      {index + 1}
-                    </Animated.Text>
-                  </View>
-                </Animated.View>
-              </TouchableOpacity>
-            );
-          })}
+                <View style={styles.selection}>
+                  <Animated.Text
+                    style={[
+                      styles.selectionText,
+                      this.textAnimation(index),
+                      { color: theme.foreground },
+                    ]}
+                  >
+                    {index + 1}
+                  </Animated.Text>
+                </View>
+              </Animated.View>
+            </TouchableOpacity>
+          ))}
         </Animated.ScrollView>
         <View style={[styles.label, { backgroundColor: theme.foreground }]}>
           <Text style={[styles.labelText, { color: theme.grey2 }]}>CUPS</Text>

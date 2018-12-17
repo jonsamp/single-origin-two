@@ -25,6 +25,7 @@ class Brew extends Component {
 
   state = {
     warning: false,
+    numberOfCups: 1,
   };
 
   componentDidMount() {
@@ -38,9 +39,10 @@ class Brew extends Component {
       <View
         style={{
           flex: 1,
-          justifyContent: 'center',
+          // justifyContent: 'center',
           padding: 12,
           backgroundColor: theme.background,
+          top: 90,
         }}
       >
         <Card>
@@ -52,7 +54,11 @@ class Brew extends Component {
           <ScrollSelect
             min={1}
             max={4}
-            onChange={v => console.log('Value: ', v)}
+            onChange={v => this.setState({ numberOfCups: v })}
+          />
+          <Warning
+            text="This is some warning about the sheer amount of coffee you're about to make."
+            isVisible={this.state.numberOfCups > 3}
           />
         </Card>
       </View>
