@@ -35,7 +35,7 @@ class Warning extends Component {
           <Text
             style={{
               ...type.body,
-              color: defaultTheme.grey6,
+              color: defaultTheme.black,
               padding: 20,
             }}
           >
