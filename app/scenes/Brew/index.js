@@ -42,7 +42,7 @@ class Brew extends Component {
           // justifyContent: 'center',
           padding: 12,
           backgroundColor: theme.background,
-          top: 90,
+          paddingTop: 90,
         }}
       >
         <Card>
@@ -52,11 +52,11 @@ class Brew extends Component {
             description="One cup is measured at 12 oz"
           />
           <ScrollSelect
-            min={160}
-            max={210}
-            step={5}
-            defaultSelection={200}
-            label="Temp °F"
+            min={1}
+            max={40}
+            step={1}
+            defaultSelection={20}
+            label="Grind Baratza Encore"
             onChange={v => this.setState({ numberOfCups: v })}
           />
         </Card>
