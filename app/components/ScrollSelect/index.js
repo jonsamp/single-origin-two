@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Animated, TouchableOpacity } from 'react-native';
 import { Haptic } from 'expo';
+import { range } from 'lodash';
 import withTheme from 'providers/theme';
 import { width } from 'constants/layout';
 import styles from './styles';
@@ -13,8 +14,41 @@ class ScrollSelect extends Component {
     theme: PropTypes.object,
     min: PropTypes.number,
     max: PropTypes.number,
+    step: PropTypes.number,
+    defaultSelection: PropTypes.number,
+    label: PropTypes.string,
     onChange: PropTypes.func,
   };
+
+  static defaultProps = {
+    min: 1,
+    max: 3,
+    step: 1,
+    label: 'label',
+    onChange: () => {},
+    defaultSelection: null,
+  };
+
+  componentDidMount() {
+    const { min, max, step, defaultSelection } = this.props;
+    if (!defaultSelection) return;
+
+    const selectionRange = range(min, max, step);
+    const defaultSelectionIndex = selectionRange.indexOf(defaultSelection);
+    const itemPosition = defaultSelectionIndex * SCREEN_WIDTH;
+
+    if (this.scrollViewRef) {
+      setTimeout(
+        () =>
+          this.scrollViewRef.scrollTo({
+            x: itemPosition,
+            y: 0,
+            animated: false,
+          }),
+        0
+      );
+    }
+  }
 
   onSelectionTap = index => {
     const itemPosition = index * SCREEN_WIDTH;
@@ -59,6 +93,11 @@ class ScrollSelect extends Component {
     ];
 
     return {
+      opacity: this.xOffset.interpolate({
+        inputRange: ranges,
+        outputRange: [0.5, 1, 0.5],
+        extrapolate: 'clamp',
+      }),
       transform: [
         {
           scale: this.xOffset.interpolate({
@@ -74,7 +113,13 @@ class ScrollSelect extends Component {
   xOffset = new Animated.Value(0);
 
   render() {
-    const { theme, min, max, onChange } = this.props;
+    const { theme, min, max, step, onChange, label } = this.props;
+    const selectionRange = range(min, max + 1, step);
+    let selectionTextStyle = styles.selectionText;
+    if (min >= 100 || max >= 100) {
+      selectionTextStyle = styles.selectionTextLargeNumber;
+    }
+
     return (
       <View style={[styles.container, { backgroundColor: theme.grey2 }]}>
         <Animated.ScrollView
@@ -93,7 +138,7 @@ class ScrollSelect extends Component {
           horizontal
           contentContainerStyle={styles.scrollContainer}
           showsHorizontalScrollIndicator={false}
-          decelerationRate={0.0}
+          decelerationRate="fast"
           snapToInterval={SCREEN_WIDTH}
           ref={ref => {
             if (ref) {
@@ -101,14 +146,14 @@ class ScrollSelect extends Component {
             }
           }}
         >
-          {[0, 1, 2, 3, 4, 5].map(index => (
+          {selectionRange.map((item, index) => (
             <TouchableOpacity
               style={[
                 styles.scrollPage,
                 index === 0 ? styles.firstPage : null,
-                index === 5 ? styles.lastPage : null,
+                index === selectionRange.length - 1 ? styles.lastPage : null,
               ]}
-              key={index}
+              key={item}
               onPress={() => this.onSelectionTap(index)}
               activeOpacity={1}
             >
@@ -118,12 +163,12 @@ class ScrollSelect extends Component {
                 <View style={styles.selection}>
                   <Animated.Text
                     style={[
-                      styles.selectionText,
+                      selectionTextStyle,
                       this.textAnimation(index),
                       { color: theme.foreground },
                     ]}
                   >
-                    {index + 1}
+                    {item}
                   </Animated.Text>
                 </View>
               </Animated.View>
@@ -131,7 +176,9 @@ class ScrollSelect extends Component {
           ))}
         </Animated.ScrollView>
         <View style={[styles.label, { backgroundColor: theme.foreground }]}>
-          <Text style={[styles.labelText, { color: theme.grey2 }]}>CUPS</Text>
+          <Text style={[styles.labelText, { color: theme.grey2 }]}>
+            {label.toUpperCase()}
+          </Text>
         </View>
       </View>
     );

@@ -52,13 +52,12 @@ class Brew extends Component {
             description="One cup is measured at 12 oz"
           />
           <ScrollSelect
-            min={1}
-            max={4}
+            min={160}
+            max={210}
+            step={5}
+            defaultSelection={200}
+            label="Temp °F"
             onChange={v => this.setState({ numberOfCups: v })}
-          />
-          <Warning
-            text="This is some warning about the sheer amount of coffee you're about to make."
-            isVisible={this.state.numberOfCups > 3}
           />
         </Card>
       </View>

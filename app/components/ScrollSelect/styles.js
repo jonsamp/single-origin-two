@@ -18,8 +18,15 @@ const styles = StyleSheet.create({
   },
   selectionText: {
     ...type.largeTitle,
-    fontSize: 56,
-    lineHeight: 56,
+    fontSize: 44,
+    lineHeight: 44,
+    height: 44,
+  },
+  selectionTextLargeNumber: {
+    ...type.largeTitle,
+    fontSize: 32,
+    lineHeight: 32,
+    height: 32,
   },
   scrollPage: {
     width: width / 3,
