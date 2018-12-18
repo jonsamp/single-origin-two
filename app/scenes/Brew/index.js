@@ -11,6 +11,7 @@ import Question from 'components/Question';
 import Image from 'components/Image';
 import Warning from 'components/Warning';
 import ScrollSelect from 'components/ScrollSelect';
+import PourTimer from 'components/PourTimer';
 
 import footerImage from 'assets/pour-over-bloom-default.jpg';
 
@@ -36,31 +37,20 @@ class Brew extends Component {
   render() {
     const { theme, settings } = this.props;
     return (
-      <ScrollView
-        contentContainerStyle={{
-          // flex: 1,
-          // justifyContent: 'center',
-          padding: 12,
-          backgroundColor: theme.background,
-          paddingTop: 90,
-        }}
-      >
-        <Card>
-          <Image source={footerImage} />
-          <Question
-            title="How many cups would you like to brew?"
-            description="One cup is measured at 12 oz"
-          />
-          <ScrollSelect
-            min={1}
-            max={40}
-            step={1}
-            defaultSelection={20}
-            label="Grind Baratza Encore"
-            onChange={v => this.setState({ numberOfCups: v })}
-          />
-        </Card>
-      </ScrollView>
+      <View style={{ flex: 1, backgroundColor: theme.background }}>
+        <ScrollView
+          contentContainerStyle={{
+            padding: 12,
+            paddingTop: 90,
+          }}
+        >
+          <Card>
+            <Image source={footerImage} />
+            <Instructions text="Over the course of **4 minutes**, pour **2.5 cups** of hot water over the coffee in the Chemex." />
+            <PourTimer />
+          </Card>
+        </ScrollView>
+      </View>
     );
   }
 }
