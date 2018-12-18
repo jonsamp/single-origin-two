@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { SectionList, View, Text } from 'react-native';
+import { SectionList, View, Text, ScrollView } from 'react-native';
 import withTheme from 'providers/theme';
 import withSettings from 'providers/settings';
 
@@ -36,9 +36,9 @@ class Brew extends Component {
   render() {
     const { theme, settings } = this.props;
     return (
-      <View
-        style={{
-          flex: 1,
+      <ScrollView
+        contentContainerStyle={{
+          // flex: 1,
           // justifyContent: 'center',
           padding: 12,
           backgroundColor: theme.background,
@@ -46,7 +46,7 @@ class Brew extends Component {
         }}
       >
         <Card>
-          {/* <Image source={footerImage} /> */}
+          <Image source={footerImage} />
           <Question
             title="How many cups would you like to brew?"
             description="One cup is measured at 12 oz"
@@ -60,7 +60,7 @@ class Brew extends Component {
             onChange={v => this.setState({ numberOfCups: v })}
           />
         </Card>
-      </View>
+      </ScrollView>
     );
   }
 }

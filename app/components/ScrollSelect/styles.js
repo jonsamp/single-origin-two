@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   scrollContainer: {
-    padding: 24,
+    paddingVertical: 40,
   },
   selection: {
     marginHorizontal: 16,
@@ -32,10 +32,10 @@ const styles = StyleSheet.create({
     width: width / 3,
   },
   firstPage: {
-    marginLeft: width / 4.25,
+    marginLeft: width / 4.25 + 24,
   },
   lastPage: {
-    marginRight: width / 4.25,
+    marginRight: width / 4.25 + 24,
   },
   label: {
     backgroundColor: 'white',

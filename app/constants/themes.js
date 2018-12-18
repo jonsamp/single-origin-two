@@ -1,11 +1,3 @@
-const greys = {
-  grey1: '#F7F7F7',
-  grey2: '#EFEFEF',
-  grey3: '#adadad',
-  grey4: '#595959',
-  grey5: '#262626',
-  grey6: '#000000',
-};
 const iconSize = 22;
 
 export default {

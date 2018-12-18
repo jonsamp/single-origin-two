@@ -10,11 +10,10 @@ const propTypes = {
   navigation: PropTypes.object,
   theme: PropTypes.object,
   title: PropTypes.string,
-  leftText: PropTypes.string,
   right: PropTypes.any,
 };
 
-function Header({ navigation, theme, title, leftText = '', right }) {
+function Header({ navigation, theme, title, right }) {
   return (
     <View
       style={[
@@ -33,7 +32,7 @@ function Header({ navigation, theme, title, leftText = '', right }) {
             onPress={() => navigation.goBack()}
             style={{ padding: 12, top: 12, right: 12 }}
           >
-            <Feather name="chevron-left" size={26} color={theme.foreground} />
+            <Feather name="chevron-left" size={30} color={theme.foreground} />
           </TouchableOpacity>
         </View>
         <Text style={[styles.title, { color: theme.foreground }]}>{title}</Text>
