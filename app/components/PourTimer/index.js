@@ -71,25 +71,25 @@ class PourTimer extends Component {
 
   render() {
     const { theme } = this.props;
-
+    const inputRange = [0, 1];
     const trackingAnimatedScale = this.trackingAnimatedValue.interpolate({
-      inputRange: [0, 1],
+      inputRange,
       outputRange: [1, 1.25],
     });
     const trackingAnimatedShadow = this.trackingAnimatedValue.interpolate({
-      inputRange: [0, 1],
+      inputRange,
       outputRange: [0, 1],
     });
     const trackingAnimatedBorder = this.trackingAnimatedValue.interpolate({
-      inputRange: [0, 1],
+      inputRange,
       outputRange: [theme.grey3, theme.primary],
     });
     const trackingAnimatedBackground = this.trackingAnimatedValue.interpolate({
-      inputRange: [0, 1],
+      inputRange,
       outputRange: [theme.background, theme.primary],
     });
     const trackingAnimatedText = this.trackingAnimatedValue.interpolate({
-      inputRange: [0, 1],
+      inputRange,
       outputRange: [theme.foreground, theme.background],
     });
 
