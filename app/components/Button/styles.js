@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
     letterSpacing: 0.65,
   },
   buttonContainer: {
-    shadowColor: 'rgba(0,0,0,0.25)',
-    shadowRadius: 4,
+    shadowColor: 'rgba(0,0,0,0.2)',
+    shadowRadius: 7,
     shadowOffset: { height: 2 },
     shadowOpacity: 1,
   },

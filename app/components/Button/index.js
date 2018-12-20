@@ -28,13 +28,14 @@ function Button({
   let buttonStyle = [styles.button, { backgroundColor: theme.primary }];
   let textStyle = [styles.text, { color: theme.background }, customTextStyle];
 
+  if (type === 'secondary') {
+    buttonStyle = [styles.button, { backgroundColor: theme.background }];
+    textStyle = [styles.text, { color: theme.foreground }];
+  }
+
   if (type === 'outline') {
     buttonStyle = [styles.buttonOutline, { borderColor: theme.foreground }];
-    textStyle = [
-      styles.textOutline,
-      { color: theme.foreground },
-      customTextStyle,
-    ];
+    textStyle = [styles.textOutline, { color: theme.foreground }];
   }
 
   if (disabled) {
@@ -46,7 +47,7 @@ function Button({
         accessibilityComponentType="button"
         activeOpacity={0.2}
       >
-        <Text style={textStyle}>{title.toUpperCase()}</Text>
+        <Text style={[textStyle, customTextStyle]}>{title.toUpperCase()}</Text>
       </TouchableOpacity>
     );
   }

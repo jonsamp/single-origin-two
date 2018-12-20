@@ -6,11 +6,11 @@ const styles = StyleSheet.create({
     padding: 24,
     paddingVertical: 40,
     flexDirection: 'row',
-    justifyContent: 'space-around',
   },
   section: {
     alignItems: 'center',
     justifyContent: 'center',
+    flex: 1,
   },
   timeText: {
     ...type.largeTitle,
@@ -21,13 +21,19 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   trackingContainer: {
-    paddingVertical: 16,
-    paddingHorizontal: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 32,
+    justifyContent: 'center',
+    alignItems: 'center',
     borderWidth: 2,
     borderRadius: 10,
   },
   trackingText: {
     ...type.title,
+    fontWeight: 'bold',
+  },
+  trackingLabelText: {
+    ...type.label,
   },
 });
 

@@ -17,6 +17,7 @@
     "prop-types": "^15.6.1",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.1.tar.gz",
+    "react-native-animate-number": "^0.1.2",
     "react-native-debugger-open": "0.3.17",
     "react-native-fade": "^1.0.2",
     "react-native-header-scroll-view": "2.0.0",
