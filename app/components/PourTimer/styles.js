@@ -27,10 +27,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 2,
     borderRadius: 10,
+    shadowColor: 'rgba(82,181,146,0.5)',
+    shadowRadius: 12,
+    shadowOffset: { height: 2 },
   },
   trackingText: {
-    ...type.title,
+    ...type.header,
     fontWeight: 'bold',
+  },
+  setWidthText: {
+    width: 65,
+    alignItems: 'center',
   },
   trackingLabelText: {
     ...type.label,

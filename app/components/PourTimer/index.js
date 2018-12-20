@@ -17,6 +17,7 @@ class PourTimer extends Component {
   state = {
     secondsRemaining: 0,
     timerRunning: false,
+    trackingValue: 100,
   };
 
   componentDidMount() {
@@ -32,13 +33,30 @@ class PourTimer extends Component {
 
   handleStart = () => {
     Animated.sequence([
+      {
+        start: onComplete => {
+          Haptic.notification(Haptic.NotificationFeedbackType.Success);
+          onComplete({ finished: true });
+        },
+      },
       Animated.timing(this.trackingAnimatedValue, {
         toValue: 1,
         duration: 200,
       }),
       {
         start: onComplete => {
-          console.log('anything here');
+          if (this.state.trackingValue === 100) {
+            this.setState({ trackingValue: 350 });
+          } else {
+            this.setState({ trackingValue: 100 });
+          }
+          onComplete({ finished: true });
+        },
+      },
+      Animated.delay(1650),
+      {
+        start: onComplete => {
+          Haptic.notification(Haptic.NotificationFeedbackType.Success);
           onComplete({ finished: true });
         },
       },
@@ -57,6 +75,14 @@ class PourTimer extends Component {
     const trackingAnimatedScale = this.trackingAnimatedValue.interpolate({
       inputRange: [0, 1],
       outputRange: [1, 1.25],
+    });
+    const trackingAnimatedShadow = this.trackingAnimatedValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 1],
+    });
+    const trackingAnimatedBorder = this.trackingAnimatedValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [theme.grey3, theme.primary],
     });
     const trackingAnimatedBackground = this.trackingAnimatedValue.interpolate({
       inputRange: [0, 1],
@@ -84,16 +110,23 @@ class PourTimer extends Component {
               styles.trackingContainer,
               {
                 backgroundColor: trackingAnimatedBackground,
-                borderColor: theme.grey3,
                 transform: [{ scale: trackingAnimatedScale }],
+                borderColor: trackingAnimatedBorder,
+                shadowOpacity: trackingAnimatedShadow,
               },
             ]}
           >
-            <Animated.Text
-              style={[styles.trackingText, { color: trackingAnimatedText }]}
-            >
-              <AnimateNumber value={150} countBy={5} interval={25} />
-            </Animated.Text>
+            <View style={styles.setWidthText}>
+              <Animated.Text
+                style={[styles.trackingText, { color: trackingAnimatedText }]}
+              >
+                <AnimateNumber
+                  value={this.state.trackingValue}
+                  countBy={5}
+                  interval={25}
+                />
+              </Animated.Text>
+            </View>
             <Animated.Text
               style={[
                 styles.trackingLabelText,

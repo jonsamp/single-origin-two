@@ -45,6 +45,14 @@ class Brew extends Component {
           }}
         >
           <Card>
+            <Question
+              title="How many cups would you like to brew? "
+              description="One cup is typically 8oz."
+            />
+            <ScrollSelect min={1} max={4} label="cups" />
+          </Card>
+          <View style={{ height: 64 }} />
+          <Card>
             <Image source={footerImage} />
             <Instructions text="Over the course of **4 minutes**, pour **2.5 cups** of hot water over the coffee in the Chemex." />
             <PourTimer />
