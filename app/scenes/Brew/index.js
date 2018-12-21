@@ -54,7 +54,7 @@ class Brew extends Component {
           <View style={{ height: 64 }} />
           <Card>
             <Image source={footerImage} />
-            <Instructions text="Over the course of **4 minutes**, pour **2.5 cups** of hot water over the coffee in the Chemex." />
+            <Instructions text="Tap **start** and pour over water as directed. During the brew, you'll pour up to **362 grams** of water over **3.5 minutes**." />
             <PourTimer />
           </Card>
         </ScrollView>

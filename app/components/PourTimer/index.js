@@ -23,7 +23,7 @@ class PourTimer extends Component {
   state = {
     seconds: this.props.seconds,
     timerRunning: false,
-    trackingValue: 100,
+    trackingValue: 0,
   };
 
   componentDidMount() {
