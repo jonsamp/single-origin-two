@@ -44,13 +44,13 @@ class Brew extends Component {
             paddingTop: 90,
           }}
         >
-          <Card>
+          {/* <Card>
             <Question
               title="How many cups would you like to brew? "
               description="One cup is typically 8oz."
             />
             <ScrollSelect min={1} max={4} label="cups" />
-          </Card>
+          </Card> */}
           <View style={{ height: 64 }} />
           <Card>
             <Image source={footerImage} />

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Animated } from 'react-native';
-import { Haptic } from 'expo';
+import { Haptic, KeepAwake } from 'expo';
 import AnimateNumber from 'react-native-animate-number';
+import formatSeconds from 'helpers/formatSeconds';
 import withTheme from 'providers/theme';
 import Button from 'components/Button';
 import styles from './styles';
@@ -10,28 +11,52 @@ import styles from './styles';
 class PourTimer extends Component {
   static propTypes = {
     theme: PropTypes.object,
+    seconds: PropTypes.number,
+    onTick: PropTypes.func,
   };
 
-  static defaultProps = {};
+  static defaultProps = {
+    seconds: 0,
+    onTick: () => {},
+  };
 
   state = {
-    secondsRemaining: 0,
+    seconds: this.props.seconds,
     timerRunning: false,
     trackingValue: 100,
   };
 
   componentDidMount() {
     clearInterval(this.interval);
-    this.setState({
-      secondsRemaining: this.props.seconds,
-    });
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
-  handleStart = () => {
+  countdown = () => {
+    this.setState(
+      prevState => ({
+        seconds: prevState.seconds + 1,
+      }),
+      () => this.props.onTick(this.state.seconds)
+    );
+  };
+
+  toggleCountdown = () => {
+    if (this.state.timerRunning) {
+      KeepAwake.deactivate();
+      clearInterval(this.interval);
+      this.setState({ timerRunning: false });
+      return;
+    }
+
+    KeepAwake.activate();
+    this.interval = setInterval(this.countdown, 1000);
+    this.setState({ timerRunning: true });
+  };
+
+  pourTrackingUpdated = () => {
     Animated.sequence([
       {
         start: onComplete => {
@@ -71,6 +96,7 @@ class PourTimer extends Component {
 
   render() {
     const { theme } = this.props;
+    const { timerRunning } = this.state;
     const inputRange = [0, 1];
     const trackingAnimatedScale = this.trackingAnimatedValue.interpolate({
       inputRange,
@@ -97,9 +123,13 @@ class PourTimer extends Component {
       <View style={[styles.container, { backgroundColor: theme.grey2 }]}>
         <View style={styles.section}>
           <Text style={[styles.timeText, { color: theme.foreground }]}>
-            4:00
+            {formatSeconds(this.state.seconds)}
           </Text>
-          <Button title="start" onPress={this.handleStart} />
+          <Button
+            type={timerRunning ? 'secondary' : 'primary'}
+            title={timerRunning ? 'stop' : 'start'}
+            onPress={this.toggleCountdown}
+          />
         </View>
         <View style={styles.section}>
           <Text style={[styles.labelText, { color: theme.foreground }]}>
