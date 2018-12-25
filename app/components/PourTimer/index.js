@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Animated } from 'react-native';
-import { Haptic, KeepAwake } from 'expo';
+import { Haptic, KeepAwake, Audio } from 'expo';
 import AnimateNumber from 'react-native-animate-number';
 import formatSeconds from 'helpers/formatSeconds';
 import withTheme from 'providers/theme';
 import Button from 'components/Button';
+import addWaterSound from './sounds/add-water.mp3';
+import endBrewSound from './sounds/end-brew.mp3';
 import styles from './styles';
 
 class PourTimer extends Component {
@@ -13,34 +15,74 @@ class PourTimer extends Component {
     theme: PropTypes.object,
     seconds: PropTypes.number,
     onTick: PropTypes.func,
+    waterPercent: PropTypes.number,
+    totalWaterWeight: PropTypes.number,
   };
 
   static defaultProps = {
     seconds: 0,
+    waterPercent: 0,
+    totalWaterWeight: 0,
     onTick: () => {},
   };
 
   state = {
     seconds: this.props.seconds,
     timerRunning: false,
-    trackingValue: 0,
   };
 
   componentDidMount() {
     clearInterval(this.interval);
   }
 
+  componentDidUpdate(nextProps) {
+    if (nextProps.waterPercent !== this.props.waterPercent) {
+      this.onAnimateNumberBegin();
+    }
+  }
+
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
-  countdown = () => {
-    this.setState(
-      prevState => ({
-        seconds: prevState.seconds + 1,
+  onAnimateNumberBegin = () =>
+    Animated.sequence([
+      {
+        start: onComplete => {
+          Haptic.notification(Haptic.NotificationFeedbackType.Success);
+          this.playSound();
+          onComplete({ finished: true });
+        },
+      },
+      Animated.timing(this.trackingAnimatedValue, {
+        toValue: 1,
+        duration: 200,
       }),
-      () => this.props.onTick(this.state.seconds)
-    );
+    ]).start();
+
+  onAnimateNumberFinish = () =>
+    Animated.sequence([
+      {
+        start: onComplete => {
+          Haptic.notification(Haptic.NotificationFeedbackType.Success);
+          onComplete({ finished: true });
+        },
+      },
+      Animated.timing(this.trackingAnimatedValue, {
+        toValue: 0,
+        duration: 200,
+      }),
+    ]).start();
+
+  playSound = async () => {
+    const soundObject = new Audio.Sound();
+    try {
+      await soundObject.loadAsync(addWaterSound);
+      await soundObject.playAsync();
+      // Your sound is playing!
+    } catch (error) {
+      // An error occurred!
+    }
   };
 
   toggleCountdown = () => {
@@ -56,46 +98,19 @@ class PourTimer extends Component {
     this.setState({ timerRunning: true });
   };
 
-  pourTrackingUpdated = () => {
-    Animated.sequence([
-      {
-        start: onComplete => {
-          Haptic.notification(Haptic.NotificationFeedbackType.Success);
-          onComplete({ finished: true });
-        },
-      },
-      Animated.timing(this.trackingAnimatedValue, {
-        toValue: 1,
-        duration: 200,
+  countdown = () => {
+    this.setState(
+      prevState => ({
+        seconds: prevState.seconds + 1,
       }),
-      {
-        start: onComplete => {
-          if (this.state.trackingValue === 100) {
-            this.setState({ trackingValue: 350 });
-          } else {
-            this.setState({ trackingValue: 100 });
-          }
-          onComplete({ finished: true });
-        },
-      },
-      Animated.delay(1650),
-      {
-        start: onComplete => {
-          Haptic.notification(Haptic.NotificationFeedbackType.Success);
-          onComplete({ finished: true });
-        },
-      },
-      Animated.timing(this.trackingAnimatedValue, {
-        toValue: 0,
-        duration: 200,
-      }),
-    ]).start();
+      () => this.props.onTick(this.state.seconds)
+    );
   };
 
   trackingAnimatedValue = new Animated.Value(0);
 
   render() {
-    const { theme } = this.props;
+    const { theme, totalWaterWeight, waterPercent } = this.props;
     const { timerRunning } = this.state;
     const inputRange = [0, 1];
     const trackingAnimatedScale = this.trackingAnimatedValue.interpolate({
@@ -151,9 +166,10 @@ class PourTimer extends Component {
                 style={[styles.trackingText, { color: trackingAnimatedText }]}
               >
                 <AnimateNumber
-                  value={this.state.trackingValue}
-                  countBy={5}
-                  interval={25}
+                  value={Math.round(totalWaterWeight * waterPercent)}
+                  countBy={4}
+                  interval={30}
+                  onFinish={this.onAnimateNumberFinish}
                 />
               </Animated.Text>
             </View>

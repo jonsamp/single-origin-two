@@ -15,7 +15,7 @@ class ScrollSelect extends Component {
     min: PropTypes.number,
     max: PropTypes.number,
     step: PropTypes.number,
-    defaultSelection: PropTypes.number,
+    defaultValue: PropTypes.number,
     label: PropTypes.string,
     onChange: PropTypes.func,
   };
@@ -26,16 +26,16 @@ class ScrollSelect extends Component {
     step: 1,
     label: 'label',
     onChange: () => {},
-    defaultSelection: null,
+    defaultValue: null,
   };
 
   componentDidMount() {
-    const { min, max, step, defaultSelection } = this.props;
-    if (!defaultSelection) return;
+    const { min, max, step, defaultValue } = this.props;
+    if (!defaultValue) return;
 
     const selectionRange = range(min, max, step);
-    const defaultSelectionIndex = selectionRange.indexOf(defaultSelection);
-    const itemPosition = defaultSelectionIndex * SCREEN_WIDTH;
+    const defaultValueIndex = selectionRange.indexOf(defaultValue);
+    const itemPosition = defaultValueIndex * SCREEN_WIDTH;
 
     if (this.scrollViewRef) {
       setTimeout(
@@ -67,6 +67,11 @@ class ScrollSelect extends Component {
       (index + 2) * SCREEN_WIDTH,
     ];
     return {
+      opacity: this.xOffset.interpolate({
+        inputRange: ranges,
+        outputRange: [0.25, 0.5, 1, 0.5, 0.25],
+        extrapolate: 'clamp',
+      }),
       transform: [
         {
           rotate: this.xOffset.interpolate({
@@ -93,11 +98,6 @@ class ScrollSelect extends Component {
     ];
 
     return {
-      opacity: this.xOffset.interpolate({
-        inputRange: ranges,
-        outputRange: [0.5, 1, 0.5],
-        extrapolate: 'clamp',
-      }),
       transform: [
         {
           scale: this.xOffset.interpolate({
