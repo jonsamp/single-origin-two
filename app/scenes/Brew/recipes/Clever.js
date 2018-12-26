@@ -74,14 +74,7 @@ class Clever extends Component {
           type: 'finished',
         },
       ],
-      [settings.bloomDuration + 180]: [
-        {
-          type: 'tip',
-          text: 'In **seconds** seconds, stop the clever from dripping.',
-          countDownTo: settings.bloomDuration + 190,
-        },
-      ],
-      [settings.bloomDuration + 200]: [
+      [settings.bloomDuration + 160]: [
         {
           type: 'warning',
           text:
