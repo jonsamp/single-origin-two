@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { View, TouchableOpacity, Image } from 'react-native';
 import withTheme from 'providers/theme';
@@ -6,7 +6,7 @@ import PauseIcon from './icons/PauseIcon';
 import PlayIcon from './icons/PlayIcon';
 import styles from './styles';
 
-class CustomImage extends Component {
+class CustomImage extends PureComponent {
   static propTypes = {
     theme: PropTypes.object,
     source: PropTypes.number,
