@@ -17,6 +17,7 @@ function Card({ theme, children }) {
         minHeight: 16,
         overflow: 'hidden',
         width: '100%',
+        marginBottom: 32,
       }}
     >
       {children}

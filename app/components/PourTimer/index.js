@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Animated } from 'react-native';
-import { Haptic, KeepAwake, Audio } from 'expo';
+import { Haptic, KeepAwake } from 'expo';
 import AnimateNumber from 'react-native-animate-number';
 import formatSeconds from 'helpers/formatSeconds';
 import withTheme from 'providers/theme';
 import Button from 'components/Button';
-import addWaterSound from './sounds/add-water.mp3';
-import endBrewSound from './sounds/end-brew.mp3';
 import styles from './styles';
 
 class PourTimer extends Component {
@@ -49,8 +47,7 @@ class PourTimer extends Component {
     Animated.sequence([
       {
         start: onComplete => {
-          Haptic.notification(Haptic.NotificationFeedbackType.Success);
-          this.playSound();
+          Haptic.selection();
           onComplete({ finished: true });
         },
       },
@@ -64,7 +61,7 @@ class PourTimer extends Component {
     Animated.sequence([
       {
         start: onComplete => {
-          Haptic.notification(Haptic.NotificationFeedbackType.Success);
+          Haptic.selection();
           onComplete({ finished: true });
         },
       },
@@ -73,17 +70,6 @@ class PourTimer extends Component {
         duration: 200,
       }),
     ]).start();
-
-  playSound = async () => {
-    const soundObject = new Audio.Sound();
-    try {
-      await soundObject.loadAsync(addWaterSound);
-      await soundObject.playAsync();
-      // Your sound is playing!
-    } catch (error) {
-      // An error occurred!
-    }
-  };
 
   toggleCountdown = () => {
     if (this.state.timerRunning) {

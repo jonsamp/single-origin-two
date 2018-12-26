@@ -7,7 +7,7 @@ const initialState = {
   expertMode: false,
   restoreLastBrew: false,
   ratio: 15,
-  bloomDuration: 45,
+  bloomDuration: 30,
   reminders: false,
   grinder: false,
   grinderType: 'generic',

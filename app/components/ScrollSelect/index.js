@@ -133,7 +133,7 @@ class ScrollSelect extends Component {
             const selectionNumber = Math.round(
               event.nativeEvent.contentOffset.x / SCREEN_WIDTH
             );
-            onChange(selectionNumber + 1);
+            onChange(selectionRange[selectionNumber]);
           }}
           horizontal
           contentContainerStyle={styles.scrollContainer}

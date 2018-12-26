@@ -1,135 +1,160 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { SectionList, View, Text, ScrollView } from 'react-native';
-import withTheme from 'providers/theme';
 import withSettings from 'providers/settings';
+import formatSeconds from 'helpers/formatSeconds';
 
 import Card from 'components/Card';
-import Instructions from 'components/Instructions';
 import Question from 'components/Question';
+import ScrollSelect from 'components/ScrollSelect';
+import Instructions from 'components/Instructions';
 import Image from 'components/Image';
 import Warning from 'components/Warning';
-import ScrollSelect from 'components/ScrollSelect';
 import PourTimer from 'components/PourTimer';
 import Tip from 'components/Tip';
 
 import footerImage from 'assets/pour-over-bloom-default.jpg';
 
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = {};
-
 class Clever extends Component {
   static propTypes = {
-    theme: PropTypes.object,
     settings: PropTypes.object,
+    setRecipeState: PropTypes.func,
+    totalVolume: PropTypes.number,
+    totalTime: PropTypes.number,
+    handleTick: PropTypes.func,
+    tip: PropTypes.object,
+    warningText: PropTypes.string,
+    volumePercent: PropTypes.number,
   };
 
-  state = {
-    currentWaterPercent: 0,
-    coffeeWeight: 0,
-    waterWeight: 0,
-    tip: null,
+  componentDidMount() {
+    const { settings, setRecipeState } = this.props;
+    setRecipeState({ key: 'totalVolume', value: 340 });
+    setRecipeState({
+      key: 'totalTime',
+      value: settings.bloomDuration + 190,
+    });
+    setRecipeState({
+      key: 'pourEvents',
+      value: this.configurePourEvents(),
+    });
+  }
 
-    // TODO: make a function to generate this object
-    waterLevels: {
-      1: 0.1549,
-      30: 1,
-    },
-
-    // TODO: make a function to generate this list
-    brewTips: [
-      {
-        min: 1,
-        max: 30,
-        message: 'In **seconds** seconds pour up to **grams** grams.',
-      },
-    ],
-  };
-
-  ouncesToGrams = ounces => ounces * 28.3495;
-
-  increaseWaterLevels = seconds => {
-    const interval = this.state.waterLevels[seconds];
-
-    if (interval) {
-      this.setState({ currentWaterPercent: interval });
-    }
-  };
-
-  setTip = seconds => {
-    const { brewTips } = this.state;
-
-    const tip = brewTips.find(t => seconds >= t.min && seconds < t.max);
-
-    if (tip) {
-      this.setState({
-        tip: tip.message
-          .replace('**seconds**', tip.max - seconds)
-          .replace(
-            '**grams**',
-            `${Math.round(
-              this.state.waterLevels[tip.max] * this.state.waterWeight
-            )}`
-          ),
-      });
-    } else {
-      this.setState({ tip: null });
-    }
-  };
-
-  handleCoffeeAmountSelected = ounces => {
-    const waterWeight = this.ouncesToGrams(ounces);
-    const coffeeWeight = waterWeight / 15;
-    // const totalBrewTime = 340;
-
-    this.setState({ waterWeight, coffeeWeight });
-  };
-
-  handleTick = s => {
-    this.increaseWaterLevels(s);
-    this.setTip(s);
+  configurePourEvents = () => {
+    const { settings } = this.props;
+    return {
+      1: [{ type: 'increaseWaterLevel', volumePercent: 0.1549 }],
+      [settings.bloomDuration - 10]: [
+        {
+          type: 'tip',
+          text: 'In **seconds** seconds pour up to **grams** grams.',
+          volumePercent: 1,
+          countDownTo: settings.bloomDuration,
+        },
+      ],
+      [settings.bloomDuration]: [
+        { type: 'increaseWaterLevel', volumePercent: 1 },
+      ],
+      [settings.bloomDuration + 30]: [
+        {
+          type: 'tip',
+          text:
+            'Use the back of a spoon to break the crust on top of the clever.',
+          countDownTo: settings.bloomDuration + 40,
+        },
+      ],
+      [settings.bloomDuration + 140]: [
+        {
+          type: 'tip',
+          text: 'In **seconds** seconds, drain the clever.',
+          countDownTo: settings.bloomDuration + 150,
+        },
+      ],
+      [settings.bloomDuration + 150]: [
+        {
+          type: 'finished',
+        },
+      ],
+      [settings.bloomDuration + 180]: [
+        {
+          type: 'tip',
+          text: 'In **seconds** seconds, stop the clever from dripping.',
+          countDownTo: settings.bloomDuration + 190,
+        },
+      ],
+      [settings.bloomDuration + 200]: [
+        {
+          type: 'warning',
+          text:
+            'Consider stopping the clever from dripping. Your coffee may become bitter.',
+        },
+      ],
+    };
   };
 
   render() {
-    const { theme } = this.props;
+    const {
+      settings,
+      totalVolume,
+      setRecipeState,
+      totalTime,
+      volumePercent,
+      handleTick,
+      tip,
+      warningText,
+    } = this.props;
+
+    if (!totalVolume) {
+      return null;
+    }
+
+    const coffeeWeight = Math.round(totalVolume / settings.ratio);
+
     return (
-      <View style={{ flex: 1, backgroundColor: theme.background }}>
-        <ScrollView
-          contentContainerStyle={{
-            padding: 12,
-            paddingTop: 90,
-          }}
-        >
-          <Card>
-            <Question
-              title="How many cups would you like to brew? "
-              description="One cup is typically 8oz."
-            />
-            <ScrollSelect
-              min={8}
-              max={20}
-              defaultValue={12}
-              label="ounces"
-              onChange={this.handleCoffeeAmountSelected}
-            />
-          </Card>
-          <View style={{ height: 64 }} />
-          <Card>
-            <Image source={footerImage} />
-            <Instructions text="Grind **26 grams** of coffee, then brew over **3.5 minutes**." />
-            <PourTimer
-              totalWaterWeight={this.state.waterWeight}
-              waterPercent={this.state.currentWaterPercent}
-              onTick={this.handleTick}
-            />
-            <Tip text={this.state.tip} isVisible={!!this.state.tip} />
-          </Card>
-        </ScrollView>
-      </View>
+      <Fragment>
+        <Card>
+          <Instructions text="placeholder: prep steps ..." />
+        </Card>
+        <Card>
+          <Question
+            title="How many grams would you like the brew to yield? "
+            description="One cup is typically 270 grams."
+          />
+          <ScrollSelect
+            min={225}
+            max={450}
+            defaultValue={totalVolume}
+            label="grams"
+            onChange={value => setRecipeState({ key: 'totalVolume', value })}
+            step={5}
+          />
+        </Card>
+        <Card>
+          {/* TODO: if no grinder, show picture  */}
+          <Instructions
+            text={`Grind **${coffeeWeight}** grams of coffee on **#30** with your Baratza Encore.`}
+          />
+        </Card>
+        <Card>
+          <Instructions text="placeholder: record your levels ..." />
+        </Card>
+        <Card>
+          <Image source={footerImage} />
+          <Instructions
+            text={`Add the ground coffee to the clever, then follow the pour timer over the next **${formatSeconds(
+              totalTime
+            )}**.`}
+          />
+          <PourTimer
+            totalWaterWeight={totalVolume}
+            waterPercent={volumePercent}
+            onTick={handleTick}
+          />
+          <Tip text={tip.text} isVisible={!!tip.text} />
+          <Warning text={warningText} isVisible={!!warningText} />
+        </Card>
+      </Fragment>
     );
   }
 }
 
-export default withSettings(withTheme(Clever));
+export default withSettings(Clever);
