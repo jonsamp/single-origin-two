@@ -66,12 +66,19 @@ class Clever extends Component {
         countDownTo: this.withBloom(150),
       },
     ],
-    [this.withBloom(150)]: [
+    [this.withBloom(180)]: [
+      {
+        type: 'tip',
+        text: 'In **seconds** seconds, stop the brewing process.',
+        countDownTo: this.withBloom(190),
+      },
+    ],
+    [this.withBloom(190)]: [
       {
         type: 'finished',
       },
     ],
-    [this.withBloom(160)]: [
+    [this.withBloom(200)]: [
       {
         type: 'warning',
         text:
