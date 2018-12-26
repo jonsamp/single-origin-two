@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import withSettings from 'providers/settings';
 import formatSeconds from 'helpers/formatSeconds';
-
 import Card from 'components/Card';
 import Question from 'components/Question';
 import ScrollSelect from 'components/ScrollSelect';
@@ -11,8 +10,8 @@ import Image from 'components/Image';
 import Warning from 'components/Warning';
 import PourTimer from 'components/PourTimer';
 import Tip from 'components/Tip';
-
-import footerImage from 'assets/pour-over-bloom-default.jpg';
+import cleverPourImage from './images/clever-pour.gif';
+import cleverPourDefaultImage from './images/clever-pour-default.jpg';
 
 class Clever extends Component {
   static propTypes = {
@@ -39,50 +38,47 @@ class Clever extends Component {
     });
   }
 
-  configurePourEvents = () => {
-    const { settings } = this.props;
-    return {
-      1: [{ type: 'increaseWaterLevel', volumePercent: 0.1549 }],
-      [settings.bloomDuration - 10]: [
-        {
-          type: 'tip',
-          text: 'In **seconds** seconds pour up to **grams** grams.',
-          volumePercent: 1,
-          countDownTo: settings.bloomDuration,
-        },
-      ],
-      [settings.bloomDuration]: [
-        { type: 'increaseWaterLevel', volumePercent: 1 },
-      ],
-      [settings.bloomDuration + 30]: [
-        {
-          type: 'tip',
-          text:
-            'Use the back of a spoon to break the crust on top of the clever.',
-          countDownTo: settings.bloomDuration + 40,
-        },
-      ],
-      [settings.bloomDuration + 140]: [
-        {
-          type: 'tip',
-          text: 'In **seconds** seconds, drain the clever.',
-          countDownTo: settings.bloomDuration + 150,
-        },
-      ],
-      [settings.bloomDuration + 150]: [
-        {
-          type: 'finished',
-        },
-      ],
-      [settings.bloomDuration + 160]: [
-        {
-          type: 'warning',
-          text:
-            'Consider stopping the clever from dripping. Your coffee may become bitter.',
-        },
-      ],
-    };
-  };
+  withBloom = duration => this.props.settings.bloomDuration + duration;
+
+  configurePourEvents = () => ({
+    1: [{ type: 'increaseWaterLevel', volumePercent: 0.1549 }],
+    [this.withBloom(-10)]: [
+      {
+        type: 'tip',
+        text: 'In **seconds** seconds pour up to **grams** grams.',
+        volumePercent: 1,
+        countDownTo: this.withBloom(0),
+      },
+    ],
+    [this.withBloom(0)]: [{ type: 'increaseWaterLevel', volumePercent: 1 }],
+    [this.withBloom(30)]: [
+      {
+        type: 'tip',
+        text:
+          'Use the back of a spoon to break the crust on top of the clever.',
+        countDownTo: this.withBloom(40),
+      },
+    ],
+    [this.withBloom(140)]: [
+      {
+        type: 'tip',
+        text: 'In **seconds** seconds, drain the clever.',
+        countDownTo: this.withBloom(150),
+      },
+    ],
+    [this.withBloom(150)]: [
+      {
+        type: 'finished',
+      },
+    ],
+    [this.withBloom(160)]: [
+      {
+        type: 'warning',
+        text:
+          'Consider stopping the clever from dripping. Your coffee may become bitter.',
+      },
+    ],
+  });
 
   render() {
     const {
@@ -131,7 +127,10 @@ class Clever extends Component {
           <Instructions text="placeholder: record your levels ..." />
         </Card>
         <Card>
-          <Image source={footerImage} />
+          <Image
+            source={cleverPourImage}
+            defaultSource={cleverPourDefaultImage}
+          />
           <Instructions
             text={`Add the ground coffee to the clever, then follow the pour timer over the next **${formatSeconds(
               totalTime
