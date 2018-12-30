@@ -10,6 +10,8 @@ import warningSound from './sounds/warning.mp3';
 
 import Clever from './recipes/Clever';
 
+import Toggle from 'components/Toggle';
+
 class Brew extends Component {
   static propTypes = {
     theme: PropTypes.object,
@@ -115,11 +117,12 @@ class Brew extends Component {
             paddingTop: 90,
           }}
         >
-          {renderRecipe({
+          <Toggle options={['coffee', 'grind', 'temp']} />
+          {/* {renderRecipe({
             setRecipeState: this.setRecipeState,
             handleTick: this.handleTick,
             ...this.state,
-          })}
+          })} */}
         </ScrollView>
       </View>
     );
