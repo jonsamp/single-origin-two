@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import withTheme from 'providers/theme';
+import styles from './styles';
 
 class Toggle extends Component {
   static propTypes = {
@@ -22,32 +23,50 @@ class Toggle extends Component {
   };
 
   componentWillMount() {
-    this._val = { x: 0, y: 0 };
-    this.state.pan.addListener(value => (this._val = value));
+    const { pan } = this.state;
+    this.val = { x: 0, y: 0 };
+    pan.addListener(value => (this.val = value));
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => true,
-      onPanResponderMove: Animated.event([null, { dx: this.state.pan.x }]),
-      onPanResponderGrant: (e, gesture) => {
-        this.state.pan.setOffset({
-          x: this._val.x,
-          y: this._val.y,
-        });
-        this.state.pan.setValue({ x: 0, y: 0 });
-      },
+      onPanResponderMove: Animated.event([null, { dx: pan.x }]),
+      onPanResponderGrant: () => this.resetCurrentPan(),
       onPanResponderRelease: (e, gesture) => {
         const { x } = this.findDroppedPosition(gesture);
-        Animated.spring(this.state.pan, {
-          toValue: { x, y: 0 },
-          friction: 5,
-        }).start();
+        this.animateToPosition({ x });
       },
     });
   }
 
-  findDroppedPosition = gesture => {
-    const { containerWidth, currentSection } = this.state;
+  getSectionWidth = () => {
+    const { containerWidth } = this.state;
     const { options } = this.props;
-    const sectionWidth = containerWidth / options.length;
+    return containerWidth / options.length;
+  };
+
+  setCurrentSection = ({ index }) => {
+    // TODO: new section selected
+    this.setState({ currentSection: index });
+  };
+
+  animateToPosition = ({ x }) => {
+    Animated.spring(this.state.pan, {
+      toValue: { x, y: 0 },
+      friction: 5,
+    }).start();
+  };
+
+  resetCurrentPan = () => {
+    const { pan } = this.state;
+    pan.setOffset({
+      x: this.val.x,
+      y: this.val.y,
+    });
+    pan.setValue({ x: 0, y: 0 });
+  };
+
+  findDroppedPosition = gesture => {
+    const { currentSection } = this.state;
+    const sectionWidth = this.getSectionWidth();
     const isDraggedFarEnough = Math.abs(gesture.dx) >= sectionWidth / 2;
     const isMovedRight = gesture.dx >= 0;
 
@@ -56,18 +75,23 @@ class Toggle extends Component {
     }
 
     const spacesMoved = this.findSpacesMoved(gesture);
-    this.setState({
-      currentSection: isMovedRight
+    this.setCurrentSection({
+      index: isMovedRight
         ? currentSection + spacesMoved
         : currentSection - spacesMoved,
+    });
+    console.log({
+      sectionIndex: isMovedRight
+        ? currentSection + spacesMoved
+        : currentSection - spacesMoved,
+      draggedTO: sectionWidth * spacesMoved * (isMovedRight ? 1 : -1),
     });
     return { x: sectionWidth * spacesMoved * (isMovedRight ? 1 : -1) };
   };
 
   findBoundaries = () => {
-    const { containerWidth } = this.state;
     const { options } = this.props;
-    const sectionWidth = containerWidth / options.length;
+    const sectionWidth = this.getSectionWidth();
     const midpoint = sectionWidth / 2;
 
     return options
@@ -104,47 +128,51 @@ class Toggle extends Component {
     return currentSection - 1 >= 0;
   };
 
+  handleToggleTapped = index => {
+    const { currentSection } = this.state;
+    const sectionWidth = this.getSectionWidth();
+    const spacesToMove = index - currentSection;
+    const nextSectionIndex = spacesToMove + currentSection;
+    const moveToX = sectionWidth * spacesToMove;
+
+    this.resetCurrentPan();
+    this.setCurrentSection({ index: nextSectionIndex });
+    this.animateToPosition({ x: moveToX });
+  };
+
   render() {
     const { theme, options } = this.props;
-    const { containerWidth } = this.state;
-    const panStyle = {
-      transform: this.state.pan.getTranslateTransform(),
-    };
-    const sectionWidth = containerWidth / options.length;
+    const { containerWidth, pan } = this.state;
 
     return (
       <View
         style={{
           backgroundColor: theme.grey2,
         }}
-        onLayout={event => {
+        onLayout={event =>
           this.setState({
             containerWidth: event.nativeEvent.layout.width,
-          });
-        }}
+          })
+        }
       >
         <Animated.View
-          {...this.panResponder.panHandlers}
           style={[
-            panStyle,
+            styles.toggleContainer,
             {
-              width: sectionWidth,
-              height: 50,
-              backgroundColor: 'orange',
-              borderRadius: 8,
-              justifyContent: 'center',
-              alignItems: 'center',
+              width: this.getSectionWidth(),
+              backgroundColor: theme.primary,
+              transform: pan.getTranslateTransform(),
             },
           ]}
+          {...this.panResponder.panHandlers}
         />
         <View
-          style={{
-            width: containerWidth,
-            justifyContent: 'space-around',
-            flexDirection: 'row',
-            position: 'absolute',
-            paddingTop: 17,
-          }}
+          style={[
+            styles.labelContainer,
+            {
+              width: containerWidth,
+            },
+          ]}
           pointerEvents="box-none"
         >
           {options.map((option, index) => (
@@ -153,14 +181,19 @@ class Toggle extends Component {
               pointerEvents={
                 this.state.currentSection === index ? 'none' : 'auto'
               }
+              style={styles.labelButtonContainer}
             >
-              <TouchableOpacity onPress={() => console.log(index)}>
+              <TouchableOpacity
+                onPress={() => this.handleToggleTapped(index)}
+                style={styles.labelButton}
+              >
                 <Text
-                  style={{
-                    color: theme.foreground,
-                    fontWeight: 'bold',
-                    fontSize: 12,
-                  }}
+                  style={[
+                    styles.labelText,
+                    {
+                      color: theme.foreground,
+                    },
+                  ]}
                 >
                   {option.toUpperCase()}
                 </Text>
