@@ -10,7 +10,7 @@ import warningSound from './sounds/warning.mp3';
 
 import Clever from './recipes/Clever';
 
-import Toggle from 'components/Toggle';
+import DraggableSegment from 'components/DraggableSegment';
 
 class Brew extends Component {
   static propTypes = {
@@ -117,7 +117,10 @@ class Brew extends Component {
             paddingTop: 90,
           }}
         >
-          <Toggle options={['coffee', 'grind', 'temp']} />
+          <DraggableSegment
+            options={['weight', 'grind', 'temp']}
+            onChange={index => console.log('segment index: ', index)}
+          />
           {/* {renderRecipe({
             setRecipeState: this.setRecipeState,
             handleTick: this.handleTick,

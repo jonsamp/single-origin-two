@@ -9,6 +9,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     height: 50,
+    shadowColor: 'rgba(0,0,0,0.05)',
+    shadowRadius: 4,
+    shadowOffset: { height: 4 },
+    shadowOpacity: 1,
   },
   labelContainer: {
     justifyContent: 'space-around',
