@@ -77,18 +77,18 @@ class Settings extends Component {
               />
               <SwitchSetting
                 title="Record grind setting"
-                value={settings.grinder}
+                value={settings.recordGrind}
                 onChange={value =>
-                  settingUpdated({ setting: 'grinder', value })
+                  settingUpdated({ setting: 'recordGrind', value })
                 }
                 borderTop
               />
               <SwitchSetting
                 title="Record temperature"
                 description="Record temperature and grind setting while brewing."
-                value={settings.waterTemp}
+                value={settings.recordTemp}
                 onChange={value =>
-                  settingUpdated({ setting: 'waterTemp', value })
+                  settingUpdated({ setting: 'recordTemp', value })
                 }
               />
             </Section>

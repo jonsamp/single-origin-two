@@ -14,7 +14,7 @@ class CustomImage extends PureComponent {
   };
 
   state = {
-    isPlaying: true,
+    isPlaying: false,
   };
 
   toggle = () =>

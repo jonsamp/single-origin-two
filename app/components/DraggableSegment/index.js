@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Easing,
 } from 'react-native';
+import { Haptic } from 'expo';
 import withTheme from 'providers/theme';
 import styles from './styles';
 
@@ -51,6 +52,7 @@ class DraggableSegment extends Component {
   };
 
   setCurrentSegmentIndex = ({ index }) => {
+    Haptic.selection();
     this.setState({ currentSegmentIndex: index });
     this.props.onChange(index);
   };

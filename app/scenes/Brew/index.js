@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import { View, ScrollView } from 'react-native';
 import withTheme from 'providers/theme';
 import playSound from 'helpers/playSound';
+import Header from 'components/Header';
 import addWaterSound from './sounds/add-water.mp3';
 import tipSound from './sounds/tip.mp3';
 import endBrewSound from './sounds/end-brew.mp3';
 import warningSound from './sounds/warning.mp3';
 
 import Clever from './recipes/Clever';
-
-import DraggableSegment from 'components/DraggableSegment';
 
 class Brew extends Component {
   static propTypes = {
@@ -111,21 +110,18 @@ class Brew extends Component {
 
     return (
       <View style={{ flex: 1, backgroundColor: theme.background }}>
+        <Header title="Clever" />
         <ScrollView
           contentContainerStyle={{
             padding: 12,
             paddingTop: 90,
           }}
         >
-          <DraggableSegment
-            options={['weight', 'grind', 'temp']}
-            onChange={index => console.log('segment index: ', index)}
-          />
-          {/* {renderRecipe({
+          {renderRecipe({
             setRecipeState: this.setRecipeState,
             handleTick: this.handleTick,
             ...this.state,
-          })} */}
+          })}
         </ScrollView>
       </View>
     );

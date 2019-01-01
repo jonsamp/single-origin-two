@@ -13,8 +13,10 @@ function Instructions({ text, theme }) {
   const specialWordCaptureGroup = /(\*\*.*?\*\*)/g;
   const specialWordRegex = /\*\*.*\*\*/;
   const specialWordStyles = {
-    textDecorationLine: 'underline',
-    ...type.headline,
+    ...type.body,
+    fontSize: 18,
+    color: theme.primary,
+    fontWeight: 'bold',
   };
   const formattedText = text.split(specialWordCaptureGroup).map(part => (
     <Text

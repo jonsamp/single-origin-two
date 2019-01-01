@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { View, LayoutAnimation } from 'react-native';
 import withSettings from 'providers/settings';
 import formatSeconds from 'helpers/formatSeconds';
 import Card from 'components/Card';
@@ -10,6 +11,7 @@ import Image from 'components/Image';
 import Warning from 'components/Warning';
 import PourTimer from 'components/PourTimer';
 import Tip from 'components/Tip';
+import DraggableSegment from 'components/DraggableSegment';
 import cleverPourImage from './images/clever-pour.gif';
 import cleverPourDefaultImage from './images/clever-pour-default.jpg';
 
@@ -23,6 +25,10 @@ class Clever extends Component {
     tip: PropTypes.object,
     warningText: PropTypes.string,
     volumePercent: PropTypes.number,
+  };
+
+  state = {
+    recordSegmentIndex: 0,
   };
 
   componentDidMount() {
@@ -87,6 +93,77 @@ class Clever extends Component {
     ],
   });
 
+  renderRecording = () => {
+    const { settings } = this.props;
+    const { recordSegmentIndex } = this.state;
+
+    if (!settings.recordGrind && !settings.recordTemp) {
+      return null;
+    }
+
+    const recordSettings = [];
+    let instructions;
+    if (settings.recordGrind) {
+      recordSettings.push('grind');
+      instructions = 'Record your grind setting.';
+    }
+    if (settings.recordTemp) {
+      recordSettings.push('temperature');
+      instructions = 'Record your water temperature.';
+    }
+
+    if (settings.recordTemp && settings.recordGrind) {
+      instructions = 'Record your grind setting and water temperature.';
+    }
+
+    const recordGrindComponent = (
+      <ScrollSelect
+        min={0}
+        max={40}
+        defaultValue={30}
+        label="grind setting"
+        onChange={value => console.log('value', value)}
+        step={1}
+      />
+    );
+
+    const recordTempComponent = (
+      <ScrollSelect
+        min={160}
+        max={210}
+        defaultValue={200}
+        label="Temp"
+        onChange={value => console.log('value', value)}
+        step={5}
+      />
+    );
+
+    return (
+      <Card>
+        <Instructions text={instructions} />
+        {recordSettings.length > 1 && (
+          <View>
+            <DraggableSegment
+              options={recordSettings}
+              onChange={index =>
+                setTimeout(() => {
+                  this.setState({ recordSegmentIndex: index });
+                }, 300)
+              }
+            />
+            {recordSegmentIndex === 0 ? recordGrindComponent : null}
+            {recordSegmentIndex === 1 ? recordTempComponent : null}
+          </View>
+        )}
+        {recordSettings.length === 1
+          ? recordSettings[0] === 'grind'
+            ? recordGrindComponent
+            : recordTempComponent
+          : null}
+      </Card>
+    );
+  };
+
   render() {
     const {
       settings,
@@ -130,9 +207,7 @@ class Clever extends Component {
             text={`Grind **${coffeeWeight}** grams of coffee on **#30** with your Baratza Encore.`}
           />
         </Card>
-        <Card>
-          <Instructions text="placeholder: record your levels ..." />
-        </Card>
+        {this.renderRecording()}
         <Card>
           <Image
             source={cleverPourImage}
