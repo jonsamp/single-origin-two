@@ -12,10 +12,7 @@ const styles = StyleSheet.create({
   title: {
     ...type.scriptTitle,
   },
-  circle: {
-    width: CIRCLE_SIZE,
-    height: CIRCLE_SIZE,
-    borderRadius: CIRCLE_SIZE / 2,
+  circleContainer: {
     marginRight: 8,
     bottom: 3,
   },
