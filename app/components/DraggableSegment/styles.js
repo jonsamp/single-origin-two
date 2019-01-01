@@ -2,7 +2,10 @@ import { StyleSheet } from 'react-native';
 import type from 'constants/type';
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    padding: 16,
+    borderBottomWidth: 1,
+  },
   toggleContainer: {
     borderRadius: 8,
     justifyContent: 'center',

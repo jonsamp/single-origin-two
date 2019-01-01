@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
 import type from 'constants/type';
 
+const CIRCLE_SIZE = 20;
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
@@ -10,9 +12,12 @@ const styles = StyleSheet.create({
   title: {
     ...type.scriptTitle,
   },
-  circleContainer: {
+  circle: {
+    height: CIRCLE_SIZE,
+    width: CIRCLE_SIZE,
+    borderRadius: CIRCLE_SIZE / 2,
     marginRight: 8,
-    bottom: 3,
+    bottom: 4,
   },
 });
 

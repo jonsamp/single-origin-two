@@ -18,9 +18,9 @@ const styles = StyleSheet.create({
   },
   selectionText: {
     ...type.largeTitle,
-    fontSize: 44,
-    lineHeight: 44,
-    height: 44,
+    fontSize: 32,
+    lineHeight: 32,
+    height: 32,
   },
   selectionTextLargeNumber: {
     ...type.largeTitle,

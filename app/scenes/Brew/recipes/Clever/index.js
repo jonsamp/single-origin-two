@@ -124,7 +124,7 @@ class Clever extends Component {
         min={0}
         max={40}
         defaultValue={30}
-        label="grind setting"
+        label="grind"
         onChange={value => console.log('value', value)}
         step={1}
       />
@@ -188,10 +188,10 @@ class Clever extends Component {
     return (
       <Fragment>
         <Title title="Preparation" />
-        <Card>
+        <Card showConnector>
           <Instructions text="placeholder: prep steps ..." />
         </Card>
-        <Card>
+        <Card showConnector>
           <Question
             title="How many grams would you like the brew to yield? "
             description="One cup is typically 270 grams."
@@ -205,7 +205,7 @@ class Clever extends Component {
             step={5}
           />
         </Card>
-        <Card>
+        <Card showConnector>
           {/* TODO: if no grinder, show picture  */}
           <Instructions
             text={`Grind **${coffeeWeight}** grams of coffee on **#30** with your Baratza Encore.`}

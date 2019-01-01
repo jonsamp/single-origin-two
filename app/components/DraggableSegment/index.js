@@ -148,7 +148,12 @@ class DraggableSegment extends Component {
     const { containerWidth, pan } = this.state;
 
     return (
-      <View style={{ padding: 20, backgroundColor: theme.grey2 }}>
+      <View
+        style={[
+          styles.container,
+          { backgroundColor: theme.grey2, borderBottomColor: theme.background },
+        ]}
+      >
         <View
           onLayout={event =>
             this.setState({
