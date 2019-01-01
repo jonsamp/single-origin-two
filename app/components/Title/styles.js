@@ -1,8 +1,6 @@
 import { StyleSheet } from 'react-native';
 import type from 'constants/type';
 
-const CIRCLE_SIZE = 20;
-
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',

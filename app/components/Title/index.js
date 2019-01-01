@@ -26,7 +26,6 @@ function Title({ title, theme }) {
 
   return (
     <View style={styles.container}>
-      {/* <View style={[styles.circle, { backgroundColor: theme.primary }]} /> */}
       <View style={styles.circleContainer}>
         {icons[random(0, icons.length)]}
       </View>
