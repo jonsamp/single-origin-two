@@ -114,7 +114,6 @@ class Brew extends Component {
         <ScrollView
           contentContainerStyle={{
             padding: 12,
-            paddingTop: 90,
           }}
         >
           {renderRecipe({

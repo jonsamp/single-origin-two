@@ -1,6 +1,12 @@
 // https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography/
 
 export default {
+  scriptTitle: {
+    fontSize: 40,
+    lineHeight: 48,
+    letterSpacing: 0.5,
+    fontFamily: 'SignPainter',
+  },
   largeTitle: {
     fontSize: 34,
     lineHeight: 41,

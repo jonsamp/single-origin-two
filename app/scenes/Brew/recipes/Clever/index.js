@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { View, LayoutAnimation } from 'react-native';
+import { View } from 'react-native';
 import withSettings from 'providers/settings';
 import formatSeconds from 'helpers/formatSeconds';
 import Card from 'components/Card';
@@ -12,6 +12,9 @@ import Warning from 'components/Warning';
 import PourTimer from 'components/PourTimer';
 import Tip from 'components/Tip';
 import DraggableSegment from 'components/DraggableSegment';
+
+import Title from 'components/Title';
+
 import cleverPourImage from './images/clever-pour.gif';
 import cleverPourDefaultImage from './images/clever-pour-default.jpg';
 
@@ -184,6 +187,7 @@ class Clever extends Component {
 
     return (
       <Fragment>
+        <Title title="Preparation" />
         <Card>
           <Instructions text="placeholder: prep steps ..." />
         </Card>
@@ -208,6 +212,7 @@ class Clever extends Component {
           />
         </Card>
         {this.renderRecording()}
+        <Title title="Brew" />
         <Card>
           <Image
             source={cleverPourImage}
