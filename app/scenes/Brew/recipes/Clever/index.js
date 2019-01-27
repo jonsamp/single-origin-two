@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { startCase } from 'lodash';
 import withSettings from 'providers/settings';
 import formatSeconds from 'helpers/formatSeconds';
 import Card from 'components/Card';
@@ -12,11 +12,12 @@ import Warning from 'components/Warning';
 import PourTimer from 'components/PourTimer';
 import RecordBrewAttributes from 'components/RecordBrewAttributes';
 import Tip from 'components/Tip';
-
 import Title from 'components/Title';
-
+import ViewPrepSteps from 'components/ViewPrepSteps';
+import HeaderImage from 'components/HeaderImage';
 import cleverPourImage from './images/clever-pour.gif';
 import cleverPourDefaultImage from './images/clever-pour-default.jpg';
+import headerImage from './images/header.jpg';
 
 class Clever extends Component {
   static propTypes = {
@@ -28,10 +29,7 @@ class Clever extends Component {
     tip: PropTypes.object,
     warningText: PropTypes.string,
     volumePercent: PropTypes.number,
-  };
-
-  state = {
-    recordSegmentIndex: 0,
+    recipe: PropTypes.string,
   };
 
   componentDidMount() {
@@ -75,23 +73,30 @@ class Clever extends Component {
         countDownTo: this.withBloom(150),
       },
     ],
-    [this.withBloom(180)]: [
+    [this.withBloom(150)]: [
       {
         type: 'tip',
-        text: 'In **seconds** seconds, stop the brewing process.',
-        countDownTo: this.withBloom(190),
+        text: 'Drain the clever.',
+        countDownTo: this.withBloom(160),
       },
     ],
-    [this.withBloom(190)]: [
+    [this.withBloom(210)]: [
+      {
+        type: 'tip',
+        text: 'In **seconds** seconds the clever should be finished draining.',
+        countDownTo: this.withBloom(220),
+      },
+    ],
+    [this.withBloom(220)]: [
       {
         type: 'finished',
       },
     ],
-    [this.withBloom(200)]: [
+    [this.withBloom(240)]: [
       {
         type: 'warning',
         text:
-          'Consider stopping the clever from dripping. Your coffee may become bitter.',
+          'If your clever is still draining, grind your beans on a coarser grind next time.',
       },
     ],
   });
@@ -106,6 +111,7 @@ class Clever extends Component {
       handleTick,
       tip,
       warningText,
+      recipe,
     } = this.props;
 
     if (!totalVolume) {
@@ -116,10 +122,9 @@ class Clever extends Component {
 
     return (
       <Fragment>
-        <Title title="Preparation" />
-        <Card>
-          <Instructions text="View preparation steps ............... ==>" />
-        </Card>
+        <HeaderImage source={headerImage} />
+        <Title title={startCase(recipe)} />
+        <ViewPrepSteps recipe={recipe} />
         <Card showConnector>
           <Question
             title="How many grams would you like the brew to yield? "

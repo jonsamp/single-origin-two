@@ -2,8 +2,8 @@
 
 export default {
   scriptTitle: {
-    fontSize: 40,
-    lineHeight: 48,
+    fontSize: 44,
+    lineHeight: 52,
     letterSpacing: 0.5,
     fontFamily: 'SignPainter',
   },

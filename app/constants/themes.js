@@ -22,7 +22,7 @@ export default {
     foreground: '#adadad',
     background: '#000000',
     primary: '#00CA9D',
-    primaryLight: '#D5FBF2',
+    primaryLight: '#122c2b',
     beige: '#F8DBBA',
     warning: '#D8BF4A',
     grey1: '#171717',

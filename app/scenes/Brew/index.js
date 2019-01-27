@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, ScrollView } from 'react-native';
+import { startCase } from 'lodash';
 import withTheme from 'providers/theme';
 import playSound from 'helpers/playSound';
 import Header from 'components/Header';
+import Button from 'components/Button';
 import addWaterSound from './sounds/add-water.mp3';
 import tipSound from './sounds/tip.mp3';
 import endBrewSound from './sounds/end-brew.mp3';
@@ -110,7 +112,7 @@ class Brew extends Component {
 
     return (
       <View style={{ flex: 1, backgroundColor: theme.background }}>
-        <Header title="Clever" />
+        <Header title={startCase(recipe)} />
         <ScrollView
           contentContainerStyle={{
             padding: 12,
@@ -119,8 +121,13 @@ class Brew extends Component {
           {renderRecipe({
             setRecipeState: this.setRecipeState,
             handleTick: this.handleTick,
+            recipe,
             ...this.state,
           })}
+          <Button
+            title="Finish"
+            customStyle={{ marginVertical: 32, paddingVertical: 20 }}
+          />
         </ScrollView>
       </View>
     );

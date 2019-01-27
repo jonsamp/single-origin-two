@@ -24,8 +24,10 @@ function Question({ title, description, theme }) {
       {description ? (
         <Text
           style={{
-            ...type.body,
+            ...type.callout,
+            opacity: 0.9,
             color: theme.foreground,
+            marginTop: 4,
           }}
         >
           {description}
