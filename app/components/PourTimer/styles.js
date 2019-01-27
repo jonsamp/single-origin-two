@@ -12,6 +12,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1,
   },
+  timeTextContainer: {
+    width: 21,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  timeTextColonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 12,
+    bottom: 3,
+    left: 1,
+  },
   timeText: {
     ...type.largeTitle,
     marginBottom: 12,

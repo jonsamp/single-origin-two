@@ -95,6 +95,33 @@ class PourTimer extends Component {
 
   trackingAnimatedValue = new Animated.Value(0);
 
+  renderTimePart = part => (
+    <Text style={[styles.timeText, { color: this.props.theme.foreground }]}>
+      {part}
+    </Text>
+  );
+
+  renderTimer = () => {
+    const parts = formatSeconds(this.state.seconds).split('');
+
+    return (
+      <View style={{ flexDirection: 'row' }}>
+        {parts.map((part, index) => (
+          <View
+            key={index}
+            style={
+              part === ':'
+                ? styles.timeTextColonContainer
+                : styles.timeTextContainer
+            }
+          >
+            {this.renderTimePart(part)}
+          </View>
+        ))}
+      </View>
+    );
+  };
+
   render() {
     const { theme, totalWaterWeight, waterPercent } = this.props;
     const { timerRunning } = this.state;
@@ -123,9 +150,7 @@ class PourTimer extends Component {
     return (
       <View style={[styles.container, { backgroundColor: theme.grey2 }]}>
         <View style={styles.section}>
-          <Text style={[styles.timeText, { color: theme.foreground }]}>
-            {formatSeconds(this.state.seconds)}
-          </Text>
+          {this.renderTimer()}
           <Button
             type={timerRunning ? 'secondary' : 'primary'}
             title={timerRunning ? 'stop' : 'start'}
