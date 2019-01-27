@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import withTheme from 'providers/theme';
-import { width } from 'constants/layout';
 
 const propTypes = {
   theme: PropTypes.object,
@@ -13,6 +12,16 @@ const propTypes = {
 function Card({ theme, showConnector, children }) {
   return (
     <View style={{ alignItems: 'center' }}>
+      {showConnector && (
+        <View
+          style={{
+            width: 8,
+            height: 44,
+            backgroundColor: theme.grey1,
+            opacity: 0.5,
+          }}
+        />
+      )}
       <View
         style={{
           backgroundColor: theme.grey1,
@@ -20,20 +29,10 @@ function Card({ theme, showConnector, children }) {
           minHeight: 16,
           overflow: 'hidden',
           width: '100%',
-          marginBottom: showConnector ? 0 : 32,
         }}
       >
         {children}
       </View>
-      {showConnector && (
-        <View
-          style={{
-            width: 8,
-            height: 32,
-            backgroundColor: theme.grey1,
-          }}
-        />
-      )}
     </View>
   );
 }

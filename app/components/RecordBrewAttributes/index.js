@@ -84,7 +84,7 @@ class RecordBrewAttributes extends Component {
     );
 
     return (
-      <Card>
+      <Card showConnector>
         <Instructions text={instructions} />
         {recordSettings.length > 1 && (
           <View style={{ backgroundColor: theme.grey2 }}>
@@ -108,6 +108,11 @@ class RecordBrewAttributes extends Component {
             </Animated.View>
           </View>
         )}
+        {recordSettings.length === 1
+          ? recordSettings.includes('grind')
+            ? recordGrindComponent
+            : recordTempComponent
+          : null}
       </Card>
     );
   }
