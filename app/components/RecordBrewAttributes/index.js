@@ -1,0 +1,119 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { View, Animated } from 'react-native';
+import withSettings from 'providers/settings';
+import withTheme from 'providers/theme';
+import Card from 'components/Card';
+import Instructions from 'components/Instructions';
+import ScrollSelect from 'components/ScrollSelect';
+import DraggableSegment from 'components/DraggableSegment';
+
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {};
+
+class RecordBrewAttributes extends Component {
+  static propTypes = {
+    settings: PropTypes.object,
+  };
+
+  state = {
+    recordSegmentIndex: 0,
+  };
+
+  onStartMove = () => {
+    Animated.timing(this.animatedOpacityValue, {
+      toValue: 0,
+      duration: 150,
+    }).start();
+  };
+
+  onStopMove = () => {
+    Animated.timing(this.animatedOpacityValue, {
+      toValue: 1,
+      duration: 150,
+    }).start();
+  };
+
+  animatedOpacityValue = new Animated.Value(1);
+
+  render() {
+    const { settings, theme } = this.props;
+    const { recordSegmentIndex } = this.state;
+
+    if (!settings.recordGrind && !settings.recordTemp) {
+      return null;
+    }
+
+    const recordSettings = [];
+    let instructions;
+    if (settings.recordGrind) {
+      recordSettings.push('grind');
+      instructions = 'Record your grind setting.';
+    }
+    if (settings.recordTemp) {
+      recordSettings.push('temperature');
+      instructions = 'Record your water temperature.';
+    }
+
+    if (settings.recordTemp && settings.recordGrind) {
+      instructions = 'Record your grind setting and water temperature.';
+    }
+
+    const recordGrindComponent = (
+      <ScrollSelect
+        min={0}
+        max={40}
+        defaultValue={30}
+        label="grind"
+        onChange={value => console.log('value', value)}
+        step={1}
+      />
+    );
+
+    const recordTempComponent = (
+      <ScrollSelect
+        min={160}
+        max={210}
+        defaultValue={200}
+        label="Temp"
+        onChange={value => console.log('value', value)}
+        step={5}
+      />
+    );
+
+    return (
+      <Card>
+        <Instructions text={instructions} />
+        {recordSettings.length > 1 && (
+          <View style={{ backgroundColor: theme.grey2 }}>
+            <DraggableSegment
+              options={recordSettings}
+              onChange={index =>
+                setTimeout(() => {
+                  this.setState({ recordSegmentIndex: index });
+                }, 300)
+              }
+              onStartMove={this.onStartMove}
+              onStopMove={this.onStopMove}
+            />
+            <Animated.View
+              style={{
+                opacity: this.animatedOpacityValue,
+              }}
+            >
+              {recordSegmentIndex === 0 ? recordGrindComponent : null}
+              {recordSegmentIndex === 1 ? recordTempComponent : null}
+            </Animated.View>
+          </View>
+        )}
+      </Card>
+    );
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withTheme(withSettings(RecordBrewAttributes)));

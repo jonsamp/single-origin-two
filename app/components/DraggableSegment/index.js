@@ -14,9 +14,16 @@ import styles from './styles';
 
 class DraggableSegment extends Component {
   static propTypes = {
-    theme: PropTypes.object,
-    options: PropTypes.array,
-    onChange: PropTypes.func,
+    theme: PropTypes.object.isRequired,
+    options: PropTypes.array.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onStartMove: PropTypes.func,
+    onStopMove: PropTypes.func,
+  };
+
+  static defaultProps = {
+    onStartMove: () => {},
+    onStopMove: () => {},
   };
 
   state = {
@@ -37,7 +44,10 @@ class DraggableSegment extends Component {
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onPanResponderMove: Animated.event([null, { dx: pan.x }]),
-      onPanResponderGrant: this.resetCurrentPan,
+      onPanResponderGrant: () => {
+        this.toggleStartedMoving();
+        this.resetCurrentPan();
+      },
       onPanResponderRelease: (e, gesture) => {
         const { x } = this.findDroppedPosition(gesture);
         this.animateToPosition({ x });
@@ -79,6 +89,8 @@ class DraggableSegment extends Component {
     const segmentWidth = this.getSegmentWidth();
     const isDraggedFarEnough = Math.abs(gesture.dx) >= segmentWidth / 2;
     const isMovedRight = gesture.dx >= 0;
+
+    this.toggleStoppedMoving();
 
     if (!isDraggedFarEnough || !this.isValidMovement(gesture)) {
       return { x: 0 };
@@ -138,9 +150,19 @@ class DraggableSegment extends Component {
     const segmentsToMove = index - currentSegmentIndex;
     const nextSegmentIndex = segmentsToMove + currentSegmentIndex;
 
+    this.toggleStartedMoving();
     this.resetCurrentPan();
     this.setCurrentSegmentIndex({ index: nextSegmentIndex });
     this.animateToPosition({ x: segmentWidth * segmentsToMove });
+    this.toggleStoppedMoving();
+  };
+
+  toggleStartedMoving = () => {
+    this.props.onStartMove();
+  };
+
+  toggleStoppedMoving = () => {
+    setTimeout(this.props.onStopMove, 400);
   };
 
   render() {

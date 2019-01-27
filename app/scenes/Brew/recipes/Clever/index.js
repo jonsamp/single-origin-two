@@ -10,8 +10,8 @@ import Instructions from 'components/Instructions';
 import Image from 'components/Image';
 import Warning from 'components/Warning';
 import PourTimer from 'components/PourTimer';
+import RecordBrewAttributes from 'components/RecordBrewAttributes';
 import Tip from 'components/Tip';
-import DraggableSegment from 'components/DraggableSegment';
 
 import Title from 'components/Title';
 
@@ -96,77 +96,6 @@ class Clever extends Component {
     ],
   });
 
-  renderRecording = () => {
-    const { settings } = this.props;
-    const { recordSegmentIndex } = this.state;
-
-    if (!settings.recordGrind && !settings.recordTemp) {
-      return null;
-    }
-
-    const recordSettings = [];
-    let instructions;
-    if (settings.recordGrind) {
-      recordSettings.push('grind');
-      instructions = 'Record your grind setting.';
-    }
-    if (settings.recordTemp) {
-      recordSettings.push('temperature');
-      instructions = 'Record your water temperature.';
-    }
-
-    if (settings.recordTemp && settings.recordGrind) {
-      instructions = 'Record your grind setting and water temperature.';
-    }
-
-    const recordGrindComponent = (
-      <ScrollSelect
-        min={0}
-        max={40}
-        defaultValue={30}
-        label="grind"
-        onChange={value => console.log('value', value)}
-        step={1}
-      />
-    );
-
-    const recordTempComponent = (
-      <ScrollSelect
-        min={160}
-        max={210}
-        defaultValue={200}
-        label="Temp"
-        onChange={value => console.log('value', value)}
-        step={5}
-      />
-    );
-
-    return (
-      <Card>
-        <Instructions text={instructions} />
-        {recordSettings.length > 1 && (
-          <View>
-            <DraggableSegment
-              options={recordSettings}
-              onChange={index =>
-                setTimeout(() => {
-                  this.setState({ recordSegmentIndex: index });
-                }, 300)
-              }
-            />
-            {recordSegmentIndex === 0 ? recordGrindComponent : null}
-            {recordSegmentIndex === 1 ? recordTempComponent : null}
-          </View>
-        )}
-        {recordSettings.length === 1
-          ? recordSettings[0] === 'grind'
-            ? recordGrindComponent
-            : recordTempComponent
-          : null}
-      </Card>
-    );
-  };
-
   render() {
     const {
       settings,
@@ -211,7 +140,7 @@ class Clever extends Component {
             text={`Grind **${coffeeWeight}** grams of coffee on **#30** with your Baratza Encore.`}
           />
         </Card>
-        {this.renderRecording()}
+        <RecordBrewAttributes />
         <Title title="Brew" />
         <Card>
           <Image
