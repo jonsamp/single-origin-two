@@ -189,7 +189,7 @@ class Clever extends Component {
       <Fragment>
         <Title title="Preparation" />
         <Card showConnector>
-          <Instructions text="placeholder: prep steps ..." />
+          <Instructions text="View preparation steps ............... ==>" />
         </Card>
         <Card showConnector>
           <Question

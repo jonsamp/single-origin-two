@@ -16,7 +16,7 @@ function Card({ theme, showConnector, children }) {
       <View
         style={{
           backgroundColor: theme.grey1,
-          borderRadius: 26,
+          borderRadius: 12,
           minHeight: 16,
           overflow: 'hidden',
           width: '100%',
