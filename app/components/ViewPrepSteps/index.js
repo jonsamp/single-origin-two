@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { startCase } from 'lodash';
 import { Text, TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { Feather } from '@expo/vector-icons';
@@ -21,7 +20,7 @@ function ViewPrepSteps({ theme, navigation, recipe }) {
         onPress={() => console.log(recipe)}
         activeOpacity={0.7}
         style={{
-          backgroundColor: theme.primaryLight,
+          backgroundColor: theme.beige,
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -34,7 +33,7 @@ function ViewPrepSteps({ theme, navigation, recipe }) {
             color: theme.foreground,
           }}
         >
-          {startCase(recipe)} device preparation
+          Prepare your {recipe}
         </Text>
         <Feather
           name="chevron-right"

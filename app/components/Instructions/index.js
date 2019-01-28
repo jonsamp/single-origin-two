@@ -14,8 +14,8 @@ function Instructions({ text, theme }) {
   const specialWordRegex = /\*\*.*\*\*/;
   const specialWordStyles = {
     ...type.body,
-    fontSize: 18,
-    color: theme.primary,
+    fontSize: 19,
+    color: theme.primaryDark,
     fontWeight: 'bold',
   };
   const formattedText = text.split(specialWordCaptureGroup).map(part => (

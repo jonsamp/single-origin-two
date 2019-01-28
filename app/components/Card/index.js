@@ -5,34 +5,23 @@ import withTheme from 'providers/theme';
 
 const propTypes = {
   theme: PropTypes.object,
-  showConnector: PropTypes.bool,
   children: PropTypes.node,
+  feature: PropTypes.bool,
 };
 
-function Card({ theme, showConnector, children }) {
+function Card({ theme, children, feature }) {
   return (
-    <View style={{ alignItems: 'center' }}>
-      {showConnector && (
-        <View
-          style={{
-            width: 8,
-            height: 44,
-            backgroundColor: theme.grey1,
-            opacity: 0.5,
-          }}
-        />
-      )}
-      <View
-        style={{
-          backgroundColor: theme.grey1,
-          borderRadius: 12,
-          minHeight: 16,
-          overflow: 'hidden',
-          width: '100%',
-        }}
-      >
-        {children}
-      </View>
+    <View
+      style={{
+        backgroundColor: feature ? theme.grey2 : theme.grey1,
+        borderRadius: 8,
+        minHeight: 16,
+        overflow: 'hidden',
+        width: '100%',
+        marginBottom: 40,
+      }}
+    >
+      {children}
     </View>
   );
 }

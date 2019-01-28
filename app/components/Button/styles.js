@@ -7,7 +7,7 @@ const defaultButton = {
   paddingVertical: 14,
   paddingHorizontal: 28,
   overflow: 'hidden',
-  borderRadius: 8,
+  borderRadius: 4,
 };
 
 const styles = StyleSheet.create({

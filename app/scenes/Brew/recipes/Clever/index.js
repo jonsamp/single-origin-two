@@ -132,7 +132,7 @@ class Clever extends Component {
         <HeaderImage source={headerImage} />
         <Title title="Clever" />
         <ViewPrepSteps recipe="clever" />
-        <Card showConnector>
+        <Card>
           <Question
             title="How many grams would you like the brew to yield? "
             description="One cup is typically 270 grams."
@@ -146,7 +146,7 @@ class Clever extends Component {
             step={5}
           />
         </Card>
-        <Card showConnector>
+        <Card feature>
           {/* TODO: if no grinder, show picture  */}
           <Instructions
             text={`Grind **${coffeeWeight}** grams of coffee on **#30** with your Baratza Encore.`}

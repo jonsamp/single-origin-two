@@ -30,7 +30,7 @@ class ScrollSelect extends Component {
   };
 
   componentDidMount() {
-    const { min, max, step, defaultValue } = this.props;
+    const { min, max, step, defaultValue } = this.encodeValues();
     if (!defaultValue) return;
 
     const selectionRange = range(min, max, step);
@@ -49,6 +49,15 @@ class ScrollSelect extends Component {
       );
     }
   }
+
+  encodeValues = () => ({
+    min: this.props.min + 100,
+    max: this.props.max + 100,
+    defaultValue: this.props.defaultValue + 100,
+    step: this.props.step,
+  });
+
+  decodeValue = value => value - 100;
 
   onSelectionTap = index => {
     const itemPosition = index * SCREEN_WIDTH;
@@ -113,12 +122,10 @@ class ScrollSelect extends Component {
   xOffset = new Animated.Value(0);
 
   render() {
-    const { theme, min, max, step, onChange, label } = this.props;
+    const { theme, onChange, label } = this.props;
+    const { min, max, step } = this.encodeValues();
     const selectionRange = range(min, max + 1, step);
-    let selectionTextStyle = styles.selectionText;
-    if (min >= 100 || max >= 100) {
-      selectionTextStyle = styles.selectionTextLargeNumber;
-    }
+    const selectionTextStyle = styles.selectionText;
 
     return (
       <View style={[styles.container, { backgroundColor: theme.grey2 }]}>
@@ -133,7 +140,7 @@ class ScrollSelect extends Component {
             const selectionNumber = Math.round(
               event.nativeEvent.contentOffset.x / SCREEN_WIDTH
             );
-            onChange(selectionRange[selectionNumber]);
+            onChange(this.decodeValue(Number(selectionRange[selectionNumber])));
           }}
           horizontal
           contentContainerStyle={styles.scrollContainer}

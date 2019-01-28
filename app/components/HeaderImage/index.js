@@ -12,27 +12,27 @@ const propTypes = {
 
 function HeaderImage({ source, theme }) {
   const imageHeight = height / 4;
-  const gradientHeight = height / 10;
+  const gradientHeight = height / 4;
   return (
     <View style={{ marginBottom: -72 }}>
       <Image
         source={source}
         style={{
-          width: width + 16,
+          width: width + 12,
           height: imageHeight,
           resizeMode: 'cover',
-          left: -16,
-          top: -16,
+          left: -12,
+          top: -12,
         }}
       />
       <LinearGradient
         colors={['rgba(255,255,255,0)', theme.background]}
         style={{
           position: 'absolute',
-          width: width + 16,
-          left: -16,
+          width: width + 12,
+          left: -12,
           height: gradientHeight,
-          top: imageHeight - gradientHeight - 16,
+          top: imageHeight - gradientHeight - 12,
         }}
       />
     </View>

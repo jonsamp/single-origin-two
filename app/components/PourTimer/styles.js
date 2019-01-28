@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
-    borderRadius: 10,
+    borderRadius: 8,
     shadowColor: 'rgba(82,181,146,0.5)',
     shadowRadius: 12,
     shadowOffset: { height: 2 },
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
   },
   trackingLabelText: {
     ...type.label,
+    marginBottom: 4,
   },
 });
 

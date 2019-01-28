@@ -138,7 +138,7 @@ class Brew extends Component {
           />
           <Button
             title="Finish"
-            customStyle={{ marginVertical: 32, paddingVertical: 20 }}
+            customStyle={{ marginVertical: 16, paddingVertical: 20 }}
           />
         </ScrollView>
       </View>
