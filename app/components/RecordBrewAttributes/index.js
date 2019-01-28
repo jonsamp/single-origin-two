@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { View, Animated } from 'react-native';
 import withSettings from 'providers/settings';
 import withTheme from 'providers/theme';
@@ -9,13 +8,13 @@ import Instructions from 'components/Instructions';
 import ScrollSelect from 'components/ScrollSelect';
 import DraggableSegment from 'components/DraggableSegment';
 
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = {};
-
 class RecordBrewAttributes extends Component {
   static propTypes = {
+    theme: PropTypes.object,
     settings: PropTypes.object,
+    grind: PropTypes.number,
+    temp: PropTypes.number,
+    setRecipeState: PropTypes.func,
   };
 
   state = {
@@ -65,9 +64,9 @@ class RecordBrewAttributes extends Component {
       <ScrollSelect
         min={0}
         max={40}
-        defaultValue={30}
+        defaultValue={this.props.grind}
         label="grind"
-        onChange={value => console.log('value', value)}
+        onChange={value => this.props.setRecipeState({ key: 'grind', value })}
         step={1}
       />
     );
@@ -76,9 +75,9 @@ class RecordBrewAttributes extends Component {
       <ScrollSelect
         min={160}
         max={210}
-        defaultValue={200}
+        defaultValue={this.props.temp}
         label="Temp"
-        onChange={value => console.log('value', value)}
+        onChange={value => this.props.setRecipeState({ key: 'temp', value })}
         step={5}
       />
     );
@@ -118,7 +117,4 @@ class RecordBrewAttributes extends Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withTheme(withSettings(RecordBrewAttributes)));
+export default withTheme(withSettings(RecordBrewAttributes));

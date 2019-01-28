@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { View, ScrollView } from 'react-native';
 import { startCase } from 'lodash';
 import withTheme from 'providers/theme';
@@ -10,8 +11,11 @@ import addWaterSound from './sounds/add-water.mp3';
 import tipSound from './sounds/tip.mp3';
 import endBrewSound from './sounds/end-brew.mp3';
 import warningSound from './sounds/warning.mp3';
-
 import Clever from './recipes/Clever';
+
+const mapStateToProps = state => ({
+  // prevGrindSetting: 15, // TODO: select from the previous most recent brew of this recipe
+});
 
 class Brew extends Component {
   static propTypes = {
@@ -24,13 +28,16 @@ class Brew extends Component {
   };
 
   state = {
-    volumePercent: 0,
-    totalVolume: 0,
-    totalTime: 0,
+    pourEvents: [],
+    volumePercent: undefined,
+    totalVolume: undefined,
+    totalTime: undefined,
+    grind: undefined,
+    temp: undefined,
     tip: {
-      text: null,
+      text: undefined,
     },
-    warningText: null,
+    warningText: undefined,
   };
 
   setRecipeState = ({ key, value }) => this.setState({ [key]: value });
@@ -62,6 +69,7 @@ class Brew extends Component {
         });
       }
     }
+
     if (!currentEvents) return;
 
     currentEvents.forEach(event => {
@@ -97,18 +105,17 @@ class Brew extends Component {
     });
   };
 
+  renderRecipe = recipe => {
+    const recipes = {
+      clever: Clever,
+    };
+
+    return recipes[recipe];
+  };
+
   render() {
     const { theme, recipe } = this.props;
-    let renderRecipe;
-
-    switch (recipe) {
-      case 'clever':
-        renderRecipe = props => <Clever {...props} />;
-        break;
-      default:
-        renderRecipe = props => <Clever {...props} />;
-        break;
-    }
+    const Recipe = this.renderRecipe(recipe);
 
     return (
       <View style={{ flex: 1, backgroundColor: theme.background }}>
@@ -118,12 +125,17 @@ class Brew extends Component {
             padding: 12,
           }}
         >
-          {renderRecipe({
-            setRecipeState: this.setRecipeState,
-            handleTick: this.handleTick,
-            recipe,
-            ...this.state,
-          })}
+          <Recipe
+            setRecipeState={this.setRecipeState}
+            handleTick={this.handleTick}
+            totalVolume={this.state.totalVolume}
+            tip={this.state.tip}
+            warningText={this.state.warningText}
+            volumePercent={this.state.volumePercent}
+            totalTime={this.state.totalTime}
+            temp={this.state.temp}
+            grind={this.state.grind}
+          />
           <Button
             title="Finish"
             customStyle={{ marginVertical: 32, paddingVertical: 20 }}
@@ -134,4 +146,4 @@ class Brew extends Component {
   }
 }
 
-export default withTheme(Brew);
+export default connect(mapStateToProps)(withTheme(Brew));

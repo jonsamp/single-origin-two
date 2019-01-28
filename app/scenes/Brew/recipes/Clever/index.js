@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { startCase } from 'lodash';
 import withSettings from 'providers/settings';
 import formatSeconds from 'helpers/formatSeconds';
 import Card from 'components/Card';
@@ -23,22 +22,33 @@ class Clever extends Component {
   static propTypes = {
     settings: PropTypes.object,
     setRecipeState: PropTypes.func,
-    totalVolume: PropTypes.number,
-    totalTime: PropTypes.number,
     handleTick: PropTypes.func,
+    totalVolume: PropTypes.number,
     tip: PropTypes.object,
     warningText: PropTypes.string,
     volumePercent: PropTypes.number,
-    recipe: PropTypes.string,
+    totalTime: PropTypes.number,
+    temp: PropTypes.number,
+    grind: PropTypes.number,
+  };
+
+  static defaultProps = {
+    settings: {},
+    setRecipeState: () => {},
+    handleTick: () => {},
+    totalVolume: 340,
+    tip: {
+      text: null,
+    },
+    warningText: null,
+    volumePercent: 0,
+    totalTime: 220,
+    temp: 200,
+    grind: 30,
   };
 
   componentDidMount() {
-    const { settings, setRecipeState } = this.props;
-    setRecipeState({ key: 'totalVolume', value: 340 });
-    setRecipeState({
-      key: 'totalTime',
-      value: settings.bloomDuration + 190,
-    });
+    const { setRecipeState } = this.props;
     setRecipeState({
       key: 'pourEvents',
       value: this.configurePourEvents(),
@@ -104,27 +114,24 @@ class Clever extends Component {
   render() {
     const {
       settings,
-      totalVolume,
       setRecipeState,
-      totalTime,
-      volumePercent,
       handleTick,
+      totalVolume,
+      totalTime,
+      grind,
+      temp,
+      volumePercent,
       tip,
       warningText,
-      recipe,
     } = this.props;
-
-    if (!totalVolume) {
-      return null;
-    }
 
     const coffeeWeight = Math.round(totalVolume / settings.ratio);
 
     return (
       <Fragment>
         <HeaderImage source={headerImage} />
-        <Title title={startCase(recipe)} />
-        <ViewPrepSteps recipe={recipe} />
+        <Title title="Clever" />
+        <ViewPrepSteps recipe="clever" />
         <Card showConnector>
           <Question
             title="How many grams would you like the brew to yield? "
@@ -145,7 +152,11 @@ class Clever extends Component {
             text={`Grind **${coffeeWeight}** grams of coffee on **#30** with your Baratza Encore.`}
           />
         </Card>
-        <RecordBrewAttributes />
+        <RecordBrewAttributes
+          setRecipeState={setRecipeState}
+          grind={grind}
+          temp={temp}
+        />
         <Title title="Brew" />
         <Card>
           <Image
