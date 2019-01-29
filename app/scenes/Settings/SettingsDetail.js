@@ -94,21 +94,12 @@ class Settings extends Component {
             </Section>
             <Section title="General">
               <SwitchSetting
-                title="Expert mode"
-                description="Displays only calculations and timers within recipes."
-                value={settings.expertMode}
-                onChange={value =>
-                  settingUpdated({ setting: 'expertMode', value })
-                }
-              />
-              <SwitchSetting
                 title="Restore last brew"
                 description="Automatically inserts grind setting and water temp from your most previous brew."
                 value={settings.restoreLastBrew}
                 onChange={value =>
                   settingUpdated({ setting: 'restoreLastBrew', value })
                 }
-                borderTop
               />
               <SwitchSetting
                 title="Tasting reminder"
@@ -143,25 +134,56 @@ class Settings extends Component {
       case 'units':
         children = (
           <Fragment>
-            <Section title="Temperature Units">
+            <Section title="Temperature units">
               <ChecklistSetting
                 items={this.createChecklistItems({
                   list: tempUnits,
-                  settingName: 'tempUnit',
+                  settingName: 'temperatureUnit',
                 })}
                 onChange={value =>
-                  settingUpdated({ setting: 'tempUnit', value })
+                  settingUpdated({ setting: 'temperatureUnit', value })
                 }
               />
             </Section>
-            <Section title="Weight Units">
+            <Section
+              title="Brewed coffee volume units"
+              description="The units used to set the volume of brewed coffee you’ll make."
+            >
               <ChecklistSetting
                 items={this.createChecklistItems({
                   list: weightUnits,
-                  settingName: 'weightUnit',
+                  settingName: 'brewedVolumeUnit',
                 })}
                 onChange={value =>
-                  settingUpdated({ setting: 'weightUnit', value })
+                  settingUpdated({ setting: 'brewedVolumeUnit', value })
+                }
+              />
+            </Section>
+            <Section
+              title="Coffee weight units"
+              description="The units used to present the weight of coffee beans you’ll need to grind."
+            >
+              <ChecklistSetting
+                items={this.createChecklistItems({
+                  list: weightUnits,
+                  settingName: 'coffeeWeightUnit',
+                })}
+                onChange={value =>
+                  settingUpdated({ setting: 'coffeeWeightUnit', value })
+                }
+              />
+            </Section>
+            <Section
+              title="Water volume units"
+              description="The units used to present the weight of water you’ll need to pour over."
+            >
+              <ChecklistSetting
+                items={this.createChecklistItems({
+                  list: weightUnits,
+                  settingName: 'waterVolumeUnit',
+                })}
+                onChange={value =>
+                  settingUpdated({ setting: 'waterVolumeUnit', value })
                 }
               />
             </Section>
@@ -224,7 +246,7 @@ class Settings extends Component {
     return (
       <View style={{ backgroundColor: theme.grey1, flex: 1 }}>
         <Header title={groupName} />
-        <ScrollView contentContainerStyle={{ paddingBottom: 32 }}>
+        <ScrollView contentContainerStyle={{ paddingBottom: 60 }}>
           {children}
         </ScrollView>
       </View>
