@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { settingUpdated } from 'state/settings/actions';
 import { selectSettings } from 'state/settings/selectors';
+import { units } from 'constants/units';
 
 const mapStateToProps = state => ({ settings: selectSettings(state) });
 
@@ -17,6 +18,47 @@ function withSettings(WrappedComponent) {
       settingUpdated: PropTypes.func,
     };
 
+    getUnitHelper = unit => ({
+      getPreferredValue: this.getPreferredValue(unit),
+      getStandardValue: this.getStandardValue(unit),
+      unit: units[this.props.settings[unit]],
+    });
+
+    getGrindHelper = () => ({
+      getPreferredValue: v => v,
+      getStandardValue: v => v,
+      unit: { symbol: 'grind' },
+    });
+
+    getPreferredValue = unit => value =>
+      this.conversions[this.props.settings[unit]].preferredConversion(value);
+
+    getStandardValue = unit => value =>
+      this.conversions[this.props.settings[unit]].standardConversion(value);
+
+    conversions = {
+      grams: {
+        preferredConversion: value => value,
+        standardConversion: value => value,
+      },
+      fahrenheit: {
+        preferredConversion: value => value,
+        standardConversion: value => value,
+      },
+      celsius: {
+        preferredConversion: value => Math.round((value - 32) / 1.8),
+        standardConversion: value => Math.round((value + 32) * 1.8),
+      },
+      ounces: {
+        preferredConversion: value => (value * 0.035274).toFixed(1),
+        standardConversion: value => Math.round(value / 0.035274),
+      },
+      cups: {
+        preferredConversion: value => (value * 0.01).toFixed(2),
+        standardConversion: value => value / 0.01,
+      },
+    };
+
     render() {
       const { settings, settingUpdated, ...rest } = this.props;
       return (
@@ -24,6 +66,14 @@ function withSettings(WrappedComponent) {
           {...rest}
           settings={settings}
           settingUpdated={settingUpdated}
+          getUnitHelpers={this.getUnitHelpers}
+          unitHelpers={{
+            brewedVolumeUnit: this.getUnitHelper('brewedVolumeUnit'),
+            coffeeWeightUnit: this.getUnitHelper('coffeeWeightUnit'),
+            waterVolumeUnit: this.getUnitHelper('waterVolumeUnit'),
+            temperatureUnit: this.getUnitHelper('temperatureUnit'),
+            grind: this.getGrindHelper(),
+          }}
         />
       );
     }

@@ -5,6 +5,7 @@ import { Haptic, KeepAwake } from 'expo';
 import AnimateNumber from 'react-native-animate-number';
 import formatSeconds from 'helpers/formatSeconds';
 import withTheme from 'providers/theme';
+import withSettings from 'providers/settings';
 import Button from 'components/Button';
 import styles from './styles';
 
@@ -15,6 +16,7 @@ class PourTimer extends Component {
     onTick: PropTypes.func,
     waterPercent: PropTypes.number,
     totalWaterWeight: PropTypes.number,
+    unitHelpers: PropTypes.object,
   };
 
   static defaultProps = {
@@ -22,6 +24,7 @@ class PourTimer extends Component {
     waterPercent: 0,
     totalWaterWeight: 0,
     onTick: () => {},
+    unitHelpers: {},
   };
 
   state = {
@@ -123,7 +126,8 @@ class PourTimer extends Component {
   };
 
   render() {
-    const { theme, totalWaterWeight, waterPercent } = this.props;
+    const { theme, totalWaterWeight, waterPercent, unitHelpers } = this.props;
+    const { waterVolumeUnit } = unitHelpers;
     const { timerRunning } = this.state;
     const inputRange = [0, 1];
     const trackingAnimatedScale = this.trackingAnimatedValue.interpolate({
@@ -177,9 +181,16 @@ class PourTimer extends Component {
                 style={[styles.trackingText, { color: trackingAnimatedText }]}
               >
                 <AnimateNumber
-                  value={Math.round(totalWaterWeight * waterPercent)}
-                  countBy={4}
-                  interval={30}
+                  value={waterVolumeUnit.getPreferredValue(
+                    totalWaterWeight * waterPercent
+                  )}
+                  formatter={val =>
+                    parseFloat(val).toFixed(
+                      waterVolumeUnit.unit.symbol === 'g' ? 0 : 1
+                    )
+                  }
+                  countBy={waterVolumeUnit.unit.symbol === 'g' ? 4 : 0.1}
+                  interval={15}
                   onFinish={this.onAnimateNumberFinish}
                 />
               </Animated.Text>
@@ -190,7 +201,7 @@ class PourTimer extends Component {
                 { color: trackingAnimatedText },
               ]}
             >
-              grams
+              {waterVolumeUnit.unit.title.toLowerCase()}
             </Animated.Text>
           </Animated.View>
         </View>
@@ -199,4 +210,4 @@ class PourTimer extends Component {
   }
 }
 
-export default withTheme(PourTimer);
+export default withSettings(withTheme(PourTimer));

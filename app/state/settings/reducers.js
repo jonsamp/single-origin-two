@@ -13,8 +13,8 @@ const initialState = {
   grinderType: 'generic',
   temperatureUnit: 'fahrenheit',
   brewedVolumeUnit: 'ounces',
-  coffeeWeightUnit: 'grams',
-  waterVolumeUnit: 'grams',
+  coffeeWeightUnit: 'ounces',
+  waterVolumeUnit: 'ounces',
   soundsEnabled: true,
   shareTrackingData: true,
   recipes: Object.values(recipes).reduce(

@@ -62,6 +62,7 @@ class RecordBrewAttributes extends Component {
 
     const recordGrindComponent = (
       <ScrollSelect
+        unitType="grind"
         min={0}
         max={40}
         defaultValue={this.props.grind}
@@ -73,12 +74,13 @@ class RecordBrewAttributes extends Component {
 
     const recordTempComponent = (
       <ScrollSelect
+        unitType="temperatureUnit"
         min={160}
         max={210}
         defaultValue={this.props.temp}
         label="Temp"
         onChange={value => this.props.setRecipeState({ key: 'temp', value })}
-        step={5}
+        step={1}
       />
     );
 

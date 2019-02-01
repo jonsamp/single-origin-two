@@ -4,6 +4,7 @@ import { View, Text, Animated, TouchableOpacity } from 'react-native';
 import { Haptic } from 'expo';
 import { range } from 'lodash';
 import withTheme from 'providers/theme';
+import withSettings from 'providers/settings';
 import { width } from 'constants/layout';
 import styles from './styles';
 
@@ -16,16 +17,17 @@ class ScrollSelect extends Component {
     max: PropTypes.number,
     step: PropTypes.number,
     defaultValue: PropTypes.number,
-    label: PropTypes.string,
     onChange: PropTypes.func,
+    unitType: PropTypes.string,
+    unitHelpers: PropTypes.object,
   };
 
   static defaultProps = {
     min: 1,
     max: 3,
     step: 1,
-    label: 'label',
     onChange: () => {},
+    unitHelpers: {},
     defaultValue: null,
   };
 
@@ -50,21 +52,27 @@ class ScrollSelect extends Component {
     }
   }
 
-  encodeValues = () => ({
-    min: this.props.min + 100,
-    max: this.props.max + 100,
-    defaultValue: this.props.defaultValue + 100,
-    step: this.props.step,
-  });
-
-  decodeValue = value => value - 100;
-
   onSelectionTap = index => {
     const itemPosition = index * SCREEN_WIDTH;
 
     if (this.scrollViewRef) {
       this.scrollViewRef.scrollTo({ x: itemPosition, y: 0, animated: true });
     }
+  };
+
+  encodeValues = () => {
+    const { unitType, min, max, unitHelpers, defaultValue } = this.props;
+    const unitHelper = unitHelpers[unitType];
+    return {
+      min: Math.round(unitHelper.getPreferredValue(min)),
+      max: Math.round(unitHelper.getPreferredValue(max)),
+      defaultValue: Math.round(unitHelper.getPreferredValue(defaultValue)),
+    };
+  };
+
+  decodeValue = value => {
+    const { unitType, unitHelpers } = this.props;
+    return unitHelpers[unitType].getStandardValue(value);
   };
 
   transitionAnimation = index => {
@@ -122,10 +130,11 @@ class ScrollSelect extends Component {
   xOffset = new Animated.Value(0);
 
   render() {
-    const { theme, onChange, label } = this.props;
-    const { min, max, step } = this.encodeValues();
+    const { theme, onChange, step, unitType, unitHelpers } = this.props;
+    const { min, max } = this.encodeValues();
     const selectionRange = range(min, max + 1, step);
     const selectionTextStyle = styles.selectionText;
+    const unitHelper = unitHelpers[unitType];
 
     return (
       <View style={[styles.container, { backgroundColor: theme.grey2 }]}>
@@ -184,7 +193,7 @@ class ScrollSelect extends Component {
         </Animated.ScrollView>
         <View style={[styles.label, { backgroundColor: theme.foreground }]}>
           <Text style={[styles.labelText, { color: theme.grey2 }]}>
-            {label.toUpperCase()}
+            {unitHelper.unit.symbol.toUpperCase()}
           </Text>
         </View>
       </View>
@@ -192,4 +201,4 @@ class ScrollSelect extends Component {
   }
 }
 
-export default withTheme(ScrollSelect);
+export default withSettings(withTheme(ScrollSelect));
