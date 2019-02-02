@@ -10,16 +10,26 @@ const propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   borderTop: PropTypes.bool,
+  isDarkTheme: PropTypes.bool,
 };
 
-const SettingWrapper = ({ children, theme, title, description, borderTop }) => (
-  <View style={{ backgroundColor: theme.grey1 }}>
+const SettingWrapper = ({
+  children,
+  theme,
+  title,
+  description,
+  borderTop,
+  isDarkTheme,
+}) => (
+  <View
+    style={{ backgroundColor: isDarkTheme ? theme.background : theme.grey1 }}
+  >
     <View
       style={{
         padding: 16,
         borderBottomWidth: 1,
-        borderBottomColor: theme.grey2,
-        backgroundColor: theme.background,
+        borderBottomColor: isDarkTheme ? theme.background : theme.grey2,
+        backgroundColor: isDarkTheme ? theme.grey2 : theme.background,
         borderTopWidth: borderTop ? 1 : 0,
         borderTopColor: theme.grey2,
       }}

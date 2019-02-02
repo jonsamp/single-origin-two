@@ -244,7 +244,12 @@ class Settings extends Component {
     }
 
     return (
-      <View style={{ backgroundColor: theme.grey1, flex: 1 }}>
+      <View
+        style={{
+          backgroundColor: isDarkTheme ? theme.background : theme.grey1,
+          flex: 1,
+        }}
+      >
         <Header title={groupName} />
         <ScrollView contentContainerStyle={{ paddingBottom: 60 }}>
           {children}

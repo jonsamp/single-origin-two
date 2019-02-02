@@ -11,6 +11,7 @@ class Group extends Component {
     title: PropTypes.string,
     theme: PropTypes.object,
     navigation: PropTypes.object,
+    isDarkTheme: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -18,7 +19,7 @@ class Group extends Component {
   };
 
   render() {
-    const { title, navigation, theme } = this.props;
+    const { title, navigation, theme, isDarkTheme } = this.props;
 
     return (
       <TouchableOpacity
@@ -27,8 +28,8 @@ class Group extends Component {
           flexDirection: 'row',
           justifyContent: 'space-between',
           padding: 16,
-          backgroundColor: theme.background,
-          borderBottomColor: theme.grey2,
+          backgroundColor: isDarkTheme ? theme.grey2 : theme.background,
+          borderBottomColor: isDarkTheme ? theme.background : theme.grey2,
           borderBottomWidth: 1,
         }}
         onPress={() => navigation.navigate('SettingsDetail', title)}
@@ -39,7 +40,8 @@ class Group extends Component {
         <Feather
           name="chevron-right"
           size={theme.iconSize}
-          color={theme.grey3}
+          color={theme.foreground}
+          style={{ opacity: 0.65 }}
         />
       </TouchableOpacity>
     );

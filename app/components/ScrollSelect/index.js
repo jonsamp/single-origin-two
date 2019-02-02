@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Animated, TouchableOpacity } from 'react-native';
-import { Haptic } from 'expo';
 import { range } from 'lodash';
 import withTheme from 'providers/theme';
 import withSettings from 'providers/settings';
@@ -127,7 +126,14 @@ class ScrollSelect extends Component {
   xOffset = new Animated.Value(0);
 
   render() {
-    const { theme, onChange, step, unitType, unitHelpers } = this.props;
+    const {
+      theme,
+      onChange,
+      step,
+      unitType,
+      unitHelpers,
+      isDarkTheme,
+    } = this.props;
     const { min, max } = this.encodeValues();
     const selectionRange = range(min, max + 1, step);
     const selectionTextStyle = styles.selectionText;
@@ -142,7 +148,6 @@ class ScrollSelect extends Component {
             { useNativeDriver: true }
           )}
           onMomentumScrollEnd={event => {
-            Haptic.selection();
             const selectionNumber = Math.round(
               event.nativeEvent.contentOffset.x / SCREEN_WIDTH
             );
@@ -188,7 +193,12 @@ class ScrollSelect extends Component {
             </TouchableOpacity>
           ))}
         </Animated.ScrollView>
-        <View style={[styles.label, { backgroundColor: theme.foreground }]}>
+        <View
+          style={[
+            styles.label,
+            { backgroundColor: theme.foreground, opacity: 0.75 },
+          ]}
+        >
           <Text style={[styles.labelText, { color: theme.grey2 }]}>
             {unitHelper.unit.symbol.toUpperCase()}
           </Text>

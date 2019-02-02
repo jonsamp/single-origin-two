@@ -19,6 +19,7 @@ class DraggableSegment extends Component {
     onChange: PropTypes.func.isRequired,
     onStartMove: PropTypes.func,
     onStopMove: PropTypes.func,
+    isDarkTheme: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -166,7 +167,7 @@ class DraggableSegment extends Component {
   };
 
   render() {
-    const { theme, options } = this.props;
+    const { theme, options, isDarkTheme } = this.props;
     const { containerWidth, pan } = this.state;
 
     return (
@@ -188,7 +189,7 @@ class DraggableSegment extends Component {
               styles.toggleContainer,
               {
                 width: this.getSegmentWidth(),
-                backgroundColor: theme.background,
+                backgroundColor: isDarkTheme ? theme.grey1 : theme.background,
                 transform: pan.getTranslateTransform(),
               },
             ]}

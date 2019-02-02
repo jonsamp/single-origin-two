@@ -6,14 +6,13 @@ import withTheme from 'providers/theme';
 const propTypes = {
   theme: PropTypes.object,
   children: PropTypes.node,
-  feature: PropTypes.bool,
 };
 
-function Card({ theme, children, feature }) {
+function Card({ theme, children }) {
   return (
     <View
       style={{
-        backgroundColor: feature ? theme.grey2 : theme.grey1,
+        backgroundColor: theme.grey1,
         borderRadius: 8,
         minHeight: 16,
         overflow: 'hidden',

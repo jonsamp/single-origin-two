@@ -10,11 +10,11 @@ import Navigator from 'scenes/Navigator';
 const { store, persistor } = configureStore();
 
 // Remove this once Sentry is correctly setup.
-// Sentry.enableInExpoDevelopment = false;
+Sentry.enableInExpoDevelopment = false;
 
-// Sentry.config(
-//   'https://a4180678b38b4ec291043df411778cf9:b8b411413ca44862830c97df282e67a6@sentry.io/1215689'
-// ).install();
+Sentry.config(
+  'https://449ff87f0ab34a49831dac73cd695c4c@sentry.io/1327357'
+).install();
 
 class App extends Component {
   state = {

@@ -13,6 +13,7 @@ const propTypes = {
   customTextStyle: PropTypes.any,
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
+  isDarkTheme: PropTypes.bool,
 };
 
 function Button({
@@ -24,12 +25,16 @@ function Button({
   customStyle,
   customTextStyle,
   loading,
+  isDarkTheme,
 }) {
   let buttonStyle = [styles.button, { backgroundColor: theme.primary }];
   let textStyle = [styles.text, { color: theme.background }, customTextStyle];
 
   if (type === 'secondary') {
-    buttonStyle = [styles.button, { backgroundColor: theme.background }];
+    buttonStyle = [
+      styles.button,
+      { backgroundColor: isDarkTheme ? theme.grey1 : theme.background },
+    ];
     textStyle = [styles.text, { color: theme.foreground }];
   }
 

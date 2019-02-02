@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
   },
   label: {
     backgroundColor: 'white',
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
     alignItems: 'center',
     padding: 8,
     paddingHorizontal: 24,

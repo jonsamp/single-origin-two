@@ -11,29 +11,38 @@ import SettingWrapper from './SettingWrapper';
 class Settings extends Component {
   static propTypes = {
     theme: PropTypes.object,
+    isDarkTheme: PropTypes.bool,
   };
 
   render() {
-    const { theme } = this.props;
+    const { theme, isDarkTheme } = this.props;
+    const modifiedTheme = isDarkTheme
+      ? {
+          ...theme,
+          grey1: theme.background,
+          grey2: theme.grey1,
+        }
+      : theme;
+
     return (
       <HeaderScrollView
         title="Settings"
-        containerStyle={{ backgroundColor: theme.grey1 }}
+        containerStyle={{ backgroundColor: modifiedTheme.grey1 }}
         headerComponentContainerStyle={{
-          backgroundColor: theme.grey1,
+          backgroundColor: modifiedTheme.grey1,
           borderBottomWidth: 1,
-          borderBottomColor: theme.grey2,
+          borderBottomColor: modifiedTheme.grey2,
         }}
         headerComponentStyle={{
-          backgroundColor: theme.grey1,
+          backgroundColor: modifiedTheme.grey1,
         }}
-        headlineStyle={{ color: theme.foreground }}
+        headlineStyle={{ color: modifiedTheme.foreground }}
         titleStyle={{
-          color: theme.foreground,
+          color: modifiedTheme.foreground,
           marginBottom: 0,
         }}
         scrollContainerStyle={{
-          backgroundColor: theme.grey1,
+          backgroundColor: modifiedTheme.grey1,
           paddingBottom: 32,
         }}
         fadeDirection="up"
@@ -54,7 +63,12 @@ class Settings extends Component {
             }
           >
             <SettingWrapper title="Send feedback">
-              <Feather name="mail" size={theme.iconSize} color={theme.grey3} />
+              <Feather
+                name="mail"
+                size={modifiedTheme.iconSize}
+                color={modifiedTheme.foreground}
+                style={{ opacity: 0.65 }}
+              />
             </SettingWrapper>
           </TouchableOpacity>
           <TouchableOpacity
@@ -65,7 +79,12 @@ class Settings extends Component {
             }
           >
             <SettingWrapper title="Rate Single Origin">
-              <Feather name="star" size={theme.iconSize} color={theme.grey3} />
+              <Feather
+                name="star"
+                size={modifiedTheme.iconSize}
+                color={modifiedTheme.foreground}
+                style={{ opacity: 0.65 }}
+              />
             </SettingWrapper>
           </TouchableOpacity>
           <Group title="Privacy policy" />
@@ -75,8 +94,9 @@ class Settings extends Component {
             <SettingWrapper title="$10 off Mistobox">
               <Feather
                 name="external-link"
-                size={theme.iconSize}
-                color={theme.grey3}
+                size={modifiedTheme.iconSize}
+                color={modifiedTheme.foreground}
+                style={{ opacity: 0.65 }}
               />
             </SettingWrapper>
           </TouchableOpacity>

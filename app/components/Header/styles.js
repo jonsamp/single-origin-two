@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     elevation: 3,
     ...ifIphoneX(
       {
-        paddingTop: 46,
+        paddingTop: 50,
         paddingBottom: 16,
       },
       {
