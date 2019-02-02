@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { startCase } from 'lodash';
 import { TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import withTheme from 'providers/theme';
@@ -20,7 +21,7 @@ const propTypes = {
 const ChecklistSetting = ({ theme, onChange, items }) =>
   items.map(item => (
     <TouchableOpacity onPress={() => onChange(item.id)} key={item.id}>
-      <SettingWrapper title={item.title}>
+      <SettingWrapper title={startCase(item.title)}>
         {item.value ? (
           <Feather name="check" size={theme.iconSize} color={theme.primary} />
         ) : null}

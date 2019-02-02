@@ -11,16 +11,17 @@ const propTypes = {
   theme: PropTypes.object,
   title: PropTypes.string,
   right: PropTypes.any,
+  isDarkTheme: PropTypes.bool,
 };
 
-function Header({ navigation, theme, title, right }) {
+function Header({ navigation, theme, title, right, isDarkTheme }) {
   return (
     <View
       style={[
         styles.container,
         {
-          borderBottomColor: theme.grey2,
-          backgroundColor: theme.background,
+          borderBottomColor: isDarkTheme ? theme.grey1 : theme.grey2,
+          backgroundColor: isDarkTheme ? theme.grey2 : theme.background,
           borderBottomWidth: 1,
         },
       ]}

@@ -1,42 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { BottomTabBar } from 'react-navigation-tabs';
-import { connect } from 'react-redux';
-import { selectSettings } from 'state/settings/selectors';
-import themes from 'constants/themes';
-
-const mapStateToProps = state => ({
-  theme: selectSettings(state).theme,
-});
+import withTheme from 'providers/theme';
 
 class TabBar extends Component {
   static propTypes = {
     props: PropTypes.any,
-    theme: PropTypes.string.isRequired,
-  };
-
-  static defaultProps = {
-    props: {},
+    theme: PropTypes.object,
+    isDarkTheme: PropTypes.bool,
   };
 
   render() {
-    const theme = themes[this.props.theme];
-    const colorMap = {
-      light: theme.grey1,
-      dark: theme.background,
-    }
+    const { theme, isDarkTheme } = this.props;
 
     return (
       <BottomTabBar
         {...this.props}
         style={{
-          backgroundColor: colorMap[this.props.theme],
+          backgroundColor: isDarkTheme ? theme.grey2 : theme.grey1,
           borderTopWidth: 1,
-          borderTopColor: theme.grey2,
+          borderTopColor: isDarkTheme ? theme.grey1 : theme.grey2,
         }}
       />
     );
   }
 }
 
-export default connect(mapStateToProps)(TabBar);
+export default withTheme(TabBar);
