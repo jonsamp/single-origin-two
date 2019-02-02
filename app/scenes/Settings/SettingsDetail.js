@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { View, ScrollView } from 'react-native';
-import grinders from 'constants/grinders';
+import { grinders } from 'constants/grinders';
 import { weightUnits, tempUnits } from 'constants/units';
 import recipes from 'constants/recipes';
 import withTheme from 'providers/theme';

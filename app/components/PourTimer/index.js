@@ -37,7 +37,10 @@ class PourTimer extends Component {
   }
 
   componentDidUpdate(nextProps) {
-    if (nextProps.waterPercent !== this.props.waterPercent) {
+    if (
+      nextProps.waterPercent !== this.props.waterPercent &&
+      this.state.timerRunning
+    ) {
       this.onAnimateNumberBegin();
     }
   }
@@ -186,11 +189,21 @@ class PourTimer extends Component {
                   )}
                   formatter={val =>
                     parseFloat(val).toFixed(
-                      waterVolumeUnit.unit.symbol === 'g' ? 0 : 1
+                      waterVolumeUnit.unit.symbol === 'g'
+                        ? 0
+                        : waterVolumeUnit.unit.symbol === 'oz'
+                          ? 1
+                          : 2
                     )
                   }
-                  countBy={waterVolumeUnit.unit.symbol === 'g' ? 4 : 0.1}
-                  interval={15}
+                  countBy={
+                    waterVolumeUnit.unit.symbol === 'g'
+                      ? 4
+                      : waterVolumeUnit.unit.symbol === 'oz'
+                        ? 0.1
+                        : 0.01
+                  }
+                  interval={waterVolumeUnit.unit.symbol === 'g' ? 15 : 30}
                   onFinish={this.onAnimateNumberFinish}
                 />
               </Animated.Text>
@@ -201,7 +214,7 @@ class PourTimer extends Component {
                 { color: trackingAnimatedText },
               ]}
             >
-              {waterVolumeUnit.unit.title.toLowerCase()}
+              {waterVolumeUnit.unit.title}
             </Animated.Text>
           </Animated.View>
         </View>

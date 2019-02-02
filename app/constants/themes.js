@@ -20,7 +20,7 @@ export default {
   },
   dark: {
     name: 'dark',
-    foreground: '#adadad',
+    foreground: '#d8d8d8',
     background: '#000000',
     primaryDark: '#00CA9D',
     primary: '#00CA9D',

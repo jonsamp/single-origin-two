@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Animated } from 'react-native';
+import {
+  View,
+  Animated,
+  TouchableOpacity,
+  LayoutAnimation,
+} from 'react-native';
+import { Haptic } from 'expo';
+import { Feather } from '@expo/vector-icons';
 import withSettings from 'providers/settings';
 import withTheme from 'providers/theme';
 import Card from 'components/Card';
@@ -19,12 +26,14 @@ class RecordBrewAttributes extends Component {
 
   state = {
     recordSegmentIndex: 0,
+    isOpen: false,
   };
 
   onStartMove = () => {
     Animated.timing(this.animatedOpacityValue, {
       toValue: 0,
       duration: 150,
+      useNativeDriver: true,
     }).start();
   };
 
@@ -32,10 +41,34 @@ class RecordBrewAttributes extends Component {
     Animated.timing(this.animatedOpacityValue, {
       toValue: 1,
       duration: 150,
+      useNativeDriver: true,
     }).start();
   };
 
+  toggleIsOpen = () => {
+    const config = LayoutAnimation.create(
+      200,
+      LayoutAnimation.Types.easeOut,
+      LayoutAnimation.Properties.opacity
+    );
+
+    LayoutAnimation.configureNext(config);
+
+    Haptic.selection();
+
+    this.setState(
+      prevState => ({ isOpen: !prevState.isOpen }),
+      () =>
+        Animated.spring(this.animatedRotationValue, {
+          toValue: this.state.isOpen ? 1 : 0,
+          duration: 250,
+          useNativeDriver: true,
+        }).start()
+    );
+  };
+
   animatedOpacityValue = new Animated.Value(1);
+  animatedRotationValue = new Animated.Value(0);
 
   render() {
     const { settings, theme } = this.props;
@@ -62,7 +95,7 @@ class RecordBrewAttributes extends Component {
 
     const recordGrindComponent = (
       <ScrollSelect
-        unitType="grind"
+        unitType="grindUnit"
         min={0}
         max={40}
         defaultValue={this.props.grind}
@@ -86,34 +119,75 @@ class RecordBrewAttributes extends Component {
 
     return (
       <Card showConnector>
-        <Instructions text={instructions} />
-        {recordSettings.length > 1 && (
-          <View style={{ backgroundColor: theme.grey2 }}>
-            <DraggableSegment
-              options={recordSettings}
-              onChange={index =>
-                setTimeout(() => {
-                  this.setState({ recordSegmentIndex: index });
-                }, 300)
-              }
-              onStartMove={this.onStartMove}
-              onStopMove={this.onStopMove}
-            />
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <Instructions text={instructions} />
+          <TouchableOpacity
+            onPress={this.toggleIsOpen}
+            style={{
+              padding: 8,
+              backgroundColor: theme.grey2,
+              borderRadius: 2,
+              marginRight: 20,
+            }}
+            activeOpacity={1}
+          >
             <Animated.View
               style={{
-                opacity: this.animatedOpacityValue,
+                transform: [
+                  {
+                    rotate: this.animatedRotationValue.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: ['0deg', '-180deg'],
+                    }),
+                  },
+                ],
               }}
             >
-              {recordSegmentIndex === 0 ? recordGrindComponent : null}
-              {recordSegmentIndex === 1 ? recordTempComponent : null}
+              <Feather
+                name="chevron-down"
+                size={theme.iconSize}
+                color={theme.foreground}
+              />
             </Animated.View>
+          </TouchableOpacity>
+        </View>
+        {this.state.isOpen ? (
+          <View>
+            {recordSettings.length > 1 && (
+              <View style={{ backgroundColor: theme.grey2 }}>
+                <DraggableSegment
+                  options={recordSettings}
+                  onChange={index =>
+                    setTimeout(() => {
+                      this.setState({ recordSegmentIndex: index });
+                    }, 300)
+                  }
+                  onStartMove={this.onStartMove}
+                  onStopMove={this.onStopMove}
+                />
+                <Animated.View
+                  style={{
+                    opacity: this.animatedOpacityValue,
+                  }}
+                >
+                  {recordSegmentIndex === 0 ? recordGrindComponent : null}
+                  {recordSegmentIndex === 1 ? recordTempComponent : null}
+                </Animated.View>
+              </View>
+            )}
+            {recordSettings.length === 1
+              ? recordSettings.includes('grind')
+                ? recordGrindComponent
+                : recordTempComponent
+              : null}
           </View>
-        )}
-        {recordSettings.length === 1
-          ? recordSettings.includes('grind')
-            ? recordGrindComponent
-            : recordTempComponent
-          : null}
+        ) : null}
       </Card>
     );
   }

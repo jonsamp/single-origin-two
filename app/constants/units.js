@@ -1,11 +1,11 @@
 const tempUnits = {
   fahrenheit: {
-    title: 'Fahrenheit',
+    title: 'fahrenheit',
     id: 'fahrenheit',
     symbol: '°F',
   },
   celsius: {
-    title: 'Celsius',
+    title: 'celsius',
     id: 'celsius',
     symbol: '°C',
   },
@@ -13,17 +13,17 @@ const tempUnits = {
 
 const weightUnits = {
   grams: {
-    title: 'Grams',
+    title: 'grams',
     id: 'grams',
     symbol: 'g',
   },
   ounces: {
-    title: 'Ounces',
+    title: 'ounces',
     id: 'ounces',
     symbol: 'oz',
   },
   cups: {
-    title: 'Cups',
+    title: 'cups',
     id: 'cups',
     symbol: 'cups',
   },

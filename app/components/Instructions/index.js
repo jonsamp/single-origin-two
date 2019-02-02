@@ -31,6 +31,7 @@ function Instructions({ text, theme }) {
     <View
       style={{
         padding: 20,
+        flex: 1,
       }}
     >
       <Text
