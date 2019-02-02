@@ -87,14 +87,12 @@ class ScrollSelect extends Component {
       opacity: this.xOffset.interpolate({
         inputRange: ranges,
         outputRange: [0.25, 0.5, 1, 0.5, 0.25],
-        extrapolate: 'clamp',
       }),
       transform: [
         {
           rotate: this.xOffset.interpolate({
             inputRange: ranges,
             outputRange: ['30deg', '17deg', '0deg', '-17deg', '-30deg'],
-            extrapolate: 'clamp',
           }),
         },
         {
@@ -120,7 +118,6 @@ class ScrollSelect extends Component {
           scale: this.xOffset.interpolate({
             inputRange: ranges,
             outputRange: [1, 1.25, 1],
-            extrapolate: 'clamp',
           }),
         },
       ],

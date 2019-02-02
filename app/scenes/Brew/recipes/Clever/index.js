@@ -181,7 +181,7 @@ class Clever extends Component {
               coffeeWeight
             )} ${
               coffeeWeightUnit.unit.title
-            }** of coffee on **${grindUnit.getGrindSetting(0.75)}** with your ${
+            }** of coffee to **${grindUnit.getGrindSetting(0.75)}** with your ${
               grindUnit.grinder.shortTitle
             }.`}
           />
