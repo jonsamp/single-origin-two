@@ -1,36 +1,37 @@
 const tempUnits = {
   fahrenheit: {
-    title: 'Fahrenheit',
+    title: 'fahrenheit',
     id: 'fahrenheit',
-    unit: '°F',
-    min: 160,
-    max: 220,
+    symbol: '°F',
   },
   celsius: {
-    title: 'Celsius',
+    title: 'celsius',
     id: 'celsius',
-    unit: '°C',
-    min: 70,
-    max: 105,
+    symbol: '°C',
   },
 };
 
 const weightUnits = {
   grams: {
-    title: 'Grams',
+    title: 'grams',
     id: 'grams',
-    unit: 'g',
+    symbol: 'g',
   },
   ounces: {
-    title: 'Ounces',
+    title: 'ounces',
     id: 'ounces',
-    unit: 'oz',
+    symbol: 'oz',
   },
   cups: {
-    title: 'Cups',
+    title: 'cups',
     id: 'cups',
-    unit: 'cup',
+    symbol: 'cups',
   },
 };
 
-export { tempUnits, weightUnits };
+const units = {
+  ...weightUnits,
+  ...tempUnits,
+};
+
+export { tempUnits, weightUnits, units };

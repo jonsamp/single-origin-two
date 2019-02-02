@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { View, ScrollView } from 'react-native';
 import { startCase } from 'lodash';
 import withTheme from 'providers/theme';
+import withSettings from 'providers/settings';
 import playSound from 'helpers/playSound';
 import Header from 'components/Header';
 import Button from 'components/Button';
@@ -21,6 +22,7 @@ class Brew extends Component {
   static propTypes = {
     theme: PropTypes.object,
     recipe: PropTypes.string,
+    unitHelpers: PropTypes.object,
   };
 
   static defaultProps = {
@@ -42,10 +44,14 @@ class Brew extends Component {
 
   setRecipeState = ({ key, value }) => this.setState({ [key]: value });
 
-  formatTipText = ({ text, secondsLeft, volumePercent }) =>
-    text
-      .replace('**seconds**', secondsLeft)
-      .replace('**grams**', volumePercent * this.state.totalVolume);
+  formatTipText = ({ text, secondsLeft, volumePercent }) => {
+    const { getPreferredValue, unit } = this.props.unitHelpers.waterVolumeUnit;
+    const value = getPreferredValue(volumePercent * this.state.totalVolume);
+
+    return text
+      .replace('**seconds**', `${secondsLeft} seconds`)
+      .replace('**grams**', `${value} ${unit.title}`);
+  };
 
   handleTick = s => {
     const currentEvents = this.state.pourEvents[s];
@@ -146,4 +152,4 @@ class Brew extends Component {
   }
 }
 
-export default connect(mapStateToProps)(withTheme(Brew));
+export default connect(mapStateToProps)(withTheme(withSettings(Brew)));

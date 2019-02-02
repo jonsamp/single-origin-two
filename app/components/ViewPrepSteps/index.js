@@ -20,7 +20,7 @@ function ViewPrepSteps({ theme, navigation, recipe }) {
         onPress={() => console.log(recipe)}
         activeOpacity={0.7}
         style={{
-          backgroundColor: theme.beige,
+          backgroundColor: theme.grey1,
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',

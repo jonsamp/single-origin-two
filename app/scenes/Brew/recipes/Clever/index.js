@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import withSettings from 'providers/settings';
 import formatSeconds from 'helpers/formatSeconds';
 import Card from 'components/Card';
-import Question from 'components/Question';
-import ScrollSelect from 'components/ScrollSelect';
 import Instructions from 'components/Instructions';
 import Image from 'components/Image';
 import Warning from 'components/Warning';
 import PourTimer from 'components/PourTimer';
+import ScrollSelect from 'components/ScrollSelect';
+import Question from 'components/Question';
 import RecordBrewAttributes from 'components/RecordBrewAttributes';
 import Tip from 'components/Tip';
 import Title from 'components/Title';
@@ -30,6 +30,7 @@ class Clever extends Component {
     totalTime: PropTypes.number,
     temp: PropTypes.number,
     grind: PropTypes.number,
+    unitHelpers: PropTypes.object,
   };
 
   static defaultProps = {
@@ -45,6 +46,7 @@ class Clever extends Component {
     totalTime: 220,
     temp: 200,
     grind: 30,
+    unitHelpers: {},
   };
 
   componentDidMount() {
@@ -52,6 +54,10 @@ class Clever extends Component {
     setRecipeState({
       key: 'pourEvents',
       value: this.configurePourEvents(),
+    });
+    setRecipeState({
+      key: 'totalVolume',
+      value: 340,
     });
   }
 
@@ -62,7 +68,7 @@ class Clever extends Component {
     [this.withBloom(-10)]: [
       {
         type: 'tip',
-        text: 'In **seconds** seconds pour up to **grams** grams.',
+        text: 'In **seconds** pour up to **grams**.',
         volumePercent: 1,
         countDownTo: this.withBloom(0),
       },
@@ -79,7 +85,7 @@ class Clever extends Component {
     [this.withBloom(140)]: [
       {
         type: 'tip',
-        text: 'In **seconds** seconds, drain the clever.',
+        text: 'In **seconds**, drain the clever.',
         countDownTo: this.withBloom(150),
       },
     ],
@@ -93,7 +99,7 @@ class Clever extends Component {
     [this.withBloom(210)]: [
       {
         type: 'tip',
-        text: 'In **seconds** seconds the clever should be finished draining.',
+        text: 'In **seconds** the clever should be finished draining.',
         countDownTo: this.withBloom(220),
       },
     ],
@@ -123,8 +129,14 @@ class Clever extends Component {
       volumePercent,
       tip,
       warningText,
+      unitHelpers,
     } = this.props;
-
+    const {
+      brewedVolumeUnit,
+      coffeeWeightUnit,
+      waterVolumeUnit,
+      grindUnit,
+    } = unitHelpers;
     const coffeeWeight = Math.round(totalVolume / settings.ratio);
 
     return (
@@ -134,22 +146,44 @@ class Clever extends Component {
         <ViewPrepSteps recipe="clever" />
         <Card>
           <Question
-            title="How many grams would you like the brew to yield? "
-            description="One cup is typically 270 grams."
+            title={`How many ${
+              brewedVolumeUnit.unit.title
+            } would you like your brew to yield?`}
+            description={`One serving is typically ${brewedVolumeUnit.getPreferredValue(
+              270
+            )} ${brewedVolumeUnit.unit.title}.`}
           />
           <ScrollSelect
+            unitType="brewedVolumeUnit"
             min={225}
             max={450}
             defaultValue={totalVolume}
-            label="grams"
-            onChange={value => setRecipeState({ key: 'totalVolume', value })}
-            step={5}
+            onChange={value =>
+              setRecipeState({
+                key: 'totalVolume',
+                value,
+              })
+            }
+            step={1}
           />
         </Card>
-        <Card feature>
+        <Card>
+          <Instructions
+            text={`Heat **${waterVolumeUnit.getPreferredValue(totalVolume)} ${
+              waterVolumeUnit.unit.title
+            }** of water to nearly boiling.`}
+          />
+        </Card>
+        <Card>
           {/* TODO: if no grinder, show picture  */}
           <Instructions
-            text={`Grind **${coffeeWeight}** grams of coffee on **#30** with your Baratza Encore.`}
+            text={`Grind **${coffeeWeightUnit.getPreferredValue(
+              coffeeWeight
+            )} ${
+              coffeeWeightUnit.unit.title
+            }** of coffee to **${grindUnit.getGrindSetting(0.75)}** with your ${
+              grindUnit.grinder.shortTitle
+            }.`}
           />
         </Card>
         <RecordBrewAttributes
@@ -164,7 +198,7 @@ class Clever extends Component {
             defaultSource={cleverPourDefaultImage}
           />
           <Instructions
-            text={`Add the ground coffee to the clever, then follow the pour timer over the next **${formatSeconds(
+            text={`Add the ground coffee to the clever. Then follow the pour timer over the next **${formatSeconds(
               totalTime
             )}**.`}
           />

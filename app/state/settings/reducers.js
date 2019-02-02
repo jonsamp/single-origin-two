@@ -4,7 +4,6 @@ import * as actions from './actions';
 
 const initialState = {
   theme: 'light',
-  expertMode: false,
   restoreLastBrew: false,
   ratio: 15,
   bloomDuration: 30,
@@ -12,8 +11,10 @@ const initialState = {
   recordTemp: true,
   recordGrind: true,
   grinderType: 'generic',
-  tempUnit: 'fahrenheit',
-  weightUnit: 'grams',
+  temperatureUnit: 'fahrenheit',
+  brewedVolumeUnit: 'ounces',
+  coffeeWeightUnit: 'ounces',
+  waterVolumeUnit: 'ounces',
   soundsEnabled: true,
   shareTrackingData: true,
   recipes: Object.values(recipes).reduce(
