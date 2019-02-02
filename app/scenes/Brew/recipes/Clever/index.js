@@ -141,7 +141,7 @@ class Clever extends Component {
 
     return (
       <Fragment>
-        <HeaderImage source={headerImage} />
+        {/* <HeaderImage source={headerImage} /> */}
         <Title title="Clever" />
         <ViewPrepSteps recipe="clever" />
         <Card>

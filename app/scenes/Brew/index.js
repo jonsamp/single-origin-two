@@ -13,6 +13,7 @@ import tipSound from './sounds/tip.mp3';
 import endBrewSound from './sounds/end-brew.mp3';
 import warningSound from './sounds/warning.mp3';
 import Clever from './recipes/Clever';
+import { BrewProvider } from './context';
 
 const mapStateToProps = state => ({
   // prevGrindSetting: 15, // TODO: select from the previous most recent brew of this recipe
@@ -40,6 +41,7 @@ class Brew extends Component {
       text: undefined,
     },
     warningText: undefined,
+    containerWidth: 0,
   };
 
   setRecipeState = ({ key, value }) => this.setState({ [key]: value });
@@ -124,28 +126,46 @@ class Brew extends Component {
     const Recipe = this.renderRecipe(recipe);
 
     return (
-      <View style={{ flex: 1, backgroundColor: theme.background }}>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: theme.background,
+        }}
+      >
         <Header title={startCase(recipe)} />
         <ScrollView
           contentContainerStyle={{
             padding: 12,
+            // alignItems: 'center',
           }}
         >
-          <Recipe
-            setRecipeState={this.setRecipeState}
-            handleTick={this.handleTick}
-            totalVolume={this.state.totalVolume}
-            tip={this.state.tip}
-            warningText={this.state.warningText}
-            volumePercent={this.state.volumePercent}
-            totalTime={this.state.totalTime}
-            temp={this.state.temp}
-            grind={this.state.grind}
-          />
-          <Button
-            title="Finish"
-            customStyle={{ marginVertical: 16, paddingVertical: 20 }}
-          />
+          <View
+            style={{ maxWidth: 480 }}
+            onLayout={event =>
+              this.setState({
+                containerWidth: event.nativeEvent.layout.width,
+              })
+            }
+          >
+            <BrewProvider value={this.state.containerWidth}>
+              <Recipe
+                setRecipeState={this.setRecipeState}
+                handleTick={this.handleTick}
+                totalVolume={this.state.totalVolume}
+                tip={this.state.tip}
+                warningText={this.state.warningText}
+                volumePercent={this.state.volumePercent}
+                totalTime={this.state.totalTime}
+                temp={this.state.temp}
+                grind={this.state.grind}
+                containerWidth={this.state.containerWidth}
+              />
+              <Button
+                title="Finish"
+                customStyle={{ marginVertical: 16, paddingVertical: 20 }}
+              />
+            </BrewProvider>
+          </View>
         </ScrollView>
       </View>
     );

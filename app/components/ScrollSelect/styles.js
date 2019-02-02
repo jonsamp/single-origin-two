@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { width } from 'constants/layout';
 import type from 'constants/type';
 
 const styles = StyleSheet.create({
@@ -27,15 +26,6 @@ const styles = StyleSheet.create({
     fontSize: 32,
     lineHeight: 32,
     height: 32,
-  },
-  scrollPage: {
-    width: width / 3,
-  },
-  firstPage: {
-    marginLeft: width / 4.25 + 24,
-  },
-  lastPage: {
-    marginRight: width / 4.25 + 24,
   },
   label: {
     backgroundColor: 'white',
