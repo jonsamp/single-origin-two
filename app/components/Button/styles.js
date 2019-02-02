@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import type from 'constants/type';
 
 const defaultButton = {
   display: 'flex',
@@ -12,6 +13,7 @@ const defaultButton = {
 
 const styles = StyleSheet.create({
   text: {
+    ...type.callout,
     fontWeight: 'bold',
     letterSpacing: 0.65,
   },

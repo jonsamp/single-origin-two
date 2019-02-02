@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   timeTextContainer: {
-    width: 21,
+    width: 22,
     justifyContent: 'center',
     alignItems: 'center',
   },

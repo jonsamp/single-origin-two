@@ -97,7 +97,7 @@ class ScrollSelect extends Component {
         {
           translateY: this.xOffset.interpolate({
             inputRange: ranges,
-            outputRange: [60, 15, 0, 15, 60],
+            outputRange: [68, 17, 0, 17, 68],
           }),
         },
       ],
@@ -193,12 +193,7 @@ class ScrollSelect extends Component {
             </TouchableOpacity>
           ))}
         </Animated.ScrollView>
-        <View
-          style={[
-            styles.label,
-            { backgroundColor: theme.foreground, opacity: 0.75 },
-          ]}
-        >
+        <View style={[styles.label, { backgroundColor: theme.foreground }]}>
           <Text style={[styles.labelText, { color: theme.grey2 }]}>
             {unitHelper.unit.symbol.toUpperCase()}
           </Text>

@@ -183,7 +183,7 @@ class Clever extends Component {
               coffeeWeightUnit.unit.title
             }** of coffee to **${grindUnit.getGrindSetting(0.75)}** with your ${
               grindUnit.grinder.shortTitle
-            }.`}
+            }, then add the grounds to your clever.`}
           />
         </Card>
         <RecordBrewAttributes
@@ -198,9 +198,11 @@ class Clever extends Component {
             defaultSource={cleverPourDefaultImage}
           />
           <Instructions
-            text={`Add the ground coffee to the clever. Then follow the pour timer over the next **${formatSeconds(
+            text={`Follow the pour timer. Your brew will take **${formatSeconds(
               totalTime
-            )}**.`}
+            )}** and you'll pour a total of  **${waterVolumeUnit.getPreferredValue(
+              totalVolume
+            )} ${waterVolumeUnit.unit.title}** of water.`}
           />
           <PourTimer
             totalWaterWeight={totalVolume}
