@@ -55,7 +55,7 @@ class Brew extends Component {
           }}
         >
           <View
-            style={{ width: '100%', maxWidth: 560 }}
+            style={{ width: '100%', maxWidth: 480 }}
             onLayout={event =>
               this.setState({
                 containerWidth: event.nativeEvent.layout.width,

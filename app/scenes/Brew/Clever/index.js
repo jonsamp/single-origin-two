@@ -14,10 +14,8 @@ import Tip from 'components/Tip';
 import Title from 'components/Title';
 import { handleTick, getValueUnit } from 'scenes/Brew/helpers';
 import ViewPrepSteps from 'components/ViewPrepSteps';
-import HeaderImage from 'components/HeaderImage';
 import cleverPourImage from './images/clever-pour.gif';
 import cleverPourDefaultImage from './images/clever-pour-default.jpg';
-import headerImage from './images/header.jpg';
 
 class Clever extends Component {
   static propTypes = {
@@ -124,7 +122,6 @@ class Clever extends Component {
 
     return (
       <Fragment>
-        <HeaderImage source={headerImage} />
         <Title title="Clever" />
         <ViewPrepSteps recipe="clever" />
         <Card>
