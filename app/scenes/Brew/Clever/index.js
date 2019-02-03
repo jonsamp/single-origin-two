@@ -156,14 +156,19 @@ class Clever extends Component {
           />
         </Card>
         <Card>
-          {/* TODO: if no grinder, show picture  */}
+          {grindUnit.grinder.shortTitle === 'grinder' ? (
+            <Image
+              source={grindUnit.getGrindSetting(0.75).image}
+              style={{ resizeMode: 'cover' }}
+            />
+          ) : null}
           <Instructions
             text={`Grind **${getValueUnit(
               coffeeWeightUnit,
               coffeeWeight
-            )}** of coffee to **${grindUnit.getGrindSetting(
-              0.75
-            )}** with your ${
+            )}** of coffee to **${
+              grindUnit.getGrindSetting(0.75).title
+            }** with your ${
               grindUnit.grinder.shortTitle
             }, then add the grounds to your clever.`}
           />
