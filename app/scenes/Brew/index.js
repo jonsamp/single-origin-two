@@ -136,11 +136,11 @@ class Brew extends Component {
         <ScrollView
           contentContainerStyle={{
             padding: 12,
-            // alignItems: 'center',
+            alignItems: 'center',
           }}
         >
           <View
-            style={{ maxWidth: 480 }}
+            style={{ width: '100%', maxWidth: 560 }}
             onLayout={event =>
               this.setState({
                 containerWidth: event.nativeEvent.layout.width,
@@ -158,7 +158,6 @@ class Brew extends Component {
                 totalTime={this.state.totalTime}
                 temp={this.state.temp}
                 grind={this.state.grind}
-                containerWidth={this.state.containerWidth}
               />
               <Button
                 title="Finish"

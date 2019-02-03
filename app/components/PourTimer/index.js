@@ -203,7 +203,7 @@ class PourTimer extends Component {
                         ? 0.1
                         : 0.01
                   }
-                  interval={waterVolumeUnit.unit.symbol === 'g' ? 15 : 30}
+                  interval={waterVolumeUnit.unit.symbol === 'g' ? 30 : 60}
                   onFinish={this.onAnimateNumberFinish}
                 />
               </Animated.Text>

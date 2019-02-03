@@ -3,7 +3,7 @@ import recipes from 'constants/recipes';
 import * as actions from './actions';
 
 const initialState = {
-  theme: 'light',
+  theme: 'dark',
   restoreLastBrew: false,
   ratio: 15,
   bloomDuration: 30,

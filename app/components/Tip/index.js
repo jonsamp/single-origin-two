@@ -28,14 +28,14 @@ class Tip extends Component {
     return (
       <View
         style={{
-          backgroundColor: theme.beige,
+          backgroundColor: theme.grey1,
         }}
       >
         {isVisible && (
           <Text
             style={{
               ...type.body,
-              color: defaultTheme.black,
+              color: theme.foreground,
               padding: 20,
             }}
           >

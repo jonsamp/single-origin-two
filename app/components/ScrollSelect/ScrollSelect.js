@@ -57,8 +57,6 @@ class ScrollSelect extends Component {
     }
   };
 
-  SCREEN_WIDTH = this.props.context / 3;
-
   encodeValues = () => {
     const { unitType, min, max, unitHelpers, defaultValue } = this.props;
     const unitHelper = unitHelpers[unitType];
@@ -74,40 +72,25 @@ class ScrollSelect extends Component {
     return unitHelpers[unitType].getStandardValue(value);
   };
 
+  getRanges = index => [
+    index * this.SCREEN_WIDTH - this.SCREEN_WIDTH * 2,
+    index * this.SCREEN_WIDTH,
+    index * this.SCREEN_WIDTH + this.SCREEN_WIDTH * 2,
+  ];
+
   transitionAnimation = index => {
-    const ranges = [
-      index * this.SCREEN_WIDTH - this.SCREEN_WIDTH * 2,
-      index * this.SCREEN_WIDTH,
-      index * this.SCREEN_WIDTH + this.SCREEN_WIDTH * 2,
-    ];
+    const ranges = this.getRanges(index);
     return {
       opacity: this.xOffset.interpolate({
         inputRange: ranges,
         outputRange: [0, 1, 0],
       }),
-      transform: [
-        {
-          rotate: this.xOffset.interpolate({
-            inputRange: ranges,
-            outputRange: ['90deg', '0deg', '-90deg'],
-          }),
-        },
-        {
-          translateX: this.xOffset.interpolate({
-            inputRange: ranges,
-            outputRange: [this.SCREEN_WIDTH, 0, this.SCREEN_WIDTH * -1],
-          }),
-        },
-      ],
     };
   };
 
   textAnimation = index => {
-    const ranges = [
-      (index - 1) * this.SCREEN_WIDTH,
-      index * this.SCREEN_WIDTH,
-      (index + 1) * this.SCREEN_WIDTH,
-    ];
+    const ranges = this.getRanges(index);
+    const translation = this.SCREEN_WIDTH * 0.75;
 
     return {
       transform: [
@@ -117,11 +100,24 @@ class ScrollSelect extends Component {
             outputRange: [1, 1.25, 1],
           }),
         },
+        {
+          rotate: this.xOffset.interpolate({
+            inputRange: ranges,
+            outputRange: ['90deg', '0deg', '-90deg'],
+          }),
+        },
+        {
+          translateX: this.xOffset.interpolate({
+            inputRange: ranges,
+            outputRange: [translation, 0, translation * -1],
+          }),
+        },
       ],
     };
   };
 
   xOffset = new Animated.Value(0);
+  SCREEN_WIDTH = this.props.context / 3;
 
   render() {
     const { theme, onChange, step, unitType, unitHelpers } = this.props;
@@ -158,7 +154,10 @@ class ScrollSelect extends Component {
           {selectionRange.map((item, index) => (
             <TouchableOpacity
               style={[
-                { width: this.SCREEN_WIDTH },
+                {
+                  width: this.SCREEN_WIDTH,
+                  alignItems: 'center',
+                },
                 index === 0 ? { marginLeft: this.SCREEN_WIDTH } : null,
                 index === selectionRange.length - 1
                   ? { marginRight: this.SCREEN_WIDTH }

@@ -9,23 +9,16 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     paddingVertical: 40,
+    alignItems: 'center',
   },
   selection: {
-    marginHorizontal: 16,
     alignItems: 'center',
-    padding: 12,
+    paddingVertical: 12,
   },
   selectionText: {
     ...type.largeTitle,
     fontSize: 32,
     lineHeight: 32,
-    height: 32,
-  },
-  selectionTextLargeNumber: {
-    ...type.largeTitle,
-    fontSize: 32,
-    lineHeight: 32,
-    height: 32,
   },
   label: {
     backgroundColor: 'white',

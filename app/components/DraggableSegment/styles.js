@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   toggleContainer: {
-    borderRadius: 8,
+    borderRadius: 4,
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
