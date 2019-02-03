@@ -7,10 +7,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 0,
     alignItems: 'center',
   },
-  scrollContainer: {
-    paddingVertical: 40,
-    alignItems: 'center',
-  },
   selection: {
     alignItems: 'center',
     paddingVertical: 12,

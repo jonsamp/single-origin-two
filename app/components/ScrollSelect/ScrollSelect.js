@@ -141,7 +141,7 @@ class ScrollSelect extends Component {
             onChange(this.decodeValue(Number(selectionRange[selectionNumber])));
           }}
           horizontal
-          contentContainerStyle={styles.scrollContainer}
+          contentContainerStyle={{ paddingVertical: this.SCREEN_WIDTH / 3 }}
           showsHorizontalScrollIndicator={false}
           decelerationRate="fast"
           snapToInterval={this.SCREEN_WIDTH}
