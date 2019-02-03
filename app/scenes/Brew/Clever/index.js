@@ -12,6 +12,7 @@ import Question from 'components/Question';
 import RecordBrewAttributes from 'components/RecordBrewAttributes';
 import Tip from 'components/Tip';
 import Title from 'components/Title';
+import { handleTick, getValueUnit } from 'scenes/Brew/helpers';
 import ViewPrepSteps from 'components/ViewPrepSteps';
 import HeaderImage from 'components/HeaderImage';
 import cleverPourImage from './images/clever-pour.gif';
@@ -21,107 +22,90 @@ import headerImage from './images/header.jpg';
 class Clever extends Component {
   static propTypes = {
     settings: PropTypes.object,
-    setRecipeState: PropTypes.func,
-    handleTick: PropTypes.func,
-    totalVolume: PropTypes.number,
-    tip: PropTypes.object,
-    warningText: PropTypes.string,
-    volumePercent: PropTypes.number,
-    totalTime: PropTypes.number,
-    temp: PropTypes.number,
-    grind: PropTypes.number,
     unitHelpers: PropTypes.object,
   };
 
   static defaultProps = {
     settings: {},
-    setRecipeState: () => {},
-    handleTick: () => {},
-    totalVolume: 340,
-    tip: {
-      text: null,
-    },
-    warningText: null,
-    volumePercent: 0,
-    totalTime: 220,
-    temp: 200,
-    grind: 30,
     unitHelpers: {},
   };
 
-  componentDidMount() {
-    const { setRecipeState } = this.props;
-    setRecipeState({
-      key: 'pourEvents',
-      value: this.configurePourEvents(),
-    });
-    setRecipeState({
-      key: 'totalVolume',
-      value: 340,
-    });
-  }
-
   withBloom = duration => this.props.settings.bloomDuration + duration;
 
-  configurePourEvents = () => ({
-    1: [{ type: 'increaseWaterLevel', volumePercent: 0.1549 }],
-    [this.withBloom(-10)]: [
-      {
-        type: 'tip',
-        text: 'In **seconds** pour up to **grams**.',
-        volumePercent: 1,
-        countDownTo: this.withBloom(0),
-      },
-    ],
-    [this.withBloom(0)]: [{ type: 'increaseWaterLevel', volumePercent: 1 }],
-    [this.withBloom(30)]: [
-      {
-        type: 'tip',
-        text:
-          'Use the back of a spoon to break the crust on top of the clever.',
-        countDownTo: this.withBloom(40),
-      },
-    ],
-    [this.withBloom(140)]: [
-      {
-        type: 'tip',
-        text: 'In **seconds**, drain the clever.',
-        countDownTo: this.withBloom(150),
-      },
-    ],
-    [this.withBloom(150)]: [
-      {
-        type: 'tip',
-        text: 'Drain the clever.',
-        countDownTo: this.withBloom(160),
-      },
-    ],
-    [this.withBloom(210)]: [
-      {
-        type: 'tip',
-        text: 'In **seconds** the clever should be finished draining.',
-        countDownTo: this.withBloom(220),
-      },
-    ],
-    [this.withBloom(220)]: [
-      {
-        type: 'finished',
-      },
-    ],
-    [this.withBloom(240)]: [
-      {
-        type: 'warning',
-        text:
-          'If your clever is still draining, grind your beans on a coarser grind next time.',
-      },
-    ],
-  });
+  state = {
+    pourEvents: {
+      1: [{ type: 'increaseWaterLevel', volumePercent: 0.1549 }],
+      [this.withBloom(-10)]: [
+        {
+          type: 'tip',
+          text: 'In **seconds** pour up to **grams**.',
+          volumePercent: 1,
+          countDownTo: this.withBloom(0),
+        },
+      ],
+      [this.withBloom(0)]: [{ type: 'increaseWaterLevel', volumePercent: 1 }],
+      [this.withBloom(30)]: [
+        {
+          type: 'tip',
+          text:
+            'Use the back of a spoon to break the crust on top of the clever.',
+          countDownTo: this.withBloom(40),
+        },
+      ],
+      [this.withBloom(140)]: [
+        {
+          type: 'tip',
+          text: 'In **seconds**, drain the clever.',
+          countDownTo: this.withBloom(150),
+        },
+      ],
+      [this.withBloom(150)]: [
+        {
+          type: 'tip',
+          text: 'Drain the clever.',
+          countDownTo: this.withBloom(160),
+        },
+      ],
+      [this.withBloom(210)]: [
+        {
+          type: 'tip',
+          text: 'In **seconds** the clever should be finished draining.',
+          countDownTo: this.withBloom(220),
+        },
+      ],
+      [this.withBloom(220)]: [
+        {
+          type: 'finished',
+        },
+      ],
+    },
+    volumePercent: 0,
+    totalVolume: 340,
+    totalTime: 220,
+    grind: 30,
+    temp: 200,
+    tip: {
+      text: undefined,
+    },
+    warningText: undefined,
+  };
+
+  setRecipeState = ({ key, value }) => this.setState({ [key]: value });
+
+  onTick = second => {
+    handleTick({
+      pourEvents: this.state.pourEvents,
+      tip: this.state.tip,
+      totalVolume: this.state.totalVolume,
+      waterVolumeUnit: this.props.unitHelpers.waterVolumeUnit,
+      setState: this.setRecipeState,
+      second,
+    });
+  };
 
   render() {
+    const { settings, unitHelpers } = this.props;
     const {
-      settings,
-      setRecipeState,
-      handleTick,
       totalVolume,
       totalTime,
       grind,
@@ -129,8 +113,7 @@ class Clever extends Component {
       volumePercent,
       tip,
       warningText,
-      unitHelpers,
-    } = this.props;
+    } = this.state;
     const {
       brewedVolumeUnit,
       coffeeWeightUnit,
@@ -141,7 +124,7 @@ class Clever extends Component {
 
     return (
       <Fragment>
-        {/* <HeaderImage source={headerImage} /> */}
+        <HeaderImage source={headerImage} />
         <Title title="Clever" />
         <ViewPrepSteps recipe="clever" />
         <Card>
@@ -149,9 +132,10 @@ class Clever extends Component {
             title={`How many ${
               brewedVolumeUnit.unit.title
             } would you like your brew to yield?`}
-            description={`One serving is typically ${brewedVolumeUnit.getPreferredValue(
+            description={`One serving is typically ${getValueUnit(
+              brewedVolumeUnit,
               270
-            )} ${brewedVolumeUnit.unit.title}.`}
+            )}.`}
           />
           <ScrollSelect
             unitType="brewedVolumeUnit"
@@ -159,9 +143,8 @@ class Clever extends Component {
             max={450}
             defaultValue={totalVolume}
             onChange={value =>
-              setRecipeState({
-                key: 'totalVolume',
-                value,
+              this.setState({
+                totalVolume: value,
               })
             }
             step={1}
@@ -169,25 +152,27 @@ class Clever extends Component {
         </Card>
         <Card>
           <Instructions
-            text={`Heat **${waterVolumeUnit.getPreferredValue(totalVolume)} ${
-              waterVolumeUnit.unit.title
-            }** of water to nearly boiling.`}
+            text={`Heat **${getValueUnit(
+              waterVolumeUnit,
+              totalVolume
+            )}** of water to nearly boiling.`}
           />
         </Card>
         <Card>
           {/* TODO: if no grinder, show picture  */}
           <Instructions
-            text={`Grind **${coffeeWeightUnit.getPreferredValue(
+            text={`Grind **${getValueUnit(
+              coffeeWeightUnit,
               coffeeWeight
-            )} ${
-              coffeeWeightUnit.unit.title
-            }** of coffee to **${grindUnit.getGrindSetting(0.75)}** with your ${
+            )}** of coffee to **${grindUnit.getGrindSetting(
+              0.75
+            )}** with your ${
               grindUnit.grinder.shortTitle
             }, then add the grounds to your clever.`}
           />
         </Card>
         <RecordBrewAttributes
-          setRecipeState={setRecipeState}
+          setRecipeState={this.setRecipeState}
           grind={grind}
           temp={temp}
         />
@@ -200,14 +185,15 @@ class Clever extends Component {
           <Instructions
             text={`Follow the pour timer. Your brew will take **${formatSeconds(
               totalTime
-            )}** and you'll pour a total of  **${waterVolumeUnit.getPreferredValue(
+            )}** and you'll pour a total of  **${getValueUnit(
+              waterVolumeUnit,
               totalVolume
-            )} ${waterVolumeUnit.unit.title}** of water.`}
+            )}** of water.`}
           />
           <PourTimer
             totalWaterWeight={totalVolume}
             waterPercent={volumePercent}
-            onTick={handleTick}
+            onTick={this.onTick}
           />
           <Tip text={tip.text} isVisible={!!tip.text} />
           <Warning text={warningText} isVisible={!!warningText} />

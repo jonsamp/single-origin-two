@@ -5,14 +5,9 @@ import { View, ScrollView } from 'react-native';
 import { startCase } from 'lodash';
 import withTheme from 'providers/theme';
 import withSettings from 'providers/settings';
-import playSound from 'helpers/playSound';
 import Header from 'components/Header';
 import Button from 'components/Button';
-import addWaterSound from './sounds/add-water.mp3';
-import tipSound from './sounds/tip.mp3';
-import endBrewSound from './sounds/end-brew.mp3';
-import warningSound from './sounds/warning.mp3';
-import Clever from './recipes/Clever';
+import Clever from './Clever';
 import { BrewProvider } from './context';
 
 const mapStateToProps = state => ({
@@ -23,7 +18,6 @@ class Brew extends Component {
   static propTypes = {
     theme: PropTypes.object,
     recipe: PropTypes.string,
-    unitHelpers: PropTypes.object,
   };
 
   static defaultProps = {
@@ -31,86 +25,7 @@ class Brew extends Component {
   };
 
   state = {
-    pourEvents: [],
-    volumePercent: undefined,
-    totalVolume: undefined,
-    totalTime: undefined,
-    grind: undefined,
-    temp: undefined,
-    tip: {
-      text: undefined,
-    },
-    warningText: undefined,
     containerWidth: 0,
-  };
-
-  setRecipeState = ({ key, value }) => this.setState({ [key]: value });
-
-  formatTipText = ({ text, secondsLeft, volumePercent }) => {
-    const { getPreferredValue, unit } = this.props.unitHelpers.waterVolumeUnit;
-    const value = getPreferredValue(volumePercent * this.state.totalVolume);
-
-    return text
-      .replace('**seconds**', `${secondsLeft} seconds`)
-      .replace('**grams**', `${value} ${unit.title}`);
-  };
-
-  handleTick = s => {
-    const currentEvents = this.state.pourEvents[s];
-
-    if (this.state.tip.text) {
-      if (this.state.tip.countDownTo === s) {
-        this.setState({ tip: { text: null } });
-      } else {
-        this.setState(prevState => {
-          const { tip } = prevState;
-          return {
-            tip: {
-              ...tip,
-              text: this.formatTipText({
-                text: tip.template,
-                secondsLeft: tip.countDownTo - s,
-                volumePercent: tip.volumePercent,
-              }),
-            },
-          };
-        });
-      }
-    }
-
-    if (!currentEvents) return;
-
-    currentEvents.forEach(event => {
-      switch (event.type) {
-        case 'increaseWaterLevel':
-          playSound({ sound: addWaterSound });
-          this.setState({ volumePercent: event.volumePercent });
-          break;
-        case 'tip':
-          playSound({ sound: tipSound });
-          this.setState({
-            tip: {
-              template: event.text,
-              text: this.formatTipText({
-                text: event.text,
-                secondsLeft: event.countDownTo - s,
-                volumePercent: event.volumePercent,
-              }),
-              volumePercent: event.volumePercent,
-              countDownTo: event.countDownTo,
-            },
-          });
-          break;
-        case 'finished':
-          playSound({ sound: endBrewSound });
-          break;
-        case 'warning':
-          playSound({ sound: warningSound });
-          this.setState({ warningText: event.text });
-          break;
-        default:
-      }
-    });
   };
 
   renderRecipe = recipe => {
@@ -148,17 +63,7 @@ class Brew extends Component {
             }
           >
             <BrewProvider value={this.state.containerWidth}>
-              <Recipe
-                setRecipeState={this.setRecipeState}
-                handleTick={this.handleTick}
-                totalVolume={this.state.totalVolume}
-                tip={this.state.tip}
-                warningText={this.state.warningText}
-                volumePercent={this.state.volumePercent}
-                totalTime={this.state.totalTime}
-                temp={this.state.temp}
-                grind={this.state.grind}
-              />
+              <Recipe />
               <Button
                 title="Finish"
                 customStyle={{ marginVertical: 16, paddingVertical: 20 }}

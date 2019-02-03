@@ -43,6 +43,7 @@
     "import/extensions": "off",
     "react/forbid-prop-types": "off",
     "react/prefer-stateless-function": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "react/sort-comp": "off"
   }
 }
