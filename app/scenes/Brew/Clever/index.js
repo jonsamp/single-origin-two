@@ -153,15 +153,16 @@ class Clever extends Component {
               waterVolumeUnit,
               totalVolume
             )}** of water to nearly boiling.`}
+            icon="WaterIcon"
           />
         </Card>
         <Card>
-          {grindUnit.grinder.shortTitle === 'grinder' ? (
+          {/* {grindUnit.grinder.shortTitle === 'grinder' ? (
             <Image
               source={grindUnit.getGrindSetting(0.75).image}
               style={{ resizeMode: 'cover' }}
             />
-          ) : null}
+          ) : null} */}
           <Instructions
             text={`Grind **${getValueUnit(
               coffeeWeightUnit,
@@ -171,6 +172,7 @@ class Clever extends Component {
             }** with your ${
               grindUnit.grinder.shortTitle
             }, then add the grounds to your clever.`}
+            icon="GrindIcon"
           />
         </Card>
         <RecordBrewAttributes

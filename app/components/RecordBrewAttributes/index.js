@@ -126,12 +126,12 @@ class RecordBrewAttributes extends Component {
             alignItems: 'center',
           }}
         >
-          <Instructions text={instructions} />
+          <Instructions text={instructions} icon="RecordIcon" />
           <TouchableOpacity
             onPress={this.toggleIsOpen}
             style={{
               padding: 8,
-              backgroundColor: theme.grey2,
+              backgroundColor: theme.foreground,
               borderRadius: 2,
               marginRight: 20,
             }}
@@ -152,7 +152,7 @@ class RecordBrewAttributes extends Component {
               <Feather
                 name="chevron-down"
                 size={theme.iconSize}
-                color={theme.foreground}
+                color={theme.background}
               />
             </Animated.View>
           </TouchableOpacity>
