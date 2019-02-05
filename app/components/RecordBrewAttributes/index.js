@@ -25,6 +25,7 @@ class RecordBrewAttributes extends Component {
     setRecipeState: PropTypes.func,
     temperatureUnit: PropTypes.object,
     grindUnit: PropTypes.object,
+    isDarkTheme: PropTypes.bool,
   };
 
   state = {
@@ -74,7 +75,13 @@ class RecordBrewAttributes extends Component {
   animatedRotationValue = new Animated.Value(0);
 
   render() {
-    const { settings, theme, temperatureUnit, grindUnit } = this.props;
+    const {
+      settings,
+      theme,
+      temperatureUnit,
+      grindUnit,
+      isDarkTheme,
+    } = this.props;
     const { recordSegmentIndex } = this.state;
 
     if (!settings.recordGrind && !settings.recordTemp) {
@@ -116,8 +123,6 @@ class RecordBrewAttributes extends Component {
       />
     );
 
-    console.log(this.props.temp);
-
     const recordTempComponent = (
       <ScrollSelect
         unitType="temperatureUnit"
@@ -149,8 +154,12 @@ class RecordBrewAttributes extends Component {
             onPress={this.toggleIsOpen}
             style={{
               padding: 8,
-              backgroundColor: theme.foreground,
-              borderRadius: 2,
+              shadowColor: 'rgba(0,0,0,0.2)',
+              shadowRadius: 4,
+              shadowOffset: { height: 2 },
+              shadowOpacity: 1,
+              backgroundColor: isDarkTheme ? theme.grey2 : theme.background,
+              borderRadius: 4,
               marginRight: 20,
             }}
             activeOpacity={1}
@@ -170,7 +179,7 @@ class RecordBrewAttributes extends Component {
               <Feather
                 name="chevron-down"
                 size={theme.iconSize}
-                color={theme.background}
+                color={theme.foreground}
               />
             </Animated.View>
           </TouchableOpacity>
