@@ -48,7 +48,7 @@ class Brew extends Component {
             }
           >
             <BrewProvider value={this.state.containerWidth}>
-              <Recipe id="Clever" />
+              <Recipe id="KalitaWave" />
               <Button
                 title="Finish"
                 customStyle={{ marginVertical: 16, paddingVertical: 20 }}
