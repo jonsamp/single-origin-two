@@ -89,3 +89,6 @@ export const handleTick = ({
 
 export const getValueUnit = (unitType, value) =>
   `${unitType.getPreferredValue(value)} ${unitType.unit.title}`;
+
+export const withBloomFn = ({ settings }) => duration =>
+  settings.bloomDuration + duration;

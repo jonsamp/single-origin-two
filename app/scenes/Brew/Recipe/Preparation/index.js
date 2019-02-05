@@ -13,7 +13,7 @@ const propTypes = {
   recipe: PropTypes.string,
 };
 
-function ViewPrepSteps({ theme, navigation, recipe }) {
+function Preparation({ theme, navigation, recipe }) {
   return (
     <Card>
       <TouchableOpacity
@@ -45,6 +45,6 @@ function ViewPrepSteps({ theme, navigation, recipe }) {
   );
 }
 
-ViewPrepSteps.propTypes = propTypes;
+Preparation.propTypes = propTypes;
 
-export default withNavigation(withTheme(ViewPrepSteps));
+export default withNavigation(withTheme(Preparation));

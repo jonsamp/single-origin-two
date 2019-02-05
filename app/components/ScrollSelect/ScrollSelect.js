@@ -103,7 +103,7 @@ class ScrollSelect extends Component {
         {
           rotate: this.xOffset.interpolate({
             inputRange: ranges,
-            outputRange: ['90deg', '0deg', '-90deg'],
+            outputRange: ['80deg', '0deg', '-80deg'],
           }),
         },
         {

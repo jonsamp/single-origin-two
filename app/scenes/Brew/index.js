@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { View, ScrollView } from 'react-native';
 import { startCase } from 'lodash';
 import withTheme from 'providers/theme';
 import withSettings from 'providers/settings';
 import Header from 'components/Header';
 import Button from 'components/Button';
-import Clever from './Clever';
-import KalitaWave from './KalitaWave';
 import { BrewProvider } from './context';
-
-const mapStateToProps = state => ({
-  // prevGrindSetting: 15, // TODO: select from the previous most recent brew of this recipe
-});
+import Recipe from './Recipe';
 
 class Brew extends Component {
   static propTypes = {
@@ -21,26 +15,15 @@ class Brew extends Component {
     recipe: PropTypes.string,
   };
 
-  static defaultProps = {
-    recipe: 'KalitaWave', // TODO: this will come from navigation state params eventually
-  };
-
   state = {
     containerWidth: 0,
   };
 
-  renderRecipe = recipe => {
-    const recipes = {
-      Clever,
-      KalitaWave,
-    };
-
-    return recipes[recipe];
-  };
+  // TODO:
+  // control on finish and navigate to summary when ready
 
   render() {
     const { theme, recipe } = this.props;
-    const Recipe = this.renderRecipe(recipe);
 
     return (
       <View
@@ -65,7 +48,7 @@ class Brew extends Component {
             }
           >
             <BrewProvider value={this.state.containerWidth}>
-              <Recipe />
+              <Recipe id="Clever" />
               <Button
                 title="Finish"
                 customStyle={{ marginVertical: 16, paddingVertical: 20 }}
@@ -78,4 +61,4 @@ class Brew extends Component {
   }
 }
 
-export default connect(mapStateToProps)(withTheme(withSettings(Brew)));
+export default withTheme(withSettings(Brew));
