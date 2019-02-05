@@ -8,6 +8,7 @@ import withSettings from 'providers/settings';
 import Header from 'components/Header';
 import Button from 'components/Button';
 import Clever from './Clever';
+import KalitaWave from './KalitaWave';
 import { BrewProvider } from './context';
 
 const mapStateToProps = state => ({
@@ -21,7 +22,7 @@ class Brew extends Component {
   };
 
   static defaultProps = {
-    recipe: 'clever', // TODO: this will come from navigation state params eventually
+    recipe: 'KalitaWave', // TODO: this will come from navigation state params eventually
   };
 
   state = {
@@ -30,7 +31,8 @@ class Brew extends Component {
 
   renderRecipe = recipe => {
     const recipes = {
-      clever: Clever,
+      Clever,
+      KalitaWave,
     };
 
     return recipes[recipe];

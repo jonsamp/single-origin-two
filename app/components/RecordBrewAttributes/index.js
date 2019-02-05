@@ -96,8 +96,6 @@ class RecordBrewAttributes extends Component {
       instructions = 'Record your grind setting and water temperature.';
     }
 
-    console.log({ grind: this.props.grind });
-
     const recordGrindComponent = (
       <ScrollSelect
         unitType="grindUnit"
