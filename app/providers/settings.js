@@ -30,7 +30,7 @@ function withSettings(WrappedComponent) {
       getPreferredValueBasedOnPercent: percent => {
         const grinder = grinders[this.props.settings.grinderType];
         const range = grinder.max - grinder.min;
-        return Math.round(range * percent) + grinder.min;
+        return Math.round(range * percent);
       },
       getStandardValue: v => v,
       getGrindSetting: percent => {
@@ -43,7 +43,7 @@ function withSettings(WrappedComponent) {
         const grinder = grinders[grinderType];
         const range = grinder.max - grinder.min;
         return {
-          title: `#${Math.round(range * percent) + grinder.min}`,
+          title: `#${Math.round(range * percent)}`,
         };
       },
       grinder: grinders[this.props.settings.grinderType],
@@ -67,7 +67,7 @@ function withSettings(WrappedComponent) {
       },
       celsius: {
         preferredConversion: value => Math.round((value - 32) / 1.8),
-        standardConversion: value => Math.round((value + 32) * 1.8),
+        standardConversion: value => Math.round(value * 1.8 + 32),
       },
       ounces: {
         preferredConversion: value => (value * 0.035274).toFixed(1),

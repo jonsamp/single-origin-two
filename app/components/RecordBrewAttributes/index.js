@@ -116,17 +116,19 @@ class RecordBrewAttributes extends Component {
       />
     );
 
+    console.log(this.props.temp);
+
     const recordTempComponent = (
       <ScrollSelect
         unitType="temperatureUnit"
-        min={temperatureUnit.getPreferredValue(160)}
-        max={temperatureUnit.getPreferredValue(210)}
-        defaultValue={temperatureUnit.getPreferredValue(this.props.temp)}
+        min={160}
+        max={212}
+        defaultValue={this.props.temp}
         label={temperatureUnit.unit.symbol}
         onChange={value =>
           this.props.setRecipeState({
             key: 'temp',
-            value: temperatureUnit.getStandardValue(value),
+            value,
           })
         }
         step={1}

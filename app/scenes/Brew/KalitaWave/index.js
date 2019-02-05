@@ -166,7 +166,9 @@ class KalitaWave extends Component {
             text={`Heat **${getValueUnit(
               waterVolumeUnit,
               totalVolume
-            )}** of water to nearly boiling.`}
+            )}** of water to **${temperatureUnit.getPreferredValue(200)}${
+              temperatureUnit.unit.symbol
+            }** (nearly boiling).`}
             icon="WaterIcon"
           />
         </Card>
