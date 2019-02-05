@@ -30,9 +30,9 @@ class ScrollSelect extends Component {
 
   componentDidMount() {
     const { min, max, step, defaultValue } = this.encodeValues();
-    if (!defaultValue) return;
+    if (defaultValue === undefined || defaultValue === null) return;
 
-    const selectionRange = range(min, max, step);
+    const selectionRange = range(min, max + 1, step);
     const defaultValueIndex = selectionRange.indexOf(defaultValue);
     const itemPosition = defaultValueIndex * this.SCREEN_WIDTH;
 

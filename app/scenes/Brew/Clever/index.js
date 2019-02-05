@@ -80,7 +80,8 @@ class Clever extends Component {
     volumePercent: 0,
     totalVolume: 340,
     totalTime: 220,
-    grind: 30,
+    defaultGrind: 0.75,
+    grind: null,
     temp: 200,
     tip: {
       text: undefined,
@@ -106,8 +107,9 @@ class Clever extends Component {
     const {
       totalVolume,
       totalTime,
-      grind,
       temp,
+      defaultGrind,
+      grind,
       volumePercent,
       tip,
       warningText,
@@ -117,6 +119,7 @@ class Clever extends Component {
       coffeeWeightUnit,
       waterVolumeUnit,
       grindUnit,
+      temperatureUnit,
     } = unitHelpers;
     const coffeeWeight = Math.round(totalVolume / settings.ratio);
 
@@ -168,7 +171,7 @@ class Clever extends Component {
               coffeeWeightUnit,
               coffeeWeight
             )}** of coffee to **${
-              grindUnit.getGrindSetting(0.75).title
+              grindUnit.getGrindSetting(defaultGrind).title
             }** with your ${
               grindUnit.grinder.shortTitle
             }, then add the grounds to your clever.`}
@@ -177,8 +180,11 @@ class Clever extends Component {
         </Card>
         <RecordBrewAttributes
           setRecipeState={this.setRecipeState}
+          defaultGrind={defaultGrind}
           grind={grind}
           temp={temp}
+          grindUnit={grindUnit}
+          temperatureUnit={temperatureUnit}
         />
         <Title title="Brew" />
         <Card>

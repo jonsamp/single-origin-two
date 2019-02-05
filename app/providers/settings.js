@@ -27,6 +27,11 @@ function withSettings(WrappedComponent) {
 
     getGrindHelper = () => ({
       getPreferredValue: v => v,
+      getPreferredValueBasedOnPercent: percent => {
+        const grinder = grinders[this.props.settings.grinderType];
+        const range = grinder.max - grinder.min;
+        return Math.round(range * percent) + grinder.min;
+      },
       getStandardValue: v => v,
       getGrindSetting: percent => {
         const { grinderType } = this.props.settings;
@@ -37,7 +42,9 @@ function withSettings(WrappedComponent) {
 
         const grinder = grinders[grinderType];
         const range = grinder.max - grinder.min;
-        return `#${Math.round(range * percent) + grinder.min}`;
+        return {
+          title: `#${Math.round(range * percent) + grinder.min}`,
+        };
       },
       grinder: grinders[this.props.settings.grinderType],
       unit: { symbol: 'grind' },

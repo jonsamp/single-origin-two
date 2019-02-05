@@ -20,8 +20,11 @@ class RecordBrewAttributes extends Component {
     theme: PropTypes.object,
     settings: PropTypes.object,
     grind: PropTypes.number,
+    defaultGrind: PropTypes.number,
     temp: PropTypes.number,
     setRecipeState: PropTypes.func,
+    temperatureUnit: PropTypes.object,
+    grindUnit: PropTypes.object,
   };
 
   state = {
@@ -71,7 +74,7 @@ class RecordBrewAttributes extends Component {
   animatedRotationValue = new Animated.Value(0);
 
   render() {
-    const { settings, theme } = this.props;
+    const { settings, theme, temperatureUnit, grindUnit } = this.props;
     const { recordSegmentIndex } = this.state;
 
     if (!settings.recordGrind && !settings.recordTemp) {
@@ -93,14 +96,24 @@ class RecordBrewAttributes extends Component {
       instructions = 'Record your grind setting and water temperature.';
     }
 
+    console.log({ grind: this.props.grind });
+
     const recordGrindComponent = (
       <ScrollSelect
         unitType="grindUnit"
-        min={0}
-        max={40}
-        defaultValue={this.props.grind}
+        min={grindUnit.grinder.min}
+        max={grindUnit.grinder.max}
+        defaultValue={
+          this.props.grind ||
+          grindUnit.getPreferredValueBasedOnPercent(this.props.defaultGrind)
+        }
         label="grind"
-        onChange={value => this.props.setRecipeState({ key: 'grind', value })}
+        onChange={value =>
+          this.props.setRecipeState({
+            key: 'grind',
+            value,
+          })
+        }
         step={1}
       />
     );
@@ -108,11 +121,16 @@ class RecordBrewAttributes extends Component {
     const recordTempComponent = (
       <ScrollSelect
         unitType="temperatureUnit"
-        min={160}
-        max={210}
-        defaultValue={this.props.temp}
-        label="Temp"
-        onChange={value => this.props.setRecipeState({ key: 'temp', value })}
+        min={temperatureUnit.getPreferredValue(160)}
+        max={temperatureUnit.getPreferredValue(210)}
+        defaultValue={temperatureUnit.getPreferredValue(this.props.temp)}
+        label={temperatureUnit.unit.symbol}
+        onChange={value =>
+          this.props.setRecipeState({
+            key: 'temp',
+            value: temperatureUnit.getStandardValue(value),
+          })
+        }
         step={1}
       />
     );
