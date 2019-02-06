@@ -3,19 +3,19 @@ import PropTypes from 'prop-types';
 import withSettings from 'providers/settings';
 import formatSeconds from 'helpers/formatSeconds';
 import Card from 'components/Card';
-import Instructions from 'components/Instructions';
 import Image from 'components/Image';
-import Warning from 'components/Warning';
-import PourTimer from 'components/PourTimer';
-import Tip from 'components/Tip';
-import Title from 'components/Title';
 import { handleTick } from 'scenes/Brew/helpers';
 import recipes from 'scenes/Brew/recipes';
+import Instructions from './Instructions';
+import Warning from './Warning';
+import Tip from './Tip';
+import Title from './Title';
 import Preparation from './Preparation';
 import YieldQuestion from './YieldQuestion';
 import BoilWater from './BoilWater';
 import GrindCoffee from './GrindCoffee';
 import RecordBrewAttributes from './RecordBrewAttributes';
+import PourTimer from './PourTimer';
 
 class Recipe extends Component {
   static propTypes = {
