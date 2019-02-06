@@ -15,7 +15,15 @@ const propTypes = {
 };
 
 const LogsIcon = ({ focused, theme }) => (
-  <Svg width="27" height="24"><Svg.G fill={focused ? themes[theme].primary : themes[theme].foreground}   fillRule="nonzero"><Svg.Path d="M6.032 8.35a1 1 0 1 1 0-2h14.885a1 1 0 0 1 0 2H6.032zM5.9 16.336a1 1 0 0 1 0-2h11.166a1 1 0 1 1 0 2H5.901zM6.032 12.307a1 1 0 0 1 0-2h14.885a1 1 0 1 1 0 2H6.032z"/><Svg.Path d="M4 2.456a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h19a2 2 0 0 0 2-2v-15a2 2 0 0 0-2-2H4zm0-2h19a4 4 0 0 1 4 4v15a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4v-15a4 4 0 0 1 4-4z"/></Svg.G></Svg>
+  <Svg width="28" height="24">
+    <Svg.G
+      fill={focused ? themes[theme].primary : themes[theme].foreground}
+      fillRule="nonzero"
+    >
+      <Svg.Path d="M10.584 8.71a1 1 0 1 1 0-2h7.244a1 1 0 0 1 0 2h-7.244zM6.453 18.73a1 1 0 0 1 0-2h15.016a1 1 0 1 1 0 2H6.453zM6.61 14.897a1 1 0 1 1 0-2h14.885a1 1 0 1 1 0 2H6.61z" />
+      <Svg.Path d="M4.552 2.816a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h19a2 2 0 0 0 2-2v-15a2 2 0 0 0-2-2h-19zm0-2h19a4 4 0 0 1 4 4v15a4 4 0 0 1-4 4h-19a4 4 0 0 1-4-4v-15a4 4 0 0 1 4-4z" />
+    </Svg.G>
+  </Svg>
 );
 
 LogsIcon.propTypes = propTypes;
