@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, ScrollView } from 'react-native';
 import { startCase } from 'lodash';
+import { View, ScrollView } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import withTheme from 'providers/theme';
 import withSettings from 'providers/settings';
 import Header from 'components/Header';
@@ -12,18 +13,16 @@ import Recipe from './Recipe';
 class Brew extends Component {
   static propTypes = {
     theme: PropTypes.object,
-    recipe: PropTypes.string,
+    navigation: PropTypes.object,
   };
 
   state = {
     containerWidth: 0,
   };
 
-  // TODO:
-  // control on finish and navigate to summary when ready
-
   render() {
-    const { theme, recipe } = this.props;
+    const { theme, navigation } = this.props;
+    const { id } = navigation.state.params;
 
     return (
       <View
@@ -32,7 +31,7 @@ class Brew extends Component {
           backgroundColor: theme.background,
         }}
       >
-        <Header title="Iced Pour Over" script />
+        <Header title={startCase(id)} script />
         <ScrollView
           contentContainerStyle={{
             padding: 12,
@@ -49,10 +48,11 @@ class Brew extends Component {
             }
           >
             <BrewProvider value={this.state.containerWidth}>
-              <Recipe id="KalitaWave" />
+              <Recipe id={id} />
               <Button
                 title="Finish"
                 customStyle={{ marginVertical: 16, paddingVertical: 20 }}
+                onPress={() => navigation.navigate('BrewSummary')}
               />
             </BrewProvider>
           </View>
@@ -62,4 +62,4 @@ class Brew extends Component {
   }
 }
 
-export default withTheme(withSettings(Brew));
+export default withNavigation(withTheme(withSettings(Brew)));

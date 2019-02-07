@@ -13,9 +13,18 @@ const propTypes = {
   right: PropTypes.any,
   isDarkTheme: PropTypes.bool,
   script: PropTypes.bool,
+  onBack: PropTypes.func,
 };
 
-function Header({ navigation, theme, title, right, isDarkTheme, script }) {
+function Header({
+  navigation,
+  theme,
+  title,
+  right,
+  isDarkTheme,
+  script,
+  onBack,
+}) {
   return (
     <View
       style={[
@@ -31,7 +40,7 @@ function Header({ navigation, theme, title, right, isDarkTheme, script }) {
         <View />
         <View style={styles.left}>
           <TouchableOpacity
-            onPress={() => navigation.goBack()}
+            onPress={() => (onBack ? onBack() : navigation.goBack())}
             style={{ padding: 12, top: 12, right: 12 }}
           >
             <Feather name="chevron-left" size={30} color={theme.foreground} />

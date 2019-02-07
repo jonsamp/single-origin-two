@@ -4,10 +4,12 @@ import {
   createStackNavigator,
   createAppContainer,
 } from 'react-navigation';
+import Menu from 'scenes/Menu';
 import Brew from 'scenes/Brew';
 import Logs from 'scenes/Logs';
 import Settings from 'scenes/Settings';
 import SettingsDetail from 'scenes/Settings/SettingsDetail';
+import BrewSummary from 'scenes/BrewSummary';
 import BrewIcon from './icons/BrewIcon';
 import LogsIcon from './icons/LogsIcon';
 import SettingsIcon from './icons/SettingsIcon';
@@ -15,7 +17,7 @@ import TabBar from './TabBar';
 
 const TabNavigator = createBottomTabNavigator(
   {
-    Brew,
+    Menu,
     Logs,
     Settings,
   },
@@ -41,7 +43,7 @@ const TabNavigator = createBottomTabNavigator(
 );
 
 const StackNavigator = createStackNavigator(
-  { TabNavigator, SettingsDetail },
+  { TabNavigator, SettingsDetail, Brew, BrewSummary },
   { defaultNavigationOptions: { header: null } }
 );
 

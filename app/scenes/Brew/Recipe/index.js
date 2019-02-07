@@ -9,7 +9,6 @@ import { handleTick } from 'scenes/Brew/helpers';
 import recipes from 'scenes/Brew/recipes';
 import Warning from './Warning';
 import Tip from './Tip';
-import Title from './Title';
 import Preparation from './Preparation';
 import YieldQuestion from './YieldQuestion';
 import BoilWater from './BoilWater';
