@@ -53,7 +53,7 @@ class PourTimer extends Component {
     Animated.sequence([
       {
         start: onComplete => {
-          Haptic.selection();
+          // Haptic.selection();
           onComplete({ finished: true });
         },
       },
@@ -67,7 +67,7 @@ class PourTimer extends Component {
     Animated.sequence([
       {
         start: onComplete => {
-          Haptic.selection();
+          // Haptic.selection();
           onComplete({ finished: true });
         },
       },
