@@ -32,11 +32,12 @@ class Brew extends Component {
           backgroundColor: theme.background,
         }}
       >
-        <Header title={startCase(recipe)} />
+        <Header title="Iced Pour Over" script />
         <ScrollView
           contentContainerStyle={{
             padding: 12,
             alignItems: 'center',
+            paddingTop: 32,
           }}
         >
           <View

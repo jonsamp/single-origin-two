@@ -88,7 +88,6 @@ class Recipe extends Component {
 
     return (
       <Fragment>
-        <Title title={title} />
         <Preparation recipe={this.props.id} />
         <YieldQuestion
           totalVolume={totalVolume}
@@ -110,7 +109,6 @@ class Recipe extends Component {
           grindUnit={grindUnit}
           temperatureUnit={temperatureUnit}
         />
-        <Title title="Brew" />
         <Card>
           <Image source={pourSource} defaultSource={pourSourceDefault} />
           <Instructions

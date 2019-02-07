@@ -24,6 +24,13 @@ const styles = StyleSheet.create({
   left: { position: 'absolute', left: 12, bottom: -2 },
   right: { position: 'absolute', right: 12, bottom: -2 },
   title: type.headline,
+  scriptTitle: {
+    ...type.headline,
+    fontFamily: 'SignPainter',
+    fontSize: 28,
+    lineHeight: 28,
+    top: 5,
+  },
 });
 
 export default styles;
