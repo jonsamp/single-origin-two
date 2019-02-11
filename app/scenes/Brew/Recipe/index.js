@@ -1,7 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { withNavigation } from 'react-navigation';
 import withSettings from 'providers/settings';
 import formatSeconds from 'helpers/formatSeconds';
+import { logAdded } from 'state/logs/actions';
+import Button from 'components/Button';
 import Card from 'components/Card';
 import Image from 'components/Image';
 import Instructions from 'components/Instructions';
@@ -16,16 +20,21 @@ import GrindCoffee from './GrindCoffee';
 import RecordBrewAttributes from './RecordBrewAttributes';
 import PourTimer from './PourTimer';
 
+const mapDispatchToProps = { logAdded };
+
 class Recipe extends Component {
   static propTypes = {
     settings: PropTypes.object,
     unitHelpers: PropTypes.object,
     recipe: PropTypes.object,
+    navigation: PropTypes.object,
+    logAdded: PropTypes.func,
   };
 
   static defaultProps = {
     settings: {},
     unitHelpers: {},
+    navigation: {},
   };
 
   state = {
@@ -37,6 +46,8 @@ class Recipe extends Component {
       text: undefined,
     },
     warningText: undefined,
+    timestamp: new Date().getTime(),
+    totalBrewTime: 0,
   };
 
   componentWillMount() {
@@ -60,6 +71,29 @@ class Recipe extends Component {
       setState: this.setRecipeState,
       second,
     });
+    this.setState({ totalBrewTime: second });
+  };
+
+  onFinish = () => {
+    const { navigation, recipe, settings } = this.props;
+    const { timestamp, totalVolume, grind, temp, totalBrewTime } = this.state;
+    const log = {
+      timestamp,
+      totalVolume,
+      temp,
+      totalBrewTime,
+      ratio: settings.ratio,
+      grind:
+        grind ||
+        this.props.unitHelpers.grindUnit.getPreferredValueBasedOnPercent(
+          this.state.defaultGrind
+        ),
+      recipeId: recipe.id,
+    };
+
+    this.props.logAdded({ log });
+
+    navigation.navigate('BrewSummary', { timestamp });
   };
 
   render() {
@@ -74,7 +108,6 @@ class Recipe extends Component {
       tip,
       warningText,
       isLoaded,
-      title,
       pourSource,
       pourSourceDefault,
       minYield,
@@ -129,9 +162,17 @@ class Recipe extends Component {
           <Tip text={tip.text} isVisible={!!tip.text} />
           <Warning text={warningText} isVisible={!!warningText} />
         </Card>
+        <Button
+          title="Finish"
+          customStyle={{ marginVertical: 16, paddingVertical: 20 }}
+          onPress={this.onFinish}
+        />
       </Fragment>
     );
   }
 }
 
-export default withSettings(Recipe);
+export default connect(
+  null,
+  mapDispatchToProps
+)(withNavigation(withSettings(Recipe)));

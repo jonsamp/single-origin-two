@@ -1,9 +1,9 @@
 import React from 'react';
 import { Svg } from 'expo';
 
-function CleverIcon({ fill }) {
+function CleverIcon({ fill, size = 1 }) {
   return (
-    <Svg width="36" height="24">
+    <Svg width={size * 36} height={size * 48} viewBox="0 0 36 24">
       <Svg.G fill={fill} fillRule="nonzero">
         <Svg.Path d="M15.653 16.53a1 1 0 1 1-2 0V7.625a1 1 0 1 1 2 0v8.907zM18.227 16.53a1 1 0 1 1-2 0v-6.519a1 1 0 0 1 2 0v6.52zM13.08 16.52a1 1 0 1 1-2 0v-6.519a1 1 0 0 1 2 0v6.52z" />
         <Svg.Path d="M2.968 2.284l8.091 16.418h7.17l8.577-16.418H2.968zm-1.607-2h27.095a1 1 0 0 1 .886 1.463l-9.62 18.418a1 1 0 0 1-.887.537h-8.398a1 1 0 0 1-.897-.558L.464 1.726A1 1 0 0 1 1.36.284z" />

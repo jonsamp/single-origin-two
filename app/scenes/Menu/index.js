@@ -9,7 +9,7 @@ import withSettings from 'providers/settings';
 import recipes from 'constants/recipes';
 import type from 'constants/type';
 import Card from 'components/Card';
-// import styles from './styles';
+import CleverIcon from 'constants/icons/CleverIcon';
 
 const propTypes = {
   theme: PropTypes.object,

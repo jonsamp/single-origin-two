@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { startCase } from 'lodash';
 import { View, ScrollView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import withTheme from 'providers/theme';
@@ -51,11 +50,6 @@ class Brew extends Component {
           >
             <BrewProvider value={this.state.containerWidth}>
               <Recipe recipe={recipe} />
-              <Button
-                title="Finish"
-                customStyle={{ marginVertical: 16, paddingVertical: 20 }}
-                onPress={() => navigation.navigate('BrewSummary')}
-              />
             </BrewProvider>
           </View>
         </ScrollView>
