@@ -5,6 +5,7 @@ import { View, ScrollView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import withTheme from 'providers/theme';
 import withSettings from 'providers/settings';
+import recipes from 'constants/recipes';
 import Header from 'components/Header';
 import Button from 'components/Button';
 import { BrewProvider } from './context';
@@ -23,6 +24,7 @@ class Brew extends Component {
   render() {
     const { theme, navigation } = this.props;
     const { id } = navigation.state.params;
+    const recipe = recipes[id];
 
     return (
       <View
@@ -31,7 +33,7 @@ class Brew extends Component {
           backgroundColor: theme.background,
         }}
       >
-        <Header title={startCase(id)} script />
+        <Header title={recipe.title} />
         <ScrollView
           contentContainerStyle={{
             padding: 12,
@@ -48,7 +50,7 @@ class Brew extends Component {
             }
           >
             <BrewProvider value={this.state.containerWidth}>
-              <Recipe id={id} />
+              <Recipe recipe={recipe} />
               <Button
                 title="Finish"
                 customStyle={{ marginVertical: 16, paddingVertical: 20 }}

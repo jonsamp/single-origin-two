@@ -21,7 +21,9 @@ const propTypes = {
 const ChecklistSetting = ({ theme, onChange, items }) =>
   items.map(item => (
     <TouchableOpacity onPress={() => onChange(item.id)} key={item.id}>
-      <SettingWrapper title={startCase(item.title)}>
+      <SettingWrapper
+        title={`${item.title}${item.modifier ? ` ${item.modifier}` : ''}`}
+      >
         {item.value ? (
           <Feather name="check" size={theme.iconSize} color={theme.primary} />
         ) : null}

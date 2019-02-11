@@ -35,7 +35,14 @@ const SettingWrapper = ({
       }}
     >
       <View style={styles.row}>
-        <Text style={[styles.title, { color: theme.foreground }]}>{title}</Text>
+        <Text
+          style={[
+            styles.title,
+            { color: theme.foreground, textTransform: 'capitalize' },
+          ]}
+        >
+          {title}
+        </Text>
         {children}
       </View>
     </View>

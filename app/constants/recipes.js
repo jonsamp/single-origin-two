@@ -1,30 +1,49 @@
+import React from 'react';
+import KalitaWave185Icon from './icons/KalitaWave185Icon';
+import KalitaWave155Icon from './icons/KalitaWave155Icon';
+import CleverIcon from './icons/CleverIcon';
+
 export default {
-  aeropress: {
+  Aeropress: {
     title: 'Aeropress',
-    id: 'aeropress',
+    id: 'Aeropress',
+    icon: () => {},
   },
-  chemex: {
+  Chemex: {
     title: 'Chemex',
-    id: 'chemex',
+    id: 'Chemex',
+    icon: () => {},
   },
-  clever: {
+  Clever: {
     title: 'Clever',
-    id: 'clever',
+    id: 'Clever',
+    icon: fill => <CleverIcon fill={fill} />,
   },
-  frenchPress: {
+  FrenchPress: {
     title: 'French Press',
-    id: 'frenchPress',
+    id: 'FrenchPress',
+    icon: () => {},
   },
-  icedPourOver: {
+  IcedPourOver: {
     title: 'Iced Pour Over',
-    id: 'icedPourOver',
+    id: 'IcedPourOver',
+    icon: () => {},
   },
-  kalitaWave: {
+  KalitaWave185: {
     title: 'Kalita Wave',
-    id: 'kalitaWave',
+    modifier: '185',
+    id: 'KalitaWave185',
+    icon: fill => <KalitaWave185Icon fill={fill} />,
   },
-  v60: {
+  KalitaWave155: {
+    title: 'Kalita Wave',
+    modifier: '155',
+    id: 'KalitaWave155',
+    icon: fill => <KalitaWave155Icon fill={fill} />,
+  },
+  V60: {
     title: 'V60',
-    id: 'v60',
+    id: 'V60',
+    icon: () => {},
   },
 };

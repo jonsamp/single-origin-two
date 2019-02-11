@@ -12,19 +12,10 @@ const propTypes = {
   title: PropTypes.string,
   right: PropTypes.any,
   isDarkTheme: PropTypes.bool,
-  script: PropTypes.bool,
   onBack: PropTypes.func,
 };
 
-function Header({
-  navigation,
-  theme,
-  title,
-  right,
-  isDarkTheme,
-  script,
-  onBack,
-}) {
+function Header({ navigation, theme, title, right, isDarkTheme, onBack }) {
   return (
     <View
       style={[
@@ -46,15 +37,7 @@ function Header({
             <Feather name="chevron-left" size={30} color={theme.foreground} />
           </TouchableOpacity>
         </View>
-        <Text
-          style={[
-            styles.title,
-            script ? styles.scriptTitle : null,
-            { color: theme.foreground },
-          ]}
-        >
-          {title}
-        </Text>
+        <Text style={[styles.title, { color: theme.foreground }]}>{title}</Text>
         <View style={styles.right}>{right}</View>
         <View />
       </View>

@@ -20,7 +20,7 @@ class Recipe extends Component {
   static propTypes = {
     settings: PropTypes.object,
     unitHelpers: PropTypes.object,
-    id: PropTypes.string,
+    recipe: PropTypes.object,
   };
 
   static defaultProps = {
@@ -40,7 +40,9 @@ class Recipe extends Component {
   };
 
   componentWillMount() {
-    const recipe = recipes[this.props.id]({ settings: this.props.settings });
+    const recipe = recipes[this.props.recipe.id]({
+      settings: this.props.settings,
+    });
     this.setState({
       ...recipe,
       isLoaded: true,
@@ -61,7 +63,7 @@ class Recipe extends Component {
   };
 
   render() {
-    const { settings, unitHelpers } = this.props;
+    const { settings, unitHelpers, recipe } = this.props;
     const {
       totalVolume,
       totalTime,
@@ -87,7 +89,7 @@ class Recipe extends Component {
 
     return (
       <Fragment>
-        <Preparation recipe={this.props.id} />
+        <Preparation recipe={recipe.title} />
         <YieldQuestion
           totalVolume={totalVolume}
           setRecipeState={this.setRecipeState}
@@ -98,7 +100,7 @@ class Recipe extends Component {
         <GrindCoffee
           coffeeWeight={coffeeWeight}
           defaultGrind={defaultGrind}
-          title={title}
+          title={recipe.title}
         />
         <RecordBrewAttributes
           setRecipeState={this.setRecipeState}

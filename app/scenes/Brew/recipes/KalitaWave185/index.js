@@ -6,7 +6,7 @@ export default function recipe({ settings }) {
   const withBloom = withBloomFn({ settings });
 
   return {
-    title: 'Kalita Wave',
+    title: 'Kalita Wave 185',
     minYield: 150,
     maxYield: 525,
     pourEvents: {
