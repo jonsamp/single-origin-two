@@ -6,6 +6,7 @@ import type from 'constants/type';
 import WaterIcon from './icons/WaterIcon';
 import RecordIcon from './icons/RecordIcon';
 import GrindIcon from './icons/GrindIcon';
+import TipIcon from './icons/TipIcon';
 
 const propTypes = {
   theme: PropTypes.object,
@@ -35,6 +36,7 @@ function Instructions({ text, theme, isDarkTheme, icon }) {
     WaterIcon,
     RecordIcon,
     GrindIcon,
+    TipIcon,
   };
   const IconComponent = icons[icon];
 

@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import app from './app/reducers';
+import logs from './logs/reducers';
 import settings from './settings/reducers';
 
 const rootReducer = combineReducers({
-  app,
+  logs,
   settings,
 });
 

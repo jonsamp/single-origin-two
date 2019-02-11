@@ -1,6 +1,6 @@
 import { call, all } from 'redux-saga/effects';
-import appSagas from './app/sagas';
+import settingsSagas from './settings/sagas';
 
 export default function* rootSaga() {
-  yield all([call(appSagas)]);
+  yield all([call(settingsSagas)]);
 }
