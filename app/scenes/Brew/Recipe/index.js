@@ -89,13 +89,13 @@ class Recipe extends Component {
 
     return (
       <Fragment>
-        <Preparation recipe={recipe.title} />
         <YieldQuestion
           totalVolume={totalVolume}
           setRecipeState={this.setRecipeState}
           minYield={minYield}
           maxYield={maxYield}
         />
+        <Preparation recipe={recipe.title.toLowerCase()} />
         <BoilWater totalVolume={totalVolume} />
         <GrindCoffee
           coffeeWeight={coffeeWeight}
