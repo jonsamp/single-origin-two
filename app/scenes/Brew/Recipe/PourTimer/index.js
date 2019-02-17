@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Animated } from 'react-native';
-import { Haptic, KeepAwake } from 'expo';
+import { KeepAwake } from 'expo';
 import AnimateNumber from 'react-native-animate-number';
 import formatSeconds from 'helpers/formatSeconds';
 import withTheme from 'providers/theme';
 import withSettings from 'providers/settings';
 import Button from 'components/Button';
+import Card from 'components/Card';
+import Instructions from 'components/Instructions';
+import Image from 'components/Image';
+import Tip from '../Tip';
+import Warning from '../Warning';
 import styles from './styles';
 
 class PourTimer extends Component {
@@ -17,6 +22,12 @@ class PourTimer extends Component {
     waterPercent: PropTypes.number,
     totalWaterWeight: PropTypes.number,
     unitHelpers: PropTypes.object,
+    tip: PropTypes.object,
+    warningText: PropTypes.string,
+    source: PropTypes.number,
+    defaultSource: PropTypes.number,
+    totalVolume: PropTypes.number,
+    totalTime: PropTypes.number,
   };
 
   static defaultProps = {
@@ -129,7 +140,18 @@ class PourTimer extends Component {
   };
 
   render() {
-    const { theme, totalWaterWeight, waterPercent, unitHelpers } = this.props;
+    const {
+      theme,
+      totalWaterWeight,
+      waterPercent,
+      unitHelpers,
+      tip,
+      warningText,
+      source,
+      defaultSource,
+      totalVolume,
+      totalTime,
+    } = this.props;
     const { waterVolumeUnit } = unitHelpers;
     const { timerRunning } = this.state;
     const inputRange = [0, 1];
@@ -155,70 +177,84 @@ class PourTimer extends Component {
     });
 
     return (
-      <View style={[styles.container, { backgroundColor: theme.grey2 }]}>
-        <View style={styles.section}>
-          {this.renderTimer()}
-          <Button
-            type={timerRunning ? 'secondary' : 'primary'}
-            title={timerRunning ? 'stop' : 'start'}
-            onPress={this.toggleCountdown}
-          />
-        </View>
-        <View style={styles.section}>
-          <Text style={[styles.labelText, { color: theme.foreground }]}>
-            POUR UP TO
-          </Text>
-          <Animated.View
-            style={[
-              styles.trackingContainer,
-              {
-                backgroundColor: trackingAnimatedBackground,
-                transform: [{ scale: trackingAnimatedScale }],
-                borderColor: trackingAnimatedBorder,
-                shadowOpacity: trackingAnimatedShadow,
-              },
-            ]}
-          >
-            <View style={styles.setWidthText}>
-              <Animated.Text
-                style={[styles.trackingText, { color: trackingAnimatedText }]}
-              >
-                <AnimateNumber
-                  value={waterVolumeUnit.getPreferredValue(
-                    totalWaterWeight * waterPercent
-                  )}
-                  formatter={val =>
-                    parseFloat(val).toFixed(
-                      waterVolumeUnit.unit.symbol === 'g'
-                        ? 0
-                        : waterVolumeUnit.unit.symbol === 'oz'
-                          ? 1
-                          : 2
-                    )
-                  }
-                  countBy={
-                    waterVolumeUnit.unit.symbol === 'g'
-                      ? 4
-                      : waterVolumeUnit.unit.symbol === 'oz'
-                        ? 0.1
-                        : 0.01
-                  }
-                  interval={waterVolumeUnit.unit.symbol === 'g' ? 30 : 60}
-                  onFinish={this.onAnimateNumberFinish}
-                />
-              </Animated.Text>
-            </View>
-            <Animated.Text
+      <Card>
+        <Image source={source} defaultSource={defaultSource} />
+        <Instructions
+          text={`Pour a total of **${Math.round(
+            waterVolumeUnit.getPreferredValue(totalVolume)
+          )} ${
+            waterVolumeUnit.unit.title
+          }** of water over the next **${formatSeconds(
+            totalTime
+          )}** with the pour timer.`}
+        />
+        <View style={[styles.container, { backgroundColor: theme.grey2 }]}>
+          <View style={styles.section}>
+            {this.renderTimer()}
+            <Button
+              type={timerRunning ? 'secondary' : 'primary'}
+              title={timerRunning ? 'stop' : 'start'}
+              onPress={this.toggleCountdown}
+            />
+          </View>
+          <View style={styles.section}>
+            <Text style={[styles.labelText, { color: theme.foreground }]}>
+              POUR UP TO
+            </Text>
+            <Animated.View
               style={[
-                styles.trackingLabelText,
-                { color: trackingAnimatedText },
+                styles.trackingContainer,
+                {
+                  backgroundColor: trackingAnimatedBackground,
+                  transform: [{ scale: trackingAnimatedScale }],
+                  borderColor: trackingAnimatedBorder,
+                  shadowOpacity: trackingAnimatedShadow,
+                },
               ]}
             >
-              {waterVolumeUnit.unit.title}
-            </Animated.Text>
-          </Animated.View>
+              <View style={styles.setWidthText}>
+                <Animated.Text
+                  style={[styles.trackingText, { color: trackingAnimatedText }]}
+                >
+                  <AnimateNumber
+                    value={waterVolumeUnit.getPreferredValue(
+                      totalWaterWeight * waterPercent
+                    )}
+                    formatter={val =>
+                      parseFloat(val).toFixed(
+                        waterVolumeUnit.unit.symbol === 'g'
+                          ? 0
+                          : waterVolumeUnit.unit.symbol === 'oz'
+                            ? 1
+                            : 2
+                      )
+                    }
+                    countBy={
+                      waterVolumeUnit.unit.symbol === 'g'
+                        ? 4
+                        : waterVolumeUnit.unit.symbol === 'oz'
+                          ? 0.1
+                          : 0.01
+                    }
+                    interval={waterVolumeUnit.unit.symbol === 'g' ? 30 : 60}
+                    onFinish={this.onAnimateNumberFinish}
+                  />
+                </Animated.Text>
+              </View>
+              <Animated.Text
+                style={[
+                  styles.trackingLabelText,
+                  { color: trackingAnimatedText },
+                ]}
+              >
+                {waterVolumeUnit.unit.title}
+              </Animated.Text>
+            </Animated.View>
+          </View>
         </View>
-      </View>
+        <Tip text={tip.text} isVisible={!!tip.text} />
+        <Warning text={warningText} isVisible={!!warningText} />
+      </Card>
     );
   }
 }

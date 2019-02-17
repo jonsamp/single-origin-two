@@ -143,25 +143,17 @@ class Recipe extends Component {
           grindUnit={grindUnit}
           temperatureUnit={temperatureUnit}
         />
-        <Card>
-          <Image source={pourSource} defaultSource={pourSourceDefault} />
-          <Instructions
-            text={`Pour a total of **${Math.round(
-              waterVolumeUnit.getPreferredValue(totalVolume)
-            )} ${
-              waterVolumeUnit.unit.title
-            }** of water over the next **${formatSeconds(
-              totalTime
-            )}** with the pour timer.`}
-          />
-          <PourTimer
-            totalWaterWeight={totalVolume}
-            waterPercent={volumePercent}
-            onTick={this.onTick}
-          />
-          <Tip text={tip.text} isVisible={!!tip.text} />
-          <Warning text={warningText} isVisible={!!warningText} />
-        </Card>
+        <PourTimer
+          totalWaterWeight={totalVolume}
+          waterPercent={volumePercent}
+          onTick={this.onTick}
+          source={pourSource}
+          defaultSource={pourSourceDefault}
+          totalTime={totalTime}
+          totalVolume={totalVolume}
+          tip={tip}
+          warningText={warningText}
+        />
         <Button
           title="Finish"
           customStyle={{ marginVertical: 16, paddingVertical: 20 }}

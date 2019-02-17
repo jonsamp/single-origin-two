@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { withNavigation, StackActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import withTheme from 'providers/theme';
 import { selectLog } from 'state/logs/selectors';
 import Header from 'components/Header';
+import Log from 'components/Log';
 
 const mapStateToProps = (state, props) => {
   const { timestamp } = props.navigation.state.params;
@@ -16,31 +17,18 @@ const mapStateToProps = (state, props) => {
 
 class BrewSummary extends Component {
   static propTypes = {
-    theme: PropTypes.object,
     navigation: PropTypes.object,
-    log: PropTypes.object,
   };
 
   render() {
-    const { navigation, theme, log } = this.props;
-    console.log({ log });
+    const { navigation } = this.props;
     return (
       <View>
         <Header
           title="Brew Summary"
           onBack={() => navigation.dispatch(StackActions.popToTop())}
         />
-        <View
-          style={{
-            backgroundColor: theme.background,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Text style={{ color: theme.foreground, fontSize: 32 }}>
-            {JSON.stringify(log, null, 2)}
-          </Text>
-        </View>
+        <Log timestamp={navigation.state.params.timestamp} />
       </View>
     );
   }

@@ -17,7 +17,7 @@ export default {
   Clever: {
     title: 'Clever',
     id: 'Clever',
-    icon: fill => <CleverIcon fill={fill} />,
+    icon: ({ fill, size }) => <CleverIcon fill={fill} size={size} />,
   },
   FrenchPress: {
     title: 'French Press',
