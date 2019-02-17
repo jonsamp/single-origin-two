@@ -57,7 +57,7 @@ function Menu({ theme, navigation, isDarkTheme, settings }) {
     >
       <View style={{ paddingHorizontal: 12 }}>
         {menuRecipes.map(recipe => (
-          <Card key={recipe.id} style={{ marginBottom: 32 }}>
+          <Card key={recipe.id}>
             <TouchableOpacity
               onPress={() => navigation.navigate('Brew', { id: recipe.id })}
               style={{ flexDirection: 'row' }}
@@ -71,7 +71,9 @@ function Menu({ theme, navigation, isDarkTheme, settings }) {
                   backgroundColor: isDarkTheme ? theme.grey2 : theme.foreground,
                 }}
               >
-                {recipe.icon(isDarkTheme ? theme.foreground : theme.background)}
+                {recipe.icon({
+                  fill: isDarkTheme ? theme.foreground : theme.background,
+                })}
               </View>
               <View
                 style={{

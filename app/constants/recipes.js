@@ -33,13 +33,13 @@ export default {
     title: 'Kalita Wave',
     modifier: '185',
     id: 'KalitaWave185',
-    icon: fill => <KalitaWave185Icon fill={fill} />,
+    icon: ({ fill, size }) => <KalitaWave185Icon fill={fill} size={size} />,
   },
   KalitaWave155: {
     title: 'Kalita Wave',
     modifier: '155',
     id: 'KalitaWave155',
-    icon: fill => <KalitaWave155Icon fill={fill} />,
+    icon: ({ fill, size }) => <KalitaWave155Icon fill={fill} size={size} />,
   },
   V60: {
     title: 'V60',

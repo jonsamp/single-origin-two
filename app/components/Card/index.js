@@ -20,6 +20,7 @@ function Card({ theme, children, style }) {
         backgroundColor: theme.grey1,
         borderRadius: 8,
         marginBottom: 40,
+        ...style,
       }}
     >
       <View
@@ -27,6 +28,7 @@ function Card({ theme, children, style }) {
           backgroundColor: theme.grey1,
           borderRadius: 8,
           minHeight: 16,
+          ...style,
           overflow: 'hidden',
           width: '100%',
         }}

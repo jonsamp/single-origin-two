@@ -178,7 +178,11 @@ class PourTimer extends Component {
 
     return (
       <Card>
-        <Image source={source} defaultSource={defaultSource} />
+        <Image
+          source={source}
+          defaultSource={defaultSource}
+          isPlaying={this.state.timerRunning}
+        />
         <Instructions
           text={`Pour a total of **${Math.round(
             waterVolumeUnit.getPreferredValue(totalVolume)

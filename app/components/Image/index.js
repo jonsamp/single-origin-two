@@ -11,7 +11,18 @@ class CustomImage extends PureComponent {
     theme: PropTypes.object,
     source: PropTypes.number,
     defaultSource: PropTypes.number,
+    isPlaying: PropTypes.bool,
   };
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.isPlaying && !state.isPlaying) {
+      return {
+        isPlaying: true,
+      };
+    }
+
+    return null;
+  }
 
   state = {
     isPlaying: false,
