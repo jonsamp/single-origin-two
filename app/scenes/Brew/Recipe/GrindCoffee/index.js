@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withSettings from 'providers/settings';
+import { Image } from 'react-native';
+import { height } from 'constants/layout';
 import { getValueUnit } from 'scenes/Brew/helpers';
 import Card from 'components/Card';
 import Instructions from 'components/Instructions';
@@ -16,12 +18,16 @@ function GrindCoffee({ unitHelpers, coffeeWeight, defaultGrind, title }) {
   const { coffeeWeightUnit, grindUnit } = unitHelpers;
   return (
     <Card>
-      {/* {grindUnit.grinder.shortTitle === 'grinder' ? (
+      {grindUnit.grinder.shortTitle === 'grinder' ? (
         <Image
           source={grindUnit.getGrindSetting(0.75).image}
-          style={{ resizeMode: 'cover' }}
+          style={{
+            resizeMode: 'cover',
+            width: null,
+            height: height / 5,
+          }}
         />
-      ) : null} */}
+      ) : null}
       <Instructions
         text={`Grind **${getValueUnit(
           coffeeWeightUnit,
