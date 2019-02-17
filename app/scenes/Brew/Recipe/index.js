@@ -3,16 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import withSettings from 'providers/settings';
-import formatSeconds from 'helpers/formatSeconds';
 import { logAdded } from 'state/logs/actions';
 import Button from 'components/Button';
-import Card from 'components/Card';
-import Image from 'components/Image';
-import Instructions from 'components/Instructions';
 import { handleTick } from 'scenes/Brew/helpers';
 import recipes from 'scenes/Brew/recipes';
-import Warning from './Warning';
-import Tip from './Tip';
 import Preparation from './Preparation';
 import YieldQuestion from './YieldQuestion';
 import BoilWater from './BoilWater';
@@ -48,6 +42,7 @@ class Recipe extends Component {
     warningText: undefined,
     timestamp: new Date().getTime(),
     totalBrewTime: 0,
+    attributesRecorded: false,
   };
 
   componentWillMount() {
@@ -76,18 +71,29 @@ class Recipe extends Component {
 
   onFinish = () => {
     const { navigation, recipe, settings } = this.props;
-    const { timestamp, totalVolume, grind, temp, totalBrewTime } = this.state;
+    const {
+      timestamp,
+      totalVolume,
+      grind,
+      temp,
+      totalBrewTime,
+      attributesRecorded,
+    } = this.state;
     const log = {
       timestamp,
       totalVolume,
-      temp,
       totalBrewTime,
       ratio: settings.ratio,
-      grind:
-        grind ||
-        this.props.unitHelpers.grindUnit.getPreferredValueBasedOnPercent(
-          this.state.defaultGrind
-        ),
+      ...(attributesRecorded
+        ? {
+            grind:
+              grind ||
+              this.props.unitHelpers.grindUnit.getPreferredValueBasedOnPercent(
+                this.state.defaultGrind
+              ),
+            temp,
+          }
+        : null),
       recipeId: recipe.id,
     };
 
@@ -113,7 +119,7 @@ class Recipe extends Component {
       minYield,
       maxYield,
     } = this.state;
-    const { waterVolumeUnit, grindUnit, temperatureUnit } = unitHelpers;
+    const { grindUnit, temperatureUnit } = unitHelpers;
     const coffeeWeight = Math.round(totalVolume / settings.ratio);
 
     if (!isLoaded) {

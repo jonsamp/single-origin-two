@@ -62,12 +62,17 @@ class RecordBrewAttributes extends Component {
 
     this.setState(
       prevState => ({ isOpen: !prevState.isOpen }),
-      () =>
+      () => {
+        if (this.state.isOpen) {
+          this.props.setRecipeState({ key: 'attributesRecorded', value: true });
+        }
+
         Animated.spring(this.animatedRotationValue, {
           toValue: this.state.isOpen ? 1 : 0,
           duration: 250,
           useNativeDriver: true,
-        }).start()
+        }).start();
+      }
     );
   };
 

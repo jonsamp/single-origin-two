@@ -6,7 +6,6 @@ import withTheme from 'providers/theme';
 import withSettings from 'providers/settings';
 import recipes from 'constants/recipes';
 import Header from 'components/Header';
-import Button from 'components/Button';
 import { BrewProvider } from './context';
 import Recipe from './Recipe';
 
