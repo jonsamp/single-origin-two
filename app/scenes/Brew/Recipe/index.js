@@ -84,13 +84,17 @@ class Recipe extends Component {
       totalVolume,
       totalBrewTime,
       ratio: settings.ratio,
-      ...(attributesRecorded
+      ...(attributesRecorded && settings.recordGrind
         ? {
             grind:
               grind ||
               this.props.unitHelpers.grindUnit.getPreferredValueBasedOnPercent(
                 this.state.defaultGrind
               ),
+          }
+        : null),
+      ...(attributesRecorded && settings.recordTemp
+        ? {
             temp,
           }
         : null),
