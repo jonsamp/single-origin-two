@@ -3,9 +3,9 @@ import Sentry from 'sentry-expo';
 import { Provider } from 'react-redux';
 import { Font, AppLoading } from 'expo';
 import { PersistGate } from 'redux-persist/integration/react';
-import SignPainter from './app/assets/SignPainter-HouseScript.ttf';
-import configureStore from './app/store/configureStore';
-import Navigator from 'scenes/Navigator';
+import Navigator from '@app/scenes/Navigator';
+import SignPainter from './src/app/assets/SignPainter-HouseScript.ttf';
+import configureStore from './src/app/store/configureStore';
 
 const { store, persistor } = configureStore();
 

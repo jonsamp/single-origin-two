@@ -1,0 +1,24 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended"],
+  "jsRules": {},
+  "rules": {
+    "max-line-length": {
+      "options": [120]
+    },
+    "quotemark": [true, "single", "jsx-double"],
+    "indent": [true, "spaces"],
+    "semicolon": [true, "always", "ignore-interfaces"],
+    "trailing-comma": [true, { "singleline": "never" }],
+    "object-literal-sort-keys": false,
+    "interface-name": false,
+    "member-access": false,
+    "member-ordering": [true, { "order": "statics-first" }],
+    "no-empty": [false],
+    "arrow-parens": false,
+    "no-implicit-dependencies": [true, ["@app"]],
+    "no-submodule-imports": [true, "@app"],
+    "no-relative-imports": [true, "allow-siblings"]
+  },
+  "rulesDirectory": []
+}
