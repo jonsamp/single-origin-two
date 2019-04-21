@@ -1,16 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { View, Image } from 'react-native'
-import { LinearGradient } from 'expo'
 import { height, width } from '@app/constants/layout'
 import withTheme from '@app/providers/theme'
+import { LinearGradient } from 'expo'
+import React from 'react'
+import { Image, View } from 'react-native'
 
-const propTypes = {
-  source: PropTypes.number,
-  theme: PropTypes.object,
+interface HeaderImage {
+  source: number
+  theme: any
 }
 
-function HeaderImage({ source, theme }) {
+function HeaderImage({ source, theme }: HeaderImage) {
   const imageHeight = height / 4
   const gradientHeight = height / 4
   return (
@@ -38,7 +37,5 @@ function HeaderImage({ source, theme }) {
     </View>
   )
 }
-
-HeaderImage.propTypes = propTypes
 
 export default withTheme(HeaderImage)

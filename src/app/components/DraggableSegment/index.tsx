@@ -1,47 +1,52 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import {
-  View,
-  Text,
-  Animated,
-  PanResponder,
-  TouchableOpacity,
-  Easing,
-} from 'react-native'
-import { Haptic } from 'expo'
 import withTheme from '@app/providers/theme'
+import { Haptic } from 'expo'
+import React, { Component } from 'react'
+import {
+  Animated,
+  Easing,
+  PanResponder,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import styles from './styles'
 
-class DraggableSegment extends Component {
-  static propTypes = {
-    theme: PropTypes.object.isRequired,
-    options: PropTypes.array.isRequired,
-    onChange: PropTypes.func.isRequired,
-    onStartMove: PropTypes.func,
-    onStopMove: PropTypes.func,
-    isDarkTheme: PropTypes.bool,
-  }
+interface DraggableSegmentProps {
+  theme: any
+  options: any[]
+  onChange: (index: number) => void
+  onStartMove?: () => void
+  onStopMove?: () => void
+  isDarkTheme?: boolean
+}
 
-  static defaultProps = {
-    onStartMove: () => {},
-    onStopMove: () => {},
-  }
+interface DraggableSegmentState {
+  pan: Animated.ValueXY
+  containerWidth: number
+  currentSegmentIndex: number
+}
 
+class DraggableSegment extends Component<
+  DraggableSegmentProps,
+  DraggableSegmentState
+> {
   state = {
     pan: new Animated.ValueXY(),
     containerWidth: 0,
     currentSegmentIndex: 0,
   }
 
+  val
+
+  panResponder
+
   componentWillMount() {
     const { pan } = this.state
     this.val = { x: 0, y: 0 }
-
     pan.addListener(value => {
       this.val = value
       return null
     })
-
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onPanResponderMove: Animated.event([null, { dx: pan.x }]),
@@ -90,13 +95,10 @@ class DraggableSegment extends Component {
     const segmentWidth = this.getSegmentWidth()
     const isDraggedFarEnough = Math.abs(gesture.dx) >= segmentWidth / 2
     const isMovedRight = gesture.dx >= 0
-
     this.toggleStoppedMoving()
-
     if (!isDraggedFarEnough || !this.isValidMovement(gesture)) {
       return { x: 0 }
     }
-
     const spacesMoved = this.findSpacesMoved(gesture)
     this.setCurrentSegmentIndex({
       index: isMovedRight
@@ -110,13 +112,11 @@ class DraggableSegment extends Component {
     const { options } = this.props
     const segmentWidth = this.getSegmentWidth()
     const midpoint = segmentWidth / 2
-
     return options
       .map((_, index) => {
         if (index === options.length - 1) {
           return null
         }
-
         return segmentWidth * index + midpoint
       })
       .filter(b => b)
@@ -130,18 +130,15 @@ class DraggableSegment extends Component {
         spacesMoved = index + 1
       }
     })
-
     return spacesMoved
   }
 
   isValidMovement = gesture => {
     const { currentSegmentIndex } = this.state
     const { options } = this.props
-
     if (gesture.dx >= 0) {
       return currentSegmentIndex + 1 <= options.length - 1
     }
-
     return currentSegmentIndex - 1 >= 0
   }
 
@@ -150,7 +147,6 @@ class DraggableSegment extends Component {
     const segmentWidth = this.getSegmentWidth()
     const segmentsToMove = index - currentSegmentIndex
     const nextSegmentIndex = segmentsToMove + currentSegmentIndex
-
     this.toggleStartedMoving()
     this.resetCurrentPan()
     this.setCurrentSegmentIndex({ index: nextSegmentIndex })
@@ -169,7 +165,6 @@ class DraggableSegment extends Component {
   render() {
     const { theme, options, isDarkTheme } = this.props
     const { containerWidth, pan } = this.state
-
     return (
       <View
         style={[
@@ -236,5 +231,4 @@ class DraggableSegment extends Component {
     )
   }
 }
-
 export default withTheme(DraggableSegment)

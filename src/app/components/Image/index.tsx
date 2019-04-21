@@ -1,19 +1,23 @@
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import { View, TouchableOpacity, Image } from 'react-native'
 import withTheme from '@app/providers/theme'
+import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react'
+import { Image, TouchableOpacity, View } from 'react-native'
 import PauseIcon from './icons/PauseIcon'
 import PlayIcon from './icons/PlayIcon'
 import styles from './styles'
 
-class CustomImage extends PureComponent {
-  static propTypes = {
-    theme: PropTypes.object,
-    source: PropTypes.number,
-    defaultSource: PropTypes.number,
-    isPlaying: PropTypes.bool,
-  }
+interface CustomImageProps {
+  theme: any
+  source: number
+  defaultSource: number
+  isPlaying: boolean
+}
 
+interface CustomImageState {
+  isPlaying: boolean
+}
+
+class CustomImage extends PureComponent<CustomImageProps, CustomImageState> {
   static getDerivedStateFromProps(props, state) {
     if (props.isPlaying && !state.isPlaying) {
       return {

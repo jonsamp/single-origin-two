@@ -13,7 +13,6 @@
     "object-literal-sort-keys": false,
     "interface-name": false,
     "member-access": false,
-    "member-ordering": [true, { "order": "statics-first" }],
     "no-empty": [false],
     "arrow-parens": false,
     "no-implicit-dependencies": [false, ["@app"]],

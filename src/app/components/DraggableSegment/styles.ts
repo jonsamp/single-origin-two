@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native'
 import type from '@app/constants/type'
+import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     height: 50,
     shadowColor: 'rgba(0,0,0,0.1)',
     shadowRadius: 4,
-    shadowOffset: { height: 4 },
+    shadowOffset: { height: 4, width: 0 },
     shadowOpacity: 1,
   },
   labelContainer: {
