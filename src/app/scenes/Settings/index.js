@@ -17,8 +17,6 @@ class Settings extends Component {
   render() {
     const { theme, isDarkTheme, ...rest } = this.props
 
-    console.log({ rest })
-
     const modifiedTheme = isDarkTheme
       ? {
           ...theme,

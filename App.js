@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import Sentry from 'sentry-expo'
 import { Provider } from 'react-redux'
 import { Font, AppLoading } from 'expo'
-// import EStyleSheet from 'react-native-extended-stylesheet'
 import { PersistGate } from 'redux-persist/integration/react'
 import Navigator from '@app/scenes/Navigator'
 import SignPainter from './src/app/assets/SignPainter-HouseScript.ttf'
 import configureStore from './src/app/store/configureStore'
+import themes from '@app/constants/themes'
 
 const { store, persistor } = configureStore()
 
@@ -20,7 +20,6 @@ Sentry.config(
 class App extends Component {
   state = {
     isAppLoaded: false,
-    shouldRender: true,
   }
 
   loadFonts = async () => {
@@ -29,21 +28,8 @@ class App extends Component {
     })
   }
 
-  toggleTheme = () => {
-    const theme =
-      EStyleSheet.value('$theme') === 'light' ? darkTheme : lightTheme
-    EStyleSheet.build(theme)
-
-    darkTheme = 'something'
-
-    // setState() called twice to re-render whole component tree
-    this.setState({ shouldRender: false }, () =>
-      this.setState({ shouldRender: true })
-    )
-  }
-
   render() {
-    const { isAppLoaded, shouldRender } = this.state
+    const { isAppLoaded } = this.state
     if (!isAppLoaded) {
       return (
         <AppLoading
@@ -56,9 +42,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         {/* <PersistGate loading={null} persistor={persistor}> */}
-        {shouldRender ? (
-          <Navigator screenProps={{ toggleTheme: this.toggleTheme }} />
-        ) : null}
+        <Navigator />
         {/* </PersistGate> */}
       </Provider>
     )
