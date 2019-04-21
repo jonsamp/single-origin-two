@@ -1,18 +1,18 @@
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import { withNavigation } from 'react-navigation';
-import withTheme from '@app/providers/theme';
-import styles from './styles';
+import React from 'react'
+import { Feather } from '@expo/vector-icons'
+import withTheme from '@app/providers/theme'
+import { Text, TouchableOpacity, View } from 'react-native'
+import { withNavigation } from 'react-navigation'
+import styles from './styles'
 
-type HeaderProps = {
-  navigation: any;
-  theme: any;
-  title: string;
-  right: any;
-  isDarkTheme: boolean;
-  onBack: () => void;
-};
+interface HeaderProps {
+  navigation: any
+  theme: any
+  title: string
+  right: any
+  isDarkTheme: boolean
+  onBack: () => void
+}
 
 function Header({
   navigation,
@@ -48,7 +48,7 @@ function Header({
         <View />
       </View>
     </View>
-  );
+  )
 }
 
-export default withTheme(withNavigation(Header));
+export default withTheme(withNavigation(Header))

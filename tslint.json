@@ -16,11 +16,10 @@
     "member-ordering": [true, { "order": "statics-first" }],
     "no-empty": [false],
     "arrow-parens": false,
-    "no-implicit-dependencies": [true, ["@app"]],
+    "no-implicit-dependencies": [false, ["@app"]],
     "no-submodule-imports": [true, "@app"],
     "no-relative-imports": [true, "allow-siblings"],
-    "no-unused-variable": true,
-    "ordered-imports": true
+    "no-unused-variable": true
   },
   "rulesDirectory": []
 }

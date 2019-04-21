@@ -6,7 +6,6 @@ import { PersistGate } from 'redux-persist/integration/react'
 import Navigator from '@app/scenes/Navigator'
 import SignPainter from './src/app/assets/SignPainter-HouseScript.ttf'
 import configureStore from './src/app/store/configureStore'
-import themes from '@app/constants/themes'
 
 const { store, persistor } = configureStore()
 
