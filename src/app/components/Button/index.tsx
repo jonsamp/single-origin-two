@@ -1,32 +1,31 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import withTheme from '@app/providers/theme';
 import styles from './styles';
 
-const propTypes = {
-  theme: PropTypes.object,
-  type: PropTypes.string,
-  onPress: PropTypes.func,
-  title: PropTypes.string,
-  customStyle: PropTypes.any,
-  customTextStyle: PropTypes.any,
-  disabled: PropTypes.bool,
-  loading: PropTypes.bool,
-  isDarkTheme: PropTypes.bool,
+type ButtonProps = {
+  theme?: any;
+  type?: 'normal' | 'secondary' | 'outline';
+  onPress?: () => void;
+  title: string;
+  customStyle?: object;
+  customTextStyle?: object;
+  disabled?: boolean;
+  loading?: boolean;
+  isDarkTheme?: boolean;
 };
 
 function Button({
   theme,
-  type = 'normal',
+  type,
   onPress,
-  title = '',
+  title,
   disabled,
   customStyle,
   customTextStyle,
   loading,
   isDarkTheme,
-}) {
+}: ButtonProps) {
   let buttonStyle = [styles.button, { backgroundColor: theme.primary }];
   let textStyle = [styles.text, { color: theme.background }, customTextStyle];
 
@@ -75,7 +74,5 @@ function Button({
     </View>
   );
 }
-
-Button.propTypes = propTypes;
 
 export default withTheme(Button);

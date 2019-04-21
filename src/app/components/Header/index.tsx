@@ -1,21 +1,27 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { withNavigation } from 'react-navigation';
 import withTheme from '@app/providers/theme';
 import styles from './styles';
 
-const propTypes = {
-  navigation: PropTypes.object,
-  theme: PropTypes.object,
-  title: PropTypes.string,
-  right: PropTypes.any,
-  isDarkTheme: PropTypes.bool,
-  onBack: PropTypes.func,
+type HeaderProps = {
+  navigation: any;
+  theme: any;
+  title: string;
+  right: any;
+  isDarkTheme: boolean;
+  onBack: () => void;
 };
 
-function Header({ navigation, theme, title, right, isDarkTheme, onBack }) {
+function Header({
+  navigation,
+  theme,
+  title,
+  right,
+  isDarkTheme,
+  onBack,
+}: HeaderProps) {
   return (
     <View
       style={[
@@ -45,6 +51,4 @@ function Header({ navigation, theme, title, right, isDarkTheme, onBack }) {
   );
 }
 
-Header.propTypes = propTypes;
-
-export default withNavigation(withTheme(Header));
+export default withTheme(withNavigation(Header));

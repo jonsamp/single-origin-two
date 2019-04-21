@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import { ScrollView, View, Text } from 'react-native';
 import withTheme from '@app/providers/theme';
@@ -22,8 +23,6 @@ class Log extends Component {
     log: PropTypes.object,
   };
 
-  state = {};
-
   render() {
     const { theme, log } = this.props;
     const recipe = recipes[log.recipeId];
@@ -39,7 +38,10 @@ class Log extends Component {
           {recipe.title}
         </Text>
         <View>
-          <Text>{new Date(log.timestamp).toString()}</Text>
+          <Text style={type.text}>
+            Brew completed at {moment(log.timestamp).format('h:mmA')} on{' '}
+            {moment(log.timestamp).format('MM/DD/YYYY')}
+          </Text>
         </View>
         <Text style={{ color: theme.foreground, fontSize: 32 }}>
           {JSON.stringify(log, null, 2)}
