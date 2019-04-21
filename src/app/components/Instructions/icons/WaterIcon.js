@@ -1,5 +1,5 @@
-import React from 'react';
-import { Svg } from 'expo';
+import React from 'react'
+import { Svg } from 'expo'
 
 function WaterIcon({ fill }) {
   return (
@@ -10,7 +10,7 @@ function WaterIcon({ fill }) {
         fillRule="evenodd"
       />
     </Svg>
-  );
+  )
 }
 
-export default WaterIcon;
+export default WaterIcon

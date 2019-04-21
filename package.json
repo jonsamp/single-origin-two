@@ -5,10 +5,10 @@
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
-    "ios": "expo start --ios",
+    "ios": "open -a Simulator && expo start --ios",
     "eject": "expo eject",
     "postinstall": "rndebugger-open",
-    "prettier": "prettier --write './app/**/*.js'"
+    "prettier": "prettier --write './src/app/**/*.js'"
   },
   "dependencies": {
     "expo": "^31.0.4",
@@ -20,6 +20,7 @@
     "react-native-animate-number": "^0.1.2",
     "react-native-calendars": "1.22.0",
     "react-native-debugger-open": "0.3.17",
+    "react-native-extended-stylesheet": "0.11.1",
     "react-native-fade": "^1.0.2",
     "react-native-header-scroll-view": "2.0.0",
     "react-native-iphone-x-helper": "^1.2.0",

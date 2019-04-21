@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
-import type from '@app/constants/type';
+import { StyleSheet } from 'react-native'
+import type from '@app/constants/type'
 
-const CIRCLE_SIZE = 20;
+const CIRCLE_SIZE = 20
 
 const styles = StyleSheet.create({
   container: {
@@ -19,6 +19,6 @@ const styles = StyleSheet.create({
     marginRight: 8,
     bottom: 4,
   },
-});
+})
 
-export default styles;
+export default styles

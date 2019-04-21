@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
-import withTheme from '@app/providers/theme';
-import type from '@app/constants/type';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { View, Text } from 'react-native'
+import withTheme from '@app/providers/theme'
+import type from '@app/constants/type'
 
 class PrivacyPolicy extends Component {
   static propTypes = {
     theme: PropTypes.object,
-  };
+  }
 
   render() {
-    const { theme } = this.props;
-    const paragraph = { color: theme.foreground, marginBottom: 16 };
+    const { theme } = this.props
+    const paragraph = { color: theme.foreground, marginBottom: 16 }
 
     return (
       <View style={{ padding: 16 }}>
@@ -279,8 +279,8 @@ class PrivacyPolicy extends Component {
           via email at sampjon@gmail.com
         </Text>
       </View>
-    );
+    )
   }
 }
 
-export default withTheme(PrivacyPolicy);
+export default withTheme(PrivacyPolicy)

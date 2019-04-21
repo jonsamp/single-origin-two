@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
-import withTheme from '@app/providers/theme';
-import styles from './styles';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { View, Text } from 'react-native'
+import withTheme from '@app/providers/theme'
+import styles from './styles'
 
 const propTypes = {
   children: PropTypes.node,
@@ -11,7 +11,7 @@ const propTypes = {
   description: PropTypes.string,
   borderTop: PropTypes.bool,
   isDarkTheme: PropTypes.bool,
-};
+}
 
 const SettingWrapper = ({
   children,
@@ -59,8 +59,8 @@ const SettingWrapper = ({
       </View>
     ) : null}
   </View>
-);
+)
 
-SettingWrapper.propTypes = propTypes;
+SettingWrapper.propTypes = propTypes
 
-export default withTheme(SettingWrapper);
+export default withTheme(SettingWrapper)

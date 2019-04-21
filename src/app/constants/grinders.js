@@ -1,10 +1,10 @@
-import extraFine from './images/extra-fine.jpeg';
-import fine from './images/fine.jpeg';
-import mediumFine from './images/medium-fine.jpeg';
-import medium from './images/medium.jpeg';
-import mediumCoarse from './images/medium-coarse.jpeg';
-import coarse from './images/coarse.jpeg';
-import extraCoarse from './images/extra-coarse.jpeg';
+import extraFine from './images/extra-fine.jpeg'
+import fine from './images/fine.jpeg'
+import mediumFine from './images/medium-fine.jpeg'
+import medium from './images/medium.jpeg'
+import mediumCoarse from './images/medium-coarse.jpeg'
+import coarse from './images/coarse.jpeg'
+import extraCoarse from './images/extra-coarse.jpeg'
 
 const grinders = {
   generic: {
@@ -42,45 +42,45 @@ const grinders = {
     min: 1,
     max: 18,
   },
-};
+}
 
 const getVerboseSetting = percent => {
-  const interval = 0.14285714286;
+  const interval = 0.14285714286
   if (percent <= interval) {
     return {
       title: 'extra fine',
       image: extraFine,
-    };
+    }
   } else if (percent <= interval * 2) {
     return {
       title: 'fine',
       image: fine,
-    };
+    }
   } else if (percent <= interval * 3) {
     return {
       title: 'medium fine',
       image: mediumFine,
-    };
+    }
   } else if (percent <= interval * 4) {
     return {
       title: 'medium',
       image: medium,
-    };
+    }
   } else if (percent <= interval * 5) {
     return {
       title: 'medium coarse',
       image: mediumCoarse,
-    };
+    }
   } else if (percent <= interval * 6) {
     return {
       title: 'coarse',
       image: coarse,
-    };
+    }
   }
   return {
     title: 'extra coarse',
     image: extraCoarse,
-  };
-};
+  }
+}
 
-export { grinders, getVerboseSetting };
+export { grinders, getVerboseSetting }

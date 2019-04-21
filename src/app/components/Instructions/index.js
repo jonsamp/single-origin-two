@@ -1,29 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
-import withTheme from '@app/providers/theme';
-import type from '@app/constants/type';
-import WaterIcon from './icons/WaterIcon';
-import RecordIcon from './icons/RecordIcon';
-import GrindIcon from './icons/GrindIcon';
-import TipIcon from './icons/TipIcon';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { View, Text } from 'react-native'
+import withTheme from '@app/providers/theme'
+import type from '@app/constants/type'
+import WaterIcon from './icons/WaterIcon'
+import RecordIcon from './icons/RecordIcon'
+import GrindIcon from './icons/GrindIcon'
+import TipIcon from './icons/TipIcon'
 
 const propTypes = {
   theme: PropTypes.object,
   text: PropTypes.string,
   isDarkTheme: PropTypes.bool,
   icon: PropTypes.string,
-};
+}
 
 function Instructions({ text, theme, isDarkTheme, icon }) {
-  const specialWordCaptureGroup = /(\*\*.*?\*\*)/g;
-  const specialWordRegex = /\*\*.*\*\*/;
+  const specialWordCaptureGroup = /(\*\*.*?\*\*)/g
+  const specialWordRegex = /\*\*.*\*\*/
   const specialWordStyles = {
     ...type.body,
     fontSize: 19,
     color: theme.primaryDark,
     fontWeight: 'bold',
-  };
+  }
   const formattedText = text.split(specialWordCaptureGroup).map(part => (
     <Text
       key={part}
@@ -31,14 +31,14 @@ function Instructions({ text, theme, isDarkTheme, icon }) {
     >
       {part.replace(/\*/g, '')}
     </Text>
-  ));
+  ))
   const icons = {
     WaterIcon,
     RecordIcon,
     GrindIcon,
     TipIcon,
-  };
-  const IconComponent = icons[icon];
+  }
+  const IconComponent = icons[icon]
 
   return (
     <View
@@ -72,9 +72,9 @@ function Instructions({ text, theme, isDarkTheme, icon }) {
         </Text>
       </View>
     </View>
-  );
+  )
 }
 
-Instructions.propTypes = propTypes;
+Instructions.propTypes = propTypes
 
-export default withTheme(Instructions);
+export default withTheme(Instructions)

@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import withSettings from '@app/providers/settings';
-import { getValueUnit } from '@app/scenes/Brew/helpers';
-import Card from '@app/components/Card';
-import Question from '@app/components/Question';
-import ScrollSelect from '@app/components/ScrollSelect';
+import React from 'react'
+import PropTypes from 'prop-types'
+import withSettings from '@app/providers/settings'
+import { getValueUnit } from '@app/scenes/Brew/helpers'
+import Card from '@app/components/Card'
+import Question from '@app/components/Question'
+import ScrollSelect from '@app/components/ScrollSelect'
 
 const propTypes = {
   unitHelpers: PropTypes.object,
@@ -12,7 +12,7 @@ const propTypes = {
   setRecipeState: PropTypes.func,
   minYield: PropTypes.number,
   maxYield: PropTypes.number,
-};
+}
 
 function YieldQuestion({
   unitHelpers,
@@ -21,7 +21,7 @@ function YieldQuestion({
   minYield,
   maxYield,
 }) {
-  const { brewedVolumeUnit } = unitHelpers;
+  const { brewedVolumeUnit } = unitHelpers
   return (
     <Card>
       <Question
@@ -47,9 +47,9 @@ function YieldQuestion({
         step={1}
       />
     </Card>
-  );
+  )
 }
 
-YieldQuestion.propTypes = propTypes;
+YieldQuestion.propTypes = propTypes
 
-export default withSettings(YieldQuestion);
+export default withSettings(YieldQuestion)

@@ -1,9 +1,9 @@
-import { withBloomFn } from '@app/scenes/Brew/helpers';
-import KalitaWavePour from './images/kalita-wave-pour.gif';
-import KalitaWavePourDefault from './images/kalita-wave-pour-default.jpg';
+import { withBloomFn } from '@app/scenes/Brew/helpers'
+import KalitaWavePour from './images/kalita-wave-pour.gif'
+import KalitaWavePourDefault from './images/kalita-wave-pour-default.jpg'
 
 export default function recipe({ settings }) {
-  const withBloom = withBloomFn({ settings });
+  const withBloom = withBloomFn({ settings })
 
   return {
     title: 'Kalita Wave 185',
@@ -65,5 +65,5 @@ export default function recipe({ settings }) {
     defaultGrind: 0.5,
     pourSource: KalitaWavePour,
     pourSourceDefault: KalitaWavePourDefault,
-  };
+  }
 }

@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { TouchableOpacity, Text } from 'react-native';
-import { withNavigation } from 'react-navigation';
-import { Feather } from '@expo/vector-icons';
-import withTheme from '@app/providers/theme';
-import type from '@app/constants/type';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { TouchableOpacity, Text } from 'react-native'
+import { withNavigation } from 'react-navigation'
+import { Feather } from '@expo/vector-icons'
+import withTheme from '@app/providers/theme'
+import type from '@app/constants/type'
 
 class Group extends Component {
   static propTypes = {
@@ -12,14 +12,14 @@ class Group extends Component {
     theme: PropTypes.object,
     navigation: PropTypes.object,
     isDarkTheme: PropTypes.bool,
-  };
+  }
 
   static defaultProps = {
     title: '',
-  };
+  }
 
   render() {
-    const { title, navigation, theme, isDarkTheme } = this.props;
+    const { title, navigation, theme, isDarkTheme } = this.props
 
     return (
       <TouchableOpacity
@@ -44,8 +44,8 @@ class Group extends Component {
           style={{ opacity: 0.65 }}
         />
       </TouchableOpacity>
-    );
+    )
   }
 }
 
-export default withNavigation(withTheme(Group));
+export default withNavigation(withTheme(Group))

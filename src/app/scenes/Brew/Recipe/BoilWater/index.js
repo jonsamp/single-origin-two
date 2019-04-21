@@ -1,16 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import withSettings from '@app/providers/settings';
-import Card from '@app/components/Card';
-import Instructions from '@app/components/Instructions';
+import React from 'react'
+import PropTypes from 'prop-types'
+import withSettings from '@app/providers/settings'
+import Card from '@app/components/Card'
+import Instructions from '@app/components/Instructions'
 
 const propTypes = {
   unitHelpers: PropTypes.object,
   totalVolume: PropTypes.number,
-};
+}
 
 function BoilWater({ unitHelpers, totalVolume }) {
-  const { waterVolumeUnit, temperatureUnit } = unitHelpers;
+  const { waterVolumeUnit, temperatureUnit } = unitHelpers
   return (
     <Card>
       <Instructions
@@ -24,9 +24,9 @@ function BoilWater({ unitHelpers, totalVolume }) {
         icon="WaterIcon"
       />
     </Card>
-  );
+  )
 }
 
-BoilWater.propTypes = propTypes;
+BoilWater.propTypes = propTypes
 
-export default withSettings(BoilWater);
+export default withSettings(BoilWater)

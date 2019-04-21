@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { View, TouchableOpacity, Image } from 'react-native';
-import withTheme from '@app/providers/theme';
-import PauseIcon from './icons/PauseIcon';
-import PlayIcon from './icons/PlayIcon';
-import styles from './styles';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { View, TouchableOpacity, Image } from 'react-native'
+import withTheme from '@app/providers/theme'
+import PauseIcon from './icons/PauseIcon'
+import PlayIcon from './icons/PlayIcon'
+import styles from './styles'
 
 class CustomImage extends PureComponent {
   static propTypes = {
@@ -12,28 +12,28 @@ class CustomImage extends PureComponent {
     source: PropTypes.number,
     defaultSource: PropTypes.number,
     isPlaying: PropTypes.bool,
-  };
+  }
 
   static getDerivedStateFromProps(props, state) {
     if (props.isPlaying && !state.isPlaying) {
       return {
         isPlaying: true,
-      };
+      }
     }
 
-    return null;
+    return null
   }
 
   state = {
     isPlaying: false,
-  };
+  }
 
   toggle = () =>
-    this.setState(prevState => ({ isPlaying: !prevState.isPlaying }));
+    this.setState(prevState => ({ isPlaying: !prevState.isPlaying }))
 
   render() {
-    const { source, defaultSource, theme } = this.props;
-    const { isPlaying } = this.state;
+    const { source, defaultSource, theme } = this.props
+    const { isPlaying } = this.state
 
     return (
       <TouchableOpacity onPress={this.toggle} activeOpacity={1}>
@@ -51,8 +51,8 @@ class CustomImage extends PureComponent {
           {defaultSource ? isPlaying ? <PauseIcon /> : <PlayIcon /> : null}
         </View>
       </TouchableOpacity>
-    );
+    )
   }
 }
 
-export default withTheme(CustomImage);
+export default withTheme(CustomImage)

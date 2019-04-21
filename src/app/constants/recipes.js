@@ -1,7 +1,7 @@
-import React from 'react';
-import KalitaWave185Icon from './icons/KalitaWave185Icon';
-import KalitaWave155Icon from './icons/KalitaWave155Icon';
-import CleverIcon from './icons/CleverIcon';
+import React from 'react'
+import KalitaWave185Icon from './icons/KalitaWave185Icon'
+import KalitaWave155Icon from './icons/KalitaWave155Icon'
+import CleverIcon from './icons/CleverIcon'
 
 export default {
   Aeropress: {
@@ -46,4 +46,4 @@ export default {
     id: 'V60',
     icon: () => {},
   },
-};
+}

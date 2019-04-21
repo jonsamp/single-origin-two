@@ -1,3 +1,3 @@
 // import { createSelector } from 'reselect';
 
-export const selectSettings = state => state.settings;
+export const selectSettings = state => state.settings

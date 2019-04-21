@@ -1,9 +1,9 @@
-import { withBloomFn } from '@app/scenes/Brew/helpers';
-import CleverPour from './images/clever-pour.gif';
-import CleverPourDefault from './images/clever-pour-default.jpg';
+import { withBloomFn } from '@app/scenes/Brew/helpers'
+import CleverPour from './images/clever-pour.gif'
+import CleverPourDefault from './images/clever-pour-default.jpg'
 
 export default function recipe({ settings }) {
-  const withBloom = withBloomFn({ settings });
+  const withBloom = withBloomFn({ settings })
 
   return {
     title: 'Clever',
@@ -60,5 +60,5 @@ export default function recipe({ settings }) {
     defaultGrind: 0.75,
     pourSource: CleverPour,
     pourSourceDefault: CleverPourDefault,
-  };
+  }
 }

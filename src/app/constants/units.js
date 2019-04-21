@@ -9,7 +9,7 @@ const tempUnits = {
     id: 'celsius',
     symbol: '°C',
   },
-};
+}
 
 const weightUnits = {
   grams: {
@@ -27,11 +27,11 @@ const weightUnits = {
     id: 'cups',
     symbol: 'cups',
   },
-};
+}
 
 const units = {
   ...weightUnits,
   ...tempUnits,
-};
+}
 
-export { tempUnits, weightUnits, units };
+export { tempUnits, weightUnits, units }

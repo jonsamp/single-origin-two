@@ -1,4 +1,4 @@
-const iconSize = 22;
+const iconSize = 22
 
 export default {
   default: {
@@ -32,4 +32,4 @@ export default {
     grey3: '#4F4F4F',
     iconSize,
   },
-};
+}

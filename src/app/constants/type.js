@@ -60,4 +60,4 @@ export default {
     lineHeight: 16,
     fontWeight: '500',
   },
-};
+}

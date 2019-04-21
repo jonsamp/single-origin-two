@@ -1,6 +1,6 @@
-import { handleActions } from 'redux-actions';
-import recipes from '@app/constants/recipes';
-import * as actions from './actions';
+import { handleActions } from 'redux-actions'
+import recipes from '@app/constants/recipes'
+import * as actions from './actions'
 
 const initialState = {
   theme: 'light',
@@ -21,7 +21,7 @@ const initialState = {
     (acc, r) => ({ ...acc, [r.id]: true }),
     {}
   ),
-};
+}
 
 const reducers = {
   [actions.settingUpdated]: (settings, { payload: { setting, value } }) => ({
@@ -32,6 +32,6 @@ const reducers = {
     ...settings,
     theme,
   }),
-};
+}
 
-export default handleActions(reducers, initialState);
+export default handleActions(reducers, initialState)

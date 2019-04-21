@@ -1,18 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Svg } from 'expo';
-import { connect } from 'react-redux';
-import { selectSettings } from '@app/state/settings/selectors';
-import themes from '@app/constants/themes';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Svg } from 'expo'
+import { connect } from 'react-redux'
+import { selectSettings } from '@app/state/settings/selectors'
+import themes from '@app/constants/themes'
 
 const mapStateToProps = state => ({
   theme: selectSettings(state).theme,
-});
+})
 
 const propTypes = {
   focused: PropTypes.bool.isRequired,
   theme: PropTypes.string.isRequired,
-};
+}
 
 const SettingsIcon = ({ focused, theme }) => (
   <Svg width="27" height="28">
@@ -24,8 +24,8 @@ const SettingsIcon = ({ focused, theme }) => (
       <Svg.Path d="M13.732 18.593a4.543 4.543 0 1 1 0-9.086 4.543 4.543 0 0 1 0 9.086zm0-2a2.543 2.543 0 1 0 0-5.086 2.543 2.543 0 0 0 0 5.086z" />
     </Svg.G>
   </Svg>
-);
+)
 
-SettingsIcon.propTypes = propTypes;
+SettingsIcon.propTypes = propTypes
 
-export default connect(mapStateToProps)(SettingsIcon);
+export default connect(mapStateToProps)(SettingsIcon)

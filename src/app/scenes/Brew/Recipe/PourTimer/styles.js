@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import type from '@app/constants/type';
+import { StyleSheet } from 'react-native'
+import type from '@app/constants/type'
 
 const styles = StyleSheet.create({
   container: {
@@ -55,6 +55,6 @@ const styles = StyleSheet.create({
     ...type.label,
     marginBottom: 4,
   },
-});
+})
 
-export default styles;
+export default styles

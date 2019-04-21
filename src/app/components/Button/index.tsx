@@ -1,19 +1,19 @@
-import React from 'react';
-import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
-import withTheme from '@app/providers/theme';
-import styles from './styles';
+import withTheme from '@app/providers/theme'
+import React from 'react'
+import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native'
+import styles from './styles'
 
-type ButtonProps = {
-  theme?: any;
-  type?: 'normal' | 'secondary' | 'outline';
-  onPress?: () => void;
-  title: string;
-  customStyle?: object;
-  customTextStyle?: object;
-  disabled?: boolean;
-  loading?: boolean;
-  isDarkTheme?: boolean;
-};
+interface ButtonProps {
+  theme?: any
+  type?: 'normal' | 'secondary' | 'outline'
+  onPress?: () => void
+  title: string
+  customStyle?: object
+  customTextStyle?: object
+  disabled?: boolean
+  loading?: boolean
+  isDarkTheme?: boolean
+}
 
 function Button({
   theme,
@@ -26,20 +26,20 @@ function Button({
   loading,
   isDarkTheme,
 }: ButtonProps) {
-  let buttonStyle = [styles.button, { backgroundColor: theme.primary }];
-  let textStyle = [styles.text, { color: theme.background }, customTextStyle];
+  let buttonStyle = [styles.button, { backgroundColor: theme.primary }]
+  let textStyle = [styles.text, { color: theme.background }, customTextStyle]
 
   if (type === 'secondary') {
     buttonStyle = [
       styles.button,
       { backgroundColor: isDarkTheme ? theme.grey1 : theme.background },
-    ];
-    textStyle = [styles.text, { color: theme.foreground }];
+    ]
+    textStyle = [styles.text, { color: theme.foreground }]
   }
 
   if (type === 'outline') {
-    buttonStyle = [styles.buttonOutline, { borderColor: theme.foreground }];
-    textStyle = [styles.textOutline, { color: theme.foreground }];
+    buttonStyle = [styles.buttonOutline, { borderColor: theme.foreground }]
+    textStyle = [styles.textOutline, { color: theme.foreground }]
   }
 
   if (disabled) {
@@ -53,7 +53,7 @@ function Button({
       >
         <Text style={[textStyle, customTextStyle]}>{title.toUpperCase()}</Text>
       </TouchableOpacity>
-    );
+    )
   }
 
   return (
@@ -72,7 +72,7 @@ function Button({
         )}
       </TouchableOpacity>
     </View>
-  );
+  )
 }
 
-export default withTheme(Button);
+export default withTheme(Button)

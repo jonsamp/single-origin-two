@@ -1,28 +1,31 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import withTheme from '@app/providers/theme';
-import HeaderScrollView from 'react-native-header-scroll-view';
-import { TouchableOpacity, Linking } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import Section from './Section';
-import Group from './Group';
-import SettingWrapper from './SettingWrapper';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import withTheme from '@app/providers/theme'
+import HeaderScrollView from 'react-native-header-scroll-view'
+import { TouchableOpacity, Linking } from 'react-native'
+import { Feather } from '@expo/vector-icons'
+import Section from './Section'
+import Group from './Group'
+import SettingWrapper from './SettingWrapper'
 
 class Settings extends Component {
   static propTypes = {
     theme: PropTypes.object,
     isDarkTheme: PropTypes.bool,
-  };
+  }
 
   render() {
-    const { theme, isDarkTheme } = this.props;
+    const { theme, isDarkTheme, ...rest } = this.props
+
+    console.log({ rest })
+
     const modifiedTheme = isDarkTheme
       ? {
           ...theme,
           grey1: theme.background,
           grey2: theme.grey1,
         }
-      : theme;
+      : theme
 
     return (
       <HeaderScrollView
@@ -102,8 +105,8 @@ class Settings extends Component {
           </TouchableOpacity>
         </Section>
       </HeaderScrollView>
-    );
+    )
   }
 }
 
-export default withTheme(Settings);
+export default withTheme(Settings)

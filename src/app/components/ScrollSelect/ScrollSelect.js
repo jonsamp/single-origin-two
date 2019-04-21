@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { View, Text, Animated, TouchableOpacity } from 'react-native';
-import { range } from 'lodash';
-import withTheme from '@app/providers/theme';
-import withSettings from '@app/providers/settings';
-import styles from './styles';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { View, Text, Animated, TouchableOpacity } from 'react-native'
+import { range } from 'lodash'
+import withTheme from '@app/providers/theme'
+import withSettings from '@app/providers/settings'
+import styles from './styles'
 
 class ScrollSelect extends Component {
   static propTypes = {
@@ -17,7 +17,7 @@ class ScrollSelect extends Component {
     unitType: PropTypes.string,
     unitHelpers: PropTypes.object,
     context: PropTypes.number,
-  };
+  }
 
   static defaultProps = {
     min: 1,
@@ -26,15 +26,15 @@ class ScrollSelect extends Component {
     onChange: () => {},
     unitHelpers: {},
     defaultValue: null,
-  };
+  }
 
   componentDidMount() {
-    const { min, max, step, defaultValue } = this.encodeValues();
-    if (defaultValue === undefined || defaultValue === null) return;
+    const { min, max, step, defaultValue } = this.encodeValues()
+    if (defaultValue === undefined || defaultValue === null) return
 
-    const selectionRange = range(min, max + 1, step);
-    const defaultValueIndex = selectionRange.indexOf(defaultValue);
-    const itemPosition = defaultValueIndex * this.SCREEN_WIDTH;
+    const selectionRange = range(min, max + 1, step)
+    const defaultValueIndex = selectionRange.indexOf(defaultValue)
+    const itemPosition = defaultValueIndex * this.SCREEN_WIDTH
 
     if (this.scrollViewRef) {
       setTimeout(
@@ -45,52 +45,52 @@ class ScrollSelect extends Component {
             animated: false,
           }),
         0
-      );
+      )
     }
   }
 
   onSelectionTap = index => {
-    const itemPosition = index * this.SCREEN_WIDTH;
+    const itemPosition = index * this.SCREEN_WIDTH
 
     if (this.scrollViewRef) {
-      this.scrollViewRef.scrollTo({ x: itemPosition, y: 0, animated: true });
+      this.scrollViewRef.scrollTo({ x: itemPosition, y: 0, animated: true })
     }
-  };
+  }
 
   encodeValues = () => {
-    const { unitType, min, max, unitHelpers, defaultValue } = this.props;
-    const unitHelper = unitHelpers[unitType];
+    const { unitType, min, max, unitHelpers, defaultValue } = this.props
+    const unitHelper = unitHelpers[unitType]
     return {
       min: Math.round(unitHelper.getPreferredValue(min)),
       max: Math.round(unitHelper.getPreferredValue(max)),
       defaultValue: Math.round(unitHelper.getPreferredValue(defaultValue)),
-    };
-  };
+    }
+  }
 
   decodeValue = value => {
-    const { unitType, unitHelpers } = this.props;
-    return unitHelpers[unitType].getStandardValue(value);
-  };
+    const { unitType, unitHelpers } = this.props
+    return unitHelpers[unitType].getStandardValue(value)
+  }
 
   getRanges = index => [
     index * this.SCREEN_WIDTH - this.SCREEN_WIDTH * 2,
     index * this.SCREEN_WIDTH,
     index * this.SCREEN_WIDTH + this.SCREEN_WIDTH * 2,
-  ];
+  ]
 
   transitionAnimation = index => {
-    const ranges = this.getRanges(index);
+    const ranges = this.getRanges(index)
     return {
       opacity: this.xOffset.interpolate({
         inputRange: ranges,
         outputRange: [0, 1, 0],
       }),
-    };
-  };
+    }
+  }
 
   textAnimation = index => {
-    const ranges = this.getRanges(index);
-    const translation = this.SCREEN_WIDTH * 0.75;
+    const ranges = this.getRanges(index)
+    const translation = this.SCREEN_WIDTH * 0.75
 
     return {
       transform: [
@@ -113,18 +113,18 @@ class ScrollSelect extends Component {
           }),
         },
       ],
-    };
-  };
+    }
+  }
 
-  xOffset = new Animated.Value(0);
-  SCREEN_WIDTH = this.props.context / 3;
+  xOffset = new Animated.Value(0)
+  SCREEN_WIDTH = this.props.context / 3
 
   render() {
-    const { theme, onChange, step, unitType, unitHelpers } = this.props;
-    const { min, max } = this.encodeValues();
-    const selectionRange = range(min, max + 1, step);
-    const selectionTextStyle = styles.selectionText;
-    const unitHelper = unitHelpers[unitType];
+    const { theme, onChange, step, unitType, unitHelpers } = this.props
+    const { min, max } = this.encodeValues()
+    const selectionRange = range(min, max + 1, step)
+    const selectionTextStyle = styles.selectionText
+    const unitHelper = unitHelpers[unitType]
 
     return (
       <View style={[styles.container, { backgroundColor: theme.grey2 }]}>
@@ -137,8 +137,8 @@ class ScrollSelect extends Component {
           onMomentumScrollEnd={event => {
             const selectionNumber = Math.round(
               event.nativeEvent.contentOffset.x / this.SCREEN_WIDTH
-            );
-            onChange(this.decodeValue(Number(selectionRange[selectionNumber])));
+            )
+            onChange(this.decodeValue(Number(selectionRange[selectionNumber])))
           }}
           horizontal
           contentContainerStyle={{ paddingVertical: this.SCREEN_WIDTH / 3 }}
@@ -147,7 +147,7 @@ class ScrollSelect extends Component {
           snapToInterval={this.SCREEN_WIDTH}
           ref={ref => {
             if (ref) {
-              this.scrollViewRef = ref._component;
+              this.scrollViewRef = ref._component
             }
           }}
         >
@@ -189,8 +189,8 @@ class ScrollSelect extends Component {
           </Text>
         </View>
       </View>
-    );
+    )
   }
 }
 
-export default withSettings(withTheme(ScrollSelect));
+export default withSettings(withTheme(ScrollSelect))

@@ -1,4 +1,4 @@
-import Clever from './Clever';
-import KalitaWave185 from './KalitaWave185';
+import Clever from './Clever'
+import KalitaWave185 from './KalitaWave185'
 
-export default { Clever, KalitaWave185 };
+export default { Clever, KalitaWave185 }

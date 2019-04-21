@@ -1,4 +1,4 @@
-import type from '@app/constants/type';
+import type from '@app/constants/type'
 // import colors from '@app/constants/colors';
 
 // Find theme style nodes (the keys in this object) here: https://github.com/wix/react-native-calendars/tree/master/src/calendar
@@ -35,6 +35,6 @@ const themeStyles = theme => ({
       justifyContent: 'space-around',
     },
   },
-});
+})
 
-export default themeStyles;
+export default themeStyles

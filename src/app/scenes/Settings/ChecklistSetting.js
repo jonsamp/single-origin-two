@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { startCase } from 'lodash';
-import { TouchableOpacity } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import withTheme from '@app/providers/theme';
-import SettingWrapper from './SettingWrapper';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { startCase } from 'lodash'
+import { TouchableOpacity } from 'react-native'
+import { Feather } from '@expo/vector-icons'
+import withTheme from '@app/providers/theme'
+import SettingWrapper from './SettingWrapper'
 
 const propTypes = {
   theme: PropTypes.object,
@@ -16,7 +16,7 @@ const propTypes = {
       value: PropTypes.bool,
     })
   ),
-};
+}
 
 const ChecklistSetting = ({ theme, onChange, items }) =>
   items.map(item => (
@@ -29,8 +29,8 @@ const ChecklistSetting = ({ theme, onChange, items }) =>
         ) : null}
       </SettingWrapper>
     </TouchableOpacity>
-  ));
+  ))
 
-ChecklistSetting.propTypes = propTypes;
+ChecklistSetting.propTypes = propTypes
 
-export default withTheme(ChecklistSetting);
+export default withTheme(ChecklistSetting)

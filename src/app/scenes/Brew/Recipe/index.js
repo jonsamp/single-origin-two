@@ -1,20 +1,20 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { withNavigation } from 'react-navigation';
-import withSettings from '@app/providers/settings';
-import { logAdded } from '@app/state/logs/actions';
-import Button from '@app/components/Button';
-import { handleTick } from '@app/scenes/Brew/helpers';
-import recipes from '@app/scenes/Brew/recipes';
-import Preparation from './Preparation';
-import YieldQuestion from './YieldQuestion';
-import BoilWater from './BoilWater';
-import GrindCoffee from './GrindCoffee';
-import RecordBrewAttributes from './RecordBrewAttributes';
-import PourTimer from './PourTimer';
+import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { withNavigation } from 'react-navigation'
+import withSettings from '@app/providers/settings'
+import { logAdded } from '@app/state/logs/actions'
+import Button from '@app/components/Button'
+import { handleTick } from '@app/scenes/Brew/helpers'
+import recipes from '@app/scenes/Brew/recipes'
+import Preparation from './Preparation'
+import YieldQuestion from './YieldQuestion'
+import BoilWater from './BoilWater'
+import GrindCoffee from './GrindCoffee'
+import RecordBrewAttributes from './RecordBrewAttributes'
+import PourTimer from './PourTimer'
 
-const mapDispatchToProps = { logAdded };
+const mapDispatchToProps = { logAdded }
 
 class Recipe extends Component {
   static propTypes = {
@@ -23,13 +23,13 @@ class Recipe extends Component {
     recipe: PropTypes.object,
     navigation: PropTypes.object,
     logAdded: PropTypes.func,
-  };
+  }
 
   static defaultProps = {
     settings: {},
     unitHelpers: {},
     navigation: {},
-  };
+  }
 
   state = {
     isLoaded: false,
@@ -43,19 +43,19 @@ class Recipe extends Component {
     timestamp: new Date().getTime(),
     totalBrewTime: 0,
     attributesRecorded: false,
-  };
+  }
 
   componentWillMount() {
     const recipe = recipes[this.props.recipe.id]({
       settings: this.props.settings,
-    });
+    })
     this.setState({
       ...recipe,
       isLoaded: true,
-    });
+    })
   }
 
-  setRecipeState = ({ key, value }) => this.setState({ [key]: value });
+  setRecipeState = ({ key, value }) => this.setState({ [key]: value })
 
   onTick = second => {
     handleTick({
@@ -65,12 +65,12 @@ class Recipe extends Component {
       waterVolumeUnit: this.props.unitHelpers.waterVolumeUnit,
       setState: this.setRecipeState,
       second,
-    });
-    this.setState({ totalBrewTime: second });
-  };
+    })
+    this.setState({ totalBrewTime: second })
+  }
 
   onFinish = () => {
-    const { navigation, recipe, settings } = this.props;
+    const { navigation, recipe, settings } = this.props
     const {
       timestamp,
       totalVolume,
@@ -78,7 +78,7 @@ class Recipe extends Component {
       temp,
       totalBrewTime,
       attributesRecorded,
-    } = this.state;
+    } = this.state
     const log = {
       timestamp,
       totalVolume,
@@ -99,15 +99,15 @@ class Recipe extends Component {
           }
         : null),
       recipeId: recipe.id,
-    };
+    }
 
-    this.props.logAdded({ log });
+    this.props.logAdded({ log })
 
-    navigation.navigate('BrewSummary', { timestamp });
-  };
+    navigation.navigate('BrewSummary', { timestamp })
+  }
 
   render() {
-    const { settings, unitHelpers, recipe } = this.props;
+    const { settings, unitHelpers, recipe } = this.props
     const {
       totalVolume,
       totalTime,
@@ -122,12 +122,12 @@ class Recipe extends Component {
       pourSourceDefault,
       minYield,
       maxYield,
-    } = this.state;
-    const { grindUnit, temperatureUnit } = unitHelpers;
-    const coffeeWeight = Math.round(totalVolume / settings.ratio);
+    } = this.state
+    const { grindUnit, temperatureUnit } = unitHelpers
+    const coffeeWeight = Math.round(totalVolume / settings.ratio)
 
     if (!isLoaded) {
-      return null;
+      return null
     }
 
     return (
@@ -170,11 +170,11 @@ class Recipe extends Component {
           onPress={this.onFinish}
         />
       </Fragment>
-    );
+    )
   }
 }
 
 export default connect(
   null,
   mapDispatchToProps
-)(withNavigation(withSettings(Recipe)));
+)(withNavigation(withSettings(Recipe)))

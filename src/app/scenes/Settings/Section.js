@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
-import withTheme from '@app/providers/theme';
-import type from '@app/constants/type';
-import styles from './styles';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { View, Text } from 'react-native'
+import withTheme from '@app/providers/theme'
+import type from '@app/constants/type'
+import styles from './styles'
 
 class Section extends Component {
   static propTypes = {
@@ -11,14 +11,14 @@ class Section extends Component {
     description: PropTypes.string,
     theme: PropTypes.object,
     children: PropTypes.node,
-  };
+  }
 
   static defaultProps = {
     title: '',
-  };
+  }
 
   render() {
-    const { title, description, theme, children } = this.props;
+    const { title, description, theme, children } = this.props
 
     return (
       <View>
@@ -66,8 +66,8 @@ class Section extends Component {
         ) : null}
         <View style={{ backgroundColor: theme.background }}>{children}</View>
       </View>
-    );
+    )
   }
 }
 
-export default withTheme(Section);
+export default withTheme(Section)

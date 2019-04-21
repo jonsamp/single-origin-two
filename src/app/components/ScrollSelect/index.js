@@ -1,6 +1,6 @@
-import React from 'react';
-import { BrewConsumer } from '@app/scenes/Brew/context';
-import ScrollSelect from './ScrollSelect';
+import React from 'react'
+import { BrewConsumer } from '@app/scenes/Brew/context'
+import ScrollSelect from './ScrollSelect'
 
 function ScrollSelectContainer(props) {
   return (
@@ -9,7 +9,7 @@ function ScrollSelectContainer(props) {
         context ? <ScrollSelect {...props} context={context} /> : null
       }
     </BrewConsumer>
-  );
+  )
 }
 
-export default ScrollSelectContainer;
+export default ScrollSelectContainer

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Svg } from 'expo';
+import React from 'react'
+import { Svg } from 'expo'
 
 function PauseIcon() {
   return (
@@ -9,7 +9,7 @@ function PauseIcon() {
         <Svg.Rect x="7.481" width="4.707" height="14.363" rx="1" />
       </Svg.G>
     </Svg>
-  );
+  )
 }
 
-export default PauseIcon;
+export default PauseIcon

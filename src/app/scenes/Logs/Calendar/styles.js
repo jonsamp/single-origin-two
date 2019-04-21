@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import type from '@app/constants/type';
+import { StyleSheet } from 'react-native'
+import type from '@app/constants/type'
 
 const styles = StyleSheet.create({
   cardContainer: {
@@ -39,6 +39,6 @@ const styles = StyleSheet.create({
   dayText: {
     ...type.callout,
   },
-});
+})
 
-export default styles;
+export default styles

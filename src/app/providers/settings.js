@@ -1,60 +1,60 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { settingUpdated } from '@app/state/settings/actions';
-import { selectSettings } from '@app/state/settings/selectors';
-import { units } from '@app/constants/units';
-import { grinders, getVerboseSetting } from '@app/constants/grinders';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { settingUpdated } from '@app/state/settings/actions'
+import { selectSettings } from '@app/state/settings/selectors'
+import { units } from '@app/constants/units'
+import { grinders, getVerboseSetting } from '@app/constants/grinders'
 
-const mapStateToProps = state => ({ settings: selectSettings(state) });
+const mapStateToProps = state => ({ settings: selectSettings(state) })
 
 const mapDispatchToProps = {
   settingUpdated,
-};
+}
 
 function withSettings(WrappedComponent) {
   class Wrapper extends Component {
     static propTypes = {
       settings: PropTypes.object,
       settingUpdated: PropTypes.func,
-    };
+    }
 
     getUnitHelper = unit => ({
       getPreferredValue: this.getPreferredValue(unit),
       getStandardValue: this.getStandardValue(unit),
       unit: units[this.props.settings[unit]],
-    });
+    })
 
     getGrindHelper = () => ({
       getPreferredValue: v => v,
       getPreferredValueBasedOnPercent: percent => {
-        const grinder = grinders[this.props.settings.grinderType];
-        const range = grinder.max - grinder.min;
-        return Math.round(range * percent);
+        const grinder = grinders[this.props.settings.grinderType]
+        const range = grinder.max - grinder.min
+        return Math.round(range * percent)
       },
       getStandardValue: v => v,
       getGrindSetting: percent => {
-        const { grinderType } = this.props.settings;
+        const { grinderType } = this.props.settings
 
         if (grinderType === 'generic') {
-          return getVerboseSetting(percent);
+          return getVerboseSetting(percent)
         }
 
-        const grinder = grinders[grinderType];
-        const range = grinder.max - grinder.min;
+        const grinder = grinders[grinderType]
+        const range = grinder.max - grinder.min
         return {
           title: `#${Math.round(range * percent)}`,
-        };
+        }
       },
       grinder: grinders[this.props.settings.grinderType],
       unit: { symbol: 'grind' },
-    });
+    })
 
     getPreferredValue = unit => value =>
-      this.conversions[this.props.settings[unit]].preferredConversion(value);
+      this.conversions[this.props.settings[unit]].preferredConversion(value)
 
     getStandardValue = unit => value =>
-      this.conversions[this.props.settings[unit]].standardConversion(value);
+      this.conversions[this.props.settings[unit]].standardConversion(value)
 
     conversions = {
       grams: {
@@ -77,10 +77,10 @@ function withSettings(WrappedComponent) {
         preferredConversion: value => (value * 0.01).toFixed(2),
         standardConversion: value => Math.round(value / 0.01),
       },
-    };
+    }
 
     render() {
-      const { settings, settingUpdated, ...rest } = this.props;
+      const { settings, settingUpdated, ...rest } = this.props
       return (
         <WrappedComponent
           {...rest}
@@ -94,14 +94,14 @@ function withSettings(WrappedComponent) {
             grindUnit: this.getGrindHelper(),
           }}
         />
-      );
+      )
     }
   }
 
   return connect(
     mapStateToProps,
     mapDispatchToProps
-  )(Wrapper);
+  )(Wrapper)
 }
 
-export default withSettings;
+export default withSettings

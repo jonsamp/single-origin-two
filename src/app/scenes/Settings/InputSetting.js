@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { TextInput } from 'react-native';
-import withTheme from '@app/providers/theme';
-import SettingWrapper from './SettingWrapper';
-import styles from './styles';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { TextInput } from 'react-native'
+import withTheme from '@app/providers/theme'
+import SettingWrapper from './SettingWrapper'
+import styles from './styles'
 
 const propTypes = {
   value: PropTypes.number,
@@ -12,7 +12,7 @@ const propTypes = {
   description: PropTypes.string,
   theme: PropTypes.object,
   borderTop: PropTypes.bool,
-};
+}
 
 const InputSetting = ({
   title,
@@ -35,8 +35,8 @@ const InputSetting = ({
       returnKeyType="done"
     />
   </SettingWrapper>
-);
+)
 
-InputSetting.propTypes = propTypes;
+InputSetting.propTypes = propTypes
 
-export default withTheme(InputSetting);
+export default withTheme(InputSetting)

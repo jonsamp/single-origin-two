@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { height } from '@app/constants/layout';
+import { StyleSheet } from 'react-native'
+import { height } from '@app/constants/layout'
 
 const styles = StyleSheet.create({
   image: {
@@ -7,6 +7,6 @@ const styles = StyleSheet.create({
     width: null,
     height: height / 5,
   },
-});
+})
 
-export default styles;
+export default styles

@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { BottomTabBar } from 'react-navigation-tabs';
-import withTheme from '@app/providers/theme';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { BottomTabBar } from 'react-navigation-tabs'
+import withTheme from '@app/providers/theme'
 
 class TabBar extends Component {
   static propTypes = {
     props: PropTypes.any,
     theme: PropTypes.object,
     isDarkTheme: PropTypes.bool,
-  };
+  }
 
   render() {
-    const { theme, isDarkTheme } = this.props;
+    const { theme, isDarkTheme } = this.props
 
     return (
       <BottomTabBar
@@ -22,8 +22,8 @@ class TabBar extends Component {
           borderTopColor: isDarkTheme ? theme.grey1 : theme.grey2,
         }}
       />
-    );
+    )
   }
 }
 
-export default withTheme(TabBar);
+export default withTheme(TabBar)

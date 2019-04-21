@@ -1,19 +1,14 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import {
-  View,
-  Animated,
-  TouchableOpacity,
-  LayoutAnimation,
-} from 'react-native';
-import { Haptic } from 'expo';
-import { Feather } from '@expo/vector-icons';
-import withSettings from '@app/providers/settings';
-import withTheme from '@app/providers/theme';
-import Card from '@app/components/Card';
-import Instructions from '@app/components/Instructions';
-import ScrollSelect from '@app/components/ScrollSelect';
-import DraggableSegment from '@app/components/DraggableSegment';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { View, Animated, TouchableOpacity, LayoutAnimation } from 'react-native'
+import { Haptic } from 'expo'
+import { Feather } from '@expo/vector-icons'
+import withSettings from '@app/providers/settings'
+import withTheme from '@app/providers/theme'
+import Card from '@app/components/Card'
+import Instructions from '@app/components/Instructions'
+import ScrollSelect from '@app/components/ScrollSelect'
+import DraggableSegment from '@app/components/DraggableSegment'
 
 class RecordBrewAttributes extends Component {
   static propTypes = {
@@ -26,58 +21,58 @@ class RecordBrewAttributes extends Component {
     temperatureUnit: PropTypes.object,
     grindUnit: PropTypes.object,
     isDarkTheme: PropTypes.bool,
-  };
+  }
 
   state = {
     recordSegmentIndex: 0,
     isOpen: false,
-  };
+  }
 
   onStartMove = () => {
     Animated.timing(this.animatedOpacityValue, {
       toValue: 0,
       duration: 150,
       useNativeDriver: true,
-    }).start();
-  };
+    }).start()
+  }
 
   onStopMove = () => {
     Animated.timing(this.animatedOpacityValue, {
       toValue: 1,
       duration: 150,
       useNativeDriver: true,
-    }).start();
-  };
+    }).start()
+  }
 
   toggleIsOpen = () => {
     const config = LayoutAnimation.create(
       200,
       LayoutAnimation.Types.easeOut,
       LayoutAnimation.Properties.opacity
-    );
+    )
 
-    LayoutAnimation.configureNext(config);
+    LayoutAnimation.configureNext(config)
 
-    Haptic.selection();
+    Haptic.selection()
 
     this.setState(
       prevState => ({ isOpen: !prevState.isOpen }),
       () => {
         if (this.state.isOpen) {
-          this.props.setRecipeState({ key: 'attributesRecorded', value: true });
+          this.props.setRecipeState({ key: 'attributesRecorded', value: true })
         }
 
         Animated.spring(this.animatedRotationValue, {
           toValue: this.state.isOpen ? 1 : 0,
           duration: 250,
           useNativeDriver: true,
-        }).start();
+        }).start()
       }
-    );
-  };
+    )
+  }
 
-  animatedOpacityValue = new Animated.Value(1);
-  animatedRotationValue = new Animated.Value(0);
+  animatedOpacityValue = new Animated.Value(1)
+  animatedRotationValue = new Animated.Value(0)
 
   render() {
     const {
@@ -86,26 +81,26 @@ class RecordBrewAttributes extends Component {
       temperatureUnit,
       grindUnit,
       isDarkTheme,
-    } = this.props;
-    const { recordSegmentIndex } = this.state;
+    } = this.props
+    const { recordSegmentIndex } = this.state
 
     if (!settings.recordGrind && !settings.recordTemp) {
-      return null;
+      return null
     }
 
-    const recordSettings = [];
-    let instructions;
+    const recordSettings = []
+    let instructions
     if (settings.recordGrind) {
-      recordSettings.push('grind');
-      instructions = 'Record your grind setting.';
+      recordSettings.push('grind')
+      instructions = 'Record your grind setting.'
     }
     if (settings.recordTemp) {
-      recordSettings.push('temperature');
-      instructions = 'Record your water temperature.';
+      recordSettings.push('temperature')
+      instructions = 'Record your water temperature.'
     }
 
     if (settings.recordTemp && settings.recordGrind) {
-      instructions = 'Record your grind setting and water temperature.';
+      instructions = 'Record your grind setting and water temperature.'
     }
 
     const recordGrindComponent = (
@@ -126,7 +121,7 @@ class RecordBrewAttributes extends Component {
         }
         step={1}
       />
-    );
+    )
 
     const recordTempComponent = (
       <ScrollSelect
@@ -143,7 +138,7 @@ class RecordBrewAttributes extends Component {
         }
         step={1}
       />
-    );
+    )
 
     return (
       <Card showConnector>
@@ -197,7 +192,7 @@ class RecordBrewAttributes extends Component {
                   options={recordSettings}
                   onChange={index =>
                     setTimeout(() => {
-                      this.setState({ recordSegmentIndex: index });
+                      this.setState({ recordSegmentIndex: index })
                     }, 300)
                   }
                   onStartMove={this.onStartMove}
@@ -221,8 +216,8 @@ class RecordBrewAttributes extends Component {
           </View>
         ) : null}
       </Card>
-    );
+    )
   }
 }
 
-export default withTheme(withSettings(RecordBrewAttributes));
+export default withTheme(withSettings(RecordBrewAttributes))

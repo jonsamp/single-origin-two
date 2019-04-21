@@ -1,17 +1,17 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { View, ScrollView } from 'react-native';
-import { grinders } from '@app/constants/grinders';
-import { weightUnits, tempUnits } from '@app/constants/units';
-import recipes from '@app/constants/recipes';
-import withTheme from '@app/providers/theme';
-import withSettings from '@app/providers/settings';
-import Header from '@app/components/Header';
-import Section from './Section';
-import SwitchSetting from './SwitchSetting';
-import InputSetting from './InputSetting';
-import ChecklistSetting from './ChecklistSetting';
-import PrivacyPolicy from './PrivacyPolicy';
+import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
+import { View, ScrollView } from 'react-native'
+import { grinders } from '@app/constants/grinders'
+import { weightUnits, tempUnits } from '@app/constants/units'
+import recipes from '@app/constants/recipes'
+import withTheme from '@app/providers/theme'
+import withSettings from '@app/providers/settings'
+import Header from '@app/components/Header'
+import Section from './Section'
+import SwitchSetting from './SwitchSetting'
+import InputSetting from './InputSetting'
+import ChecklistSetting from './ChecklistSetting'
+import PrivacyPolicy from './PrivacyPolicy'
 
 class Settings extends Component {
   static propTypes = {
@@ -21,19 +21,19 @@ class Settings extends Component {
     navigation: PropTypes.object,
     isDarkTheme: PropTypes.bool,
     toggleTheme: PropTypes.func,
-  };
+  }
 
   createChecklistItems = ({ list, settingName }) =>
     Object.values(list).map(item => ({
       ...item,
       value: item.id === this.props.settings[settingName],
-    }));
+    }))
 
   createRecipesCheckList = () =>
     Object.values(recipes).map(recipe => ({
       ...recipe,
       value: this.props.settings.recipes[recipe.id],
-    }));
+    }))
 
   recipeUpdated = ({ recipe }) =>
     this.props.settingUpdated({
@@ -42,7 +42,7 @@ class Settings extends Component {
         ...this.props.settings.recipes,
         [recipe]: !this.props.settings.recipes[recipe],
       },
-    });
+    })
 
   render() {
     const {
@@ -51,9 +51,9 @@ class Settings extends Component {
       settingUpdated,
       isDarkTheme,
       toggleTheme,
-    } = this.props;
-    const groupName = this.props.navigation.state.params;
-    let children;
+    } = this.props
+    const groupName = this.props.navigation.state.params
+    let children
 
     switch (groupName.toLowerCase().replace(' ', '-')) {
       case 'brew-settings':
@@ -112,8 +112,8 @@ class Settings extends Component {
               />
             </Section>
           </Fragment>
-        );
-        break;
+        )
+        break
       case 'grinder':
         children = (
           <Fragment>
@@ -129,8 +129,8 @@ class Settings extends Component {
               />
             </Section>
           </Fragment>
-        );
-        break;
+        )
+        break
       case 'units':
         children = (
           <Fragment>
@@ -188,8 +188,8 @@ class Settings extends Component {
               />
             </Section>
           </Fragment>
-        );
-        break;
+        )
+        break
       case 'recipes':
         children = (
           <Fragment>
@@ -200,8 +200,8 @@ class Settings extends Component {
               />
             </Section>
           </Fragment>
-        );
-        break;
+        )
+        break
       case 'app':
         children = (
           <Fragment>
@@ -228,8 +228,8 @@ class Settings extends Component {
               />
             </Section>
           </Fragment>
-        );
-        break;
+        )
+        break
       case 'privacy-policy':
         children = (
           <Fragment>
@@ -237,10 +237,10 @@ class Settings extends Component {
               <PrivacyPolicy />
             </Section>
           </Fragment>
-        );
-        break;
+        )
+        break
       default:
-        children = null;
+        children = null
     }
 
     return (
@@ -255,8 +255,8 @@ class Settings extends Component {
           {children}
         </ScrollView>
       </View>
-    );
+    )
   }
 }
 
-export default withTheme(withSettings(Settings));
+export default withTheme(withSettings(Settings))

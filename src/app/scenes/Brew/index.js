@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { View, ScrollView } from 'react-native';
-import { withNavigation } from 'react-navigation';
-import withTheme from '@app/providers/theme';
-import withSettings from '@app/providers/settings';
-import recipes from '@app/constants/recipes';
-import Header from '@app/components/Header';
-import { BrewProvider } from './context';
-import Recipe from './Recipe';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { View, ScrollView } from 'react-native'
+import { withNavigation } from 'react-navigation'
+import withTheme from '@app/providers/theme'
+import withSettings from '@app/providers/settings'
+import recipes from '@app/constants/recipes'
+import Header from '@app/components/Header'
+import { BrewProvider } from './context'
+import Recipe from './Recipe'
 
 class Brew extends Component {
   static propTypes = {
     theme: PropTypes.object,
     navigation: PropTypes.object,
-  };
+  }
 
   state = {
     containerWidth: 0,
-  };
+  }
 
   render() {
-    const { theme, navigation } = this.props;
-    const { id } = navigation.state.params;
-    const recipe = recipes[id];
+    const { theme, navigation } = this.props
+    const { id } = navigation.state.params
+    const recipe = recipes[id]
 
     return (
       <View
@@ -53,8 +53,8 @@ class Brew extends Component {
           </View>
         </ScrollView>
       </View>
-    );
+    )
   }
 }
 
-export default withNavigation(withTheme(withSettings(Brew)));
+export default withNavigation(withTheme(withSettings(Brew)))

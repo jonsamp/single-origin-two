@@ -8,7 +8,7 @@
     },
     "quotemark": [true, "single", "jsx-double"],
     "indent": [true, "spaces"],
-    "semicolon": [true, "always", "ignore-interfaces"],
+    "semicolon": [false, "never"],
     "trailing-comma": [true, { "singleline": "never" }],
     "object-literal-sort-keys": false,
     "interface-name": false,
@@ -18,7 +18,9 @@
     "arrow-parens": false,
     "no-implicit-dependencies": [true, ["@app"]],
     "no-submodule-imports": [true, "@app"],
-    "no-relative-imports": [true, "allow-siblings"]
+    "no-relative-imports": [true, "allow-siblings"],
+    "no-unused-variable": true,
+    "ordered-imports": true
   },
   "rulesDirectory": []
 }

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Svg } from 'expo';
+import React from 'react'
+import { Svg } from 'expo'
 
 function KalitaWave155Icon({ fill }) {
   return (
@@ -9,7 +9,7 @@ function KalitaWave155Icon({ fill }) {
         <Svg.Path d="M13.395 18.604a1 1 0 1 1 0-2h4.958a1 1 0 0 1 0 2h-4.958zM11.428 15.631a1 1 0 1 1 0-2h9.017a1 1 0 1 1 0 2h-9.017zM6.59 23.082a1 1 0 0 1 0-2h19.075a1 1 0 1 1 0 2H6.591zM28.633 7.788a1 1 0 1 1 0-2h5.344a1 1 0 0 1 1 .997c.007 2.922-2.416 4.76-10.001 8.599a1 1 0 1 1-.903-1.784c5.461-2.765 7.922-4.37 8.656-5.812h-4.096z" />
       </Svg.G>
     </Svg>
-  );
+  )
 }
 
-export default KalitaWave155Icon;
+export default KalitaWave155Icon

@@ -1,18 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Svg } from 'expo';
-import { connect } from 'react-redux';
-import { selectSettings } from '@app/state/settings/selectors';
-import themes from '@app/constants/themes';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Svg } from 'expo'
+import { connect } from 'react-redux'
+import { selectSettings } from '@app/state/settings/selectors'
+import themes from '@app/constants/themes'
 
 const mapStateToProps = state => ({
   theme: selectSettings(state).theme,
-});
+})
 
 const propTypes = {
   focused: PropTypes.bool.isRequired,
   theme: PropTypes.string.isRequired,
-};
+}
 
 const BrewIcon = ({ focused, theme }) => (
   <Svg width="36" height="27" xmlns="http://www.w3.org/2000/svg">
@@ -28,8 +28,8 @@ const BrewIcon = ({ focused, theme }) => (
       <Svg.Path d="M11.631 20.406c4.497 1.525 9.22 1.493 14.17-.096-.41-3.928-1.574-5.713-3.493-5.352-2.878.54-4.466.543-7.27 0-2.802-.544-3.407 5.448-3.407 5.448z" />
     </Svg.G>
   </Svg>
-);
+)
 
-BrewIcon.propTypes = propTypes;
+BrewIcon.propTypes = propTypes
 
-export default connect(mapStateToProps)(BrewIcon);
+export default connect(mapStateToProps)(BrewIcon)

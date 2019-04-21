@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import type from '@app/constants/type';
+import { StyleSheet } from 'react-native'
+import type from '@app/constants/type'
 
 const styles = StyleSheet.create({
   row: {
@@ -20,6 +20,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     paddingLeft: 13,
   },
-});
+})
 
-export default styles;
+export default styles

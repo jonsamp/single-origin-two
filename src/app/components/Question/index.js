@@ -1,14 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
-import withTheme from '@app/providers/theme';
-import type from '@app/constants/type';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { View, Text } from 'react-native'
+import withTheme from '@app/providers/theme'
+import type from '@app/constants/type'
 
 const propTypes = {
   theme: PropTypes.object,
   title: PropTypes.string,
   description: PropTypes.string,
-};
+}
 
 function Question({ title, description, theme }) {
   return (
@@ -34,9 +34,9 @@ function Question({ title, description, theme }) {
         </Text>
       ) : null}
     </View>
-  );
+  )
 }
 
-Question.propTypes = propTypes;
+Question.propTypes = propTypes
 
-export default withTheme(Question);
+export default withTheme(Question)

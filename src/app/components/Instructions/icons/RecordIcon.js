@@ -1,5 +1,5 @@
-import React from 'react';
-import { Svg } from 'expo';
+import React from 'react'
+import { Svg } from 'expo'
 
 function RecordIcon({ fill }) {
   return (
@@ -12,7 +12,7 @@ function RecordIcon({ fill }) {
         />
       </Svg.G>
     </Svg>
-  );
+  )
 }
 
-export default RecordIcon;
+export default RecordIcon

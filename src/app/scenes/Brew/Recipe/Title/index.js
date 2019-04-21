@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
-import withTheme from '@app/providers/theme';
-import styles from './styles';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { View, Text } from 'react-native'
+import withTheme from '@app/providers/theme'
+import styles from './styles'
 
 const propTypes = {
   theme: PropTypes.object,
   title: PropTypes.string,
-};
+}
 
 function Title({ title, theme }) {
   return (
@@ -24,9 +24,9 @@ function Title({ title, theme }) {
         {title}
       </Text>
     </View>
-  );
+  )
 }
 
-Title.propTypes = propTypes;
+Title.propTypes = propTypes
 
-export default withTheme(Title);
+export default withTheme(Title)

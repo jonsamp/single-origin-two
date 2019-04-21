@@ -1,33 +1,33 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { View, Text } from 'react-native';
-import { Calendar } from 'react-native-calendars';
-import withTheme from '@app/providers/theme';
-import moment from 'moment';
-import styles from './styles';
-import themeStyles from './themeStyles';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { View, Text } from 'react-native'
+import { Calendar } from 'react-native-calendars'
+import withTheme from '@app/providers/theme'
+import moment from 'moment'
+import styles from './styles'
+import themeStyles from './themeStyles'
 
 const mapStateToProps = state => ({
   // currentMonthStreakDatesCompleted: selectCurrentMonthStreakDatesCompleted(
   //   state
   // ),
   // updatedDate: selectCurriculumUpdatedDate(state),
-});
+})
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {}
 
 class LogCalendar extends Component {
   static propTypes = {
     // currentMonthStreakDatesCompleted: PropTypes.array,
     // updatedDate: PropTypes.string,
     theme: PropTypes.object,
-  };
+  }
 
   static defaultProps = {
     // currentMonthStreakDatesCompleted: [],
     // updatedDate: '',
-  };
+  }
 
   // isStreakDate = ({ date }) =>
   //   this.props.currentMonthStreakDatesCompleted.find(
@@ -35,7 +35,7 @@ class LogCalendar extends Component {
   //   );
 
   render() {
-    const { theme } = this.props;
+    const { theme } = this.props
     return (
       <View style={styles.cardContainer} key="streak-calendar-">
         <View style={styles.container}>
@@ -64,11 +64,11 @@ class LogCalendar extends Component {
           />
         </View>
       </View>
-    );
+    )
   }
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withTheme(LogCalendar));
+)(withTheme(LogCalendar))

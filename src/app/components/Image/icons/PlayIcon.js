@@ -1,5 +1,5 @@
-import React from 'react';
-import { Svg } from 'expo';
+import React from 'react'
+import { Svg } from 'expo'
 
 function PlayIcon() {
   return (
@@ -10,7 +10,7 @@ function PlayIcon() {
         fillRule="evenodd"
       />
     </Svg>
-  );
+  )
 }
 
-export default PlayIcon;
+export default PlayIcon

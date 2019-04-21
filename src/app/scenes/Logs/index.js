@@ -1,30 +1,30 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { View, ScrollView, Text } from 'react-native';
-import withTheme from '@app/providers/theme';
-import type from '@app/constants/type';
-import Calendar from './Calendar';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { View, ScrollView, Text } from 'react-native'
+import withTheme from '@app/providers/theme'
+import type from '@app/constants/type'
+import Calendar from './Calendar'
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({})
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {}
 
 class Logs extends Component {
-  static propTypes = {};
+  static propTypes = {}
 
-  state = {};
+  state = {}
 
   render() {
-    const { theme } = this.props;
+    const { theme } = this.props
     return (
       <View style={{ flex: 1, backgroundColor: theme.background }}>
         <ScrollView>
           <Calendar />
         </ScrollView>
       </View>
-    );
+    )
   }
 }
 
-export default withTheme(Logs);
+export default withTheme(Logs)

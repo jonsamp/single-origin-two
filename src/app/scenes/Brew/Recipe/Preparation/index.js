@@ -1,17 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { View, TouchableOpacity } from 'react-native';
-import { withNavigation } from 'react-navigation';
-import { Feather } from '@expo/vector-icons';
-import withTheme from '@app/providers/theme';
-import Card from '@app/components/Card';
-import Instructions from '@app/components/Instructions';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { View, TouchableOpacity } from 'react-native'
+import { withNavigation } from 'react-navigation'
+import { Feather } from '@expo/vector-icons'
+import withTheme from '@app/providers/theme'
+import Card from '@app/components/Card'
+import Instructions from '@app/components/Instructions'
 
 const propTypes = {
   theme: PropTypes.object,
   navigation: PropTypes.object,
   recipe: PropTypes.string,
-};
+}
 
 function Preparation({ theme, navigation, recipe }) {
   return (
@@ -34,9 +34,9 @@ function Preparation({ theme, navigation, recipe }) {
         </View>
       </Card>
     </TouchableOpacity>
-  );
+  )
 }
 
-Preparation.propTypes = propTypes;
+Preparation.propTypes = propTypes
 
-export default withNavigation(withTheme(Preparation));
+export default withNavigation(withTheme(Preparation))

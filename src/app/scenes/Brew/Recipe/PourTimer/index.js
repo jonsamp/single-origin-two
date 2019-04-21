@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { View, Text, Animated } from 'react-native';
-import { KeepAwake } from 'expo';
-import AnimateNumber from 'react-native-animate-number';
-import formatSeconds from '@app/helpers/formatSeconds';
-import withTheme from '@app/providers/theme';
-import withSettings from '@app/providers/settings';
-import Button from '@app/components/Button';
-import Card from '@app/components/Card';
-import Instructions from '@app/components/Instructions';
-import Image from '@app/components/Image';
-import Tip from '../Tip';
-import Warning from '../Warning';
-import styles from './styles';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { View, Text, Animated } from 'react-native'
+import { KeepAwake } from 'expo'
+import AnimateNumber from 'react-native-animate-number'
+import formatSeconds from '@app/helpers/formatSeconds'
+import withTheme from '@app/providers/theme'
+import withSettings from '@app/providers/settings'
+import Button from '@app/components/Button'
+import Card from '@app/components/Card'
+import Instructions from '@app/components/Instructions'
+import Image from '@app/components/Image'
+import Tip from '../Tip'
+import Warning from '../Warning'
+import styles from './styles'
 
 class PourTimer extends Component {
   static propTypes = {
@@ -28,7 +28,7 @@ class PourTimer extends Component {
     defaultSource: PropTypes.number,
     totalVolume: PropTypes.number,
     totalTime: PropTypes.number,
-  };
+  }
 
   static defaultProps = {
     seconds: 0,
@@ -36,15 +36,15 @@ class PourTimer extends Component {
     totalWaterWeight: 0,
     onTick: () => {},
     unitHelpers: {},
-  };
+  }
 
   state = {
     seconds: this.props.seconds,
     timerRunning: false,
-  };
+  }
 
   componentDidMount() {
-    clearInterval(this.interval);
+    clearInterval(this.interval)
   }
 
   componentDidUpdate(nextProps) {
@@ -52,12 +52,12 @@ class PourTimer extends Component {
       nextProps.waterPercent !== this.props.waterPercent &&
       this.state.timerRunning
     ) {
-      this.onAnimateNumberBegin();
+      this.onAnimateNumberBegin()
     }
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    clearInterval(this.interval)
   }
 
   onAnimateNumberBegin = () =>
@@ -65,41 +65,41 @@ class PourTimer extends Component {
       {
         start: onComplete => {
           // Haptic.selection();
-          onComplete({ finished: true });
+          onComplete({ finished: true })
         },
       },
       Animated.timing(this.trackingAnimatedValue, {
         toValue: 1,
         duration: 200,
       }),
-    ]).start();
+    ]).start()
 
   onAnimateNumberFinish = () =>
     Animated.sequence([
       {
         start: onComplete => {
           // Haptic.selection();
-          onComplete({ finished: true });
+          onComplete({ finished: true })
         },
       },
       Animated.timing(this.trackingAnimatedValue, {
         toValue: 0,
         duration: 200,
       }),
-    ]).start();
+    ]).start()
 
   toggleCountdown = () => {
     if (this.state.timerRunning) {
-      KeepAwake.deactivate();
-      clearInterval(this.interval);
-      this.setState({ timerRunning: false });
-      return;
+      KeepAwake.deactivate()
+      clearInterval(this.interval)
+      this.setState({ timerRunning: false })
+      return
     }
 
-    KeepAwake.activate();
-    this.interval = setInterval(this.countdown, 1000);
-    this.setState({ timerRunning: true });
-  };
+    KeepAwake.activate()
+    this.interval = setInterval(this.countdown, 1000)
+    this.setState({ timerRunning: true })
+  }
 
   countdown = () => {
     this.setState(
@@ -107,19 +107,19 @@ class PourTimer extends Component {
         seconds: prevState.seconds + 1,
       }),
       () => this.props.onTick(this.state.seconds)
-    );
-  };
+    )
+  }
 
-  trackingAnimatedValue = new Animated.Value(0);
+  trackingAnimatedValue = new Animated.Value(0)
 
   renderTimePart = part => (
     <Text style={[styles.timeText, { color: this.props.theme.foreground }]}>
       {part}
     </Text>
-  );
+  )
 
   renderTimer = () => {
-    const parts = formatSeconds(this.state.seconds).split('');
+    const parts = formatSeconds(this.state.seconds).split('')
 
     return (
       <View style={{ flexDirection: 'row' }}>
@@ -136,8 +136,8 @@ class PourTimer extends Component {
           </View>
         ))}
       </View>
-    );
-  };
+    )
+  }
 
   render() {
     const {
@@ -151,30 +151,30 @@ class PourTimer extends Component {
       defaultSource,
       totalVolume,
       totalTime,
-    } = this.props;
-    const { waterVolumeUnit } = unitHelpers;
-    const { timerRunning } = this.state;
-    const inputRange = [0, 1];
+    } = this.props
+    const { waterVolumeUnit } = unitHelpers
+    const { timerRunning } = this.state
+    const inputRange = [0, 1]
     const trackingAnimatedScale = this.trackingAnimatedValue.interpolate({
       inputRange,
       outputRange: [1, 1.25],
-    });
+    })
     const trackingAnimatedShadow = this.trackingAnimatedValue.interpolate({
       inputRange,
       outputRange: [0, 1],
-    });
+    })
     const trackingAnimatedBorder = this.trackingAnimatedValue.interpolate({
       inputRange,
       outputRange: [theme.grey3, theme.primary],
-    });
+    })
     const trackingAnimatedBackground = this.trackingAnimatedValue.interpolate({
       inputRange,
       outputRange: [theme.background, theme.primary],
-    });
+    })
     const trackingAnimatedText = this.trackingAnimatedValue.interpolate({
       inputRange,
       outputRange: [theme.foreground, theme.background],
-    });
+    })
 
     return (
       <Card>
@@ -259,8 +259,8 @@ class PourTimer extends Component {
         <Tip text={tip.text} isVisible={!!tip.text} />
         <Warning text={warningText} isVisible={!!warningText} />
       </Card>
-    );
+    )
   }
 }
 
-export default withSettings(withTheme(PourTimer));
+export default withSettings(withTheme(PourTimer))

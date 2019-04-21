@@ -1,22 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { withNavigation } from 'react-navigation';
-import HeaderScrollView from 'react-native-header-scroll-view';
-import { Feather } from '@expo/vector-icons';
-import withTheme from '@app/providers/theme';
-import withSettings from '@app/providers/settings';
-import recipes from '@app/constants/recipes';
-import type from '@app/constants/type';
-import Card from '@app/components/Card';
-import CleverIcon from '@app/constants/icons/CleverIcon';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { View, Text, TouchableOpacity } from 'react-native'
+import { withNavigation } from 'react-navigation'
+import HeaderScrollView from 'react-native-header-scroll-view'
+import { Feather } from '@expo/vector-icons'
+import withTheme from '@app/providers/theme'
+import withSettings from '@app/providers/settings'
+import recipes from '@app/constants/recipes'
+import type from '@app/constants/type'
+import Card from '@app/components/Card'
+import CleverIcon from '@app/constants/icons/CleverIcon'
 
 const propTypes = {
   theme: PropTypes.object,
   navigation: PropTypes.object,
   isDarkTheme: PropTypes.bool,
   settings: PropTypes.object,
-};
+}
 
 function Menu({ theme, navigation, isDarkTheme, settings }) {
   const modifiedTheme = isDarkTheme
@@ -25,12 +25,12 @@ function Menu({ theme, navigation, isDarkTheme, settings }) {
         grey1: theme.background,
         grey2: theme.grey1,
       }
-    : theme;
+    : theme
 
   const selectedRecipes = Object.keys(settings.recipes).filter(
     v => settings.recipes[v]
-  );
-  const menuRecipes = Object.values(selectedRecipes).map(sr => recipes[sr]);
+  )
+  const menuRecipes = Object.values(selectedRecipes).map(sr => recipes[sr])
 
   return (
     <HeaderScrollView
@@ -104,9 +104,9 @@ function Menu({ theme, navigation, isDarkTheme, settings }) {
         ))}
       </View>
     </HeaderScrollView>
-  );
+  )
 }
 
-Menu.propTypes = propTypes;
+Menu.propTypes = propTypes
 
-export default withSettings(withNavigation(withTheme(Menu)));
+export default withSettings(withNavigation(withTheme(Menu)))

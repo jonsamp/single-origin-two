@@ -1,4 +1,4 @@
-import { takeLatest, put, select, call } from 'redux-saga/effects';
+import { takeLatest, put, select, call } from 'redux-saga/effects'
 // import { } from './actions'
 // import { } from './selectors'
 
