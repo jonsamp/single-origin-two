@@ -1,12 +1,19 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import moment from 'moment'
-import { connect } from 'react-redux'
-import { ScrollView, View, Text } from 'react-native'
-import withTheme from '@app/providers/theme'
 import recipes from '@app/constants/recipes'
 import type from '@app/constants/type'
+import withTheme from '@app/providers/theme'
 import { selectLog } from '@app/state/logs/selectors'
+import moment from 'moment'
+import React, { Component } from 'react'
+import { ScrollView, Text, View } from 'react-native'
+import { connect } from 'react-redux'
+
+interface LogProps {
+  theme: any
+  log: {
+    recipeId: string
+    timestamp: number
+  }
+}
 
 const mapStateToProps = (state, props) => {
   const { timestamp } = props
@@ -17,12 +24,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = {}
 
-class Log extends Component {
-  static propTypes = {
-    theme: PropTypes.object,
-    log: PropTypes.object,
-  }
-
+class Log extends Component<LogProps> {
   render() {
     const { theme, log } = this.props
     const recipe = recipes[log.recipeId]

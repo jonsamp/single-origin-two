@@ -1,7 +1,8 @@
-import React from 'react'
 import { Svg } from 'expo'
+import React from 'react'
+import { Icon } from './types'
 
-function WaterIcon({ fill }) {
+function WaterIcon({ fill }: Icon) {
   return (
     <Svg width="16" height="22">
       <Svg.Path

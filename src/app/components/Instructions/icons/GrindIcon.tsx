@@ -1,7 +1,8 @@
-import React from 'react'
 import { Svg } from 'expo'
+import React from 'react'
+import { Icon } from './types'
 
-function GrindIcon({ fill }) {
+function GrindIcon({ fill }: Icon) {
   return (
     <Svg width="23" height="24">
       <Svg.G fill={fill} fillRule="evenodd">

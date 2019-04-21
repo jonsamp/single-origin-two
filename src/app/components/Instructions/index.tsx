@@ -1,21 +1,20 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { View, Text } from 'react-native'
-import withTheme from '@app/providers/theme'
 import type from '@app/constants/type'
-import WaterIcon from './icons/WaterIcon'
-import RecordIcon from './icons/RecordIcon'
+import withTheme from '@app/providers/theme'
+import React from 'react'
+import { Text, View } from 'react-native'
 import GrindIcon from './icons/GrindIcon'
+import RecordIcon from './icons/RecordIcon'
 import TipIcon from './icons/TipIcon'
+import WaterIcon from './icons/WaterIcon'
 
-const propTypes = {
-  theme: PropTypes.object,
-  text: PropTypes.string,
-  isDarkTheme: PropTypes.bool,
-  icon: PropTypes.string,
+interface Instructions {
+  theme: any
+  text: string
+  isDarkTheme: boolean
+  icon: string
 }
 
-function Instructions({ text, theme, isDarkTheme, icon }) {
+function Instructions({ text, theme, isDarkTheme, icon }: Instructions) {
   const specialWordCaptureGroup = /(\*\*.*?\*\*)/g
   const specialWordRegex = /\*\*.*\*\*/
   const specialWordStyles = {
@@ -74,7 +73,5 @@ function Instructions({ text, theme, isDarkTheme, icon }) {
     </View>
   )
 }
-
-Instructions.propTypes = propTypes
 
 export default withTheme(Instructions)

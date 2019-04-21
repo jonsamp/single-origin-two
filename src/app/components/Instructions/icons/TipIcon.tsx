@@ -1,7 +1,8 @@
-import React from 'react'
 import { Svg } from 'expo'
+import React from 'react'
+import { Icon } from './types'
 
-function TipIcon({ fill }) {
+function TipIcon({ fill }: Icon) {
   return (
     <Svg width="17" height="21">
       <Svg.G fill={fill} fillRule="nonzero">

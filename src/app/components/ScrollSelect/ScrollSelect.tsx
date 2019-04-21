@@ -1,24 +1,23 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { View, Text, Animated, TouchableOpacity } from 'react-native'
-import { range } from 'lodash'
-import withTheme from '@app/providers/theme'
 import withSettings from '@app/providers/settings'
+import withTheme from '@app/providers/theme'
+import { range } from 'lodash'
+import React, { Component } from 'react'
+import { Animated, Text, TouchableOpacity, View } from 'react-native'
 import styles from './styles'
 
-class ScrollSelect extends Component {
-  static propTypes = {
-    theme: PropTypes.object,
-    min: PropTypes.number,
-    max: PropTypes.number,
-    step: PropTypes.number,
-    defaultValue: PropTypes.number,
-    onChange: PropTypes.func,
-    unitType: PropTypes.string,
-    unitHelpers: PropTypes.object,
-    context: PropTypes.number,
-  }
+interface ScrollSelectProps {
+  theme: any
+  min: number
+  max: number
+  step: number
+  defaultValue: number
+  onChange: (value: number) => void
+  unitType: string
+  unitHelpers: any
+  context: number
+}
 
+class ScrollSelect extends Component<ScrollSelectProps> {
   static defaultProps = {
     min: 1,
     max: 3,
@@ -28,9 +27,17 @@ class ScrollSelect extends Component {
     defaultValue: null,
   }
 
+  scrollViewRef
+
+  xOffset = new Animated.Value(0)
+  SCREEN_WIDTH = this.props.context / 3
+
   componentDidMount() {
-    const { min, max, step, defaultValue } = this.encodeValues()
-    if (defaultValue === undefined || defaultValue === null) return
+    const { step } = this.props
+    const { min, max, defaultValue } = this.encodeValues()
+    if (defaultValue === undefined || defaultValue === null) {
+      return
+    }
 
     const selectionRange = range(min, max + 1, step)
     const defaultValueIndex = selectionRange.indexOf(defaultValue)
@@ -42,14 +49,14 @@ class ScrollSelect extends Component {
           this.scrollViewRef.scrollTo({
             x: itemPosition,
             y: 0,
-            animated: false,
+            animated: true,
           }),
         0
       )
     }
   }
 
-  onSelectionTap = index => {
+  onSelectionTap = (index: number) => {
     const itemPosition = index * this.SCREEN_WIDTH
 
     if (this.scrollViewRef) {
@@ -67,18 +74,18 @@ class ScrollSelect extends Component {
     }
   }
 
-  decodeValue = value => {
+  decodeValue = (value: number) => {
     const { unitType, unitHelpers } = this.props
     return unitHelpers[unitType].getStandardValue(value)
   }
 
-  getRanges = index => [
+  getRanges = (index: number) => [
     index * this.SCREEN_WIDTH - this.SCREEN_WIDTH * 2,
     index * this.SCREEN_WIDTH,
     index * this.SCREEN_WIDTH + this.SCREEN_WIDTH * 2,
   ]
 
-  transitionAnimation = index => {
+  transitionAnimation = (index: number) => {
     const ranges = this.getRanges(index)
     return {
       opacity: this.xOffset.interpolate({
@@ -88,7 +95,7 @@ class ScrollSelect extends Component {
     }
   }
 
-  textAnimation = index => {
+  textAnimation = (index: number) => {
     const ranges = this.getRanges(index)
     const translation = this.SCREEN_WIDTH * 0.75
 
@@ -115,9 +122,6 @@ class ScrollSelect extends Component {
       ],
     }
   }
-
-  xOffset = new Animated.Value(0)
-  SCREEN_WIDTH = this.props.context / 3
 
   render() {
     const { theme, onChange, step, unitType, unitHelpers } = this.props

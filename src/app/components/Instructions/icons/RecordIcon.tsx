@@ -1,7 +1,8 @@
-import React from 'react'
 import { Svg } from 'expo'
+import React from 'react'
+import { Icon } from './types'
 
-function RecordIcon({ fill }) {
+function RecordIcon({ fill }: Icon) {
   return (
     <Svg width="20" height="22">
       <Svg.G fill={fill} fillRule="evenodd">

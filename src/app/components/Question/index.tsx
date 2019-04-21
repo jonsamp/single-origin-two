@@ -1,16 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { View, Text } from 'react-native'
-import withTheme from '@app/providers/theme'
 import type from '@app/constants/type'
+import withTheme from '@app/providers/theme'
+import React from 'react'
+import { Text, View } from 'react-native'
 
-const propTypes = {
-  theme: PropTypes.object,
-  title: PropTypes.string,
-  description: PropTypes.string,
+interface QuestionProps {
+  theme: any
+  title: string
+  description: string
 }
 
-function Question({ title, description, theme }) {
+function Question({ title, description, theme }: QuestionProps) {
   return (
     <View style={{ padding: 20 }}>
       <Text
@@ -36,7 +35,5 @@ function Question({ title, description, theme }) {
     </View>
   )
 }
-
-Question.propTypes = propTypes
 
 export default withTheme(Question)
