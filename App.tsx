@@ -1,10 +1,10 @@
+import { AppLoading, Font } from 'expo'
 import React, { Component } from 'react'
-import Sentry from 'sentry-expo'
 import { Provider } from 'react-redux'
-import { Font, AppLoading } from 'expo'
 import { PersistGate } from 'redux-persist/integration/react'
-import Navigator from '@app/scenes/Navigator'
+import Sentry from 'sentry-expo'
 import SignPainter from './src/app/assets/SignPainter-HouseScript.ttf'
+import Navigator from './src/app/scenes/Navigator'
 import configureStore from './src/app/store/configureStore'
 
 const { store, persistor } = configureStore()
@@ -16,7 +16,11 @@ Sentry.config(
   'https://449ff87f0ab34a49831dac73cd695c4c@sentry.io/1327357'
 ).install()
 
-class App extends Component {
+interface AppState {
+  isAppLoaded: boolean
+}
+
+class App extends Component<any, AppState> {
   state = {
     isAppLoaded: false,
   }

@@ -1,5 +1,5 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import { persistStore, persistReducer } from 'redux-persist'
+import { applyMiddleware, compose, createStore } from 'redux'
+import { persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import createSagaMiddleware from 'redux-saga'
 import rootReducer from '../state/reducers'
