@@ -1,12 +1,13 @@
-import React, { ReactNode } from 'react';
-import { View } from 'react-native';
-import withTheme from '@app/providers/theme';
+import withTheme from '@app/providers/theme'
+import { Theme } from '@app/types/index'
+import React, { ReactNode } from 'react'
+import { View, ViewStyle } from 'react-native'
 
-type CardProps = {
-  theme: any;
-  children: ReactNode;
-  style: object;
-};
+interface CardProps {
+  theme: Theme
+  children: ReactNode
+  style: ViewStyle
+}
 
 function Card({ theme, children, style }: CardProps) {
   return (
@@ -35,7 +36,7 @@ function Card({ theme, children, style }: CardProps) {
         {children}
       </View>
     </View>
-  );
+  )
 }
 
-export default withTheme(Card);
+export default withTheme(Card)

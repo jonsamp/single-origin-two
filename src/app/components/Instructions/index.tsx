@@ -1,7 +1,7 @@
 import type from '@app/constants/type'
 import withTheme from '@app/providers/theme'
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Text, TextStyle, View } from 'react-native'
 import GrindIcon from './icons/GrindIcon'
 import RecordIcon from './icons/RecordIcon'
 import TipIcon from './icons/TipIcon'
@@ -10,8 +10,8 @@ import WaterIcon from './icons/WaterIcon'
 interface Instructions {
   theme: any
   text: string
-  isDarkTheme: boolean
-  icon: string
+  isDarkTheme?: boolean
+  icon?: string
 }
 
 function Instructions({ text, theme, isDarkTheme, icon }: Instructions) {
@@ -26,7 +26,9 @@ function Instructions({ text, theme, isDarkTheme, icon }: Instructions) {
   const formattedText = text.split(specialWordCaptureGroup).map(part => (
     <Text
       key={part}
-      style={part.match(specialWordRegex) ? specialWordStyles : null}
+      style={
+        part.match(specialWordRegex) ? (specialWordStyles as TextStyle) : null
+      }
     >
       {part.replace(/\*/g, '')}
     </Text>
@@ -62,10 +64,12 @@ function Instructions({ text, theme, isDarkTheme, icon }: Instructions) {
       ) : null}
       <View style={{ padding: 20, flex: 1 }}>
         <Text
-          style={{
-            ...type.body,
-            color: theme.foreground,
-          }}
+          style={
+            {
+              ...type.body,
+              color: theme.foreground,
+            } as TextStyle
+          }
         >
           {formattedText}
         </Text>

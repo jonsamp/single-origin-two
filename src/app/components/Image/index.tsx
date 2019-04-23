@@ -1,5 +1,4 @@
 import withTheme from '@app/providers/theme'
-import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { Image, TouchableOpacity, View } from 'react-native'
 import PauseIcon from './icons/PauseIcon'
