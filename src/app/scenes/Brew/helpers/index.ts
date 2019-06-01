@@ -1,10 +1,10 @@
-import playSound from '@app/helpers/playSound'
-import addWaterSound from '@app/scenes/Brew/sounds/add-water.mp3'
-import endBrewSound from '@app/scenes/Brew/sounds/end-brew.mp3'
-import tipSound from '@app/scenes/Brew/sounds/tip.mp3'
-import warningSound from '@app/scenes/Brew/sounds/warning.mp3'
-import { Settings } from '@app/state/settings/types'
-import { Tip } from '@app/types/index'
+import playSound from '../../../helpers/playSound'
+import addWaterSound from '../../../scenes/Brew/sounds/add-water.mp3'
+import endBrewSound from '../../../scenes/Brew/sounds/end-brew.mp3'
+import tipSound from '../../../scenes/Brew/sounds/tip.mp3'
+import warningSound from '../../../scenes/Brew/sounds/warning.mp3'
+import { Settings } from '../../../state/settings/types'
+import { Tip } from '../../../types/index'
 
 interface TipTextProps {
   text: string
@@ -84,6 +84,9 @@ export const handleTick = ({
       case 'increaseWaterLevel':
         playSound({ sound: addWaterSound })
         setState({ key: 'volumePercent', value: event.volumePercent })
+        break
+      case 'updateImage':
+        setState({ key: 'image', value: event.image })
         break
       case 'tip':
         playSound({ sound: tipSound })

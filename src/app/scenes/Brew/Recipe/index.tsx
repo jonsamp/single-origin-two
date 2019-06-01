@@ -1,11 +1,11 @@
-import Button from '@app/components/Button'
-import withSettings from '@app/providers/settings'
-import { handleTick } from '@app/scenes/Brew/helpers'
-import recipes from '@app/scenes/Brew/recipes'
-import { logAdded } from '@app/state/logs/actions'
-import { Settings } from '@app/state/settings/types'
-import { State } from '@app/state/types'
-import { PourEvents, RecipeConfig, Tip, UnitHelpers } from '@app/types/index'
+import Button from '../../../components/Button';
+import withSettings from '../../../providers/settings'
+import { handleTick } from '../../../scenes/Brew/helpers'
+import recipes from '../../../scenes/Brew/recipes'
+import { logAdded } from '../../../state/logs/actions'
+import { Settings } from '../../../state/settings/types'
+import { State } from '../../../state/types'
+import { PourEvents, RecipeConfig, Tip, UnitHelpers } from '../../../types/index'
 import React, { Component, Fragment } from 'react'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import { connect } from 'react-redux'
@@ -15,6 +15,7 @@ import PourTimer from './PourTimer'
 import Preparation from './Preparation'
 import RecordBrewAttributes from './RecordBrewAttributes'
 import YieldQuestion from './YieldQuestion'
+import recipe from '../recipes/Clever';
 
 interface RecipeProps {
   settings: Settings
@@ -42,6 +43,7 @@ interface RecipeState {
   minYield: number
   maxYield: number
   totalTime: number
+  image: any
 }
 
 const mapDispatchToProps = { logAdded }
@@ -68,6 +70,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
     totalVolume: undefined,
     defaultGrind: undefined,
     pourEvents: undefined,
+    image: recipes[this.props.recipe.id].defaultSource
   } as RecipeState
 
   componentWillMount() {
@@ -147,6 +150,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
       pourSourceDefault,
       minYield,
       maxYield,
+      image,
     } = this.state
     const { grindUnit, temperatureUnit } = unitHelpers
     const coffeeWeight = Math.round(totalVolume / settings.ratio)
@@ -182,7 +186,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
           totalWaterWeight={totalVolume}
           waterPercent={volumePercent}
           onTick={this.onTick}
-          source={pourSource}
+          source={image}
           defaultSource={pourSourceDefault}
           totalTime={totalTime}
           totalVolume={totalVolume}

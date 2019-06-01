@@ -1,5 +1,6 @@
-import { withBloomFn } from '@app/scenes/Brew/helpers'
+import { withBloomFn } from '../../../Brew/helpers'
 import CleverPour from './images/clever-pour.gif'
+import CleverSitting from './images/clever-sitting.gif'
 import CleverPourDefault from './images/clever-pour-default.jpg'
 
 export default function recipe({ settings }) {
@@ -10,7 +11,8 @@ export default function recipe({ settings }) {
     minYield: 225,
     maxYield: 450,
     pourEvents: {
-      1: [{ type: 'increaseWaterLevel', volumePercent: 0.1549 }],
+      1: [{ type: 'increaseWaterLevel', volumePercent: 0.1549 }, { type: 'updateImage', image: CleverPour }],
+      10: [{ type: 'updateImage', image: CleverSitting }],
       [withBloom(-10)]: [
         {
           type: 'tip',
@@ -19,7 +21,8 @@ export default function recipe({ settings }) {
           countDownTo: withBloom(0),
         },
       ],
-      [withBloom(0)]: [{ type: 'increaseWaterLevel', volumePercent: 1 }],
+      [withBloom(0)]: [{ type: 'increaseWaterLevel', volumePercent: 1 }, { type: 'updateImage', image: CleverPour }],
+      [withBloom(10)]: [{ type: 'updateImage', image: CleverSitting }],
       [withBloom(30)]: [
         {
           type: 'tip',
