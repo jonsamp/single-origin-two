@@ -1,5 +1,5 @@
-import recipes from '@app/constants/recipes'
 import { handleActions } from 'redux-actions'
+import recipes from '@app/constants/recipes'
 import * as actions from './actions'
 import { Settings } from './types'
 

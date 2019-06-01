@@ -1,15 +1,15 @@
-import Brew from '@app/scenes/Brew'
-import BrewSummary from '@app/scenes/BrewSummary'
-import Logs from '@app/scenes/Logs'
-import Menu from '@app/scenes/Menu'
-import Settings from '@app/scenes/Settings'
-import SettingsDetail from '@app/scenes/Settings/SettingsDetail'
 import React from 'react'
 import {
   createAppContainer,
   createBottomTabNavigator,
   createStackNavigator,
 } from 'react-navigation'
+import Brew from '../../scenes/Brew'
+import BrewSummary from '@app/scenes/BrewSummary'
+import Logs from '@app/scenes/Logs'
+import Menu from '@app/scenes/Menu'
+import Settings from '@app/scenes/Settings'
+import SettingsDetail from '@app/scenes/Settings/SettingsDetail'
 import BrewIcon from './icons/BrewIcon'
 import LogsIcon from './icons/LogsIcon'
 import SettingsIcon from './icons/SettingsIcon'
