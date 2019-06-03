@@ -78,6 +78,5 @@ export interface Recipe {
   totalVolume: number
   totalTime: number
   defaultGrind: number
-  pourSource: number
   pourSourceDefault: number
 }

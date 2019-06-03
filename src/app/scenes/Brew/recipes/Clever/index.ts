@@ -61,7 +61,6 @@ export default function recipe({ settings }) {
     totalVolume: 340,
     totalTime: 220,
     defaultGrind: 0.75,
-    pourSource: CleverPour,
     pourSourceDefault: CleverPourDefault,
   }
 }

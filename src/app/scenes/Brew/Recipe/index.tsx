@@ -1,21 +1,26 @@
-import Button from '../../../components/Button';
+import React, { Component, Fragment } from 'react'
+import { NavigationScreenProp, withNavigation } from 'react-navigation'
+import { connect } from 'react-redux'
+import Button from '../../../components/Button'
 import withSettings from '../../../providers/settings'
 import { handleTick } from '../../../scenes/Brew/helpers'
 import recipes from '../../../scenes/Brew/recipes'
 import { logAdded } from '../../../state/logs/actions'
 import { Settings } from '../../../state/settings/types'
 import { State } from '../../../state/types'
-import { PourEvents, RecipeConfig, Tip, UnitHelpers } from '../../../types/index'
-import React, { Component, Fragment } from 'react'
-import { NavigationScreenProp, withNavigation } from 'react-navigation'
-import { connect } from 'react-redux'
+import {
+  PourEvents,
+  RecipeConfig,
+  Tip,
+  UnitHelpers,
+} from '../../../types/index'
+import recipe from '../recipes/Clever'
 import BoilWater from './BoilWater'
 import GrindCoffee from './GrindCoffee'
 import PourTimer from './PourTimer'
 import Preparation from './Preparation'
 import RecordBrewAttributes from './RecordBrewAttributes'
 import YieldQuestion from './YieldQuestion'
-import recipe from '../recipes/Clever';
 
 interface RecipeProps {
   settings: Settings
@@ -38,7 +43,6 @@ interface RecipeState {
   totalVolume: number
   defaultGrind: number
   pourEvents: PourEvents
-  pourSource: number
   pourSourceDefault: number
   minYield: number
   maxYield: number
@@ -70,10 +74,10 @@ class Recipe extends Component<RecipeProps, RecipeState> {
     totalVolume: undefined,
     defaultGrind: undefined,
     pourEvents: undefined,
-    image: recipes[this.props.recipe.id].defaultSource
+    image: recipes[this.props.recipe.id].defaultSource,
   } as RecipeState
 
-  componentWillMount() {
+  componentDidMount() {
     const recipe = recipes[this.props.recipe.id]({
       settings: this.props.settings,
     })
@@ -85,7 +89,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
 
   setRecipeState = ({ key, value }) => this.setState({ [key]: value } as any)
 
-  onTick = second => {
+  onTick = (second: number) => {
     handleTick({
       pourEvents: this.state.pourEvents,
       tip: this.state.tip,
@@ -98,7 +102,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
   }
 
   onFinish = () => {
-    const { navigation, recipe, settings } = this.props
+    const { navigation, recipe, settings, logAdded } = this.props
     const {
       timestamp,
       totalVolume,
@@ -129,7 +133,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
       recipeId: recipe.id,
     }
 
-    this.props.logAdded({ log })
+    logAdded({ log })
 
     navigation.navigate('BrewSummary', { timestamp })
   }
@@ -146,7 +150,6 @@ class Recipe extends Component<RecipeProps, RecipeState> {
       tip,
       warningText,
       isLoaded,
-      pourSource,
       pourSourceDefault,
       minYield,
       maxYield,

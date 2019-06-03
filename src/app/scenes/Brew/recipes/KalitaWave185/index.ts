@@ -1,6 +1,6 @@
-import { withBloomFn } from '@app/scenes/Brew/helpers'
-import KalitaWavePour from './images/kalita-wave-pour.gif'
+import { withBloomFn } from '../../../../scenes/Brew/helpers'
 import KalitaWavePourDefault from './images/kalita-wave-pour-default.jpg'
+import KalitaWavePour from './images/kalita-wave-pour.gif'
 
 export default function recipe({ settings }) {
   const withBloom = withBloomFn({ settings })
@@ -63,7 +63,6 @@ export default function recipe({ settings }) {
     totalVolume: 325,
     totalTime: 175,
     defaultGrind: 0.5,
-    pourSource: KalitaWavePour,
     pourSourceDefault: KalitaWavePourDefault,
   }
 }
