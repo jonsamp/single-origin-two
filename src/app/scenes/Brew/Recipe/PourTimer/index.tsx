@@ -3,12 +3,11 @@ import React, { Component } from 'react'
 import { Animated, View } from 'react-native'
 import Card from '../../../../components/Card'
 import Image from '../../../../components/Image'
-import Instructions from '../../../../components/Instructions'
-import formatSeconds from '../../../../helpers/formatSeconds'
 import withSettings from '../../../../providers/settings'
 import withTheme from '../../../../providers/theme'
 import { Theme, UnitHelpers } from '../../../../types/index'
 import { withBloomFn } from '../../helpers'
+import Step from './Step'
 import styles from './styles'
 import Timer from './Timer'
 import WaterVolume from './WaterVolume'
@@ -65,81 +64,6 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
 
   componentWillUnmount() {
     clearInterval(this.interval)
-  }
-
-  getNextEvent = (offset = 0) => {
-    const { recipe, second } = this.state
-    return Number(
-      Object.keys(recipe).find(time => Number(time) + offset > second)
-    )
-  }
-
-  getNextStepText = () => {
-    const { recipe } = this.state
-    const nextStep = recipe[this.getNextEvent(5)]
-
-    if (!nextStep || nextStep.type === 'finished') {
-      return 'End of brew'
-    }
-
-    if (nextStep.type === 'pour') {
-      const {
-        volume,
-        unitHelpers: { waterVolumeUnit },
-      } = this.props
-
-      return `Pour up to **${Math.round(
-        waterVolumeUnit.getPreferredValue(volume * nextStep.volumePercent)
-      )} ${waterVolumeUnit.unit.title}** of water.`
-    }
-
-    if (nextStep.type === 'tip') {
-      return nextStep.text
-    }
-  }
-
-  isDuringStep = () => this.state.second >= this.getNextEvent(5)
-
-  getText = () => {
-    const { recipe } = this.props
-    const { second, timerRunning } = this.state
-    const {
-      volume,
-      unitHelpers: { waterVolumeUnit },
-    } = this.props
-    const nextEvent = this.getNextEvent(5)
-    const beforeBrewStart = second < 0 && !timerRunning
-    const brewCountdown = second < 0 && timerRunning
-    const foreshadowNextStep = nextEvent - second > 10
-    const countdownToNextStep = nextEvent - second <= 10
-
-    if (beforeBrewStart) {
-      return `Over **${formatSeconds(
-        recipe.totalTime
-      )}**, pour over **${Math.round(
-        waterVolumeUnit.getPreferredValue(volume)
-      )} ${waterVolumeUnit.unit.title}** of water.`
-    }
-
-    if (this.isDuringStep()) {
-      return `Now`
-    }
-
-    if (brewCountdown) {
-      return `In **${second * -1}** seconds`
-    }
-
-    if (countdownToNextStep) {
-      return `In **${nextEvent - second}** seconds`
-    }
-
-    if (foreshadowNextStep) {
-      return `Next step at **${formatSeconds(nextEvent)}**`
-    }
-
-    if (!nextEvent) {
-      return ''
-    }
   }
 
   onAnimateNumberBegin = () =>
@@ -214,18 +138,18 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
       volume,
       unitHelpers: { waterVolumeUnit },
     } = this.props
-    const { timerRunning, volumePercent, second } = this.state
+    const { recipe, timerRunning, volumePercent, second } = this.state
 
     return (
       <Card>
-        <Instructions text={`${this.getText()}`} />
-        <View
-          style={{
-            opacity: this.isDuringStep() ? 1 : 0.5,
-          }}
-        >
-          <Instructions text={this.getNextStepText()} />
-        </View>
+        <Step
+          recipe={recipe}
+          second={second}
+          volume={volume}
+          waterVolumeUnit={waterVolumeUnit}
+          timerRunning={timerRunning}
+          totalTime={this.props.recipe.totalTime}
+        />
         <View style={[styles.container, { backgroundColor: theme.grey2 }]}>
           <Timer
             toggleCountdown={this.toggleCountdown}
