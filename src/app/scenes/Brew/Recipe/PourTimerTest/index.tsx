@@ -76,9 +76,10 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
 
   getNextStepText = () => {
     const { recipe } = this.state
-    const nextStep = recipe[this.getNextEvent()]
-    if (!nextStep) {
-      return
+    const nextStep = recipe[this.getNextEvent(5)]
+
+    if (!nextStep || nextStep.type === 'finished') {
+      return 'End of brew'
     }
 
     if (nextStep.type === 'pour') {
@@ -125,15 +126,19 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     }
 
     if (brewCountdown) {
-      return `In ${second * -1} seconds`
+      return `In **${second * -1}** seconds`
     }
 
     if (countdownToNextStep) {
-      return `In ${nextEvent - second} seconds`
+      return `In **${nextEvent - second}** seconds`
     }
 
     if (foreshadowNextStep) {
       return `Next step at **${formatSeconds(nextEvent)}**`
+    }
+
+    if (!nextEvent) {
+      return ''
     }
   }
 
@@ -176,26 +181,30 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     }
 
     activateKeepAwake()
-    this.interval = setInterval(this.countdown, 1000)
+    this.interval = setInterval(() => {
+      this.countdown()
+      this.trackStepChange()
+    }, 1000)
     this.setState({ timerRunning: true })
   }
 
-  countdown = () => {
+  trackStepChange = async () => {
     const { recipe, second } = this.state
-    const currentStepIndex = Object.keys(recipe).findIndex(
-      key => Number(key) > second
-    )
-    // TODO: figure out how to detect when the steps change reliably
-    // I need this for water, images, and sounds
-    // const volumePercent =
-    //   recipe[currentStepIndex] && recipe[currentStepIndex].volumePercent
+    const step = recipe[second]
 
+    if (step) {
+      if (step.type === 'pour') {
+        await this.setState({
+          volumePercent: step.volumePercent,
+        })
+        this.onAnimateNumberBegin()
+      }
+    }
+  }
+
+  countdown = () => {
     this.setState(prev => ({
       second: prev.second + 1,
-      currentStep: currentStepIndex,
-      // volumePercent:
-      //   (prev.currentStep !== currentStepIndex && volumePercent) ||
-      //   prev.volumePercent,
     }))
   }
 
@@ -237,7 +246,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
       volume,
       unitHelpers: { waterVolumeUnit },
     } = this.props
-    const { timerRunning, volumePercent, currentStep } = this.state
+    const { timerRunning, volumePercent } = this.state
     const inputRange = [0, 1]
     const trackingAnimatedScale = this.trackingAnimatedValue.interpolate({
       inputRange,
@@ -262,7 +271,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
 
     return (
       <Card>
-        <Instructions text={`${currentStep}: ${this.getText()}`} />
+        <Instructions text={`${this.getText()}`} />
         <View
           style={{
             opacity: this.isDuringStep() ? 1 : 0.5,
@@ -285,7 +294,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
                 [styles.labelText, { color: theme.foreground }] as TextStyle
               }
             >
-              POUR UP TO
+              WATER VOLUME
             </Text>
             <Animated.View
               style={[
@@ -322,7 +331,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
                           ? 0.1
                           : 0.01
                     }
-                    interval={waterVolumeUnit.unit.symbol === 'g' ? 30 : 60}
+                    interval={60}
                     onFinish={this.onAnimateNumberFinish}
                   />
                 </Animated.Text>
