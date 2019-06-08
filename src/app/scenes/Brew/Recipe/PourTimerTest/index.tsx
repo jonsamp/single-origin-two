@@ -25,6 +25,8 @@ interface PourTimerState {
   second: number
   timerRunning: boolean
   recipe: any
+  volumePercent: number
+  currentStep: number
 }
 
 class PourTimer extends Component<PourTimerProps, PourTimerState> {
@@ -37,9 +39,11 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     second: -3,
     timerRunning: false,
     recipe: undefined,
+    volumePercent: 0,
+    currentStep: 0,
   }
 
-  // trackingAnimatedValue = new Animated.Value(0)
+  trackingAnimatedValue = new Animated.Value(0)
 
   interval
 
@@ -63,9 +67,11 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     clearInterval(this.interval)
   }
 
-  getNextEvent = () => {
+  getNextEvent = (offset = 0) => {
     const { recipe, second } = this.state
-    return Number(Object.keys(recipe).find(time => Number(time) + 5 > second))
+    return Number(
+      Object.keys(recipe).find(time => Number(time) + offset > second)
+    )
   }
 
   getNextStepText = () => {
@@ -91,7 +97,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     }
   }
 
-  isDuringStep = () => this.state.second >= this.getNextEvent()
+  isDuringStep = () => this.state.second >= this.getNextEvent(5)
 
   getText = () => {
     const { recipe } = this.props
@@ -100,7 +106,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
       volume,
       unitHelpers: { waterVolumeUnit },
     } = this.props
-    const nextEvent = this.getNextEvent()
+    const nextEvent = this.getNextEvent(5)
     const beforeBrewStart = second < 0 && !timerRunning
     const brewCountdown = second < 0 && timerRunning
     const foreshadowNextStep = nextEvent - second > 10
@@ -131,35 +137,35 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     }
   }
 
-  // onAnimateNumberBegin = () =>
-  //   Animated.sequence([
-  //     {
-  //       start: onComplete => {
-  //         // Haptic.selection();
-  //         onComplete({ finished: true })
-  //       },
-  //       stop: () => {},
-  //     },
-  //     Animated.timing(this.trackingAnimatedValue, {
-  //       toValue: 1,
-  //       duration: 200,
-  //     }),
-  //   ]).start()
+  onAnimateNumberBegin = () =>
+    Animated.sequence([
+      {
+        start: onComplete => {
+          // Haptic.selection();
+          onComplete({ finished: true })
+        },
+        stop: () => {},
+      },
+      Animated.timing(this.trackingAnimatedValue, {
+        toValue: 1,
+        duration: 200,
+      }),
+    ]).start()
 
-  // onAnimateNumberFinish = () =>
-  //   Animated.sequence([
-  //     {
-  //       start: onComplete => {
-  //         // Haptic.selection();
-  //         onComplete({ finished: true })
-  //       },
-  //       stop: () => {},
-  //     },
-  //     Animated.timing(this.trackingAnimatedValue, {
-  //       toValue: 0,
-  //       duration: 200,
-  //     }),
-  //   ]).start()
+  onAnimateNumberFinish = () =>
+    Animated.sequence([
+      {
+        start: onComplete => {
+          // Haptic.selection();
+          onComplete({ finished: true })
+        },
+        stop: () => {},
+      },
+      Animated.timing(this.trackingAnimatedValue, {
+        toValue: 0,
+        duration: 200,
+      }),
+    ]).start()
 
   toggleCountdown = () => {
     if (this.state.timerRunning) {
@@ -170,13 +176,26 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     }
 
     activateKeepAwake()
-    this.interval = setInterval(this.countdown, 200)
+    this.interval = setInterval(this.countdown, 1000)
     this.setState({ timerRunning: true })
   }
 
   countdown = () => {
+    const { recipe, second } = this.state
+    const currentStepIndex = Object.keys(recipe).findIndex(
+      key => Number(key) > second
+    )
+    // TODO: figure out how to detect when the steps change reliably
+    // I need this for water, images, and sounds
+    // const volumePercent =
+    //   recipe[currentStepIndex] && recipe[currentStepIndex].volumePercent
+
     this.setState(prev => ({
       second: prev.second + 1,
+      currentStep: currentStepIndex,
+      // volumePercent:
+      //   (prev.currentStep !== currentStepIndex && volumePercent) ||
+      //   prev.volumePercent,
     }))
   }
 
@@ -213,12 +232,37 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
   }
 
   render() {
-    const { theme } = this.props
-    const { timerRunning } = this.state
+    const {
+      theme,
+      volume,
+      unitHelpers: { waterVolumeUnit },
+    } = this.props
+    const { timerRunning, volumePercent, currentStep } = this.state
+    const inputRange = [0, 1]
+    const trackingAnimatedScale = this.trackingAnimatedValue.interpolate({
+      inputRange,
+      outputRange: [1, 1.25],
+    })
+    const trackingAnimatedShadow = this.trackingAnimatedValue.interpolate({
+      inputRange,
+      outputRange: [0, 1],
+    })
+    const trackingAnimatedBorder = this.trackingAnimatedValue.interpolate({
+      inputRange,
+      outputRange: [theme.grey3, theme.primary],
+    })
+    const trackingAnimatedBackground = this.trackingAnimatedValue.interpolate({
+      inputRange,
+      outputRange: [theme.background, theme.primary],
+    })
+    const trackingAnimatedText = this.trackingAnimatedValue.interpolate({
+      inputRange,
+      outputRange: [theme.foreground, theme.background],
+    })
 
     return (
       <Card>
-        <Instructions text={this.getText()} />
+        <Instructions text={`${currentStep}: ${this.getText()}`} />
         <View
           style={{
             opacity: this.isDuringStep() ? 1 : 0.5,
@@ -235,6 +279,64 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
               onPress={this.toggleCountdown}
             />
           </View>
+          <View style={styles.section}>
+            <Text
+              style={
+                [styles.labelText, { color: theme.foreground }] as TextStyle
+              }
+            >
+              POUR UP TO
+            </Text>
+            <Animated.View
+              style={[
+                styles.trackingContainer,
+                {
+                  backgroundColor: trackingAnimatedBackground,
+                  transform: [{ scale: trackingAnimatedScale }],
+                  borderColor: trackingAnimatedBorder,
+                  shadowOpacity: trackingAnimatedShadow,
+                },
+              ]}
+            >
+              <View style={styles.setWidthText}>
+                <Animated.Text
+                  style={[styles.trackingText, { color: trackingAnimatedText }]}
+                >
+                  <AnimateNumber
+                    value={waterVolumeUnit.getPreferredValue(
+                      volume * volumePercent
+                    )}
+                    formatter={val =>
+                      parseFloat(val).toFixed(
+                        waterVolumeUnit.unit.symbol === 'g'
+                          ? 0
+                          : waterVolumeUnit.unit.symbol === 'oz'
+                            ? 1
+                            : 2
+                      )
+                    }
+                    countBy={
+                      waterVolumeUnit.unit.symbol === 'g'
+                        ? 4
+                        : waterVolumeUnit.unit.symbol === 'oz'
+                          ? 0.1
+                          : 0.01
+                    }
+                    interval={waterVolumeUnit.unit.symbol === 'g' ? 30 : 60}
+                    onFinish={this.onAnimateNumberFinish}
+                  />
+                </Animated.Text>
+              </View>
+              <Animated.Text
+                style={[
+                  styles.trackingLabelText,
+                  { color: trackingAnimatedText },
+                ]}
+              >
+                {waterVolumeUnit.unit.title}
+              </Animated.Text>
+            </Animated.View>
+          </View>
         </View>
       </Card>
     )
@@ -242,27 +344,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     // const { theme, unitHelpers } = this.props
     // const { waterVolumeUnit } = unitHelpers
     // const { timerRunning } = this.state
-    // const inputRange = [0, 1]
-    // const trackingAnimatedScale = this.trackingAnimatedValue.interpolate({
-    //   inputRange,
-    //   outputRange: [1, 1.25],
-    // })
-    // const trackingAnimatedShadow = this.trackingAnimatedValue.interpolate({
-    //   inputRange,
-    //   outputRange: [0, 1],
-    // })
-    // const trackingAnimatedBorder = this.trackingAnimatedValue.interpolate({
-    //   inputRange,
-    //   outputRange: [theme.grey3, theme.primary],
-    // })
-    // const trackingAnimatedBackground = this.trackingAnimatedValue.interpolate({
-    //   inputRange,
-    //   outputRange: [theme.background, theme.primary],
-    // })
-    // const trackingAnimatedText = this.trackingAnimatedValue.interpolate({
-    //   inputRange,
-    //   outputRange: [theme.foreground, theme.background],
-    // })
+
     //
     // return (
     //   <Card>
@@ -289,63 +371,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     //           onPress={this.toggleCountdown}
     //         />
     //       </View>
-    //       <View style={styles.section}>
-    //         <Text
-    //           style={
-    //             [styles.labelText, { color: theme.foreground }] as TextStyle
-    //           }
-    //         >
-    //           POUR UP TO
-    //         </Text>
-    //         <Animated.View
-    //           style={[
-    //             styles.trackingContainer,
-    //             {
-    //               backgroundColor: trackingAnimatedBackground,
-    //               transform: [{ scale: trackingAnimatedScale }],
-    //               borderColor: trackingAnimatedBorder,
-    //               shadowOpacity: trackingAnimatedShadow,
-    //             },
-    //           ]}
-    //         >
-    //           <View style={styles.setWidthText}>
-    //             <Animated.Text
-    //               style={[styles.trackingText, { color: trackingAnimatedText }]}
-    //             >
-    //               <AnimateNumber
-    //                 value={waterVolumeUnit.getPreferredValue(
-    //                   totalWaterWeight * waterPercent
-    //                 )}
-    //                 formatter={val =>
-    //                   parseFloat(val).toFixed(
-    //                     waterVolumeUnit.unit.symbol === 'g'
-    //                       ? 0
-    //                       : waterVolumeUnit.unit.symbol === 'oz'
-    //                         ? 1
-    //                         : 2
-    //                   )
-    //                 }
-    //                 countBy={
-    //                   waterVolumeUnit.unit.symbol === 'g'
-    //                     ? 4
-    //                     : waterVolumeUnit.unit.symbol === 'oz'
-    //                       ? 0.1
-    //                       : 0.01
-    //                 }
-    //                 interval={waterVolumeUnit.unit.symbol === 'g' ? 30 : 60}
-    //                 onFinish={this.onAnimateNumberFinish}
-    //               />
-    //             </Animated.Text>
-    //           </View>
-    //           <Animated.Text
-    //             style={[
-    //               styles.trackingLabelText,
-    //               { color: trackingAnimatedText },
-    //             ]}
-    //           >
-    //             {waterVolumeUnit.unit.title}
-    //           </Animated.Text>
-    //         </Animated.View>
+
     //       </View>
     //     </View>
     //   </Card>
