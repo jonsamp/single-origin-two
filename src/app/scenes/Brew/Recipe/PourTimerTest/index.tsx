@@ -18,6 +18,7 @@ interface PourTimerProps {
   unitHelpers: UnitHelpers
   recipe: any
   settings: any
+  volume: number
 }
 
 interface PourTimerState {
@@ -29,6 +30,7 @@ interface PourTimerState {
 class PourTimer extends Component<PourTimerProps, PourTimerState> {
   static defaultProps = {
     unitHelpers: {},
+    volume: 350,
   }
 
   state = {
@@ -63,29 +65,69 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
 
   getNextEvent = () => {
     const { recipe, second } = this.state
-    return Object.keys(recipe).find(time => Number(time) + 5 > second)
+    return Number(Object.keys(recipe).find(time => Number(time) + 5 > second))
   }
 
+  getNextStepText = () => {
+    const { recipe } = this.state
+    const nextStep = recipe[this.getNextEvent()]
+    if (!nextStep) {
+      return
+    }
+
+    if (nextStep.type === 'pour') {
+      const {
+        volume,
+        unitHelpers: { waterVolumeUnit },
+      } = this.props
+
+      return `Pour up to **${Math.round(
+        waterVolumeUnit.getPreferredValue(volume * nextStep.volumePercent)
+      )} ${waterVolumeUnit.unit.title}** of water.`
+    }
+
+    if (nextStep.type === 'tip') {
+      return nextStep.text
+    }
+  }
+
+  isDuringStep = () => this.state.second >= this.getNextEvent()
+
   getText = () => {
-    const { second, recipe } = this.state
-    const nextEvent = Number(this.getNextEvent())
+    const { recipe } = this.props
+    const { second, timerRunning } = this.state
+    const {
+      volume,
+      unitHelpers: { waterVolumeUnit },
+    } = this.props
+    const nextEvent = this.getNextEvent()
+    const beforeBrewStart = second < 0 && !timerRunning
+    const brewCountdown = second < 0 && timerRunning
+    const foreshadowNextStep = nextEvent - second > 10
+    const countdownToNextStep = nextEvent - second <= 10
 
-    if (second < 0) {
-      return `start in ${second * -1}`
+    if (beforeBrewStart) {
+      return `Over **${formatSeconds(
+        recipe.totalTime
+      )}**, pour over **${Math.round(
+        waterVolumeUnit.getPreferredValue(volume)
+      )} ${waterVolumeUnit.unit.title}** of water.`
     }
 
-    if (nextEvent === undefined) {
-      return 'finished!'
+    if (this.isDuringStep()) {
+      return `Now`
     }
 
-    const type = recipe[nextEvent].type
+    if (brewCountdown) {
+      return `In ${second * -1} seconds`
+    }
 
-    if (second < nextEvent && nextEvent - second <= 10) {
-      return `${type} in ${nextEvent - second} seconds`
-    } else if (second < nextEvent) {
-      return `next step to ${type} at ${nextEvent}`
-    } else {
-      return `${type} now!`
+    if (countdownToNextStep) {
+      return `In ${nextEvent - second} seconds`
+    }
+
+    if (foreshadowNextStep) {
+      return `Next step at **${formatSeconds(nextEvent)}**`
     }
   }
 
@@ -128,7 +170,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     }
 
     activateKeepAwake()
-    this.interval = setInterval(this.countdown, 1000)
+    this.interval = setInterval(this.countdown, 200)
     this.setState({ timerRunning: true })
   }
 
@@ -171,17 +213,29 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
   }
 
   render() {
-    const { timerRunning, recipe } = this.state
+    const { theme } = this.props
+    const { timerRunning } = this.state
+
     return (
       <Card>
-        {this.renderTimer()}
-        <Instructions text={`${Object.keys(recipe)}`} />
         <Instructions text={this.getText()} />
-        <Button
-          type={timerRunning ? 'secondary' : 'primary'}
-          title={timerRunning ? 'stop' : 'start'}
-          onPress={this.toggleCountdown}
-        />
+        <View
+          style={{
+            opacity: this.isDuringStep() ? 1 : 0.5,
+          }}
+        >
+          <Instructions text={this.getNextStepText()} />
+        </View>
+        <View style={[styles.container, { backgroundColor: theme.grey2 }]}>
+          <View style={styles.section}>
+            {this.renderTimer()}
+            <Button
+              type={timerRunning ? 'secondary' : 'primary'}
+              title={timerRunning ? 'stop' : 'start'}
+              onPress={this.toggleCountdown}
+            />
+          </View>
+        </View>
       </Card>
     )
 

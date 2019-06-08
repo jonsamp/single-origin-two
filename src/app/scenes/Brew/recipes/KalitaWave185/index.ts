@@ -38,7 +38,6 @@ export default {
       volumePercent: 1,
     },
   ],
-  totalVolume: 325,
-  totalTime: '2:55',
+  totalTime: 175,
   defaultGrind: 0.5,
 }
