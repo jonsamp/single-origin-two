@@ -121,6 +121,6 @@ export const handleTick = ({
 export const getValueUnit = (unitType: any, value: number) =>
   `${unitType.getPreferredValue(value)} ${unitType.unit.title}`
 
-export const withBloomFn = ({ settings }: { settings: Settings }) => (
+export const withBloomFn = (props: { settings: Settings }) => (
   duration: number
-) => settings.bloomDuration + duration
+) => props.settings.bloomDuration + duration
