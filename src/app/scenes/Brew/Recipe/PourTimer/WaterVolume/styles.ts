@@ -1,32 +1,11 @@
 import { StyleSheet } from 'react-native'
-import type from '../../../../constants/type'
+import type from '../../../../../constants/type'
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 24,
-    paddingVertical: 40,
-    flexDirection: 'row',
-  },
+export default StyleSheet.create({
   section: {
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
-  },
-  timeTextContainer: {
-    width: 22,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  timeTextColonContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 12,
-    bottom: 3,
-    left: 1,
-  },
-  timeText: {
-    ...type.largeTitle,
-    marginBottom: 12,
   },
   labelText: {
     ...type.label,
@@ -43,10 +22,6 @@ const styles = StyleSheet.create({
     shadowRadius: 12,
     shadowOffset: { height: 2, width: 0 },
   },
-  trackingText: {
-    ...type.header,
-    fontWeight: 'bold',
-  },
   setWidthText: {
     width: 65,
     alignItems: 'center',
@@ -55,6 +30,8 @@ const styles = StyleSheet.create({
     ...type.label,
     marginBottom: 4,
   },
+  trackingText: {
+    ...type.header,
+    fontWeight: 'bold',
+  },
 })
-
-export default styles
