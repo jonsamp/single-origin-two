@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
-import { ifIphoneX } from 'react-native-iphone-x-helper';
-import type from '@app/constants/type';
+import { StyleSheet } from 'react-native'
+import { ifIphoneX } from 'react-native-iphone-x-helper'
+import type from '../../constants/type'
 
 const styles = StyleSheet.create({
   container: {
@@ -31,6 +31,6 @@ const styles = StyleSheet.create({
     lineHeight: 28,
     top: 5,
   },
-});
+})
 
-export default styles;
+export default styles

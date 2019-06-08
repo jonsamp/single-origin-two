@@ -1,8 +1,3 @@
-import Header from '@app/components/Header'
-import Log from '@app/components/Log'
-import withTheme from '@app/providers/theme'
-import { selectLog } from '@app/state/logs/selectors'
-import { State } from '@app/state/types'
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import {
@@ -11,6 +6,11 @@ import {
   withNavigation,
 } from 'react-navigation'
 import { connect } from 'react-redux'
+import Header from '../../components/Header'
+import Log from '../../components/Log'
+import withTheme from '../../providers/theme'
+import { selectLog } from '../../state/logs/selectors'
+import { State } from '../../state/types'
 
 interface BrewSummaryProps {
   navigation: NavigationScreenProp<State, any>

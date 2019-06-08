@@ -1,5 +1,4 @@
-import type from '@app/constants/type'
-// import colors from '@app/constants/colors';
+import type from '../../../constants/type'
 
 // Find theme style nodes (the keys in this object) here: https://github.com/wix/react-native-calendars/tree/master/src/calendar
 

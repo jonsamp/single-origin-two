@@ -1,14 +1,3 @@
 {
-  "presets": ["babel-preset-expo"],
-  "plugins": [
-    [
-      "module-resolver",
-      {
-        "root": ["./"],
-        "alias": {
-          "@app": "./src/app"
-        }
-      }
-    ]
-  ]
+  "presets": ["babel-preset-expo"]
 }

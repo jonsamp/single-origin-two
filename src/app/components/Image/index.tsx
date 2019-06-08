@@ -1,6 +1,6 @@
-import withTheme from '@app/providers/theme'
 import React, { PureComponent } from 'react'
 import { Image, TouchableOpacity, View } from 'react-native'
+import withTheme from '../../providers/theme'
 import PauseIcon from './icons/PauseIcon'
 import PlayIcon from './icons/PlayIcon'
 import styles from './styles'

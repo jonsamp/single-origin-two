@@ -1,8 +1,8 @@
-import withSettings from '@app/providers/settings'
-import withTheme from '@app/providers/theme'
 import { range } from 'lodash'
 import React, { Component } from 'react'
 import { Animated, Text, TouchableOpacity, View } from 'react-native'
+import withSettings from '../../providers/settings'
+import withTheme from '../../providers/theme'
 import styles from './styles'
 
 interface ScrollSelectProps {

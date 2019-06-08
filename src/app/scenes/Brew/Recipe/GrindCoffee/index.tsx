@@ -1,10 +1,10 @@
-import Card from '@app/components/Card'
-import Instructions from '@app/components/Instructions'
-import { height } from '@app/constants/layout'
-import withSettings from '@app/providers/settings'
-import { getValueUnit } from '@app/scenes/Brew/helpers'
 import React from 'react'
 import { Image } from 'react-native'
+import Card from '../../../../components/Card'
+import Instructions from '../../../../components/Instructions'
+import { height } from '../../../../constants/layout'
+import withSettings from '../../../../providers/settings'
+import { getValueUnit } from '../../../../scenes/Brew/helpers'
 
 interface GrindCoffeeProps {
   unitHelpers: any

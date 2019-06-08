@@ -1,9 +1,9 @@
-import type from '@app/constants/type'
-import withTheme from '@app/providers/theme'
-import { Theme } from '@app/types/index'
 import React, { Component } from 'react'
 import { ScrollView, Text, View } from 'react-native'
 import { connect } from 'react-redux'
+import type from '../../constants/type'
+import withTheme from '../../providers/theme'
+import { Theme } from '../../types/index'
 import Calendar from './Calendar'
 
 interface LogsProps {

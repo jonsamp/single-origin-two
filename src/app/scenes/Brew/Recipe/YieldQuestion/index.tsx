@@ -1,10 +1,10 @@
-import Card from '@app/components/Card'
-import Question from '@app/components/Question'
-import ScrollSelect from '@app/components/ScrollSelect'
-import withSettings from '@app/providers/settings'
-import { getValueUnit } from '@app/scenes/Brew/helpers'
-import { UnitHelpers } from '@app/types/index'
 import React from 'react'
+import Card from '../../../../components/Card'
+import Question from '../../../../components/Question'
+import ScrollSelect from '../../../../components/ScrollSelect'
+import withSettings from '../../../../providers/settings'
+import { getValueUnit } from '../../../../scenes/Brew/helpers'
+import { UnitHelpers } from '../../../../types/index'
 
 interface YieldQuestionProps {
   unitHelpers: UnitHelpers

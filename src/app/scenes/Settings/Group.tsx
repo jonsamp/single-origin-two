@@ -1,10 +1,10 @@
-import type from '@app/constants/type'
-import withTheme from '@app/providers/theme'
-import { Theme } from '@app/types/index'
 import { Feather } from '@expo/vector-icons'
 import React, { Component } from 'react'
 import { Text, TextStyle, TouchableOpacity } from 'react-native'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
+import type from '../../constants/type'
+import withTheme from '../../providers/theme'
+import { Theme } from '../../types/index'
 
 interface GroupProps {
   title: string

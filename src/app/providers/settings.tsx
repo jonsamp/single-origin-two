@@ -1,11 +1,11 @@
-import { getVerboseSetting, grinders } from '@app/constants/grinders'
-import { units } from '@app/constants/units'
-import { settingUpdated } from '@app/state/settings/actions'
-import { selectSettings } from '@app/state/settings/selectors'
-import { Settings } from '@app/state/settings/types'
-import { State } from '@app/state/types'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { getVerboseSetting, grinders } from '../constants/grinders'
+import { units } from '../constants/units'
+import { settingUpdated } from '../state/settings/actions'
+import { selectSettings } from '../state/settings/selectors'
+import { Settings } from '../state/settings/types'
+import { State } from '../state/types'
 
 interface WrapperProps {
   settings: Settings

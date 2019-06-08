@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import type from '@app/constants/type';
+import { StyleSheet, ViewStyle } from 'react-native'
+import type from '../../constants/type'
 
 const defaultButton = {
   display: 'flex',
@@ -9,7 +9,7 @@ const defaultButton = {
   paddingHorizontal: 28,
   overflow: 'hidden',
   borderRadius: 4,
-};
+} as ViewStyle
 
 const styles = StyleSheet.create({
   text: {
@@ -38,6 +38,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderWidth: 2,
   },
-});
+})
 
-export default styles;
+export default styles

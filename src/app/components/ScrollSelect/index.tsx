@@ -1,5 +1,5 @@
-import { BrewConsumer } from '@app/scenes/Brew/context'
 import React from 'react'
+import { BrewConsumer } from '../../scenes/Brew/context'
 import ScrollSelect from './ScrollSelect'
 
 function ScrollSelectContainer(props: any) {

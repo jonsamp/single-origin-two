@@ -1,10 +1,10 @@
-import themes from '@app/constants/themes'
-import { themeUpdated } from '@app/state/settings/actions'
-import { selectSettings } from '@app/state/settings/selectors'
-import { State } from '@app/state/types'
 import React, { Component } from 'react'
 import { StatusBar, StatusBarStyle } from 'react-native'
 import { connect } from 'react-redux'
+import themes from '../constants/themes'
+import { themeUpdated } from '../state/settings/actions'
+import { selectSettings } from '../state/settings/selectors'
+import { State } from '../state/types'
 
 interface WrapperProps {
   theme: 'default' | 'light' | 'dark'

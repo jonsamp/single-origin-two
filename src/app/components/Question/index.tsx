@@ -1,7 +1,7 @@
-import type from '@app/constants/type'
-import withTheme from '@app/providers/theme'
 import React from 'react'
 import { Text, View } from 'react-native'
+import type from '../../constants/type'
+import withTheme from '../../providers/theme'
 
 interface QuestionProps {
   theme: any

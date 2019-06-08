@@ -1,8 +1,8 @@
-import type from '@app/constants/type'
-import withTheme from '@app/providers/theme'
-import { Theme } from '@app/types/index'
 import React, { Component } from 'react'
 import { LayoutAnimation, Text, TextStyle, View } from 'react-native'
+import type from '../../../../constants/type'
+import withTheme from '../../../../providers/theme'
+import { Theme } from '../../../../types/index'
 
 interface WarningProps {
   theme: Theme

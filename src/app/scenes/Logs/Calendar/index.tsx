@@ -1,10 +1,10 @@
-import withTheme from '@app/providers/theme'
-import { Theme } from '@app/types/index'
 import moment from 'moment'
 import React, { Component } from 'react'
 import { Text, TextStyle, View } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import { connect } from 'react-redux'
+import withTheme from '../../../providers/theme'
+import { Theme } from '../../../types/index'
 import styles from './styles'
 import themeStyles from './themeStyles'
 

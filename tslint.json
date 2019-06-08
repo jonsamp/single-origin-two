@@ -15,8 +15,8 @@
     "member-access": false,
     "no-empty": [false],
     "arrow-parens": false,
-    "no-implicit-dependencies": [false, ["@app"]],
-    "no-submodule-imports": [true, "@app"],
+    "no-implicit-dependencies": [false],
+    "no-submodule-imports": [true],
     "no-relative-imports": [true, "allow-siblings"],
     "no-unused-variable": true
   },

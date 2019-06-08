@@ -1,68 +1,44 @@
-import { withBloomFn } from '../../../../scenes/Brew/helpers'
-import KalitaWavePourDefault from './images/kalita-wave-pour-default.jpg'
-import KalitaWavePour from './images/kalita-wave-pour.gif'
+// import { withBloomFn } from '../../../../scenes/Brew/helpers'
+// import KalitaWavePourDefault from './images/kalita-wave-pour-default.jpg'
+// import KalitaWavePour from './images/kalita-wave-pour.gif'
 
-export default function recipe({ settings }) {
-  const withBloom = withBloomFn({ settings })
-
-  return {
-    title: 'Kalita Wave 185',
-    minYield: 150,
-    maxYield: 525,
-    pourEvents: {
-      1: [{ type: 'increaseWaterLevel', volumePercent: 0.1538 }],
-      [withBloom(-10)]: [
-        {
-          type: 'tip',
-          text: 'In **seconds** pour up to **grams**.',
-          volumePercent: 0.5385,
-          countDownTo: withBloom(0),
-        },
-      ],
-      [withBloom(0)]: [{ type: 'increaseWaterLevel', volumePercent: 0.5385 }],
-      [withBloom(30)]: [
-        {
-          type: 'tip',
-          text: 'In **seconds** pour up to **grams**.',
-          volumePercent: 0.6923,
-          countDownTo: withBloom(40),
-        },
-      ],
-      [withBloom(40)]: [{ type: 'increaseWaterLevel', volumePercent: 0.6923 }],
-      [withBloom(55)]: [
-        {
-          type: 'tip',
-          text: 'In **seconds** pour up to **grams**.',
-          volumePercent: 0.8462,
-          countDownTo: withBloom(65),
-        },
-      ],
-      [withBloom(65)]: [{ type: 'increaseWaterLevel', volumePercent: 0.8462 }],
-      [withBloom(80)]: [
-        {
-          type: 'tip',
-          text: 'In **seconds** pour up to **grams**.',
-          volumePercent: 1,
-          countDownTo: withBloom(90),
-        },
-      ],
-      [withBloom(90)]: [{ type: 'increaseWaterLevel', volumePercent: 1 }],
-      [withBloom(135)]: [
-        {
-          type: 'tip',
-          text: 'In **seconds** the kalita wave should be finished draining.',
-          countDownTo: withBloom(145),
-        },
-      ],
-      [withBloom(145)]: [
-        {
-          type: 'finished',
-        },
-      ],
+export default {
+  title: 'Kalita Wave 185',
+  minYield: 150,
+  maxYield: 525,
+  steps: [
+    {
+      start: true,
+      type: 'pour',
+      volumePercent: 0.1538,
     },
-    totalVolume: 325,
-    totalTime: 175,
-    defaultGrind: 0.5,
-    pourSourceDefault: KalitaWavePourDefault,
-  }
+    {
+      second: 0,
+      type: 'pour',
+      volumePercent: 0.5385,
+    },
+    {
+      second: 10,
+      type: 'tip',
+      text: 'this is a tip',
+    },
+    {
+      second: 40,
+      type: 'pour',
+      volumePercent: 0.6923,
+    },
+    {
+      second: 90,
+      type: 'pour',
+      volumePercent: 0.7923,
+    },
+    {
+      second: 145,
+      type: 'finished',
+      volumePercent: 1,
+    },
+  ],
+  totalVolume: 325,
+  totalTime: '2:55',
+  defaultGrind: 0.5,
 }

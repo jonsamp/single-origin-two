@@ -1,4 +1,3 @@
-import withTheme from '@app/providers/theme'
 import { Haptic } from 'expo'
 import React, { Component } from 'react'
 import {
@@ -9,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
+import withTheme from '../../providers/theme'
 import styles from './styles'
 
 interface DraggableSegmentProps {

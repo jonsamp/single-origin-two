@@ -1,8 +1,8 @@
-import { height, width } from '@app/constants/layout'
-import withTheme from '@app/providers/theme'
 import { LinearGradient } from 'expo'
 import React from 'react'
 import { Image, View } from 'react-native'
+import { height, width } from '../../constants/layout'
+import withTheme from '../../providers/theme'
 
 interface HeaderImage {
   source: number

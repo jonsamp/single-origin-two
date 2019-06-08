@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import type from '@app/constants/type'
+import type from '../../../../constants/type'
 
 const CIRCLE_SIZE = 20
 

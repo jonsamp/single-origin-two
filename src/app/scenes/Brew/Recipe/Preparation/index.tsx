@@ -1,11 +1,11 @@
-import Card from '@app/components/Card'
-import Instructions from '@app/components/Instructions'
-import withTheme from '@app/providers/theme'
-import { Theme } from '@app/types/index'
 import { Feather } from '@expo/vector-icons'
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import Card from '../../../../components/Card'
+import Instructions from '../../../../components/Instructions'
+import withTheme from '../../../../providers/theme'
+import { Theme } from '../../../../types/index'
 
 interface PreparationProps {
   theme: Theme

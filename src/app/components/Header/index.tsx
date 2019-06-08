@@ -1,8 +1,8 @@
-import React from 'react'
 import { Feather } from '@expo/vector-icons'
-import withTheme from '@app/providers/theme'
+import React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import withTheme from '../../providers/theme'
 import styles from './styles'
 
 interface HeaderProps {

@@ -1,5 +1,5 @@
-import type from '@app/constants/type'
 import { StyleSheet, TextStyle } from 'react-native'
+import type from '../../../constants/type'
 
 const styles = StyleSheet.create({
   cardContainer: {

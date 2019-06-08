@@ -1,9 +1,9 @@
-import themes from '@app/constants/themes'
-import { selectSettings } from '@app/state/settings/selectors'
-import { State } from '@app/state/types'
 import { Svg } from 'expo'
 import React from 'react'
 import { connect } from 'react-redux'
+import themes from '../../../constants/themes'
+import { selectSettings } from '../../../state/settings/selectors'
+import { State } from '../../../state/types'
 import { Icon } from './types'
 
 const mapStateToProps = (state: State) => ({

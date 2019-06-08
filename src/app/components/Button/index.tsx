@@ -1,6 +1,6 @@
-import withTheme from '@app/providers/theme'
 import React from 'react'
 import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native'
+import withTheme from '../../providers/theme'
 import styles from './styles'
 
 interface ButtonProps {

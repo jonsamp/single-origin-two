@@ -1,7 +1,7 @@
-import withTheme from '@app/providers/theme'
-import { Theme } from '@app/types/index'
 import React from 'react'
 import { TextInput, ViewStyle } from 'react-native'
+import withTheme from '../../providers/theme'
+import { Theme } from '../../types/index'
 import SettingWrapper from './SettingWrapper'
 import styles from './styles'
 

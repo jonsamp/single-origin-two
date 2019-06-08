@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { height } from '@app/constants/layout'
+import { height } from '../../constants/layout'
 
 const styles = StyleSheet.create({
   image: {

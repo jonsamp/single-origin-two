@@ -1,7 +1,7 @@
-import withTheme from '@app/providers/theme'
-import { Theme } from '@app/types/index'
 import React, { ReactNode } from 'react'
 import { View, ViewStyle } from 'react-native'
+import withTheme from '../../providers/theme'
+import { Theme } from '../../types/index'
 
 interface CardProps {
   theme: Theme

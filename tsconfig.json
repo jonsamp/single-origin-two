@@ -9,9 +9,6 @@
     "target": "ESNext",
     "baseUrl": "src",
     "esModuleInterop": true,
-    "paths": {
-      "@app/*": ["app/*"]
-    },
     "pretty": true
   },
   "exclude": ["**/node_modules"]

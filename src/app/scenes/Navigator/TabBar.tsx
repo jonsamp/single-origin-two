@@ -1,7 +1,7 @@
-import withTheme from '@app/providers/theme'
-import { Theme } from '@app/types/index'
 import React, { Component } from 'react'
 import { BottomTabBar } from 'react-navigation-tabs'
+import withTheme from '../../providers/theme'
+import { Theme } from '../../types/index'
 
 interface TabBarProps {
   props: any

@@ -1,7 +1,7 @@
-import Card from '@app/components/Card'
-import Instructions from '@app/components/Instructions'
-import withSettings from '@app/providers/settings'
 import React from 'react'
+import Card from '../../../../components/Card'
+import Instructions from '../../../../components/Instructions'
+import withSettings from '../../../../providers/settings'
 
 interface BoilWaterProps {
   unitHelpers: any

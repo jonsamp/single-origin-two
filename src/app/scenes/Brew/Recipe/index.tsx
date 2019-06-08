@@ -14,10 +14,11 @@ import {
   Tip,
   UnitHelpers,
 } from '../../../types/index'
-import recipe from '../recipes/Clever'
+import KalitaWave185 from '../recipes/KalitaWave185'
 import BoilWater from './BoilWater'
 import GrindCoffee from './GrindCoffee'
-import PourTimer from './PourTimer'
+// import PourTimer from './PourTimer'
+import PourTimer from './PourTimerTest'
 import Preparation from './Preparation'
 import RecordBrewAttributes from './RecordBrewAttributes'
 import YieldQuestion from './YieldQuestion'
@@ -78,85 +79,85 @@ class Recipe extends Component<RecipeProps, RecipeState> {
   } as RecipeState
 
   componentDidMount() {
-    const recipe = recipes[this.props.recipe.id]({
-      settings: this.props.settings,
-    })
+    // const recipe = recipes[this.props.recipe.id]({
+    //   settings: this.props.settings,
+    // })
     this.setState({
-      ...recipe,
+      // ...recipe,
       isLoaded: true,
     })
   }
 
-  setRecipeState = ({ key, value }) => this.setState({ [key]: value } as any)
+  // setRecipeState = ({ key, value }) => this.setState({ [key]: value } as any)
 
-  onTick = (second: number) => {
-    handleTick({
-      pourEvents: this.state.pourEvents,
-      tip: this.state.tip,
-      totalVolume: this.state.totalVolume,
-      waterVolumeUnit: this.props.unitHelpers.waterVolumeUnit,
-      setState: this.setRecipeState,
-      second,
-    })
-    this.setState({ totalBrewTime: second })
-  }
+  // onTick = (second: number) => {
+  //   handleTick({
+  //     pourEvents: this.state.pourEvents,
+  //     tip: this.state.tip,
+  //     totalVolume: this.state.totalVolume,
+  //     waterVolumeUnit: this.props.unitHelpers.waterVolumeUnit,
+  //     setState: this.setRecipeState,
+  //     second,
+  //   })
+  //   this.setState({ totalBrewTime: second })
+  // }
 
-  onFinish = () => {
-    const { navigation, recipe, settings, logAdded } = this.props
-    const {
-      timestamp,
-      totalVolume,
-      grind,
-      temp,
-      totalBrewTime,
-      attributesRecorded,
-    } = this.state
-    const log = {
-      timestamp,
-      totalVolume,
-      totalBrewTime,
-      ratio: settings.ratio,
-      ...(attributesRecorded && settings.recordGrind
-        ? {
-            grind:
-              grind ||
-              this.props.unitHelpers.grindUnit.getPreferredValueBasedOnPercent(
-                this.state.defaultGrind
-              ),
-          }
-        : null),
-      ...(attributesRecorded && settings.recordTemp
-        ? {
-            temp,
-          }
-        : null),
-      recipeId: recipe.id,
-    }
+  // onFinish = () => {
+  //   const { navigation, recipe, settings, logAdded } = this.props
+  //   const {
+  //     timestamp,
+  //     totalVolume,
+  //     grind,
+  //     temp,
+  //     totalBrewTime,
+  //     attributesRecorded,
+  //   } = this.state
+  //   const log = {
+  //     timestamp,
+  //     totalVolume,
+  //     totalBrewTime,
+  //     ratio: settings.ratio,
+  //     ...(attributesRecorded && settings.recordGrind
+  //       ? {
+  //           grind:
+  //             grind ||
+  //             this.props.unitHelpers.grindUnit.getPreferredValueBasedOnPercent(
+  //               this.state.defaultGrind
+  //             ),
+  //         }
+  //       : null),
+  //     ...(attributesRecorded && settings.recordTemp
+  //       ? {
+  //           temp,
+  //         }
+  //       : null),
+  //     recipeId: recipe.id,
+  //   }
 
-    logAdded({ log })
+  //   logAdded({ log })
 
-    navigation.navigate('BrewSummary', { timestamp })
-  }
+  //   navigation.navigate('BrewSummary', { timestamp })
+  // }
 
   render() {
-    const { settings, unitHelpers, recipe } = this.props
+    // const { settings, unitHelpers, recipe } = this.props
     const {
-      totalVolume,
-      totalTime,
-      temp,
-      defaultGrind,
-      grind,
-      volumePercent,
-      tip,
-      warningText,
+      // totalVolume,
+      // totalTime,
+      // temp,
+      // defaultGrind,
+      // grind,
+      // volumePercent,
+      // tip,
+      // warningText,
       isLoaded,
-      pourSourceDefault,
-      minYield,
-      maxYield,
-      image,
+      // pourSourceDefault,
+      // minYield,
+      // maxYield,
+      // image,
     } = this.state
-    const { grindUnit, temperatureUnit } = unitHelpers
-    const coffeeWeight = Math.round(totalVolume / settings.ratio)
+    // const { grindUnit, temperatureUnit } = unitHelpers
+    // const coffeeWeight = Math.round(totalVolume / settings.ratio)
 
     if (!isLoaded) {
       return null
@@ -164,7 +165,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
 
     return (
       <Fragment>
-        <YieldQuestion
+        {/* <YieldQuestion
           totalVolume={totalVolume}
           setRecipeState={this.setRecipeState}
           minYield={minYield}
@@ -184,23 +185,20 @@ class Recipe extends Component<RecipeProps, RecipeState> {
           temp={temp}
           grindUnit={grindUnit}
           temperatureUnit={temperatureUnit}
-        />
-        <PourTimer
-          totalWaterWeight={totalVolume}
-          waterPercent={volumePercent}
-          onTick={this.onTick}
-          source={image}
-          defaultSource={pourSourceDefault}
-          totalTime={totalTime}
-          totalVolume={totalVolume}
-          tip={tip}
-          warningText={warningText}
-        />
-        <Button
+        /> */}
+        <PourTimer recipe={KalitaWave185} />
+        {/* // totalWaterWeight={totalVolume}
+          // waterPercent={volumePercent}
+          // source={image}
+          // defaultSource={pourSourceDefault}
+          // totalTime={totalTime}
+          // totalVolume={totalVolume} */}
+
+        {/* <Button
           title="Finish"
           customStyle={{ marginVertical: 16, paddingVertical: 20 }}
           onPress={this.onFinish}
-        />
+        /> */}
       </Fragment>
     )
   }

@@ -1,15 +1,15 @@
-import Card from '@app/components/Card'
-import DraggableSegment from '@app/components/DraggableSegment'
-import Instructions from '@app/components/Instructions'
-import ScrollSelect from '@app/components/ScrollSelect'
-import withSettings from '@app/providers/settings'
-import withTheme from '@app/providers/theme'
-import { Settings } from '@app/state/settings/types'
-import { GrindHelper, Theme, Unit } from '@app/types/index'
 import { Feather } from '@expo/vector-icons'
 import { Haptic } from 'expo'
 import React, { Component } from 'react'
 import { Animated, LayoutAnimation, TouchableOpacity, View } from 'react-native'
+import Card from '../../../../components/Card'
+import DraggableSegment from '../../../../components/DraggableSegment'
+import Instructions from '../../../../components/Instructions'
+import ScrollSelect from '../../../../components/ScrollSelect'
+import withSettings from '../../../../providers/settings'
+import withTheme from '../../../../providers/theme'
+import { Settings } from '../../../../state/settings/types'
+import { GrindHelper, Theme, Unit } from '../../../../types/index'
 
 interface RecordBrewAttributesProps {
   theme: Theme
@@ -17,7 +17,7 @@ interface RecordBrewAttributesProps {
   grind: number
   defaultGrind: number
   temp: number
-  setRecipeState: (props: { key: string, value: any }) => void
+  setRecipeState: (props: { key: string; value: any }) => void
   temperatureUnit: { unit: Unit }
   grindUnit: GrindHelper
   isDarkTheme: boolean
