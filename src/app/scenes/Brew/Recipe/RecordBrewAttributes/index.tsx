@@ -1,5 +1,5 @@
 import { Feather } from '@expo/vector-icons'
-import { Haptic } from 'expo'
+import * as Haptic from 'expo-haptics';
 import React, { Component } from 'react'
 import { Animated, LayoutAnimation, TouchableOpacity, View } from 'react-native'
 import Card from '../../../../components/Card'

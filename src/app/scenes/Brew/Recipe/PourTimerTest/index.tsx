@@ -1,4 +1,4 @@
-import { KeepAwake } from 'expo'
+import KeepAwake from 'expo-keep-awake';
 import React, { Component } from 'react'
 import { Animated, Text, TextStyle, View } from 'react-native'
 import AnimateNumber from 'react-native-animate-number'

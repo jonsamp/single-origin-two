@@ -1,4 +1,4 @@
-import { Haptic } from 'expo'
+import * as Haptic from 'expo-haptics';
 import React, { Component } from 'react'
 import {
   Animated,

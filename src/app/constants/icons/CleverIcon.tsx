@@ -1,4 +1,4 @@
-import { Svg } from 'expo'
+import * as Svg from 'react-native-svg';
 import React from 'react'
 import { Icon } from './types'
 
