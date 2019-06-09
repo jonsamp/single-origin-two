@@ -29,6 +29,7 @@ function GrindCoffee({
             resizeMode: 'cover',
             width: null,
             height: height / 5,
+            zIndex: 1,
           }}
         />
       ) : null}
