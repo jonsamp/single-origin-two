@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { Animated, View } from 'react-native'
 import Card from '../../../../components/Card'
 import Image from '../../../../components/Image'
+import { width } from '../../../../constants/layout'
 import withSettings from '../../../../providers/settings'
 import withTheme from '../../../../providers/theme'
 import { Theme, UnitHelpers } from '../../../../types/index'
@@ -12,6 +13,9 @@ import Step from './Step'
 import styles from './styles'
 import Timer from './Timer'
 import WaterVolume from './WaterVolume'
+
+import DefaultImageSource from '../../recipes/KalitaWave185/images/kalita-wave-pour-default.jpg'
+import ImageSource from '../../recipes/KalitaWave185/images/kalita-wave-pour.gif'
 
 interface PourTimerProps {
   theme: Theme
@@ -139,48 +143,54 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     const { recipe, timerRunning, volumePercent, second } = this.state
 
     return (
-      <Animated.View
-        style={{
-          shadowColor: this.shadowAnimatedValue.interpolate({
-            inputRange: [0, 0.5],
-            outputRange: [theme.black, theme.primary],
-            extrapolate: 'clamp',
-          }),
-          shadowRadius: this.shadowAnimatedValue.interpolate({
-            inputRange: [0, 1],
-            outputRange: [10, 16],
-          }),
-          shadowOffset: { height: 6, width: 0 },
-          shadowOpacity: this.shadowAnimatedValue.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0.2, 0.8],
-          }),
-        }}
-      >
-        <Card style={{ shadowOpacity: 0 }}>
-          <Step
-            recipe={recipe}
-            second={second}
-            volume={volume}
-            waterVolumeUnit={waterVolumeUnit}
-            timerRunning={timerRunning}
-            totalTime={this.props.recipe.totalTime}
-          />
-          <View style={[styles.container, { backgroundColor: theme.grey2 }]}>
-            <Timer
-              toggleCountdown={this.toggleCountdown}
-              timerRunning={timerRunning}
+      <View>
+        <View style={{ left: -16, width: width + 32 }}>
+          <Image source={ImageSource} />
+        </View>
+        <Animated.View
+          style={{
+            shadowColor: this.shadowAnimatedValue.interpolate({
+              inputRange: [0, 0.5],
+              outputRange: [theme.black, theme.primary],
+              extrapolate: 'clamp',
+            }),
+            shadowRadius: this.shadowAnimatedValue.interpolate({
+              inputRange: [0, 1],
+              outputRange: [10, 16],
+            }),
+            shadowOffset: { height: 6, width: 0 },
+            shadowOpacity: this.shadowAnimatedValue.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0.3, 0.8],
+            }),
+            top: -24,
+          }}
+        >
+          <Card style={{ shadowOpacity: 0 }}>
+            <Step
+              recipe={recipe}
               second={second}
-            />
-            <WaterVolume
-              animatedValue={this.animatedValue}
-              volume={volume * volumePercent}
+              volume={volume}
               waterVolumeUnit={waterVolumeUnit}
-              onAnimateNumberFinish={this.onAnimateNumberFinish}
+              timerRunning={timerRunning}
+              totalTime={this.props.recipe.totalTime}
             />
-          </View>
-        </Card>
-      </Animated.View>
+            <View style={[styles.container, { backgroundColor: theme.grey2 }]}>
+              <Timer
+                toggleCountdown={this.toggleCountdown}
+                timerRunning={timerRunning}
+                second={second}
+              />
+              <WaterVolume
+                animatedValue={this.animatedValue}
+                volume={volume * volumePercent}
+                waterVolumeUnit={waterVolumeUnit}
+                onAnimateNumberFinish={this.onAnimateNumberFinish}
+              />
+            </View>
+          </Card>
+        </Animated.View>
+      </View>
     )
   }
 }

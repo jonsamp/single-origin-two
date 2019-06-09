@@ -114,9 +114,8 @@ class Step extends Component<StepProps, StepState> {
         pour: 'pour',
         tip: 'step',
       }
-      return `Next ${types[recipe[nextEvent].type]} at **${formatSeconds(
-        nextEvent
-      )}**`
+      return `Next ${types[recipe[nextEvent].type] ||
+        'step'} at **${formatSeconds(nextEvent)}**`
     }
 
     if (!nextEvent) {
