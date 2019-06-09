@@ -130,7 +130,10 @@ class Step extends Component<StepProps, StepState> {
     return (
       <View style={{ minHeight: 100, justifyContent: 'center' }}>
         <View>
-          <Instructions text={this.getText()} style={{ paddingBottom: 8 }} />
+          <Instructions
+            text={this.getText()}
+            style={{ paddingBottom: 0, top: -8 }}
+          />
           {!beforeTimerStart && (
             <Animated.View
               style={{

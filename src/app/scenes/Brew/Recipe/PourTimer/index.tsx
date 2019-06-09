@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { Animated, View } from 'react-native'
 import Card from '../../../../components/Card'
 import Image from '../../../../components/Image'
-import { width } from '../../../../constants/layout'
+import { height, width } from '../../../../constants/layout'
 import playSound from '../../../../helpers/playSound'
 import withSettings from '../../../../providers/settings'
 import withTheme from '../../../../providers/theme'
@@ -176,6 +176,9 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
             source={image}
             defaultSource={this.props.recipe.defaultSource}
             isPlaying={timerRunning}
+            style={{
+              height: height / 4,
+            }}
           />
         </View>
         <Animated.View
