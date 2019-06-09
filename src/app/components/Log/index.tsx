@@ -22,38 +22,47 @@ const mapStateToProps = (state, props) => {
   }
 }
 
-const mapDispatchToProps = {}
-
 class Log extends Component<LogProps> {
   render() {
     const { theme, log } = this.props
     const recipe = recipes[log.recipeId]
     return (
-      <ScrollView
-        contentContainerStyle={{
+      <View
+        style={{
           backgroundColor: theme.background,
-          alignItems: 'center',
+          flex: 1,
         }}
       >
-        {recipe.icon({ fill: theme.foreground, size: 2 })}
-        <Text style={{ color: theme.foreground, ...type.header }}>
-          {recipe.title}
-        </Text>
-        <View>
-          <Text style={type.body}>
-            Brew completed at {moment(log.timestamp).format('h:mmA')} on{' '}
-            {moment(log.timestamp).format('MM/DD/YYYY')}
+        <ScrollView
+          contentContainerStyle={{
+            alignItems: 'center',
+            paddingVertical: 32,
+          }}
+        >
+          {recipe.icon({ fill: theme.foreground, size: 2 })}
+          <Text
+            style={{
+              color: theme.foreground,
+              ...type.header,
+              fontWeight: '900',
+              marginVertical: 16,
+            }}
+          >
+            {recipe.title} {recipe.modifier}
           </Text>
-        </View>
-        <Text style={{ color: theme.foreground, fontSize: 32 }}>
-          {JSON.stringify(log, null, 2)}
-        </Text>
-      </ScrollView>
+          <View>
+            <Text style={[type.body, { color: theme.foreground }]}>
+              Finished at {moment(log.timestamp).format('h:mmA')} on{' '}
+              {moment(log.timestamp).format('MM/DD/YYYY')}
+            </Text>
+          </View>
+          <Text style={{ color: theme.foreground, fontSize: 32 }}>
+            {JSON.stringify(log, null, 2)}
+          </Text>
+        </ScrollView>
+      </View>
     )
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withTheme(Log))
+export default connect(mapStateToProps)(withTheme(Log))

@@ -27,10 +27,10 @@ class BrewSummary extends Component<BrewSummaryProps> {
   render() {
     const { navigation } = this.props
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <Header
           title="Brew Summary"
-          onBack={() => navigation.dispatch(StackActions.popToTop())}
+          onBack={() => navigation.dispatch(StackActions.popToTop({}))}
         />
         <Log timestamp={navigation.state.params.timestamp} />
       </View>

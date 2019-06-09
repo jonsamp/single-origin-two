@@ -7,6 +7,7 @@ import Draining from './images/draining.gif'
 import Pour from './images/pour.gif'
 
 export default {
+  id: 'KalitaWave185',
   title: 'Kalita Wave 185',
   minYield: 150,
   maxYield: 525,

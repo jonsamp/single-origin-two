@@ -119,7 +119,11 @@ class Recipe extends Component<RecipeProps, RecipeState> {
           grindUnit={grindUnit}
           temperatureUnit={temperatureUnit}
         />
-        <PourTimer recipe={KalitaWave185} volume={totalVolume} />
+        <PourTimer
+          recipe={KalitaWave185}
+          volume={totalVolume}
+          setRecipeState={this.setRecipeState}
+        />
         <Button
           title="Finish"
           customStyle={{ marginVertical: 16, paddingVertical: 20 }}

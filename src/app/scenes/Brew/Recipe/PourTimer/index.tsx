@@ -23,6 +23,7 @@ interface PourTimerProps {
   recipe: any
   settings: any
   volume: number
+  setRecipeState: (props: any) => {}
 }
 
 interface PourTimerState {
@@ -155,10 +156,14 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     }
   }
 
-  countdown = () => {
-    this.setState(prev => ({
+  countdown = async () => {
+    await this.setState(prev => ({
       second: prev.second + 1,
     }))
+    this.props.setRecipeState({
+      key: 'totalBrewTime',
+      value: this.state.second,
+    })
   }
 
   render() {
