@@ -2,27 +2,19 @@ import React, { Component } from 'react'
 import { ScrollView, View } from 'react-native'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import Header from '../../components/Header'
-import recipes from '../../constants/recipes'
 import { Theme } from '../../constants/themes'
 import withSettings from '../../providers/settings'
 import withTheme from '../../providers/theme'
 import { State } from '../../state/types'
 import Recipe from './Recipe'
+import recipes from './recipes'
 
 interface BrewProps {
   theme: Theme
   navigation: NavigationScreenProp<State, any>
 }
 
-interface BrewState {
-  containerWidth: number
-}
-
-class Brew extends Component<BrewProps, BrewState> {
-  state = {
-    containerWidth: 0,
-  }
-
+class Brew extends Component<BrewProps> {
   render() {
     const { theme, navigation } = this.props
     const { id } = navigation.state.params
@@ -43,14 +35,7 @@ class Brew extends Component<BrewProps, BrewState> {
             paddingTop: 32,
           }}
         >
-          <View
-            style={{ width: '100%', maxWidth: 480 }}
-            onLayout={event =>
-              this.setState({
-                containerWidth: event.nativeEvent.layout.width,
-              })
-            }
-          >
+          <View style={{ width: '100%' }}>
             <Recipe recipe={recipe} />
           </View>
         </ScrollView>

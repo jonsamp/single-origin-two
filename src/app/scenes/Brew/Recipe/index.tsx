@@ -3,11 +3,10 @@ import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import { connect } from 'react-redux'
 import Button from '../../../components/Button'
 import withSettings from '../../../providers/settings'
-import recipes from '../../../scenes/Brew/recipes'
 import { logAdded } from '../../../state/logs/actions'
 import { Settings } from '../../../state/settings/types'
 import { State } from '../../../state/types'
-import { PourEvents, RecipeConfig, UnitHelpers } from '../../../types/index'
+import { UnitHelpers } from '../../../types/index'
 import KalitaWave185 from '../recipes/KalitaWave185'
 import BoilWater from './BoilWater'
 import GrindCoffee from './GrindCoffee'
@@ -107,13 +106,15 @@ class Recipe extends Component<RecipeProps, RecipeState> {
       return null
     }
 
+    console.log({ recipe })
+
     return (
       <Fragment>
         <YieldQuestion
           totalVolume={350}
           setRecipeState={this.setRecipeState}
-          minYield={150}
-          maxYield={525}
+          minYield={minYield}
+          maxYield={maxYield}
         />
         <Preparation recipe={recipe.title.toLowerCase()} />
         <BoilWater totalVolume={totalVolume} />
