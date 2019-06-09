@@ -24,7 +24,6 @@ interface RecipeProps {
 }
 
 interface RecipeState {
-  isLoaded: boolean
   grind: number
   temp: number
   timestamp: number
@@ -43,17 +42,12 @@ class Recipe extends Component<RecipeProps, RecipeState> {
   }
 
   state = {
-    isLoaded: false,
     grind: undefined,
     temp: 205,
     timestamp: new Date().getTime(),
     totalBrewTime: 0,
     attributesRecorded: false,
     totalVolume: undefined,
-  }
-
-  componentDidMount() {
-    this.setState({ isLoaded: true })
   }
 
   setRecipeState = ({ key, value }) => this.setState({ [key]: value } as any)
@@ -101,12 +95,6 @@ class Recipe extends Component<RecipeProps, RecipeState> {
     const { minYield, maxYield, defaultGrind } = recipe
     const { totalVolume, grind, temp } = this.state
     const coffeeWeight = Math.round(totalVolume / settings.ratio)
-
-    if (!this.state.isLoaded) {
-      return null
-    }
-
-    console.log({ recipe })
 
     return (
       <Fragment>
