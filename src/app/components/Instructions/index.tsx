@@ -13,9 +13,17 @@ interface Instructions {
   isDarkTheme?: boolean
   icon?: string
   style: ViewStyle
+  textStyle: TextStyle
 }
 
-function Instructions({ text, theme, isDarkTheme, icon, style }: Instructions) {
+function Instructions({
+  text,
+  theme,
+  isDarkTheme,
+  icon,
+  style,
+  textStyle,
+}: Instructions) {
   const specialWordCaptureGroup = /(\*\*.*?\*\*)/g
   const specialWordRegex = /\*\*.*\*\*/
   const specialWordStyles = {
@@ -65,12 +73,11 @@ function Instructions({ text, theme, isDarkTheme, icon, style }: Instructions) {
       ) : null}
       <View style={{ padding: 20, flex: 1, ...style }}>
         <Text
-          style={
-            {
-              ...type.body,
-              color: theme.foreground,
-            } as TextStyle
-          }
+          style={{
+            ...type.body,
+            color: theme.foreground,
+            ...textStyle,
+          }}
         >
           {formattedText}
         </Text>

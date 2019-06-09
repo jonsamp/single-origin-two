@@ -171,7 +171,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
             }),
             shadowRadius: this.shadowAnimatedValue.interpolate({
               inputRange: [0, 1],
-              outputRange: [10, 16],
+              outputRange: [10, 4],
             }),
             shadowOffset: { height: 6, width: 0 },
             shadowOpacity: this.shadowAnimatedValue.interpolate({
