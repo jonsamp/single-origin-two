@@ -1,11 +1,8 @@
-import { thisExpression } from '@babel/types'
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { Animated, View } from 'react-native'
-import Button from '../../../../../components/Button'
 import Instructions from '../../../../../components/Instructions'
 import formatSeconds from '../../../../../helpers/formatSeconds'
 import withTheme from '../../../../../providers/theme'
-import styles from './styles'
 
 interface StepProps {
   recipe: any

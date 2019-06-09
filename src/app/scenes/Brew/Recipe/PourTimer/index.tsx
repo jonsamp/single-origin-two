@@ -1,3 +1,4 @@
+import * as Haptics from 'expo-haptics'
 import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake'
 import React, { Component } from 'react'
 import { Animated, View } from 'react-native'
@@ -43,6 +44,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
   }
 
   animatedValue = new Animated.Value(0)
+  shadowAnimatedValue = new Animated.Value(0)
 
   interval
 
@@ -67,36 +69,20 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
   }
 
   onAnimateNumberBegin = () =>
-    Animated.sequence([
-      {
-        start: onComplete => {
-          // Haptic.selection();
-          onComplete({ finished: true })
-        },
-        stop: () => {},
-      },
-      Animated.timing(this.animatedValue, {
-        toValue: 1,
-        duration: 200,
-      }),
-    ]).start()
+    Animated.timing(this.animatedValue, {
+      toValue: 1,
+      duration: 200,
+    }).start()
 
   onAnimateNumberFinish = () =>
-    Animated.sequence([
-      {
-        start: onComplete => {
-          // Haptic.selection();
-          onComplete({ finished: true })
-        },
-        stop: () => {},
-      },
-      Animated.timing(this.animatedValue, {
-        toValue: 0,
-        duration: 200,
-      }),
-    ]).start()
+    Animated.timing(this.animatedValue, {
+      toValue: 0,
+      duration: 200,
+    }).start()
 
   toggleCountdown = () => {
+    Haptics.selectionAsync()
+
     if (this.state.timerRunning) {
       deactivateKeepAwake()
       clearInterval(this.interval)
@@ -117,6 +103,18 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     const step = recipe[second]
 
     if (step) {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
+      Animated.sequence([
+        Animated.timing(this.shadowAnimatedValue, {
+          toValue: 1,
+          duration: 500,
+        }),
+        Animated.timing(this.shadowAnimatedValue, {
+          toValue: 0,
+          duration: 500,
+        }),
+      ]).start()
+
       if (step.type === 'pour') {
         await this.setState({
           volumePercent: step.volumePercent,
@@ -141,29 +139,48 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     const { recipe, timerRunning, volumePercent, second } = this.state
 
     return (
-      <Card>
-        <Step
-          recipe={recipe}
-          second={second}
-          volume={volume}
-          waterVolumeUnit={waterVolumeUnit}
-          timerRunning={timerRunning}
-          totalTime={this.props.recipe.totalTime}
-        />
-        <View style={[styles.container, { backgroundColor: theme.grey2 }]}>
-          <Timer
-            toggleCountdown={this.toggleCountdown}
-            timerRunning={timerRunning}
+      <Animated.View
+        style={{
+          shadowColor: this.shadowAnimatedValue.interpolate({
+            inputRange: [0, 0.5],
+            outputRange: [theme.black, theme.primary],
+            extrapolate: 'clamp',
+          }),
+          shadowRadius: this.shadowAnimatedValue.interpolate({
+            inputRange: [0, 1],
+            outputRange: [10, 16],
+          }),
+          shadowOffset: { height: 6, width: 0 },
+          shadowOpacity: this.shadowAnimatedValue.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0.2, 0.8],
+          }),
+        }}
+      >
+        <Card style={{ shadowOpacity: 0 }}>
+          <Step
+            recipe={recipe}
             second={second}
-          />
-          <WaterVolume
-            animatedValue={this.animatedValue}
-            volume={volume * volumePercent}
+            volume={volume}
             waterVolumeUnit={waterVolumeUnit}
-            onAnimateNumberFinish={this.onAnimateNumberFinish}
+            timerRunning={timerRunning}
+            totalTime={this.props.recipe.totalTime}
           />
-        </View>
-      </Card>
+          <View style={[styles.container, { backgroundColor: theme.grey2 }]}>
+            <Timer
+              toggleCountdown={this.toggleCountdown}
+              timerRunning={timerRunning}
+              second={second}
+            />
+            <WaterVolume
+              animatedValue={this.animatedValue}
+              volume={volume * volumePercent}
+              waterVolumeUnit={waterVolumeUnit}
+              onAnimateNumberFinish={this.onAnimateNumberFinish}
+            />
+          </View>
+        </Card>
+      </Animated.View>
     )
   }
 }
