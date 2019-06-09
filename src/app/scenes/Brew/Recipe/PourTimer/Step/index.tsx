@@ -89,7 +89,7 @@ class Step extends Component<StepProps, StepState> {
       recipe,
     } = this.props
     const nextEvent = this.getNextEvent()
-    const beforeBrewStart = second < 0 && !timerRunning
+    const beforeBrewStart = second === -3 && !timerRunning
     const brewCountdown = second < 0 && timerRunning
     const foreshadowNextStep = nextEvent - second > 10
     const countdownToNextStep = nextEvent - second <= 10
@@ -128,32 +128,36 @@ class Step extends Component<StepProps, StepState> {
   }
 
   render() {
+    const beforeTimerStart =
+      !this.props.timerRunning && this.props.second === -3
     this.getNextStepText()
     return (
-      <Fragment>
+      <View style={{ minHeight: 92 }}>
         <Instructions text={this.getText()} style={{ paddingBottom: 8 }} />
-        <Animated.View
-          style={{
-            opacity: this.animatedValue.interpolate({
-              inputRange: [0, 0.5],
-              outputRange: [1, 0],
-            }),
-            transform: [
-              {
-                translateY: this.animatedValue.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0, 24],
-                }),
-              },
-            ],
-          }}
-        >
-          <Instructions
-            text={this.state.nextStepText}
-            style={{ paddingTop: 0, opacity: this.isDuringStep() ? 1 : 0.5 }}
-          />
-        </Animated.View>
-      </Fragment>
+        {!beforeTimerStart && (
+          <Animated.View
+            style={{
+              opacity: this.animatedValue.interpolate({
+                inputRange: [0, 0.5],
+                outputRange: [1, 0],
+              }),
+              transform: [
+                {
+                  translateY: this.animatedValue.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, 24],
+                  }),
+                },
+              ],
+            }}
+          >
+            <Instructions
+              text={this.state.nextStepText}
+              style={{ paddingTop: 0, opacity: this.isDuringStep() ? 1 : 0.5 }}
+            />
+          </Animated.View>
+        )}
+      </View>
     )
   }
 }
