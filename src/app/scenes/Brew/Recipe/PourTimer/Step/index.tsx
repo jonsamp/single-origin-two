@@ -94,7 +94,7 @@ class Step extends Component<StepProps, StepState> {
     if (beforeBrewStart) {
       return `Over **${formatSeconds(totalTime)}**, pour over **${Math.round(
         waterVolumeUnit.getPreferredValue(volume)
-      )} ${waterVolumeUnit.unit.title}** of water.`
+      )} ${waterVolumeUnit.unit.title}** of water. Press **Start** to begin.`
     }
 
     if (this.isDuringStep()) {
@@ -128,9 +128,9 @@ class Step extends Component<StepProps, StepState> {
       !this.props.timerRunning && this.props.second === -3
     this.getNextStepText()
     return (
-      <View style={{ minHeight: 108, justifyContent: 'center' }}>
+      <View style={{ minHeight: 100, justifyContent: 'center' }}>
         <View>
-          <Instructions text={this.getText()} style={{ paddingBottom: 16 }} />
+          <Instructions text={this.getText()} style={{ paddingBottom: 8 }} />
           {!beforeTimerStart && (
             <Animated.View
               style={{

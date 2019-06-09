@@ -50,8 +50,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
     timestamp: new Date().getTime(),
     totalBrewTime: 0,
     attributesRecorded: false,
-    totalVolume: 350,
-    defaultGrind: undefined,
+    totalVolume: undefined,
   }
 
   componentDidMount() {
@@ -123,15 +122,15 @@ class Recipe extends Component<RecipeProps, RecipeState> {
           defaultGrind={defaultGrind}
           title={recipe.title}
         />
-        {/* <RecordBrewAttributes
+        <RecordBrewAttributes
           setRecipeState={this.setRecipeState}
           defaultGrind={defaultGrind}
           grind={grind}
           temp={temp}
           grindUnit={grindUnit}
           temperatureUnit={temperatureUnit}
-        /> */}
-        <PourTimer recipe={KalitaWave185} />
+        />
+        <PourTimer recipe={KalitaWave185} volume={totalVolume} />
         <Button
           title="Finish"
           customStyle={{ marginVertical: 16, paddingVertical: 20 }}

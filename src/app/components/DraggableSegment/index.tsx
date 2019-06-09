@@ -1,4 +1,4 @@
-import * as Haptic from 'expo-haptics';
+import * as Haptic from 'expo-haptics'
 import React, { Component } from 'react'
 import {
   Animated,
@@ -68,7 +68,7 @@ class DraggableSegment extends Component<
   }
 
   setCurrentSegmentIndex = ({ index }) => {
-    Haptic.selection()
+    Haptic.selectionAsync()
     this.setState({ currentSegmentIndex: index })
     this.props.onChange(index)
   }

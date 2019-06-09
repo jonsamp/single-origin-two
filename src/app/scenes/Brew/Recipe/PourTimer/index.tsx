@@ -2,16 +2,16 @@ import * as Haptics from 'expo-haptics'
 import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake'
 import React, { Component } from 'react'
 import { Animated, View } from 'react-native'
-// import playSound from '../../../helpers/playSound'
-// import addWaterSound from '../../../scenes/Brew/sounds/add-water.mp3'
-// import endBrewSound from '../../../scenes/Brew/sounds/end-brew.mp3'
 import Card from '../../../../components/Card'
 import Image from '../../../../components/Image'
 import { width } from '../../../../constants/layout'
+import playSound from '../../../../helpers/playSound'
 import withSettings from '../../../../providers/settings'
 import withTheme from '../../../../providers/theme'
 import { Theme, UnitHelpers } from '../../../../types/index'
 import { withBloomFn } from '../../helpers'
+import addWaterSound from '../../sounds/add-water.mp3'
+import tipSound from '../../sounds/tip.mp3'
 import Step from './Step'
 import styles from './styles'
 import Timer from './Timer'
@@ -111,11 +111,19 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
       Animated.sequence([
         Animated.timing(this.shadowAnimatedValue, {
           toValue: 1,
-          duration: 500,
+          duration: 200,
         }),
         Animated.timing(this.shadowAnimatedValue, {
           toValue: 0,
-          duration: 500,
+          duration: 200,
+        }),
+        Animated.timing(this.shadowAnimatedValue, {
+          toValue: 1,
+          duration: 200,
+        }),
+        Animated.timing(this.shadowAnimatedValue, {
+          toValue: 0,
+          duration: 200,
         }),
       ]).start()
 
@@ -137,7 +145,12 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
         await this.setState({
           volumePercent: step.volumePercent,
         })
+        playSound({ sound: addWaterSound })
         this.onAnimateNumberBegin()
+      }
+
+      if (step.type === 'tip') {
+        playSound({ sound: tipSound })
       }
     }
   }

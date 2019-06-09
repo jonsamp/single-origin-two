@@ -1,5 +1,5 @@
 import { Feather } from '@expo/vector-icons'
-import * as Haptic from 'expo-haptics';
+import * as Haptic from 'expo-haptics'
 import React, { Component } from 'react'
 import { Animated, LayoutAnimation, TouchableOpacity, View } from 'react-native'
 import Card from '../../../../components/Card'
@@ -65,7 +65,7 @@ class RecordBrewAttributes extends Component<
 
     LayoutAnimation.configureNext(config)
 
-    Haptic.selection()
+    Haptic.selectionAsync()
 
     this.setState(
       prevState => ({ isOpen: !prevState.isOpen }),
