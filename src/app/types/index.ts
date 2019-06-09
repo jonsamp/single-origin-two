@@ -46,13 +46,6 @@ export interface Grinder {
   max: number
 }
 
-export interface Tip {
-  text: string
-  countDownTo: number
-  template: string
-  volumePercent: number
-}
-
 export interface PourEvents {
   [second: number]: PourEvent
 }

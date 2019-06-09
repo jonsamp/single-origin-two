@@ -7,7 +7,6 @@ import { Theme } from '../../constants/themes'
 import withSettings from '../../providers/settings'
 import withTheme from '../../providers/theme'
 import { State } from '../../state/types'
-import { BrewProvider } from './context'
 import Recipe from './Recipe'
 
 interface BrewProps {
@@ -52,9 +51,7 @@ class Brew extends Component<BrewProps, BrewState> {
               })
             }
           >
-            <BrewProvider value={this.state.containerWidth}>
-              <Recipe recipe={recipe} />
-            </BrewProvider>
+            <Recipe recipe={recipe} />
           </View>
         </ScrollView>
       </View>
