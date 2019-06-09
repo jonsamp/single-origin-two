@@ -14,9 +14,6 @@ import styles from './styles'
 import Timer from './Timer'
 import WaterVolume from './WaterVolume'
 
-import DefaultImageSource from '../../recipes/KalitaWave185/images/kalita-wave-pour-default.jpg'
-import ImageSource from '../../recipes/KalitaWave185/images/kalita-wave-pour.gif'
-
 interface PourTimerProps {
   theme: Theme
   unitHelpers: UnitHelpers
@@ -30,7 +27,7 @@ interface PourTimerState {
   timerRunning: boolean
   recipe: any
   volumePercent: number
-  currentStep: number
+  image: number
 }
 
 class PourTimer extends Component<PourTimerProps, PourTimerState> {
@@ -44,7 +41,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     timerRunning: false,
     recipe: undefined,
     volumePercent: 0,
-    currentStep: 0,
+    image: this.props.recipe.defaultSource,
   }
 
   animatedValue = new Animated.Value(0)
@@ -119,6 +116,20 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
         }),
       ]).start()
 
+      if (step.image) {
+        this.setState({
+          image: step.image,
+        })
+      }
+
+      if (step.afterImage) {
+        setTimeout(() => {
+          this.setState({
+            image: step.afterImage,
+          })
+        }, 5000)
+      }
+
       if (step.type === 'pour') {
         await this.setState({
           volumePercent: step.volumePercent,
@@ -140,12 +151,16 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
       volume,
       unitHelpers: { waterVolumeUnit },
     } = this.props
-    const { recipe, timerRunning, volumePercent, second } = this.state
+    const { recipe, timerRunning, volumePercent, second, image } = this.state
 
     return (
       <View>
         <View style={{ left: -16, width: width + 32 }}>
-          <Image source={ImageSource} />
+          <Image
+            source={image}
+            defaultSource={this.props.recipe.defaultSource}
+            isPlaying={timerRunning}
+          />
         </View>
         <Animated.View
           style={{
