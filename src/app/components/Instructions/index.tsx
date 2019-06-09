@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, TextStyle, View } from 'react-native'
+import { Text, TextStyle, View, ViewStyle } from 'react-native'
 import type from '../../constants/type'
 import withTheme from '../../providers/theme'
 import GrindIcon from './icons/GrindIcon'
@@ -12,9 +12,10 @@ interface Instructions {
   text: string
   isDarkTheme?: boolean
   icon?: string
+  style: ViewStyle
 }
 
-function Instructions({ text, theme, isDarkTheme, icon }: Instructions) {
+function Instructions({ text, theme, isDarkTheme, icon, style }: Instructions) {
   const specialWordCaptureGroup = /(\*\*.*?\*\*)/g
   const specialWordRegex = /\*\*.*\*\*/
   const specialWordStyles = {
@@ -62,7 +63,7 @@ function Instructions({ text, theme, isDarkTheme, icon }: Instructions) {
           />
         </View>
       ) : null}
-      <View style={{ padding: 20, flex: 1 }}>
+      <View style={{ padding: 20, flex: 1, ...style }}>
         <Text
           style={
             {

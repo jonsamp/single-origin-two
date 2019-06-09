@@ -1,5 +1,7 @@
+import { thisExpression } from '@babel/types'
 import React, { Component, Fragment } from 'react'
-import { View } from 'react-native'
+import { Animated, View } from 'react-native'
+import Button from '../../../../../components/Button'
 import Instructions from '../../../../../components/Instructions'
 import formatSeconds from '../../../../../helpers/formatSeconds'
 import withTheme from '../../../../../providers/theme'
@@ -14,10 +16,42 @@ interface StepProps {
   totalTime: number
 }
 
-class Step extends Component<StepProps> {
+interface StepState {
+  nextStepText: string
+}
+
+class Step extends Component<StepProps, StepState> {
+  state = {
+    nextStepText: '',
+  }
+
+  animatedValue = new Animated.Value(0)
+
   getNextEvent = () => {
     const { recipe, second } = this.props
     return Number(Object.keys(recipe).find(time => Number(time) + 5 > second))
+  }
+
+  setNextStepText = (nextStepText: string) => {
+    if (nextStepText !== this.state.nextStepText) {
+      Animated.sequence([
+        Animated.timing(this.animatedValue, {
+          toValue: 1,
+          duration: 200,
+        }),
+        {
+          start: async onComplete => {
+            await this.setState({ nextStepText })
+            onComplete({ finished: true })
+          },
+          stop: () => {},
+        },
+        Animated.timing(this.animatedValue, {
+          toValue: 0,
+          duration: 200,
+        }),
+      ]).start()
+    }
   }
 
   getNextStepText = () => {
@@ -25,19 +59,21 @@ class Step extends Component<StepProps> {
     const nextStep = recipe[this.getNextEvent()]
 
     if (!nextStep || nextStep.type === 'finished') {
-      return 'End of brew'
+      return this.setNextStepText('End of brew')
     }
 
     if (nextStep.type === 'pour') {
       const { volume, waterVolumeUnit } = this.props
 
-      return `Pour up to **${Math.round(
-        waterVolumeUnit.getPreferredValue(volume * nextStep.volumePercent)
-      )} ${waterVolumeUnit.unit.title}** of water.`
+      return this.setNextStepText(
+        `Pour up to **${Math.round(
+          waterVolumeUnit.getPreferredValue(volume * nextStep.volumePercent)
+        )} ${waterVolumeUnit.unit.title}** of water.`
+      )
     }
 
     if (nextStep.type === 'tip') {
-      return nextStep.text
+      return this.setNextStepText(nextStep.text)
     }
   }
 
@@ -50,6 +86,7 @@ class Step extends Component<StepProps> {
       timerRunning,
       volume,
       waterVolumeUnit,
+      recipe,
     } = this.props
     const nextEvent = this.getNextEvent()
     const beforeBrewStart = second < 0 && !timerRunning
@@ -64,7 +101,7 @@ class Step extends Component<StepProps> {
     }
 
     if (this.isDuringStep()) {
-      return `Now`
+      return 'Now'
     }
 
     if (brewCountdown) {
@@ -76,7 +113,13 @@ class Step extends Component<StepProps> {
     }
 
     if (foreshadowNextStep) {
-      return `Next step at **${formatSeconds(nextEvent)}**`
+      const types = {
+        pour: 'pour',
+        tip: 'step',
+      }
+      return `Next ${types[recipe[nextEvent].type]} at **${formatSeconds(
+        nextEvent
+      )}**`
     }
 
     if (!nextEvent) {
@@ -85,16 +128,31 @@ class Step extends Component<StepProps> {
   }
 
   render() {
+    this.getNextStepText()
     return (
       <Fragment>
-        <Instructions text={`${this.getText()}`} />
-        <View
+        <Instructions text={this.getText()} style={{ paddingBottom: 8 }} />
+        <Animated.View
           style={{
-            opacity: this.isDuringStep() ? 1 : 0.5,
+            opacity: this.animatedValue.interpolate({
+              inputRange: [0, 0.5],
+              outputRange: [1, 0],
+            }),
+            transform: [
+              {
+                translateY: this.animatedValue.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0, 24],
+                }),
+              },
+            ],
           }}
         >
-          <Instructions text={this.getNextStepText()} />
-        </View>
+          <Instructions
+            text={this.state.nextStepText}
+            style={{ paddingTop: 0, opacity: this.isDuringStep() ? 1 : 0.5 }}
+          />
+        </Animated.View>
       </Fragment>
     )
   }
