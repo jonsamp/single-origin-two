@@ -50,7 +50,7 @@ class Log extends Component<LogProps> {
         label: 'Grind setting',
       }),
       totalBrewTime: val => ({
-        value: formatSeconds(val),
+        value: formatSeconds(val < 0 ? 0 : val),
         label: 'Brew time',
       }),
       ratio: val => ({

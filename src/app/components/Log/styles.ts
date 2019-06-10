@@ -17,6 +17,9 @@ export default StyleSheet.create({
     marginHorizontal: 8,
     marginBottom: 16,
     alignItems: 'center',
+    shadowRadius: 4,
+    shadowOpacity: 0.2,
+    shadowOffset: { height: 4, width: 0 },
   },
   cardValue: {
     ...type.header,
