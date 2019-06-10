@@ -7,6 +7,7 @@ export interface Theme {
 export default {
   default: {
     black: '#000000',
+    white: '#d8d8d8',
   },
   light: {
     name: 'light',

@@ -1,8 +1,10 @@
+import themes from '../../../constants/themes'
 import type from '../../../constants/type'
+const theme = themes.dark
 
 // Find theme style nodes (the keys in this object) here: https://github.com/wix/react-native-calendars/tree/master/src/calendar
 
-const themeStyles = theme => ({
+const themeStyles = () => ({
   'stylesheet.calendar.header': {
     header: {
       justifyContent: 'flex-start',
@@ -16,7 +18,7 @@ const themeStyles = theme => ({
       margin: 0,
     },
     dayHeader: {
-      color: theme.grey3,
+      color: theme.foreground,
       marginBottom: 8,
       width: '100%',
       textAlign: 'center',
@@ -25,6 +27,7 @@ const themeStyles = theme => ({
   'stylesheet.calendar.main': {
     container: {
       padding: 0,
+      backgroundColor: theme.background,
     },
     week: {
       backgroundColor: theme.background,

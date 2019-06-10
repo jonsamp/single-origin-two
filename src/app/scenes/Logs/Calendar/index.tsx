@@ -1,6 +1,6 @@
-import moment from 'moment'
 import React, { Component } from 'react'
-import { Text, TextStyle, View } from 'react-native'
+import { Text, View } from 'react-native'
+import { StatusBar } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import { connect } from 'react-redux'
 import withTheme from '../../../providers/theme'
@@ -12,14 +12,7 @@ interface LogCalendarProps {
   theme: Theme
 }
 
-const mapStateToProps = state => ({
-  // currentMonthStreakDatesCompleted: selectCurrentMonthStreakDatesCompleted(
-  //   state
-  // ),
-  // updatedDate: selectCurriculumUpdatedDate(state),
-})
-
-const mapDispatchToProps = {}
+const mapStateToProps = state => ({})
 
 class LogCalendar extends Component<LogCalendarProps> {
   static propTypes = {
@@ -38,23 +31,24 @@ class LogCalendar extends Component<LogCalendarProps> {
   //     streakDate => streakDate === moment(date.dateString).format('MM-DD-YYYY')
   //   );
 
+  componentDidMount() {
+    StatusBar.setBarStyle('light-content', true)
+  }
+
   render() {
     const { theme } = this.props
+
     return (
-      <View style={styles.cardContainer} key="streak-calendar-">
+      <View>
         <View style={styles.container}>
-          <Text
-            style={[styles.labelText, { color: theme.foreground }] as TextStyle}
-          >
-            BREW LOGS
-          </Text>
+          <Text style={styles.labelText}>BREW LOGS</Text>
           <Calendar
             monthFormat="MMMM yyyy"
             hideArrows
             hideExtraDays
             disableMonthChange
             firstDay={0}
-            theme={themeStyles(theme)}
+            theme={themeStyles()}
             dayComponent={({ state, date }) => (
               <View
                 style={[
@@ -62,9 +56,7 @@ class LogCalendar extends Component<LogCalendarProps> {
                   state === 'today' && styles.isToday,
                 ]}
               >
-                <Text style={[styles.dayText, { color: theme.foreground }]}>
-                  {date.day}
-                </Text>
+                <Text style={styles.dayText}>{date.day}</Text>
               </View>
             )}
           />
@@ -74,7 +66,4 @@ class LogCalendar extends Component<LogCalendarProps> {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withTheme(LogCalendar))
+export default connect(mapStateToProps)(withTheme(LogCalendar))

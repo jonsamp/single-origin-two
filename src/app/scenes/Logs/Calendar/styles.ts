@@ -1,22 +1,17 @@
-import { StyleSheet, TextStyle } from 'react-native'
+import { StyleSheet } from 'react-native'
+import themes from '../../../constants/themes'
 import type from '../../../constants/type'
+const theme = themes.dark
 
 const styles = StyleSheet.create({
-  cardContainer: {
-    marginHorizontal: 16,
-    marginVertical: 24,
-  },
   container: {
-    // borderRadius: 20,
-    // borderWidth: 1,
-    // backgroundColor: colors.swatches.white,
-    // borderColor: colors.swatches.grey[200],
-    // overflow: 'hidden',
-    paddingVertical: 24,
+    paddingTop: 72,
+    paddingBottom: 40,
+    paddingHorizontal: 12,
+    backgroundColor: theme.background,
   },
   labelText: {
-    // ...type.subheader,
-    // color: colors.swatches.grey[600],
+    color: theme.foreground,
     paddingLeft: 12,
     ...type.label,
     marginBottom: 12,
@@ -24,20 +19,21 @@ const styles = StyleSheet.create({
   dayContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10,
+    padding: 8,
+    width: '80%',
   },
   isToday: {
-    // borderColor: colors.swatches.yellow[600],
-    // borderTopColor: colors.swatches.yellow[600],
-    // borderBottomColor: colors.swatches.yellow[600],
-    // padding: 8,
-    // top: 1,
+    borderWidth: 3,
+    borderColor: theme.primary,
+    borderRadius: 8,
   },
   isStreakDay: {
     // backgroundColor: colors.swatches.yellow[500],
   },
   dayText: {
-    ...(type.callout as TextStyle),
+    ...type.callout,
+    color: theme.foreground,
+    fontWeight: '700',
   },
 })
 
