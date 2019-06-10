@@ -27,13 +27,14 @@ const styles = StyleSheet.create({
     borderColor: theme.primary,
     borderRadius: 8,
   },
-  isStreakDay: {
-    // backgroundColor: colors.swatches.yellow[500],
-  },
   dayText: {
     ...type.callout,
     color: theme.foreground,
     fontWeight: '700',
+  },
+  brewDate: {
+    fontWeight: '900',
+    color: theme.primary,
   },
 })
 
