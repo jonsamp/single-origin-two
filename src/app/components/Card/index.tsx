@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { Animated, View, ViewStyle } from 'react-native'
+import { View, ViewStyle } from 'react-native'
 import withTheme from '../../providers/theme'
 import { Theme } from '../../types/index'
 
@@ -11,7 +11,7 @@ interface CardProps {
 
 function Card({ theme, children, style }: CardProps) {
   return (
-    <Animated.View
+    <View
       style={{
         shadowColor: theme.black,
         shadowRadius: 10,
@@ -35,7 +35,7 @@ function Card({ theme, children, style }: CardProps) {
       >
         {children}
       </View>
-    </Animated.View>
+    </View>
   )
 }
 

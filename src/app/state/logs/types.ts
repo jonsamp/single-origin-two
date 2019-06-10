@@ -8,6 +8,6 @@ export interface Log {
   totalBrewTime: number
   ratio: number
   recipeId: string
-  grind: number
-  temp: number
+  grind?: number
+  temp?: number
 }

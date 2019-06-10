@@ -6,6 +6,7 @@ import {
   withNavigation,
 } from 'react-navigation'
 import { connect } from 'react-redux'
+import Button from '../../components/Button'
 import Header from '../../components/Header'
 import Log from '../../components/Log'
 import withTheme from '../../providers/theme'
@@ -26,13 +27,16 @@ const mapStateToProps = (state, props) => {
 class BrewSummary extends Component<BrewSummaryProps> {
   render() {
     const { navigation } = this.props
+    const onBack = () => navigation.dispatch(StackActions.popToTop({}))
     return (
       <View style={{ flex: 1 }}>
-        <Header
-          title="Brew Summary"
-          onBack={() => navigation.dispatch(StackActions.popToTop({}))}
-        />
+        <Header title="Brew Summary" onBack={onBack} />
         <Log timestamp={navigation.state.params.timestamp} />
+        <Button
+          title="done"
+          customStyle={{ paddingBottom: 32 }}
+          onPress={onBack}
+        />
       </View>
     )
   }
