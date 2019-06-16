@@ -78,12 +78,12 @@ class WaterVolume extends Component<WaterVolumeProps> {
                 }
                 countBy={
                   waterVolumeUnit.unit.symbol === 'g'
-                    ? 4
+                    ? 1
                     : waterVolumeUnit.unit.symbol === 'oz'
                       ? 0.1
                       : 0.01
                 }
-                interval={60}
+                interval={140}
                 onFinish={onAnimateNumberFinish}
               />
             </Animated.Text>
