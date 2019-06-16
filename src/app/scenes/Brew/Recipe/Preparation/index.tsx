@@ -15,7 +15,10 @@ interface PreparationProps {
 
 function Preparation({ theme, navigation, recipe }: PreparationProps) {
   return (
-    <TouchableOpacity onPress={() => console.log(recipe)} activeOpacity={0.7}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('Preparation', recipe)}
+      activeOpacity={0.7}
+    >
       <Card>
         <View
           style={{

@@ -8,6 +8,7 @@ import Brew from '../../scenes/Brew'
 import BrewSummary from '../../scenes/BrewSummary'
 import Logs from '../../scenes/Logs'
 import Menu from '../../scenes/Menu'
+import Preparation from '../../scenes/Preparation'
 import Settings from '../../scenes/Settings'
 import SettingsDetail from '../../scenes/Settings/SettingsDetail'
 import BrewIcon from './icons/BrewIcon'
@@ -45,7 +46,7 @@ const TabNavigator = createBottomTabNavigator(
 )
 
 const StackNavigator = createStackNavigator(
-  { TabNavigator, SettingsDetail, Brew, BrewSummary },
+  { TabNavigator, SettingsDetail, Brew, BrewSummary, Preparation },
   { defaultNavigationOptions: { header: null } }
 )
 
