@@ -96,15 +96,20 @@ class Recipe extends Component<RecipeProps, RecipeState> {
     const { totalVolume, grind, temp } = this.state
     const coffeeWeight = Math.round(totalVolume / settings.ratio)
 
+    console.log(recipe.preparation)
+
     return (
       <Fragment>
+        <Preparation
+          recipe={recipe.title.toLowerCase()}
+          preparation={recipe.preparation}
+        />
         <YieldQuestion
           totalVolume={350}
           setRecipeState={this.setRecipeState}
           minYield={minYield}
           maxYield={maxYield}
         />
-        <Preparation recipe={recipe.title.toLowerCase()} />
         <BoilWater totalVolume={totalVolume} />
         <GrindCoffee
           coffeeWeight={coffeeWeight}

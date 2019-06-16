@@ -6,14 +6,15 @@ import GrindIcon from './icons/GrindIcon'
 import RecordIcon from './icons/RecordIcon'
 import TipIcon from './icons/TipIcon'
 import WaterIcon from './icons/WaterIcon'
+import PrepIcon from './icons/PrepIcon';
 
 interface Instructions {
   theme: any
   text: string
   isDarkTheme?: boolean
   icon?: string
-  style: ViewStyle
-  textStyle: TextStyle
+  style?: ViewStyle
+  textStyle?: TextStyle
 }
 
 function Instructions({
@@ -47,6 +48,7 @@ function Instructions({
     RecordIcon,
     GrindIcon,
     TipIcon,
+    PrepIcon,
   }
   const IconComponent = icons[icon]
 

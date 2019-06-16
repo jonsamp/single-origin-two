@@ -1,3 +1,4 @@
+import AddGrounds from './images/add-grounds.jpg'
 import AfterBloom from './images/afterbloom.gif'
 import Finish from './images/afterfinish.gif'
 import AfterPour from './images/afterpour.gif'
@@ -5,12 +6,28 @@ import Bloom from './images/bloom.gif'
 import Default from './images/default.jpg'
 import Draining from './images/draining.gif'
 import Pour from './images/pour.gif'
+import WetFilter from './images/wet-filter.jpg'
 
 export default {
   id: 'KalitaWave185',
   title: 'Kalita Wave 185',
   minYield: 150,
   maxYield: 525,
+  preparation: [
+    {
+      image: WetFilter,
+      text:
+        'Rinse the entire filter with hot water, then discard the excess water.',
+    },
+    {
+      image: AddGrounds,
+      text:
+        'Place the filter inside the Kalita Wave, add the coffee grouds, then place on top of a carafe or mug.',
+    },
+    {
+      text: 'Then put it all on a scale and zero the scale.',
+    },
+  ],
   steps: [
     {
       start: true,

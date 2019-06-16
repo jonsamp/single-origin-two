@@ -11,12 +11,21 @@ interface PreparationProps {
   theme: Theme
   navigation: any
   recipe: string
+  preparation: Array<{
+    image?: number
+    text: string
+  }>
 }
 
-function Preparation({ theme, navigation, recipe }: PreparationProps) {
+function Preparation({
+  theme,
+  navigation,
+  recipe,
+  preparation,
+}: PreparationProps) {
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('Preparation', recipe)}
+      onPress={() => navigation.navigate('Preparation', preparation)}
       activeOpacity={0.7}
     >
       <Card>
@@ -28,7 +37,7 @@ function Preparation({ theme, navigation, recipe }: PreparationProps) {
             paddingRight: 20,
           }}
         >
-          <Instructions text={`Prepare your ${recipe}.`} icon="TipIcon" />
+          <Instructions text={`Prepare your ${recipe}.`} icon="PrepIcon" />
           <Feather
             name="chevron-right"
             size={theme.iconSize}
