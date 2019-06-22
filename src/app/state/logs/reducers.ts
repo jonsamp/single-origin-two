@@ -3,22 +3,22 @@ import * as actions from './actions'
 import { Logs } from './types'
 
 const initialState = {
-  1561214087191: {
-    timestamp: 1561214087191,
+  1561127475000: {
+    timestamp: 1561127475000,
     totalVolume: 340,
     totalBrewTime: 0,
     ratio: 15,
     recipeId: 'KalitaWave185',
   },
-  1531214087200: {
-    timestamp: 1531214087200,
+  1561766400000: {
+    timestamp: 1561766400000,
     totalVolume: 230,
     totalBrewTime: 125,
     ratio: 15,
     recipeId: 'KalitaWave185',
   },
-  1501214067200: {
-    timestamp: 1501214067200,
+  1559520000000: {
+    timestamp: 1559520000000,
     totalVolume: 330,
     totalBrewTime: 145,
     ratio: 15,

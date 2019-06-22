@@ -5,7 +5,7 @@ import { Text, View } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import { connect } from 'react-redux'
 import withTheme from '../../../providers/theme'
-import { selectLogs } from '../../../state/logs/selectors'
+import { selectLogs, selectLogsDates } from '../../../state/logs/selectors'
 import { Log } from '../../../state/logs/types'
 import { Theme } from '../../../types/index'
 import styles from './styles'
@@ -14,23 +14,17 @@ import themeStyles from './themeStyles'
 interface LogCalendarProps {
   theme: Theme
   logs: Log[]
+  logsDates: string[]
 }
 
 const mapStateToProps = state => ({
   logs: selectLogs(state),
+  logsDates: selectLogsDates(state),
 })
 
 class LogCalendar extends Component<LogCalendarProps> {
-  isBrewDate = ({ timestamp }) => {
-    // logs keys start of day
-    const logTimeStamps = Object.keys(this.props.logs).map(timestamp =>
-      startOfDay(timestamp)
-    )
-    console.log({ logTimeStamps })
-
-    // ... if (timestamp === )
-    return false
-  }
+  isBrewDate = date =>
+    this.props.logsDates.includes(`${date.month}/${date.day}/${date.year}`)
 
   componentDidMount() {
     // TODO: set up a focus listener to control the status bar color
@@ -39,15 +33,6 @@ class LogCalendar extends Component<LogCalendarProps> {
 
   render() {
     const { logs } = this.props
-
-    // logs is a keyed object
-    // "1560134707542": Object {
-    //   "ratio": 15,
-    //   "recipeId": "KalitaWave185",
-    //   "timestamp": 1560134707542,
-    //   "totalBrewTime": 0,
-    //   "totalVolume": 340,
-    // },
 
     return (
       <View key={Object.keys(logs).length}>
