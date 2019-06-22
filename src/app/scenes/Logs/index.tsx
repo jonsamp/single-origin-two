@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, View } from 'react-native'
+import { FlatList, ScrollView, Text, View } from 'react-native'
 import { connect } from 'react-redux'
-import type from '../../constants/type'
 import withTheme from '../../providers/theme'
-import { Logs as LogsType, Theme } from '../../types/index'
+import { Log, Logs as LogsType, Theme } from '../../types/index'
 import Calendar from './Calendar'
+import LogListItem from './LogListItem'
 
 const mockLogs = {
   1561214087191: {
@@ -50,9 +50,14 @@ class Logs extends Component<LogsProps> {
     const { theme, logs } = this.props
     return (
       <View style={{ flex: 1, backgroundColor: theme.background }}>
-        {/* <Calendar /> */}
-        <ScrollView>
-          <Text>{JSON.stringify(logs)}</Text>
+        <Calendar />
+        <ScrollView contentContainerStyle={{ padding: 16 }}>
+          <FlatList
+            data={Object.values(logs)}
+            extraData={this.state}
+            keyExtractor={(item: Log) => String(item.timestamp)}
+            renderItem={props => <LogListItem log={props.item} />}
+          />
         </ScrollView>
       </View>
     )
