@@ -1,4 +1,4 @@
-import moment from 'moment'
+import { format } from 'date-fns'
 import React, { Component } from 'react'
 import { ScrollView, Text, View } from 'react-native'
 import { connect } from 'react-redux'
@@ -88,8 +88,8 @@ class Log extends Component<LogProps> {
           </Text>
           <View>
             <Text style={[type.body, { color: theme.foreground }]}>
-              Finished at {moment(log.timestamp).format('h:mmA')} on{' '}
-              {moment(log.timestamp).format('MM/DD/YYYY')}
+              Finished at {format(log.timestamp, 'h:MMA')} on{' '}
+              {format(log.timestamp, 'MM/DD/YYYY')}
             </Text>
           </View>
           <View style={styles.cardsContainer}>

@@ -1,4 +1,4 @@
-import moment from 'moment'
+import { startOfDay } from 'date-fns'
 import React, { Component } from 'react'
 import { StatusBar } from 'react-native'
 import { Text, View } from 'react-native'
@@ -23,10 +23,10 @@ const mapStateToProps = state => ({
 class LogCalendar extends Component<LogCalendarProps> {
   isBrewDate = ({ timestamp }) => {
     // logs keys start of day
-    // const logTimeStamps = Object.keys(this.props.logs).map(timestamp =>
-    //   moment(timestamp).startOf('day')
-    // )
-    // console.log({ logTimeStamps })
+    const logTimeStamps = Object.keys(this.props.logs).map(timestamp =>
+      startOfDay(timestamp)
+    )
+    console.log({ logTimeStamps })
 
     // ... if (timestamp === )
     return false
