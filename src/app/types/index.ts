@@ -73,3 +73,15 @@ export interface Recipe {
   defaultGrind: number
   pourSourceDefault: number
 }
+
+export interface Log {
+  timestamp: number
+  totalVolume: number
+  totalBrewTime: number
+  ratio: number
+  recipeId: string
+}
+
+export interface Logs {
+  [i: string]: Log
+}

@@ -3,7 +3,7 @@ import { ScrollView, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import type from '../../constants/type'
 import withTheme from '../../providers/theme'
-import { Log, Theme } from '../../types/index'
+import { Logs as LogsType, Theme } from '../../types/index'
 import Calendar from './Calendar'
 
 const mockLogs = {
@@ -32,7 +32,7 @@ const mockLogs = {
 
 interface LogsProps {
   theme: Theme
-  logs: Log[]
+  logs: LogsType
 }
 
 const mapStateToProps = state => ({})
