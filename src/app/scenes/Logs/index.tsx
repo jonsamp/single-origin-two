@@ -17,6 +17,7 @@ const mapStateToProps = state => ({
 })
 
 class Logs extends Component<LogsProps> {
+  byTimestamp = (a, b) => b.timestamp - a.timestamp
   render() {
     const { theme, logs } = this.props
     if (!logs || Object.keys(logs).length === 0) {
@@ -26,9 +27,9 @@ class Logs extends Component<LogsProps> {
     return (
       <View style={{ flex: 1, backgroundColor: theme.background }}>
         <Calendar />
-        <View style={{ paddingTop: 16 }}>
+        <View style={{ flex: 1 }}>
           <FlatList
-            data={Object.values(logs)}
+            data={Object.values(logs).sort(this.byTimestamp)}
             extraData={this.state}
             keyExtractor={(item: Log) => String(item.timestamp)}
             renderItem={props => <LogListItem {...props} />}

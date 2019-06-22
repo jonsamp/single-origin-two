@@ -1,4 +1,3 @@
-import { startOfDay } from 'date-fns'
 import React, { Component } from 'react'
 import { StatusBar } from 'react-native'
 import { Text, View } from 'react-native'
@@ -39,12 +38,14 @@ class LogCalendar extends Component<LogCalendarProps> {
         <View style={styles.container}>
           <Text style={styles.labelText}>BREW LOGS</Text>
           <Calendar
-            monthFormat="MMMM yyyy"
             hideArrows
             hideExtraDays
             disableMonthChange
             firstDay={0}
             theme={themeStyles()}
+            onDayPress={day => {
+              console.log('selected day', day)
+            }}
             dayComponent={({ state, date }) => {
               return (
                 <View

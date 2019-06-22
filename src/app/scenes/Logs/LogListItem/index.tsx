@@ -29,14 +29,14 @@ function LogListItem(props: LogListItemProps) {
     >
       <Card
         style={{ shadowOpacity: 0, flexDirection: 'row' }}
-        containerStyle={{ shadowOpacity: 0, marginBottom: 24 }}
+        containerStyle={{ shadowOpacity: 0, marginTop: 24, marginBottom: 0 }}
       >
         <View
           style={{
             backgroundColor: isDarkTheme ? theme.grey2 : theme.foreground,
             alignItems: 'center',
             width: 60,
-            paddingTop: 22,
+            paddingTop: 30,
           }}
         >
           {recipes[log.recipeId].icon({
@@ -52,7 +52,7 @@ function LogListItem(props: LogListItemProps) {
             paddingRight: 16,
           }}
         >
-          <View style={{ padding: 16 }}>
+          <View style={{ paddingVertical: 24, paddingHorizontal: 16 }}>
             <Text style={{ color: theme.foreground, ...type.headline }}>
               {recipes[log.recipeId].title} {recipes[log.recipeId].modifier}
             </Text>
