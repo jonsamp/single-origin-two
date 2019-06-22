@@ -94,7 +94,11 @@ class Log extends Component<LogProps> {
           </View>
           <View style={styles.cardsContainer}>
             {logStats.map(stat => (
-              <Card style={styles.cardContainer} key={stat.label}>
+              <Card
+                containerStyle={styles.cardContainer}
+                style={styles.cardContainer}
+                key={stat.label}
+              >
                 <Text style={[styles.cardValue, { color: theme.foreground }]}>
                   {stat.value}
                 </Text>

@@ -21,7 +21,7 @@ class LogDetail extends Component<LogDetailProps> {
 
     return (
       <View style={{ flex: 1, backgroundColor: theme.background }}>
-        <Header title="LogDetail" onBack={navigation.goBack} />
+        <Header title="Brew Log" onBack={navigation.goBack} />
         <Log timestamp={timestamp} />
         <Button
           title="done"

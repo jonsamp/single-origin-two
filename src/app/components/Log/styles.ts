@@ -18,7 +18,7 @@ export default StyleSheet.create({
     marginBottom: 16,
     alignItems: 'center',
     shadowRadius: 4,
-    shadowOpacity: 0.2,
+    shadowOpacity: 0,
     shadowOffset: { height: 4, width: 0 },
   },
   cardValue: {

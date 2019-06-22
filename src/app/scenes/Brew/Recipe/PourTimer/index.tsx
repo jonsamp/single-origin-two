@@ -205,7 +205,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
             top: -24,
           }}
         >
-          <Card style={{ shadowOpacity: 0 }}>
+          <Card containerStyle={{ shadowOpacity: 0 }}>
             <Step
               recipe={recipe}
               second={second}

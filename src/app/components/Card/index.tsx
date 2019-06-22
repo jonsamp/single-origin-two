@@ -7,9 +7,10 @@ interface CardProps {
   theme: Theme
   children: ReactNode
   style: ViewStyle
+  containerStyle: ViewStyle
 }
 
-function Card({ theme, children, style }: CardProps) {
+function Card({ theme, children, style, containerStyle }: CardProps) {
   return (
     <View
       style={{
@@ -20,7 +21,7 @@ function Card({ theme, children, style }: CardProps) {
         backgroundColor: theme.grey1,
         borderRadius: 8,
         marginBottom: 40,
-        ...style,
+        ...containerStyle,
       }}
     >
       <View
