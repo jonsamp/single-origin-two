@@ -96,8 +96,6 @@ class Recipe extends Component<RecipeProps, RecipeState> {
     const { totalVolume, grind, temp } = this.state
     const coffeeWeight = Math.round(totalVolume / settings.ratio)
 
-    console.log(recipe.preparation)
-
     return (
       <Fragment>
         <Preparation

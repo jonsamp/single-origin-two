@@ -3,11 +3,36 @@ import { ScrollView, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import type from '../../constants/type'
 import withTheme from '../../providers/theme'
-import { Theme } from '../../types/index'
+import { Log, Theme } from '../../types/index'
 import Calendar from './Calendar'
+
+const mockLogs = {
+  1561214087191: {
+    timestamp: 1561214087191,
+    totalVolume: 340,
+    totalBrewTime: 0,
+    ratio: 15,
+    recipeId: 'KalitaWave185',
+  },
+  1561214087200: {
+    timestamp: 1561214087200,
+    totalVolume: 230,
+    totalBrewTime: 125,
+    ratio: 15,
+    recipeId: 'KalitaWave185',
+  },
+  1561214067200: {
+    timestamp: 1561214067200,
+    totalVolume: 330,
+    totalBrewTime: 145,
+    ratio: 15,
+    recipeId: 'KalitaWave185',
+  },
+}
 
 interface LogsProps {
   theme: Theme
+  logs: Log[]
 }
 
 const mapStateToProps = state => ({})
@@ -15,16 +40,19 @@ const mapStateToProps = state => ({})
 const mapDispatchToProps = {}
 
 class Logs extends Component<LogsProps> {
-  static propTypes = {}
+  static defaultProps = {
+    logs: mockLogs,
+  }
 
   state = {}
 
   render() {
-    const { theme } = this.props
+    const { theme, logs } = this.props
     return (
       <View style={{ flex: 1, backgroundColor: theme.background }}>
+        {/* <Calendar /> */}
         <ScrollView>
-          <Calendar />
+          <Text>{JSON.stringify(logs)}</Text>
         </ScrollView>
       </View>
     )
