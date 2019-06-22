@@ -22,9 +22,8 @@ interface LogProps {
 }
 
 const mapStateToProps = (state, props) => {
-  const { timestamp } = props
   return {
-    log: selectLog(state, timestamp),
+    log: selectLog(state, props.timestamp),
   }
 }
 

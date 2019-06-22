@@ -6,6 +6,7 @@ import {
 } from 'react-navigation'
 import Brew from '../../scenes/Brew'
 import BrewSummary from '../../scenes/BrewSummary'
+import LogDetail from '../../scenes/LogDetail'
 import Logs from '../../scenes/Logs'
 import Menu from '../../scenes/Menu'
 import Preparation from '../../scenes/Preparation'
@@ -46,7 +47,7 @@ const TabNavigator = createBottomTabNavigator(
 )
 
 const StackNavigator = createStackNavigator(
-  { TabNavigator, SettingsDetail, Brew, BrewSummary, Preparation },
+  { TabNavigator, SettingsDetail, Brew, BrewSummary, Preparation, LogDetail },
   { defaultNavigationOptions: { header: null } }
 )
 
