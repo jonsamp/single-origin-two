@@ -28,14 +28,18 @@ function LogListItem(props: LogListItemProps) {
       style={{ marginHorizontal: 12 }}
     >
       <Card
-        style={{ shadowOpacity: 0, flexDirection: 'row' }}
+        style={{
+          shadowOpacity: 0,
+          flexDirection: 'row',
+          backgroundColor: isDarkTheme ? theme.grey1 : theme.grey2,
+        }}
         containerStyle={{ shadowOpacity: 0, marginTop: 24, marginBottom: 0 }}
       >
         <View
           style={{
             backgroundColor: isDarkTheme ? theme.grey2 : theme.foreground,
             alignItems: 'center',
-            width: 60,
+            width: 72,
             paddingTop: 30,
           }}
         >

@@ -17,9 +17,9 @@ class TabBar extends Component<TabBarProps> {
       <BottomTabBar
         {...this.props}
         style={{
-          backgroundColor: isDarkTheme ? theme.grey2 : theme.grey1,
-          borderTopWidth: 1,
-          borderTopColor: isDarkTheme ? theme.grey1 : theme.grey2,
+          backgroundColor: isDarkTheme ? theme.grey2 : theme.background,
+          borderTopWidth: 0,
+          paddingTop: 8,
         }}
       />
     )

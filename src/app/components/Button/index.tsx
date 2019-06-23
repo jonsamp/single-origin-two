@@ -1,10 +1,11 @@
 import React from 'react'
 import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native'
 import withTheme from '../../providers/theme'
+import { Theme } from '../../types'
 import styles from './styles'
 
 interface ButtonProps {
-  theme?: any
+  theme?: Theme
   type?: 'normal' | 'secondary' | 'outline'
   onPress?: () => void
   title: string
