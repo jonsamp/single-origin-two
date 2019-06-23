@@ -27,9 +27,7 @@ function Header({
       style={[
         styles.container,
         {
-          borderBottomColor: isDarkTheme ? theme.grey1 : theme.grey2,
           backgroundColor: isDarkTheme ? theme.grey2 : theme.background,
-          borderBottomWidth: 1,
         },
       ]}
     >

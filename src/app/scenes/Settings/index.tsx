@@ -21,7 +21,7 @@ class Settings extends Component<SettingsProps> {
       ? {
           ...theme,
           grey1: theme.background,
-          grey2: theme.grey1,
+          grey2: theme.grey2,
         }
       : theme
 
@@ -30,9 +30,7 @@ class Settings extends Component<SettingsProps> {
         title="Settings"
         containerStyle={{ backgroundColor: modifiedTheme.grey1 }}
         headerComponentContainerStyle={{
-          backgroundColor: modifiedTheme.grey1,
-          borderBottomWidth: 1,
-          borderBottomColor: modifiedTheme.grey2,
+          backgroundColor: modifiedTheme.grey2,
         }}
         headerComponentStyle={{
           backgroundColor: modifiedTheme.grey1,

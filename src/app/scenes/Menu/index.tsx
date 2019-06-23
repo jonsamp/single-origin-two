@@ -4,7 +4,6 @@ import { Text, TextStyle, TouchableOpacity, View } from 'react-native'
 import HeaderScrollView from 'react-native-header-scroll-view'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import Card from '../../components/Card'
-import CleverIcon from '../../constants/icons/CleverIcon'
 import recipes from '../../constants/recipes'
 import type from '../../constants/type'
 import withSettings from '../../providers/settings'
@@ -24,7 +23,7 @@ function Menu({ theme, navigation, isDarkTheme, settings }: MenuProps) {
     ? {
         ...theme,
         grey1: theme.background,
-        grey2: theme.grey1,
+        grey2: theme.grey2,
       }
     : theme
 
@@ -38,9 +37,7 @@ function Menu({ theme, navigation, isDarkTheme, settings }: MenuProps) {
       title="Brew Methods"
       containerStyle={{ backgroundColor: modifiedTheme.grey1 }}
       headerComponentContainerStyle={{
-        backgroundColor: modifiedTheme.grey1,
-        borderBottomWidth: 1,
-        borderBottomColor: modifiedTheme.grey2,
+        backgroundColor: modifiedTheme.grey2,
       }}
       headerComponentStyle={{
         backgroundColor: modifiedTheme.grey1,
