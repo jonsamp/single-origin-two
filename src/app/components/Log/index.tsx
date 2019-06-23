@@ -19,6 +19,7 @@ interface LogProps {
   theme: Theme
   log: LogType
   unitHelpers: UnitHelpers
+  isDarkTheme: boolean
 }
 
 const mapStateToProps = (state, props) => {
@@ -29,7 +30,7 @@ const mapStateToProps = (state, props) => {
 
 class Log extends Component<LogProps> {
   render() {
-    const { theme, log, unitHelpers } = this.props
+    const { theme, log, unitHelpers, isDarkTheme } = this.props
     const recipe = recipes[log.recipeId]
     const logConfig = {
       totalVolume: val => ({
@@ -65,7 +66,7 @@ class Log extends Component<LogProps> {
     return (
       <View
         style={{
-          backgroundColor: theme.background,
+          backgroundColor: isDarkTheme ? theme.background : theme.grey1,
           flex: 1,
         }}
       >

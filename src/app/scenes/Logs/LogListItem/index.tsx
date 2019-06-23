@@ -31,7 +31,7 @@ function LogListItem(props: LogListItemProps) {
         style={{
           shadowOpacity: 0,
           flexDirection: 'row',
-          backgroundColor: isDarkTheme ? theme.grey1 : theme.grey2,
+          backgroundColor: isDarkTheme ? theme.grey1 : theme.background,
         }}
         containerStyle={{ shadowOpacity: 0, marginTop: 24, marginBottom: 0 }}
       >
