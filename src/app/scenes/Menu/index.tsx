@@ -37,7 +37,7 @@ function Menu({ theme, navigation, isDarkTheme, settings }: MenuProps) {
       title="Brew methods"
       containerStyle={{ backgroundColor: modifiedTheme.grey1 }}
       headerComponentContainerStyle={{
-        backgroundColor: modifiedTheme.grey2,
+        backgroundColor: isDarkTheme ? modifiedTheme.grey2 : theme.background,
       }}
       headerComponentStyle={{
         backgroundColor: modifiedTheme.grey1,

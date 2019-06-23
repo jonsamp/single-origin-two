@@ -38,7 +38,9 @@ class Logs extends Component<LogsProps> {
           title="Logs"
           containerStyle={{ backgroundColor: modifiedTheme.grey1 }}
           headerComponentContainerStyle={{
-            backgroundColor: modifiedTheme.grey2,
+            backgroundColor: isDarkTheme
+              ? modifiedTheme.grey2
+              : theme.background,
           }}
           headerComponentStyle={{
             backgroundColor: modifiedTheme.grey1,
