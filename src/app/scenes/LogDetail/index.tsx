@@ -12,15 +12,21 @@ interface LogDetailProps {
   navigation: NavigationScreenProp<State>
   theme: Theme
   timestamp: number
+  isDarkTheme: boolean
 }
 
 class LogDetail extends Component<LogDetailProps> {
   render() {
-    const { navigation, theme } = this.props
+    const { navigation, theme, isDarkTheme } = this.props
     const { timestamp } = navigation.state.params
 
     return (
-      <View style={{ flex: 1, backgroundColor: theme.background }}>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: isDarkTheme ? theme.background : theme.grey1,
+        }}
+      >
         <Header title="Brew Log" onBack={navigation.goBack} />
         <Log timestamp={timestamp} />
         <Button

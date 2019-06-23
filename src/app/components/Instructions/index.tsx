@@ -3,10 +3,10 @@ import { Text, TextStyle, View, ViewStyle } from 'react-native'
 import type from '../../constants/type'
 import withTheme from '../../providers/theme'
 import GrindIcon from './icons/GrindIcon'
+import PrepIcon from './icons/PrepIcon'
 import RecordIcon from './icons/RecordIcon'
 import TipIcon from './icons/TipIcon'
 import WaterIcon from './icons/WaterIcon'
-import PrepIcon from './icons/PrepIcon';
 
 interface Instructions {
   theme: any

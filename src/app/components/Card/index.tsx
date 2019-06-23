@@ -8,17 +8,24 @@ interface CardProps {
   children: ReactNode
   style: ViewStyle
   containerStyle: ViewStyle
+  isDarkTheme: boolean
 }
 
-function Card({ theme, children, style, containerStyle }: CardProps) {
+function Card({
+  theme,
+  children,
+  style,
+  containerStyle,
+  isDarkTheme,
+}: CardProps) {
   return (
     <View
       style={{
         shadowColor: theme.black,
         shadowRadius: 10,
         shadowOffset: { height: 6, width: 0 },
-        shadowOpacity: 0.2,
-        backgroundColor: theme.grey1,
+        shadowOpacity: 0.1,
+        backgroundColor: isDarkTheme ? theme.grey1 : theme.background,
         borderRadius: 8,
         marginBottom: 40,
         ...containerStyle,
@@ -26,7 +33,7 @@ function Card({ theme, children, style, containerStyle }: CardProps) {
     >
       <View
         style={{
-          backgroundColor: theme.grey1,
+          backgroundColor: isDarkTheme ? theme.grey1 : theme.background,
           borderRadius: 8,
           minHeight: 16,
           ...style,

@@ -12,11 +12,12 @@ import recipes from './recipes'
 interface BrewProps {
   theme: Theme
   navigation: NavigationScreenProp<State, any>
+  isDarkTheme: boolean
 }
 
 class Brew extends Component<BrewProps> {
   render() {
-    const { theme, navigation } = this.props
+    const { theme, navigation, isDarkTheme } = this.props
     const { id } = navigation.state.params
     const recipe = recipes[id]
 
@@ -24,7 +25,7 @@ class Brew extends Component<BrewProps> {
       <View
         style={{
           flex: 1,
-          backgroundColor: theme.background,
+          backgroundColor: isDarkTheme ? theme.background : theme.grey1,
         }}
       >
         <Header title={recipe.title} />

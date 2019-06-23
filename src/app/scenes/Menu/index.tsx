@@ -34,7 +34,7 @@ function Menu({ theme, navigation, isDarkTheme, settings }: MenuProps) {
 
   return (
     <HeaderScrollView
-      title="Brew Methods"
+      title="Brew methods"
       containerStyle={{ backgroundColor: modifiedTheme.grey1 }}
       headerComponentContainerStyle={{
         backgroundColor: modifiedTheme.grey2,
