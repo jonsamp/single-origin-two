@@ -14,7 +14,7 @@ interface LogDetailEditProps {
   isDarkTheme: boolean
 }
 
-class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
+class LogDetailEdit extends Component<LogDetailEditProps> {
   render() {
     const { navigation, theme, isDarkTheme } = this.props
     const { timestamp } = navigation.state.params

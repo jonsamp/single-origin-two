@@ -80,6 +80,13 @@ const reducers = {
     [log.timestamp]: log,
     ...logs,
   }),
+  [actions.logUpdated]: (logs: Logs, { payload: { timestamp, log } }) => ({
+    [timestamp]: {
+      ...logs[timestamp],
+      ...log,
+    },
+    ...logs,
+  }),
   [actions.logDeleted]: (logs: Logs, { payload: { log } }) => ({
     [log.timestamp]: undefined,
     ...logs,
