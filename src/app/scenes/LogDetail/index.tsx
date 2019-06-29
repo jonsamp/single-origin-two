@@ -15,7 +15,7 @@ interface LogDetailProps {
   isDarkTheme: boolean
 }
 
-class LogDetail extends Component<LogDetailProps, LogDetailState> {
+class LogDetail extends Component<LogDetailProps> {
   render() {
     const { navigation, theme, isDarkTheme } = this.props
     const { timestamp } = navigation.state.params
@@ -37,7 +37,9 @@ class LogDetail extends Component<LogDetailProps, LogDetailState> {
               }
               style={{ marginRight: 12 }}
             >
-              <Text style={type.body}>Edit</Text>
+              <Text style={[type.body, { color: theme.foreground, bottom: 2 }]}>
+                Edit
+              </Text>
             </TouchableOpacity>
           }
         />

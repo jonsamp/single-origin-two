@@ -57,9 +57,31 @@ function LogListItem(props: LogListItemProps) {
           }}
         >
           <View style={{ paddingVertical: 24, paddingHorizontal: 16 }}>
-            <Text style={{ color: theme.foreground, ...type.headline }}>
-              {recipes[log.recipeId].title} {recipes[log.recipeId].modifier}
-            </Text>
+            <View style={{ flexDirection: 'row' }}>
+              <Text
+                style={{
+                  color: theme.foreground,
+                  ...type.headline,
+                  marginRight: 8,
+                }}
+              >
+                {recipes[log.recipeId].title} {recipes[log.recipeId].modifier}
+              </Text>
+              {log.rating ? (
+                <View
+                  style={{
+                    backgroundColor: theme.grey2,
+                    paddingVertical: 1,
+                    paddingHorizontal: 8,
+                    borderRadius: 2,
+                    justifyContent: 'center',
+                    top: 1,
+                  }}
+                >
+                  <Text style={{ color: theme.foreground }}>{log.rating}</Text>
+                </View>
+              ) : null}
+            </View>
             <Text style={{ color: theme.foreground, ...type.caption }}>
               {format(log.timestamp, 'MM/DD @ h:mmA')}
             </Text>

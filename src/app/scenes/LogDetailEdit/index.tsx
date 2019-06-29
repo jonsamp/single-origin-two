@@ -1,10 +1,13 @@
 import { format } from 'date-fns'
 import React, { Component } from 'react'
 import {
+  Alert,
+  Keyboard,
   KeyboardAvoidingView,
   ScrollView,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
@@ -52,11 +55,27 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
   updateTastingNote = value => this.setState({ tastingNote: value })
 
   onDelete = () => {
-    this.props.logDeleted({
-      timestamp: this.props.navigation.state.params.timestamp,
-    })
-
-    this.props.navigation.goBack()
+    Alert.alert(
+      'Delete Log',
+      'Are you sure you want to delete this log? This action is permanent.',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: () => {
+            this.props.logDeleted({
+              timestamp: this.props.navigation.state.params.timestamp,
+            })
+            this.props.navigation.navigate('Logs')
+          },
+        },
+      ]
+    )
   }
 
   onSave = () => {
@@ -70,6 +89,9 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
 
   render() {
     const { theme, isDarkTheme, log } = this.props
+    if (!log) {
+      return <View style={{ backgroundColor: theme.background, flex: 1 }} />
+    }
 
     return (
       <View
@@ -78,24 +100,58 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
           flex: 1,
         }}
       >
-        <KeyboardAvoidingView
-          behavior="position"
-          keyboardVerticalOffset={100}
-          style={{ flex: 1 }}
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: 16,
+            paddingTop: 24,
+            backgroundColor: isDarkTheme ? theme.grey1 : theme.background,
+          }}
         >
-          <ScrollView
-            contentContainerStyle={{
-              paddingVertical: 32,
-              paddingHorizontal: 12,
+          <Text
+            style={[
+              type.headline,
+              { color: theme.foreground, fontWeight: '700' },
+            ]}
+          >
+            Edit log
+          </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
             }}
           >
-            <Text style={[type.header, { color: theme.foreground }]}>
-              Edit log
-            </Text>
+            <TouchableOpacity onPress={this.onDelete}>
+              <Text style={[type.body, { color: '#E25B80', marginRight: 24 }]}>
+                Delete
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.onSave}
+              style={{
+                backgroundColor: theme.primary,
+                paddingVertical: 8,
+                paddingHorizontal: 20,
+                borderRadius: 4,
+              }}
+            >
+              <Text style={[type.body, { color: theme.background }]}>Save</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <ScrollView
+          contentContainerStyle={{
+            paddingHorizontal: 12,
+          }}
+        >
+          <KeyboardAvoidingView behavior="position">
             <Text
               style={{
-                marginBottom: 24,
-                marginTop: 8,
+                marginBottom: 32,
+                marginTop: 16,
                 color: theme.foreground,
               }}
             >
@@ -191,14 +247,11 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
               onChangeText={text => this.setState({ notes: text })}
               value={this.state.notes || log.notes || ''}
               keyboardAppearance={isDarkTheme ? 'dark' : ('default' as any)}
+              returnKeyType="done"
+              onSubmitEditing={Keyboard.dismiss}
             />
-          </ScrollView>
-        </KeyboardAvoidingView>
-        <Button
-          onPress={this.onSave}
-          title="Save"
-          customStyle={{ paddingBottom: 32, borderRadius: 0 }}
-        />
+          </KeyboardAvoidingView>
+        </ScrollView>
       </View>
     )
   }

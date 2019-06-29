@@ -56,7 +56,9 @@ class Logs extends Component<LogsProps> {
           fadeDirection="up"
         >
           <FlatList
-            data={Object.values(logs).sort(this.byTimestamp)}
+            data={Object.values(logs)
+              .filter(log => log)
+              .sort(this.byTimestamp)}
             extraData={this.state}
             keyExtractor={(item: Log) => String(item.timestamp)}
             renderItem={props => <LogListItem {...props} />}

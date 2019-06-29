@@ -77,8 +77,8 @@ const initialState = {
 
 const reducers = {
   [actions.logAdded]: (logs: Logs, { payload: { log } }) => ({
-    [log.timestamp]: log,
     ...logs,
+    [log.timestamp]: log,
   }),
   [actions.logUpdated]: (logs: Logs, { payload: { timestamp, log } }) => ({
     ...logs,
@@ -87,9 +87,9 @@ const reducers = {
       ...log,
     },
   }),
-  [actions.logDeleted]: (logs: Logs, { payload: { log } }) => ({
-    [log.timestamp]: undefined,
+  [actions.logDeleted]: (logs: Logs, { payload: { timestamp } }) => ({
     ...logs,
+    [timestamp]: undefined,
   }),
 }
 

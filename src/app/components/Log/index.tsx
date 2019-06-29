@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import React, { Component } from 'react'
+import React, { Component, ReactNode } from 'react'
 import { ScrollView, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import Card from '../../components/Card'
@@ -29,8 +29,18 @@ const mapStateToProps = (state, props) => {
 }
 
 class Log extends Component<LogProps> {
+  capitalizeFirstLetter = string => {
+    return (
+      string
+        .toString()
+        .charAt(0)
+        .toUpperCase() + string.toString().slice(1)
+    )
+  }
+
   render() {
     const { theme, log, unitHelpers, isDarkTheme } = this.props
+    if (!log) { return null }
     const recipe = recipes[log.recipeId]
     const logConfig = {
       totalVolume: val => ({
@@ -57,10 +67,15 @@ class Log extends Component<LogProps> {
         value: `1:${val}`,
         label: 'Ratio',
       }),
+      tastingNote: 'Tasting Note',
+      rating: 'Rating',
+      notes: 'Notes',
     }
 
     const logStats = Object.keys(log)
-      .filter(logKey => logConfig[logKey])
+      .filter(
+        logKey => logConfig[logKey] && typeof logConfig[logKey] === 'function'
+      )
       .map(logKey => logConfig[logKey](log[logKey]))
 
     return (
@@ -72,27 +87,79 @@ class Log extends Component<LogProps> {
       >
         <ScrollView
           contentContainerStyle={{
-            alignItems: 'center',
             paddingVertical: 48,
+            paddingHorizontal: 12,
           }}
         >
-          {recipe.icon({ fill: theme.primary, size: 2 })}
-          <Text
-            style={{
-              color: theme.foreground,
-              ...type.header,
-              fontWeight: '900',
-              marginVertical: 16,
-            }}
-          >
-            {recipe.title} {recipe.modifier}
-          </Text>
-          <View>
-            <Text style={[type.body, { color: theme.foreground }]}>
-              Finished at {format(log.timestamp, 'h:MMA')} on{' '}
-              {format(log.timestamp, 'MM/DD/YYYY')}
+          <View style={{ alignItems: 'center' }}>
+            {recipe.icon({ fill: theme.primary, size: 2 })}
+            <Text
+              style={{
+                color: theme.foreground,
+                ...type.header,
+                fontWeight: '900',
+                marginVertical: 16,
+              }}
+            >
+              {recipe.title} {recipe.modifier}
             </Text>
+            <View>
+              <Text style={[type.body, { color: theme.foreground }]}>
+                Finished at {format(log.timestamp, 'h:MMA')} on{' '}
+                {format(log.timestamp, 'MM/DD/YYYY')}
+              </Text>
+            </View>
           </View>
+          <View style={{ marginTop: 24 }}>
+            {['tastingNote', 'rating']
+              .filter(key => log[key])
+              .map((key, index) => (
+                <Card
+                  key={key}
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }}
+                  containerStyle={{
+                    marginTop: 4,
+                    marginBottom: index === 0 ? 12 : 0,
+                    marginHorizontal: 8,
+                    shadowOpacity: 0,
+                    padding: 16,
+                  }}
+                >
+                  <Text style={[type.body, { color: theme.foreground }]}>
+                    {logConfig[key]}
+                  </Text>
+                  <Text style={[type.body, { color: theme.foreground }]}>
+                    {this.capitalizeFirstLetter(log[key])}
+                  </Text>
+                </Card>
+              ))}
+          </View>
+          {log.notes ? (
+            <Card
+              containerStyle={{
+                marginTop: 16,
+                marginBottom: 0,
+                marginHorizontal: 8,
+                shadowOpacity: 0,
+                padding: 16,
+              }}
+            >
+              <Text
+                style={[
+                  type.headline,
+                  { color: theme.foreground, marginBottom: 4 },
+                ]}
+              >
+                Notes
+              </Text>
+              <Text style={[type.body, { color: theme.foreground }]}>
+                {log.notes}
+              </Text>
+            </Card>
+          ) : null}
           <View style={styles.cardsContainer}>
             {logStats.map(stat => (
               <Card

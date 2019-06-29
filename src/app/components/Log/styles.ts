@@ -8,10 +8,9 @@ export default StyleSheet.create({
     justifyContent: 'flex-start',
     marginTop: 16,
     width: '100%',
-    padding: 16,
   },
   cardContainer: {
-    width: '45%',
+    width: '45.5%',
     paddingVertical: 16,
     paddingHorizontal: 8,
     marginHorizontal: 8,
