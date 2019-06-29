@@ -4,6 +4,7 @@ import { Animated, Text, TouchableOpacity, View } from 'react-native'
 import { width } from '../../constants/layout'
 import withSettings from '../../providers/settings'
 import withTheme from '../../providers/theme'
+import { UnitHelpers } from '../../types'
 import styles from './styles'
 
 interface ScrollSelectProps {
@@ -14,7 +15,8 @@ interface ScrollSelectProps {
   defaultValue: number
   onChange: (value: number) => void
   unitType: string
-  unitHelpers: any
+  unitHelpers: UnitHelpers
+  label?: string
 }
 
 class ScrollSelect extends Component<ScrollSelectProps> {
@@ -69,15 +71,17 @@ class ScrollSelect extends Component<ScrollSelectProps> {
     const { unitType, min, max, unitHelpers, defaultValue } = this.props
     const unitHelper = unitHelpers[unitType]
     return {
-      min: Math.round(unitHelper.getPreferredValue(min)),
-      max: Math.round(unitHelper.getPreferredValue(max)),
-      defaultValue: Math.round(unitHelper.getPreferredValue(defaultValue)),
+      min: unitType ? Math.round(unitHelper.getPreferredValue(min)) : min,
+      max: unitType ? Math.round(unitHelper.getPreferredValue(max)) : max,
+      defaultValue: unitType
+        ? Math.round(unitHelper.getPreferredValue(defaultValue))
+        : defaultValue,
     }
   }
 
   decodeValue = (value: number) => {
     const { unitType, unitHelpers } = this.props
-    return unitHelpers[unitType].getStandardValue(value)
+    return unitType ? unitHelpers[unitType].getStandardValue(value) : value
   }
 
   getRanges = (index: number) => [
@@ -125,7 +129,7 @@ class ScrollSelect extends Component<ScrollSelectProps> {
   }
 
   render() {
-    const { theme, onChange, step, unitType, unitHelpers } = this.props
+    const { theme, onChange, step, unitType, unitHelpers, label } = this.props
     const { min, max } = this.encodeValues()
     const selectionRange = range(min, max + 1, step)
     const selectionTextStyle = styles.selectionText
@@ -190,7 +194,7 @@ class ScrollSelect extends Component<ScrollSelectProps> {
         </Animated.ScrollView>
         <View style={[styles.label, { backgroundColor: theme.foreground }]}>
           <Text style={[styles.labelText, { color: theme.grey2 }]}>
-            {unitHelper.unit.symbol.toUpperCase()}
+            {(unitHelper && unitHelper.unit.symbol.toUpperCase()) || label}
           </Text>
         </View>
       </View>
