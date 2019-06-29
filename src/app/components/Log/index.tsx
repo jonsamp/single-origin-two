@@ -40,7 +40,9 @@ class Log extends Component<LogProps> {
 
   render() {
     const { theme, log, unitHelpers, isDarkTheme } = this.props
-    if (!log) { return null }
+    if (!log) {
+      return null
+    }
     const recipe = recipes[log.recipeId]
     const logConfig = {
       totalVolume: val => ({
@@ -128,7 +130,7 @@ class Log extends Component<LogProps> {
                     padding: 16,
                   }}
                 >
-                  <Text style={[type.body, { color: theme.foreground }]}>
+                  <Text style={[type.headline, { color: theme.foreground }]}>
                     {logConfig[key]}
                   </Text>
                   <Text style={[type.body, { color: theme.foreground }]}>
