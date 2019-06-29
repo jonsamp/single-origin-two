@@ -1,12 +1,10 @@
 import React from 'react'
-import {
-  createAppContainer,
-  createBottomTabNavigator,
-  createStackNavigator,
-} from 'react-navigation'
+import { createAppContainer, createBottomTabNavigator } from 'react-navigation'
+import { createStackNavigator, TransitionPresets } from 'react-navigation-stack'
 import Brew from '../../scenes/Brew'
 import BrewSummary from '../../scenes/BrewSummary'
 import LogDetail from '../../scenes/LogDetail'
+import LogDetailEdit from '../../scenes/LogDetailEdit'
 import Logs from '../../scenes/Logs'
 import Menu from '../../scenes/Menu'
 import Preparation from '../../scenes/Preparation'
@@ -47,8 +45,23 @@ const TabNavigator = createBottomTabNavigator(
 )
 
 const StackNavigator = createStackNavigator(
-  { TabNavigator, SettingsDetail, Brew, BrewSummary, Preparation, LogDetail },
-  { defaultNavigationOptions: { header: null } }
+  { TabNavigator, SettingsDetail, Brew, BrewSummary, LogDetail, Preparation },
+  {
+    headerMode: 'none',
+  }
 )
 
-export default createAppContainer(StackNavigator)
+const ModalNavigator = createStackNavigator(
+  { StackNavigator, LogDetailEdit },
+  {
+    ...TransitionPresets.ModalPresentationIOS,
+    mode: 'modal',
+    headerMode: 'none',
+    defaultNavigationOptions: {
+      cardOverlayEnabled: true,
+      gesturesEnabled: true,
+    },
+  }
+)
+
+export default createAppContainer(ModalNavigator)

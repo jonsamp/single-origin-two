@@ -1,4 +1,5 @@
-import { AppLoading, Font } from 'expo'
+import { AppLoading } from 'expo'
+import * as Font from 'expo-font'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'

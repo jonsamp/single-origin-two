@@ -1,21 +1,20 @@
 import React, { Component } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
-import Header from '../../components/Header'
-import Log from '../../components/Log'
+import Button from '../../components/Button'
 import type from '../../constants/type'
 import withTheme from '../../providers/theme'
 import { State } from '../../state/types'
 import { Theme } from '../../types'
 
-interface LogDetailProps {
+interface LogDetailEditProps {
   navigation: NavigationScreenProp<State>
   theme: Theme
   timestamp: number
   isDarkTheme: boolean
 }
 
-class LogDetail extends Component<LogDetailProps, LogDetailState> {
+class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
   render() {
     const { navigation, theme, isDarkTheme } = this.props
     const { timestamp } = navigation.state.params
@@ -27,24 +26,12 @@ class LogDetail extends Component<LogDetailProps, LogDetailState> {
           backgroundColor: isDarkTheme ? theme.background : theme.grey1,
         }}
       >
-        <Header
-          title="Brew Log"
-          onBack={navigation.goBack}
-          right={
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('LogDetailEdit', { timestamp })
-              }
-              style={{ marginRight: 12 }}
-            >
-              <Text style={type.body}>Edit</Text>
-            </TouchableOpacity>
-          }
-        />
-        <Log timestamp={timestamp} />
+        <Text style={type.header}>Update Log</Text>
+        <Text style={type.header}>{timestamp}</Text>
+        <Button onPress={() => navigation.goBack()} title="Done" />
       </View>
     )
   }
 }
 
-export default withNavigation(withTheme(LogDetail) as any)
+export default withNavigation(withTheme(LogDetailEdit) as any)
