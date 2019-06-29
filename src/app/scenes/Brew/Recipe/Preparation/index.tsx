@@ -37,7 +37,7 @@ function Preparation({
             paddingRight: 20,
           }}
         >
-          <Instructions text={`Prepare your ${recipe}.`} icon="PrepIcon" />
+          <Instructions text={`Prepare your ${recipe}.`} />
           <Feather
             name="chevron-right"
             size={theme.iconSize}

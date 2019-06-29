@@ -173,6 +173,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
       unitHelpers: { waterVolumeUnit },
     } = this.props
     const { recipe, timerRunning, volumePercent, second, image } = this.state
+    console.log({ volume, volumePercent })
 
     return (
       <View>

@@ -47,7 +47,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
     timestamp: new Date().getTime(),
     totalBrewTime: 0,
     attributesRecorded: false,
-    totalVolume: undefined,
+    totalVolume: this.props.recipe.defaultTotalVolume,
   }
 
   setRecipeState = ({ key, value }) => this.setState({ [key]: value } as any)

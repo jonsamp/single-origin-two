@@ -11,8 +11,12 @@ import WetFilter from './images/wet-filter.jpg'
 export default {
   id: 'KalitaWave185',
   title: 'Kalita Wave 185',
-  minYield: 150,
-  maxYield: 525,
+  minYield: 142,
+  maxYield: 567,
+  totalTime: 175,
+  defaultGrind: 0.5,
+  defaultTotalVolume: 340,
+  defaultSource: Default,
   preparation: [
     {
       image: WetFilter,
@@ -43,11 +47,11 @@ export default {
       image: Pour,
       afterImage: AfterPour,
     },
-    {
-      second: 10,
-      type: 'tip',
-      text: 'this is a tip',
-    },
+    // {
+    //   second: 10,
+    //   type: 'tip',
+    //   text: 'this is a tip',
+    // },
     {
       second: 40,
       type: 'pour',
@@ -64,13 +68,10 @@ export default {
     },
     {
       second: 145,
-      type: 'finished',
+      type: 'pour',
       volumePercent: 1,
       image: Finish,
       afterImage: Finish,
     },
   ],
-  totalTime: 175,
-  defaultGrind: 0.5,
-  defaultSource: Default,
 }
