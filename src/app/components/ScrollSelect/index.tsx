@@ -1,6 +1,6 @@
 import { range } from 'lodash'
 import React, { Component } from 'react'
-import { Animated, Text, TouchableOpacity, View } from 'react-native'
+import { Animated, Text, TouchableOpacity, View, ViewStyle } from 'react-native'
 import { width } from '../../constants/layout'
 import withSettings from '../../providers/settings'
 import withTheme from '../../providers/theme'
@@ -17,6 +17,7 @@ interface ScrollSelectProps {
   unitType: string
   unitHelpers: UnitHelpers
   label?: string
+  style?: ViewStyle
 }
 
 class ScrollSelect extends Component<ScrollSelectProps> {
@@ -52,7 +53,7 @@ class ScrollSelect extends Component<ScrollSelectProps> {
           this.scrollViewRef.scrollTo({
             x: itemPosition,
             y: 0,
-            animated: true,
+            animated: false,
           }),
         0
       )
@@ -129,14 +130,24 @@ class ScrollSelect extends Component<ScrollSelectProps> {
   }
 
   render() {
-    const { theme, onChange, step, unitType, unitHelpers, label } = this.props
+    const {
+      theme,
+      onChange,
+      step,
+      unitType,
+      unitHelpers,
+      label,
+      style,
+    } = this.props
     const { min, max } = this.encodeValues()
     const selectionRange = range(min, max + 1, step)
     const selectionTextStyle = styles.selectionText
     const unitHelper = unitHelpers[unitType]
 
     return (
-      <View style={[styles.container, { backgroundColor: theme.grey2 }]}>
+      <View
+        style={[styles.container, { backgroundColor: theme.grey2, ...style }]}
+      >
         <Animated.ScrollView
           scrollEventThrottle={16}
           onScroll={Animated.event(

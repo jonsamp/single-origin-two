@@ -1,26 +1,15 @@
 import { Feather } from '@expo/vector-icons'
 import React from 'react'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, ViewStyle } from 'react-native'
 import withTheme from '../../providers/theme'
 import { Theme } from '../../types/index'
 import SettingWrapper from './SettingWrapper'
-
-// const propTypes = {
-//   theme: PropTypes.object,
-//   onChange: PropTypes.func,
-//   items: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       title: PropTypes.string,
-//       id: PropTypes.string,
-//       value: PropTypes.bool,
-//     })
-//   ),
-// }
 
 interface ChecklistSettingProps {
   theme: Theme
   onChange: (id: string) => void
   items: Item[]
+  style: ViewStyle
 }
 
 interface Item {
@@ -30,13 +19,17 @@ interface Item {
   modifier: string
 }
 
-// interface Setting
-
-const ChecklistSetting = ({ theme, onChange, items }: ChecklistSettingProps) =>
+const ChecklistSetting = ({
+  theme,
+  onChange,
+  items,
+  style,
+}: ChecklistSettingProps) =>
   items.map(item => (
     <TouchableOpacity onPress={() => onChange(item.id)} key={item.id}>
       <SettingWrapper
         title={`${item.title}${item.modifier ? ` ${item.modifier}` : ''}`}
+        style={style}
       >
         {item.value ? (
           <Feather name="check" size={theme.iconSize} color={theme.primary} />

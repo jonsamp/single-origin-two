@@ -10,4 +10,7 @@ export interface Log {
   recipeId: string
   grind?: number
   temp?: number
+  rating?: number
+  tastingNote?: string
+  notes?: string
 }

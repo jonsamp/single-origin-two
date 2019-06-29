@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, ViewStyle } from 'react-native'
 import withTheme from '../../providers/theme'
 import { Theme } from '../../types/index'
 import styles from './styles'
@@ -11,6 +11,7 @@ interface SettingWrapperProps {
   description: string
   borderTop: boolean
   isDarkTheme: boolean
+  style: ViewStyle
 }
 
 const SettingWrapper = ({
@@ -20,6 +21,7 @@ const SettingWrapper = ({
   description,
   borderTop,
   isDarkTheme,
+  style,
 }: SettingWrapperProps) => (
   <View
     style={{ backgroundColor: isDarkTheme ? theme.background : theme.grey1 }}
@@ -32,6 +34,7 @@ const SettingWrapper = ({
         backgroundColor: isDarkTheme ? theme.grey2 : theme.background,
         borderTopWidth: borderTop ? 1 : 0,
         borderTopColor: theme.grey2,
+        ...style,
       }}
     >
       <View style={styles.row}>
