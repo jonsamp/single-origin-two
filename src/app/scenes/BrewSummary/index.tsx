@@ -31,7 +31,7 @@ class BrewSummary extends Component<BrewSummaryProps> {
     return (
       <View style={{ flex: 1 }}>
         <Header title="Brew Summary" onBack={onBack} />
-        <Log timestamp={navigation.state.params.timestamp} />
+        <Log timestamp={navigation.state.params.timestamp} withReminder />
         <Button
           title="done"
           customStyle={{ paddingBottom: 32 }}

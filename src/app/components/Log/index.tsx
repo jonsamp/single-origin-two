@@ -1,6 +1,7 @@
+import { Feather } from '@expo/vector-icons'
 import { format } from 'date-fns'
-import React, { Component, ReactNode } from 'react'
-import { ScrollView, Text, View } from 'react-native'
+import React, { Component } from 'react'
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
 import Card from '../../components/Card'
 import recipes from '../../constants/recipes'
@@ -10,6 +11,13 @@ import withSettings from '../../providers/settings'
 import withTheme from '../../providers/theme'
 import { selectLog } from '../../state/logs/selectors'
 import { Log as LogType } from '../../state/logs/types'
+import {
+  notificationsReset,
+  reminderCancelled,
+  reminderRequested,
+} from '../../state/notifications/actions'
+import { selectNotifications } from '../../state/notifications/selectors'
+import { Notifications } from '../../state/notifications/types'
 import { Settings } from '../../state/settings/types'
 import { Theme, UnitHelpers } from '../../types/index'
 import styles from './styles'
@@ -20,15 +28,53 @@ interface LogProps {
   log: LogType
   unitHelpers: UnitHelpers
   isDarkTheme: boolean
+  reminderRequested: (props: { timestamp: number }) => void
+  notificationsReset: () => void
+  reminderCancelled: () => void
+  withReminder: boolean
+  notifications: Notifications
 }
 
 const mapStateToProps = (state, props) => {
   return {
     log: selectLog(state, props.timestamp),
+    notifications: selectNotifications(state),
   }
 }
 
+const mapDispatchToProps = {
+  reminderRequested,
+  notificationsReset,
+  reminderCancelled,
+}
+
 class Log extends Component<LogProps> {
+  state = {
+    reminderScheduled: false,
+  }
+
+  toggleReminder = async () => {
+    if (!this.state.reminderScheduled) {
+      await this.props.reminderRequested({
+        timestamp: this.props.log.timestamp,
+      })
+      return this.setState({
+        reminderScheduled: true,
+      })
+    } else {
+      await this.props.reminderCancelled()
+      return this.setState({
+        reminderScheduled: false,
+      })
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.withReminder) {
+      this.props.notificationsReset()
+    }
+  }
+
   capitalizeFirstLetter = string => {
     return (
       string
@@ -39,10 +85,7 @@ class Log extends Component<LogProps> {
   }
 
   render() {
-    const { theme, log, unitHelpers, isDarkTheme } = this.props
-    if (!log) {
-      return null
-    }
+    const { theme, log, unitHelpers, isDarkTheme, withReminder } = this.props
     const recipe = recipes[log.recipeId]
     const logConfig = {
       totalVolume: val => ({
@@ -162,6 +205,83 @@ class Log extends Component<LogProps> {
               </Text>
             </Card>
           ) : null}
+
+          {withReminder && this.props.notifications.status !== 'denied' ? (
+            <TouchableOpacity
+              onPress={this.toggleReminder}
+              activeOpacity={0.75}
+            >
+              <Card
+                containerStyle={{
+                  marginTop: 16,
+                  marginBottom: 0,
+                  marginHorizontal: 8,
+                  padding: 16,
+                }}
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <Text
+                  style={[
+                    type.headline,
+                    { color: theme.foreground, marginBottom: 4 },
+                  ]}
+                >
+                  Send a tasting reminder
+                </Text>
+                {this.state.reminderScheduled ? (
+                  <Feather
+                    name="check-square"
+                    size={theme.iconSize}
+                    color={theme.primary}
+                  />
+                ) : (
+                  <Feather
+                    name="x-square"
+                    size={theme.iconSize}
+                    color={theme.foreground}
+                    style={{ opacity: 0.5 }}
+                  />
+                )}
+              </Card>
+            </TouchableOpacity>
+          ) : null}
+          {withReminder && this.props.notifications.status === 'denied' ? (
+            <Card
+              containerStyle={{
+                marginTop: 16,
+                marginBottom: 0,
+                marginHorizontal: 8,
+                padding: 16,
+              }}
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}
+            >
+              <View>
+                <Text
+                  style={[
+                    type.headline,
+                    { color: theme.foreground, marginBottom: 4 },
+                  ]}
+                >
+                  Send a tasting reminder
+                </Text>
+                <Text style={[type.callout, { color: theme.foreground }]}>
+                  To send a reminder, turn notification permissions on in
+                  Settings.
+                </Text>
+              </View>
+              <Feather
+                name="alert-triangle"
+                size={theme.iconSize}
+                color={theme.foreground}
+              />
+            </Card>
+          ) : null}
           <View style={styles.cardsContainer}>
             {logStats.map(stat => (
               <Card
@@ -184,4 +304,7 @@ class Log extends Component<LogProps> {
   }
 }
 
-export default connect(mapStateToProps)(withTheme(withSettings(Log)))
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withTheme(withSettings(Log)))

@@ -18,7 +18,10 @@ interface LogDetailProps {
 class LogDetail extends Component<LogDetailProps> {
   render() {
     const { navigation, theme, isDarkTheme } = this.props
-    const { timestamp } = navigation.state.params
+    const timestamp =
+      navigation.state &&
+      navigation.state.params &&
+      navigation.state.params.timestamp
 
     return (
       <View
