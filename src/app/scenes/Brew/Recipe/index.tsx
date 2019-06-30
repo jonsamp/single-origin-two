@@ -6,8 +6,10 @@ import withSettings from '../../../providers/settings'
 import { logAdded } from '../../../state/logs/actions'
 import { Settings } from '../../../state/settings/types'
 import { State } from '../../../state/types'
+import { Recipe as RecipeType } from '../../../types'
 import { UnitHelpers } from '../../../types/index'
 import KalitaWave185 from '../recipes/KalitaWave185'
+import AddIce from './AddIce'
 import BoilWater from './BoilWater'
 import GrindCoffee from './GrindCoffee'
 import PourTimer from './PourTimer'
@@ -18,7 +20,7 @@ import YieldQuestion from './YieldQuestion'
 interface RecipeProps {
   settings: Settings
   unitHelpers: UnitHelpers
-  recipe: any // TODO: fix this type
+  recipe: RecipeType
   navigation: NavigationScreenProp<State, any>
   logAdded: (props: any) => void
 }
@@ -95,6 +97,9 @@ class Recipe extends Component<RecipeProps, RecipeState> {
     const { minYield, maxYield, defaultGrind } = recipe
     const { totalVolume, grind, temp } = this.state
     const coffeeWeight = Math.round(totalVolume / settings.ratio)
+    const totalPourVolume = recipe.iced
+      ? Math.round(totalVolume * 0.666)
+      : totalVolume
 
     return (
       <Fragment>
@@ -103,12 +108,13 @@ class Recipe extends Component<RecipeProps, RecipeState> {
           preparation={recipe.preparation}
         />
         <YieldQuestion
-          totalVolume={350}
+          defaultValue={recipe.defaultTotalVolume}
           setRecipeState={this.setRecipeState}
           minYield={minYield}
           maxYield={maxYield}
         />
-        <BoilWater totalVolume={totalVolume} />
+        <BoilWater volume={totalPourVolume} />
+        {recipe.iced && <AddIce volume={Math.round(totalVolume * 0.333)} />}
         <GrindCoffee
           coffeeWeight={coffeeWeight}
           defaultGrind={defaultGrind}
@@ -123,8 +129,8 @@ class Recipe extends Component<RecipeProps, RecipeState> {
           temperatureUnit={temperatureUnit}
         />
         <PourTimer
-          recipe={KalitaWave185}
-          volume={totalVolume}
+          recipe={recipe}
+          volume={totalPourVolume}
           setRecipeState={this.setRecipeState}
         />
         <Button

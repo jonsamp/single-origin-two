@@ -78,12 +78,12 @@ class Step extends Component<StepProps, StepState> {
 
   getText = () => {
     const {
-      totalTime,
       second,
       timerRunning,
       volume,
       waterVolumeUnit,
       recipe,
+      totalTime,
     } = this.props
     const nextEvent = this.getNextEvent()
     const beforeBrewStart = second === -3 && !timerRunning

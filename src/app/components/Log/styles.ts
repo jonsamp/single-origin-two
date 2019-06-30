@@ -10,7 +10,7 @@ export default StyleSheet.create({
     width: '100%',
   },
   cardContainer: {
-    width: '45.5%',
+    width: '45%',
     paddingVertical: 16,
     paddingHorizontal: 8,
     marginHorizontal: 8,

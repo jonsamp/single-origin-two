@@ -5,17 +5,17 @@ import withSettings from '../../../../providers/settings'
 
 interface BoilWaterProps {
   unitHelpers: any
-  totalVolume: number
+  volume: number
 }
 
-function BoilWater({ unitHelpers, totalVolume }: BoilWaterProps) {
+function BoilWater({ unitHelpers, volume }: BoilWaterProps) {
   const { waterVolumeUnit, temperatureUnit } = unitHelpers
 
   return (
     <Card>
       <Instructions
         text={`Heat **${Math.round(
-          waterVolumeUnit.getPreferredValue(totalVolume)
+          waterVolumeUnit.getPreferredValue(volume)
         )} ${
           waterVolumeUnit.unit.title
         }** of water to **${temperatureUnit.getPreferredValue(205)}${

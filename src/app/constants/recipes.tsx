@@ -29,6 +29,12 @@ export default {
   //   id: 'IcedPourOver',
   //   icon: () => {},
   // },
+  IcedKalitaWave185: {
+    title: 'Iced Kalita Wave',
+    modifier: '185',
+    id: 'IcedKalitaWave185',
+    icon: ({ fill, size }) => <KalitaWave185Icon fill={fill} size={size} />,
+  },
   KalitaWave185: {
     title: 'Kalita Wave',
     modifier: '185',

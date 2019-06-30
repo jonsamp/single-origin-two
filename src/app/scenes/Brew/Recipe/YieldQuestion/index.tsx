@@ -8,7 +8,7 @@ import { UnitHelpers } from '../../../../types/index'
 
 interface YieldQuestionProps {
   unitHelpers: UnitHelpers
-  totalVolume: number
+  defaultValue: number
   setRecipeState: (props: { key: string; value: any }) => void
   minYield: number
   maxYield: number
@@ -16,7 +16,7 @@ interface YieldQuestionProps {
 
 function YieldQuestion({
   unitHelpers,
-  totalVolume,
+  defaultValue,
   setRecipeState,
   minYield,
   maxYield,
@@ -37,7 +37,7 @@ function YieldQuestion({
         unitType="brewedVolumeUnit"
         min={minYield}
         max={maxYield}
-        defaultValue={totalVolume}
+        defaultValue={defaultValue}
         onChange={value =>
           setRecipeState({
             key: 'totalVolume',

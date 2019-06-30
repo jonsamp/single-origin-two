@@ -64,14 +64,26 @@ export interface RecipeConfig {
 }
 
 export interface Recipe {
+  id: string
   title: string
   minYield: number
   maxYield: number
-  pourEvents: PourEvents
-  totalVolume: number
   totalTime: number
   defaultGrind: number
-  pourSourceDefault: number
+  defaultTotalVolume: number
+  iced: boolean
+  defaultSource: number
+  preparation: Array<{
+    image?: number
+    text: string
+  }>
+  steps: Array<{
+    start?: boolean
+    type: string
+    volumePercent: number
+    image: number
+    afterImage: number
+  }>
 }
 
 export interface Log {
