@@ -106,10 +106,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
               alignItems: 'center',
             }}
           >
-            <TouchableOpacity
-              onPress={() => navigation.goBack()}
-              // hitSlop={{}}
-            >
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <Feather
                 name="plus"
                 size={theme.iconSize + 5}
@@ -132,7 +129,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                 color: theme.foreground,
               }}
             >
-              Rating your {recipes[log.recipeId].title} logged at{' '}
+              Rate your {recipes[log.recipeId].title} logged at{' '}
               {format(log.timestamp, 'h:mmA')} on{' '}
               {format(log.timestamp, 'MM/DD/YYYY')}.
             </Text>
@@ -192,11 +189,9 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                 label="RATING"
                 onChange={value => this.updateLog('rating', value)}
                 step={1}
-                style={
-                  isDarkTheme && {
-                    backgroundColor: theme.grey1,
-                  }
-                }
+                style={{
+                  backgroundColor: isDarkTheme ? theme.grey1 : theme.background,
+                }}
               />
             </View>
             <Text style={[type.title, { color: theme.foreground }]}>Notes</Text>
