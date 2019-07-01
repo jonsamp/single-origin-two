@@ -1,7 +1,7 @@
+import { Feather } from '@expo/vector-icons'
 import { format } from 'date-fns'
 import React, { Component } from 'react'
 import {
-  Alert,
   Keyboard,
   KeyboardAvoidingView,
   ScrollView,
@@ -12,13 +12,12 @@ import {
 } from 'react-native'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import { connect } from 'react-redux'
-import Button from '../../components/Button'
 import ScrollSelect from '../../components/ScrollSelect'
 import recipes from '../../constants/recipes'
 import type from '../../constants/type'
 import withTheme from '../../providers/theme'
 import ChecklistSetting from '../../scenes/Settings/ChecklistSetting'
-import { logDeleted, logUpdated } from '../../state/logs/actions'
+import { logUpdated } from '../../state/logs/actions'
 import { selectLog } from '../../state/logs/selectors'
 import { Log } from '../../state/logs/types'
 import { State } from '../../state/types'
@@ -37,7 +36,7 @@ interface LogDetailEditProps {
 interface LogDetailEditState {
   rating?: number
   tastingNote?: string
-  notes: string
+  notes?: string
 }
 
 const mapStateToProps = (state, props) => ({
@@ -46,49 +45,20 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = {
   logUpdated,
-  logDeleted,
 }
 
 class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
-  state = {} as LogDetailEditState
-
-  updateTastingNote = value => this.setState({ tastingNote: value })
-
-  onDelete = () => {
-    Alert.alert(
-      'Delete Log',
-      'Are you sure you want to delete this log? This action is permanent.',
-      [
-        {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: () => {
-            this.props.logDeleted({
-              timestamp: this.props.navigation.state.params.timestamp,
-            })
-            this.props.navigation.navigate('Logs')
-          },
-        },
-      ]
-    )
-  }
-
-  onSave = () => {
+  updateLog = (key, value) => {
     this.props.logUpdated({
       timestamp: this.props.navigation.state.params.timestamp,
-      log: this.state,
+      log: {
+        [key]: value,
+      },
     })
-
-    this.props.navigation.goBack()
   }
 
   render() {
-    const { theme, isDarkTheme, log } = this.props
+    const { theme, isDarkTheme, log, navigation } = this.props
     if (!log) {
       return <View style={{ backgroundColor: theme.background, flex: 1 }} />
     }
@@ -106,39 +76,46 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
             justifyContent: 'space-between',
             alignItems: 'center',
             padding: 16,
-            paddingTop: 24,
             backgroundColor: isDarkTheme ? theme.grey1 : theme.background,
           }}
         >
-          <Text
-            style={[
-              type.headline,
-              { color: theme.foreground, fontWeight: '700' },
-            ]}
-          >
-            Edit log
-          </Text>
           <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
             }}
           >
-            <TouchableOpacity onPress={this.onDelete}>
-              <Text style={[type.body, { color: '#E25B80', marginRight: 24 }]}>
-                Delete
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={this.onSave}
-              style={{
-                backgroundColor: theme.primary,
-                paddingVertical: 8,
-                paddingHorizontal: 20,
-                borderRadius: 4,
-              }}
+            <Feather
+              name="clipboard"
+              size={theme.iconSize}
+              color={theme.foreground}
+              style={{ top: -1, marginRight: 4 }}
+            />
+            <Text
+              style={[
+                type.headline,
+                { color: theme.foreground, fontWeight: '700' },
+              ]}
             >
-              <Text style={[type.body, { color: theme.background }]}>Save</Text>
+              Rate
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              // hitSlop={{}}
+            >
+              <Feather
+                name="plus"
+                size={theme.iconSize + 5}
+                color={theme.foreground}
+                style={{ transform: [{ rotate: '45deg' }], top: -1 }}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -155,7 +132,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                 color: theme.foreground,
               }}
             >
-              Editing your {recipes[log.recipeId].title} logged at{' '}
+              Rating your {recipes[log.recipeId].title} logged at{' '}
               {format(log.timestamp, 'h:mmA')} on{' '}
               {format(log.timestamp, 'MM/DD/YYYY')}.
             </Text>
@@ -175,26 +152,20 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                   {
                     title: 'Sour',
                     id: 'sour',
-                    value: this.state.tastingNote
-                      ? this.state.tastingNote === 'sour'
-                      : log.tastingNote === 'sour',
+                    value: log.tastingNote === 'sour',
                   },
                   {
                     title: 'Sweet',
                     id: 'sweet',
-                    value: this.state.tastingNote
-                      ? this.state.tastingNote === 'sweet'
-                      : log.tastingNote === 'sweet',
+                    value: log.tastingNote === 'sweet',
                   },
                   {
                     title: 'Bitter',
                     id: 'bitter',
-                    value: this.state.tastingNote
-                      ? this.state.tastingNote === 'bitter'
-                      : log.tastingNote === 'bitter',
+                    value: log.tastingNote === 'bitter',
                   },
                 ]}
-                onChange={this.updateTastingNote}
+                onChange={value => this.updateLog('tastingNote', value)}
                 style={
                   isDarkTheme && {
                     backgroundColor: theme.grey1,
@@ -219,7 +190,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                 max={10}
                 defaultValue={log.rating || 5}
                 label="RATING"
-                onChange={value => this.setState({ rating: value })}
+                onChange={value => this.updateLog('rating', value)}
                 step={1}
                 style={
                   isDarkTheme && {
@@ -244,8 +215,8 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                 color: theme.foreground,
               }}
               multiline
-              onChangeText={text => this.setState({ notes: text })}
-              value={this.state.notes || log.notes || ''}
+              onChangeText={value => this.updateLog('notes', value)}
+              value={log.notes}
               keyboardAppearance={isDarkTheme ? 'dark' : ('default' as any)}
               returnKeyType="done"
               onSubmitEditing={Keyboard.dismiss}

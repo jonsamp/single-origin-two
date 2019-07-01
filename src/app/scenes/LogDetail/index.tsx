@@ -41,7 +41,7 @@ class LogDetail extends Component<LogDetailProps> {
               style={{ marginRight: 12 }}
             >
               <Text style={[type.body, { color: theme.foreground, bottom: 2 }]}>
-                Edit
+                Rate
               </Text>
             </TouchableOpacity>
           }
