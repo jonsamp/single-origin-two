@@ -27,7 +27,7 @@ function Card({
         shadowOpacity: 0.1,
         backgroundColor: isDarkTheme ? theme.grey1 : theme.background,
         borderRadius: 8,
-        marginBottom: 40,
+        marginBottom: 32,
         ...containerStyle,
       }}
     >

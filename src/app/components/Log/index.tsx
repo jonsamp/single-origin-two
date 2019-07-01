@@ -239,7 +239,7 @@ class Log extends Component<LogProps> {
                   />
                 ) : (
                   <Feather
-                    name="x-square"
+                    name="plus-square"
                     size={theme.iconSize}
                     color={theme.foreground}
                     style={{ opacity: 0.5 }}
@@ -271,7 +271,7 @@ class Log extends Component<LogProps> {
                   Send a tasting reminder
                 </Text>
                 <Text style={[type.callout, { color: theme.foreground }]}>
-                  To send a reminder, turn notification permissions on in
+                  To send reminders, turn on notification permissions in
                   Settings.
                 </Text>
               </View>
