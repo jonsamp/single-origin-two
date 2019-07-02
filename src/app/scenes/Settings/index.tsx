@@ -47,7 +47,7 @@ class Settings extends Component<SettingsProps> {
         fadeDirection="up"
       >
         <Section title="Brewing">
-          <Group title="Brew settings" />
+          <Group title="Brew Settings" />
           <Group title="Grinder" />
           <Group title="Units" />
           <Group title="Recipes" />
@@ -70,7 +70,7 @@ class Settings extends Component<SettingsProps> {
               />
             </SettingWrapper>
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() =>
               Linking.openURL(
                 'https://itunes.apple.com/us/app/appName/id1316843624?mt=8&action=write-review'
@@ -85,9 +85,9 @@ class Settings extends Component<SettingsProps> {
                 style={{ opacity: 0.65 }}
               />
             </SettingWrapper>
-          </TouchableOpacity>
-          <Group title="Privacy policy" />
-          <TouchableOpacity
+          </TouchableOpacity> */}
+          <Group title="Privacy Policy" />
+          {/* <TouchableOpacity
             onPress={() => Linking.openURL('http://mbox.coffee/OGCC')}
           >
             <SettingWrapper title="$10 off Mistobox">
@@ -98,7 +98,7 @@ class Settings extends Component<SettingsProps> {
                 style={{ opacity: 0.65 }}
               />
             </SettingWrapper>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </Section>
       </HeaderScrollView>
     )

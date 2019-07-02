@@ -68,7 +68,7 @@ class Menu extends Component<MenuProps> {
 
     return (
       <HeaderScrollView
-        title="Brew methods"
+        title="Brew Methods"
         containerStyle={{ backgroundColor: modifiedTheme.grey1 }}
         headerComponentContainerStyle={{
           backgroundColor: isDarkTheme ? modifiedTheme.grey2 : theme.background,

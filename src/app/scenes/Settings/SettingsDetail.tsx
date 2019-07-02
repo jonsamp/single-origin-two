@@ -94,25 +94,6 @@ class Settings extends Component<SettingsProps> {
                 }
               />
             </Section>
-            <Section title="General">
-              <SwitchSetting
-                title="Restore last brew"
-                description="Automatically inserts grind setting and water temp from your most previous brew."
-                value={settings.restoreLastBrew}
-                onChange={value =>
-                  settingUpdated({ setting: 'restoreLastBrew', value })
-                }
-              />
-              <SwitchSetting
-                title="Tasting reminder"
-                description="Receive a notification to taste and rate your brew once your brew has cooled to tasting temperature."
-                value={settings.reminders}
-                onChange={value =>
-                  settingUpdated({ setting: 'reminders', value })
-                }
-                borderTop
-              />
-            </Section>
           </Fragment>
         )
         break
@@ -212,13 +193,6 @@ class Settings extends Component<SettingsProps> {
                 title="Dark mode"
                 value={isDarkTheme}
                 onChange={toggleTheme}
-              />
-              <SwitchSetting
-                title="Sounds enabled"
-                value={settings.soundsEnabled}
-                onChange={value =>
-                  settingUpdated({ setting: 'soundsEnabled', value })
-                }
               />
               <SwitchSetting
                 title="Share anonymous data"

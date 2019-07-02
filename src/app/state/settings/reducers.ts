@@ -5,10 +5,8 @@ import { Settings } from './types'
 
 const initialState = {
   theme: 'dark',
-  restoreLastBrew: false,
-  ratio: 15,
-  bloomDuration: 30,
-  reminders: false,
+  ratio: 16,
+  bloomDuration: 45,
   recordTemp: true,
   recordGrind: true,
   grinderType: 'generic',
@@ -16,7 +14,6 @@ const initialState = {
   brewedVolumeUnit: 'ounces',
   coffeeWeightUnit: 'grams',
   waterVolumeUnit: 'grams',
-  soundsEnabled: true,
   shareTrackingData: true,
   recipes: Object.values(recipes).reduce(
     (acc, r) => ({ ...acc, [r.id]: true }),
