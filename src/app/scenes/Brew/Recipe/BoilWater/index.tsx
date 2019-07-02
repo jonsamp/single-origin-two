@@ -14,9 +14,7 @@ function BoilWater({ unitHelpers, volume }: BoilWaterProps) {
   return (
     <Card>
       <Instructions
-        text={`Heat **${Math.round(
-          waterVolumeUnit.getPreferredValue(volume)
-        )} ${
+        text={`Heat **${waterVolumeUnit.getPreferredValue(volume)} ${
           waterVolumeUnit.unit.title
         }** of water to **${temperatureUnit.getPreferredValue(205)}${
           temperatureUnit.unit.symbol

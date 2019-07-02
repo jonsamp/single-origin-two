@@ -14,7 +14,7 @@ function AddIce({ unitHelpers, volume }: AddIceProps) {
   return (
     <Card>
       <Instructions
-        text={`Add **${Math.round(waterVolumeUnit.getPreferredValue(volume))} ${
+        text={`Add **${waterVolumeUnit.getPreferredValue(volume)} ${
           waterVolumeUnit.unit.title
         }** of ice to your carafe or mug.`}
         icon="WaterIcon"
