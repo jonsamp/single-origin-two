@@ -4,7 +4,11 @@ import type from '../../constants/type'
 
 const styles = StyleSheet.create({
   container: {
-    elevation: 3,
+    shadowColor: 'black',
+    shadowRadius: 4,
+    shadowOffset: { height: 2, width: 0 },
+    shadowOpacity: 0.1,
+    zIndex: 1,
     ...ifIphoneX(
       {
         paddingTop: 50,

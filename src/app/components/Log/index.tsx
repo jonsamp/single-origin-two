@@ -201,7 +201,7 @@ class Log extends Component<LogProps> {
                 Notes
               </Text>
               <Text style={[type.body, { color: theme.foreground }]}>
-                {log.notes}
+                {log.notes.trim()}
               </Text>
             </Card>
           ) : null}

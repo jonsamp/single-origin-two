@@ -89,11 +89,14 @@ class Menu extends Component<MenuProps> {
       >
         <View style={{ paddingHorizontal: 12 }}>
           {menuRecipes.map(recipe => (
-            <Card key={recipe.id} containerStyle={{ marginBottom: 24 }}>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('Brew', { id: recipe.id })}
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Brew', { id: recipe.id })}
+              activeOpacity={0.8}
+              key={recipe.id}
+            >
+              <Card
+                containerStyle={{ marginBottom: 24 }}
                 style={{ flexDirection: 'row' }}
-                activeOpacity={0.8}
               >
                 <View
                   style={{
@@ -135,8 +138,8 @@ class Menu extends Component<MenuProps> {
                     color={theme.foreground}
                   />
                 </View>
-              </TouchableOpacity>
-            </Card>
+              </Card>
+            </TouchableOpacity>
           ))}
         </View>
       </HeaderScrollView>

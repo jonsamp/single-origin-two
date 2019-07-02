@@ -26,6 +26,7 @@ function LogListItem(props: LogListItemProps) {
         navigation.navigate('LogDetail', { timestamp: log.timestamp })
       }
       style={{ marginHorizontal: 12 }}
+      activeOpacity={0.8}
     >
       <Card
         style={{
@@ -39,8 +40,8 @@ function LogListItem(props: LogListItemProps) {
           style={{
             backgroundColor: isDarkTheme ? theme.grey2 : theme.foreground,
             alignItems: 'center',
-            width: 72,
-            paddingTop: 30,
+            justifyContent: 'center',
+            flex: 0.2,
           }}
         >
           {recipes[log.recipeId].icon({
@@ -52,11 +53,12 @@ function LogListItem(props: LogListItemProps) {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
-            flex: 1,
-            paddingRight: 16,
+            flex: 0.8,
+            padding: 20,
+            paddingVertical: 16,
           }}
         >
-          <View style={{ paddingVertical: 24, paddingHorizontal: 16 }}>
+          <View>
             <View style={{ flexDirection: 'row' }}>
               <Text
                 style={{

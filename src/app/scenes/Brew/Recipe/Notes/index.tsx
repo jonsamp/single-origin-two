@@ -9,7 +9,7 @@ interface NotesProps {
 function Notes({ text }: NotesProps) {
   return (
     <Card>
-      <Instructions text={'Your notes from last time:'} hint={text} />
+      <Instructions text={'Your notes from last time:'} hint={text.trim()} />
     </Card>
   )
 }

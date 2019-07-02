@@ -35,9 +35,9 @@ function GrindCoffee({
   }
 
   if (recentLog.totalBrewTime > recipeDuration * 1.15) {
-    recommendation = `Last time${grindFromLastTime} it brewed too long. Try grinding your coffee coarser this time.`
+    recommendation = `Last time${grindFromLastTime} brewing lasted too long. Try grinding your coffee coarser this time.`
   } else if (recentLog.totalBrewTime < recipeDuration * 0.85) {
-    recommendation = `Last time${grindFromLastTime} it brewed too short. Try grinding your coffee finer this time.`
+    recommendation = `Last time${grindFromLastTime} brewing finished too quickly. Try grinding your coffee finer this time.`
   }
 
   if (recentLog.tastingNote === 'bitter') {

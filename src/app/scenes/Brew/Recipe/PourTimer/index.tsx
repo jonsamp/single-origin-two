@@ -110,25 +110,6 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
 
     if (step) {
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
-      Animated.sequence([
-        Animated.timing(this.shadowAnimatedValue, {
-          toValue: 1,
-          duration: 200,
-        }),
-        Animated.timing(this.shadowAnimatedValue, {
-          toValue: 0,
-          duration: 200,
-        }),
-        Animated.timing(this.shadowAnimatedValue, {
-          toValue: 1,
-          duration: 200,
-        }),
-        Animated.timing(this.shadowAnimatedValue, {
-          toValue: 0,
-          duration: 200,
-        }),
-      ]).start()
-
       if (step.image) {
         this.setState({
           image: step.image,
@@ -152,6 +133,24 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
       }
 
       if (step.type === 'tip') {
+        Animated.sequence([
+          Animated.timing(this.shadowAnimatedValue, {
+            toValue: 1,
+            duration: 200,
+          }),
+          Animated.timing(this.shadowAnimatedValue, {
+            toValue: 0,
+            duration: 200,
+          }),
+          Animated.timing(this.shadowAnimatedValue, {
+            toValue: 1,
+            duration: 200,
+          }),
+          Animated.timing(this.shadowAnimatedValue, {
+            toValue: 0,
+            duration: 200,
+          }),
+        ]).start()
         playSound({ sound: tipSound })
       }
     }
