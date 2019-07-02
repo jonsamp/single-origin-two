@@ -15,6 +15,7 @@ interface Instructions {
   icon?: string
   style?: ViewStyle
   textStyle?: TextStyle
+  hint: string
 }
 
 function Instructions({
@@ -24,6 +25,7 @@ function Instructions({
   icon,
   style,
   textStyle,
+  hint,
 }: Instructions) {
   const specialWordCaptureGroup = /(\*\*.*?\*\*)/g
   const specialWordRegex = /\*\*.*\*\*/
@@ -83,6 +85,26 @@ function Instructions({
         >
           {formattedText}
         </Text>
+        {hint ? (
+          <View
+            style={{
+              backgroundColor: isDarkTheme ? theme.grey3 : theme.warning,
+              padding: 12,
+              borderRadius: 4,
+              marginTop: 16,
+            }}
+          >
+            <Text
+              style={{
+                ...type.body,
+                color: theme.foreground,
+                ...textStyle,
+              }}
+            >
+              {hint}
+            </Text>
+          </View>
+        ) : null}
       </View>
     </View>
   )

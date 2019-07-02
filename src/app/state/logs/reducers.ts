@@ -17,62 +17,6 @@ const initialState = {
     ratio: 15,
     recipeId: 'KalitaWave185',
   },
-  1559520000000: {
-    timestamp: 1559520000000,
-    totalVolume: 330,
-    totalBrewTime: 145,
-    ratio: 15,
-    recipeId: 'KalitaWave185',
-  },
-  1559530000000: {
-    timestamp: 1559530000000,
-    totalVolume: 330,
-    totalBrewTime: 145,
-    ratio: 15,
-    recipeId: 'KalitaWave185',
-  },
-  1559550000000: {
-    timestamp: 1559550000000,
-    totalVolume: 330,
-    totalBrewTime: 145,
-    ratio: 15,
-    recipeId: 'KalitaWave185',
-  },
-  1559570000000: {
-    timestamp: 1559570000000,
-    totalVolume: 330,
-    totalBrewTime: 145,
-    ratio: 15,
-    recipeId: 'KalitaWave185',
-  },
-  1559590000000: {
-    timestamp: 1559590000000,
-    totalVolume: 330,
-    totalBrewTime: 145,
-    ratio: 15,
-    recipeId: 'KalitaWave185',
-  },
-  1558590000000: {
-    timestamp: 1558590000000,
-    totalVolume: 330,
-    totalBrewTime: 145,
-    ratio: 15,
-    recipeId: 'KalitaWave185',
-  },
-  1557590000000: {
-    timestamp: 1557590000000,
-    totalVolume: 330,
-    totalBrewTime: 145,
-    ratio: 15,
-    recipeId: 'KalitaWave185',
-  },
-  1556590000000: {
-    timestamp: 1556590000000,
-    totalVolume: 330,
-    totalBrewTime: 145,
-    ratio: 15,
-    recipeId: 'KalitaWave185',
-  },
 }
 
 const reducers = {

@@ -18,7 +18,6 @@
     "react": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-native-animate-number": "0.1.2",
-    "react-native-calendars": "1.185.0",
     "react-native-debugger-open": "0.3.19",
     "react-native-header-scroll-view": "2.0.0",
     "react-native-iphone-x-helper": "^1.2.1",

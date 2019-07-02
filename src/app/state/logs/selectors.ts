@@ -9,17 +9,14 @@ export const selectLog = createSelector(
   (logs = {}, timestamp) => logs[timestamp]
 )
 
-export const selectLogsDates = createSelector(selectLogs, (logs = {}) => {
-  return Object.values(logs).map(log => {
-    const date = new Date(log.timestamp)
-    return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
-  })
-})
-
 export const selectRecentLog = createSelector(
   selectLogs,
-  (_: State, method: string) => method,
-  (logs = {}, method = '') => {
-    return Object.values(logs).find(log => log.method === method) || {}
+  (_: State, recipeId: string) => recipeId,
+  (logs = {}, recipeId = '') => {
+    return (
+      Object.values(logs)
+        .sort((a, b) => b.timestamp - a.timestamp)
+        .find(log => log.recipeId === recipeId) || {}
+    )
   }
 )

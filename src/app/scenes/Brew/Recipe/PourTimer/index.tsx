@@ -8,6 +8,8 @@ import { height, width } from '../../../../constants/layout'
 import playSound from '../../../../helpers/playSound'
 import withSettings from '../../../../providers/settings'
 import withTheme from '../../../../providers/theme'
+import { Settings } from '../../../../state/settings/types'
+import { Recipe } from '../../../../types'
 import { Theme, UnitHelpers } from '../../../../types/index'
 import { withBloomFn } from '../../helpers'
 import addWaterSound from '../../sounds/add-water.mp3'
@@ -20,8 +22,8 @@ import WaterVolume from './WaterVolume'
 interface PourTimerProps {
   theme: Theme
   unitHelpers: UnitHelpers
-  recipe: any
-  settings: any
+  recipe: Recipe
+  settings: Settings
   volume: number
   setRecipeState: (props: any) => {}
 }
@@ -37,7 +39,6 @@ interface PourTimerState {
 class PourTimer extends Component<PourTimerProps, PourTimerState> {
   static defaultProps = {
     unitHelpers: {},
-    volume: 350,
   }
 
   state = {
@@ -212,7 +213,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
               volume={volume}
               waterVolumeUnit={waterVolumeUnit}
               timerRunning={timerRunning}
-              totalTime={this.props.recipe.totalTime}
+              totalTime={Math.max(...Object.keys(recipe).map(n => Number(n)))}
             />
             <View style={[styles.container, { backgroundColor: theme.grey2 }]}>
               <Timer

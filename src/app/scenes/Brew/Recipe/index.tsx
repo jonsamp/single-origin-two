@@ -4,11 +4,12 @@ import { connect } from 'react-redux'
 import Button from '../../../components/Button'
 import withSettings from '../../../providers/settings'
 import { logAdded } from '../../../state/logs/actions'
+import { selectRecentLog } from '../../../state/logs/selectors'
+import { Log } from '../../../state/logs/types'
 import { Settings } from '../../../state/settings/types'
 import { State } from '../../../state/types'
 import { Recipe as RecipeType } from '../../../types'
 import { UnitHelpers } from '../../../types/index'
-import KalitaWave185 from '../recipes/KalitaWave185'
 import AddIce from './AddIce'
 import BoilWater from './BoilWater'
 import GrindCoffee from './GrindCoffee'
@@ -23,6 +24,7 @@ interface RecipeProps {
   recipe: RecipeType
   navigation: NavigationScreenProp<State, any>
   logAdded: (props: any) => void
+  recentLog: Log
 }
 
 interface RecipeState {
@@ -33,6 +35,10 @@ interface RecipeState {
   attributesRecorded: boolean
   totalVolume: number
 }
+
+const mapStateToProps = (state, props) => ({
+  recentLog: selectRecentLog(state, props.recipe.id),
+})
 
 const mapDispatchToProps = { logAdded }
 
@@ -92,7 +98,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
   }
 
   render() {
-    const { recipe, settings, unitHelpers } = this.props
+    const { recipe, settings, unitHelpers, recentLog } = this.props
     const { grindUnit, temperatureUnit } = unitHelpers
     const { minYield, maxYield, defaultGrind } = recipe
     const { totalVolume, grind, temp } = this.state
@@ -119,6 +125,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
           coffeeWeight={coffeeWeight}
           defaultGrind={defaultGrind}
           title={recipe.title}
+          recentLog={recentLog}
         />
         <RecordBrewAttributes
           setRecipeState={this.setRecipeState}
@@ -144,6 +151,6 @@ class Recipe extends Component<RecipeProps, RecipeState> {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withSettings(withNavigation(Recipe as any)))
