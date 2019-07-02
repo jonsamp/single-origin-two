@@ -83,7 +83,7 @@ class WaterVolume extends Component<WaterVolumeProps> {
                       ? 0.1
                       : 0.01
                 }
-                interval={140}
+                interval={130}
                 onFinish={onAnimateNumberFinish}
               />
             </Animated.Text>

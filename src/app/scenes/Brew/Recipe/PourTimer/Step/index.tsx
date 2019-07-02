@@ -63,8 +63,8 @@ class Step extends Component<StepProps, StepState> {
       const { volume, waterVolumeUnit } = this.props
 
       return this.setNextStepText(
-        `Pour up to **${Math.round(
-          waterVolumeUnit.getPreferredValue(volume * nextStep.volumePercent)
+        `Pour up to **${waterVolumeUnit.getPreferredValue(
+          volume * nextStep.volumePercent
         )} ${waterVolumeUnit.unit.title}** of water.`
       )
     }
@@ -92,9 +92,11 @@ class Step extends Component<StepProps, StepState> {
     const countdownToNextStep = nextEvent - second <= 10
 
     if (beforeBrewStart) {
-      return `Over **${formatSeconds(totalTime)}**, pour over **${Math.round(
-        waterVolumeUnit.getPreferredValue(volume)
-      )} ${waterVolumeUnit.unit.title}** of water. Press **Start** to begin.`
+      return `Over **${formatSeconds(
+        totalTime
+      )}**, pour over **${waterVolumeUnit.getPreferredValue(volume)} ${
+        waterVolumeUnit.unit.title
+      }** of water. Press **Start** to begin.`
     }
 
     if (this.isDuringStep()) {
