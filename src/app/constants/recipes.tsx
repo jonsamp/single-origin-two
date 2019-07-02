@@ -32,6 +32,7 @@ export default {
   IcedKalitaWave185: {
     title: 'Iced Kalita Wave',
     modifier: '185',
+    iced: true,
     id: 'IcedKalitaWave185',
     icon: ({ fill, size }) => <KalitaWave185Icon fill={fill} size={size} />,
   },

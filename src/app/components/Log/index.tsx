@@ -206,7 +206,9 @@ class Log extends Component<LogProps> {
             </Card>
           ) : null}
 
-          {withReminder && this.props.notifications.status !== 'denied' ? (
+          {withReminder &&
+          !recipe.iced &&
+          this.props.notifications.status !== 'denied' ? (
             <TouchableOpacity
               onPress={this.toggleReminder}
               activeOpacity={0.75}
@@ -248,7 +250,9 @@ class Log extends Component<LogProps> {
               </Card>
             </TouchableOpacity>
           ) : null}
-          {withReminder && this.props.notifications.status === 'denied' ? (
+          {withReminder &&
+          !recipe.iced &&
+          this.props.notifications.status === 'denied' ? (
             <Card
               containerStyle={{
                 marginTop: 16,
