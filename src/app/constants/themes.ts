@@ -32,7 +32,7 @@ export default {
     primary: '#00CA9D',
     primaryLight: '#122c2b',
     beige: '#2B2B2B',
-    warning: '#D8BF4A',
+    warning: '#57502D',
     grey2: '#171717',
     grey1: '#2B2B2B',
     grey3: '#4F4F4F',

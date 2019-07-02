@@ -88,7 +88,7 @@ function Instructions({
         {hint ? (
           <View
             style={{
-              backgroundColor: isDarkTheme ? theme.grey3 : theme.warning,
+              backgroundColor: theme.warning,
               padding: 12,
               borderRadius: 4,
               marginTop: 16,
