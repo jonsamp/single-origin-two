@@ -1,5 +1,6 @@
+import { Feather } from '@expo/vector-icons'
 import React, { Component } from 'react'
-import { ScrollView, View } from 'react-native'
+import { ScrollView, TouchableOpacity, View } from 'react-native'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import Header from '../../components/Header'
 import { Theme } from '../../constants/themes'
@@ -28,7 +29,23 @@ class Brew extends Component<BrewProps> {
           backgroundColor: isDarkTheme ? theme.background : theme.grey1,
         }}
       >
-        <Header title={recipe.title} />
+        <Header
+          title={recipe.title}
+          right={
+            <TouchableOpacity
+              style={{ paddingRight: 8, top: -2 }}
+              onPress={() =>
+                navigation.navigate('SettingsDetail', 'Units' as any)
+              }
+            >
+              <Feather
+                name="sliders"
+                color={theme.foreground}
+                size={theme.iconSize}
+              />
+            </TouchableOpacity>
+          }
+        />
         <ScrollView
           contentContainerStyle={{
             padding: 12,
