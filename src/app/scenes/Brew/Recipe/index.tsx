@@ -35,6 +35,7 @@ interface RecipeState {
   totalBrewTime: number
   attributesRecorded: boolean
   totalVolume: number
+  randomKey: number
 }
 
 const mapStateToProps = (state, props) => ({
@@ -51,6 +52,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
   }
 
   state = {
+    randomKey: 1,
     grind: this.props.recentLog.grind,
     temp: this.props.recentLog.temp || 205,
     timestamp: new Date().getTime(),
@@ -95,8 +97,9 @@ class Recipe extends Component<RecipeProps, RecipeState> {
     }
 
     logAdded({ log })
-
-    navigation.navigate('BrewSummary', { timestamp })
+    this.setState({ randomKey: Math.random() }, () => {
+      navigation.navigate('BrewSummary', { timestamp })
+    })
   }
 
   render() {
@@ -147,6 +150,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
           recipe={recipe}
           volume={totalPourVolume}
           setRecipeState={this.setRecipeState}
+          key={this.state.randomKey}
         />
         <Button
           title="Finish"
