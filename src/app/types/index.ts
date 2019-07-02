@@ -79,10 +79,11 @@ export interface Recipe {
   }>
   steps: Array<{
     start?: boolean
+    second?: number
     type: string
-    volumePercent: number
-    image: number
-    afterImage: number
+    volumePercent?: number
+    image?: number
+    afterImage?: number
   }>
 }
 

@@ -13,6 +13,7 @@ interface GrindCoffeeProps {
   defaultGrind: number
   title: string
   recentLog: Log
+  recipeDuration: number
 }
 
 function GrindCoffee({
@@ -21,18 +22,26 @@ function GrindCoffee({
   defaultGrind,
   title,
   recentLog,
+  recipeDuration,
 }: GrindCoffeeProps) {
   const { coffeeWeightUnit, grindUnit } = unitHelpers
   let recommendation
+  let grindFromLastTime = ''
 
-  console.log({ recentLog })
+  if (recentLog.grind) {
+    grindFromLastTime = ` with a grind setting of ${recentLog.grind},`
+  }
+
+  if (recentLog.totalBrewTime > recipeDuration * 1.15) {
+    recommendation = `Last time you brewed${grindFromLastTime} it brewed too long. Try grinding your coffee coarser.`
+  } else if (recentLog.totalBrewTime < recipeDuration * 0.85) {
+    recommendation = `Last time you brewed${grindFromLastTime} it brewed too short. Try grinding your coffee finer.`
+  }
 
   if (recentLog.tastingNote === 'bitter') {
-    recommendation =
-      'Last time you brewed it was bitter. Try grinding your coffee coarser.'
+    recommendation = `Last time you brewed${grindFromLastTime} it was bitter. Try grinding your coffee coarser.`
   } else if (recentLog.tastingNote === 'sour') {
-    recommendation =
-      'Last time you brewed it was sour. Try grinding your coffee finer.'
+    recommendation = `Last time you brewed${grindFromLastTime} it was sour. Try grinding your coffee finer.`
   }
 
   return (

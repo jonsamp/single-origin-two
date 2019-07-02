@@ -13,6 +13,7 @@ import { UnitHelpers } from '../../../types/index'
 import AddIce from './AddIce'
 import BoilWater from './BoilWater'
 import GrindCoffee from './GrindCoffee'
+import Notes from './Notes'
 import PourTimer from './PourTimer'
 import Preparation from './Preparation'
 import RecordBrewAttributes from './RecordBrewAttributes'
@@ -106,6 +107,10 @@ class Recipe extends Component<RecipeProps, RecipeState> {
     const totalPourVolume = recipe.iced
       ? Math.round(totalVolume * 0.666)
       : totalVolume
+    const longestSecond = recipe.steps
+      .filter(s => s.second)
+      .map(s => s.second)
+      .sort((a, b) => b - a)[0]
 
     return (
       <Fragment>
@@ -119,6 +124,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
           minYield={minYield}
           maxYield={maxYield}
         />
+        {recentLog.notes ? <Notes text={recentLog.notes} /> : null}
         <BoilWater volume={totalPourVolume} />
         {recipe.iced && <AddIce volume={Math.round(totalVolume * 0.333)} />}
         <GrindCoffee
@@ -126,6 +132,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
           defaultGrind={defaultGrind}
           title={recipe.title}
           recentLog={recentLog}
+          recipeDuration={longestSecond + settings.bloomDuration}
         />
         <RecordBrewAttributes
           setRecipeState={this.setRecipeState}
