@@ -51,12 +51,13 @@ class Recipe extends Component<RecipeProps, RecipeState> {
   }
 
   state = {
-    grind: undefined,
-    temp: 205,
+    grind: this.props.recentLog.grind,
+    temp: this.props.recentLog.temp || 205,
     timestamp: new Date().getTime(),
     totalBrewTime: 0,
     attributesRecorded: false,
-    totalVolume: this.props.recipe.defaultTotalVolume,
+    totalVolume:
+      this.props.recentLog.totalVolume || this.props.recipe.defaultTotalVolume,
   }
 
   setRecipeState = ({ key, value }) => this.setState({ [key]: value } as any)
@@ -119,7 +120,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
           preparation={recipe.preparation}
         />
         <YieldQuestion
-          defaultValue={recipe.defaultTotalVolume}
+          defaultValue={recentLog.totalVolume || recipe.defaultTotalVolume}
           setRecipeState={this.setRecipeState}
           minYield={minYield}
           maxYield={maxYield}

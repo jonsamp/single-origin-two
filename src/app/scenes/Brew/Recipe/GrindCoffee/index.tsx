@@ -29,19 +29,21 @@ function GrindCoffee({
   let grindFromLastTime = ''
 
   if (recentLog.grind) {
-    grindFromLastTime = ` with a grind setting of ${recentLog.grind},`
+    grindFromLastTime = ` you brewed with a grind setting of ${
+      recentLog.grind
+    } and`
   }
 
   if (recentLog.totalBrewTime > recipeDuration * 1.15) {
-    recommendation = `Last time you brewed${grindFromLastTime} it brewed too long. Try grinding your coffee coarser.`
+    recommendation = `Last time${grindFromLastTime} it brewed too long. Try grinding your coffee coarser this time.`
   } else if (recentLog.totalBrewTime < recipeDuration * 0.85) {
-    recommendation = `Last time you brewed${grindFromLastTime} it brewed too short. Try grinding your coffee finer.`
+    recommendation = `Last time${grindFromLastTime} it brewed too short. Try grinding your coffee finer this time.`
   }
 
   if (recentLog.tastingNote === 'bitter') {
-    recommendation = `Last time you brewed${grindFromLastTime} it was bitter. Try grinding your coffee coarser.`
+    recommendation = `Last time${grindFromLastTime} it was bitter. Try grinding your coffee coarser this time.`
   } else if (recentLog.tastingNote === 'sour') {
-    recommendation = `Last time you brewed${grindFromLastTime} it was sour. Try grinding your coffee finer.`
+    recommendation = `Last time${grindFromLastTime} it was sour. Try grinding your coffee finer this time.`
   }
 
   return (
