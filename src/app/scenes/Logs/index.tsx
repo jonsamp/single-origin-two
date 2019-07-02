@@ -48,6 +48,7 @@ class Logs extends Component<LogsProps> {
           headlineStyle={{ color: modifiedTheme.foreground }}
           titleStyle={{
             color: modifiedTheme.foreground,
+            marginBottom: 20,
           }}
           scrollContainerStyle={{
             backgroundColor: modifiedTheme.grey1,
