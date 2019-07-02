@@ -12,15 +12,10 @@ function* scheduleNotification({ timestamp }) {
   }
 
   const schedulingOptions = {
-    time: new Date().getTime() + /* 360000 */ 5000, // TODO: Make this 6  minutes
+    time: new Date().getTime() + 360000,
   }
 
   yield call(cancelAllNotifications)
-
-  console.log('SCHEDULING NOTIFICATION!', {
-    schedulingOptions,
-    localNotification,
-  }) // TODO: remove this
 
   yield call(
     Notifications.scheduleLocalNotificationAsync,
