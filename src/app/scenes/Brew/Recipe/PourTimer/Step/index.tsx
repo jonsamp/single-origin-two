@@ -16,17 +16,26 @@ interface StepProps {
 
 interface StepState {
   nextStepText: string
+  stepKey: number
 }
 
 class Step extends Component<StepProps, StepState> {
   state = {
     nextStepText: '',
+    stepKey: 0,
   }
 
   animatedValue = new Animated.Value(0)
 
-  getNextEvent = () => {
-    const { recipe, second, currentStepDuration } = this.props
+  async componentDidUpdate(prevProps) {
+    if (prevProps.second !== this.props.second) {
+      await this.getNextEvent(this.props.second)
+      this.getNextStepText()
+    }
+  }
+
+  getNextEvent = async second => {
+    const { recipe, currentStepDuration } = this.props
 
     const result = Number(
       Object.keys(recipe).find(time => {
@@ -34,7 +43,9 @@ class Step extends Component<StepProps, StepState> {
       })
     )
 
-    return result
+    if (this.state.stepKey < result) {
+      await this.setState({ stepKey: result })
+    }
   }
 
   setNextStepText = (nextStepText: string) => {
@@ -61,7 +72,7 @@ class Step extends Component<StepProps, StepState> {
 
   getNextStepText = () => {
     const { recipe } = this.props
-    const nextStep = recipe[this.getNextEvent()]
+    const nextStep = recipe[this.state.stepKey]
 
     if (!nextStep || nextStep.type === 'finished') {
       return this.setNextStepText('End of brew')
@@ -82,7 +93,7 @@ class Step extends Component<StepProps, StepState> {
     }
   }
 
-  isDuringStep = () => this.props.second >= this.getNextEvent()
+  isDuringStep = () => this.props.second >= this.state.stepKey
 
   getText = () => {
     const {
@@ -93,7 +104,7 @@ class Step extends Component<StepProps, StepState> {
       recipe,
       totalTime,
     } = this.props
-    const nextEvent = this.getNextEvent()
+    const nextEvent = this.state.stepKey
     const beforeBrewStart = second === -3 && !timerRunning
     const brewCountdown = second < 0 && timerRunning
     const foreshadowNextStep = nextEvent - second > 10
@@ -136,7 +147,7 @@ class Step extends Component<StepProps, StepState> {
   render() {
     const beforeTimerStart =
       !this.props.timerRunning && this.props.second === -3
-    this.getNextStepText()
+
     return (
       <View style={{ minHeight: 100, justifyContent: 'center' }}>
         <View>

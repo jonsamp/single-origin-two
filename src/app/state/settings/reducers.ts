@@ -6,7 +6,7 @@ import { Settings } from './types'
 const initialState = {
   theme: 'dark',
   ratio: 16,
-  bloomDuration: 45,
+  bloomDuration: 25,
   recordTemp: true,
   recordGrind: true,
   grinderType: 'generic',

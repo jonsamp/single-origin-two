@@ -32,8 +32,6 @@ export default {
       text: 'Then put it all on a scale and zero the scale.',
     },
   ],
-
-  // 325 total grams
   steps: [
     {
       start: true,
@@ -43,17 +41,17 @@ export default {
       afterImage: AfterBloom,
     },
     {
+      second: -10,
+      type: 'tip',
+      text: 'this is a tip',
+    },
+    {
       second: 0,
       type: 'pour',
       volumePercent: 0.5385,
       image: Pour,
       afterImage: AfterPour,
     },
-    // {
-    //   second: 10,
-    //   type: 'tip',
-    //   text: 'this is a tip',
-    // },
     {
       second: 40,
       type: 'pour',

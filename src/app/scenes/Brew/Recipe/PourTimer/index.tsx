@@ -112,7 +112,6 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     const step = recipe[second]
 
     if (step) {
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
       if (step.image) {
         this.setState({
           image: step.image,
@@ -142,6 +141,9 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
       }
 
       if (step.type === 'tip') {
+        await this.setState({
+          currentStepDuration: 5,
+        })
         Animated.sequence([
           Animated.timing(this.shadowAnimatedValue, {
             toValue: 1,
