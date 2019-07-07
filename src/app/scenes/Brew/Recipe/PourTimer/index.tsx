@@ -1,5 +1,6 @@
 import * as Haptics from 'expo-haptics'
 import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake'
+import { number } from 'prop-types'
 import React, { Component } from 'react'
 import { Animated, View } from 'react-native'
 import Card from '../../../../components/Card'
@@ -34,6 +35,7 @@ interface PourTimerState {
   recipe: any
   volumePercent: number
   image: number
+  currentStepDuration: number
 }
 
 class PourTimer extends Component<PourTimerProps, PourTimerState> {
@@ -47,6 +49,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     recipe: undefined,
     volumePercent: 0,
     image: this.props.recipe.defaultSource,
+    currentStepDuration: 5,
   }
 
   animatedValue = new Animated.Value(0)
@@ -125,8 +128,14 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
       }
 
       if (step.type === 'pour') {
+        const volumePercentDifference =
+          step.volumePercent - this.state.volumePercent
+        const volumeToAdd = volumePercentDifference * this.props.volume
+        const lengthOfPour = volumeToAdd * 130
+
         await this.setState({
           volumePercent: step.volumePercent,
+          currentStepDuration: Math.round(lengthOfPour / 1000),
         })
         playSound({ sound: addWaterSound })
         this.onAnimateNumberBegin()
@@ -172,7 +181,14 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
       volume,
       unitHelpers: { waterVolumeUnit },
     } = this.props
-    const { recipe, timerRunning, volumePercent, second, image } = this.state
+    const {
+      recipe,
+      timerRunning,
+      volumePercent,
+      second,
+      image,
+      currentStepDuration,
+    } = this.state
 
     return (
       <View>
@@ -213,6 +229,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
               waterVolumeUnit={waterVolumeUnit}
               timerRunning={timerRunning}
               totalTime={Math.max(...Object.keys(recipe).map(n => Number(n)))}
+              currentStepDuration={currentStepDuration}
             />
             <View style={[styles.container, { backgroundColor: theme.grey2 }]}>
               <Timer

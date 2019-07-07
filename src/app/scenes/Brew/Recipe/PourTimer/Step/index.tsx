@@ -11,6 +11,7 @@ interface StepProps {
   waterVolumeUnit: any
   timerRunning: boolean
   totalTime: number
+  currentStepDuration: number
 }
 
 interface StepState {
@@ -25,8 +26,15 @@ class Step extends Component<StepProps, StepState> {
   animatedValue = new Animated.Value(0)
 
   getNextEvent = () => {
-    const { recipe, second } = this.props
-    return Number(Object.keys(recipe).find(time => Number(time) + 5 > second))
+    const { recipe, second, currentStepDuration } = this.props
+
+    const result = Number(
+      Object.keys(recipe).find(time => {
+        return Number(time) + currentStepDuration > second
+      })
+    )
+
+    return result
   }
 
   setNextStepText = (nextStepText: string) => {
