@@ -41,11 +41,6 @@ export default {
       afterImage: AfterBloom,
     },
     {
-      second: -10,
-      type: 'tip',
-      text: 'this is a tip',
-    },
-    {
       second: 0,
       type: 'pour',
       volumePercent: 0.5385,

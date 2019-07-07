@@ -27,6 +27,10 @@ class Step extends Component<StepProps, StepState> {
 
   animatedValue = new Animated.Value(0)
 
+  componentDidMount() {
+    this.getNextStepText()
+  }
+
   async componentDidUpdate(prevProps) {
     if (prevProps.second !== this.props.second) {
       await this.getNextEvent(this.props.second)
