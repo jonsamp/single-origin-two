@@ -134,7 +134,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
 
         await this.setState({
           volumePercent: step.volumePercent,
-          currentStepDuration: Math.round(lengthOfPour / 1000),
+          currentStepDuration: Math.round(lengthOfPour / 1000 + 0.75),
         })
         playSound({ sound: addWaterSound })
         this.onAnimateNumberBegin()
