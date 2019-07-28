@@ -10,13 +10,13 @@ const initialState = {
     ratio: 15,
     recipeId: 'KalitaWave185',
   },
-  1561766400000: {
-    timestamp: 1561766400000,
-    totalVolume: 230,
-    totalBrewTime: 125,
-    ratio: 15,
-    recipeId: 'KalitaWave185',
-  },
+  // 1561766400000: {
+  //   timestamp: 1561766400000,
+  //   totalVolume: 230,
+  //   totalBrewTime: 125,
+  //   ratio: 15,
+  //   recipeId: 'KalitaWave185',
+  // },
 }
 
 const reducers = {
@@ -31,10 +31,11 @@ const reducers = {
       ...log,
     },
   }),
-  [actions.logDeleted]: (logs: Logs, { payload: { timestamp } }) => ({
-    ...logs,
-    [timestamp]: undefined,
-  }),
+  [actions.logDeleted]: (logs: Logs, { payload: { timestamp } }) => {
+    const updated = { ...logs }
+    delete updated[timestamp]
+    return updated
+  },
 }
 
 export default handleActions(reducers, initialState)

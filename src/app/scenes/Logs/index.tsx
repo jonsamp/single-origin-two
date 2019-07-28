@@ -37,6 +37,8 @@ class Logs extends Component<LogsProps, LogsState> {
 
   render() {
     const { theme, logs, isDarkTheme, logDeleted } = this.props
+    console.log(logs)
+
     if (!logs || Object.keys(logs).length === 0) {
       return <View />
     }
