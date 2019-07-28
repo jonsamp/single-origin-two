@@ -32,7 +32,10 @@ class Step extends Component<StepProps, StepState> {
   }
 
   async componentDidUpdate(prevProps) {
-    if (prevProps.second !== this.props.second) {
+    if (
+      prevProps.second !== this.props.second ||
+      prevProps.volume !== this.props.volume
+    ) {
       await this.getNextEvent(this.props.second)
       this.getNextStepText()
     }
