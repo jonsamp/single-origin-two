@@ -12,6 +12,11 @@ const styles = StyleSheet.create({
     right: 0,
     justifyContent: 'center',
   },
+  placeholderLog: {
+    margin: 12,
+    borderRadius: 8,
+    height: 70,
+  },
 })
 
 export default styles

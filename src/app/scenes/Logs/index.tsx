@@ -4,6 +4,7 @@ import { Text, TouchableOpacity, View } from 'react-native'
 import HeaderScrollView from 'react-native-header-scroll-view'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { connect } from 'react-redux'
+import type from '../../constants/type'
 import withTheme from '../../providers/theme'
 import { logDeleted } from '../../state/logs/actions'
 import { selectLogs } from '../../state/logs/selectors'
@@ -37,11 +38,6 @@ class Logs extends Component<LogsProps, LogsState> {
 
   render() {
     const { theme, logs, isDarkTheme, logDeleted } = this.props
-    console.log(logs)
-
-    if (!logs || Object.keys(logs).length === 0) {
-      return <View />
-    }
     const modifiedTheme = isDarkTheme
       ? {
           ...theme,
@@ -74,28 +70,70 @@ class Logs extends Component<LogsProps, LogsState> {
           }}
           fadeDirection="up"
         >
-          <SwipeListView
-            data={Object.values(logs)
-              .filter(log => log)
-              .sort(this.byTimestamp)}
-            renderItem={props => <LogListItem {...props} />}
-            renderHiddenItem={data => (
-              <TouchableOpacity
-                onPress={() => logDeleted({ timestamp: data.item.timestamp })}
+          {logs && Object.keys(logs).length ? (
+            <SwipeListView
+              data={Object.values(logs)
+                .filter(log => log)
+                .sort(this.byTimestamp)}
+              renderItem={props => <LogListItem {...props} />}
+              renderHiddenItem={data => (
+                <TouchableOpacity
+                  onPress={() => logDeleted({ timestamp: data.item.timestamp })}
+                >
+                  <View style={styles.behindRowContainer}>
+                    <Feather
+                      name="trash-2"
+                      size={theme.iconSize}
+                      color={theme.background}
+                    />
+                  </View>
+                </TouchableOpacity>
+              )}
+              extraData={this.state}
+              keyExtractor={(item: Log) => String(item.timestamp)}
+              rightOpenValue={-75}
+            />
+          ) : (
+            <View>
+              <View
+                style={[
+                  styles.placeholderLog,
+                  {
+                    borderColor: theme.primary,
+                    borderWidth: 2,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    padding: 16,
+                    height: 'auto',
+                  },
+                ]}
               >
-                <View style={styles.behindRowContainer}>
-                  <Feather
-                    name="trash-2"
-                    size={theme.iconSize}
-                    color={theme.background}
-                  />
-                </View>
-              </TouchableOpacity>
-            )}
-            extraData={this.state}
-            keyExtractor={(item: Log) => String(item.timestamp)}
-            rightOpenValue={-75}
-          />
+                <Text
+                  style={[type.body, { textAlign: 'center', maxWidth: 220 }]}
+                >
+                  You'll see logs here once you complete a brew.
+                </Text>
+              </View>
+              <View
+                style={[
+                  styles.placeholderLog,
+                  { backgroundColor: theme.grey3, opacity: 0.75 },
+                ]}
+              />
+              <View
+                style={[
+                  styles.placeholderLog,
+                  { backgroundColor: theme.grey3, opacity: 0.5 },
+                ]}
+              />
+              <View
+                style={[
+                  styles.placeholderLog,
+                  { backgroundColor: theme.grey3, opacity: 0.25 },
+                ]}
+              />
+            </View>
+          )}
         </HeaderScrollView>
       </View>
     )
