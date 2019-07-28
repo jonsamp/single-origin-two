@@ -26,7 +26,7 @@ function LogListItem(props: LogListItemProps) {
         navigation.navigate('LogDetail', { timestamp: log.timestamp })
       }
       style={{ marginHorizontal: 12 }}
-      activeOpacity={0.8}
+      activeOpacity={1}
     >
       <Card
         style={{

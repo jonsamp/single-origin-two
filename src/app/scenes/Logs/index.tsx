@@ -1,26 +1,42 @@
+import { Feather } from '@expo/vector-icons'
 import React, { Component } from 'react'
-import { FlatList, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import HeaderScrollView from 'react-native-header-scroll-view'
+import { SwipeListView } from 'react-native-swipe-list-view'
 import { connect } from 'react-redux'
 import withTheme from '../../providers/theme'
+import { logDeleted } from '../../state/logs/actions'
 import { selectLogs } from '../../state/logs/selectors'
 import { Log, Logs as LogsType, Theme } from '../../types/index'
 import LogListItem from './LogListItem'
+import styles from './styles'
 
 interface LogsProps {
   theme: Theme
   logs: LogsType
   isDarkTheme: boolean
+  logDeleted: (props: { timestamp: number }) => void
+}
+
+interface LogsState {
+  editing: boolean
 }
 
 const mapStateToProps = state => ({
   logs: selectLogs(state),
 })
 
-class Logs extends Component<LogsProps> {
+const mapDispatchToProps = { logDeleted }
+
+class Logs extends Component<LogsProps, LogsState> {
+  state = { editing: false }
+
+  toggleEditing = () => this.setState(prev => ({ editing: !prev.editing }))
+
   byTimestamp = (a, b) => b.timestamp - a.timestamp
+
   render() {
-    const { theme, logs, isDarkTheme } = this.props
+    const { theme, logs, isDarkTheme, logDeleted } = this.props
     if (!logs || Object.keys(logs).length === 0) {
       return <View />
     }
@@ -56,13 +72,27 @@ class Logs extends Component<LogsProps> {
           }}
           fadeDirection="up"
         >
-          <FlatList
+          <SwipeListView
             data={Object.values(logs)
               .filter(log => log)
               .sort(this.byTimestamp)}
+            renderItem={props => <LogListItem {...props} />}
+            renderHiddenItem={data => (
+              <TouchableOpacity
+                onPress={() => logDeleted({ timestamp: data.item.timestamp })}
+              >
+                <View style={styles.behindRowContainer}>
+                  <Feather
+                    name="trash-2"
+                    size={theme.iconSize}
+                    color={theme.background}
+                  />
+                </View>
+              </TouchableOpacity>
+            )}
             extraData={this.state}
             keyExtractor={(item: Log) => String(item.timestamp)}
-            renderItem={props => <LogListItem {...props} />}
+            rightOpenValue={-75}
           />
         </HeaderScrollView>
       </View>
@@ -70,4 +100,7 @@ class Logs extends Component<LogsProps> {
   }
 }
 
-export default connect(mapStateToProps)(withTheme(Logs))
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withTheme(Logs))
