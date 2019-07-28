@@ -33,7 +33,9 @@ class Step extends Component<StepProps, StepState> {
 
   async componentDidUpdate(prevProps) {
     if (
+      // try updating the event/next step text every second tick
       prevProps.second !== this.props.second ||
+      // update the text/event when the volume changes from the yield question
       prevProps.volume !== this.props.volume
     ) {
       await this.getNextEvent(this.props.second)
@@ -81,8 +83,8 @@ class Step extends Component<StepProps, StepState> {
     const { recipe } = this.props
     const nextStep = recipe[this.state.stepKey]
 
-    if (!nextStep || nextStep.type === 'finished') {
-      return this.setNextStepText('End of brew')
+    if (!nextStep || nextStep.type === 'finish') {
+      return this.setNextStepText('End of brew.')
     }
 
     if (nextStep.type === 'pour') {
@@ -139,11 +141,12 @@ class Step extends Component<StepProps, StepState> {
 
     if (foreshadowNextStep) {
       const types = {
-        pour: 'pour',
-        tip: 'step',
+        pour: 'Next pour',
+        tip: 'Next step',
+        finish: 'Brew will finish',
       }
-      return `Next ${types[recipe[nextEvent].type] ||
-        'step'} at **${formatSeconds(nextEvent)}**`
+      return `${types[recipe[nextEvent].type] ||
+        'Next step'} at **${formatSeconds(nextEvent)}**`
     }
 
     if (!nextEvent) {
