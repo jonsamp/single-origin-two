@@ -109,7 +109,14 @@ class Logs extends Component<LogsProps, LogsState> {
                 ]}
               >
                 <Text
-                  style={[type.body, { textAlign: 'center', maxWidth: 220 }]}
+                  style={[
+                    type.body,
+                    {
+                      textAlign: 'center',
+                      maxWidth: 220,
+                      color: theme.foreground,
+                    },
+                  ]}
                 >
                   You'll see logs here once you complete a brew.
                 </Text>

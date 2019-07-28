@@ -103,7 +103,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     this.interval = setInterval(() => {
       this.countdown()
       this.trackStepChange()
-    }, 400)
+    }, 1000)
     this.setState({ timerRunning: true })
   }
 
