@@ -5,7 +5,7 @@ import { reminderCancelled, reminderDenied, reminderRequested } from './actions'
 
 function* scheduleNotification({ timestamp }) {
   const localNotification = {
-    title: '☕️ Your coffee is cool enough to taste',
+    title: 'Taste your coffee.',
     body: `Tap here to rate your brew.`,
     data: { timestamp },
     ios: { sound: true },

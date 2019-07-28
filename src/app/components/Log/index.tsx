@@ -1,5 +1,5 @@
 import { Feather } from '@expo/vector-icons'
-import { format } from 'date-fns'
+import { addMinutes, format } from 'date-fns'
 import React, { Component } from 'react'
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
@@ -206,9 +206,7 @@ class Log extends Component<LogProps> {
             </Card>
           ) : null}
 
-          {withReminder &&
-          !recipe.iced &&
-          this.props.notifications.status !== 'denied' ? (
+          {withReminder && this.props.notifications.status !== 'denied' ? (
             <TouchableOpacity
               onPress={this.toggleReminder}
               activeOpacity={0.75}
@@ -219,25 +217,49 @@ class Log extends Component<LogProps> {
                   marginBottom: 0,
                   marginHorizontal: 8,
                   padding: 16,
+                  backgroundColor: this.state.reminderScheduled
+                    ? theme.primary
+                    : theme.background,
                 }}
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between',
+                  backgroundColor: this.state.reminderScheduled
+                    ? theme.primary
+                    : theme.background,
                 }}
               >
-                <Text
-                  style={[
-                    type.headline,
-                    { color: theme.foreground, marginBottom: 4 },
-                  ]}
-                >
-                  Send a tasting reminder
-                </Text>
+                <View style={{ flex: 1, marginRight: 32 }}>
+                  <Text
+                    style={[
+                      type.headline,
+                      {
+                        color: this.state.reminderScheduled
+                          ? theme.background
+                          : theme.foreground,
+                        fontWeight: this.state.reminderScheduled
+                          ? 'bold'
+                          : 'normal',
+                        marginBottom: 4,
+                      },
+                    ]}
+                  >
+                    {this.state.reminderScheduled
+                      ? 'Tasting reminder scheduled'
+                      : 'Send a tasting reminder'}
+                  </Text>
+                  {this.state.reminderScheduled && (
+                    <Text style={[type.callout, { color: theme.background }]}>
+                      You'll get a reminder to taste your coffee at{' '}
+                      {format(addMinutes(new Date(), 6), 'h:MMA')}.
+                    </Text>
+                  )}
+                </View>
                 {this.state.reminderScheduled ? (
                   <Feather
                     name="check-square"
                     size={theme.iconSize}
-                    color={theme.primary}
+                    color={theme.background}
                   />
                 ) : (
                   <Feather
@@ -250,9 +272,7 @@ class Log extends Component<LogProps> {
               </Card>
             </TouchableOpacity>
           ) : null}
-          {withReminder &&
-          !recipe.iced &&
-          this.props.notifications.status === 'denied' ? (
+          {withReminder && this.props.notifications.status === 'denied' ? (
             <Card
               containerStyle={{
                 marginTop: 16,
