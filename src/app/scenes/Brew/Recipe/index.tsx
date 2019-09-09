@@ -130,7 +130,6 @@ class Recipe extends Component<RecipeProps, RecipeState> {
         />
         {recentLog.notes ? <Notes text={recentLog.notes} /> : null}
         <BoilWater volume={totalPourVolume} />
-        {recipe.iced && <AddIce volume={Math.round(totalVolume * 0.333)} />}
         <GrindCoffee
           coffeeWeight={coffeeWeight}
           defaultGrind={defaultGrind}
@@ -138,6 +137,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
           recentLog={recentLog}
           recipeDuration={longestSecond + settings.bloomDuration}
         />
+        {recipe.iced && <AddIce volume={Math.round(totalVolume * 0.333)} />}
         <RecordBrewAttributes
           setRecipeState={this.setRecipeState}
           defaultGrind={defaultGrind}
