@@ -99,8 +99,6 @@ class Logs extends Component<LogsProps, LogsState> {
                 style={[
                   styles.placeholderLog,
                   {
-                    borderColor: theme.primary,
-                    borderWidth: 2,
                     justifyContent: 'center',
                     alignItems: 'center',
                     padding: 16,
@@ -113,32 +111,14 @@ class Logs extends Component<LogsProps, LogsState> {
                     type.body,
                     {
                       textAlign: 'center',
-                      maxWidth: 220,
+                      maxWidth: 260,
                       color: theme.foreground,
                     },
                   ]}
                 >
-                  You'll see logs here once you complete a brew.
+                  Logs of your brews will appear here once you complete a brew.
                 </Text>
               </View>
-              <View
-                style={[
-                  styles.placeholderLog,
-                  { backgroundColor: theme.grey3, opacity: 0.75 },
-                ]}
-              />
-              <View
-                style={[
-                  styles.placeholderLog,
-                  { backgroundColor: theme.grey3, opacity: 0.5 },
-                ]}
-              />
-              <View
-                style={[
-                  styles.placeholderLog,
-                  { backgroundColor: theme.grey3, opacity: 0.25 },
-                ]}
-              />
             </View>
           )}
         </HeaderScrollView>
