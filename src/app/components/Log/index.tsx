@@ -219,14 +219,18 @@ class Log extends Component<LogProps> {
                   padding: 16,
                   backgroundColor: this.state.reminderScheduled
                     ? theme.primary
-                    : theme.background,
+                    : isDarkTheme
+                      ? theme.grey1
+                      : theme.background,
                 }}
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between',
                   backgroundColor: this.state.reminderScheduled
                     ? theme.primary
-                    : theme.background,
+                    : isDarkTheme
+                      ? theme.grey1
+                      : theme.background,
                 }}
               >
                 <View style={{ flex: 1, marginRight: 32 }}>

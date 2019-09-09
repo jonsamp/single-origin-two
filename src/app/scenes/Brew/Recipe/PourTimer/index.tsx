@@ -218,7 +218,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
             shadowOffset: { height: 6, width: 0 },
             shadowOpacity: this.shadowAnimatedValue.interpolate({
               inputRange: [0, 1],
-              outputRange: [0.3, 0.8],
+              outputRange: [0.2, 0.8],
             }),
             top: -24,
           }}
