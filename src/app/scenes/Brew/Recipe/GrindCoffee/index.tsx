@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, Text } from 'react-native'
+import { Image } from 'react-native'
 import Card from '../../../../components/Card'
 import Instructions from '../../../../components/Instructions'
 import { height } from '../../../../constants/layout'
@@ -13,7 +13,6 @@ interface GrindCoffeeProps {
   defaultGrind: number
   title: string
   recentLog: Log
-  recipeDuration: number
 }
 
 function GrindCoffee({
@@ -22,7 +21,6 @@ function GrindCoffee({
   defaultGrind,
   title,
   recentLog,
-  recipeDuration,
 }: GrindCoffeeProps) {
   const { coffeeWeightUnit, grindUnit } = unitHelpers
   let recommendation
@@ -34,16 +32,10 @@ function GrindCoffee({
     } and`
   }
 
-  if (recentLog.totalBrewTime > recipeDuration * 1.15) {
-    recommendation = `Last time${grindFromLastTime} brewing lasted too long. Try grinding your coffee coarser this time.`
-  } else if (recentLog.totalBrewTime < recipeDuration * 0.85) {
-    recommendation = `Last time${grindFromLastTime} brewing finished too quickly. Try grinding your coffee finer this time.`
-  }
-
   if (recentLog.tastingNote === 'bitter') {
-    recommendation = `Last time${grindFromLastTime} it was bitter. Try grinding your coffee coarser this time.`
+    recommendation = `Last time${grindFromLastTime} your coffee was bitter. Try grinding your coffee coarser this time.`
   } else if (recentLog.tastingNote === 'sour') {
-    recommendation = `Last time${grindFromLastTime} it was sour. Try grinding your coffee finer this time.`
+    recommendation = `Last time${grindFromLastTime} your coffee was sour. Try grinding your coffee finer this time.`
   }
 
   return (
