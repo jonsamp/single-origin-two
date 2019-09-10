@@ -112,6 +112,11 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     const step = recipe[second]
 
     if (step) {
+      const volumePercentDifference =
+        step.volumePercent - this.state.volumePercent
+      const volumeToAdd = volumePercentDifference * this.props.volume
+      const lengthOfPour = volumeToAdd * 130
+
       if (step.image) {
         this.setState({
           image: step.image,
@@ -123,15 +128,10 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
           this.setState({
             image: step.afterImage,
           })
-        }, 5000)
+        }, lengthOfPour + 750)
       }
 
       if (step.type === 'pour') {
-        const volumePercentDifference =
-          step.volumePercent - this.state.volumePercent
-        const volumeToAdd = volumePercentDifference * this.props.volume
-        const lengthOfPour = volumeToAdd * 130
-
         await this.setState({
           volumePercent: step.volumePercent,
           currentStepDuration: Math.round(lengthOfPour / 1000 + 0.75),
