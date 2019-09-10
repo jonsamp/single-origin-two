@@ -1,7 +1,6 @@
-import { Feather } from '@expo/vector-icons'
 import { Notifications } from 'expo'
 import React, { Component } from 'react'
-import { Text, TextStyle, TouchableOpacity, View } from 'react-native'
+import { View } from 'react-native'
 import HeaderScrollView from 'react-native-header-scroll-view'
 import {
   NavigationActions,
@@ -9,9 +8,8 @@ import {
   StackActions,
   withNavigation,
 } from 'react-navigation'
-import Card from '../../components/Card'
+import ListItem from '../../components/ListItem'
 import recipes from '../../constants/recipes'
-import type from '../../constants/type'
 import withSettings from '../../providers/settings'
 import withTheme from '../../providers/theme'
 import { Settings } from '../../state/settings/types'
@@ -84,64 +82,17 @@ class Menu extends Component<MenuProps> {
         scrollContainerStyle={{
           backgroundColor: modifiedTheme.grey1,
           paddingBottom: 32,
+          paddingHorizontal: 12,
         }}
         fadeDirection="up"
       >
-        <View style={{ paddingHorizontal: 12 }}>
-          {menuRecipes.map(recipe => (
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Brew', { id: recipe.id })}
-              activeOpacity={0.8}
-              key={recipe.id}
-            >
-              <Card
-                containerStyle={{ marginBottom: 24 }}
-                style={{ flexDirection: 'row' }}
-              >
-                <View
-                  style={{
-                    flex: 0.2,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: isDarkTheme
-                      ? theme.grey2
-                      : theme.foreground,
-                  }}
-                >
-                  {recipe.icon({
-                    fill: isDarkTheme ? theme.foreground : theme.background,
-                  })}
-                </View>
-                <View
-                  style={{
-                    padding: 20,
-                    paddingVertical: 32,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    flex: 0.8,
-                  }}
-                >
-                  <Text
-                    style={
-                      {
-                        color: theme.foreground,
-                        ...type.headline,
-                      } as TextStyle
-                    }
-                  >
-                    {recipe.title} {recipe.modifier}
-                  </Text>
-                  <Feather
-                    name="chevron-right"
-                    size={theme.iconSize}
-                    color={theme.foreground}
-                  />
-                </View>
-              </Card>
-            </TouchableOpacity>
-          ))}
-        </View>
+        {menuRecipes.map(recipe => (
+          <ListItem
+            recipe={recipe}
+            key={recipe.id}
+            onPress={() => navigation.navigate('Brew', { id: recipe.id })}
+          />
+        ))}
       </HeaderScrollView>
     )
   }

@@ -1,15 +1,17 @@
 import { Feather } from '@expo/vector-icons'
+import { format } from 'date-fns'
 import React, { Component } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import HeaderScrollView from 'react-native-header-scroll-view'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { connect } from 'react-redux'
+import ListItem from '../../components/ListItem'
+import recipes from '../../constants/recipes'
 import type from '../../constants/type'
 import withTheme from '../../providers/theme'
 import { logDeleted } from '../../state/logs/actions'
 import { selectLogs } from '../../state/logs/selectors'
 import { Log, Logs as LogsType, Theme } from '../../types/index'
-import LogListItem from './LogListItem'
 import styles from './styles'
 
 interface LogsProps {
@@ -62,11 +64,12 @@ class Logs extends Component<LogsProps, LogsState> {
           headlineStyle={{ color: modifiedTheme.foreground }}
           titleStyle={{
             color: modifiedTheme.foreground,
-            marginBottom: 20,
+            marginBottom: 24,
           }}
           scrollContainerStyle={{
             backgroundColor: modifiedTheme.grey1,
             paddingBottom: 32,
+            paddingHorizontal: 12,
           }}
           fadeDirection="up"
         >
@@ -75,7 +78,21 @@ class Logs extends Component<LogsProps, LogsState> {
               data={Object.values(logs)
                 .filter(log => log)
                 .sort(this.byTimestamp)}
-              renderItem={props => <LogListItem {...props} />}
+              renderItem={props => {
+                const { navigation, item: log } = props
+                const recipe = recipes[log.recipeId]
+                return (
+                  <ListItem
+                    recipe={recipe}
+                    onPress={() =>
+                      navigation.navigate('LogDetail', {
+                        timestamp: log.timestamp,
+                      })
+                    }
+                    description={format(log.timestamp, 'MM/DD @ h:mmA')}
+                  />
+                )
+              }}
               renderHiddenItem={data => (
                 <TouchableOpacity
                   onPress={() => logDeleted({ timestamp: data.item.timestamp })}

@@ -2,21 +2,18 @@ import { Feather } from '@expo/vector-icons'
 import React from 'react'
 import { TouchableOpacity, ViewStyle } from 'react-native'
 import withTheme from '../../providers/theme'
-import { Theme } from '../../types/index'
+import { MenuItem, Theme } from '../../types'
 import SettingWrapper from './SettingWrapper'
 
 interface ChecklistSettingProps {
   theme: Theme
   onChange: (id: string) => void
-  items: Item[]
+  items: EnhancedMenuItem[]
   style: ViewStyle
 }
 
-interface Item {
-  title: string
-  id: string
+interface EnhancedMenuItem extends MenuItem {
   value: boolean
-  modifier: string
 }
 
 const ChecklistSetting = ({

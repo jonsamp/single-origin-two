@@ -22,6 +22,7 @@ export default {
     grey2: '#EFEFEF',
     grey3: '#adadad',
     black: '#000000',
+    blue: '#4c9eea',
     iconSize,
   },
   dark: {
@@ -37,6 +38,7 @@ export default {
     grey1: '#2B2B2B',
     grey3: '#4F4F4F',
     black: '#000000',
+    blue: '#4c9eea',
     iconSize,
   },
 }

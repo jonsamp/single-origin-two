@@ -103,3 +103,11 @@ export interface Log {
 export interface Logs {
   [i: string]: Log
 }
+
+export interface MenuItem {
+  title: string
+  modifier: string
+  iced: boolean
+  id: string
+  icon: (props: { fill?: string; size?: number }) => ReactNode
+}
