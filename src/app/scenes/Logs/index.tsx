@@ -1,14 +1,14 @@
 import { Feather } from '@expo/vector-icons'
 import { format } from 'date-fns'
 import React, { Component } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import HeaderScrollView from 'react-native-header-scroll-view'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import { connect } from 'react-redux'
+import ScreenPlaceholder from '../../components/ScreenPlaceholder';
 import ListItem from '../../components/ListItem'
 import recipes from '../../constants/recipes'
-import type from '../../constants/type'
 import withTheme from '../../providers/theme'
 import { logDeleted } from '../../state/logs/actions'
 import { selectLogs } from '../../state/logs/selectors'
@@ -114,32 +114,7 @@ class Logs extends Component<LogsProps, LogsState> {
               rightOpenValue={-75}
             />
           ) : (
-            <View>
-              <View
-                style={[
-                  styles.placeholderLog,
-                  {
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    padding: 16,
-                    height: 'auto',
-                  },
-                ]}
-              >
-                <Text
-                  style={[
-                    type.body,
-                    {
-                      textAlign: 'center',
-                      maxWidth: 260,
-                      color: theme.foreground,
-                    },
-                  ]}
-                >
-                  Logs of your brews will appear here once you complete a brew.
-                </Text>
-              </View>
-            </View>
+            <ScreenPlaceholder text="Logs of your brews will appear here once you complete a brew." />
           )}
         </HeaderScrollView>
       </View>

@@ -8,6 +8,7 @@ import {
   StackActions,
   withNavigation,
 } from 'react-navigation'
+import ScreenPlaceholder from '../../components/ScreenPlaceholder';
 import ListItem from '../../components/ListItem'
 import recipes from '../../constants/recipes'
 import withSettings from '../../providers/settings'
@@ -93,6 +94,9 @@ class Menu extends Component<MenuProps> {
             onPress={() => navigation.navigate('Brew', { id: recipe.id })}
           />
         ))}
+        {menuRecipes.length === 0 && (
+          <ScreenPlaceholder text="To start brewing, tap the settings icon, then Recipes, then select which brew methods you'd like to appear here." />
+        )}
       </HeaderScrollView>
     )
   }
