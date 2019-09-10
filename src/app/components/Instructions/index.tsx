@@ -7,6 +7,7 @@ import PrepIcon from './icons/PrepIcon'
 import RecordIcon from './icons/RecordIcon'
 import TipIcon from './icons/TipIcon'
 import WaterIcon from './icons/WaterIcon'
+import IceIcon from './icons/IceIcon';
 
 interface Instructions {
   theme: any
@@ -51,6 +52,7 @@ function Instructions({
     GrindIcon,
     TipIcon,
     PrepIcon,
+    IceIcon,
   }
   const IconComponent = icons[icon]
 

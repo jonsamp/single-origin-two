@@ -17,7 +17,7 @@ function AddIce({ unitHelpers, volume }: AddIceProps) {
         text={`Add **${waterVolumeUnit.getPreferredValue(volume)} ${
           waterVolumeUnit.unit.title
         }** of ice to your carafe or mug.`}
-        icon="WaterIcon"
+        icon="IceIcon"
       />
     </Card>
   )
