@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import HeaderScrollView from 'react-native-header-scroll-view'
 import { SwipeListView } from 'react-native-swipe-list-view'
+import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import { connect } from 'react-redux'
 import ListItem from '../../components/ListItem'
 import recipes from '../../constants/recipes'
@@ -19,6 +20,7 @@ interface LogsProps {
   logs: LogsType
   isDarkTheme: boolean
   logDeleted: (props: { timestamp: number }) => void
+  navigation: NavigationScreenProp<any>
 }
 
 interface LogsState {
@@ -39,7 +41,7 @@ class Logs extends Component<LogsProps, LogsState> {
   byTimestamp = (a, b) => b.timestamp - a.timestamp
 
   render() {
-    const { theme, logs, isDarkTheme, logDeleted } = this.props
+    const { theme, logs, isDarkTheme, logDeleted, navigation } = this.props
     const modifiedTheme = isDarkTheme
       ? {
           ...theme,
@@ -79,7 +81,7 @@ class Logs extends Component<LogsProps, LogsState> {
                 .filter(log => log)
                 .sort(this.byTimestamp)}
               renderItem={props => {
-                const { navigation, item: log } = props
+                const { item: log } = props
                 const recipe = recipes[log.recipeId]
                 return (
                   <ListItem
@@ -90,6 +92,7 @@ class Logs extends Component<LogsProps, LogsState> {
                       })
                     }
                     description={format(log.timestamp, 'MM/DD @ h:mmA')}
+                    activeOpacity={1}
                   />
                 )
               }}
@@ -147,4 +150,4 @@ class Logs extends Component<LogsProps, LogsState> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withTheme(Logs))
+)(withNavigation(withTheme(Logs) as any))

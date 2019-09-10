@@ -12,14 +12,22 @@ interface ItemProps {
   theme: Theme
   isDarkTheme: boolean
   onPress?: () => void
-  description: string
+  description?: string
+  activeOpacity?: number
 }
 
 function Item(props: ItemProps) {
-  const { theme, isDarkTheme, onPress, recipe, description } = props
+  const {
+    theme,
+    isDarkTheme,
+    onPress,
+    recipe,
+    description,
+    activeOpacity,
+  } = props
 
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
+    <TouchableOpacity onPress={onPress} activeOpacity={activeOpacity || 0.8}>
       <Card containerStyle={styles.cardContainer} style={styles.card}>
         <View
           style={[
