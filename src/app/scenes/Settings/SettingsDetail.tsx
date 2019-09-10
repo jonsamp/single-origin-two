@@ -130,7 +130,7 @@ class Settings extends Component<SettingsProps> {
             </Section>
             <Section
               title="Brewed coffee volume units"
-              description="The units used to set the volume of brewed coffee you’ll make."
+              description="The units that represent the volume of brewed coffee you’d like to make."
             >
               <ChecklistSetting
                 items={this.createChecklistItems({
@@ -144,7 +144,7 @@ class Settings extends Component<SettingsProps> {
             </Section>
             <Section
               title="Coffee weight units"
-              description="The units used to present the weight of coffee beans you’ll need to grind."
+              description="The units that represent the weight of coffee beans you’ll need to grind."
             >
               <ChecklistSetting
                 items={this.createChecklistItems({
@@ -158,7 +158,7 @@ class Settings extends Component<SettingsProps> {
             </Section>
             <Section
               title="Water volume units"
-              description="The units used to present the weight of water you’ll need to pour over."
+              description="The units that represent the weight of water you’ll need to pour over."
             >
               <ChecklistSetting
                 items={this.createChecklistItems({
