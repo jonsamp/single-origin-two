@@ -43,11 +43,6 @@ class Preparation extends Component<PreparationProps> {
             </Card>
           ))}
         </ScrollView>
-        <Button
-          title="done"
-          customStyle={{ paddingBottom: 32, borderRadius: 0 }}
-          onPress={() => navigation.goBack()}
-        />
       </View>
     )
   }
