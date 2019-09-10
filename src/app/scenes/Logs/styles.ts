@@ -2,12 +2,11 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   behindRowContainer: {
-    backgroundColor: 'red',
-    marginRight: 12,
-    marginTop: 4,
+    backgroundColor: '#FF3A3A',
     borderRadius: 8,
-    padding: 18,
-    height: 70,
+    marginTop: 2,
+    padding: 22,
+    height: 86,
     position: 'absolute',
     right: 0,
     justifyContent: 'center',
