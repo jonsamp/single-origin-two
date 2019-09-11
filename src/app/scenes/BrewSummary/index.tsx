@@ -12,6 +12,7 @@ import Log from '../../components/Log'
 import withTheme from '../../providers/theme'
 import { selectLog } from '../../state/logs/selectors'
 import { State } from '../../state/types'
+import styles from './styles'
 
 interface BrewSummaryProps {
   navigation: NavigationScreenProp<State, any>
@@ -32,11 +33,9 @@ class BrewSummary extends Component<BrewSummaryProps> {
       <View style={{ flex: 1 }}>
         <Header title="Brew Summary" onBack={onBack} />
         <Log timestamp={navigation.state.params.timestamp} withReminder />
-        <Button
-          title="done"
-          customStyle={{ paddingBottom: 32 }}
-          onPress={onBack}
-        />
+        <View style={styles.buttonContainer}>
+          <Button title="done" customStyle={styles.button} onPress={onBack} />
+        </View>
       </View>
     )
   }
