@@ -3,17 +3,16 @@ import type from '../../../../../constants/type'
 
 export default StyleSheet.create({
   section: {
-    alignItems: 'center',
-    justifyContent: 'center',
     flex: 1,
+    justifyContent: 'space-between',
   },
   labelText: {
     ...type.label,
     marginBottom: 8,
+    textAlign: 'center',
   },
   trackingContainer: {
     paddingVertical: 8,
-    paddingHorizontal: 32,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
@@ -21,6 +20,8 @@ export default StyleSheet.create({
     shadowColor: 'rgba(82,181,146,0.5)',
     shadowRadius: 12,
     shadowOffset: { height: 2, width: 0 },
+    marginHorizontal: 8,
+    bottom: -2,
   },
   setWidthText: {
     width: 65,

@@ -18,7 +18,7 @@ class Timer extends Component<TimerProps> {
     const parts = formatSeconds(second < 0 ? 0 : second).split('')
     return (
       <View style={styles.section}>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={styles.timeContainer}>
           {parts.map((part, index) => (
             <View
               key={index}

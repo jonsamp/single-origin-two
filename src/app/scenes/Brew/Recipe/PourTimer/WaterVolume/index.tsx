@@ -5,14 +5,11 @@ import withTheme from '../../../../../providers/theme'
 import styles from './styles'
 
 interface WaterVolumeProps {
-  // timerRunning: boolean
-  // toggleCountdown: () => void
   theme: any
   animatedValue: Animated.Value
   volume: number
   waterVolumeUnit: any
   onAnimateNumberFinish: () => {}
-  // second: number
 }
 
 class WaterVolume extends Component<WaterVolumeProps> {
@@ -27,7 +24,7 @@ class WaterVolume extends Component<WaterVolumeProps> {
     const inputRange = [0, 1]
     const trackingAnimatedScale = animatedValue.interpolate({
       inputRange,
-      outputRange: [1, 1.25],
+      outputRange: [1, 1.2],
     })
     const trackingAnimatedShadow = animatedValue.interpolate({
       inputRange,

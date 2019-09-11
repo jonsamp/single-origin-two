@@ -3,9 +3,12 @@ import type from '../../../../../constants/type'
 
 export default StyleSheet.create({
   section: {
-    alignItems: 'center',
-    justifyContent: 'center',
     flex: 1,
+    marginRight: 20,
+  },
+  timeContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   timeTextContainer: {
     width: 22,
