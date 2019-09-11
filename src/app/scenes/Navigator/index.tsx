@@ -53,7 +53,7 @@ const StackNavigator = createStackNavigator(
 )
 
 const ModalNavigator = createStackNavigator(
-  { Test, StackNavigator, LogDetailEdit },
+  { StackNavigator, LogDetailEdit },
   {
     ...TransitionPresets.ModalPresentationIOS,
     mode: 'modal',
