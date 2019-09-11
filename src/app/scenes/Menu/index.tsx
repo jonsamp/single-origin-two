@@ -8,8 +8,8 @@ import {
   StackActions,
   withNavigation,
 } from 'react-navigation'
-import ScreenPlaceholder from '../../components/ScreenPlaceholder';
 import ListItem from '../../components/ListItem'
+import ScreenPlaceholder from '../../components/ScreenPlaceholder'
 import recipes from '../../constants/recipes'
 import withSettings from '../../providers/settings'
 import withTheme from '../../providers/theme'
@@ -79,6 +79,7 @@ class Menu extends Component<MenuProps> {
         titleStyle={{
           color: modifiedTheme.foreground,
           marginBottom: 24,
+          marginLeft: 0,
         }}
         scrollContainerStyle={{
           backgroundColor: modifiedTheme.grey1,

@@ -6,8 +6,8 @@ import HeaderScrollView from 'react-native-header-scroll-view'
 import { SwipeListView } from 'react-native-swipe-list-view'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import { connect } from 'react-redux'
-import ScreenPlaceholder from '../../components/ScreenPlaceholder';
 import ListItem from '../../components/ListItem'
+import ScreenPlaceholder from '../../components/ScreenPlaceholder'
 import recipes from '../../constants/recipes'
 import withTheme from '../../providers/theme'
 import { logDeleted } from '../../state/logs/actions'
@@ -67,6 +67,7 @@ class Logs extends Component<LogsProps, LogsState> {
           titleStyle={{
             color: modifiedTheme.foreground,
             marginBottom: 24,
+            marginLeft: 0,
           }}
           scrollContainerStyle={{
             backgroundColor: modifiedTheme.grey1,
