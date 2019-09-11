@@ -4,7 +4,7 @@ import * as actions from './actions'
 import { Settings } from './types'
 
 const initialState = {
-  theme: 'light',
+  theme: 'dark',
   ratio: 16,
   bloomDuration: 30,
   recordTemp: true,
