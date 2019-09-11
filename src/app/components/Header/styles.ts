@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  left: { position: 'absolute', left: 12, bottom: -2 },
-  right: { position: 'absolute', right: 12, bottom: -2 },
+  left: { position: 'absolute', left: 6, bottom: -2 },
+  right: { position: 'absolute', right: 6, bottom: -2 },
   title: type.headline,
   scriptTitle: {
     ...type.headline,
