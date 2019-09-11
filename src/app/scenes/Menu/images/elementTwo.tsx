@@ -1,5 +1,5 @@
 import React from 'react'
-import { Path, Svg, Circle, G, Mask } from 'react-native-svg'
+import { Svg, Circle, G, Mask } from 'react-native-svg'
 import { width } from '../../../constants/layout';
 
 function IceIcon({ fill, ...rest }: { fill: string }) {

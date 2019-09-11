@@ -38,7 +38,8 @@ class Settings extends Component<SettingsProps> {
         headlineStyle={{ color: modifiedTheme.foreground }}
         titleStyle={{
           color: modifiedTheme.foreground,
-          marginBottom: 0,
+          marginBottom: -8,
+          marginLeft: 12,
         }}
         scrollContainerStyle={{
           backgroundColor: modifiedTheme.grey1,
