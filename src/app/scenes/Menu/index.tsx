@@ -1,6 +1,5 @@
 import { Notifications } from 'expo'
 import React, { Component } from 'react'
-import { View } from 'react-native'
 import HeaderScrollView from 'react-native-header-scroll-view'
 import {
   NavigationActions,

@@ -10,6 +10,7 @@ import Menu from '../../scenes/Menu'
 import Preparation from '../../scenes/Preparation'
 import Settings from '../../scenes/Settings'
 import SettingsDetail from '../../scenes/Settings/SettingsDetail'
+import Test from '../../scenes/Test'
 import BrewIcon from './icons/BrewIcon'
 import LogsIcon from './icons/LogsIcon'
 import SettingsIcon from './icons/SettingsIcon'
@@ -52,7 +53,7 @@ const StackNavigator = createStackNavigator(
 )
 
 const ModalNavigator = createStackNavigator(
-  { StackNavigator, LogDetailEdit },
+  { Test, StackNavigator, LogDetailEdit },
   {
     ...TransitionPresets.ModalPresentationIOS,
     mode: 'modal',

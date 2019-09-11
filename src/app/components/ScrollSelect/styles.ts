@@ -7,10 +7,12 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 0,
     alignItems: 'center',
   },
+  // each number in the horiz scroll view without translation
   selection: {
     alignItems: 'center',
     paddingVertical: 12,
   },
+  // each number's actual text (with translation)
   selectionText: {
     ...type.largeTitle,
     fontSize: 32,
