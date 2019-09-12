@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
-import Button from '../../components/Button'
+import Header from '../../components/Header'
 
 interface OnboardingProps {
   navigation: NavigationScreenProp<any>
@@ -9,9 +9,9 @@ interface OnboardingProps {
 
 function Onboarding(props: OnboardingProps) {
   return (
-    <View style={{ justifyContent: 'center', flex: 1 }}>
+    <View style={{ flex: 1 }}>
+      <Header title="Get started" />
       <Text>Onboarding</Text>
-      <Button title="Back" onPress={() => props.navigation.goBack()} />
     </View>
   )
 }
