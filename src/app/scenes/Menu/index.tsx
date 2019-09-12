@@ -1,6 +1,6 @@
 import { Notifications } from 'expo'
 import React, { Component } from 'react'
-import { Image, View } from 'react-native'
+import { View } from 'react-native'
 import HeaderScrollView from 'react-native-header-scroll-view'
 import {
   NavigationActions,
@@ -11,12 +11,11 @@ import {
 import ListItem from '../../components/ListItem'
 import ScreenPlaceholder from '../../components/ScreenPlaceholder'
 import recipes from '../../constants/recipes'
+import { width, height } from '../../constants/layout';
 import withSettings from '../../providers/settings'
 import withTheme from '../../providers/theme'
 import { Settings } from '../../state/settings/types'
 import { Theme } from '../../types/index'
-import ElementOne from './images/elementOne'
-import ElementTwo from './images/elementTwo'
 
 interface MenuProps {
   theme: Theme
@@ -74,19 +73,7 @@ class Menu extends Component<MenuProps> {
           backgroundColor: isDarkTheme ? theme.background : theme.grey1,
         }}
       >
-        <View style={{ position: 'absolute', top: -100, right: -100 }}>
-          <ElementTwo fill={isDarkTheme ? theme.grey3 : theme.grey3} />
-        </View>
-        <View
-          style={{
-            position: 'absolute',
-            top: -100,
-            left: -100,
-            opacity: 0.8,
-          }}
-        >
-          <ElementOne fill={isDarkTheme ? theme.grey2 : theme.grey2} />
-        </View>
+        <View style={{ position: 'absolute', height: 200, width, backgroundColor: theme.primary, opacity: 0.2 }} />
         <HeaderScrollView
           title="Brew Methods"
           containerStyle={{ backgroundColor: 'transparent' }}
