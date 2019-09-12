@@ -2,6 +2,7 @@ import { Notifications } from 'expo'
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import HeaderScrollView from 'react-native-header-scroll-view'
+import { ifIphoneX } from 'react-native-iphone-x-helper'
 import {
   NavigationActions,
   NavigationScreenProp,
@@ -10,12 +11,13 @@ import {
 } from 'react-navigation'
 import ListItem from '../../components/ListItem'
 import ScreenPlaceholder from '../../components/ScreenPlaceholder'
+import { height, width } from '../../constants/layout'
 import recipes from '../../constants/recipes'
-import { width, height } from '../../constants/layout';
 import withSettings from '../../providers/settings'
 import withTheme from '../../providers/theme'
 import { Settings } from '../../state/settings/types'
 import { Theme } from '../../types/index'
+import Onboarding from './Onboarding'
 
 interface MenuProps {
   theme: Theme
@@ -73,7 +75,15 @@ class Menu extends Component<MenuProps> {
           backgroundColor: isDarkTheme ? theme.background : theme.grey1,
         }}
       >
-        <View style={{ position: 'absolute', height: 200, width, backgroundColor: theme.primary, opacity: 0.2 }} />
+        <View
+          style={{
+            position: 'absolute',
+            height: ifIphoneX(158 + 26, 158),
+            width,
+            backgroundColor: theme.primary,
+            opacity: 0.2,
+          }}
+        />
         <HeaderScrollView
           title="Brew Methods"
           containerStyle={{ backgroundColor: 'transparent' }}
@@ -98,6 +108,7 @@ class Menu extends Component<MenuProps> {
           }}
           fadeDirection="up"
         >
+          <Onboarding />
           {menuRecipes.map(recipe => (
             <ListItem
               recipe={recipe}

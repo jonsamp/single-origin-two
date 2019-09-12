@@ -7,6 +7,7 @@ import LogDetail from '../../scenes/LogDetail'
 import LogDetailEdit from '../../scenes/LogDetailEdit'
 import Logs from '../../scenes/Logs'
 import Menu from '../../scenes/Menu'
+import Onboarding from '../../scenes/Onboarding'
 import Preparation from '../../scenes/Preparation'
 import Settings from '../../scenes/Settings'
 import SettingsDetail from '../../scenes/Settings/SettingsDetail'
@@ -46,7 +47,15 @@ const TabNavigator = createBottomTabNavigator(
 )
 
 const StackNavigator = createStackNavigator(
-  { TabNavigator, SettingsDetail, Brew, BrewSummary, LogDetail, Preparation },
+  {
+    TabNavigator,
+    SettingsDetail,
+    Brew,
+    BrewSummary,
+    LogDetail,
+    Preparation,
+    Onboarding,
+  },
   {
     headerMode: 'none',
   }
