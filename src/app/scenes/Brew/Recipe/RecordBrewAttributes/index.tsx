@@ -26,6 +26,7 @@ interface RecordBrewAttributesProps {
 interface RecordBrewAttributesState {
   recordSegmentIndex: number
   isOpen: boolean
+  containerHeight: number
 }
 
 class RecordBrewAttributes extends Component<
@@ -35,6 +36,7 @@ class RecordBrewAttributes extends Component<
   state = {
     recordSegmentIndex: 0,
     isOpen: false,
+    containerHeight: 0,
   }
 
   animatedOpacityValue = new Animated.Value(1)
@@ -193,9 +195,18 @@ class RecordBrewAttributes extends Component<
           </TouchableOpacity>
         </View>
         {this.state.isOpen ? (
-          <View>
+          <View
+            style={{
+              backgroundColor: theme.grey2,
+              minHeight: this.state.containerHeight,
+            }}
+            onLayout={event => {
+              const { x, y, width, height } = event.nativeEvent.layout
+              this.setState({ containerHeight: height })
+            }}
+          >
             {recordSettings.length > 1 && (
-              <View style={{ backgroundColor: theme.grey2 }}>
+              <View>
                 <DraggableSegment
                   options={recordSettings}
                   onChange={index =>
