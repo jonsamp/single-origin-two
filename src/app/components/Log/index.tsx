@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
 import Card from '../../components/Card'
+import { height } from '../../constants/layout'
 import recipes from '../../constants/recipes'
 import type from '../../constants/type'
 import formatSeconds from '../../helpers/formatSeconds'
@@ -134,6 +135,7 @@ class Log extends Component<LogProps> {
           contentContainerStyle={{
             paddingVertical: 48,
             paddingHorizontal: 12,
+            paddingBottom: height / 3,
           }}
         >
           <View style={{ alignItems: 'center' }}>
