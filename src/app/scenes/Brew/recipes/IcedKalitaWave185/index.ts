@@ -18,6 +18,7 @@ export default {
   defaultTotalVolume: 340,
   iced: true,
   defaultSource: Default,
+  pourVelocity: 130,
   preparation: [
     {
       image: WetFilter,

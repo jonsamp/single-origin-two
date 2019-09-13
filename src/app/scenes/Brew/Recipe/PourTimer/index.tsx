@@ -115,7 +115,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
       const volumePercentDifference =
         step.volumePercent - this.state.volumePercent
       const volumeToAdd = volumePercentDifference * this.props.volume
-      const lengthOfPour = volumeToAdd * 130
+      const lengthOfPour = volumeToAdd * recipe.pourVelocity
 
       if (step.image) {
         this.setState({

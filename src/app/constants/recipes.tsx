@@ -14,11 +14,11 @@ export default {
   //   id: 'Chemex',
   //   icon: () => {},
   // },
-  // Clever: {
-  //   title: 'Clever',
-  //   id: 'Clever',
-  //   icon: ({ fill, size }) => <CleverIcon fill={fill} size={size} />,
-  // },
+  Clever: {
+    title: 'Clever',
+    id: 'Clever',
+    icon: ({ fill, size }) => <CleverIcon fill={fill} size={size} />,
+  },
   // FrenchPress: {
   //   title: 'French Press',
   //   id: 'FrenchPress',
