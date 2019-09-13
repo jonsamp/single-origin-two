@@ -1,3 +1,4 @@
+import * as Haptic from 'expo-haptics'
 import { range } from 'lodash'
 import React, { Component } from 'react'
 import { Animated, Text, TouchableOpacity, View, ViewStyle } from 'react-native'
@@ -34,6 +35,7 @@ class ScrollSelect extends Component<ScrollSelectProps> {
 
   xOffset = new Animated.Value(0)
   SCREEN_WIDTH = Math.round(this.props.containerWidth / 3)
+  currentPosition = 0
 
   componentDidMount() {
     const { step } = this.props
@@ -150,10 +152,27 @@ class ScrollSelect extends Component<ScrollSelectProps> {
         style={[styles.container, { backgroundColor: theme.grey2, ...style }]}
       >
         <Animated.ScrollView
-          scrollEventThrottle={16}
+          scrollEventThrottle={32}
           onScroll={Animated.event(
             [{ nativeEvent: { contentOffset: { x: this.xOffset } } }],
-            { useNativeDriver: true }
+            {
+              useNativeDriver: true,
+              listener: async (event: any) => {
+                const { x } = event.nativeEvent.contentOffset
+
+                if (!this.currentPosition) {
+                  this.currentPosition = x
+                }
+
+                if (
+                  Math.abs(x - this.currentPosition) >
+                  this.SCREEN_WIDTH - 16
+                ) {
+                  await Haptic.selectionAsync()
+                  this.currentPosition = x
+                }
+              },
+            }
           )}
           onMomentumScrollEnd={event => {
             const selectionNumber = Math.round(
