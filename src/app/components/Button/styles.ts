@@ -2,8 +2,8 @@ import { StyleSheet, ViewStyle } from 'react-native'
 import type from '../../constants/type'
 
 const defaultButton = {
-  // display: 'flex',
   alignItems: 'center',
+  justifyContent: 'center',
   paddingVertical: 14,
   paddingHorizontal: 28,
   overflow: 'hidden',
