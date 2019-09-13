@@ -11,7 +11,7 @@ import {
 } from 'react-navigation'
 import ListItem from '../../components/ListItem'
 import ScreenPlaceholder from '../../components/ScreenPlaceholder'
-import { height, width } from '../../constants/layout'
+import { width } from '../../constants/layout'
 import recipes from '../../constants/recipes'
 import withSettings from '../../providers/settings'
 import withTheme from '../../providers/theme'
