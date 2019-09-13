@@ -14,7 +14,7 @@ export default {
     foreground: '#2B2B2B',
     background: '#FFFFFF',
     primaryDark: '#00A57D',
-    primary: '#00A57D',
+    primary: '#00b78e',
     beige: '#f8e8d5',
     warning: '#FFE982',
     grey1: '#F7F7F7',

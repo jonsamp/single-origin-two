@@ -81,7 +81,7 @@ class Menu extends Component<MenuProps> {
             height: ifIphoneX(158 + 26, 158),
             width,
             backgroundColor: isDarkTheme ? theme.grey2 : theme.primary,
-            opacity: isDarkTheme ? 1 : 0.2,
+            opacity: isDarkTheme ? 1 : 0.3,
           }}
         />
         <HeaderScrollView
