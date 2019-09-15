@@ -17,7 +17,6 @@ export default {
   defaultGrind: 0.75,
   defaultTotalVolume: 340,
   defaultSource: Default,
-  pourVelocity: 65,
   preparation: [
     {
       // image: WetFilter,
