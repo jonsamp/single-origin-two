@@ -112,10 +112,20 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     const step = recipe[second]
 
     if (step) {
-      const volumePercentDifference =
-        step.volumePercent - this.state.volumePercent
-      const volumeToAdd = volumePercentDifference * this.props.volume
-      const lengthOfPour = volumeToAdd * 130
+      let lengthOfStep
+      if (step.duration) {
+        lengthOfStep = step.duration
+      } else if (step.volumePercent) {
+        const volumePercentDifference =
+          step.volumePercent - this.state.volumePercent
+        const volumeToAdd = volumePercentDifference * this.props.volume
+
+        // 130 is pour velocity
+        // 750 is adding 3/4 of a second so the animation of the pour tracker has time to finish
+        lengthOfStep = volumeToAdd * 130 + 750
+      } else {
+        lengthOfStep = 5000
+      }
 
       if (step.image) {
         this.setState({
@@ -128,13 +138,13 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
           this.setState({
             image: step.afterImage,
           })
-        }, lengthOfPour + 750)
+        }, lengthOfStep)
       }
 
       if (step.type === 'pour') {
         await this.setState({
           volumePercent: step.volumePercent,
-          currentStepDuration: Math.round(lengthOfPour / 1000 + 0.75),
+          currentStepDuration: Math.round(lengthOfStep / 1000),
         })
         playSound({ sound: addWaterSound })
         this.onAnimateNumberBegin()
