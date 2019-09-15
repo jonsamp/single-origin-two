@@ -132,11 +132,12 @@ class Step extends Component<StepProps, StepState> {
     }
 
     if (brewCountdown) {
-      return `In **${second * -1}** seconds`
+      return `In **${second * -1}** second${second === -1 ? '' : 's'}`
     }
 
     if (countdownToNextStep) {
-      return `In **${nextEvent - second}** seconds`
+      const secondsLeft = nextEvent - second
+      return `In **${secondsLeft}** second${secondsLeft === 1 ? '' : 's'}`
     }
 
     if (foreshadowNextStep) {
