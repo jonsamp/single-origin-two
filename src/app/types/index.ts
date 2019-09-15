@@ -73,6 +73,7 @@ export interface Recipe {
   defaultTotalVolume: number
   iced: boolean
   defaultSource: number
+  pourVelocity: number
   preparation: Array<{
     image?: number
     text: string
