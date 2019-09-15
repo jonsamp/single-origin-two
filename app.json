@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Single Origin 2.0",
+    "name": "Single Origin 2",
     "description": "Learn to brew specialty coffee.",
     "slug": "single-origin-two",
     "privacy": "unlisted",
@@ -19,11 +19,9 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.jonsamp.singleorigintwo"
-    },
-    "android": {
-      "package": "com.jonsamp.singleorigintwo"
+      "supportsTablet": false,
+      "bundleIdentifier": "com.jonsamp.singleorigintwo",
+      "buildNumber": "1"
     }
   }
 }
