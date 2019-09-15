@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { ActivityIndicator, View } from 'react-native'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import Sentry from 'sentry-expo'
@@ -6,7 +7,6 @@ import Navigator from './src/app/scenes/Navigator'
 import configureStore from './src/app/store/configureStore'
 
 const { store, persistor } = configureStore()
-
 // Remove this once Sentry is correctly setup.
 Sentry.enableInExpoDevelopment = false
 
@@ -18,7 +18,21 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+        <PersistGate
+          loading={
+            <View
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: 'black',
+              }}
+            >
+              <ActivityIndicator />
+            </View>
+          }
+          persistor={persistor}
+        >
           <Navigator />
         </PersistGate>
       </Provider>

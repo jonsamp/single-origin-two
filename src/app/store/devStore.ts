@@ -16,7 +16,7 @@ const sagaMiddleware = createSagaMiddleware()
 // Root store
 export default function configureStore() {
   const store = createStore(
-    rootReducer,
+    persistedReducer,
     compose(
       applyMiddleware(sagaMiddleware),
       window.devToolsExtension ? window.devToolsExtension() : f => f
