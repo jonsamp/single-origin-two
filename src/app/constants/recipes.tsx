@@ -1,4 +1,5 @@
 import React from 'react'
+import Chemex3CupIcon from './icons/Chemex3CupIcon'
 import ChemexIcon from './icons/ChemexIcon'
 import CleverIcon from './icons/CleverIcon'
 import KalitaWave155Icon from './icons/KalitaWave155Icon'
@@ -14,6 +15,12 @@ export default {
     title: 'Chemex',
     id: 'Chemex',
     icon: ({ fill, size }) => <ChemexIcon fill={fill} size={size} />,
+  },
+  Chemex3Cup: {
+    title: 'Chemex',
+    modifier: '3 Cup',
+    id: 'Chemex3Cup',
+    icon: ({ fill, size }) => <Chemex3CupIcon fill={fill} size={size} />,
   },
   Clever: {
     title: 'Clever',
