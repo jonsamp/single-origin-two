@@ -16,10 +16,23 @@ export default {
     id: 'Chemex',
     icon: ({ fill, size }) => <ChemexIcon fill={fill} size={size} />,
   },
+  IcedChemex: {
+    title: 'Iced Chemex',
+    id: 'IcedChemex',
+    iced: true,
+    icon: ({ fill, size }) => <ChemexIcon fill={fill} size={size} />,
+  },
   Chemex3Cup: {
     title: 'Chemex',
     modifier: '3 Cup',
     id: 'Chemex3Cup',
+    icon: ({ fill, size }) => <Chemex3CupIcon fill={fill} size={size} />,
+  },
+  IcedChemex3Cup: {
+    title: 'Iced Chemex',
+    modifier: '3 Cup',
+    id: 'IcedChemex3Cup',
+    iced: true,
     icon: ({ fill, size }) => <Chemex3CupIcon fill={fill} size={size} />,
   },
   Clever: {
