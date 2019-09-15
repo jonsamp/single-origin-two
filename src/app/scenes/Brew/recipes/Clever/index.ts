@@ -13,7 +13,6 @@ export default {
   title: 'Clever',
   minYield: 142,
   maxYield: 516,
-  totalTime: 175,
   defaultGrind: 0.75,
   defaultTotalVolume: 340,
   defaultSource: Default,

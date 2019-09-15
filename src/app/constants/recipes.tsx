@@ -1,4 +1,5 @@
 import React from 'react'
+import ChemexIcon from './icons/ChemexIcon'
 import CleverIcon from './icons/CleverIcon'
 import KalitaWave155Icon from './icons/KalitaWave155Icon'
 import KalitaWave185Icon from './icons/KalitaWave185Icon'
@@ -9,26 +10,16 @@ export default {
   //   id: 'Aeropress',
   //   icon: () => {},
   // },
-  // Chemex: {
-  //   title: 'Chemex',
-  //   id: 'Chemex',
-  //   icon: () => {},
-  // },
+  Chemex: {
+    title: 'Chemex',
+    id: 'Chemex',
+    icon: ({ fill, size }) => <ChemexIcon fill={fill} size={size} />,
+  },
   Clever: {
     title: 'Clever',
     id: 'Clever',
     icon: ({ fill, size }) => <CleverIcon fill={fill} size={size} />,
   },
-  // FrenchPress: {
-  //   title: 'French Press',
-  //   id: 'FrenchPress',
-  //   icon: () => {},
-  // },
-  // IcedPourOver: {
-  //   title: 'Iced Pour Over',
-  //   id: 'IcedPourOver',
-  //   icon: () => {},
-  // },
   IcedKalitaWave185: {
     title: 'Iced Kalita Wave',
     modifier: '185',

@@ -13,7 +13,6 @@ export default {
   title: 'Kalita Wave 185',
   minYield: 142,
   maxYield: 567,
-  totalTime: 175,
   defaultGrind: 0.5,
   defaultTotalVolume: 340,
   defaultSource: Default,

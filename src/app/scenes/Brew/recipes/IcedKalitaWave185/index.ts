@@ -13,7 +13,6 @@ export default {
   title: 'Iced Kalita Wave 185',
   minYield: 142,
   maxYield: 567,
-  totalTime: 120,
   defaultGrind: 0.5,
   defaultTotalVolume: 340,
   iced: true,

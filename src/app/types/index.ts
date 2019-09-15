@@ -68,7 +68,6 @@ export interface Recipe {
   title: string
   minYield: number
   maxYield: number
-  totalTime: number
   defaultGrind: number
   defaultTotalVolume: number
   iced: boolean
