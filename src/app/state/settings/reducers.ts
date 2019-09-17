@@ -15,10 +15,9 @@ const initialState = {
   coffeeWeightUnit: 'grams',
   waterVolumeUnit: 'grams',
   shareTrackingData: true,
-  recipes: Object.values(recipes).reduce(
-    (acc, r) => ({ ...acc, [r.id]: true }),
-    {}
-  ),
+  recipes: Object.values(recipes)
+    .filter(r => !r.iced)
+    .reduce((acc, r) => ({ ...acc, [r.id]: true }), {}),
 }
 
 const reducers = {

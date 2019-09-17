@@ -60,6 +60,7 @@ export interface PourEvent {
 export interface RecipeConfig {
   title: string
   id: string
+  iced?: boolean
   icon: ({ fill: string, size: number }) => ReactNode
 }
 
