@@ -24,6 +24,10 @@ export default {
         'Rinse the entire filter with hot water, then discard the excess water.',
     },
     {
+      text:
+        'According to the instructions, add the appropriate amount of ice into the carafe or mug.',
+    },
+    {
       image: AddGrounds,
       text:
         'Place the filter inside the Kalita Wave, add the coffee grouds, then place on top of a carafe or mug.',

@@ -25,7 +25,7 @@ export default {
     {
       image: AddGrounds,
       text:
-        'Place the filter inside the Kalita Wave, add the coffee grouds, then place on top of a carafe or mug.',
+        'Place the filter inside the Kalita Wave 155, add the coffee grouds, then place on top of a carafe or mug.',
     },
     {
       text: 'Then put it all on a scale and zero the scale.',

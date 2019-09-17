@@ -26,6 +26,10 @@ export default {
       text: 'Rinse the filter with water, then discard the water.',
     },
     {
+      text:
+        'According to the instructions, add the appropriate amount of ice into the chemex.',
+    },
+    {
       image: AddGrounds,
       text:
         'Add coffee to the filter inside the chemex, place it on a scale, then zero/tare the scale.',

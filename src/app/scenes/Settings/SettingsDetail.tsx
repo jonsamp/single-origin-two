@@ -174,9 +174,10 @@ class Settings extends Component<SettingsProps> {
         )
         break
       case 'recipes':
+        console.log('recipes', this.createRecipesCheckList())
         children = (
           <Fragment>
-            <Section title="Menu Recipes">
+            <Section title="Recipes">
               <ChecklistSetting
                 items={this.createRecipesCheckList()}
                 onChange={recipe => this.recipeUpdated({ recipe })}

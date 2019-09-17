@@ -4,14 +4,10 @@ import ChemexIcon from './icons/ChemexIcon'
 import CleverIcon from './icons/CleverIcon'
 import KalitaWave155Icon from './icons/KalitaWave155Icon'
 import KalitaWave185Icon from './icons/KalitaWave185Icon'
+import V6001Icon from './icons/V6001Icon'
 import V60Icon from './icons/V60Icon'
 
 export default {
-  // Aeropress: {
-  //   title: 'Aeropress',
-  //   id: 'Aeropress',
-  //   icon: () => {},
-  // },
   Chemex: {
     title: 'Chemex',
     id: 'Chemex',
@@ -55,10 +51,10 @@ export default {
     icon: ({ fill, size }) => <KalitaWave185Icon fill={fill} size={size} />,
   },
   IcedKalitaWave155: {
-    title: 'Kalita Wave',
+    title: 'Iced Kalita Wave',
     modifier: '155',
     iced: true,
-    id: 'KalitaWave155',
+    id: 'IcedKalitaWave155',
     icon: ({ fill, size }) => <KalitaWave155Icon fill={fill} size={size} />,
   },
   KalitaWave155: {
@@ -68,8 +64,8 @@ export default {
     icon: ({ fill, size }) => <KalitaWave155Icon fill={fill} size={size} />,
   },
   IcedV60: {
-    title: 'V60',
-    id: 'V60',
+    title: 'Iced V60',
+    id: 'IcedV60',
     iced: true,
     icon: ({ fill, size }) => <V60Icon fill={fill} size={size} />,
   },
@@ -77,5 +73,18 @@ export default {
     title: 'V60',
     id: 'V60',
     icon: ({ fill, size }) => <V60Icon fill={fill} size={size} />,
+  },
+  V6001: {
+    title: 'V60',
+    id: 'V6001',
+    modifier: '#01',
+    icon: ({ fill, size }) => <V6001Icon fill={fill} size={size} />,
+  },
+  IcedV6001: {
+    title: 'Iced V60',
+    id: 'IcedV6001',
+    modifier: '#01',
+    iced: true,
+    icon: ({ fill, size }) => <V6001Icon fill={fill} size={size} />,
   },
 }
