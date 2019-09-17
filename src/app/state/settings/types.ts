@@ -10,6 +10,7 @@ export interface Settings {
   coffeeWeightUnit: WeightUnits
   waterVolumeUnit: WeightUnits
   shareTrackingData: boolean
+  onboardingVisible: boolean
   recipes: {
     [i: string]: boolean
   }

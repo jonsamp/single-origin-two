@@ -108,7 +108,7 @@ class Menu extends Component<MenuProps> {
           }}
           fadeDirection="up"
         >
-          {/* <Onboarding /> */}
+          {settings.onboardingVisible && <Onboarding />}
           {menuRecipes.map(recipe => (
             <ListItem
               recipe={recipe}
