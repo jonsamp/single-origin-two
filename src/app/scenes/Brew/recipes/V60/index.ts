@@ -1,12 +1,11 @@
-import AddGrounds from './images/addgrounds.jpg'
+import AddGrounds from './images/addgrounds.png'
 import AfterBloom from './images/afterbloom.gif'
 import Finish from './images/afterfinish.gif'
 import AfterPour from './images/afterpour.gif'
 import Bloom from './images/bloom.gif'
-import Default from './images/default.jpg'
-import Draining from './images/draining.gif'
+import Default from './images/default.png'
 import Pour from './images/pour.gif'
-import WetFilter from './images/wetfilter.jpg'
+import WetFilter from './images/wetfilter.png'
 
 export default {
   id: 'V60',

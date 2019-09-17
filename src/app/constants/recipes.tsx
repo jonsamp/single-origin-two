@@ -54,11 +54,24 @@ export default {
     id: 'KalitaWave185',
     icon: ({ fill, size }) => <KalitaWave185Icon fill={fill} size={size} />,
   },
+  IcedKalitaWave155: {
+    title: 'Kalita Wave',
+    modifier: '155',
+    iced: true,
+    id: 'KalitaWave155',
+    icon: ({ fill, size }) => <KalitaWave155Icon fill={fill} size={size} />,
+  },
   KalitaWave155: {
     title: 'Kalita Wave',
     modifier: '155',
     id: 'KalitaWave155',
     icon: ({ fill, size }) => <KalitaWave155Icon fill={fill} size={size} />,
+  },
+  IcedV60: {
+    title: 'V60',
+    id: 'V60',
+    iced: true,
+    icon: ({ fill, size }) => <V60Icon fill={fill} size={size} />,
   },
   V60: {
     title: 'V60',
