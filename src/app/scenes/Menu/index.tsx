@@ -80,7 +80,7 @@ class Menu extends Component<MenuProps> {
             position: 'absolute',
             height: ifIphoneX(158 + 26, 158),
             width,
-            backgroundColor: isDarkTheme ? theme.grey2 : theme.primary,
+            backgroundColor: isDarkTheme ? theme.background : theme.primary,
             opacity: isDarkTheme ? 1 : 0.3,
           }}
         />
