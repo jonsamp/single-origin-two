@@ -7,7 +7,7 @@ Build number: 3
 
 Notes:
 
-- Compressed images/gifs to reduce app size (was 187MB)
+- Compressed images/gifs to reduce app size (Build 2 was 194MB, build 3 is 91MB)
 
 ## 9/18/2019
 
