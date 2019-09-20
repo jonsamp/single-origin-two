@@ -1,6 +1,7 @@
 import React from 'react'
-import { createAppContainer, createBottomTabNavigator } from 'react-navigation'
+import { createAppContainer } from 'react-navigation'
 import { createStackNavigator, TransitionPresets } from 'react-navigation-stack'
+import { createBottomTabNavigator } from 'react-navigation-tabs'
 import Brew from '../../scenes/Brew'
 import BrewSummary from '../../scenes/BrewSummary'
 import LogDetail from '../../scenes/LogDetail'
