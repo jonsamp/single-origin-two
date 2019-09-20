@@ -3633,25 +3633,18 @@ expo-asset@~7.0.0:
     path-browserify "^1.0.0"
     url-parse "^1.4.4"
 
-expo-av@~6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/expo-av/-/expo-av-6.0.0.tgz#95a5a095583bec3ac0a35ba1e9b67e72ac4a6485"
-  integrity sha512-4GI6PUitp3rf9EzPHCuQ2JxrDGo20djen5JISldG0XMNq0y/y+TgEuWyJPYa0/HwKAlwtHoPzYLuhfvjSTIiDg==
+expo-av@~7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/expo-av/-/expo-av-7.0.0.tgz#0ecc622c98bae6e9d220de8c192074175573118a"
+  integrity sha512-iutq8PTXHKdkm+NIYI2G92OB5OXCke4IDyAD4Pbxi+HI5MxKT4wJfAuW9+CjjEO0UJfGy9MuRmZr4ReYkSZR6w==
   dependencies:
-    lodash "^4.17.11"
+    lodash "^4.17.15"
     nullthrows "^1.1.0"
 
 expo-constants@*, expo-constants@~7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-7.0.0.tgz#668c3ec0100e219522ffd9515ec47fadfccd443d"
   integrity sha512-oLINuMtGcAwfHGInSVhq6xGojp3atUpSIp7KImo9rqXhWwD5FNmqA5Jflo4J0ODPq590kN5ieiYCCqwls2/u0w==
-  dependencies:
-    ua-parser-js "^0.7.19"
-
-expo-constants@~6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-6.0.0.tgz#ff4598985ba006e24949be3f05be7429e5bedacf"
-  integrity sha512-O0yL3Ok0YUEWpAqsWjOdgFD/lMfg8PUGH/nq31CZ1s7cuFUlksD42i5YhIRlb0Pa/btK8X9LpfY3eWhx9eTmbg==
   dependencies:
     ua-parser-js "^0.7.19"
 
@@ -3669,10 +3662,10 @@ expo-font@~7.0.0:
   dependencies:
     fontfaceobserver "^2.1.0"
 
-expo-haptics@~6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/expo-haptics/-/expo-haptics-6.0.0.tgz#dd0b8390564b3ba398a3f6d726ce5ad99a892ddc"
-  integrity sha512-Xn+u5Gqp0/aLipKUMhPgZrccTO9uSV5FSM9u6bkMhV/zfjZqQMWpm0NqL24OBBXy5wPmF3g6Hev5YyDUd0Jj9Q==
+expo-haptics@~7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/expo-haptics/-/expo-haptics-7.0.0.tgz#aebcce0cb2cd0f0a9c21b2e1591a2ee26a8e9a41"
+  integrity sha512-E95fqb32U2qbWyW45LdFKL0da+oxlpkjN+fP4NOykH1i6SW0a886X0aAIFJXvbLbfC3l32TcmFUIynrKU/jwOg==
 
 expo-keep-awake@~7.0.0:
   version "7.0.0"
