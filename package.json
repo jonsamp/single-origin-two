@@ -6,7 +6,9 @@
     "start": "expo start --ios",
     "android": "expo start --android",
     "postinstall": "rndebugger-open",
-    "prettier": "prettier --write './src/app/**/*.js'"
+    "prettier": "prettier --write './src/app/**/*.js'",
+    "compressgifs": "gifsicle --batch --lossy=100 --resize-width=400 --colors 256 -O3 **/*.gif",
+    "resizeimages": "mogrify -r 400 **/*.{jpg,png}"
   },
   "dependencies": {
     "date-fns": "1.30.1",
