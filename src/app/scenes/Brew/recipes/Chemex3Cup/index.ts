@@ -1,11 +1,11 @@
-import AddGrounds from './images/addgrounds.gif'
-import AfterBloom from './images/afterbloom.gif'
-import AfterPour from './images/afterpour.gif'
-import Bloom from './images/bloom.gif'
-import Default from './images/default.jpg'
-import Finish from './images/finish.gif'
-import Pour from './images/pour.gif'
-import WetFilter from './images/wetfilter.gif'
+import AddGrounds from '../Chemex/images/addgrounds.gif'
+import AfterBloom from '../Chemex/images/afterbloom.gif'
+import AfterPour from '../Chemex/images/afterpour.gif'
+import Bloom from '../Chemex/images/bloom.gif'
+import Default from '../Chemex/images/default.jpg'
+import Finish from '../Chemex/images/finish.gif'
+import Pour from '../Chemex/images/pour.gif'
+import WetFilter from '../Chemex/images/wetfilter.gif'
 
 export default {
   id: 'Chemex3Cup',

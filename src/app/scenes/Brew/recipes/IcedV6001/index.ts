@@ -1,11 +1,11 @@
-import AddGrounds from './images/addgrounds.png'
-import AfterBloom from './images/afterbloom.gif'
-import Finish from './images/afterfinish.gif'
-import AfterPour from './images/afterpour.gif'
-import Bloom from './images/bloom.gif'
-import Default from './images/default.png'
-import Pour from './images/pour.gif'
-import WetFilter from './images/wetfilter.png'
+import AddGrounds from '../V60/images/addgrounds.png'
+import AfterBloom from '../V60/images/afterbloom.gif'
+import Finish from '../V60/images/afterfinish.gif'
+import AfterPour from '../V60/images/afterpour.gif'
+import Bloom from '../V60/images/bloom.gif'
+import Default from '../V60/images/default.png'
+import Pour from '../V60/images/pour.gif'
+import WetFilter from '../V60/images/wetfilter.png'
 
 export default {
   id: 'IcedV6001',

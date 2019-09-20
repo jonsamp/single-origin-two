@@ -1,12 +1,12 @@
-import AddGrounds from './images/add-grounds.jpg'
-import AfterBloom from './images/afterbloom.gif'
-import Finish from './images/afterfinish.gif'
-import AfterPour from './images/afterpour.gif'
-import Bloom from './images/bloom.gif'
-import Default from './images/default.jpg'
-import Draining from './images/draining.gif'
-import Pour from './images/pour.gif'
-import WetFilter from './images/wet-filter.jpg'
+import AddGrounds from '../KalitaWave185/images/add-grounds.jpg'
+import AfterBloom from '../KalitaWave185/images/afterbloom.gif'
+import Finish from '../KalitaWave185/images/afterfinish.gif'
+import AfterPour from '../KalitaWave185/images/afterpour.gif'
+import Bloom from '../KalitaWave185/images/bloom.gif'
+import Default from '../KalitaWave185/images/default.jpg'
+import Draining from '../KalitaWave185/images/draining.gif'
+import Pour from '../KalitaWave185/images/pour.gif'
+import WetFilter from '../KalitaWave185/images/wet-filter.jpg'
 
 export default {
   id: 'KalitaWave155',
