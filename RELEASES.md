@@ -15,9 +15,10 @@ Release channel: alpha
 Build number: 2
 
 Notes:
-Released to alpha test users on 9/20/19
 
-## ???
+- Released to alpha test users on 9/20/19
+
+## 9/15/2019
 
 Release channel: alpha
 Build number: 1
