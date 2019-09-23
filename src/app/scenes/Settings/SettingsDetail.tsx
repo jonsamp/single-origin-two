@@ -10,6 +10,7 @@ import withTheme from '../../providers/theme'
 import { Settings as SettingsType } from '../../state/settings/types'
 import { Theme } from '../../types/index'
 import ChecklistSetting from './ChecklistSetting'
+import Group from './Group'
 import InputSetting from './InputSetting'
 import PrivacyPolicy from './PrivacyPolicy'
 import Section from './Section'
@@ -53,6 +54,7 @@ class Settings extends Component<SettingsProps> {
       settingUpdated,
       isDarkTheme,
       toggleTheme,
+      navigation,
     } = this.props
     const groupName = this.props.navigation.state.params
     let children
@@ -174,7 +176,6 @@ class Settings extends Component<SettingsProps> {
         )
         break
       case 'recipes':
-        console.log('recipes', this.createRecipesCheckList())
         children = (
           <Fragment>
             <Section title="Recipes">
@@ -194,6 +195,10 @@ class Settings extends Component<SettingsProps> {
                 title="Dark mode"
                 value={isDarkTheme}
                 onChange={toggleTheme}
+              />
+              <Group
+                title="View Get Started"
+                onPress={() => navigation.navigate('Onboarding')}
               />
               <SwitchSetting
                 title="Share anonymous data"

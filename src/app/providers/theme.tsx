@@ -5,6 +5,9 @@ import themes from '../constants/themes'
 import { themeUpdated } from '../state/settings/actions'
 import { selectSettings } from '../state/settings/selectors'
 import { State } from '../state/types'
+import { Theme as ThemeType } from '../types'
+
+export type Theme = ThemeType
 
 interface WrapperProps {
   theme: 'default' | 'light' | 'dark'

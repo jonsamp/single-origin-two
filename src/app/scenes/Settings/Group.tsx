@@ -11,6 +11,7 @@ interface GroupProps {
   theme: Theme
   navigation: NavigationScreenProp<any>
   isDarkTheme?: boolean
+  onPress?: () => void
 }
 
 class Group extends Component<GroupProps> {
@@ -19,7 +20,7 @@ class Group extends Component<GroupProps> {
   }
 
   render() {
-    const { title, navigation, theme, isDarkTheme } = this.props
+    const { title, navigation, theme, isDarkTheme, onPress } = this.props
 
     return (
       <TouchableOpacity
@@ -32,7 +33,12 @@ class Group extends Component<GroupProps> {
           borderBottomColor: isDarkTheme ? theme.background : theme.grey2,
           borderBottomWidth: 1,
         }}
-        onPress={() => navigation.navigate('SettingsDetail', title as any)}
+        onPress={() => {
+          if (onPress) {
+            return onPress()
+          }
+          navigation.navigate('SettingsDetail', title as any)
+        }}
       >
         <Text style={[type.headline, { color: theme.foreground }] as TextStyle}>
           {title}
