@@ -1,3 +1,4 @@
+import Aeropress from './Aeropress'
 import Chemex from './Chemex'
 import Chemex3Cup from './Chemex3Cup'
 import Clever from './Clever'
@@ -13,6 +14,7 @@ import V60 from './V60'
 import V6001 from './V6001'
 
 export default {
+  Aeropress,
   Chemex,
   IcedChemex,
   Chemex3Cup,

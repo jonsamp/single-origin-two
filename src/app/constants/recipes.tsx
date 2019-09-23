@@ -1,4 +1,5 @@
 import React from 'react'
+import AeropressIcon from './icons/AeropressIcon'
 import Chemex3CupIcon from './icons/Chemex3CupIcon'
 import ChemexIcon from './icons/ChemexIcon'
 import CleverIcon from './icons/CleverIcon'
@@ -8,6 +9,12 @@ import V6001Icon from './icons/V6001Icon'
 import V60Icon from './icons/V60Icon'
 
 export default {
+  Aeropress: {
+    title: 'Aeropress',
+    id: 'Aeropress',
+    modifier: 'Inverted',
+    icon: ({ fill, size }) => <AeropressIcon fill={fill} size={size} />,
+  },
   Chemex: {
     title: 'Chemex',
     id: 'Chemex',
