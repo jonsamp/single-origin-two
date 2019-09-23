@@ -42,6 +42,13 @@ const grinders = {
     min: 1,
     max: 18,
   },
+  mahlkonigEK43: {
+    title: 'Mahlkönig EK43 (0-16)',
+    shortTitle: 'Mahlkönig EK43',
+    id: 'mahlkonigEK43',
+    min: 0,
+    max: 16,
+  },
 }
 
 const getVerboseSetting = (percent: number) => {
