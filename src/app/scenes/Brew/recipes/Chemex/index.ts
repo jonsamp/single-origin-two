@@ -15,6 +15,7 @@ export default {
   defaultGrind: 0.75,
   defaultTotalVolume: 720,
   defaultSource: Default,
+  iced: true,
   preparation: [
     {
       text:

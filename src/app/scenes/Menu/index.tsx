@@ -64,7 +64,7 @@ class Menu extends Component<MenuProps> {
       : theme
 
     const selectedRecipes = Object.keys(settings.recipes).filter(
-      v => settings.recipes[v]
+      v => settings.recipes[v] && recipes[v]
     )
     const menuRecipes = Object.values(selectedRecipes).map(sr => recipes[sr])
 

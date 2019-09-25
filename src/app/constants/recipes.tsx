@@ -21,23 +21,10 @@ export default {
     id: 'Chemex',
     icon: ({ fill, size }) => <ChemexIcon fill={fill} size={size} />,
   },
-  IcedChemex: {
-    title: 'Iced Chemex',
-    id: 'IcedChemex',
-    iced: true,
-    icon: ({ fill, size }) => <ChemexIcon fill={fill} size={size} />,
-  },
   Chemex3Cup: {
     title: 'Chemex',
     modifier: '3 Cup',
     id: 'Chemex3Cup',
-    icon: ({ fill, size }) => <Chemex3CupIcon fill={fill} size={size} />,
-  },
-  IcedChemex3Cup: {
-    title: 'Iced Chemex',
-    modifier: '3 Cup',
-    id: 'IcedChemex3Cup',
-    iced: true,
     icon: ({ fill, size }) => <Chemex3CupIcon fill={fill} size={size} />,
   },
   Clever: {
@@ -69,24 +56,10 @@ export default {
     id: 'KalitaWave185',
     icon: ({ fill, size }) => <KalitaWave185Icon fill={fill} size={size} />,
   },
-  IcedKalitaWave185: {
-    title: 'Iced Kalita Wave',
-    modifier: '185',
-    iced: true,
-    id: 'IcedKalitaWave185',
-    icon: ({ fill, size }) => <KalitaWave185Icon fill={fill} size={size} />,
-  },
   KalitaWave155: {
     title: 'Kalita Wave',
     modifier: '155',
     id: 'KalitaWave155',
-    icon: ({ fill, size }) => <KalitaWave155Icon fill={fill} size={size} />,
-  },
-  IcedKalitaWave155: {
-    title: 'Iced Kalita Wave',
-    modifier: '155',
-    iced: true,
-    id: 'IcedKalitaWave155',
     icon: ({ fill, size }) => <KalitaWave155Icon fill={fill} size={size} />,
   },
   V60: {
@@ -94,23 +67,10 @@ export default {
     id: 'V60',
     icon: ({ fill, size }) => <V60Icon fill={fill} size={size} />,
   },
-  IcedV60: {
-    title: 'Iced V60',
-    id: 'IcedV60',
-    iced: true,
-    icon: ({ fill, size }) => <V60Icon fill={fill} size={size} />,
-  },
   V6001: {
     title: 'V60',
     id: 'V6001',
     modifier: '#01',
-    icon: ({ fill, size }) => <V6001Icon fill={fill} size={size} />,
-  },
-  IcedV6001: {
-    title: 'Iced V60',
-    id: 'IcedV6001',
-    modifier: '#01',
-    iced: true,
     icon: ({ fill, size }) => <V6001Icon fill={fill} size={size} />,
   },
 }

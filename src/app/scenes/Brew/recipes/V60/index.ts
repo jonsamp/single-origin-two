@@ -15,6 +15,7 @@ export default {
   defaultGrind: 0.5,
   defaultTotalVolume: 340,
   defaultSource: Default,
+  iced: true,
   preparation: [
     {
       image: WetFilter,
