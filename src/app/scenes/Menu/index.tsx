@@ -15,6 +15,7 @@ import { width } from '../../constants/layout'
 import recipes from '../../constants/recipes'
 import withSettings from '../../providers/settings'
 import withTheme from '../../providers/theme'
+import withTracking, { Tracking } from '../../providers/tracking'
 import { Settings } from '../../state/settings/types'
 import { Theme } from '../../types/index'
 import Onboarding from './Onboarding'
@@ -24,15 +25,19 @@ interface MenuProps {
   navigation: NavigationScreenProp<any>
   isDarkTheme: boolean
   settings: Settings
+  tracking: Tracking
 }
 
 class Menu extends Component<MenuProps> {
   notificationSubscription
 
   componentDidMount() {
+    const { tracking } = this.props
     this.notificationSubscription = Notifications.addListener(
       this.handleNotification
     )
+
+    tracking.track(tracking.events.MENU_VIEWED)
   }
 
   handleNotification = notification => {
@@ -54,7 +59,7 @@ class Menu extends Component<MenuProps> {
     }
   }
   render() {
-    const { theme, navigation, isDarkTheme, settings } = this.props
+    const { theme, navigation, isDarkTheme, settings, tracking } = this.props
     const modifiedTheme = isDarkTheme
       ? {
           ...theme,
@@ -113,7 +118,10 @@ class Menu extends Component<MenuProps> {
             <ListItem
               recipe={recipe}
               key={recipe.id}
-              onPress={() => navigation.navigate('Brew', { id: recipe.id })}
+              onPress={() => {
+                navigation.navigate('Brew', { id: recipe.id })
+                tracking.track(tracking.events.RECIPE_TAPPED, { id: recipe.id })
+              }}
             />
           ))}
           {menuRecipes.length === 0 && (
@@ -125,4 +133,6 @@ class Menu extends Component<MenuProps> {
   }
 }
 
-export default withSettings(withNavigation(withTheme(Menu) as any))
+export default withTracking(
+  withSettings(withNavigation(withTheme(Menu) as any))
+)

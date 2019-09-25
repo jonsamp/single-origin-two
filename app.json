@@ -9,6 +9,9 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "extra": {
+      "amplitudeApiKey": "b7b8d9d386e9d6ccf3d6f69e941bbaaf"
+    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
