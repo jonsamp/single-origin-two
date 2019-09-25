@@ -3,6 +3,8 @@ import Chemex from './Chemex'
 import Chemex3Cup from './Chemex3Cup'
 import Clever from './Clever'
 import FrenchPress3Cup from './FrenchPress3Cup'
+import FrenchPress4Cup from './FrenchPress4Cup'
+import FrenchPress8Cup from './FrenchPress8Cup'
 import IcedChemex from './IcedChemex'
 import IcedChemex3Cup from './IcedChemex3Cup'
 import IcedKalitaWave155 from './IcedKalitaWave155'
@@ -22,6 +24,8 @@ export default {
   IcedChemex3Cup,
   Clever,
   FrenchPress3Cup,
+  FrenchPress4Cup,
+  FrenchPress8Cup,
   KalitaWave185,
   IcedKalitaWave185,
   KalitaWave155,
