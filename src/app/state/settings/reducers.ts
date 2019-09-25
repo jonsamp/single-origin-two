@@ -16,9 +16,10 @@ const initialState = {
   waterVolumeUnit: 'grams',
   shareTrackingData: true,
   onboardingVisible: true,
-  recipes: Object.values(recipes)
-    .filter((r: any) => !r.iced)
-    .reduce((acc, r) => ({ ...acc, [r.id]: true }), {}),
+  recipes: Object.values(recipes).reduce(
+    (acc, r) => ({ ...acc, [r.id]: true }),
+    {}
+  ),
 }
 
 const reducers = {

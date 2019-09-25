@@ -38,9 +38,7 @@ function Item(props: ItemProps) {
           ]}
         >
           {recipe.icon({
-            fill: recipe.iced
-              ? theme.blue
-              : isDarkTheme
+            fill: isDarkTheme
                 ? theme.foreground
                 : theme.background,
           })}

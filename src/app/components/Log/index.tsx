@@ -140,7 +140,7 @@ class Log extends Component<LogProps> {
         >
           <View style={{ alignItems: 'center' }}>
             {recipe.icon({
-              fill: recipe.iced ? theme.blue : theme.foreground,
+              fill: theme.foreground,
               size: 2,
             })}
             <Text

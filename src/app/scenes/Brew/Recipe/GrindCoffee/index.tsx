@@ -59,9 +59,7 @@ function GrindCoffee({
           grindUnit.getGrindSetting(defaultGrind).title
         }** with your ${
           grindUnit.grinder.shortTitle
-        }, then add the grounds to your ${title
-          .toLowerCase()
-          .replace('iced ', '')}.`}
+        }, then add the grounds to your ${title.toLowerCase()}.`}
         icon="GrindIcon"
         hint={recommendation}
       />
