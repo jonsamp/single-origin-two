@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import { Switch, View } from 'react-native'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import { connect } from 'react-redux'
 import Button from '../../../components/Button'
@@ -13,6 +14,7 @@ import { UnitHelpers } from '../../../types/index'
 import AddIce from './AddIce'
 import BoilWater from './BoilWater'
 import GrindCoffee from './GrindCoffee'
+import IceToggle from './IceToggle'
 import Notes from './Notes'
 import PourTimer from './PourTimer'
 import Preparation from './Preparation'
@@ -36,6 +38,7 @@ interface RecipeState {
   attributesRecorded: boolean
   totalVolume: number
   randomKey: number
+  isIced: boolean
 }
 
 const mapStateToProps = (state, props) => ({
@@ -60,9 +63,12 @@ class Recipe extends Component<RecipeProps, RecipeState> {
     attributesRecorded: false,
     totalVolume:
       this.props.recentLog.totalVolume || this.props.recipe.defaultTotalVolume,
+    isIced: false,
   }
 
   setRecipeState = ({ key, value }) => this.setState({ [key]: value } as any)
+
+  onIsIcedChange = value => this.setState({ isIced: value })
 
   onFinish = () => {
     const { navigation, recipe, settings, logAdded } = this.props
@@ -108,7 +114,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
     const { minYield, maxYield, defaultGrind } = recipe
     const { totalVolume, grind, temp } = this.state
     const coffeeWeight = Math.round(totalVolume / settings.ratio)
-    const totalPourVolume = recipe.iced
+    const totalPourVolume = this.state.isIced
       ? Math.round(totalVolume * 0.666)
       : totalVolume
     const longestSecond = recipe.steps
@@ -128,6 +134,9 @@ class Recipe extends Component<RecipeProps, RecipeState> {
           minYield={minYield}
           maxYield={maxYield}
         />
+        {recipe.iced && (
+          <IceToggle value={this.state.isIced} onChange={this.onIsIcedChange} />
+        )}
         {recentLog.notes ? <Notes text={recentLog.notes} /> : null}
         <BoilWater volume={totalPourVolume} />
         <GrindCoffee
@@ -137,7 +146,9 @@ class Recipe extends Component<RecipeProps, RecipeState> {
           recentLog={recentLog}
           recipeDuration={longestSecond + settings.bloomDuration}
         />
-        {recipe.iced && <AddIce volume={Math.round(totalVolume * 0.333)} />}
+        {this.state.isIced && (
+          <AddIce volume={Math.round(totalVolume * 0.333)} />
+        )}
         <RecordBrewAttributes
           setRecipeState={this.setRecipeState}
           defaultGrind={defaultGrind}
