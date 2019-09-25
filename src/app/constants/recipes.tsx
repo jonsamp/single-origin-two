@@ -3,6 +3,7 @@ import AeropressIcon from './icons/AeropressIcon'
 import Chemex3CupIcon from './icons/Chemex3CupIcon'
 import ChemexIcon from './icons/ChemexIcon'
 import CleverIcon from './icons/CleverIcon'
+import FrenchPressIcon from './icons/FrenchPressIcon';
 import KalitaWave155Icon from './icons/KalitaWave155Icon'
 import KalitaWave185Icon from './icons/KalitaWave185Icon'
 import V6001Icon from './icons/V6001Icon'
@@ -43,6 +44,12 @@ export default {
     title: 'Clever',
     id: 'Clever',
     icon: ({ fill, size }) => <CleverIcon fill={fill} size={size} />,
+  },
+  FrenchPress3Cup: {
+    title: 'French Press',
+    modifier: '3 Cup',
+    id: 'FrenchPress3Cup',
+    icon: ({ fill, size }) => <FrenchPressIcon fill={fill} size={size} />,
   },
   KalitaWave185: {
     title: 'Kalita Wave',
