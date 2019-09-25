@@ -10,6 +10,7 @@ import type from '../../constants/type'
 import formatSeconds from '../../helpers/formatSeconds'
 import withSettings from '../../providers/settings'
 import withTheme from '../../providers/theme'
+import withTracking, { Tracking } from '../../providers/tracking'
 import { selectLog } from '../../state/logs/selectors'
 import { Log as LogType } from '../../state/logs/types'
 import {
@@ -34,6 +35,7 @@ interface LogProps {
   reminderCancelled: () => void
   withReminder: boolean
   notifications: Notifications
+  tracking: Tracking
 }
 
 const mapStateToProps = (state, props) => {
@@ -71,9 +73,15 @@ class Log extends Component<LogProps> {
   }
 
   componentDidMount() {
-    if (this.props.withReminder) {
+    const { tracking, withReminder, log } = this.props
+    if (withReminder) {
       this.props.notificationsReset()
     }
+
+    tracking.track(tracking.events.LOG_VIEWED, {
+      isAfterRecipe: withReminder,
+      ...log,
+    })
   }
 
   capitalizeFirstLetter = string => {
@@ -340,4 +348,4 @@ class Log extends Component<LogProps> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withTheme(withSettings(Log)))
+)(withTracking(withTheme(withSettings(Log))))

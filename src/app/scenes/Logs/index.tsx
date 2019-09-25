@@ -10,6 +10,7 @@ import ListItem from '../../components/ListItem'
 import ScreenPlaceholder from '../../components/ScreenPlaceholder'
 import recipes from '../../constants/recipes'
 import withTheme from '../../providers/theme'
+import withTracking, { Tracking } from '../../providers/tracking'
 import { logDeleted } from '../../state/logs/actions'
 import { selectLogs } from '../../state/logs/selectors'
 import { Log, Logs as LogsType, Theme } from '../../types/index'
@@ -21,6 +22,7 @@ interface LogsProps {
   isDarkTheme: boolean
   logDeleted: (props: { timestamp: number }) => void
   navigation: NavigationScreenProp<any>
+  tracking: Tracking
 }
 
 interface LogsState {
@@ -35,6 +37,19 @@ const mapDispatchToProps = { logDeleted }
 
 class Logs extends Component<LogsProps, LogsState> {
   state = { editing: false }
+
+  focusListener
+
+  componentDidMount() {
+    const { navigation, tracking } = this.props
+    this.focusListener = navigation.addListener('didFocus', () => {
+      tracking.track(tracking.events.LOGS_VIEWED)
+    })
+  }
+
+  componentWillUnmount() {
+    this.focusListener.remove()
+  }
 
   toggleEditing = () => this.setState(prev => ({ editing: !prev.editing }))
 
@@ -126,4 +141,4 @@ class Logs extends Component<LogsProps, LogsState> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withNavigation(withTheme(Logs) as any))
+)(withNavigation(withTracking(withTheme(Logs)) as any))

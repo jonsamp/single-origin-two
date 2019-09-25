@@ -16,6 +16,7 @@ import ScrollSelect from '../../components/ScrollSelect'
 import recipes from '../../constants/recipes'
 import type from '../../constants/type'
 import withTheme from '../../providers/theme'
+import withTracking, { Tracking } from '../../providers/tracking'
 import ChecklistSetting from '../../scenes/Settings/ChecklistSetting'
 import { logUpdated } from '../../state/logs/actions'
 import { selectLog } from '../../state/logs/selectors'
@@ -31,6 +32,7 @@ interface LogDetailEditProps {
   logUpdated: (props: { timestamp: number; log: any }) => void
   logDeleted: (props: { timestamp: number }) => void
   log: Log
+  tracking: Tracking
 }
 
 interface LogDetailEditState {
@@ -48,6 +50,11 @@ const mapDispatchToProps = {
 }
 
 class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
+  componentDidMount() {
+    const { tracking } = this.props
+    tracking.track(tracking.events.RATING_VIEWED)
+  }
+
   updateLog = (key, value) => {
     this.props.logUpdated({
       timestamp: this.props.navigation.state.params.timestamp,
@@ -226,4 +233,4 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withNavigation(withTheme(LogDetailEdit) as any))
+)(withNavigation(withTracking(withTheme(LogDetailEdit)) as any))
