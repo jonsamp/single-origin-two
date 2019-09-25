@@ -65,6 +65,7 @@ class Logs extends Component<LogsProps, LogsState> {
         }
       : theme
 
+    console.log({ logs })
     return (
       <View style={{ flex: 1, backgroundColor: theme.background }}>
         <HeaderScrollView
@@ -94,7 +95,7 @@ class Logs extends Component<LogsProps, LogsState> {
           {logs && Object.keys(logs).length ? (
             <SwipeListView
               data={Object.values(logs)
-                .filter(log => log)
+                .filter(log => log && recipes[log.recipeId])
                 .sort(this.byTimestamp)}
               renderItem={props => {
                 const { item: log } = props
