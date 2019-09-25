@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { ScrollView, View } from 'react-native'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
-import Button from '../../components/Button'
-import Card from '../../components/Card'
 import Header from '../../components/Header'
 import Image from '../../components/Image'
+import InstructionalCard from '../../components/InstructionalCard'
 import Instructions from '../../components/Instructions'
 import withTheme from '../../providers/theme'
 import { State } from '../../state/types'
@@ -34,13 +33,17 @@ class Preparation extends Component<PreparationProps> {
       >
         <Header title="Preparation" onBack={navigation.goBack} />
         <ScrollView
-          style={{ paddingHorizontal: 16, paddingTop: 32, paddingBottom: 60 }}
+          contentContainerStyle={{
+            paddingHorizontal: 16,
+            paddingTop: 32,
+            paddingBottom: 60,
+          }}
         >
           {preparation.map(prepStep => (
-            <Card key={prepStep.text}>
-              {prepStep.image ? <Image source={prepStep.image} /> : null}
-              <Instructions text={prepStep.text} />
-            </Card>
+            <InstructionalCard
+              key={prepStep.text}
+              step={{ image: prepStep.image, description: prepStep.text }}
+            />
           ))}
         </ScrollView>
       </View>

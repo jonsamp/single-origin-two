@@ -1,10 +1,9 @@
 import React from 'react'
-import { Image, ScrollView, Text, View } from 'react-native'
+import { ScrollView } from 'react-native'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import Button from '../../components/Button'
-import Card from '../../components/Card'
 import Header from '../../components/Header'
-import Instructions from '../../components/Instructions'
+import InstructionalCard from '../../components/InstructionalCard'
 import withSettings from '../../providers/settings'
 import withTheme, { Theme } from '../../providers/theme'
 import ChooseYield from './images/chooseYield.gif'
@@ -70,22 +69,7 @@ function Onboarding(props: OnboardingProps) {
         }}
       >
         {onboarding.map(step => (
-          <Card key={step.title}>
-            {step.image ? <Image source={step.image} /> : null}
-            <Instructions
-              text={step.title}
-              textStyle={{ fontWeight: 'bold', padding: 0 }}
-              style={{
-                marginBottom: 0,
-                borderBottomWidth: 2,
-                borderBottomColor: props.theme.primary,
-                margin: 20,
-                padding: 0,
-                paddingBottom: 16,
-              }}
-            />
-            <Instructions text={step.description} />
-          </Card>
+          <InstructionalCard key={step.title} step={step} />
         ))}
         <Button
           title="Got it"
