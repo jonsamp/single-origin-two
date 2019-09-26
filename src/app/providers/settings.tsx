@@ -4,11 +4,13 @@ import { getVerboseSetting, grinders } from '../constants/grinders'
 import { units } from '../constants/units'
 import { settingUpdated } from '../state/settings/actions'
 import { selectSettings } from '../state/settings/selectors'
-import { Settings } from '../state/settings/types'
+import { Settings as SettingsType } from '../state/settings/types'
 import { State } from '../state/types'
 
+export type Settings = SettingsType
+
 interface WrapperProps {
-  settings: Settings
+  settings: SettingsType
   settingUpdated: (props: { setting: string; value: any }) => void
   [i: string]: any
 }

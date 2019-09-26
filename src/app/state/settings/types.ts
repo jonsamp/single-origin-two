@@ -11,6 +11,7 @@ export interface Settings {
   waterVolumeUnit: WeightUnits
   shareTrackingData: boolean
   onboardingVisible: boolean
+  submittedRating: boolean
   recipes: {
     [i: string]: boolean
   }
