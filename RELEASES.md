@@ -1,5 +1,14 @@
 # Releases
 
+How to:
+
+```
+xcrun altool --upload-app -f ~/Downloads/ -u sampjon@gmail.com
+```
+
+- Add ipa file path
+- password is app specific password from appleid.apple.com
+
 ## 9/25/2019
 
 Release channel: production-1.0

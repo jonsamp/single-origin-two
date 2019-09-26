@@ -88,14 +88,14 @@ class Settings extends Component<SettingsProps> {
               />
             </SettingWrapper>
           </TouchableOpacity>
-          {/* <TouchableOpacity
+          <TouchableOpacity
             onPress={() =>
               Linking.openURL(
-                'https://itunes.apple.com/us/app/appName/id1316843624?mt=8&action=write-review'
+                'https://itunes.apple.com/app/id1480168613?action=write-review'
               )
             }
           >
-            <SettingWrapper title="Rate Single Origin">
+            <SettingWrapper title="Rate Single Origin 2">
               <Feather
                 name="star"
                 size={modifiedTheme.iconSize}
@@ -103,9 +103,8 @@ class Settings extends Component<SettingsProps> {
                 style={{ opacity: 0.65 }}
               />
             </SettingWrapper>
-          </TouchableOpacity> */}
-          <Group title="Privacy Policy" />
-          {/* <TouchableOpacity
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() => Linking.openURL('http://mbox.coffee/OGCC')}
           >
             <SettingWrapper title="$10 off Mistobox">
@@ -116,7 +115,8 @@ class Settings extends Component<SettingsProps> {
                 style={{ opacity: 0.65 }}
               />
             </SettingWrapper>
-          </TouchableOpacity> */}
+          </TouchableOpacity>
+          <Group title="Privacy Policy" />
         </Section>
       </HeaderScrollView>
     )

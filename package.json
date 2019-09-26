@@ -17,6 +17,7 @@
     "expo-av": "~7.0.0",
     "expo-constants": "~7.0.0",
     "expo-haptics": "~7.0.0",
+    "expo-store-review": "~1.0.0",
     "lodash": "4.17.11",
     "react": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
