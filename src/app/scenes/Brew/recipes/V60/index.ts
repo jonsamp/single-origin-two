@@ -9,7 +9,7 @@ import WetFilter from './images/wetfilter.png'
 
 export default {
   id: 'V60',
-  title: 'V60',
+  title: 'V60 #02',
   minYield: 142,
   maxYield: 567,
   defaultGrind: 0.5,

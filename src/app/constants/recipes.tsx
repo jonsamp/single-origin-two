@@ -65,6 +65,7 @@ export default {
   V60: {
     title: 'V60',
     id: 'V60',
+    modifier: '#02',
     icon: ({ fill, size }) => <V60Icon fill={fill} size={size} />,
   },
   V6001: {

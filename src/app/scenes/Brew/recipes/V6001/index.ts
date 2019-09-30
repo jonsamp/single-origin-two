@@ -13,7 +13,7 @@ export default {
   minYield: 142,
   maxYield: 400,
   defaultGrind: 0.5,
-  defaultTotalVolume: 340,
+  defaultTotalVolume: 280,
   defaultSource: Default,
   iced: true,
   preparation: [
