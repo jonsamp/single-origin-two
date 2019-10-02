@@ -20,8 +20,8 @@ import TabBar from './TabBar'
 
 const TabNavigator = createBottomTabNavigator(
   {
-    Logs,
     Menu,
+    Logs,
     Settings: {
       screen: props => <Settings {...props} />,
     },
