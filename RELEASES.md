@@ -9,6 +9,17 @@ xcrun altool --upload-app -f ~/Downloads/ -u sampjon@gmail.com
 - Add ipa file path
 - password is app specific password from appleid.apple.com
 
+## 10/2/2019
+
+Release channel: production-1.1
+Build number: 1
+
+Notes:
+
+- Adds Beehouse pour over brewer and Eva Solo immersion brewer. Find them both in Settings > Recipes.
+- Updates Logs tab and fixes an issue where logs were impossible to delete.
+- Updates the rate of pouring for French Presses and Eva Solo.
+
 ## 9/25/2019
 
 Release channel: production-1.0
