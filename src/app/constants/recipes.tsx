@@ -1,5 +1,6 @@
 import React from 'react'
 import AeropressIcon from './icons/AeropressIcon'
+import BeehouseIcon from './icons/BeehouseIcon'
 import Chemex3CupIcon from './icons/Chemex3CupIcon'
 import ChemexIcon from './icons/ChemexIcon'
 import CleverIcon from './icons/CleverIcon'
@@ -15,6 +16,11 @@ export default {
     id: 'Aeropress',
     modifier: 'Inverted',
     icon: ({ fill, size }) => <AeropressIcon fill={fill} size={size} />,
+  },
+  Beehouse: {
+    title: 'Beehouse',
+    id: 'Beehouse',
+    icon: ({ fill, size }) => <BeehouseIcon fill={fill} size={size} />,
   },
   Chemex: {
     title: 'Chemex',

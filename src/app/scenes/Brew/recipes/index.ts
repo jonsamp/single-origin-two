@@ -1,4 +1,5 @@
 import Aeropress from './Aeropress'
+import Beehouse from './Beehouse'
 import Chemex from './Chemex'
 import Chemex3Cup from './Chemex3Cup'
 import Clever from './Clever'
@@ -12,6 +13,7 @@ import V6001 from './V6001'
 
 export default {
   Aeropress,
+  Beehouse,
   Chemex,
   Chemex3Cup,
   Clever,
