@@ -4,6 +4,7 @@ import BeehouseIcon from './icons/BeehouseIcon'
 import Chemex3CupIcon from './icons/Chemex3CupIcon'
 import ChemexIcon from './icons/ChemexIcon'
 import CleverIcon from './icons/CleverIcon'
+import EvaSoloIcon from './icons/EvaSoloIcon'
 import FrenchPressIcon from './icons/FrenchPressIcon'
 import KalitaWave155Icon from './icons/KalitaWave155Icon'
 import KalitaWave185Icon from './icons/KalitaWave185Icon'
@@ -37,6 +38,11 @@ export default {
     title: 'Clever',
     id: 'Clever',
     icon: ({ fill, size }) => <CleverIcon fill={fill} size={size} />,
+  },
+  EvaSolo: {
+    title: 'Eva Solo',
+    id: 'EvaSolo',
+    icon: ({ fill, size }) => <EvaSoloIcon fill={fill} size={size} />,
   },
   FrenchPress3Cup: {
     title: 'French Press',

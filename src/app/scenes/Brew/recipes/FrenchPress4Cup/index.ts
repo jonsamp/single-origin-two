@@ -15,6 +15,7 @@ export default {
   maxYield: 640,
   defaultGrind: 0.85,
   defaultTotalVolume: 432,
+  pourVelocity: 40,
   defaultSource: Default,
   preparation: [
     {

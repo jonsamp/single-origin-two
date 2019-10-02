@@ -10,6 +10,7 @@ interface WaterVolumeProps {
   volume: number
   waterVolumeUnit: any
   onAnimateNumberFinish: () => {}
+  pourVelocity?: number
 }
 
 class WaterVolume extends Component<WaterVolumeProps> {
@@ -20,6 +21,7 @@ class WaterVolume extends Component<WaterVolumeProps> {
       volume,
       waterVolumeUnit,
       onAnimateNumberFinish,
+      pourVelocity,
     } = this.props
     const inputRange = [0, 1]
     const trackingAnimatedScale = animatedValue.interpolate({
@@ -80,7 +82,7 @@ class WaterVolume extends Component<WaterVolumeProps> {
                       ? 0.1
                       : 0.01
                 }
-                interval={130}
+                interval={pourVelocity || 130}
                 onFinish={onAnimateNumberFinish}
               />
             </Animated.Text>

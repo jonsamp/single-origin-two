@@ -16,6 +16,7 @@ export default {
   defaultGrind: 0.85,
   defaultTotalVolume: 272,
   defaultSource: Default,
+  pourVelocity: 40,
   preparation: [
     {
       image: AddGrounds,

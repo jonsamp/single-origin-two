@@ -120,9 +120,10 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
           step.volumePercent - this.state.volumePercent
         const volumeToAdd = volumePercentDifference * this.props.volume
 
-        // 130 is pour velocity
+        // 130 is default pour velocity
         // 750 is adding 3/4 of a second so the animation of the pour tracker has time to finish
-        lengthOfStep = volumeToAdd * 130 + 750
+        lengthOfStep =
+          volumeToAdd * (this.props.recipe.pourVelocity || 130) + 750
       } else {
         lengthOfStep = 5000
       }
@@ -254,6 +255,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
                 volume={volume * volumePercent}
                 waterVolumeUnit={waterVolumeUnit}
                 onAnimateNumberFinish={this.onAnimateNumberFinish}
+                pourVelocity={this.props.recipe.pourVelocity}
               />
             </View>
           </Card>
