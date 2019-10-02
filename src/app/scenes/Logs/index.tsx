@@ -108,7 +108,14 @@ class Logs extends Component<LogsProps, LogsState> {
               extraData={this.state}
               ItemSeparatorComponent={() => (
                 <View
-                  style={[styles.separator, { backgroundColor: theme.grey1 }]}
+                  style={[
+                    styles.separator,
+                    {
+                      backgroundColor: isDarkTheme
+                        ? theme.background
+                        : theme.grey1,
+                    },
+                  ]}
                 />
               )}
             />

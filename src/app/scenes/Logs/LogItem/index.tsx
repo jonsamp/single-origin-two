@@ -29,7 +29,7 @@ const RightActions = ({ dragX, onPress, theme }) => {
   )
 }
 
-const ListItem = ({ log, onPress, onRightPress, theme }) => {
+const ListItem = ({ log, onPress, onRightPress, theme, isDarkTheme }) => {
   const recipe = recipes[log.recipeId]
 
   return (
@@ -44,17 +44,20 @@ const ListItem = ({ log, onPress, onRightPress, theme }) => {
         style={[
           styles.container,
           styles.displayHorizontal,
-          { backgroundColor: theme.background },
+          { backgroundColor: isDarkTheme ? theme.grey2 : theme.background },
         ]}
       >
         <View style={[styles.displayHorizontal, { flex: 1 }]}>
           <View
             style={[
               styles.iconContainer,
-              { backgroundColor: theme.foreground },
+              { backgroundColor: isDarkTheme ? theme.grey1 : theme.foreground },
             ]}
           >
-            {recipe.icon({ fill: theme.background, size: 0.8 })}
+            {recipe.icon({
+              fill: isDarkTheme ? theme.foreground : theme.background,
+              size: 0.8,
+            })}
           </View>
           <View style={{ flex: 1 }}>
             <Text style={[type.headline, { color: theme.foreground }]}>
