@@ -1,11 +1,11 @@
-import AddGrounds from './images/addgrounds.png' // TODO:
+import AddGrounds from './images/addgrounds.png'
 import AfterBloom from './images/afterbloom.gif'
 import AfterPour from './images/afterpour.gif'
 import Bloom from './images/bloom.gif'
 import Default from './images/default.png'
 import Finish from './images/finish.gif'
 import Pour from './images/pour.gif'
-import WetFilter from './images/wetfilter.png' // TODO:
+import WetFilter from './images/wetfilter.png'
 
 export default {
   id: 'Beehouse',
