@@ -65,7 +65,6 @@ class Logs extends Component<LogsProps, LogsState> {
         }
       : theme
 
-    console.log({ logs })
     return (
       <View style={{ flex: 1, backgroundColor: theme.background }}>
         <HeaderScrollView
