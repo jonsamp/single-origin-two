@@ -1,19 +1,17 @@
-import { Feather } from '@expo/vector-icons'
-import { format } from 'date-fns'
 import React, { Component } from 'react'
-import { TouchableOpacity, View } from 'react-native'
+import { Animated, FlatList, View } from 'react-native'
+import { RectButton } from 'react-native-gesture-handler'
 import HeaderScrollView from 'react-native-header-scroll-view'
-import { SwipeListView } from 'react-native-swipe-list-view'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import { connect } from 'react-redux'
-import ListItem from '../../components/ListItem'
 import ScreenPlaceholder from '../../components/ScreenPlaceholder'
 import recipes from '../../constants/recipes'
 import withTheme from '../../providers/theme'
 import withTracking, { Tracking } from '../../providers/tracking'
 import { logDeleted } from '../../state/logs/actions'
 import { selectLogs } from '../../state/logs/selectors'
-import { Log, Logs as LogsType, Theme } from '../../types/index'
+import { Logs as LogsType, Theme } from '../../types/index'
+import LogItem from './LogItem'
 import styles from './styles'
 
 interface LogsProps {
@@ -82,52 +80,37 @@ class Logs extends Component<LogsProps, LogsState> {
           titleStyle={{
             color: modifiedTheme.foreground,
             marginBottom: 24,
-            marginLeft: 0,
+            marginLeft: 12,
           }}
           scrollContainerStyle={{
             backgroundColor: modifiedTheme.grey1,
             paddingBottom: 32,
-            paddingHorizontal: 12,
           }}
           fadeDirection="up"
         >
           {logs && Object.keys(logs).length ? (
-            <SwipeListView
+            <FlatList
               data={Object.values(logs)
                 .filter(log => log && recipes[log.recipeId])
                 .sort(this.byTimestamp)}
-              renderItem={props => {
-                const { item: log } = props
-                const recipe = recipes[log.recipeId]
-                return (
-                  <ListItem
-                    recipe={recipe}
-                    onPress={() =>
-                      navigation.navigate('LogDetail', {
-                        timestamp: log.timestamp,
-                      })
-                    }
-                    description={format(log.timestamp, 'MM/DD @ h:mmA')}
-                    activeOpacity={1}
-                  />
-                )
-              }}
-              renderHiddenItem={data => (
-                <TouchableOpacity
-                  onPress={() => logDeleted({ timestamp: data.item.timestamp })}
-                >
-                  <View style={styles.behindRowContainer}>
-                    <Feather
-                      name="trash-2"
-                      size={theme.iconSize}
-                      color={theme.background}
-                    />
-                  </View>
-                </TouchableOpacity>
+              keyExtractor={log => String(log.timestamp)}
+              renderItem={({ item }) => (
+                <LogItem
+                  log={item}
+                  onPress={() =>
+                    navigation.navigate('LogDetail', {
+                      timestamp: item.timestamp,
+                    })
+                  }
+                  onRightPress={() => logDeleted({ timestamp: item.timestamp })}
+                />
               )}
               extraData={this.state}
-              keyExtractor={(item: Log) => String(item.timestamp)}
-              rightOpenValue={-75}
+              ItemSeparatorComponent={() => (
+                <View
+                  style={[styles.separator, { backgroundColor: theme.grey1 }]}
+                />
+              )}
             />
           ) : (
             <ScreenPlaceholder text="Logs of your brews will appear here once you complete a brew." />

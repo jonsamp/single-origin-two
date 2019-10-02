@@ -11,6 +11,10 @@ const styles = StyleSheet.create({
     right: 0,
     justifyContent: 'center',
   },
+  separator: {
+    flex: 1,
+    height: 1,
+  },
 })
 
 export default styles
