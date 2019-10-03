@@ -9,7 +9,16 @@ xcrun altool --upload-app -f ~/Downloads/ -u sampjon@gmail.com
 - Add ipa file path
 - password is app specific password from appleid.apple.com
 
-## 10/2/2019
+## 10/2/2019 (night)
+
+Release channel: production-1.2
+Build number: 1
+
+Notes:
+
+- Adds support for iPad
+
+## 10/2/2019 (afternoon)
 
 Release channel: production-1.1
 Build number: 1
