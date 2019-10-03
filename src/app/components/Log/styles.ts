@@ -9,16 +9,16 @@ export default StyleSheet.create({
     marginTop: 16,
   },
   cardContainer: {
-    // half screen width, subtract margin, subtract scroll view padding
-    width: width * 0.5 - 16 - 12,
-    paddingVertical: 16,
+    paddingVertical: 32,
     paddingHorizontal: 8,
     marginHorizontal: 8,
     marginBottom: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
     shadowOpacity: 0,
   },
+  cardStyle: {
+    alignItems: 'center',
+  },
+
   cardValue: {
     ...type.header,
     marginBottom: 8,

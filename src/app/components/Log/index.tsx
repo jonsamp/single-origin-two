@@ -4,12 +4,12 @@ import React, { Component } from 'react'
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
 import Card from '../../components/Card'
-import { height } from '../../constants/layout'
+import { height, width } from '../../constants/layout'
 import recipes from '../../constants/recipes'
 import type from '../../constants/type'
 import formatSeconds from '../../helpers/formatSeconds'
 import withSettings from '../../providers/settings'
-import withTheme from '../../providers/theme'
+import withTheme, { Styleguide, Theme } from '../../providers/theme'
 import withTracking, { Tracking } from '../../providers/tracking'
 import { selectLog } from '../../state/logs/selectors'
 import { Log as LogType } from '../../state/logs/types'
@@ -21,12 +21,13 @@ import {
 import { selectNotifications } from '../../state/notifications/selectors'
 import { Notifications } from '../../state/notifications/types'
 import { Settings } from '../../state/settings/types'
-import { Theme, UnitHelpers } from '../../types/index'
+import { UnitHelpers } from '../../types/index'
 import styles from './styles'
 
 interface LogProps {
   settings: Settings
   theme: Theme
+  styleguide: Styleguide
   log: LogType
   unitHelpers: UnitHelpers
   isDarkTheme: boolean
@@ -94,7 +95,14 @@ class Log extends Component<LogProps> {
   }
 
   render() {
-    const { theme, log, unitHelpers, isDarkTheme, withReminder } = this.props
+    const {
+      theme,
+      log,
+      unitHelpers,
+      isDarkTheme,
+      withReminder,
+      styleguide,
+    } = this.props
     const recipe = recipes[log.recipeId]
     const logConfig = {
       totalVolume: val => ({
@@ -125,7 +133,7 @@ class Log extends Component<LogProps> {
       rating: 'Rating',
       notes: 'Notes',
     }
-
+    const isMaxWidth = width >= styleguide.maxWidth
     const logStats = Object.keys(log)
       .filter(
         logKey => logConfig[logKey] && typeof logConfig[logKey] === 'function'
@@ -137,6 +145,7 @@ class Log extends Component<LogProps> {
         style={{
           backgroundColor: isDarkTheme ? theme.background : theme.grey1,
           flex: 1,
+          alignItems: 'center',
         }}
       >
         <ScrollView
@@ -144,6 +153,7 @@ class Log extends Component<LogProps> {
             paddingVertical: 48,
             paddingHorizontal: 12,
             paddingBottom: height / 3,
+            width: isMaxWidth ? styleguide.maxWidth : width,
           }}
         >
           <View style={{ alignItems: 'center' }}>
@@ -326,8 +336,14 @@ class Log extends Component<LogProps> {
           <View style={styles.cardsContainer}>
             {logStats.map(stat => (
               <Card
-                containerStyle={styles.cardContainer}
-                style={styles.cardContainer}
+                containerStyle={{
+                  ...styles.cardContainer,
+
+                  // half screen width, subtract margin, subtract scroll view padding
+                  width:
+                    (isMaxWidth ? styleguide.maxWidth : width) * 0.5 - 16 - 12,
+                }}
+                style={styles.cardStyle}
                 key={stat.label}
               >
                 <Text style={[styles.cardValue, { color: theme.foreground }]}>

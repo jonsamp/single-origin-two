@@ -10,8 +10,9 @@ import { connect } from 'react-redux'
 import Button from '../../components/Button'
 import Header from '../../components/Header'
 import Log from '../../components/Log'
+import { width } from '../../constants/layout'
 import withSettings, { Settings } from '../../providers/settings'
-import withTheme from '../../providers/theme'
+import withTheme, { Styleguide } from '../../providers/theme'
 import { selectLog } from '../../state/logs/selectors'
 import { State } from '../../state/types'
 import styles from './styles'
@@ -20,6 +21,7 @@ interface BrewSummaryProps {
   navigation: NavigationScreenProp<State, any>
   settings: Settings
   settingUpdated: (props: { setting: string; value: any }) => void
+  styleguide: Styleguide
 }
 
 const mapStateToProps = (state, props) => {
@@ -37,15 +39,31 @@ class BrewSummary extends Component<BrewSummaryProps> {
       settingUpdated({ setting: 'submittedRating', value: true })
     }
   }
+
   render() {
-    const { navigation } = this.props
+    const { navigation, styleguide } = this.props
     const onBack = () => navigation.dispatch(StackActions.popToTop({}))
+    const isMaxWidth = width >= styleguide.maxWidth
+
     return (
       <View style={{ flex: 1 }}>
         <Header title="Brew Summary" onBack={onBack} />
         <Log timestamp={navigation.state.params.timestamp} withReminder />
-        <View style={styles.buttonContainer}>
-          <Button title="done" customStyle={styles.button} onPress={onBack} />
+        <View
+          style={{
+            alignItems: 'center',
+          }}
+        >
+          <View
+            style={[
+              styles.buttonContainer,
+              isMaxWidth && {
+                width: styleguide.maxWidth,
+              },
+            ]}
+          >
+            <Button title="done" customStyle={styles.button} onPress={onBack} />
+          </View>
         </View>
       </View>
     )
