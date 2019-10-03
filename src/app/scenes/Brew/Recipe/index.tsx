@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { View } from 'react-native'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import { connect } from 'react-redux'
 import Button from '../../../components/Button'
+import { width } from '../../../constants/layout'
 import withSettings from '../../../providers/settings'
 import withTheme, { Styleguide } from '../../../providers/theme'
 import { logAdded } from '../../../state/logs/actions'
@@ -124,9 +125,11 @@ class Recipe extends Component<RecipeProps, RecipeState> {
       .map(s => s.second)
       .sort((a, b) => b - a)[0]
 
+    const isMaxWidth = width >= styleguide.maxWidth
+
     return (
-      <View style={{ alignItems: 'center' }}>
-        <View style={{ maxWidth: styleguide.maxWidth }}>
+      <View style={isMaxWidth && { alignItems: 'center' }}>
+        <View style={isMaxWidth && { width: styleguide.maxWidth }}>
           <Preparation
             recipe={recipe.title.toLowerCase()}
             preparation={recipe.preparation}

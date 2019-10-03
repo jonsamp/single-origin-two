@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image } from 'react-native'
+import Image from '../../components/Image'
 import withTheme, { Theme } from '../../providers/theme'
 import Card from '../Card'
 import Instructions from '../Instructions'

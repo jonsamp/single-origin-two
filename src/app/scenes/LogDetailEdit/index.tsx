@@ -13,20 +13,21 @@ import {
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import { connect } from 'react-redux'
 import ScrollSelect from '../../components/ScrollSelect'
+import { width } from '../../constants/layout'
 import recipes from '../../constants/recipes'
 import type from '../../constants/type'
-import withTheme from '../../providers/theme'
+import withTheme, { Styleguide, Theme } from '../../providers/theme'
 import withTracking, { Tracking } from '../../providers/tracking'
 import ChecklistSetting from '../../scenes/Settings/ChecklistSetting'
 import { logUpdated } from '../../state/logs/actions'
 import { selectLog } from '../../state/logs/selectors'
 import { Log } from '../../state/logs/types'
 import { State } from '../../state/types'
-import { Theme } from '../../types'
 
 interface LogDetailEditProps {
   navigation: NavigationScreenProp<State>
   theme: Theme
+  styleguide: Styleguide
   timestamp: number
   isDarkTheme: boolean
   logUpdated: (props: { timestamp: number; log: any }) => void
@@ -65,10 +66,12 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
   }
 
   render() {
-    const { theme, isDarkTheme, log, navigation } = this.props
+    const { theme, isDarkTheme, log, navigation, styleguide } = this.props
     if (!log) {
       return <View style={{ backgroundColor: theme.background, flex: 1 }} />
     }
+
+    const isMaxWidth = width >= styleguide.maxWidth
 
     return (
       <View
@@ -140,89 +143,111 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
               {format(log.timestamp, 'h:mmA')} on{' '}
               {format(log.timestamp, 'MM/DD/YYYY')}.
             </Text>
-            <Text style={[type.title, { color: theme.foreground }]}>
-              Tasting note
-            </Text>
             <View
-              style={{
-                borderRadius: 8,
-                overflow: 'hidden',
-                marginTop: 24,
-                marginBottom: 32,
-              }}
+              style={
+                isMaxWidth && {
+                  alignItems: 'center',
+                }
+              }
             >
-              <ChecklistSetting
-                items={[
-                  {
-                    title: 'Sour',
-                    id: 'sour',
-                    value: log.tastingNote === 'sour',
-                  },
-                  {
-                    title: 'Sweet',
-                    id: 'sweet',
-                    value: log.tastingNote === 'sweet',
-                  },
-                  {
-                    title: 'Bitter',
-                    id: 'bitter',
-                    value: log.tastingNote === 'bitter',
-                  },
-                ]}
-                onChange={value => this.updateLog('tastingNote', value)}
+              <View
                 style={
-                  isDarkTheme && {
-                    backgroundColor: theme.grey1,
-                    borderBottomColor: theme.grey2,
+                  isMaxWidth && {
+                    width: styleguide.maxWidth,
                   }
                 }
-              />
+              >
+                <Text style={[type.title, { color: theme.foreground }]}>
+                  Tasting note
+                </Text>
+                <View
+                  style={{
+                    borderRadius: 8,
+                    overflow: 'hidden',
+                    marginTop: 24,
+                    marginBottom: 32,
+                  }}
+                >
+                  <ChecklistSetting
+                    items={[
+                      {
+                        title: 'Sour',
+                        id: 'sour',
+                        value: log.tastingNote === 'sour',
+                      },
+                      {
+                        title: 'Sweet',
+                        id: 'sweet',
+                        value: log.tastingNote === 'sweet',
+                      },
+                      {
+                        title: 'Bitter',
+                        id: 'bitter',
+                        value: log.tastingNote === 'bitter',
+                      },
+                    ]}
+                    onChange={value => this.updateLog('tastingNote', value)}
+                    style={
+                      isDarkTheme && {
+                        backgroundColor: theme.grey1,
+                        borderBottomColor: theme.grey2,
+                      }
+                    }
+                  />
+                </View>
+                <Text style={[type.title, { color: theme.foreground }]}>
+                  Overall rating
+                </Text>
+                <View
+                  style={{
+                    borderRadius: 8,
+                    overflow: 'hidden',
+                    marginTop: 24,
+                    marginBottom: 32,
+                  }}
+                >
+                  <ScrollSelect
+                    min={1}
+                    max={10}
+                    defaultValue={log.rating || 5}
+                    label="RATING"
+                    onChange={value => this.updateLog('rating', value)}
+                    step={1}
+                    style={{
+                      backgroundColor: isDarkTheme
+                        ? theme.grey1
+                        : theme.background,
+                    }}
+                  />
+                </View>
+                <Text style={[type.title, { color: theme.foreground }]}>
+                  Notes
+                </Text>
+                <TextInput
+                  style={{
+                    height: 160,
+                    borderColor: theme.grey1,
+                    borderWidth: 1,
+                    borderRadius: 8,
+                    backgroundColor: isDarkTheme
+                      ? theme.grey1
+                      : theme.background,
+                    padding: 16,
+                    paddingTop: 16,
+                    marginTop: 24,
+                    marginBottom: 100,
+                    ...type.body,
+                    color: theme.foreground,
+                  }}
+                  multiline
+                  onChangeText={value => this.updateLog('notes', value)}
+                  value={log.notes}
+                  keyboardAppearance={isDarkTheme ? 'dark' : ('default' as any)}
+                  returnKeyType="done"
+                  onSubmitEditing={Keyboard.dismiss}
+                />
+              </View>
             </View>
-            <Text style={[type.title, { color: theme.foreground }]}>
-              Overall rating
-            </Text>
-            <View
-              style={{
-                borderRadius: 8,
-                overflow: 'hidden',
-                marginTop: 24,
-                marginBottom: 32,
-              }}
-            >
-              <ScrollSelect
-                min={1}
-                max={10}
-                defaultValue={log.rating || 5}
-                label="RATING"
-                onChange={value => this.updateLog('rating', value)}
-                step={1}
-                style={{
-                  backgroundColor: isDarkTheme ? theme.grey1 : theme.background,
-                }}
-              />
-            </View>
-            <Text style={[type.title, { color: theme.foreground }]}>Notes</Text>
-            <TextInput
-              style={{
-                height: 160,
-                borderColor: theme.grey1,
-                borderWidth: 1,
-                borderRadius: 8,
-                backgroundColor: isDarkTheme ? theme.grey1 : theme.background,
-                padding: 16,
-                paddingTop: 16,
-                marginTop: 24,
-                marginBottom: 100,
-                ...type.body,
-                color: theme.foreground,
-              }}
-              multiline
-              onChangeText={value => this.updateLog('notes', value)}
-              value={log.notes}
-              keyboardAppearance={isDarkTheme ? 'dark' : ('default' as any)}
-              returnKeyType="done"
-              onSubmitEditing={Keyboard.dismiss}
-            />
           </KeyboardAvoidingView>
         </ScrollView>
       </View>

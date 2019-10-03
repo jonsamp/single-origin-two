@@ -145,7 +145,7 @@ class Log extends Component<LogProps> {
         style={{
           backgroundColor: isDarkTheme ? theme.background : theme.grey1,
           flex: 1,
-          alignItems: 'center',
+          ...(isMaxWidth && { alignItems: 'center' }),
         }}
       >
         <ScrollView
@@ -153,7 +153,7 @@ class Log extends Component<LogProps> {
             paddingVertical: 48,
             paddingHorizontal: 12,
             paddingBottom: height / 3,
-            width: isMaxWidth ? styleguide.maxWidth : width,
+            ...(isMaxWidth && { width: styleguide.maxWidth }),
           }}
         >
           <View style={{ alignItems: 'center' }}>

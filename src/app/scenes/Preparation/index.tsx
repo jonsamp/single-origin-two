@@ -2,12 +2,10 @@ import React, { Component } from 'react'
 import { ScrollView, View } from 'react-native'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import Header from '../../components/Header'
-import Image from '../../components/Image'
 import InstructionalCard from '../../components/InstructionalCard'
-import Instructions from '../../components/Instructions'
-import withTheme from '../../providers/theme'
+import { width } from '../../constants/layout'
+import withTheme, { Styleguide, Theme } from '../../providers/theme'
 import { State } from '../../state/types'
-import { Theme } from '../../types'
 
 interface PreparationProps {
   navigation: NavigationScreenProp<State>
@@ -17,12 +15,14 @@ interface PreparationProps {
     image?: number
     text: string
   }>
+  styleguide: Styleguide
 }
 
 class Preparation extends Component<PreparationProps> {
   render() {
-    const { navigation, theme, isDarkTheme } = this.props
+    const { navigation, theme, isDarkTheme, styleguide } = this.props
     const preparation = navigation.state.params
+    const isMaxWidth = width >= styleguide.maxWidth
 
     return (
       <View
@@ -32,20 +32,23 @@ class Preparation extends Component<PreparationProps> {
         }}
       >
         <Header title="Preparation" onBack={navigation.goBack} />
-        <ScrollView
-          contentContainerStyle={{
-            paddingHorizontal: 16,
-            paddingTop: 32,
-            paddingBottom: 60,
-          }}
-        >
-          {preparation.map(prepStep => (
-            <InstructionalCard
-              key={prepStep.text}
-              step={{ image: prepStep.image, description: prepStep.text }}
-            />
-          ))}
-        </ScrollView>
+        <View style={isMaxWidth && { alignItems: 'center' }}>
+          <ScrollView
+            contentContainerStyle={{
+              paddingHorizontal: 16,
+              paddingTop: 32,
+              paddingBottom: 60,
+              ...(isMaxWidth && { width: styleguide.maxWidth }),
+            }}
+          >
+            {preparation.map(prepStep => (
+              <InstructionalCard
+                key={prepStep.text}
+                step={{ image: prepStep.image, description: prepStep.text }}
+              />
+            ))}
+          </ScrollView>
+        </View>
       </View>
     )
   }
