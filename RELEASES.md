@@ -3,13 +3,13 @@
 How to:
 
 ```
-xcrun altool --upload-app -f ~/Downloads/ -u sampjon@gmail.com
+xcrun altool --upload-app -f ~/Downloads/ -u sampjon@gmail.com -p
 ```
 
 - Add ipa file path
 - password is app specific password from appleid.apple.com
 
-## 10/2/2019 (night)
+## 10/3/2019
 
 Release channel: production-1.2
 Build number: 1
@@ -18,7 +18,7 @@ Notes:
 
 - Adds support for iPad
 
-## 10/2/2019 (afternoon)
+## 10/2/2019
 
 Release channel: production-1.1
 Build number: 1
