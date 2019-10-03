@@ -1,3 +1,4 @@
+import { ScreenOrientation } from 'expo'
 import Constants from 'expo-constants'
 import React, { Component } from 'react'
 import { ActivityIndicator, View } from 'react-native'
@@ -17,6 +18,14 @@ Sentry.init({
 Sentry.setRelease(Constants.manifest.revisionId)
 
 class App extends Component {
+  async componentDidMount() {
+    if (Constants.platform.ios.userInterfaceIdiom === 'tablet') {
+      await ScreenOrientation.lockAsync(
+        ScreenOrientation.OrientationLock.LANDSCAPE
+      )
+    }
+  }
+
   render() {
     return (
       <Provider store={store}>

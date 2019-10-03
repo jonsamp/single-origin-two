@@ -132,17 +132,6 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
           }}
         >
           <KeyboardAvoidingView behavior="position">
-            <Text
-              style={{
-                marginBottom: 32,
-                marginTop: 16,
-                color: theme.foreground,
-              }}
-            >
-              Rate your {recipes[log.recipeId].title} logged at{' '}
-              {format(log.timestamp, 'h:mmA')} on{' '}
-              {format(log.timestamp, 'MM/DD/YYYY')}.
-            </Text>
             <View
               style={
                 isMaxWidth && {
@@ -157,6 +146,17 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                   }
                 }
               >
+                <Text
+                  style={{
+                    marginBottom: 32,
+                    marginTop: 16,
+                    color: theme.foreground,
+                  }}
+                >
+                  Rate your {recipes[log.recipeId].title} logged at{' '}
+                  {format(log.timestamp, 'h:mmA')} on{' '}
+                  {format(log.timestamp, 'MM/DD/YYYY')}.
+                </Text>
                 <Text style={[type.title, { color: theme.foreground }]}>
                   Tasting note
                 </Text>
