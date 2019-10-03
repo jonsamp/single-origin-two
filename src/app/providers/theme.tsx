@@ -9,6 +9,11 @@ import { Theme as ThemeType } from '../types'
 
 export type Theme = ThemeType
 
+export interface Styleguide {
+  iconSize: number
+  maxWidth: number
+}
+
 interface WrapperProps {
   theme: 'default' | 'light' | 'dark'
   themeUpdated: (props: { theme: string }) => void
@@ -38,7 +43,7 @@ function withTheme(WrappedComponent) {
         <WrappedComponent
           {...rest}
           theme={themes[this.props.theme]}
-          defaultTheme={themes.default}
+          styleguide={themes.styleguide}
           toggleTheme={this.toggleTheme}
           isDarkTheme={this.props.theme === 'dark'}
           isLightTheme={this.props.theme === 'light'}

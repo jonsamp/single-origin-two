@@ -1,6 +1,5 @@
 import * as Haptics from 'expo-haptics'
 import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake'
-import { number } from 'prop-types'
 import React, { Component } from 'react'
 import { Animated, View } from 'react-native'
 import Card from '../../../../components/Card'
@@ -8,10 +7,10 @@ import Image from '../../../../components/Image'
 import { height, width } from '../../../../constants/layout'
 import playSound from '../../../../helpers/playSound'
 import withSettings from '../../../../providers/settings'
-import withTheme from '../../../../providers/theme'
+import withTheme, { Styleguide, Theme } from '../../../../providers/theme'
 import { Settings } from '../../../../state/settings/types'
 import { Recipe } from '../../../../types'
-import { Theme, UnitHelpers } from '../../../../types/index'
+import { UnitHelpers } from '../../../../types/index'
 import { withBloomFn } from '../../helpers'
 import addWaterSound from '../../sounds/add-water.mp3'
 import tipSound from '../../sounds/tip.mp3'
@@ -27,6 +26,7 @@ interface PourTimerProps {
   settings: Settings
   volume: number
   setRecipeState: (props: any) => {}
+  styleguide: Styleguide
 }
 
 interface PourTimerState {
@@ -193,6 +193,7 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
       theme,
       volume,
       unitHelpers: { waterVolumeUnit },
+      styleguide,
     } = this.props
     const {
       recipe,
@@ -203,9 +204,18 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
       currentStepDuration,
     } = this.state
 
+    const maxWidth = width > styleguide.maxWidth ? styleguide.maxWidth : width
+
     return (
       <View>
-        <View style={{ left: -16, width: width + 32 }}>
+        <View
+          style={{
+            left: -16,
+            width: maxWidth + 32,
+            borderRadius: maxWidth >= styleguide.maxWidth ? 4 : 0,
+            overflow: 'hidden',
+          }}
+        >
           <Image
             source={image}
             defaultSource={this.props.recipe.defaultSource}

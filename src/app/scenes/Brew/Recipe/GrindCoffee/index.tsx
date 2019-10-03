@@ -1,9 +1,10 @@
 import React from 'react'
-import { Image } from 'react-native'
+import { Image, View } from 'react-native'
 import Card from '../../../../components/Card'
 import Instructions from '../../../../components/Instructions'
-import { height } from '../../../../constants/layout'
+import { height, width } from '../../../../constants/layout'
 import withSettings from '../../../../providers/settings'
+import withTheme, { Styleguide } from '../../../../providers/theme'
 import { getValueUnit } from '../../../../scenes/Brew/helpers'
 import { Log } from '../../../../state/logs/types'
 
@@ -13,6 +14,7 @@ interface GrindCoffeeProps {
   defaultGrind: number
   title: string
   recentLog: Log
+  styleguide: Styleguide
 }
 
 function GrindCoffee({
@@ -21,8 +23,10 @@ function GrindCoffee({
   defaultGrind,
   title,
   recentLog,
+  styleguide,
 }: GrindCoffeeProps) {
   const { coffeeWeightUnit, grindUnit } = unitHelpers
+  const isMaxWidth = width > styleguide.maxWidth
   let recommendation
   let grindFromLastTime = ''
 
@@ -40,31 +44,34 @@ function GrindCoffee({
 
   return (
     <Card>
-      {grindUnit.grinder.shortTitle === 'grinder' ? (
-        <Image
-          source={grindUnit.getGrindSetting(0.75).image}
-          style={{
-            resizeMode: 'cover',
-            width: null,
-            height: height / 5,
-            zIndex: 1,
-          }}
+      <View style={isMaxWidth && { flexDirection: 'row-reverse' }}>
+        {grindUnit.grinder.shortTitle === 'grinder' ? (
+          <Image
+            source={grindUnit.getGrindSetting(0.75).image}
+            style={{
+              resizeMode: 'cover',
+              width: null,
+              height: height / 5,
+              zIndex: 1,
+              flex: 0.5,
+            }}
+          />
+        ) : null}
+        <Instructions
+          text={`Grind **${getValueUnit(
+            coffeeWeightUnit,
+            coffeeWeight
+          )}** of coffee to **${
+            grindUnit.getGrindSetting(defaultGrind).title
+          }** with your ${
+            grindUnit.grinder.shortTitle
+          }, then add the grounds to your ${title.toLowerCase()}.`}
+          icon="GrindIcon"
+          hint={recommendation}
         />
-      ) : null}
-      <Instructions
-        text={`Grind **${getValueUnit(
-          coffeeWeightUnit,
-          coffeeWeight
-        )}** of coffee to **${
-          grindUnit.getGrindSetting(defaultGrind).title
-        }** with your ${
-          grindUnit.grinder.shortTitle
-        }, then add the grounds to your ${title.toLowerCase()}.`}
-        icon="GrindIcon"
-        hint={recommendation}
-      />
+      </View>
     </Card>
   )
 }
 
-export default withSettings(GrindCoffee)
+export default withSettings(withTheme(GrindCoffee))

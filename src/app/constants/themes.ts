@@ -5,6 +5,10 @@ export interface Theme {
 }
 
 export default {
+  styleguide: {
+    iconSize: 22,
+    maxWidth: 560,
+  },
   default: {
     black: '#000000',
     white: '#d8d8d8',

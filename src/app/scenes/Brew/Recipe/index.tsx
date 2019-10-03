@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from 'react'
-import { Switch, View } from 'react-native'
+import { View } from 'react-native'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import { connect } from 'react-redux'
 import Button from '../../../components/Button'
 import withSettings from '../../../providers/settings'
+import withTheme, { Styleguide } from '../../../providers/theme'
 import { logAdded } from '../../../state/logs/actions'
 import { selectRecentLog } from '../../../state/logs/selectors'
 import { Log } from '../../../state/logs/types'
@@ -28,6 +29,7 @@ interface RecipeProps {
   navigation: NavigationScreenProp<State, any>
   logAdded: (props: any) => void
   recentLog: Log
+  styleguide: Styleguide
 }
 
 interface RecipeState {
@@ -109,7 +111,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
   }
 
   render() {
-    const { recipe, settings, unitHelpers, recentLog } = this.props
+    const { recipe, settings, unitHelpers, recentLog, styleguide } = this.props
     const { grindUnit, temperatureUnit } = unitHelpers
     const { minYield, maxYield, defaultGrind } = recipe
     const { totalVolume, grind, temp } = this.state
@@ -123,52 +125,57 @@ class Recipe extends Component<RecipeProps, RecipeState> {
       .sort((a, b) => b - a)[0]
 
     return (
-      <Fragment>
-        <Preparation
-          recipe={recipe.title.toLowerCase()}
-          preparation={recipe.preparation}
-        />
-        <YieldQuestion
-          defaultValue={recentLog.totalVolume || recipe.defaultTotalVolume}
-          setRecipeState={this.setRecipeState}
-          minYield={minYield}
-          maxYield={maxYield}
-        />
-        {recipe.iced && (
-          <IceToggle value={this.state.isIced} onChange={this.onIsIcedChange} />
-        )}
-        {recentLog.notes ? <Notes text={recentLog.notes} /> : null}
-        <BoilWater volume={totalPourVolume} />
-        <GrindCoffee
-          coffeeWeight={coffeeWeight}
-          defaultGrind={defaultGrind}
-          title={recipe.title}
-          recentLog={recentLog}
-          recipeDuration={longestSecond + settings.bloomDuration}
-        />
-        {this.state.isIced && (
-          <AddIce volume={Math.round(totalVolume * 0.333)} />
-        )}
-        <RecordBrewAttributes
-          setRecipeState={this.setRecipeState}
-          defaultGrind={defaultGrind}
-          grind={grind}
-          temp={temp}
-          grindUnit={grindUnit}
-          temperatureUnit={temperatureUnit}
-        />
-        <PourTimer
-          recipe={recipe}
-          volume={totalPourVolume}
-          setRecipeState={this.setRecipeState}
-          key={this.state.randomKey}
-        />
-        <Button
-          title="Finish"
-          customStyle={{ marginVertical: 16, paddingVertical: 20 }}
-          onPress={this.onFinish}
-        />
-      </Fragment>
+      <View style={{ alignItems: 'center' }}>
+        <View style={{ maxWidth: styleguide.maxWidth }}>
+          <Preparation
+            recipe={recipe.title.toLowerCase()}
+            preparation={recipe.preparation}
+          />
+          <YieldQuestion
+            defaultValue={recentLog.totalVolume || recipe.defaultTotalVolume}
+            setRecipeState={this.setRecipeState}
+            minYield={minYield}
+            maxYield={maxYield}
+          />
+          {recipe.iced && (
+            <IceToggle
+              value={this.state.isIced}
+              onChange={this.onIsIcedChange}
+            />
+          )}
+          {recentLog.notes ? <Notes text={recentLog.notes} /> : null}
+          <BoilWater volume={totalPourVolume} />
+          <GrindCoffee
+            coffeeWeight={coffeeWeight}
+            defaultGrind={defaultGrind}
+            title={recipe.title}
+            recentLog={recentLog}
+            recipeDuration={longestSecond + settings.bloomDuration}
+          />
+          {this.state.isIced && (
+            <AddIce volume={Math.round(totalVolume * 0.333)} />
+          )}
+          <RecordBrewAttributes
+            setRecipeState={this.setRecipeState}
+            defaultGrind={defaultGrind}
+            grind={grind}
+            temp={temp}
+            grindUnit={grindUnit}
+            temperatureUnit={temperatureUnit}
+          />
+          <PourTimer
+            recipe={recipe}
+            volume={totalPourVolume}
+            setRecipeState={this.setRecipeState}
+            key={this.state.randomKey}
+          />
+          <Button
+            title="Finish"
+            customStyle={{ marginVertical: 16, paddingVertical: 20 }}
+            onPress={this.onFinish}
+          />
+        </View>
+      </View>
     )
   }
 }
@@ -176,4 +183,4 @@ class Recipe extends Component<RecipeProps, RecipeState> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withSettings(withNavigation(Recipe as any)))
+)(withNavigation(withSettings(withTheme(Recipe)) as any))
