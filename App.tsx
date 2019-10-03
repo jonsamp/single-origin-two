@@ -21,7 +21,7 @@ class App extends Component {
   async componentDidMount() {
     if (Constants.platform.ios.userInterfaceIdiom === 'tablet') {
       await ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.LANDSCAPE
+        ScreenOrientation.OrientationLock.DEFAULT
       )
     }
   }
