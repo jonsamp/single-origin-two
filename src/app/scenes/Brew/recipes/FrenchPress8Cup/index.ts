@@ -19,6 +19,10 @@ export default {
   pourVelocity: 40,
   preparation: [
     {
+      text:
+        'Warm the french press with some hot water, then discard the water before beginning your brew.',
+    },
+    {
       image: AddGrounds,
       text: 'Add coffee grounds to the french press',
     },
