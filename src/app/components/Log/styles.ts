@@ -18,7 +18,6 @@ export default StyleSheet.create({
   cardStyle: {
     alignItems: 'center',
   },
-
   cardValue: {
     ...type.header,
     marginBottom: 8,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import Header from '../../components/Header'
 import Log from '../../components/Log'
@@ -12,24 +12,18 @@ interface LogDetailProps {
   navigation: NavigationScreenProp<State>
   theme: Theme
   timestamp: number
-  isDarkTheme: boolean
 }
 
 class LogDetail extends Component<LogDetailProps> {
   render() {
-    const { navigation, theme, isDarkTheme } = this.props
+    const { navigation, theme } = this.props
     const timestamp =
       navigation.state &&
       navigation.state.params &&
       navigation.state.params.timestamp
 
     return (
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: isDarkTheme ? theme.background : theme.grey1,
-        }}
-      >
+      <>
         <Header
           title="Brew Log"
           onBack={navigation.goBack}
@@ -47,7 +41,7 @@ class LogDetail extends Component<LogDetailProps> {
           }
         />
         <Log timestamp={timestamp} />
-      </View>
+      </>
     )
   }
 }

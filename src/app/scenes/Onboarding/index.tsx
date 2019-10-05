@@ -1,12 +1,10 @@
 import React from 'react'
-import { ScrollView, View } from 'react-native'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import Button from '../../components/Button'
 import Header from '../../components/Header'
 import InstructionalCard from '../../components/InstructionalCard'
-import { width } from '../../constants/layout'
+import ResponsiveScrollView from '../../components/ResponsiveScrollView'
 import withSettings from '../../providers/settings'
-import withTheme, { Styleguide, Theme } from '../../providers/theme'
 import ChooseYield from './images/chooseYield.gif'
 import Rate from './images/rate.gif'
 import SelectRecipe from './images/selectRecipe.gif'
@@ -15,8 +13,6 @@ import StartTimer from './images/startTimer.gif'
 interface OnboardingProps {
   navigation: NavigationScreenProp<any>
   settingUpdated: (props: { setting: string; value: boolean }) => void
-  theme: Theme
-  styleguide: Styleguide
 }
 
 const onboarding = [
@@ -59,44 +55,26 @@ const onboarding = [
 ]
 
 function Onboarding(props: OnboardingProps) {
-  const isMaxWidth = width >= props.styleguide.maxWidth
   return (
     <>
       <Header title="Get started" />
-      <View
-        style={
-          isMaxWidth && {
-            alignItems: 'center',
-            backgroundColor: props.theme.background,
-          }
-        }
-      >
-        <ScrollView
-          contentContainerStyle={{
-            paddingHorizontal: 16,
-            paddingTop: 32,
-            paddingBottom: 60,
-            backgroundColor: props.theme.background,
-            ...(isMaxWidth && { width: props.styleguide.maxWidth }),
+      <ResponsiveScrollView>
+        {onboarding.map(step => (
+          <InstructionalCard key={step.title} step={step} />
+        ))}
+        <Button
+          title="Got it"
+          onPress={() => {
+            props.settingUpdated({
+              setting: 'onboardingVisible',
+              value: false,
+            })
+            props.navigation.goBack()
           }}
-        >
-          {onboarding.map(step => (
-            <InstructionalCard key={step.title} step={step} />
-          ))}
-          <Button
-            title="Got it"
-            onPress={() => {
-              props.settingUpdated({
-                setting: 'onboardingVisible',
-                value: false,
-              })
-              props.navigation.goBack()
-            }}
-          />
-        </ScrollView>
-      </View>
+        />
+      </ResponsiveScrollView>
     </>
   )
 }
 
-export default withNavigation(withSettings(withTheme(Onboarding)) as any)
+export default withNavigation(withSettings(Onboarding) as any)

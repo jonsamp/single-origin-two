@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
 import Card from '../../components/Card'
+import ResponsiveScrollView from '../../components/ResponsiveScrollView'
 import { height, width } from '../../constants/layout'
 import recipes from '../../constants/recipes'
 import type from '../../constants/type'
@@ -141,222 +142,208 @@ class Log extends Component<LogProps> {
       .map(logKey => logConfig[logKey](log[logKey]))
 
     return (
-      <View
-        style={{
+      <ResponsiveScrollView
+        wrapperStyle={{
           backgroundColor: isDarkTheme ? theme.background : theme.grey1,
-          flex: 1,
-          ...(isMaxWidth && { alignItems: 'center' }),
         }}
+        style={{ flex: 1 }}
       >
-        <ScrollView
-          contentContainerStyle={{
-            paddingVertical: 48,
-            paddingHorizontal: 12,
-            paddingBottom: height / 3,
-            ...(isMaxWidth && { width: styleguide.maxWidth }),
-          }}
-        >
-          <View style={{ alignItems: 'center' }}>
-            {recipe.icon({
-              fill: theme.foreground,
-              size: 2,
-            })}
-            <Text
-              style={{
-                color: theme.foreground,
-                ...type.header,
-                fontWeight: '900',
-                marginVertical: 16,
-              }}
-            >
-              {recipe.title} {recipe.modifier}
+        <View style={{ alignItems: 'center' }}>
+          {recipe.icon({
+            fill: theme.foreground,
+            size: 2,
+          })}
+          <Text
+            style={{
+              color: theme.foreground,
+              ...type.header,
+              fontWeight: '900',
+              marginVertical: 16,
+            }}
+          >
+            {recipe.title} {recipe.modifier}
+          </Text>
+          <View>
+            <Text style={[type.body, { color: theme.foreground }]}>
+              Finished at {format(log.timestamp, 'h:mmA')} on{' '}
+              {format(log.timestamp, 'MM/DD/YYYY')}
             </Text>
-            <View>
-              <Text style={[type.body, { color: theme.foreground }]}>
-                Finished at {format(log.timestamp, 'h:mmA')} on{' '}
-                {format(log.timestamp, 'MM/DD/YYYY')}
-              </Text>
-            </View>
           </View>
-          <View style={{ marginTop: 24 }}>
-            {['tastingNote', 'rating']
-              .filter(key => log[key])
-              .map((key, index) => (
-                <Card
-                  key={key}
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                  containerStyle={{
-                    marginTop: 4,
-                    marginBottom: index === 0 ? 12 : 0,
-                    marginHorizontal: 8,
-                    shadowOpacity: 0,
-                    padding: 16,
-                  }}
-                >
-                  <Text style={[type.headline, { color: theme.foreground }]}>
-                    {logConfig[key]}
-                  </Text>
-                  <Text style={[type.body, { color: theme.foreground }]}>
-                    {this.capitalizeFirstLetter(log[key])}
-                  </Text>
-                </Card>
-              ))}
-          </View>
-          {log.notes ? (
+        </View>
+        <View style={{ marginTop: 24 }}>
+          {['tastingNote', 'rating']
+            .filter(key => log[key])
+            .map((key, index) => (
+              <Card
+                key={key}
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}
+                containerStyle={{
+                  marginTop: 4,
+                  marginBottom: index === 0 ? 12 : 0,
+                  marginHorizontal: 8,
+                  shadowOpacity: 0,
+                  padding: 16,
+                }}
+              >
+                <Text style={[type.headline, { color: theme.foreground }]}>
+                  {logConfig[key]}
+                </Text>
+                <Text style={[type.body, { color: theme.foreground }]}>
+                  {this.capitalizeFirstLetter(log[key])}
+                </Text>
+              </Card>
+            ))}
+        </View>
+        {log.notes ? (
+          <Card
+            containerStyle={{
+              marginTop: 16,
+              marginBottom: 0,
+              marginHorizontal: 8,
+              shadowOpacity: 0,
+              padding: 16,
+            }}
+          >
+            <Text
+              style={[
+                type.headline,
+                { color: theme.foreground, marginBottom: 4 },
+              ]}
+            >
+              Notes
+            </Text>
+            <Text style={[type.body, { color: theme.foreground }]}>
+              {log.notes.trim()}
+            </Text>
+          </Card>
+        ) : null}
+
+        {withReminder && this.props.notifications.status !== 'denied' ? (
+          <TouchableOpacity onPress={this.toggleReminder} activeOpacity={0.75}>
             <Card
               containerStyle={{
                 marginTop: 16,
                 marginBottom: 0,
                 marginHorizontal: 8,
-                shadowOpacity: 0,
                 padding: 16,
+                backgroundColor: this.state.reminderScheduled
+                  ? theme.primary
+                  : isDarkTheme
+                    ? theme.grey1
+                    : theme.background,
+              }}
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                backgroundColor: this.state.reminderScheduled
+                  ? theme.primary
+                  : isDarkTheme
+                    ? theme.grey1
+                    : theme.background,
               }}
             >
+              <View style={{ flex: 1, marginRight: 32 }}>
+                <Text
+                  style={[
+                    type.headline,
+                    {
+                      color: this.state.reminderScheduled
+                        ? theme.background
+                        : theme.foreground,
+                      fontWeight: this.state.reminderScheduled
+                        ? 'bold'
+                        : 'normal',
+                      marginBottom: 4,
+                    },
+                  ]}
+                >
+                  {this.state.reminderScheduled
+                    ? 'Tasting reminder scheduled'
+                    : 'Send a tasting reminder'}
+                </Text>
+                {this.state.reminderScheduled && (
+                  <Text style={[type.callout, { color: theme.background }]}>
+                    You'll get a reminder to taste your coffee at{' '}
+                    {format(addMinutes(new Date(), 6), 'h:mmA')}.
+                  </Text>
+                )}
+              </View>
+              {this.state.reminderScheduled ? (
+                <Feather
+                  name="check-square"
+                  size={theme.iconSize}
+                  color={theme.background}
+                />
+              ) : (
+                <Feather
+                  name="plus-square"
+                  size={theme.iconSize}
+                  color={theme.foreground}
+                  style={{ opacity: 0.5 }}
+                />
+              )}
+            </Card>
+          </TouchableOpacity>
+        ) : null}
+        {withReminder && this.props.notifications.status === 'denied' ? (
+          <Card
+            containerStyle={{
+              marginTop: 16,
+              marginBottom: 0,
+              marginHorizontal: 8,
+              padding: 16,
+            }}
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
+          >
+            <View>
               <Text
                 style={[
                   type.headline,
                   { color: theme.foreground, marginBottom: 4 },
                 ]}
               >
-                Notes
+                Send a tasting reminder
               </Text>
-              <Text style={[type.body, { color: theme.foreground }]}>
-                {log.notes.trim()}
+              <Text style={[type.callout, { color: theme.foreground }]}>
+                To send reminders, turn on notification permissions in Settings.
               </Text>
-            </Card>
-          ) : null}
-
-          {withReminder && this.props.notifications.status !== 'denied' ? (
-            <TouchableOpacity
-              onPress={this.toggleReminder}
-              activeOpacity={0.75}
-            >
-              <Card
-                containerStyle={{
-                  marginTop: 16,
-                  marginBottom: 0,
-                  marginHorizontal: 8,
-                  padding: 16,
-                  backgroundColor: this.state.reminderScheduled
-                    ? theme.primary
-                    : isDarkTheme
-                      ? theme.grey1
-                      : theme.background,
-                }}
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  backgroundColor: this.state.reminderScheduled
-                    ? theme.primary
-                    : isDarkTheme
-                      ? theme.grey1
-                      : theme.background,
-                }}
-              >
-                <View style={{ flex: 1, marginRight: 32 }}>
-                  <Text
-                    style={[
-                      type.headline,
-                      {
-                        color: this.state.reminderScheduled
-                          ? theme.background
-                          : theme.foreground,
-                        fontWeight: this.state.reminderScheduled
-                          ? 'bold'
-                          : 'normal',
-                        marginBottom: 4,
-                      },
-                    ]}
-                  >
-                    {this.state.reminderScheduled
-                      ? 'Tasting reminder scheduled'
-                      : 'Send a tasting reminder'}
-                  </Text>
-                  {this.state.reminderScheduled && (
-                    <Text style={[type.callout, { color: theme.background }]}>
-                      You'll get a reminder to taste your coffee at{' '}
-                      {format(addMinutes(new Date(), 6), 'h:mmA')}.
-                    </Text>
-                  )}
-                </View>
-                {this.state.reminderScheduled ? (
-                  <Feather
-                    name="check-square"
-                    size={theme.iconSize}
-                    color={theme.background}
-                  />
-                ) : (
-                  <Feather
-                    name="plus-square"
-                    size={theme.iconSize}
-                    color={theme.foreground}
-                    style={{ opacity: 0.5 }}
-                  />
-                )}
-              </Card>
-            </TouchableOpacity>
-          ) : null}
-          {withReminder && this.props.notifications.status === 'denied' ? (
+            </View>
+            <Feather
+              name="alert-triangle"
+              size={theme.iconSize}
+              color={theme.foreground}
+            />
+          </Card>
+        ) : null}
+        <View style={styles.cardsContainer}>
+          {logStats.map(stat => (
             <Card
               containerStyle={{
-                marginTop: 16,
-                marginBottom: 0,
-                marginHorizontal: 8,
-                padding: 16,
-              }}
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}
-            >
-              <View>
-                <Text
-                  style={[
-                    type.headline,
-                    { color: theme.foreground, marginBottom: 4 },
-                  ]}
-                >
-                  Send a tasting reminder
-                </Text>
-                <Text style={[type.callout, { color: theme.foreground }]}>
-                  To send reminders, turn on notification permissions in
-                  Settings.
-                </Text>
-              </View>
-              <Feather
-                name="alert-triangle"
-                size={theme.iconSize}
-                color={theme.foreground}
-              />
-            </Card>
-          ) : null}
-          <View style={styles.cardsContainer}>
-            {logStats.map(stat => (
-              <Card
-                containerStyle={{
-                  ...styles.cardContainer,
+                ...styles.cardContainer,
 
-                  // half screen width, subtract margin, subtract scroll view padding
-                  width:
-                    (isMaxWidth ? styleguide.maxWidth : width) * 0.5 - 16 - 12,
-                }}
-                style={styles.cardStyle}
-                key={stat.label}
-              >
-                <Text style={[styles.cardValue, { color: theme.foreground }]}>
-                  {stat.value}
-                </Text>
-                <Text style={[styles.cardLabel, { color: theme.foreground }]}>
-                  {stat.label}
-                </Text>
-              </Card>
-            ))}
-          </View>
-        </ScrollView>
-      </View>
+                // half screen width, subtract margin, subtract scroll view padding
+                width:
+                  (isMaxWidth ? styleguide.maxWidth : width) * 0.5 - 16 - 16,
+              }}
+              style={styles.cardStyle}
+              key={stat.label}
+            >
+              <Text style={[styles.cardValue, { color: theme.foreground }]}>
+                {stat.value}
+              </Text>
+              <Text style={[styles.cardLabel, { color: theme.foreground }]}>
+                {stat.label}
+              </Text>
+            </Card>
+          ))}
+        </View>
+      </ResponsiveScrollView>
     )
   }
 }
