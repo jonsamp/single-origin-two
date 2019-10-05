@@ -1,3 +1,4 @@
+import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake'
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
@@ -67,6 +68,14 @@ class Recipe extends Component<RecipeProps, RecipeState> {
     totalVolume:
       this.props.recentLog.totalVolume || this.props.recipe.defaultTotalVolume,
     isIced: false,
+  }
+
+  componentDidMount() {
+    activateKeepAwake()
+  }
+
+  componentWillUnmount() {
+    deactivateKeepAwake()
   }
 
   setRecipeState = ({ key, value }) => this.setState({ [key]: value } as any)

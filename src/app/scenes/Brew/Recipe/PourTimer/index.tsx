@@ -1,5 +1,4 @@
 import * as Haptics from 'expo-haptics'
-import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake'
 import React, { Component } from 'react'
 import { Animated, View } from 'react-native'
 import Card from '../../../../components/Card'
@@ -93,13 +92,11 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     Haptics.selectionAsync()
 
     if (this.state.timerRunning) {
-      deactivateKeepAwake()
       clearInterval(this.interval)
       this.setState({ timerRunning: false })
       return
     }
 
-    activateKeepAwake()
     this.interval = setInterval(() => {
       this.countdown()
       this.trackStepChange()
