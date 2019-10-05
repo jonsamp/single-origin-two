@@ -9,6 +9,18 @@ xcrun altool --upload-app -f ~/Downloads/ -u sampjon@gmail.com -p
 - Add ipa file path
 - password is app specific password from appleid.apple.com
 
+## 10/5/2019
+
+Release channel: production-1.3
+Build number: 1
+
+Notes:
+
+- Keeps screen awake on brewing screen.
+- Automatic theme switching added for devices running iOS 13 and above.
+- Fixes iPad scrolling and UI issues.
+- Adds preheating preparation step to french press brew methods.
+
 ## 10/3/2019
 
 Release channel: production-1.2
