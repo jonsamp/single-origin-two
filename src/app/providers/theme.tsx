@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { StatusBar, StatusBarStyle } from 'react-native'
+import { Appearance } from 'react-native-appearance'
 import { connect } from 'react-redux'
 import themes from '../constants/themes'
-import { themeUpdated } from '../state/settings/actions'
+import { autoThemeUpdated, themeUpdated } from '../state/settings/actions'
 import { selectSettings } from '../state/settings/selectors'
 import { State } from '../state/types'
 import { Theme as ThemeType } from '../types'
@@ -17,22 +18,54 @@ export interface Styleguide {
 interface WrapperProps {
   theme: 'default' | 'light' | 'dark'
   themeUpdated: (props: { theme: string }) => void
+  autoThemeUpdated: (props: { autoTheme: boolean }) => void
+  autoTheme: boolean
   [i: string]: any
 }
 
 const mapStateToProps = (state: State) => ({
   theme: selectSettings(state).theme,
+  autoTheme: selectSettings(state).autoTheme,
 })
 
 const mapDispatchToProps = {
   themeUpdated,
+  autoThemeUpdated,
 }
 
 function withTheme(WrappedComponent) {
   class Wrapper extends Component<WrapperProps> {
+    themeListener
+    componentDidMount() {
+      this.updateTheme({ colorScheme: Appearance.getColorScheme() })
+      this.themeListener = Appearance.addChangeListener(({ colorScheme }) => {
+        this.updateTheme({ colorScheme })
+      })
+    }
+
+    componentWillUnmount() {
+      this.themeListener.remove()
+    }
+
+    updateTheme = ({ colorScheme }) => {
+      const { theme, themeUpdated, autoTheme } = this.props
+      if (autoTheme) {
+        const scheme = colorScheme
+
+        if (theme !== scheme) {
+          themeUpdated({ theme: scheme })
+        }
+      }
+    }
+
     toggleTheme = () => {
       const { theme, themeUpdated } = this.props
       themeUpdated({ theme: theme === 'dark' ? 'light' : 'dark' })
+    }
+
+    toggleAutoTheme = () => {
+      const { autoTheme: currentAutoTheme, autoThemeUpdated } = this.props
+      autoThemeUpdated({ autoTheme: !currentAutoTheme })
     }
 
     render() {
@@ -45,6 +78,7 @@ function withTheme(WrappedComponent) {
           theme={themes[this.props.theme]}
           styleguide={themes.styleguide}
           toggleTheme={this.toggleTheme}
+          toggleAutoTheme={this.toggleAutoTheme}
           isDarkTheme={this.props.theme === 'dark'}
           isLightTheme={this.props.theme === 'light'}
         />

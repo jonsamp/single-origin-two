@@ -2,6 +2,7 @@ import { ScreenOrientation } from 'expo'
 import Constants from 'expo-constants'
 import React, { Component } from 'react'
 import { ActivityIndicator, View } from 'react-native'
+import { AppearanceProvider } from 'react-native-appearance'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import * as Sentry from 'sentry-expo'
@@ -44,7 +45,9 @@ class App extends Component {
           }
           persistor={persistor}
         >
-          <Navigator />
+          <AppearanceProvider>
+            <Navigator />
+          </AppearanceProvider>
         </PersistGate>
       </Provider>
     )

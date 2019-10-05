@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { ScrollView, View } from 'react-native'
+import { Platform, ScrollView, View } from 'react-native'
 import { NavigationScreenProp } from 'react-navigation'
 import Header from '../../components/Header'
 import { grinders } from '../../constants/grinders'
@@ -23,6 +23,7 @@ interface SettingsProps {
   navigation: NavigationScreenProp<any>
   isDarkTheme: boolean
   toggleTheme: () => void
+  toggleAutoTheme: () => void
 }
 
 class Settings extends Component<SettingsProps> {
@@ -54,6 +55,7 @@ class Settings extends Component<SettingsProps> {
       settingUpdated,
       isDarkTheme,
       toggleTheme,
+      toggleAutoTheme,
       navigation,
     } = this.props
     const groupName = this.props.navigation.state.params
@@ -195,7 +197,15 @@ class Settings extends Component<SettingsProps> {
                 title="Dark mode"
                 value={isDarkTheme}
                 onChange={toggleTheme}
+                disabled={settings.autoTheme}
               />
+              {parseInt(Platform.Version, 10) >= 13 ? (
+                <SwitchSetting
+                  title={`Automatic theme`}
+                  value={settings.autoTheme}
+                  onChange={toggleAutoTheme}
+                />
+              ) : null}
               <Group
                 title="View Get Started"
                 onPress={() => navigation.navigate('Onboarding')}

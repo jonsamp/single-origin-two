@@ -12,6 +12,7 @@ export interface Settings {
   shareTrackingData: boolean
   onboardingVisible: boolean
   submittedRating: boolean
+  autoTheme: boolean
   recipes: {
     [i: string]: boolean
   }

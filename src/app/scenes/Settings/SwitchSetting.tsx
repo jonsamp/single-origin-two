@@ -8,6 +8,7 @@ interface SwitchSettingProps {
   title: string
   description?: string
   borderTop?: boolean
+  disabled?: boolean
 }
 
 const SwitchSetting = ({
@@ -16,9 +17,14 @@ const SwitchSetting = ({
   value,
   onChange,
   borderTop,
+  disabled,
 }: SwitchSettingProps) => (
   <SettingWrapper title={title} description={description} borderTop={borderTop}>
-    <Switch value={value} onValueChange={v => onChange(v)} />
+    <Switch
+      value={value}
+      onValueChange={v => onChange(v)}
+      disabled={disabled}
+    />
   </SettingWrapper>
 )
 

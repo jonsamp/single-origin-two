@@ -17,6 +17,7 @@ const initialState = {
   shareTrackingData: true,
   onboardingVisible: true,
   submittedRating: false,
+  autoTheme: false,
   recipes: Object.values(recipes).reduce(
     (acc, r) => ({ ...acc, [r.id]: true }),
     {}
@@ -34,6 +35,13 @@ const reducers = {
   [actions.themeUpdated]: (settings: Settings, { payload: { theme } }) => ({
     ...settings,
     theme,
+  }),
+  [actions.autoThemeUpdated]: (
+    settings: Settings,
+    { payload: { autoTheme } }
+  ) => ({
+    ...settings,
+    autoTheme,
   }),
 }
 
