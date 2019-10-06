@@ -1,16 +1,15 @@
 import { Feather } from '@expo/vector-icons'
 import { addMinutes, format } from 'date-fns'
 import React, { Component } from 'react'
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
 import Card from '../../components/Card'
 import ResponsiveScrollView from '../../components/ResponsiveScrollView'
-import { height, width } from '../../constants/layout'
 import recipes from '../../constants/recipes'
 import type from '../../constants/type'
 import formatSeconds from '../../helpers/formatSeconds'
 import withSettings from '../../providers/settings'
-import withTheme, { Styleguide, Theme } from '../../providers/theme'
+import withTheme, { Theme } from '../../providers/theme'
 import withTracking, { Tracking } from '../../providers/tracking'
 import { selectLog } from '../../state/logs/selectors'
 import { Log as LogType } from '../../state/logs/types'
@@ -28,7 +27,6 @@ import styles from './styles'
 interface LogProps {
   settings: Settings
   theme: Theme
-  styleguide: Styleguide
   log: LogType
   unitHelpers: UnitHelpers
   isDarkTheme: boolean
@@ -96,14 +94,7 @@ class Log extends Component<LogProps> {
   }
 
   render() {
-    const {
-      theme,
-      log,
-      unitHelpers,
-      isDarkTheme,
-      withReminder,
-      styleguide,
-    } = this.props
+    const { theme, log, unitHelpers, isDarkTheme, withReminder } = this.props
     const recipe = recipes[log.recipeId]
     const logConfig = {
       totalVolume: val => ({
@@ -134,7 +125,6 @@ class Log extends Component<LogProps> {
       rating: 'Rating',
       notes: 'Notes',
     }
-    const isMaxWidth = width >= styleguide.maxWidth
     const logStats = Object.keys(log)
       .filter(
         logKey => logConfig[logKey] && typeof logConfig[logKey] === 'function'
@@ -323,24 +313,19 @@ class Log extends Component<LogProps> {
         ) : null}
         <View style={styles.cardsContainer}>
           {logStats.map(stat => (
-            <Card
-              containerStyle={{
-                ...styles.cardContainer,
-
-                // half screen width, subtract margin, subtract scroll view padding
-                width:
-                  (isMaxWidth ? styleguide.maxWidth : width) * 0.5 - 16 - 16,
-              }}
-              style={styles.cardStyle}
-              key={stat.label}
-            >
-              <Text style={[styles.cardValue, { color: theme.foreground }]}>
-                {stat.value}
-              </Text>
-              <Text style={[styles.cardLabel, { color: theme.foreground }]}>
-                {stat.label}
-              </Text>
-            </Card>
+            <View style={styles.cardWrapper} key={stat.label}>
+              <Card
+                containerStyle={styles.cardContainer}
+                style={styles.cardStyle}
+              >
+                <Text style={[styles.cardValue, { color: theme.foreground }]}>
+                  {stat.value}
+                </Text>
+                <Text style={[styles.cardLabel, { color: theme.foreground }]}>
+                  {stat.label}
+                </Text>
+              </Card>
+            </View>
           ))}
         </View>
       </ResponsiveScrollView>

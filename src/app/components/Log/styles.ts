@@ -8,7 +8,15 @@ export default StyleSheet.create({
     flexWrap: 'wrap',
     marginTop: 16,
   },
+  cardWrapper: {
+    flex: 1,
+    flexGrow: 0,
+    flexBasis: '50%',
+  },
   cardContainer: {
+    // flex: 1,
+    // flexGrow: 0,
+    // flexBasis: '50%',
     paddingVertical: 32,
     paddingHorizontal: 8,
     marginHorizontal: 8,
