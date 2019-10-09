@@ -182,9 +182,13 @@ class Recipe extends Component<RecipeProps, RecipeState> {
             key={this.state.randomKey}
           />
           <Button
-            title="Finish"
-            customStyle={{ marginVertical: 16, paddingVertical: 20 }}
+            title="Finish Brew"
+            customStyle={{
+              paddingVertical: 20,
+              marginBottom: 32,
+            }}
             onPress={this.onFinish}
+            type="secondary"
           />
         </View>
       </View>
