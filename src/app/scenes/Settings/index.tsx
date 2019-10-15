@@ -72,7 +72,7 @@ class Settings extends Component<SettingsProps> {
         </Section>
         <Section title="General">
           <Group title="App" />
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() =>
               Linking.openURL(
                 'mailto:sampjon@gmail.com?subject=Single%20Origin%20Feedback'
@@ -87,7 +87,7 @@ class Settings extends Component<SettingsProps> {
                 style={{ opacity: 0.65 }}
               />
             </SettingWrapper>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             onPress={() =>
               Linking.openURL(
