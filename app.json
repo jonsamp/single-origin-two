@@ -24,7 +24,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.jonsamp.singleorigintwo",
-      "buildNumber": "1",
+      "buildNumber": "2",
       "userInterfaceStyle": "automatic"
     }
   }

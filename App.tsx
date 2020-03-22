@@ -1,7 +1,7 @@
-import { ScreenOrientation } from 'expo'
+import { ScreenOrientation, SplashScreen } from 'expo'
 import Constants from 'expo-constants'
 import React, { Component } from 'react'
-import { ActivityIndicator, View } from 'react-native'
+import { ActivityIndicator, View, Animated } from 'react-native'
 import { AppearanceProvider } from 'react-native-appearance'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -18,13 +18,92 @@ Sentry.init({
 
 Sentry.setRelease(Constants.manifest.revisionId)
 
+type State = {
+  splashAnimationComplete: boolean
+  isLoadingComplete: boolean
+  splashAnimation: Animated.Value
+}
+
 class App extends Component {
+  state = {
+    splashAnimationComplete: false,
+    isLoadingComplete: false,
+    splashAnimation: new Animated.Value(0),
+  }
+
   async componentDidMount() {
+    SplashScreen.preventAutoHide()
+
     if (Constants.platform.ios.userInterfaceIdiom === 'tablet') {
       await ScreenOrientation.lockAsync(
         ScreenOrientation.OrientationLock.DEFAULT
       )
     }
+  }
+
+  _maybeRenderLoadingImage = () => {
+    if (this.state.splashAnimationComplete) {
+      return null
+    }
+
+    return (
+      <Animated.View
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#000',
+          opacity: this.state.splashAnimation.interpolate({
+            inputRange: [0, 1],
+            outputRange: [1, 0],
+          }),
+          transform: [
+            {
+              scale: this.state.splashAnimation.interpolate({
+                inputRange: [0, 1],
+                outputRange: [1, 1.5],
+              }),
+            },
+            {
+              translateY: this.state.splashAnimation.interpolate({
+                inputRange: [0, 1],
+                outputRange: [1, 4],
+              }),
+            },
+          ],
+        }}
+      >
+        <Animated.Image
+          source={require('./assets/splash.png')}
+          style={{
+            width: undefined,
+            height: undefined,
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            resizeMode: 'contain',
+          }}
+          onLoadEnd={this._animateOut}
+        />
+      </Animated.View>
+    )
+  }
+
+  _animateOut = () => {
+    SplashScreen.hide()
+    Animated.timing(this.state.splashAnimation, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start(() => {
+      this.setState({ splashAnimationComplete: true })
+    })
   }
 
   render() {
@@ -47,6 +126,7 @@ class App extends Component {
         >
           <AppearanceProvider>
             <Navigator />
+            {this._maybeRenderLoadingImage()}
           </AppearanceProvider>
         </PersistGate>
       </Provider>
