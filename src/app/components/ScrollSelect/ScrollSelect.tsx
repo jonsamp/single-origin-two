@@ -152,7 +152,7 @@ class ScrollSelect extends Component<ScrollSelectProps> {
         style={[styles.container, { backgroundColor: theme.grey2, ...style }]}
       >
         <Animated.ScrollView
-          scrollEventThrottle={32}
+          scrollEventThrottle={8}
           onScroll={Animated.event(
             [{ nativeEvent: { contentOffset: { x: this.xOffset } } }],
             {

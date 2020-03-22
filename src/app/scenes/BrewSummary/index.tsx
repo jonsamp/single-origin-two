@@ -32,9 +32,9 @@ const mapStateToProps = (state, props) => {
 }
 
 class BrewSummary extends Component<BrewSummaryProps> {
-  componentDidMount() {
+  async componentDidMount() {
     const { settings, settingUpdated } = this.props
-    if (StoreReview.isSupported() && !settings.submittedRating) {
+    if ((await StoreReview.isAvailableAsync()) && !settings.submittedRating) {
       StoreReview.requestReview()
       settingUpdated({ setting: 'submittedRating', value: true })
     }
