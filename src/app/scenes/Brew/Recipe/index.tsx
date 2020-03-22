@@ -188,7 +188,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
               marginBottom: 32,
             }}
             onPress={this.onFinish}
-            type="secondary"
+            type="tertiary"
           />
         </View>
       </View>

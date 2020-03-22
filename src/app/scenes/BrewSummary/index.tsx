@@ -62,7 +62,12 @@ class BrewSummary extends Component<BrewSummaryProps> {
               },
             ]}
           >
-            <Button title="done" customStyle={styles.button} onPress={onBack} />
+            <Button
+              title="done"
+              type="tertiary"
+              customStyle={styles.button}
+              onPress={onBack}
+            />
           </View>
         </View>
       </View>

@@ -6,7 +6,7 @@ import styles from './styles'
 
 interface ButtonProps {
   theme?: Theme
-  type?: 'normal' | 'secondary' | 'outline'
+  type?: 'normal' | 'secondary' | 'tertiary' | 'outline'
   onPress?: () => void
   title: string
   customStyle?: object
@@ -36,6 +36,17 @@ function Button({
       { backgroundColor: isDarkTheme ? theme.grey1 : theme.background },
     ]
     textStyle = [styles.text, { color: theme.foreground }]
+  }
+
+  if (type === 'tertiary') {
+    buttonStyle = [
+      styles.button,
+      { backgroundColor: isDarkTheme ? theme.grey1 : theme.foreground },
+    ]
+    textStyle = [
+      styles.text,
+      { color: isDarkTheme ? theme.foreground : theme.background },
+    ]
   }
 
   if (type === 'outline') {
