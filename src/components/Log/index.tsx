@@ -291,7 +291,7 @@ class Log extends Component<LogProps> {
               justifyContent: 'space-between',
             }}
           >
-            <View>
+            <View style={{ flex: 1 }}>
               <Text
                 style={[
                   type.headline,

@@ -78,6 +78,7 @@ class DraggableSegment extends Component<
       toValue: { x, y: 0 },
       duration: 400,
       easing: Easing.out(Easing.exp),
+      useNativeDriver: true,
     }).start()
   }
 

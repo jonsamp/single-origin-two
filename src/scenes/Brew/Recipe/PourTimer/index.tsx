@@ -80,12 +80,14 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     Animated.timing(this.animatedValue, {
       toValue: 1,
       duration: 200,
+      useNativeDriver: false,
     }).start()
 
   onAnimateNumberFinish = () =>
     Animated.timing(this.animatedValue, {
       toValue: 0,
       duration: 200,
+      useNativeDriver: false,
     }).start()
 
   toggleCountdown = () => {
@@ -156,18 +158,22 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
           Animated.timing(this.shadowAnimatedValue, {
             toValue: 1,
             duration: 200,
+            useNativeDriver: true,
           }),
           Animated.timing(this.shadowAnimatedValue, {
             toValue: 0,
             duration: 200,
+            useNativeDriver: true,
           }),
           Animated.timing(this.shadowAnimatedValue, {
             toValue: 1,
             duration: 200,
+            useNativeDriver: true,
           }),
           Animated.timing(this.shadowAnimatedValue, {
             toValue: 0,
             duration: 200,
+            useNativeDriver: true,
           }),
         ]).start()
         playSound({ sound: tipSound })

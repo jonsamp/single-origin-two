@@ -63,6 +63,7 @@ class Step extends Component<StepProps, StepState> {
         Animated.timing(this.animatedValue, {
           toValue: 1,
           duration: 200,
+          useNativeDriver: true,
         }),
         {
           start: async onComplete => {
@@ -70,10 +71,12 @@ class Step extends Component<StepProps, StepState> {
             onComplete({ finished: true })
           },
           stop: () => {},
+          reset: () => {},
         },
         Animated.timing(this.animatedValue, {
           toValue: 0,
           duration: 200,
+          useNativeDriver: true,
         }),
       ]).start()
     }

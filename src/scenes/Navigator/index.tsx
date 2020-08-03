@@ -2,7 +2,6 @@ import React from 'react'
 import { TouchableOpacity, Text } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from 'react-native-screens/native-stack'
 
@@ -22,9 +21,9 @@ import Brew from '../../scenes/Brew'
 import LogDetail from '../../scenes/LogDetail'
 import LogDetailEdit from '../../scenes/LogDetailEdit'
 import BrewSummary from '../../scenes/BrewSummary'
+import Test from '../../scenes/Test'
 
 const Tab = createBottomTabNavigator()
-// const Stack = createStackNavigator()
 const Stack = createNativeStackNavigator()
 
 function LogsStack() {
@@ -101,6 +100,7 @@ function App({ theme }) {
           },
         }}
       >
+        {/* <Stack.Screen name="Test" component={Test} /> */}
         <Stack.Screen
           name="Tabs"
           component={withTheme(Tabs)}

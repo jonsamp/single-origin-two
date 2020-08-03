@@ -1,6 +1,6 @@
 import * as Haptic from 'expo-haptics'
 import { range } from 'lodash'
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 import { Animated, Text, TouchableOpacity, View, ViewStyle } from 'react-native'
 import withSettings from '../../providers/settings'
 import withTheme from '../../providers/theme'
@@ -9,13 +9,13 @@ import styles from './styles'
 
 interface ScrollSelectProps {
   theme: any
-  min: number
-  max: number
-  step: number
-  defaultValue: number
-  onChange: (value: number) => void
+  min?: number
+  max?: number
+  step?: number
+  defaultValue?: number
+  onChange?: (value: number) => void
   unitType: string
-  unitHelpers: UnitHelpers
+  unitHelpers?: UnitHelpers
   label?: string
   style?: ViewStyle
   containerWidth: number
@@ -31,7 +31,7 @@ class ScrollSelect extends Component<ScrollSelectProps> {
     defaultValue: undefined,
   }
 
-  scrollViewRef
+  scrollViewRef = createRef()
 
   xOffset = new Animated.Value(0)
   SCREEN_WIDTH = Math.round(this.props.containerWidth / 3)
@@ -52,7 +52,7 @@ class ScrollSelect extends Component<ScrollSelectProps> {
     if (this.scrollViewRef) {
       setTimeout(
         () =>
-          this.scrollViewRef.scrollTo({
+          this.scrollViewRef.current.scrollTo({
             x: itemPosition,
             y: 0,
             animated: false,
@@ -185,11 +185,7 @@ class ScrollSelect extends Component<ScrollSelectProps> {
           showsHorizontalScrollIndicator={false}
           decelerationRate="fast"
           snapToInterval={this.SCREEN_WIDTH}
-          ref={ref => {
-            if (ref) {
-              this.scrollViewRef = ref._component
-            }
-          }}
+          ref={this.scrollViewRef}
         >
           {selectionRange.map((item, index) => (
             <TouchableOpacity
