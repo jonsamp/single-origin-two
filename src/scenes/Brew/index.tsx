@@ -1,65 +1,47 @@
-import { Feather } from '@expo/vector-icons'
-import React, { Component } from 'react'
-import { ScrollView, TouchableOpacity, View } from 'react-native'
-import { NavigationScreenProp, withNavigation } from 'react-navigation'
-import Header from '../../components/Header'
+import React from 'react'
+import { ScrollView, View } from 'react-native'
 import { Theme } from '../../constants/themes'
 import withSettings from '../../providers/settings'
 import withTheme from '../../providers/theme'
-import { State } from '../../state/types'
 import Recipe from './Recipe'
 import recipes from './recipes'
 
+type Params = {
+  Brew: { id: string }
+}
+
 interface BrewProps {
   theme: Theme
-  navigation: NavigationScreenProp<State, any>
   isDarkTheme: boolean
+  route: any
+  navigation: any
 }
 
-class Brew extends Component<BrewProps> {
-  render() {
-    const { theme, navigation, isDarkTheme } = this.props
-    const { id } = navigation.state.params
-    const recipe = recipes[id]
+function Brew(props: BrewProps) {
+  const { theme, isDarkTheme, route, navigation } = props
+  const { id } = route.params
+  const recipe = recipes[id]
 
-    return (
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: isDarkTheme ? theme.background : theme.grey1,
+  return (
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: isDarkTheme ? theme.background : theme.grey1,
+      }}
+    >
+      <ScrollView
+        contentContainerStyle={{
+          padding: 12,
+          alignItems: 'center',
+          paddingTop: 32,
         }}
       >
-        <Header
-          title={recipe.title}
-          right={
-            <TouchableOpacity
-              style={{ paddingRight: 8, top: -2 }}
-              onPress={() =>
-                navigation.navigate('SettingsDetail', 'Units' as any)
-              }
-            >
-              <Feather
-                name="sliders"
-                color={theme.foreground}
-                size={theme.iconSize}
-              />
-            </TouchableOpacity>
-          }
-        />
-        <ScrollView
-          contentContainerStyle={{
-            padding: 12,
-            alignItems: 'center',
-            paddingTop: 32,
-          }}
-        >
-          <View style={{ width: '100%' }}>
-            <Recipe recipe={recipe} />
-          </View>
-        </ScrollView>
-      </View>
-    )
-  }
+        <View style={{ width: '100%' }}>
+          <Recipe recipe={recipe} navigation={navigation} />
+        </View>
+      </ScrollView>
+    </View>
+  )
 }
 
-export default withNavigation(withSettings(withTheme(Brew)) as any)
+export default withSettings(withTheme(Brew))

@@ -2,14 +2,9 @@ import { Notifications } from 'expo'
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import HeaderScrollView from 'react-native-header-scroll-view'
-import {
-  NavigationActions,
-  NavigationScreenProp,
-  StackActions,
-} from 'react-navigation'
+import { NavigationScreenProp } from 'react-navigation'
 import ListItem from '../../components/ListItem'
 import ScreenPlaceholder from '../../components/ScreenPlaceholder'
-import { width } from '../../constants/layout'
 import recipes from '../../constants/recipes'
 import withSettings from '../../providers/settings'
 import withTheme from '../../providers/theme'
@@ -116,7 +111,10 @@ class Menu extends Component<MenuProps> {
               recipe={recipe}
               key={recipe.id}
               onPress={() => {
-                navigation.navigate('Brew', { id: recipe.id })
+                navigation.navigate('Brew', {
+                  id: recipe.id,
+                  title: `${recipe.title} ${recipe.modifier}`,
+                })
                 tracking.track(tracking.events.RECIPE_TAPPED, { id: recipe.id })
               }}
             />

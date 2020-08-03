@@ -1,7 +1,6 @@
 import { Feather } from '@expo/vector-icons'
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
-import { withNavigation } from 'react-navigation'
 import Card from '../../../../components/Card'
 import Instructions from '../../../../components/Instructions'
 import withTheme from '../../../../providers/theme'
@@ -49,4 +48,4 @@ function Preparation({
   )
 }
 
-export default withTheme(withNavigation(Preparation))
+export default withTheme(Preparation)

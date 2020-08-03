@@ -1,7 +1,6 @@
 import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake'
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { NavigationScreenProp, withNavigation } from 'react-navigation'
 import { connect } from 'react-redux'
 import Button from '../../../components/Button'
 import { width } from '../../../constants/layout'
@@ -28,10 +27,10 @@ interface RecipeProps {
   settings: Settings
   unitHelpers: UnitHelpers
   recipe: RecipeType
-  navigation: NavigationScreenProp<State, any>
   logAdded: (props: any) => void
   recentLog: Log
   styleguide: Styleguide
+  navigation: any
 }
 
 interface RecipeState {
@@ -142,6 +141,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
           <Preparation
             recipe={recipe.title.toLowerCase()}
             preparation={recipe.preparation}
+            navigation={this.props.navigation}
           />
           <YieldQuestion
             defaultValue={recentLog.totalVolume || recipe.defaultTotalVolume}
@@ -199,4 +199,4 @@ class Recipe extends Component<RecipeProps, RecipeState> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withNavigation(withSettings(withTheme(Recipe)) as any))
+)(withSettings(withTheme(Recipe)))

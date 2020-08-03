@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Platform, ScrollView, View } from 'react-native'
 import { NavigationScreenProp } from 'react-navigation'
-import Header from '../../components/Header'
 import { grinders } from '../../constants/grinders'
 import recipes from '../../constants/recipes'
 import { tempUnits, weightUnits } from '../../constants/units'
@@ -58,7 +57,7 @@ class Settings extends Component<SettingsProps> {
       toggleAutoTheme,
       navigation,
     } = this.props
-    const groupName = this.props.navigation.state.params
+    const groupName = this.props.route.params
     let children
 
     switch (groupName.toLowerCase().replace(' ', '-')) {
@@ -242,7 +241,6 @@ class Settings extends Component<SettingsProps> {
           flex: 1,
         }}
       >
-        <Header title={groupName} />
         <ScrollView contentContainerStyle={{ paddingBottom: 60 }}>
           {children}
         </ScrollView>

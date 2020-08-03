@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
 import { NavigationScreenProp, withNavigation } from 'react-navigation'
-import Header from '../../components/Header'
 import InstructionalCard from '../../components/InstructionalCard'
 import ResponsiveScrollView from '../../components/ResponsiveScrollView'
 import withTheme, { Theme } from '../../providers/theme'
@@ -9,6 +7,7 @@ import { State } from '../../state/types'
 
 interface PreparationProps {
   navigation: NavigationScreenProp<State>
+  route: any
   theme: Theme
   isDarkTheme: boolean
   preparation: Array<{
@@ -19,25 +18,22 @@ interface PreparationProps {
 
 class Preparation extends Component<PreparationProps> {
   render() {
-    const { navigation, theme, isDarkTheme } = this.props
-    const preparation = navigation.state.params
+    const { navigation, route, theme, isDarkTheme } = this.props
+    const preparation = route.params
 
     return (
-      <>
-        <Header title="Preparation" onBack={navigation.goBack} />
-        <ResponsiveScrollView
-          wrapperStyle={{
-            backgroundColor: isDarkTheme ? theme.background : theme.grey1,
-          }}
-        >
-          {preparation.map(prepStep => (
-            <InstructionalCard
-              key={prepStep.text}
-              step={{ image: prepStep.image, description: prepStep.text }}
-            />
-          ))}
-        </ResponsiveScrollView>
-      </>
+      <ResponsiveScrollView
+        wrapperStyle={{
+          backgroundColor: isDarkTheme ? theme.background : theme.grey1,
+        }}
+      >
+        {preparation.map(prepStep => (
+          <InstructionalCard
+            key={prepStep.text}
+            step={{ image: prepStep.image, description: prepStep.text }}
+          />
+        ))}
+      </ResponsiveScrollView>
     )
   }
 }
