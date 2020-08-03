@@ -20,6 +20,7 @@ import Preparation from '../../scenes/Preparation'
 import Brew from '../../scenes/Brew'
 import LogDetail from '../../scenes/LogDetail'
 import LogDetailEdit from '../../scenes/LogDetailEdit'
+import BrewSummary from '../../scenes/BrewSummary'
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -118,6 +119,11 @@ function App({ theme }) {
         />
         <Stack.Screen name="LogDetail" component={LogDetail} />
         <Stack.Screen name="LogDetailEdit" component={LogDetailEdit} />
+        <Stack.Screen
+          name="BrewSummary"
+          component={BrewSummary}
+          options={{ gestureEnabled: false, title: 'Brew Summary' }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   )
