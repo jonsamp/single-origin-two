@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, StyleSheet } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -22,11 +22,15 @@ import Brew from '../../scenes/Brew'
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
 
-function Tabs() {
+function Tabs({ theme }) {
   return (
     <Tab.Navigator
       tabBarOptions={{
         showLabel: false,
+        style: {
+          backgroundColor: theme.background,
+          borderTopColor: theme.grey3,
+        },
       }}
     >
       <Tab.Screen
@@ -62,11 +66,15 @@ function App({ theme }) {
           headerTitleStyle: type.headline,
           headerBackTitleVisible: false,
           headerTintColor: theme.foreground,
+          headerStyle: {
+            backgroundColor: theme.background,
+            borderBottomColor: 'red',
+          },
         }}
       >
         <Stack.Screen
           name="Tabs"
-          component={Tabs}
+          component={() => <Tabs theme={theme} />}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -92,6 +100,9 @@ function App({ theme }) {
             ),
             headerRightContainerStyle: {
               right: 8,
+            },
+            headerStyle: {
+              borderBottomColor: theme.grey3,
             },
           })}
         />

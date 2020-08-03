@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NavigationScreenProp, withNavigation } from 'react-navigation'
+import { NavigationScreenProp } from 'react-navigation'
 import InstructionalCard from '../../components/InstructionalCard'
 import ResponsiveScrollView from '../../components/ResponsiveScrollView'
 import withTheme, { Theme } from '../../providers/theme'
@@ -18,7 +18,7 @@ interface PreparationProps {
 
 class Preparation extends Component<PreparationProps> {
   render() {
-    const { navigation, route, theme, isDarkTheme } = this.props
+    const { route, theme, isDarkTheme } = this.props
     const preparation = route.params
 
     return (
@@ -38,4 +38,4 @@ class Preparation extends Component<PreparationProps> {
   }
 }
 
-export default withNavigation(withTheme(Preparation) as any)
+export default withTheme(Preparation)
