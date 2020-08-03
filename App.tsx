@@ -10,6 +10,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Navigator from './src/scenes/Navigator'
 import NavigatorNew from './src/scenes/NavigatorNew'
 import configureStore from './src/store/configureStore'
+import { enableScreens } from 'react-native-screens'
+enableScreens()
 
 const { store, persistor } = configureStore()
 

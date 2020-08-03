@@ -2,7 +2,7 @@ import { Feather } from '@expo/vector-icons'
 import React, { Component } from 'react'
 import { Linking, TouchableOpacity } from 'react-native'
 import HeaderScrollView from 'react-native-header-scroll-view'
-import { NavigationScreenProp, withNavigation } from 'react-navigation'
+import { NavigationScreenProp } from 'react-navigation'
 import withTheme from '../../providers/theme'
 import withTracking, { Tracking } from '../../providers/tracking'
 import { Theme } from '../../types/index'
@@ -22,13 +22,9 @@ class Settings extends Component<SettingsProps> {
 
   componentDidMount() {
     const { navigation, tracking } = this.props
-    this.focusListener = navigation.addListener('didFocus', () => {
+    navigation.addListener('focus', () => {
       tracking.track(tracking.events.SETTINGS_VIEWED)
     })
-  }
-
-  componentWillUnmount() {
-    this.focusListener.remove()
   }
 
   render() {
@@ -123,4 +119,4 @@ class Settings extends Component<SettingsProps> {
   }
 }
 
-export default withNavigation(withTracking(withTheme(Settings)) as any)
+export default withTracking(withTheme(Settings))

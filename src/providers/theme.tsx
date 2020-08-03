@@ -44,7 +44,9 @@ function withTheme(WrappedComponent) {
     }
 
     componentWillUnmount() {
-      this.themeListener.remove()
+      if (this.themeListener && this.themeListener.remove) {
+        this.themeListener.remove()
+      }
     }
 
     updateTheme = ({ colorScheme }) => {

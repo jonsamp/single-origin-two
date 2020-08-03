@@ -24,8 +24,6 @@ interface MenuProps {
 class Menu extends Component<MenuProps> {
   notificationSubscription
 
-  // focusListener
-
   componentDidMount() {
     const { navigation, tracking } = this.props
 
@@ -33,13 +31,9 @@ class Menu extends Component<MenuProps> {
       this.handleNotification
     )
 
-    // this.focusListener = navigation.addListener('didFocus', () => {
-    //   tracking.track(tracking.events.MENU_VIEWED)
-    // })
-  }
-
-  componentWillUnmount() {
-    // this.focusListener.remove()
+    navigation.addListener('focus', () => {
+      tracking.track(tracking.events.MENU_VIEWED)
+    })
   }
 
   handleNotification = notification => {

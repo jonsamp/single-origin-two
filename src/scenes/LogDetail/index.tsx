@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, TouchableOpacity } from 'react-native'
-import { NavigationScreenProp, withNavigation } from 'react-navigation'
+import { NavigationScreenProp } from 'react-navigation'
 import Header from '../../components/Header'
 import Log from '../../components/Log'
 import type from '../../constants/type'
@@ -12,15 +12,13 @@ interface LogDetailProps {
   navigation: NavigationScreenProp<State>
   theme: Theme
   timestamp: number
+  route: any
 }
 
 class LogDetail extends Component<LogDetailProps> {
   render() {
-    const { navigation, theme } = this.props
-    const timestamp =
-      navigation.state &&
-      navigation.state.params &&
-      navigation.state.params.timestamp
+    const { navigation, theme, route } = this.props
+    const timestamp = route.params && route.params.timestamp
 
     return (
       <>
@@ -46,4 +44,4 @@ class LogDetail extends Component<LogDetailProps> {
   }
 }
 
-export default withNavigation(withTheme(LogDetail) as any)
+export default withTheme(LogDetail)

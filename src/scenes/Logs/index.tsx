@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Animated, FlatList, View } from 'react-native'
-import { RectButton } from 'react-native-gesture-handler'
+import { FlatList, View } from 'react-native'
 import HeaderScrollView from 'react-native-header-scroll-view'
-import { NavigationScreenProp, withNavigation } from 'react-navigation'
+import { NavigationScreenProp } from 'react-navigation'
 import { connect } from 'react-redux'
 import ScreenPlaceholder from '../../components/ScreenPlaceholder'
 import recipes from '../../constants/recipes'
@@ -36,17 +35,11 @@ const mapDispatchToProps = { logDeleted }
 class Logs extends Component<LogsProps, LogsState> {
   state = { editing: false }
 
-  focusListener
-
   componentDidMount() {
     const { navigation, tracking } = this.props
-    this.focusListener = navigation.addListener('didFocus', () => {
+    navigation.addListener('focus', () => {
       tracking.track(tracking.events.LOGS_VIEWED)
     })
-  }
-
-  componentWillUnmount() {
-    this.focusListener.remove()
   }
 
   toggleEditing = () => this.setState(prev => ({ editing: !prev.editing }))
@@ -131,4 +124,4 @@ class Logs extends Component<LogsProps, LogsState> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withNavigation(withTracking(withTheme(Logs)) as any))
+)(withTracking(withTheme(Logs)))

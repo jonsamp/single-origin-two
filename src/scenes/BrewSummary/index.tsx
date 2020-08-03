@@ -1,11 +1,7 @@
 import * as StoreReview from 'expo-store-review'
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import {
-  NavigationScreenProp,
-  StackActions,
-  withNavigation,
-} from 'react-navigation'
+import { NavigationScreenProp, StackActions } from 'react-navigation'
 import { connect } from 'react-redux'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Button from '../../components/Button'
@@ -77,6 +73,4 @@ class BrewSummary extends Component<BrewSummaryProps> {
   }
 }
 
-export default connect(mapStateToProps)(
-  withNavigation(withTheme(withSettings(BrewSummary)) as any)
-)
+export default connect(mapStateToProps)(withTheme(withSettings(BrewSummary)))

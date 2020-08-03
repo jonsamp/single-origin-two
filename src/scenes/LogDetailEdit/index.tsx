@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
-import { NavigationScreenProp, withNavigation } from 'react-navigation'
+import { NavigationScreenProp } from 'react-navigation'
 import { connect } from 'react-redux'
 import ScrollSelect from '../../components/ScrollSelect'
 import { width } from '../../constants/layout'
@@ -34,6 +34,7 @@ interface LogDetailEditProps {
   logDeleted: (props: { timestamp: number }) => void
   log: Log
   tracking: Tracking
+  route: any
 }
 
 interface LogDetailEditState {
@@ -43,7 +44,7 @@ interface LogDetailEditState {
 }
 
 const mapStateToProps = (state, props) => ({
-  log: selectLog(state, props.navigation.state.params.timestamp),
+  log: selectLog(state, props.route.params.timestamp),
 })
 
 const mapDispatchToProps = {
@@ -58,7 +59,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
 
   updateLog = (key, value) => {
     this.props.logUpdated({
-      timestamp: this.props.navigation.state.params.timestamp,
+      timestamp: this.props.route.params.timestamp,
       log: {
         [key]: value,
       },
@@ -258,4 +259,4 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withNavigation(withTracking(withTheme(LogDetailEdit)) as any))
+)(withTracking(withTheme(LogDetailEdit)))

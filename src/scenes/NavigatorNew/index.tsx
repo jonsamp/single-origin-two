@@ -18,6 +18,8 @@ import SettingsDetail from '../../scenes/Settings/SettingsDetail'
 import Onboarding from '../../scenes/Onboarding'
 import Preparation from '../../scenes/Preparation'
 import Brew from '../../scenes/Brew'
+import LogDetail from '../../scenes/LogDetail'
+import LogDetailEdit from '../../scenes/LogDetailEdit'
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -74,7 +76,7 @@ function App({ theme }) {
       >
         <Stack.Screen
           name="Tabs"
-          component={() => <Tabs theme={theme} />}
+          component={withTheme(Tabs)}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -114,6 +116,8 @@ function App({ theme }) {
             title: route.params,
           })}
         />
+        <Stack.Screen name="LogDetail" component={LogDetail} />
+        <Stack.Screen name="LogDetailEdit" component={LogDetailEdit} />
       </Stack.Navigator>
     </NavigationContainer>
   )
