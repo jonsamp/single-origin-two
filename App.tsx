@@ -7,8 +7,8 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import * as Sentry from 'sentry-expo'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import Navigator from './src/app/scenes/Navigator'
-import configureStore from './src/app/store/configureStore'
+import Navigator from './src/scenes/Navigator'
+import configureStore from './src/store/configureStore'
 
 const { store, persistor } = configureStore()
 

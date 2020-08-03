@@ -6,9 +6,9 @@
     "start": "expo start",
     "ios": "expo start",
     "android": "expo start --android",
-    "prettier": "prettier --write './src/app/**/*.ts*'",
+    "prettier": "prettier --write './src/**/*.ts*'",
     "compressgifs": "gifsicle --batch --lossy=100 --resize-width=400 --colors 256 -O3 **/*.gif",
-    "resizeimages": "mogrify -resize 400 src/app/**/*.{jpg,png}"
+    "resizeimages": "mogrify -resize 400 src/**/*.{jpg,png}"
   },
   "dependencies": {
     "date-fns": "1.30.1",
