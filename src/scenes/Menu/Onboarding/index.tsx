@@ -1,18 +1,19 @@
 import { Feather } from '@expo/vector-icons'
 import React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
-import { NavigationScreenProp, withNavigation } from 'react-navigation'
+import { useNavigation } from '@react-navigation/native'
 import Card from '../../../components/Card'
 import type from '../../../constants/type'
 import withTheme from '../../../providers/theme'
 
 interface OnboardingProps {
   theme: any
-  navigation: NavigationScreenProp<any>
 }
 
 function Onboarding(props: OnboardingProps) {
-  const { theme, navigation } = props
+  const { theme } = props
+  const navigation = useNavigation()
+
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('Onboarding')}
@@ -41,4 +42,4 @@ function Onboarding(props: OnboardingProps) {
   )
 }
 
-export default withNavigation(withTheme(Onboarding) as any)
+export default withTheme(Onboarding)

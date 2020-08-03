@@ -1,13 +1,12 @@
 import { Feather } from '@expo/vector-icons'
 import React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
-import { withNavigation } from 'react-navigation'
+import { useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import withTheme from '../../providers/theme'
 import styles from './styles'
 
 interface HeaderProps {
-  navigation: any
   theme: any
   title: string
   right: any
@@ -15,14 +14,10 @@ interface HeaderProps {
   onBack: () => void
 }
 
-function Header({
-  navigation,
-  theme,
-  title,
-  right,
-  isDarkTheme,
-  onBack,
-}: HeaderProps) {
+function Header(props: HeaderProps) {
+  const { theme, title, right, isDarkTheme, onBack } = props
+  const navigation = useNavigation()
+
   return (
     <SafeAreaView
       edges={['top']}
@@ -51,4 +46,4 @@ function Header({
   )
 }
 
-export default withTheme(withNavigation(Header))
+export default withTheme(Header)

@@ -1,7 +1,6 @@
 import React from 'react'
-import { NavigationScreenProp, withNavigation } from 'react-navigation'
+import { useNavigation } from '@react-navigation/native'
 import Button from '../../components/Button'
-import Header from '../../components/Header'
 import InstructionalCard from '../../components/InstructionalCard'
 import ResponsiveScrollView from '../../components/ResponsiveScrollView'
 import withSettings from '../../providers/settings'
@@ -11,7 +10,6 @@ import SelectRecipe from './images/selectRecipe.gif'
 import StartTimer from './images/startTimer.gif'
 
 interface OnboardingProps {
-  navigation: NavigationScreenProp<any>
   settingUpdated: (props: { setting: string; value: boolean }) => void
 }
 
@@ -55,9 +53,10 @@ const onboarding = [
 ]
 
 function Onboarding(props: OnboardingProps) {
+  const navigation = useNavigation()
+
   return (
     <>
-      <Header title="Get started" />
       <ResponsiveScrollView>
         {onboarding.map(step => (
           <InstructionalCard key={step.title} step={step} />
@@ -69,7 +68,7 @@ function Onboarding(props: OnboardingProps) {
               setting: 'onboardingVisible',
               value: false,
             })
-            props.navigation.goBack()
+            navigation.goBack()
           }}
         />
       </ResponsiveScrollView>
@@ -77,4 +76,4 @@ function Onboarding(props: OnboardingProps) {
   )
 }
 
-export default withNavigation(withSettings(Onboarding) as any)
+export default withSettings(Onboarding)

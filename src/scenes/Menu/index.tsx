@@ -6,7 +6,6 @@ import {
   NavigationActions,
   NavigationScreenProp,
   StackActions,
-  withNavigation,
 } from 'react-navigation'
 import ListItem from '../../components/ListItem'
 import ScreenPlaceholder from '../../components/ScreenPlaceholder'
@@ -30,7 +29,7 @@ interface MenuProps {
 class Menu extends Component<MenuProps> {
   notificationSubscription
 
-  focusListener
+  // focusListener
 
   componentDidMount() {
     const { navigation, tracking } = this.props
@@ -39,31 +38,30 @@ class Menu extends Component<MenuProps> {
       this.handleNotification
     )
 
-    this.focusListener = navigation.addListener('didFocus', () => {
-      tracking.track(tracking.events.MENU_VIEWED)
-    })
+    // this.focusListener = navigation.addListener('didFocus', () => {
+    //   tracking.track(tracking.events.MENU_VIEWED)
+    // })
   }
 
   componentWillUnmount() {
-    this.focusListener.remove()
+    // this.focusListener.remove()
   }
 
   handleNotification = notification => {
     if (notification.data && notification.data.timestamp) {
-      const resetAction = StackActions.reset({
-        index: 1,
-        actions: [
-          NavigationActions.navigate({
-            routeName: 'StackNavigator',
-          }),
-          NavigationActions.navigate({
-            routeName: 'LogDetailEdit',
-            params: { timestamp: notification.data.timestamp },
-          }),
-        ],
-      })
-
-      this.props.navigation.dispatch(resetAction)
+      // const resetAction = StackActions.reset({
+      //   index: 1,
+      //   actions: [
+      //     NavigationActions.navigate({
+      //       routeName: 'StackNavigator',
+      //     }),
+      //     NavigationActions.navigate({
+      //       routeName: 'LogDetailEdit',
+      //       params: { timestamp: notification.data.timestamp },
+      //     }),
+      //   ],
+      // })
+      // this.props.navigation.dispatch(resetAction)
     }
   }
   render() {
@@ -132,6 +130,4 @@ class Menu extends Component<MenuProps> {
   }
 }
 
-export default withTracking(
-  withSettings(withNavigation(withTheme(Menu) as any))
-)
+export default withTracking(withSettings(withTheme(Menu)))

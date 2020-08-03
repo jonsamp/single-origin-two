@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react'
 import { ScrollView, View, ViewStyle } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+
 import { width } from '../../constants/layout'
 import withTheme, { Styleguide, Theme } from '../../providers/theme'
 
@@ -13,6 +15,7 @@ interface ResponsiveScrollViewProps {
 
 function ResponsiveScrollView(props: ResponsiveScrollViewProps) {
   const { styleguide, children, wrapperStyle, style, theme } = props
+  const insets = useSafeAreaInsets()
   const isMaxWidth = width >= styleguide.maxWidth
 
   return (
@@ -24,7 +27,7 @@ function ResponsiveScrollView(props: ResponsiveScrollViewProps) {
           {
             paddingHorizontal: 16,
             paddingTop: 32,
-            paddingBottom: 60,
+            paddingBottom: insets.bottom,
             ...(isMaxWidth && { alignItems: 'center' }),
           },
           style,

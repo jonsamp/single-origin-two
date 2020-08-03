@@ -8,6 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import * as Sentry from 'sentry-expo'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Navigator from './src/scenes/Navigator'
+import NavigatorNew from './src/scenes/NavigatorNew'
 import configureStore from './src/store/configureStore'
 
 const { store, persistor } = configureStore()
@@ -127,7 +128,7 @@ class App extends Component {
             persistor={persistor}
           >
             <AppearanceProvider>
-              <Navigator />
+              <NavigatorNew />
               {this._maybeRenderLoadingImage()}
             </AppearanceProvider>
           </PersistGate>
