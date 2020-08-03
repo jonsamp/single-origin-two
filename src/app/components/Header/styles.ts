@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native'
-import { ifIphoneX } from 'react-native-iphone-x-helper'
 import type from '../../constants/type'
 
 const styles = StyleSheet.create({
@@ -9,23 +8,14 @@ const styles = StyleSheet.create({
     shadowOffset: { height: 2, width: 0 },
     shadowOpacity: 0.1,
     zIndex: 1,
-    ...ifIphoneX(
-      {
-        paddingTop: 50,
-        paddingBottom: 16,
-      },
-      {
-        paddingTop: 28,
-        paddingBottom: 12,
-      }
-    ),
+    paddingBottom: 16,
   },
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  left: { position: 'absolute', left: 6, bottom: -2 },
+  left: { position: 'absolute', left: 6, bottom: -6 },
   right: { position: 'absolute', right: 6, bottom: -2 },
   title: type.headline,
   scriptTitle: {

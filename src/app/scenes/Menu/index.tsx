@@ -2,7 +2,6 @@ import { Notifications } from 'expo'
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import HeaderScrollView from 'react-native-header-scroll-view'
-import { ifIphoneX } from 'react-native-iphone-x-helper'
 import {
   NavigationActions,
   NavigationScreenProp,
@@ -89,15 +88,6 @@ class Menu extends Component<MenuProps> {
           backgroundColor: isDarkTheme ? theme.background : theme.grey1,
         }}
       >
-        <View
-          style={{
-            position: 'absolute',
-            height: ifIphoneX(158 + 26, 158),
-            width: '100%',
-            backgroundColor: isDarkTheme ? theme.background : theme.primary,
-            opacity: isDarkTheme ? 1 : 0.3,
-          }}
-        />
         <HeaderScrollView
           title="Brew Methods"
           containerStyle={{ backgroundColor: 'transparent' }}

@@ -6,6 +6,7 @@ import { AppearanceProvider } from 'react-native-appearance'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import * as Sentry from 'sentry-expo'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Navigator from './src/app/scenes/Navigator'
 import configureStore from './src/app/store/configureStore'
 
@@ -108,28 +109,30 @@ class App extends Component {
 
   render() {
     return (
-      <Provider store={store}>
-        <PersistGate
-          loading={
-            <View
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: 'black',
-              }}
-            >
-              <ActivityIndicator />
-            </View>
-          }
-          persistor={persistor}
-        >
-          <AppearanceProvider>
-            <Navigator />
-            {this._maybeRenderLoadingImage()}
-          </AppearanceProvider>
-        </PersistGate>
-      </Provider>
+      <SafeAreaProvider>
+        <Provider store={store}>
+          <PersistGate
+            loading={
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: 'black',
+                }}
+              >
+                <ActivityIndicator />
+              </View>
+            }
+            persistor={persistor}
+          >
+            <AppearanceProvider>
+              <Navigator />
+              {this._maybeRenderLoadingImage()}
+            </AppearanceProvider>
+          </PersistGate>
+        </Provider>
+      </SafeAreaProvider>
     )
   }
 }

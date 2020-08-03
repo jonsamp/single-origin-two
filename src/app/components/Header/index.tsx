@@ -2,6 +2,7 @@ import { Feather } from '@expo/vector-icons'
 import React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import withTheme from '../../providers/theme'
 import styles from './styles'
 
@@ -23,7 +24,8 @@ function Header({
   onBack,
 }: HeaderProps) {
   return (
-    <View
+    <SafeAreaView
+      edges={['top']}
       style={[
         styles.container,
         {
@@ -45,7 +47,7 @@ function Header({
         <View style={styles.right}>{right}</View>
         <View />
       </View>
-    </View>
+    </SafeAreaView>
   )
 }
 

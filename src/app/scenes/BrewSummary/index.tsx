@@ -7,6 +7,7 @@ import {
   withNavigation,
 } from 'react-navigation'
 import { connect } from 'react-redux'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import Button from '../../components/Button'
 import Header from '../../components/Header'
 import Log from '../../components/Log'
@@ -54,7 +55,8 @@ class BrewSummary extends Component<BrewSummaryProps> {
             alignItems: 'center',
           }}
         >
-          <View
+          <SafeAreaView
+            edges={['bottom']}
             style={[
               styles.buttonContainer,
               isMaxWidth && {
@@ -68,7 +70,7 @@ class BrewSummary extends Component<BrewSummaryProps> {
               customStyle={styles.button}
               onPress={onBack}
             />
-          </View>
+          </SafeAreaView>
         </View>
       </View>
     )
