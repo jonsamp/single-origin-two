@@ -8,7 +8,6 @@ import { PersistGate } from 'redux-persist/integration/react'
 import * as Sentry from 'sentry-expo'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Navigator from './src/scenes/Navigator'
-import NavigatorNew from './src/scenes/NavigatorNew'
 import configureStore from './src/store/configureStore'
 import { enableScreens } from 'react-native-screens'
 enableScreens()
@@ -130,7 +129,7 @@ class App extends Component {
             persistor={persistor}
           >
             <AppearanceProvider>
-              <NavigatorNew />
+              <Navigator />
               {this._maybeRenderLoadingImage()}
             </AppearanceProvider>
           </PersistGate>
