@@ -1,7 +1,7 @@
 import { Notifications } from 'expo'
 import React, { Component } from 'react'
-import { View } from 'react-native'
-import HeaderScrollView from 'react-native-header-scroll-view'
+import { ScrollView } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { NavigationScreenProp } from 'react-navigation'
 import ListItem from '../../components/ListItem'
 import ScreenPlaceholder from '../../components/ScreenPlaceholder'
@@ -69,36 +69,14 @@ class Menu extends Component<MenuProps> {
     const menuRecipes = Object.values(selectedRecipes).map(sr => recipes[sr])
 
     return (
-      <View
+      <SafeAreaView
+        edges={['top']}
         style={{
           flex: 1,
           backgroundColor: isDarkTheme ? theme.background : theme.grey1,
         }}
       >
-        <HeaderScrollView
-          title="Brew Methods"
-          containerStyle={{ backgroundColor: 'transparent' }}
-          headerComponentContainerStyle={{
-            backgroundColor: isDarkTheme
-              ? modifiedTheme.grey2
-              : theme.background,
-          }}
-          headerComponentStyle={{
-            backgroundColor: 'transparent',
-          }}
-          headlineStyle={{ color: modifiedTheme.foreground }}
-          titleStyle={{
-            color: modifiedTheme.foreground,
-            marginBottom: 24,
-            marginLeft: 0,
-          }}
-          scrollContainerStyle={{
-            backgroundColor: 'transparent',
-            paddingBottom: 32,
-            paddingHorizontal: 12,
-          }}
-          fadeDirection="up"
-        >
+        <ScrollView contentContainerStyle={{ padding: 12 }}>
           {settings.onboardingVisible && <Onboarding />}
           {menuRecipes.map(recipe => (
             <ListItem
@@ -107,7 +85,9 @@ class Menu extends Component<MenuProps> {
               onPress={() => {
                 navigation.navigate('Brew', {
                   id: recipe.id,
-                  title: `${recipe.title} ${recipe.modifier}`,
+                  title: `${recipe.title}${
+                    recipe.modifier ? ` ${recipe.modifier}` : ''
+                  }`,
                 })
                 tracking.track(tracking.events.RECIPE_TAPPED, { id: recipe.id })
               }}
@@ -116,8 +96,8 @@ class Menu extends Component<MenuProps> {
           {menuRecipes.length === 0 && (
             <ScreenPlaceholder text="To start brewing, tap the settings icon, then Recipes, then select which brew methods you'd like to appear here." />
           )}
-        </HeaderScrollView>
-      </View>
+        </ScrollView>
+      </SafeAreaView>
     )
   }
 }
