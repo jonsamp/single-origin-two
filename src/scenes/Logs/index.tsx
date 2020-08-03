@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList, View } from 'react-native'
-import HeaderScrollView from 'react-native-header-scroll-view'
+import { FlatList, View, ScrollView } from 'react-native'
 import { NavigationScreenProp } from 'react-navigation'
 import { connect } from 'react-redux'
 import ScreenPlaceholder from '../../components/ScreenPlaceholder'
@@ -56,67 +55,37 @@ class Logs extends Component<LogsProps, LogsState> {
         }
       : theme
 
-    return (
-      <View style={{ flex: 1, backgroundColor: theme.background }}>
-        <HeaderScrollView
-          title="Logs"
-          containerStyle={{ backgroundColor: modifiedTheme.grey1 }}
-          headerComponentContainerStyle={{
-            backgroundColor: isDarkTheme
-              ? modifiedTheme.grey2
-              : theme.background,
-          }}
-          headerComponentStyle={{
-            backgroundColor: modifiedTheme.grey1,
-          }}
-          headlineStyle={{ color: modifiedTheme.foreground }}
-          titleStyle={{
-            color: modifiedTheme.foreground,
-            marginBottom: 24,
-            marginLeft: 12,
-          }}
-          scrollContainerStyle={{
-            backgroundColor: modifiedTheme.grey1,
-            paddingBottom: 32,
-          }}
-          fadeDirection="up"
-        >
-          {logs && Object.keys(logs).length ? (
-            <FlatList
-              data={Object.values(logs)
-                .filter(log => log && recipes[log.recipeId])
-                .sort(this.byTimestamp)}
-              keyExtractor={log => String(log.timestamp)}
-              renderItem={({ item }) => (
-                <LogItem
-                  log={item}
-                  onPress={() =>
-                    navigation.navigate('LogDetail', {
-                      timestamp: item.timestamp,
-                    })
-                  }
-                  onRightPress={() => logDeleted({ timestamp: item.timestamp })}
-                />
-              )}
-              extraData={this.state}
-              ItemSeparatorComponent={() => (
-                <View
-                  style={[
-                    styles.separator,
-                    {
-                      backgroundColor: isDarkTheme
-                        ? theme.background
-                        : theme.grey1,
-                    },
-                  ]}
-                />
-              )}
-            />
-          ) : (
-            <ScreenPlaceholder text="Logs of your brews will appear here once you complete a brew." />
-          )}
-        </HeaderScrollView>
-      </View>
+    return logs && Object.keys(logs).length > 0 ? (
+      <FlatList
+        data={Object.values(logs)
+          .filter(log => log && recipes[log.recipeId])
+          .sort(this.byTimestamp)}
+        keyExtractor={log => String(log.timestamp)}
+        renderItem={({ item }) => (
+          <LogItem
+            log={item}
+            onPress={() =>
+              navigation.navigate('LogDetail', {
+                timestamp: item.timestamp,
+              })
+            }
+            onRightPress={() => logDeleted({ timestamp: item.timestamp })}
+          />
+        )}
+        extraData={this.state}
+        ItemSeparatorComponent={() => (
+          <View
+            style={[
+              styles.separator,
+              {
+                backgroundColor: isDarkTheme ? theme.background : theme.grey1,
+              },
+            ]}
+          />
+        )}
+      />
+    ) : (
+      <ScreenPlaceholder text="Logs of your brews will appear here once you complete a brew." />
     )
   }
 }

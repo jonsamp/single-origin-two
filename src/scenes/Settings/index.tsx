@@ -1,7 +1,6 @@
 import { Feather } from '@expo/vector-icons'
 import React, { Component } from 'react'
-import { Linking, TouchableOpacity } from 'react-native'
-import HeaderScrollView from 'react-native-header-scroll-view'
+import { Linking, TouchableOpacity, ScrollView } from 'react-native'
 import { NavigationScreenProp } from 'react-navigation'
 import withTheme from '../../providers/theme'
 import withTracking, { Tracking } from '../../providers/tracking'
@@ -39,27 +38,7 @@ class Settings extends Component<SettingsProps> {
       : theme
 
     return (
-      <HeaderScrollView
-        title="Settings"
-        containerStyle={{ backgroundColor: modifiedTheme.grey1 }}
-        headerComponentContainerStyle={{
-          backgroundColor: isDarkTheme ? modifiedTheme.grey2 : theme.background,
-        }}
-        headerComponentStyle={{
-          backgroundColor: modifiedTheme.grey1,
-        }}
-        headlineStyle={{ color: modifiedTheme.foreground }}
-        titleStyle={{
-          color: modifiedTheme.foreground,
-          marginBottom: -8,
-          marginLeft: 12,
-        }}
-        scrollContainerStyle={{
-          backgroundColor: modifiedTheme.grey1,
-          paddingBottom: 32,
-        }}
-        fadeDirection="up"
-      >
+      <ScrollView>
         <Section title="Brewing">
           <Group title="Brew Settings" />
           <Group title="Grinder" />
@@ -114,7 +93,7 @@ class Settings extends Component<SettingsProps> {
           </TouchableOpacity>
           <Group title="Privacy Policy" />
         </Section>
-      </HeaderScrollView>
+      </ScrollView>
     )
   }
 }

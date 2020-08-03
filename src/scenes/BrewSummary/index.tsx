@@ -61,6 +61,9 @@ function BrewSummary(props: Props) {
             onPress={onBack}
             labelVisible={false}
             tintColor={theme.foreground}
+            style={{
+              left: -16,
+            }}
           />
         ),
       })

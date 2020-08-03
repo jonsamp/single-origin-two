@@ -8,6 +8,7 @@
     "version": "38",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
     "extra": {
       "amplitudeApiKey": "b7b8d9d386e9d6ccf3d6f69e941bbaaf"
     },
@@ -23,8 +24,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.jonsamp.singleorigintwo",
-      "buildNumber": "1",
-      "userInterfaceStyle": "automatic"
+      "buildNumber": "1"
     }
   }
 }

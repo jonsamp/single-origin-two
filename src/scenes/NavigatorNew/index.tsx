@@ -4,6 +4,7 @@ import { Feather } from '@expo/vector-icons'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createNativeStackNavigator } from 'react-native-screens/native-stack'
 
 import type from '../../constants/type'
 import withTheme from '../../providers/theme'
@@ -23,7 +24,32 @@ import LogDetailEdit from '../../scenes/LogDetailEdit'
 import BrewSummary from '../../scenes/BrewSummary'
 
 const Tab = createBottomTabNavigator()
-const Stack = createStackNavigator()
+// const Stack = createStackNavigator()
+const Stack = createNativeStackNavigator()
+
+function LogsStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Logs"
+        component={Logs}
+        options={{ headerLargeTitle: true, title: 'Notes' }}
+      />
+    </Stack.Navigator>
+  )
+}
+
+function SettingsStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Settings"
+        component={Settings}
+        options={{ headerLargeTitle: true }}
+      />
+    </Stack.Navigator>
+  )
+}
 
 function Tabs({ theme }) {
   return (
@@ -45,14 +71,14 @@ function Tabs({ theme }) {
       />
       <Tab.Screen
         name="Logs"
-        component={Logs}
+        component={LogsStack}
         options={{
           tabBarIcon: props => <LogsIcon {...props} />,
         }}
       />
       <Tab.Screen
         name="Settings"
-        component={Settings}
+        component={SettingsStack}
         options={{
           tabBarIcon: props => <SettingsIcon {...props} />,
         }}
@@ -118,7 +144,11 @@ function App({ theme }) {
           })}
         />
         <Stack.Screen name="LogDetail" component={LogDetail} />
-        <Stack.Screen name="LogDetailEdit" component={LogDetailEdit} />
+        <Stack.Screen
+          name="LogDetailEdit"
+          component={LogDetailEdit}
+          options={{ stackPresentation: 'modal' }}
+        />
         <Stack.Screen
           name="BrewSummary"
           component={BrewSummary}
