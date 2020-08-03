@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity, StyleSheet } from 'react-native'
+import { TouchableOpacity, Text } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -143,7 +143,26 @@ function App({ theme }) {
             title: route.params,
           })}
         />
-        <Stack.Screen name="LogDetail" component={LogDetail} />
+        <Stack.Screen
+          name="LogDetail"
+          component={LogDetail}
+          options={({ navigation, route }) => ({
+            title: 'Brew Note',
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('LogDetailEdit', {
+                    timestamp: route.params.timestamp,
+                  })
+                }
+              >
+                <Text style={[type.body, { color: theme.foreground }]}>
+                  Rate
+                </Text>
+              </TouchableOpacity>
+            ),
+          })}
+        />
         <Stack.Screen
           name="LogDetailEdit"
           component={LogDetailEdit}
