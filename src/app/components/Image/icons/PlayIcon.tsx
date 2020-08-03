@@ -1,5 +1,5 @@
 import React from 'react'
-import * as Svg from 'react-native-svg';
+import * as Svg from 'react-native-svg'
 
 function PlayIcon() {
   return (

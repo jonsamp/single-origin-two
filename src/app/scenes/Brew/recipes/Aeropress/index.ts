@@ -23,11 +23,11 @@ export default {
     },
     {
       text:
-        'Once the coffee is brewing, you\'ll add the filter and cap to the aeropress.',
+        "Once the coffee is brewing, you'll add the filter and cap to the aeropress.",
     },
     {
       text:
-        'As the brew finishes, you\'ll carefully flip the entire brew onto a carafe or mug. Firmly but gently press down for 30 seconds, until all of the coffee has been pressed out of the Aeropress.',
+        "As the brew finishes, you'll carefully flip the entire brew onto a carafe or mug. Firmly but gently press down for 30 seconds, until all of the coffee has been pressed out of the Aeropress.",
     },
   ],
   steps: [

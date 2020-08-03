@@ -29,7 +29,7 @@ export default {
     },
     {
       text:
-        'After the clever has finished brewing, you\'ll need a carafe or mug to drain the clever\'s coffee into.',
+        "After the clever has finished brewing, you'll need a carafe or mug to drain the clever's coffee into.",
     },
   ],
   steps: [

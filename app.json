@@ -4,10 +4,8 @@
     "description": "Learn to brew specialty coffee.",
     "slug": "single-origin-two",
     "privacy": "unlisted",
-    "platforms": [
-      "ios"
-    ],
-    "version": "1.5",
+    "platforms": ["ios"],
+    "version": "38",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "extra": {
@@ -19,15 +17,13 @@
       "backgroundColor": "#1e1e1f"
     },
     "updates": {
-      "fallbackToCacheTimeout": 15000
+      "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.jonsamp.singleorigintwo",
-      "buildNumber": "2",
+      "buildNumber": "1",
       "userInterfaceStyle": "automatic"
     }
   }

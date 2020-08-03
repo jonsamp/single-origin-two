@@ -18,7 +18,7 @@ function ScreenPlaceholder(props: ScreenPlaceholderProps) {
           styles.placeholderText,
           {
             color: theme.foreground,
-            opacity: 0.75
+            opacity: 0.75,
           },
         ]}
       >

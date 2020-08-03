@@ -1,4 +1,4 @@
-import { Audio } from 'expo-av';
+import { Audio } from 'expo-av'
 
 export default async function playSound({ sound }) {
   const soundObject = new Audio.Sound()

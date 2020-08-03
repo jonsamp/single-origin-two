@@ -23,9 +23,9 @@ const onboarding = [
     image: SelectRecipe,
   },
   {
-    title: 'Choose how much you\'d like to brew',
+    title: "Choose how much you'd like to brew",
     description:
-      'Select how much coffee you\'d like to make, then follow the instructions.',
+      "Select how much coffee you'd like to make, then follow the instructions.",
     image: ChooseYield,
   },
   {
