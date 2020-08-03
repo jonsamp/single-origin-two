@@ -1,7 +1,6 @@
 import { Feather } from '@expo/vector-icons'
 import React, { Component } from 'react'
 import { Linking, TouchableOpacity, ScrollView } from 'react-native'
-import { NavigationScreenProp } from 'react-navigation'
 import withTheme from '../../providers/theme'
 import withTracking, { Tracking } from '../../providers/tracking'
 import { Theme } from '../../types/index'
@@ -12,7 +11,7 @@ import SettingWrapper from './SettingWrapper'
 interface SettingsProps {
   theme: Theme
   isDarkTheme: boolean
-  navigation: NavigationScreenProp<any>
+  navigation: any
   tracking: Tracking
 }
 

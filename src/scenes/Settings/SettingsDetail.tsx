@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import { Platform, ScrollView, View } from 'react-native'
-import { NavigationScreenProp } from 'react-navigation'
 import { grinders } from '../../constants/grinders'
 import recipes from '../../constants/recipes'
 import { tempUnits, weightUnits } from '../../constants/units'
@@ -19,7 +18,7 @@ interface SettingsProps {
   theme: Theme
   settings: SettingsType
   settingUpdated: (props: any) => void
-  navigation: NavigationScreenProp<any>
+  navigation: any
   isDarkTheme: boolean
   toggleTheme: () => void
   toggleAutoTheme: () => void
@@ -198,7 +197,7 @@ class Settings extends Component<SettingsProps> {
                 onChange={toggleTheme}
                 disabled={settings.autoTheme}
               />
-              {parseInt(Platform.Version, 10) >= 13 ? (
+              {parseInt(String(Platform.Version), 10) >= 13 ? (
                 <SwitchSetting
                   title={`Automatic theme`}
                   value={settings.autoTheme}

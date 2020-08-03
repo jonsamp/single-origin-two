@@ -10,7 +10,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
-import { NavigationScreenProp } from 'react-navigation'
 import { connect } from 'react-redux'
 import ScrollSelect from '../../components/ScrollSelect'
 import { width } from '../../constants/layout'
@@ -22,10 +21,9 @@ import ChecklistSetting from '../../scenes/Settings/ChecklistSetting'
 import { logUpdated } from '../../state/logs/actions'
 import { selectLog } from '../../state/logs/selectors'
 import { Log } from '../../state/logs/types'
-import { State } from '../../state/types'
 
 interface LogDetailEditProps {
-  navigation: NavigationScreenProp<State>
+  navigation: any
   theme: Theme
   styleguide: Styleguide
   timestamp: number

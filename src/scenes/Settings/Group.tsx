@@ -1,7 +1,6 @@
 import { Feather } from '@expo/vector-icons'
-import React, { Component } from 'react'
+import React from 'react'
 import { Text, TextStyle, TouchableOpacity } from 'react-native'
-import { NavigationScreenProp } from 'react-navigation'
 import { useNavigation } from '@react-navigation/native'
 import type from '../../constants/type'
 import withTheme from '../../providers/theme'

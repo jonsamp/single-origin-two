@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-import { NavigationScreenProp } from 'react-navigation'
 import InstructionalCard from '../../components/InstructionalCard'
 import ResponsiveScrollView from '../../components/ResponsiveScrollView'
 import withTheme, { Theme } from '../../providers/theme'
-import { State } from '../../state/types'
 
 interface PreparationProps {
-  navigation: NavigationScreenProp<State>
+  navigation: any
   route: any
   theme: Theme
   isDarkTheme: boolean

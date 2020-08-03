@@ -2,7 +2,6 @@ import { Notifications } from 'expo'
 import React, { Component } from 'react'
 import { ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { NavigationScreenProp } from 'react-navigation'
 import ListItem from '../../components/ListItem'
 import ScreenPlaceholder from '../../components/ScreenPlaceholder'
 import recipes from '../../constants/recipes'
@@ -15,7 +14,7 @@ import Onboarding from './Onboarding'
 
 interface MenuProps {
   theme: Theme
-  navigation: NavigationScreenProp<any>
+  navigation: any
   isDarkTheme: boolean
   settings: Settings
   tracking: Tracking

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList, View, ScrollView } from 'react-native'
-import { NavigationScreenProp } from 'react-navigation'
+import { FlatList, View } from 'react-native'
 import { connect } from 'react-redux'
 import ScreenPlaceholder from '../../components/ScreenPlaceholder'
 import recipes from '../../constants/recipes'
@@ -17,7 +16,7 @@ interface LogsProps {
   logs: LogsType
   isDarkTheme: boolean
   logDeleted: (props: { timestamp: number }) => void
-  navigation: NavigationScreenProp<any>
+  navigation: any
   tracking: Tracking
 }
 
