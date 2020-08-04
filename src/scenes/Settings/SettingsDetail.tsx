@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { Platform, ScrollView, View } from 'react-native'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RouteProp } from '@react-navigation/native'
+import { StackParams } from '../../navigation'
 import { grinders } from '../../constants/grinders'
 import recipes from '../../constants/recipes'
 import { tempUnits, weightUnits } from '../../constants/units'
@@ -18,13 +21,14 @@ interface SettingsProps {
   theme: Theme
   settings: SettingsType
   settingUpdated: (props: any) => void
-  navigation: any
+  navigation: StackNavigationProp<StackParams, 'SettingsDetail'>
+  route: RouteProp<StackParams, 'SettingsDetail'>
   isDarkTheme: boolean
   toggleTheme: () => void
   toggleAutoTheme: () => void
 }
 
-class Settings extends Component<SettingsProps> {
+class SettingsDetail extends Component<SettingsProps> {
   createChecklistItems = ({ list, settingName }) =>
     Object.values(list).map((item: any) => ({
       ...item,
@@ -55,8 +59,9 @@ class Settings extends Component<SettingsProps> {
       toggleTheme,
       toggleAutoTheme,
       navigation,
+      route,
     } = this.props
-    const groupName = this.props.route.params
+    const groupName = route.params.title
     let children
 
     switch (groupName.toLowerCase().replace(' ', '-')) {
@@ -248,4 +253,4 @@ class Settings extends Component<SettingsProps> {
   }
 }
 
-export default withTheme(withSettings(Settings))
+export default withTheme(withSettings(SettingsDetail))
