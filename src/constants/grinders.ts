@@ -49,6 +49,13 @@ const grinders = {
     min: 0,
     max: 16,
   },
+  ode: {
+    title: 'Fellow Ode (1 - 11)',
+    shortTitle: 'Fellow Ode',
+    id: 'ode',
+    min: 1,
+    max: 11,
+  },
 }
 
 const getVerboseSetting = (percent: number) => {

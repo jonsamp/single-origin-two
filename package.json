@@ -33,6 +33,7 @@
     "react-native-safe-area-context": "~3.0.7",
     "react-native-screens": "~2.9.0",
     "react-redux": "7.0.3",
+    "react-timer-mixin": "0.13.4",
     "redux": "4.0.1",
     "redux-actions": "2.6.5",
     "redux-persist": "5.10.0",
