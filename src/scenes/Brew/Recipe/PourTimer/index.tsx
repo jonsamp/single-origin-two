@@ -42,13 +42,17 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
     unitHelpers: {},
   }
 
-  state = {
-    second: -3,
-    timerRunning: false,
-    recipe: undefined,
-    volumePercent: 0,
-    image: this.props.recipe.defaultSource,
-    currentStepDuration: 5,
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      second: -3,
+      timerRunning: false,
+      recipe: this.formatRecipe(props.recipe),
+      volumePercent: 0,
+      image: this.props.recipe.defaultSource,
+      currentStepDuration: 5,
+    }
   }
 
   animatedValue = new Animated.Value(0)
@@ -64,12 +68,6 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
         ...(step.start ? { 0: step } : { [withBloom(step.second)]: step }),
       }
     }, {})
-  }
-
-  componentWillMount() {
-    this.setState({
-      recipe: this.formatRecipe(this.props.recipe),
-    })
   }
 
   componentWillUnmount() {
