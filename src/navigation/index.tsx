@@ -5,26 +5,53 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from 'react-native-screens/native-stack'
 
-import type from '../../constants/type'
-import withTheme from '../../providers/theme'
+import type from '../constants/type'
+import withTheme from '../providers/theme'
 
 import BrewIcon from './icons/BrewIcon'
 import LogsIcon from './icons/LogsIcon'
 import SettingsIcon from './icons/SettingsIcon'
-import Logs from '../../scenes/Logs'
-import Menu from '../../scenes/Menu'
-import Settings from '../../scenes/Settings'
-import SettingsDetail from '../../scenes/Settings/SettingsDetail'
-import Onboarding from '../../scenes/Onboarding'
-import Preparation from '../../scenes/Preparation'
-import Brew from '../../scenes/Brew'
-import LogDetail from '../../scenes/LogDetail'
-import LogDetailEdit from '../../scenes/LogDetailEdit'
-import BrewSummary from '../../scenes/BrewSummary'
-import Test from '../../scenes/Test'
+import Logs from '../scenes/Logs'
+import Menu from '../scenes/Menu'
+import Settings from '../scenes/Settings'
+import SettingsDetail from '../scenes/Settings/SettingsDetail'
+import Onboarding from '../scenes/Onboarding'
+import Preparation from '../scenes/Preparation'
+import Brew from '../scenes/Brew'
+import LogDetail from '../scenes/LogDetail'
+import LogDetailEdit from '../scenes/LogDetailEdit'
+import BrewSummary from '../scenes/BrewSummary'
+import Test from '../scenes/Test'
 
-const Tab = createBottomTabNavigator()
-const Stack = createNativeStackNavigator()
+export type StackParams = {
+  Brew: {
+    id: string
+    title: string
+  }
+  LogDetail: {
+    timestamp: number
+  }
+  SettingsDetail: {
+    title: string
+  }
+  Tabs: undefined
+  Onboarding: undefined
+  Logs: undefined
+  Settings: undefined
+  Preparation: undefined
+  BrewSummary: undefined
+  LogDetailEdit: undefined
+  Test: undefined
+}
+
+export type TabParams = {
+  Menu: undefined
+  Logs: undefined
+  Settings: undefined
+}
+
+const Tab = createBottomTabNavigator<TabParams>()
+const Stack = createNativeStackNavigator<StackParams>()
 
 function LogsStack() {
   return (
@@ -96,7 +123,6 @@ function App({ theme }) {
           headerTintColor: theme.foreground,
           headerStyle: {
             backgroundColor: theme.background,
-            borderBottomColor: 'red',
           },
         }}
       >
@@ -118,7 +144,9 @@ function App({ theme }) {
             title: route.params.title,
             headerRight: () => (
               <TouchableOpacity
-                onPress={() => navigation.navigate('SettingsDetail', 'Units')}
+                onPress={() =>
+                  navigation.navigate('SettingsDetail', { title: 'Units' })
+                }
               >
                 <Feather
                   name="sliders"
@@ -130,9 +158,6 @@ function App({ theme }) {
             headerRightContainerStyle: {
               right: 8,
             },
-            headerStyle: {
-              borderBottomColor: theme.grey3,
-            },
           })}
         />
         <Stack.Screen name="Preparation" component={Preparation} />
@@ -140,7 +165,7 @@ function App({ theme }) {
           name="SettingsDetail"
           component={SettingsDetail}
           options={({ route }) => ({
-            title: route.params,
+            title: route.params.title,
           })}
         />
         <Stack.Screen

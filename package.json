@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "expo start",
-    "ios": "expo start",
+    "ios": "expo start --ios",
     "android": "expo start --android",
     "prettier": "prettier --write './src/**/*.ts*'",
     "compressgifs": "gifsicle --batch --lossy=100 --resize-width=400 --colors 256 -O3 **/*.gif",
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
+    "@react-native-community/segmented-control": "1.6.1",
     "@react-navigation/bottom-tabs": "5.7.3",
     "@react-navigation/native": "5.7.2",
     "@react-navigation/stack": "5.8.0",

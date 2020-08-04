@@ -1,11 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Text, View } from 'react-native'
 import ScrollSelect from '../../components/ScrollSelect'
 import { height, width } from '../../constants/layout'
+import SegmentedControl from '@react-native-community/segmented-control'
 
 interface TestProps {}
 
 function Test(props: TestProps) {
+  const [selected, setSelected] = useState<number | undefined>(0)
+  return (
+    <View>
+      <SegmentedControl
+        values={['One', 'Two']}
+        selectedIndex={selected}
+        onChange={event => {
+          setSelected(event.nativeEvent.selectedSegmentIndex)
+        }}
+      />
+      <Text>{selected}</Text>
+    </View>
+  )
   return (
     <View
       style={{

@@ -66,7 +66,11 @@ class ScrollSelect extends Component<ScrollSelectProps> {
     const itemPosition = index * this.SCREEN_WIDTH
 
     if (this.scrollViewRef) {
-      this.scrollViewRef.scrollTo({ x: itemPosition, y: 0, animated: true })
+      this.scrollViewRef.current.scrollTo({
+        x: itemPosition,
+        y: 0,
+        animated: true,
+      })
     }
   }
 

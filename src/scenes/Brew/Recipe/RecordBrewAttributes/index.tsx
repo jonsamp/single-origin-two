@@ -2,8 +2,9 @@ import { Feather } from '@expo/vector-icons'
 import * as Haptic from 'expo-haptics'
 import React, { Component } from 'react'
 import { Animated, LayoutAnimation, TouchableOpacity, View } from 'react-native'
+import SegmentedControl from '@react-native-community/segmented-control'
+
 import Card from '../../../../components/Card'
-import DraggableSegment from '../../../../components/DraggableSegment'
 import Instructions from '../../../../components/Instructions'
 import ScrollSelect from '../../../../components/ScrollSelect'
 import withSettings from '../../../../providers/settings'
@@ -39,24 +40,7 @@ class RecordBrewAttributes extends Component<
     containerHeight: 0,
   }
 
-  animatedOpacityValue = new Animated.Value(1)
   animatedRotationValue = new Animated.Value(0)
-
-  onStartMove = () => {
-    Animated.timing(this.animatedOpacityValue, {
-      toValue: 0,
-      duration: 150,
-      useNativeDriver: true,
-    }).start()
-  }
-
-  onStopMove = () => {
-    Animated.timing(this.animatedOpacityValue, {
-      toValue: 1,
-      duration: 150,
-      useNativeDriver: true,
-    }).start()
-  }
 
   toggleIsOpen = () => {
     const config = LayoutAnimation.create(
@@ -206,25 +190,28 @@ class RecordBrewAttributes extends Component<
             }}
           >
             {recordSettings.length > 1 && (
-              <View>
-                <DraggableSegment
-                  options={recordSettings}
-                  onChange={index =>
-                    setTimeout(() => {
-                      this.setState({ recordSegmentIndex: index })
-                    }, 300)
-                  }
-                  onStartMove={this.onStartMove}
-                  onStopMove={this.onStopMove}
-                />
-                <Animated.View
-                  style={{
-                    opacity: this.animatedOpacityValue,
+              <View
+                style={{
+                  paddingHorizontal: 8,
+                  marginTop: 16,
+                }}
+              >
+                <SegmentedControl
+                  values={recordSettings.map(
+                    name => name.charAt(0).toUpperCase() + name.slice(1)
+                  )}
+                  selectedIndex={recordSegmentIndex}
+                  onChange={event => {
+                    this.setState({
+                      recordSegmentIndex:
+                        event.nativeEvent.selectedSegmentIndex,
+                    })
                   }}
-                >
+                />
+                <View>
                   {recordSegmentIndex === 0 ? recordGrindComponent : null}
                   {recordSegmentIndex === 1 ? recordTempComponent : null}
-                </Animated.View>
+                </View>
               </View>
             )}
             {recordSettings.length === 1

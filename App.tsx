@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import * as Sentry from 'sentry-expo'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import Navigator from './src/scenes/Navigator'
+import Navigator from './src/navigation'
 import configureStore from './src/store/configureStore'
 import { enableScreens } from 'react-native-screens'
 enableScreens()

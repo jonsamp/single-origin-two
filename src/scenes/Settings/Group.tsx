@@ -32,7 +32,7 @@ function Group(props: GroupProps) {
         if (onPress) {
           return onPress()
         }
-        navigation.navigate('SettingsDetail', title as any)
+        navigation.navigate('SettingsDetail', { title })
       }}
     >
       <Text style={[type.headline, { color: theme.foreground }] as TextStyle}>

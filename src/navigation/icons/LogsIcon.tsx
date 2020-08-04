@@ -1,9 +1,9 @@
 import React from 'react'
 import { G, Path, Svg } from 'react-native-svg'
 import { connect } from 'react-redux'
-import themes from '../../../constants/themes'
-import { selectSettings } from '../../../state/settings/selectors'
-import { State } from '../../../state/types'
+import themes from '../../constants/themes'
+import { selectSettings } from '../../state/settings/selectors'
+import { State } from '../../state/types'
 import { Icon } from './types'
 
 const mapStateToProps = (state: State) => ({
