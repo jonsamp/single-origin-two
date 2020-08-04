@@ -16,7 +16,6 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   timeTextColonContainer: {
-    justifyContent: 'center',
     alignItems: 'center',
     width: 12,
     bottom: 3,

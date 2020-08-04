@@ -17,7 +17,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     borderWidth: 2,
     borderRadius: 8,
-    shadowColor: 'rgba(82,181,146,0.5)',
+    shadowColor: 'rgba(82,181,146,1)',
     shadowRadius: 12,
     shadowOffset: { height: 2, width: 0 },
     marginHorizontal: 8,

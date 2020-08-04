@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Animated, Text, View } from 'react-native'
-import AnimateNumber from 'react-native-animate-number'
+import AnimateNumber from '../../../../../components/AnimateNumber'
 import withTheme from '../../../../../providers/theme'
 import styles from './styles'
 
@@ -61,31 +61,28 @@ class WaterVolume extends Component<WaterVolumeProps> {
           ]}
         >
           <View style={styles.setWidthText}>
-            <Animated.Text
-              style={[styles.trackingText, { color: trackingAnimatedText }]}
-            >
-              <AnimateNumber
-                value={waterVolumeUnit.getPreferredValue(volume)}
-                formatter={val =>
-                  parseFloat(val).toFixed(
-                    waterVolumeUnit.unit.symbol === 'g'
-                      ? 0
-                      : waterVolumeUnit.unit.symbol === 'oz'
-                        ? 1
-                        : 2
-                  )
-                }
-                countBy={
+            <AnimateNumber
+              textStyle={[styles.trackingText, { color: trackingAnimatedText }]}
+              value={waterVolumeUnit.getPreferredValue(volume)}
+              formatter={val =>
+                parseFloat(val).toFixed(
                   waterVolumeUnit.unit.symbol === 'g'
-                    ? 1
+                    ? 0
                     : waterVolumeUnit.unit.symbol === 'oz'
-                      ? 0.1
-                      : 0.01
-                }
-                interval={pourVelocity || 130}
-                onFinish={onAnimateNumberFinish}
-              />
-            </Animated.Text>
+                      ? 1
+                      : 2
+                )
+              }
+              countBy={
+                waterVolumeUnit.unit.symbol === 'g'
+                  ? 1
+                  : waterVolumeUnit.unit.symbol === 'oz'
+                    ? 0.1
+                    : 0.01
+              }
+              interval={pourVelocity || 130}
+              onFinish={onAnimateNumberFinish}
+            />
           </View>
           <Animated.Text
             style={[styles.trackingLabelText, { color: trackingAnimatedText }]}

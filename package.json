@@ -26,7 +26,6 @@
     "lodash": "4.17.11",
     "react": "16.11.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
-    "react-native-animate-number": "0.1.2",
     "react-native-appearance": "~0.3.3",
     "react-native-debugger-open": "0.3.19",
     "react-native-gesture-handler": "~1.6.0",
