@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from 'react-native-screens/native-stack'
 
 import type from '../constants/type'
 import withTheme from '../providers/theme'
+import { styleguide } from '../constants/themes'
 
 import BrewIcon from './icons/BrewIcon'
 import LogsIcon from './icons/LogsIcon'
@@ -83,7 +84,7 @@ function Tabs({ theme }) {
       tabBarOptions={{
         showLabel: false,
         style: {
-          backgroundColor: theme.background,
+          backgroundColor: theme.card,
           borderTopColor: theme.grey3,
         },
       }}
@@ -92,37 +93,44 @@ function Tabs({ theme }) {
         name="Menu"
         component={Menu}
         options={{
-          tabBarIcon: props => <BrewIcon {...props} />,
+          tabBarIcon: props => {
+            console.log({ props, theme })
+            return <BrewIcon focused={props.focused} theme={theme} />
+          },
         }}
       />
       <Tab.Screen
         name="Logs"
         component={LogsStack}
         options={{
-          tabBarIcon: props => <LogsIcon {...props} />,
+          tabBarIcon: props => (
+            <LogsIcon focused={props.focused} theme={theme} />
+          ),
         }}
       />
       <Tab.Screen
         name="Settings"
         component={SettingsStack}
         options={{
-          tabBarIcon: props => <SettingsIcon {...props} />,
+          tabBarIcon: props => (
+            <SettingsIcon focused={props.focused} theme={theme} />
+          ),
         }}
       />
     </Tab.Navigator>
   )
 }
 
-function App({ theme }) {
+function App({ theme, isDarkTheme }) {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={{ dark: isDarkTheme, colors: theme }}>
       <Stack.Navigator
         screenOptions={{
           headerTitleStyle: type.headline,
           headerBackTitleVisible: false,
           headerTintColor: theme.foreground,
           headerStyle: {
-            backgroundColor: theme.background,
+            backgroundColor: theme.card,
           },
         }}
       >
@@ -151,7 +159,7 @@ function App({ theme }) {
                 <Feather
                   name="sliders"
                   color={theme.foreground}
-                  size={theme.iconSize}
+                  size={styleguide.iconSize}
                 />
               </TouchableOpacity>
             ),

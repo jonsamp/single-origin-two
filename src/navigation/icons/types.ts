@@ -1,4 +1,4 @@
 export interface Icon {
   focused: boolean
-  theme: string
+  theme: any
 }

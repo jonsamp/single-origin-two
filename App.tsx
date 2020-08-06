@@ -27,7 +27,7 @@ type State = {
   splashAnimation: Animated.Value
 }
 
-class App extends Component {
+class App extends Component<null, State> {
   state = {
     splashAnimationComplete: false,
     isLoadingComplete: false,

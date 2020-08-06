@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { StatusBar, StatusBarStyle } from 'react-native'
 import { Appearance } from 'react-native-appearance'
 import { connect } from 'react-redux'
-import themes from '../constants/themes'
+import { lightTheme, darkTheme, styleguide } from '../constants/themes'
 import { autoThemeUpdated, themeUpdated } from '../state/settings/actions'
 import { selectSettings } from '../state/settings/selectors'
 import { State } from '../state/types'
@@ -72,13 +72,16 @@ function withTheme(WrappedComponent) {
 
     render() {
       const { theme, ...rest } = this.props
+      const { colors } = theme === 'dark' ? darkTheme : lightTheme
       const statusBarTheme = theme === 'dark' ? 'light' : 'dark'
+
       StatusBar.setBarStyle(`${statusBarTheme}-content` as StatusBarStyle)
+
       return (
         <WrappedComponent
           {...rest}
-          theme={themes[this.props.theme]}
-          styleguide={themes.styleguide}
+          theme={colors}
+          styleguide={styleguide}
           toggleTheme={this.toggleTheme}
           toggleAutoTheme={this.toggleAutoTheme}
           isDarkTheme={this.props.theme === 'dark'}

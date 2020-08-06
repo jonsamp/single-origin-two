@@ -1,22 +1,29 @@
-const iconSize = 22
-
 export interface Theme {
-  [i: string]: string
+  foreground: string
+  text: string
+  background: string
+  notification: string
+  primaryDark: string
+  primary: string
+  beige: string
+  warning: string
+  grey1: string
+  grey2: string
+  grey3: string
+  black: string
+  blue: string
+  border: string
+  card: string
+  iconSize: number
 }
 
-export default {
-  styleguide: {
-    iconSize: 22,
-    maxWidth: 560,
-  },
-  default: {
-    black: '#000000',
-    white: '#d8d8d8',
-  },
-  light: {
-    name: 'light',
+export const lightTheme = {
+  dark: false,
+  colors: {
     foreground: '#2B2B2B',
+    text: '#2B2B2B',
     background: '#FFFFFF',
+    notification: '#FFFFFF',
     primaryDark: '#00A57D',
     primary: '#00b78e',
     beige: '#f8e8d5',
@@ -26,12 +33,19 @@ export default {
     grey3: '#adadad',
     black: '#000000',
     blue: '#4c9eea',
-    iconSize,
+    border: 'rgb(224, 224, 224)',
+    card: 'rgb(255, 255, 255)',
+    iconSize: 22,
   },
-  dark: {
-    name: 'dark',
+}
+
+export const darkTheme = {
+  dark: true,
+  colors: {
     foreground: '#d8d8d8',
+    text: '#d8d8d8',
     background: '#000000',
+    notification: '#000000',
     primaryDark: '#00CA9D',
     primary: '#00CA9D',
     beige: '#2B2B2B',
@@ -41,6 +55,13 @@ export default {
     grey3: '#4F4F4F',
     black: '#000000',
     blue: '#4c9eea',
-    iconSize,
+    border: 'rgb(39, 39, 41)',
+    card: 'rgb(18, 18, 18)',
+    iconSize: 22,
   },
+}
+
+export const styleguide = {
+  iconSize: 22,
+  maxWidth: 560,
 }
