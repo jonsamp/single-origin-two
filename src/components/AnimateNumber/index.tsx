@@ -106,7 +106,7 @@ export default class AnimateNumber extends Component<Props, State> {
 
   render() {
     const parts = this.state.displayValue.toString().split('')
-    console.log(parts)
+
     return (
       <View style={styles.timeContainer}>
         {parts.map((part, index) => (
