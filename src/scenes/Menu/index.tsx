@@ -1,6 +1,6 @@
 import * as Notifications from 'expo-notifications'
 import React, { Component } from 'react'
-import { ScrollView } from 'react-native'
+import { ScrollView, ImageBackground } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { StackNavigationProp } from '@react-navigation/stack'
 

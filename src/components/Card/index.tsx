@@ -21,10 +21,10 @@ function Card({
   return (
     <View
       style={{
-        shadowColor: theme.black,
+        shadowColor: 'black',
         shadowRadius: 10,
         shadowOffset: { height: 6, width: 0 },
-        shadowOpacity: 0.1,
+        shadowOpacity: 0.15,
         backgroundColor: isDarkTheme ? theme.grey1 : theme.background,
         borderRadius: 8,
         marginBottom: 32,

@@ -1,6 +1,6 @@
 import { Feather } from '@expo/vector-icons'
 import React from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View, ImageBackground } from 'react-native'
 import Card from '../../components/Card'
 import type from '../../constants/type'
 import withTheme from '../../providers/theme'
@@ -28,41 +28,41 @@ function Item(props: ItemProps) {
 
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={activeOpacity || 0.8}>
-      <Card containerStyle={styles.cardContainer} style={styles.card}>
-        <View
-          style={[
-            styles.iconContainer,
-            {
-              backgroundColor: isDarkTheme ? theme.grey2 : theme.foreground,
-            },
-          ]}
-        >
-          {recipe.icon({
-            fill: isDarkTheme ? theme.foreground : theme.background,
-          })}
-        </View>
-        <View style={styles.bodyContainer}>
-          <View>
-            <Text
+      <Card containerStyle={styles.cardContainer}>
+        <ImageBackground source={recipe.image} style={{ flex: 1, height: 160 }}>
+          <View style={styles.bodyContainer}>
+            <View>
+              <Text
+                style={{
+                  color: 'white',
+                  ...type.scriptTitle,
+                }}
+              >
+                {recipe.title} {recipe.modifier ? `\n${recipe.modifier}` : ''}
+              </Text>
+              {description && (
+                <Text style={{ color: theme.foreground, ...type.caption }}>
+                  {description}
+                </Text>
+              )}
+            </View>
+            <View
               style={{
-                color: theme.foreground,
-                ...type.headline,
+                padding: 8,
+                backgroundColor: theme.primary,
+                borderRadius: 100,
+                bottom: 12,
               }}
             >
-              {recipe.title} {recipe.modifier}
-            </Text>
-            {description && (
-              <Text style={{ color: theme.foreground, ...type.caption }}>
-                {description}
-              </Text>
-            )}
+              <Feather
+                name="arrow-right"
+                size={theme.iconSize}
+                color={theme.background}
+                style={{ top: 1 }}
+              />
+            </View>
           </View>
-          <Feather
-            name="chevron-right"
-            size={theme.iconSize}
-            color={theme.foreground}
-          />
-        </View>
+        </ImageBackground>
       </Card>
     </TouchableOpacity>
   )

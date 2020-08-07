@@ -127,4 +127,5 @@ export interface MenuItem {
   iced: boolean
   id: string
   icon: (props: { fill?: string; size?: number }) => ReactNode
+  image: number
 }

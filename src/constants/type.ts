@@ -6,8 +6,8 @@ export default {
   scriptTitle: {
     fontSize: 48,
     lineHeight: 52,
-    letterSpacing: 0.5,
-    fontFamily: 'SignPainter',
+    paddingRight: 8,
+    fontFamily: 'Script',
   } as TextStyle,
   largeTitle: {
     fontSize: 34,

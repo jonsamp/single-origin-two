@@ -6,6 +6,7 @@ import { AppearanceProvider } from 'react-native-appearance'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import * as Sentry from 'sentry-expo'
+import * as Font from 'expo-font'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import Navigator from './src/navigation'
 import configureStore from './src/store/configureStore'
@@ -22,21 +23,27 @@ Sentry.init({
 
 Sentry.setRelease(Constants.manifest.revisionId)
 
+let customFonts = {
+  Script: require('./assets/SignPainter-HouseScript.ttf'),
+}
+
 type State = {
   splashAnimationComplete: boolean
-  isLoadingComplete: boolean
   splashAnimation: Animated.Value
+  fontsLoaded: boolean
 }
 
 class App extends Component<null, State> {
   state = {
     splashAnimationComplete: false,
-    isLoadingComplete: false,
     splashAnimation: new Animated.Value(0),
+    fontsLoaded: false,
   }
 
   async componentDidMount() {
     SplashScreen.preventAutoHide()
+
+    this._loadFontsAsync()
 
     if (Constants.platform.ios.userInterfaceIdiom === 'tablet') {
       await ScreenOrientation.lockAsync(
@@ -45,8 +52,13 @@ class App extends Component<null, State> {
     }
   }
 
+  async _loadFontsAsync() {
+    await Font.loadAsync(customFonts)
+    this.setState({ fontsLoaded: true })
+  }
+
   _maybeRenderLoadingImage = () => {
-    if (this.state.splashAnimationComplete) {
+    if (this.state.splashAnimationComplete || !this.state.fontsLoaded) {
       return null
     }
 
