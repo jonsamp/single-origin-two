@@ -1,7 +1,7 @@
 import { Feather } from '@expo/vector-icons'
 import { addMinutes, format } from 'date-fns'
 import React, { Component } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View, ViewStyle } from 'react-native'
 import { connect } from 'react-redux'
 import Card from '../../components/Card'
 import ResponsiveScrollView from '../../components/ResponsiveScrollView'
@@ -36,6 +36,7 @@ interface LogProps {
   withReminder: boolean
   notifications: Notifications
   tracking: Tracking
+  style: ViewStyle
 }
 
 const mapStateToProps = (state, props) => {
@@ -136,7 +137,7 @@ class Log extends Component<LogProps> {
         wrapperStyle={{
           backgroundColor: isDarkTheme ? theme.background : theme.grey1,
         }}
-        style={{ flex: 1 }}
+        style={this.props.style}
       >
         <View style={{ alignItems: 'center' }}>
           {recipe.icon({

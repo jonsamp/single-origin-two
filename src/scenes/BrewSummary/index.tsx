@@ -73,7 +73,11 @@ function BrewSummary(props: BrewSummaryProps) {
 
   return (
     <View style={{ flex: 1 }}>
-      <Log timestamp={route.params.timestamp} withReminder />
+      <Log
+        timestamp={route.params.timestamp}
+        withReminder
+        style={{ paddingBottom: 120 }}
+      />
       <View
         style={{
           alignItems: 'center',

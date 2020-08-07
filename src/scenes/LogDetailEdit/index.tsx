@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
+import { StatusBar } from 'expo-status-bar'
 import { connect } from 'react-redux'
 import ScrollSelect from '../../components/ScrollSelect'
 import { width } from '../../constants/layout'
@@ -79,6 +80,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
           flex: 1,
         }}
       >
+        <StatusBar animated style="light" />
         <View
           style={{
             flexDirection: 'row',
