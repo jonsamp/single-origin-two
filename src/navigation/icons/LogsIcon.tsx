@@ -1,6 +1,5 @@
 import React from 'react'
 import { G, Path, Svg } from 'react-native-svg'
-import { State } from '../../state/types'
 import { Icon } from './types'
 
 const LogsIcon = ({ focused, theme }: Icon) => (

@@ -1,6 +1,5 @@
 import React from 'react'
 import { G, Path, Svg } from 'react-native-svg'
-import { connect } from 'react-redux'
 import { Icon } from './types'
 
 const BrewIcon = ({ focused, theme }: Icon) => (

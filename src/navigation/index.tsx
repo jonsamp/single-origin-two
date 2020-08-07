@@ -3,10 +3,12 @@ import { TouchableOpacity, Text } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createStackNavigator } from '@react-navigation/stack'
 import { createNativeStackNavigator } from 'react-native-screens/native-stack'
 
 import type from '../constants/type'
-import withTheme from '../providers/theme'
+import { lightTheme, darkTheme } from '../constants/themes'
+import withTheme, { useTheme } from '../providers/theme'
 import { styleguide } from '../constants/themes'
 
 import BrewIcon from './icons/BrewIcon'
@@ -54,15 +56,18 @@ export type TabParams = {
 const Tab = createBottomTabNavigator<TabParams>()
 const Stack = createNativeStackNavigator<StackParams>()
 
-function LogsStack({ theme }) {
+function LogsStack() {
+  const colorScheme = useTheme()
+  const { colors } = colorScheme.theme === 'dark' ? darkTheme : lightTheme
+
   return (
     <Stack.Navigator
       screenOptions={{
         contentStyle: {
-          backgroundColor: theme.pageBackground,
+          backgroundColor: colors.pageBackground,
         },
         headerStyle: {
-          backgroundColor: theme.navigationBackground,
+          backgroundColor: colors.navigationBackground,
         },
       }}
     >
@@ -75,15 +80,18 @@ function LogsStack({ theme }) {
   )
 }
 
-function SettingsStack({ theme }) {
+function SettingsStack() {
+  const colorScheme = useTheme()
+  const { colors } = colorScheme.theme === 'dark' ? darkTheme : lightTheme
+
   return (
     <Stack.Navigator
       screenOptions={{
         contentStyle: {
-          backgroundColor: theme.pageBackground,
+          backgroundColor: colors.pageBackground,
         },
         headerStyle: {
-          backgroundColor: theme.navigationBackground,
+          backgroundColor: colors.navigationBackground,
         },
       }}
     >
@@ -118,7 +126,7 @@ function Tabs({ theme }) {
       />
       <Tab.Screen
         name="Logs"
-        component={withTheme(LogsStack)}
+        component={LogsStack}
         options={{
           tabBarIcon: props => (
             <LogsIcon focused={props.focused} theme={theme} />
@@ -127,7 +135,7 @@ function Tabs({ theme }) {
       />
       <Tab.Screen
         name="Settings"
-        component={withTheme(SettingsStack)}
+        component={SettingsStack}
         options={{
           tabBarIcon: props => (
             <SettingsIcon focused={props.focused} theme={theme} />

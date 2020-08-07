@@ -15,18 +15,10 @@ interface SettingsProps {
 
 class Settings extends Component<SettingsProps> {
   render() {
-    const { theme, isDarkTheme } = this.props
-
-    const modifiedTheme = isDarkTheme
-      ? {
-          ...theme,
-          grey1: theme.background,
-          grey2: theme.grey2,
-        }
-      : theme
+    const { theme } = this.props
 
     return (
-      <ScrollView>
+      <ScrollView style={{ backgroundColor: theme.pageBackground }}>
         <Section title="Brewing">
           <Group title="Brew Settings" />
           <Group title="Grinder" />
@@ -62,8 +54,8 @@ class Settings extends Component<SettingsProps> {
             <SettingWrapper title="Rate Single Origin 2">
               <Feather
                 name="star"
-                size={modifiedTheme.iconSize}
-                color={modifiedTheme.foreground}
+                size={theme.iconSize}
+                color={theme.foreground}
                 style={{ opacity: 0.65 }}
               />
             </SettingWrapper>
@@ -74,8 +66,8 @@ class Settings extends Component<SettingsProps> {
             <SettingWrapper title="$10 off Mistobox">
               <Feather
                 name="external-link"
-                size={modifiedTheme.iconSize}
-                color={modifiedTheme.foreground}
+                size={theme.iconSize}
+                color={theme.foreground}
                 style={{ opacity: 0.65 }}
               />
             </SettingWrapper>

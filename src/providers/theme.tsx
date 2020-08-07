@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StatusBar, StatusBarStyle } from 'react-native'
 import { Appearance } from 'react-native-appearance'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { lightTheme, darkTheme, styleguide } from '../constants/themes'
 import { autoThemeUpdated, themeUpdated } from '../state/settings/actions'
 import { selectSettings } from '../state/settings/selectors'
@@ -32,6 +32,8 @@ const mapDispatchToProps = {
   themeUpdated,
   autoThemeUpdated,
 }
+
+export const useTheme = () => useSelector(mapStateToProps)
 
 function withTheme(WrappedComponent) {
   class Wrapper extends Component<WrapperProps> {
