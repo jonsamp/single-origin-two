@@ -1,27 +1,24 @@
-import { Notifications } from 'expo'
+import * as Notifications from 'expo-notifications'
 import * as Permissions from 'expo-permissions'
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { reminderCancelled, reminderDenied, reminderRequested } from './actions'
 
 function* scheduleNotification({ timestamp }) {
   const localNotification = {
-    title: 'Taste your coffee.',
-    body: `Tap here to rate your brew.`,
-    data: { timestamp },
-    ios: { sound: true },
-  }
-
-  const schedulingOptions = {
-    time: new Date().getTime() + 360000,
+    content: {
+      title: 'Taste your coffee.',
+      body: `Tap here to rate your brew.`,
+      data: { timestamp },
+      ios: { sound: true },
+    },
+    trigger: {
+      seconds: 360000,
+    },
   }
 
   yield call(cancelAllNotifications)
 
-  yield call(
-    Notifications.scheduleLocalNotificationAsync,
-    localNotification,
-    schedulingOptions
-  )
+  yield call(Notifications.scheduleNotificationAsync, localNotification)
 }
 
 function* cancelAllNotifications() {
