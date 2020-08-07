@@ -24,15 +24,9 @@ interface MenuProps {
 
 class Menu extends Component<MenuProps> {
   componentDidMount() {
-    const { navigation, tracking } = this.props
-
     Notifications.addNotificationResponseReceivedListener(
       this.handleNotification
     )
-
-    navigation.addListener('focus', () => {
-      tracking.track(tracking.events.MENU_VIEWED)
-    })
   }
 
   handleNotification = event => {

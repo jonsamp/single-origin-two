@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import ScreenPlaceholder from '../../components/ScreenPlaceholder'
 import recipes from '../../constants/recipes'
 import withTheme from '../../providers/theme'
-import withTracking, { Tracking } from '../../providers/tracking'
 import { logDeleted } from '../../state/logs/actions'
 import { selectLogs } from '../../state/logs/selectors'
 import { Logs as LogsType, Theme } from '../../types/index'
@@ -17,7 +16,6 @@ interface LogsProps {
   isDarkTheme: boolean
   logDeleted: (props: { timestamp: number }) => void
   navigation: any
-  tracking: Tracking
 }
 
 interface LogsState {
@@ -31,13 +29,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = { logDeleted }
 
 class Logs extends Component<LogsProps, LogsState> {
-  componentDidMount() {
-    const { navigation, tracking } = this.props
-    navigation.addListener('focus', () => {
-      tracking.track(tracking.events.LOGS_VIEWED)
-    })
-  }
-
   byTimestamp = (a, b) => b.timestamp - a.timestamp
 
   render() {
@@ -81,4 +72,4 @@ class Logs extends Component<LogsProps, LogsState> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withTracking(withTheme(Logs)))
+)(withTheme(Logs))

@@ -2,7 +2,6 @@ import { Feather } from '@expo/vector-icons'
 import React, { Component } from 'react'
 import { Linking, TouchableOpacity, ScrollView } from 'react-native'
 import withTheme from '../../providers/theme'
-import withTracking, { Tracking } from '../../providers/tracking'
 import { Theme } from '../../types/index'
 import Group from './Group'
 import Section from './Section'
@@ -12,19 +11,9 @@ interface SettingsProps {
   theme: Theme
   isDarkTheme: boolean
   navigation: any
-  tracking: Tracking
 }
 
 class Settings extends Component<SettingsProps> {
-  focusListener
-
-  componentDidMount() {
-    const { navigation, tracking } = this.props
-    navigation.addListener('focus', () => {
-      tracking.track(tracking.events.SETTINGS_VIEWED)
-    })
-  }
-
   render() {
     const { theme, isDarkTheme } = this.props
 
@@ -97,4 +86,4 @@ class Settings extends Component<SettingsProps> {
   }
 }
 
-export default withTracking(withTheme(Settings))
+export default withTheme(Settings)
