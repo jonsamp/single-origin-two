@@ -14,10 +14,10 @@ import V60Icon from './icons/V60Icon'
 import AeropressImage from './recipeImages/aeropress-card.jpg'
 import BeehouseImage from './recipeImages/beehouse-card.png'
 import ChemexImage from './recipeImages/chemex-card.png'
+import Chemex3CupImage from './recipeImages/chemex-3-cup-card.png'
 import CleverImage from './recipeImages/clever-card.png'
 import EvaSoloImage from './recipeImages/eva-solo-card.png'
 import FrenchPressImage from './recipeImages/french-press-card.png'
-import IcedCoffeeImage from './recipeImages/ice-chemex-card.jpg'
 import KalitaWaveImage from './recipeImages/kalita-wave-card.png'
 import V60Image from './recipeImages/v60-card.jpg'
 
@@ -46,7 +46,7 @@ export default {
     modifier: '3 Cup',
     id: 'Chemex3Cup',
     icon: ({ fill, size }) => <Chemex3CupIcon fill={fill} size={size} />,
-    image: ChemexImage,
+    image: Chemex3CupImage,
   },
   Clever: {
     title: 'Clever',

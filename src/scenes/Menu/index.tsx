@@ -66,7 +66,7 @@ class Menu extends Component<MenuProps> {
         <ImageBackground
           source={BackgroundImage}
           style={{ flex: 1 }}
-          imageStyle={{ opacity: 0.5 }}
+          imageStyle={{ opacity: 0.35 }}
         >
           <ScrollView contentContainerStyle={{ padding: 12 }}>
             {settings.onboardingVisible && <Onboarding />}

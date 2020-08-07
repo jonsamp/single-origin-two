@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList, View, ImageBackground } from 'react-native'
+import { FlatList, View } from 'react-native'
 import { connect } from 'react-redux'
 import ScreenPlaceholder from '../../components/ScreenPlaceholder'
 import recipes from '../../constants/recipes'
@@ -7,7 +7,6 @@ import withTheme from '../../providers/theme'
 import { logDeleted } from '../../state/logs/actions'
 import { selectLogs } from '../../state/logs/selectors'
 import { Logs as LogsType, Theme } from '../../types/index'
-import BackgroundImage from './images/notesbackground.png'
 import LogItem from './LogItem'
 import styles from './styles'
 
@@ -36,44 +35,38 @@ class Logs extends Component<LogsProps, LogsState> {
     const { theme, logs, logDeleted, navigation } = this.props
 
     return (
-      <ImageBackground
-        source={BackgroundImage}
-        style={{ flex: 1, paddingTop: 16 }}
-        imageStyle={{ opacity: 0.2 }}
-      >
-        {logs && Object.keys(logs).length > 0 ? (
-          <FlatList
-            data={Object.values(logs)
-              .filter(log => log && recipes[log.recipeId])
-              .sort(this.byTimestamp)}
-            keyExtractor={log => String(log.timestamp)}
-            renderItem={({ item }) => (
-              <LogItem
-                log={item}
-                onPress={() =>
-                  navigation.navigate('LogDetail', {
-                    timestamp: item.timestamp,
-                  })
-                }
-                onRightPress={() => logDeleted({ timestamp: item.timestamp })}
-              />
-            )}
-            extraData={this.state}
-            ItemSeparatorComponent={() => (
-              <View
-                style={[
-                  styles.separator,
-                  {
-                    backgroundColor: theme.border,
-                  },
-                ]}
-              />
-            )}
+      <FlatList
+        contentContainerStyle={{ paddingTop: 16 }}
+        data={Object.values(logs)
+          .filter(log => log && recipes[log.recipeId])
+          .sort(this.byTimestamp)}
+        keyExtractor={log => String(log.timestamp)}
+        renderItem={({ item }) => (
+          <LogItem
+            log={item}
+            onPress={() =>
+              navigation.navigate('LogDetail', {
+                timestamp: item.timestamp,
+              })
+            }
+            onRightPress={() => logDeleted({ timestamp: item.timestamp })}
           />
-        ) : (
-          <ScreenPlaceholder text="Notes of each brew will appear here once you complete a brew." />
         )}
-      </ImageBackground>
+        extraData={this.state}
+        ItemSeparatorComponent={() => (
+          <View
+            style={[
+              styles.separator,
+              {
+                backgroundColor: theme.border,
+              },
+            ]}
+          />
+        )}
+        ListEmptyComponent={
+          <ScreenPlaceholder text="Notes of each brew will appear here once you complete a brew." />
+        }
+      />
     )
   }
 }
