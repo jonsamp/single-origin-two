@@ -58,7 +58,7 @@ class App extends Component<null, State> {
   }
 
   _maybeRenderLoadingImage = () => {
-    if (this.state.splashAnimationComplete || !this.state.fontsLoaded) {
+    if (this.state.splashAnimationComplete) {
       return null
     }
 
@@ -123,6 +123,7 @@ class App extends Component<null, State> {
   }
 
   render() {
+    if (!this.state.fontsLoaded) return null
     return (
       <SafeAreaProvider>
         <Provider store={store}>
