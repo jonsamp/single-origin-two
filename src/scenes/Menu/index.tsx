@@ -13,6 +13,7 @@ import withTheme, { Theme } from '../../providers/theme'
 import withTracking, { Tracking } from '../../providers/tracking'
 import { Settings } from '../../state/settings/types'
 import Onboarding from './Onboarding'
+import BackgroundImage from './images/background.png'
 
 interface MenuProps {
   theme: Theme
@@ -62,27 +63,35 @@ class Menu extends Component<MenuProps> {
           backgroundColor: theme.pageBackground,
         }}
       >
-        <ScrollView contentContainerStyle={{ padding: 12 }}>
-          {settings.onboardingVisible && <Onboarding />}
-          {menuRecipes.map(recipe => (
-            <ListItem
-              recipe={recipe}
-              key={recipe.id}
-              onPress={() => {
-                navigation.navigate('Brew', {
-                  id: recipe.id,
-                  title: `${recipe.title}${
-                    recipe.modifier ? ` ${recipe.modifier}` : ''
-                  }`,
-                })
-                tracking.track(tracking.events.RECIPE_TAPPED, { id: recipe.id })
-              }}
-            />
-          ))}
-          {menuRecipes.length === 0 && (
-            <ScreenPlaceholder text="To start brewing, tap the settings icon, then Recipes, then select which brew methods you'd like to appear here." />
-          )}
-        </ScrollView>
+        <ImageBackground
+          source={BackgroundImage}
+          style={{ flex: 1 }}
+          imageStyle={{ opacity: 0.5 }}
+        >
+          <ScrollView contentContainerStyle={{ padding: 12 }}>
+            {settings.onboardingVisible && <Onboarding />}
+            {menuRecipes.map(recipe => (
+              <ListItem
+                recipe={recipe}
+                key={recipe.id}
+                onPress={() => {
+                  navigation.navigate('Brew', {
+                    id: recipe.id,
+                    title: `${recipe.title}${
+                      recipe.modifier ? ` ${recipe.modifier}` : ''
+                    }`,
+                  })
+                  tracking.track(tracking.events.RECIPE_TAPPED, {
+                    id: recipe.id,
+                  })
+                }}
+              />
+            ))}
+            {menuRecipes.length === 0 && (
+              <ScreenPlaceholder text="To start brewing, tap the settings icon, then Recipes, then select which brew methods you'd like to appear here." />
+            )}
+          </ScrollView>
+        </ImageBackground>
       </SafeAreaView>
     )
   }

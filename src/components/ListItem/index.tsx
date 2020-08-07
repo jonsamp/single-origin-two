@@ -29,7 +29,7 @@ function Item(props: ItemProps) {
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={activeOpacity || 0.8}>
       <Card containerStyle={styles.cardContainer}>
-        <ImageBackground source={recipe.image} style={{ flex: 1, height: 160 }}>
+        <ImageBackground source={recipe.image} style={{ flex: 1, height: 180 }}>
           <View style={styles.bodyContainer}>
             <View>
               <Text
