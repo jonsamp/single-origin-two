@@ -64,7 +64,7 @@ class Logs extends Component<LogsProps, LogsState> {
         )}
       />
     ) : (
-      <ScreenPlaceholder text="Logs of your brews will appear here once you complete a brew." />
+      <ScreenPlaceholder text="Notes of each brew will appear here once you complete a brew." />
     )
   }
 }

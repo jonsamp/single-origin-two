@@ -12,6 +12,7 @@ import {
 } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { connect } from 'react-redux'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import ScrollSelect from '../../components/ScrollSelect'
 import { width } from '../../constants/layout'
 import recipes from '../../constants/recipes'
@@ -97,10 +98,10 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
             }}
           >
             <Feather
-              name="clipboard"
+              name="edit-3"
               size={theme.iconSize}
               color={theme.foreground}
-              style={{ top: -1, marginRight: 4 }}
+              style={{ top: 1, marginRight: 8 }}
             />
             <Text
               style={[
@@ -108,7 +109,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                 { color: theme.foreground, fontWeight: '700' },
               ]}
             >
-              Rate
+              Edit Note
             </Text>
           </View>
           <View
@@ -118,12 +119,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
             }}
           >
             <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Feather
-                name="plus"
-                size={theme.iconSize + 5}
-                color={theme.foreground}
-                style={{ transform: [{ rotate: '45deg' }], top: -1 }}
-              />
+              <Text style={[type.headline, { color: theme.text }]}>Save</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -133,7 +129,8 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
           }}
         >
           <KeyboardAvoidingView behavior="position">
-            <View
+            <SafeAreaView
+              edges={['bottom']}
               style={
                 isMaxWidth && {
                   alignItems: 'center',
@@ -149,7 +146,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
               >
                 <Text
                   style={{
-                    marginBottom: 32,
+                    marginBottom: 24,
                     marginTop: 16,
                     color: theme.foreground,
                   }}
@@ -165,8 +162,8 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                   style={{
                     borderRadius: 8,
                     overflow: 'hidden',
-                    marginTop: 24,
-                    marginBottom: 32,
+                    marginTop: 16,
+                    marginBottom: 24,
                   }}
                 >
                   <ChecklistSetting
@@ -203,8 +200,8 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                   style={{
                     borderRadius: 8,
                     overflow: 'hidden',
-                    marginTop: 24,
-                    marginBottom: 32,
+                    marginTop: 16,
+                    marginBottom: 24,
                   }}
                 >
                   <ScrollSelect
@@ -235,10 +232,9 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                       : theme.background,
                     padding: 16,
                     paddingTop: 16,
-                    marginTop: 24,
-                    marginBottom: 100,
+                    marginTop: 16,
                     ...type.body,
-                    color: theme.foreground,
+                    color: theme.text,
                   }}
                   multiline
                   onChangeText={value => this.updateLog('notes', value)}
@@ -248,7 +244,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                   onSubmitEditing={Keyboard.dismiss}
                 />
               </View>
-            </View>
+            </SafeAreaView>
           </KeyboardAvoidingView>
         </ScrollView>
       </View>

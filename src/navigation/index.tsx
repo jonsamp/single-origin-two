@@ -217,8 +217,8 @@ function App({ theme, isDarkTheme }) {
                   })
                 }
               >
-                <Text style={[type.body, { color: theme.foreground }]}>
-                  Rate
+                <Text style={[type.headline, { color: theme.foreground }]}>
+                  Edit
                 </Text>
               </TouchableOpacity>
             ),

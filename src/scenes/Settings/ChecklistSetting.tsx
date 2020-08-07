@@ -22,11 +22,14 @@ const ChecklistSetting = ({
   items,
   style,
 }: ChecklistSettingProps) =>
-  items.map(item => (
+  items.map((item, index) => (
     <TouchableOpacity onPress={() => onChange(item.id)} key={item.id}>
       <SettingWrapper
         title={`${item.title}${item.modifier ? ` ${item.modifier}` : ''}`}
-        style={style}
+        style={{
+          ...style,
+          ...(index === items.length - 1 ? { borderBottomWidth: 0 } : null),
+        }}
       >
         {item.value ? (
           <Feather
