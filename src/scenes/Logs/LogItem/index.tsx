@@ -66,7 +66,7 @@ const ListItem = ({ log, onPress, onRightPress, theme, isDarkTheme }) => {
             <Text
               style={[type.caption, { color: theme.foreground, opacity: 0.8 }]}
             >
-              {format(log.timestamp, 'MM/DD @ h:mmA')}
+              {format(log.timestamp, 'MMM D, YYYY @ h:mmA')}
             </Text>
             {log.notes ? (
               <Text

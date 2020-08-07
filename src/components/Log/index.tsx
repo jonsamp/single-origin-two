@@ -155,8 +155,8 @@ class Log extends Component<LogProps> {
           </Text>
           <View>
             <Text style={[type.body, { color: theme.foreground }]}>
-              Finished at {format(log.timestamp, 'h:mmA')} on{' '}
-              {format(log.timestamp, 'MM/DD/YYYY')}
+              Brewed at {format(log.timestamp, 'h:mmA')} on{' '}
+              {format(log.timestamp, 'MMM D, YYYY')}
             </Text>
           </View>
         </View>
