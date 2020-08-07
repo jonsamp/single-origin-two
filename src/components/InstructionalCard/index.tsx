@@ -22,12 +22,12 @@ function InstructionalCard({ step, theme }: InstructionalCardProps) {
           text={step.title}
           textStyle={{ fontWeight: 'bold', padding: 0 }}
           style={{
-            marginBottom: 0,
             borderBottomWidth: 2,
             borderBottomColor: theme.primary,
             margin: 20,
+            marginBottom: 0,
             padding: 0,
-            paddingBottom: 16,
+            paddingBottom: 8,
           }}
         />
       ) : null}

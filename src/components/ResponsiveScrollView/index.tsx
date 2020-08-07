@@ -10,18 +10,15 @@ interface ResponsiveScrollViewProps {
   children: ReactNode
   style: ViewStyle
   wrapperStyle: ViewStyle
-  theme: Theme
 }
 
 function ResponsiveScrollView(props: ResponsiveScrollViewProps) {
-  const { styleguide, children, wrapperStyle, style, theme } = props
+  const { styleguide, children, wrapperStyle, style } = props
   const insets = useSafeAreaInsets()
   const isMaxWidth = width >= styleguide.maxWidth
 
   return (
-    <View
-      style={[{ flex: 1, backgroundColor: theme.background }, wrapperStyle]}
-    >
+    <View style={[{ flex: 1 }, wrapperStyle]}>
       <ScrollView
         contentContainerStyle={[
           {

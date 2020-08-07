@@ -29,7 +29,11 @@ const ChecklistSetting = ({
         style={style}
       >
         {item.value ? (
-          <Feather name="check" size={theme.iconSize} color={theme.primary} />
+          <Feather
+            name="check"
+            size={theme.iconSize - 3}
+            color={theme.primary}
+          />
         ) : null}
       </SettingWrapper>
     </TouchableOpacity>

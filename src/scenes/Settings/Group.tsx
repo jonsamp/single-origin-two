@@ -23,9 +23,11 @@ function Group(props: GroupProps) {
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: 16,
+        alignItems: 'center',
+        padding: 12,
+        paddingLeft: 16,
         backgroundColor: isDarkTheme ? theme.grey2 : theme.background,
-        borderBottomColor: isDarkTheme ? theme.background : theme.grey2,
+        borderBottomColor: theme.border,
         borderBottomWidth: 1,
       }}
       onPress={() => {
@@ -35,13 +37,13 @@ function Group(props: GroupProps) {
         navigation.navigate('SettingsDetail', { title })
       }}
     >
-      <Text style={[type.headline, { color: theme.foreground }] as TextStyle}>
+      <Text style={[type.body, { color: theme.text }] as TextStyle}>
         {title}
       </Text>
       <Feather
         name="chevron-right"
         size={theme.iconSize}
-        color={theme.foreground}
+        color={theme.text}
         style={{ opacity: 0.65 }}
       />
     </TouchableOpacity>

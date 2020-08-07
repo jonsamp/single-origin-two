@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  title: type.headline as TextStyle,
+  title: type.body as TextStyle,
   subContainer: {
     flex: 1,
   },

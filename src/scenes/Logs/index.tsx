@@ -31,8 +31,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = { logDeleted }
 
 class Logs extends Component<LogsProps, LogsState> {
-  state = { editing: false }
-
   componentDidMount() {
     const { navigation, tracking } = this.props
     navigation.addListener('focus', () => {
@@ -40,19 +38,10 @@ class Logs extends Component<LogsProps, LogsState> {
     })
   }
 
-  toggleEditing = () => this.setState(prev => ({ editing: !prev.editing }))
-
   byTimestamp = (a, b) => b.timestamp - a.timestamp
 
   render() {
-    const { theme, logs, isDarkTheme, logDeleted, navigation } = this.props
-    const modifiedTheme = isDarkTheme
-      ? {
-          ...theme,
-          grey1: theme.background,
-          grey2: theme.grey2,
-        }
-      : theme
+    const { theme, logs, logDeleted, navigation } = this.props
 
     return logs && Object.keys(logs).length > 0 ? (
       <FlatList
@@ -77,7 +66,7 @@ class Logs extends Component<LogsProps, LogsState> {
             style={[
               styles.separator,
               {
-                backgroundColor: isDarkTheme ? theme.background : theme.grey1,
+                backgroundColor: theme.border,
               },
             ]}
           />

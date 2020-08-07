@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { Platform, ScrollView, View } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RouteProp } from '@react-navigation/native'
+import { withSafeAreaInsets } from 'react-native-safe-area-context'
 import { StackParams } from '../../navigation'
 import { grinders } from '../../constants/grinders'
 import recipes from '../../constants/recipes'
@@ -26,6 +27,9 @@ interface SettingsProps {
   isDarkTheme: boolean
   toggleTheme: () => void
   toggleAutoTheme: () => void
+  insets: {
+    bottom: number
+  }
 }
 
 class SettingsDetail extends Component<SettingsProps> {
@@ -68,7 +72,7 @@ class SettingsDetail extends Component<SettingsProps> {
       case 'brew-settings':
         children = (
           <Fragment>
-            <Section title="Brewing">
+            <Section>
               <InputSetting
                 title="Coffee to water ratio"
                 description="Grams of water to grams of coffee ratio. Smaller numbers produce stronger coffee. Default: 16."
@@ -107,7 +111,7 @@ class SettingsDetail extends Component<SettingsProps> {
       case 'grinder':
         children = (
           <Fragment>
-            <Section title="Grinder type">
+            <Section>
               <ChecklistSetting
                 items={this.createChecklistItems({
                   list: grinders,
@@ -183,7 +187,7 @@ class SettingsDetail extends Component<SettingsProps> {
       case 'recipes':
         children = (
           <Fragment>
-            <Section title="Recipes">
+            <Section>
               <ChecklistSetting
                 items={this.createRecipesCheckList()}
                 onChange={recipe => this.recipeUpdated({ recipe })}
@@ -245,7 +249,9 @@ class SettingsDetail extends Component<SettingsProps> {
           flex: 1,
         }}
       >
-        <ScrollView contentContainerStyle={{ paddingBottom: 60 }}>
+        <ScrollView
+          contentContainerStyle={{ paddingBottom: this.props.insets.bottom }}
+        >
           {children}
         </ScrollView>
       </View>
@@ -253,4 +259,4 @@ class SettingsDetail extends Component<SettingsProps> {
   }
 }
 
-export default withTheme(withSettings(SettingsDetail))
+export default withTheme(withSettings(withSafeAreaInsets(SettingsDetail)))

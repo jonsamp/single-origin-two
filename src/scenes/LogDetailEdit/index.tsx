@@ -189,7 +189,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                     style={
                       isDarkTheme && {
                         backgroundColor: theme.grey1,
-                        borderBottomColor: theme.grey2,
+                        borderBottomColor: theme.border,
                       }
                     }
                   />
@@ -225,7 +225,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                 <TextInput
                   style={{
                     height: 160,
-                    borderColor: theme.grey1,
+                    borderColor: theme.border,
                     borderWidth: 1,
                     borderRadius: 8,
                     backgroundColor: isDarkTheme

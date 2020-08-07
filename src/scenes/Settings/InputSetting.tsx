@@ -28,7 +28,7 @@ const InputSetting = ({
       style={
         [
           styles.input,
-          { borderColor: theme.grey2, color: theme.foreground },
+          { borderColor: theme.border, color: theme.foreground },
         ] as ViewStyle
       }
       keyboardType="number-pad"

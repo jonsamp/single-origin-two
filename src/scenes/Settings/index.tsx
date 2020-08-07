@@ -46,6 +46,7 @@ class Settings extends Component<SettingsProps> {
         </Section>
         <Section title="General">
           <Group title="App" />
+          <Group title="Privacy Policy" />
           {/* <TouchableOpacity
             onPress={() =>
               Linking.openURL(
@@ -90,7 +91,6 @@ class Settings extends Component<SettingsProps> {
               />
             </SettingWrapper>
           </TouchableOpacity>
-          <Group title="Privacy Policy" />
         </Section>
       </ScrollView>
     )

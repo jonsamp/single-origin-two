@@ -26,7 +26,7 @@ class Section extends Component<SectionProps> {
           style={{
             marginTop: 24,
             borderBottomWidth: description ? 0 : 1,
-            borderBottomColor: theme.grey2,
+            borderBottomColor: theme.border,
             paddingBottom: 8,
           }}
         >
@@ -38,6 +38,7 @@ class Section extends Component<SectionProps> {
                   color: theme.foreground,
                   opacity: 0.9,
                   paddingLeft: 16,
+                  letterSpacing: 0.25,
                 },
               ] as TextStyle
             }
@@ -53,7 +54,7 @@ class Section extends Component<SectionProps> {
               paddingTop: 0,
               marginTop: -4,
               borderBottomWidth: 1,
-              borderBottomColor: theme.grey2,
+              borderBottomColor: theme.border,
             }}
           >
             <Text

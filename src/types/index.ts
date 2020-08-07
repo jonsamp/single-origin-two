@@ -1,7 +1,22 @@
 import { ReactNode } from 'react'
 
 export interface Theme {
-  [color: string]: string
+  foreground: string
+  text: string
+  background: string
+  notification: string
+  primaryDark: string
+  primary: string
+  beige: string
+  warning: string
+  grey1: string
+  grey2: string
+  grey3: string
+  black: string
+  blue: string
+  border: string
+  card: string
+  iconSize: number
 }
 
 export interface UnitHelpers {

@@ -28,12 +28,13 @@ const SettingWrapper = ({
   >
     <View
       style={{
-        padding: 16,
+        padding: 12,
+        paddingHorizontal: 16,
         borderBottomWidth: 1,
-        borderBottomColor: isDarkTheme ? theme.background : theme.grey2,
+        borderBottomColor: theme.border,
         backgroundColor: isDarkTheme ? theme.grey2 : theme.background,
         borderTopWidth: borderTop ? 1 : 0,
-        borderTopColor: theme.grey2,
+        borderTopColor: theme.border,
         ...style,
       }}
     >
@@ -53,6 +54,7 @@ const SettingWrapper = ({
       <View
         style={{
           padding: 16,
+          paddingTop: 8,
           paddingBottom: 32,
         }}
       >
