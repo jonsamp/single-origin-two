@@ -6,6 +6,8 @@ export interface Theme {
   background: string
   notification: string
   primaryDark: string
+  pageBackground: string
+  navigationBackground: string
   primary: string
   beige: string
   warning: string

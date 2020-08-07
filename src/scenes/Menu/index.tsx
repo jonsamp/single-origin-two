@@ -1,4 +1,4 @@
-import { Notifications } from 'expo'
+import * as Notifications from 'expo-notifications'
 import React, { Component } from 'react'
 import { ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -9,10 +9,9 @@ import ListItem from '../../components/ListItem'
 import ScreenPlaceholder from '../../components/ScreenPlaceholder'
 import recipes from '../../constants/recipes'
 import withSettings from '../../providers/settings'
-import withTheme from '../../providers/theme'
+import withTheme, { Theme } from '../../providers/theme'
 import withTracking, { Tracking } from '../../providers/tracking'
 import { Settings } from '../../state/settings/types'
-import { Theme } from '../../types/index'
 import Onboarding from './Onboarding'
 
 interface MenuProps {
@@ -24,12 +23,10 @@ interface MenuProps {
 }
 
 class Menu extends Component<MenuProps> {
-  notificationSubscription
-
   componentDidMount() {
     const { navigation, tracking } = this.props
 
-    this.notificationSubscription = Notifications.addListener(
+    Notifications.addNotificationResponseReceivedListener(
       this.handleNotification
     )
 
@@ -38,32 +35,25 @@ class Menu extends Component<MenuProps> {
     })
   }
 
-  handleNotification = notification => {
-    if (notification.data && notification.data.timestamp) {
-      // const resetAction = StackActions.reset({
-      //   index: 1,
-      //   actions: [
-      //     NavigationActions.navigate({
-      //       routeName: 'StackNavigator',
-      //     }),
-      //     NavigationActions.navigate({
-      //       routeName: 'LogDetailEdit',
-      //       params: { timestamp: notification.data.timestamp },
-      //     }),
-      //   ],
-      // })
-      // this.props.navigation.dispatch(resetAction)
+  handleNotification = event => {
+    if (
+      event &&
+      event.notification &&
+      event.notification.request &&
+      event.notification.request.content &&
+      event.notification.request.content.data &&
+      event.notification.request.content.data.timestamp
+    ) {
+      const { navigation } = this.props
+      const { timestamp } = event.notification.request.content.data
+
+      //@ts-ignore
+      navigation.navigate('LogDetailEdit', { timestamp })
     }
   }
+
   render() {
-    const { theme, navigation, isDarkTheme, settings, tracking } = this.props
-    const modifiedTheme = isDarkTheme
-      ? {
-          ...theme,
-          grey1: theme.background,
-          grey2: theme.grey2,
-        }
-      : theme
+    const { theme, navigation, settings, tracking } = this.props
 
     const selectedRecipes = Object.keys(settings.recipes).filter(
       v => settings.recipes[v] && recipes[v]
@@ -75,7 +65,7 @@ class Menu extends Component<MenuProps> {
         edges={['top']}
         style={{
           flex: 1,
-          backgroundColor: isDarkTheme ? theme.background : theme.grey1,
+          backgroundColor: theme.pageBackground,
         }}
       >
         <ScrollView contentContainerStyle={{ padding: 12 }}>
