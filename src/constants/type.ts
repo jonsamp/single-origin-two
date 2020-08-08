@@ -4,9 +4,8 @@ import { TextStyle } from 'react-native'
 
 export default {
   scriptTitle: {
-    fontSize: 48,
-    lineHeight: 52,
-    paddingRight: 8,
+    fontSize: 54,
+    lineHeight: 54,
     fontFamily: 'Script',
   } as TextStyle,
   largeTitle: {

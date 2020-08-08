@@ -1,7 +1,6 @@
 import * as Notifications from 'expo-notifications'
 import React, { Component } from 'react'
-import { ScrollView, ImageBackground } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { ScrollView, ImageBackground, View } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 import { StackParams } from '../../navigation'
@@ -56,8 +55,7 @@ class Menu extends Component<MenuProps> {
     const menuRecipes = Object.values(selectedRecipes).map(sr => recipes[sr])
 
     return (
-      <SafeAreaView
-        edges={['top']}
+      <View
         style={{
           flex: 1,
           backgroundColor: theme.pageBackground,
@@ -68,7 +66,7 @@ class Menu extends Component<MenuProps> {
           style={{ flex: 1 }}
           imageStyle={{ opacity: 0.35 }}
         >
-          <ScrollView contentContainerStyle={{ padding: 12 }}>
+          <ScrollView contentContainerStyle={{ padding: 12, paddingTop: 24 }}>
             {settings.onboardingVisible && <Onboarding />}
             {menuRecipes.map(recipe => (
               <ListItem
@@ -92,7 +90,7 @@ class Menu extends Component<MenuProps> {
             )}
           </ScrollView>
         </ImageBackground>
-      </SafeAreaView>
+      </View>
     )
   }
 }

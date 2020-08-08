@@ -18,8 +18,11 @@ import Chemex3CupImage from './recipeImages/chemex-3-cup-card.png'
 import CleverImage from './recipeImages/clever-card.png'
 import EvaSoloImage from './recipeImages/eva-solo-card.png'
 import FrenchPressImage from './recipeImages/french-press-card.png'
+import FrenchPress3CupImage from './recipeImages/french-press-3-cup-card.png'
+import FrenchPress8CupImage from './recipeImages/french-press-8-cup-card.png'
 import KalitaWaveImage from './recipeImages/kalita-wave-card.png'
 import V60Image from './recipeImages/v60-card.jpg'
+import V6001Image from './recipeImages/v60-01-card.png'
 
 export default {
   Aeropress: {
@@ -65,7 +68,7 @@ export default {
     modifier: '3 Cup',
     id: 'FrenchPress3Cup',
     icon: ({ fill, size }) => <FrenchPressIcon fill={fill} size={size} />,
-    image: FrenchPressImage,
+    image: FrenchPress3CupImage,
   },
   FrenchPress4Cup: {
     title: 'French Press',
@@ -79,7 +82,7 @@ export default {
     modifier: '8 Cup',
     id: 'FrenchPress8Cup',
     icon: ({ fill, size }) => <FrenchPressIcon fill={fill} size={size} />,
-    image: FrenchPressImage,
+    image: FrenchPress8CupImage,
   },
   KalitaWave185: {
     title: 'Kalita Wave',
@@ -107,6 +110,6 @@ export default {
     id: 'V6001',
     modifier: '#01',
     icon: ({ fill, size }) => <V6001Icon fill={fill} size={size} />,
-    image: V60Image,
+    image: V6001Image,
   },
 }

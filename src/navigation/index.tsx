@@ -1,9 +1,8 @@
 import React from 'react'
-import { TouchableOpacity, Text } from 'react-native'
+import { TouchableOpacity, Text, View } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { createStackNavigator } from '@react-navigation/stack'
 import { createNativeStackNavigator } from 'react-native-screens/native-stack'
 
 import type from '../constants/type'
@@ -37,6 +36,7 @@ export type StackParams = {
   SettingsDetail: {
     title: string
   }
+  Menu: undefined
   Tabs: undefined
   Onboarding: undefined
   Logs: undefined
@@ -55,6 +55,42 @@ export type TabParams = {
 
 const Tab = createBottomTabNavigator<TabParams>()
 const Stack = createNativeStackNavigator<StackParams>()
+
+function MenuStack() {
+  const colorScheme = useTheme()
+  const { colors } = colorScheme.theme === 'dark' ? darkTheme : lightTheme
+
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        contentStyle: {
+          backgroundColor: colors.pageBackground,
+        },
+        headerStyle: {
+          backgroundColor: colors.navigationBackground,
+        },
+      }}
+    >
+      <Stack.Screen
+        name="Menu"
+        component={Menu}
+        options={{
+          headerCenter: () => null,
+          headerLeft: () => (
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <BrewIcon theme={colors} focused={false} size={30} />
+              <Text
+                style={{ ...type.headline, marginLeft: 10, color: colors.text }}
+              >
+                Single Origin 2
+              </Text>
+            </View>
+          ),
+        }}
+      />
+    </Stack.Navigator>
+  )
+}
 
 function LogsStack() {
   const colorScheme = useTheme()
@@ -104,23 +140,25 @@ function SettingsStack() {
   )
 }
 
-function Tabs({ theme }) {
+function Tabs() {
+  const colorScheme = useTheme()
+  const { colors } = colorScheme.theme === 'dark' ? darkTheme : lightTheme
   return (
     <Tab.Navigator
       tabBarOptions={{
         showLabel: false,
         style: {
-          backgroundColor: theme.navigationBackground,
-          borderTopColor: theme.border,
+          backgroundColor: colors.navigationBackground,
+          borderTopColor: colors.border,
         },
       }}
     >
       <Tab.Screen
         name="Menu"
-        component={Menu}
+        component={MenuStack}
         options={{
           tabBarIcon: props => (
-            <BrewIcon focused={props.focused} theme={theme} />
+            <BrewIcon focused={props.focused} theme={colors} />
           ),
         }}
       />
@@ -129,7 +167,7 @@ function Tabs({ theme }) {
         component={LogsStack}
         options={{
           tabBarIcon: props => (
-            <LogsIcon focused={props.focused} theme={theme} />
+            <LogsIcon focused={props.focused} theme={colors} />
           ),
         }}
       />
@@ -138,7 +176,7 @@ function Tabs({ theme }) {
         component={SettingsStack}
         options={{
           tabBarIcon: props => (
-            <SettingsIcon focused={props.focused} theme={theme} />
+            <SettingsIcon focused={props.focused} theme={colors} />
           ),
         }}
       />
@@ -165,7 +203,7 @@ function App({ theme, isDarkTheme }) {
         {/* <Stack.Screen name="Test" component={Test} /> */}
         <Stack.Screen
           name="Tabs"
-          component={withTheme(Tabs)}
+          component={Tabs}
           options={{ headerShown: false }}
         />
         <Stack.Screen
