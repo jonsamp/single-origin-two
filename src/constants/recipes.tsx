@@ -28,7 +28,7 @@ export default {
   Aeropress: {
     title: 'Aeropress',
     id: 'Aeropress',
-    modifier: 'Inverted',
+    // modifier: 'Inverted',
     icon: ({ fill, size }) => <AeropressIcon fill={fill} size={size} />,
     image: AeropressImage,
   },
