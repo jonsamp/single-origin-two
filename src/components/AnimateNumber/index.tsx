@@ -110,7 +110,14 @@ export default class AnimateNumber extends Component<Props, State> {
     return (
       <View style={styles.timeContainer}>
         {parts.map((part, index) => (
-          <View style={styles.timeTextContainer} key={`${part}-${index}`}>
+          <View
+            style={
+              part === '.'
+                ? styles.timeTextPeriodContainer
+                : styles.timeTextContainer
+            }
+            key={`${part}-${index}`}
+          >
             <Animated.Text style={this.props.textStyle}>{part}</Animated.Text>
           </View>
         ))}
@@ -167,6 +174,10 @@ const styles = StyleSheet.create({
   },
   timeTextContainer: {
     width: 19,
+    alignItems: 'center',
+  },
+  timeTextPeriodContainer: {
+    width: 8,
     alignItems: 'center',
   },
 })
