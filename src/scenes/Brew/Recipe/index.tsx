@@ -179,7 +179,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
             recipe={recipe}
             volume={totalPourVolume}
             setRecipeState={this.setRecipeState}
-            key={this.state.randomKey}
+            key={this.state.randomKey + settings.bloomDuration}
           />
           <Button
             title="Finish Brew"

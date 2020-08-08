@@ -23,6 +23,7 @@ import Brew from '../scenes/Brew'
 import LogDetail from '../scenes/LogDetail'
 import LogDetailEdit from '../scenes/LogDetailEdit'
 import BrewSummary from '../scenes/BrewSummary'
+import BrewSettings from '../scenes/BrewSettings'
 import Test from '../scenes/Test'
 
 export type StackParams = {
@@ -45,6 +46,7 @@ export type StackParams = {
   BrewSummary: undefined
   LogDetailEdit: undefined
   Test: undefined
+  BrewSettings: undefined
 }
 
 export type TabParams = {
@@ -218,9 +220,7 @@ function App({ theme, isDarkTheme }) {
             title: route.params.title,
             headerRight: () => (
               <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate('SettingsDetail', { title: 'Units' })
-                }
+                onPress={() => navigation.navigate('BrewSettings')}
               >
                 <Feather
                   name="sliders"
@@ -266,6 +266,11 @@ function App({ theme, isDarkTheme }) {
           name="LogDetailEdit"
           component={LogDetailEdit}
           options={{ stackPresentation: 'modal' }}
+        />
+        <Stack.Screen
+          name="BrewSettings"
+          component={BrewSettings}
+          options={{ title: 'Brew Settings' }}
         />
         <Stack.Screen
           name="BrewSummary"

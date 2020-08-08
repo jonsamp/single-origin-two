@@ -10,10 +10,17 @@ interface ResponsiveScrollViewProps {
   children: ReactNode
   style: ViewStyle
   wrapperStyle: ViewStyle
+  contentContainerStyle?: ViewStyle
 }
 
 function ResponsiveScrollView(props: ResponsiveScrollViewProps) {
-  const { styleguide, children, wrapperStyle, style } = props
+  const {
+    styleguide,
+    children,
+    wrapperStyle,
+    style,
+    contentContainerStyle,
+  } = props
   const insets = useSafeAreaInsets()
   const isMaxWidth = width >= styleguide.maxWidth
 
@@ -26,6 +33,7 @@ function ResponsiveScrollView(props: ResponsiveScrollViewProps) {
             paddingTop: 32,
             paddingBottom: insets.bottom,
             ...(isMaxWidth && { alignItems: 'center' }),
+            ...contentContainerStyle,
           },
           style,
         ]}

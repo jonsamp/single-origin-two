@@ -1,14 +1,10 @@
 import React from 'react'
 import { ScrollView, View } from 'react-native'
-import { Theme } from '../../constants/themes'
+import { Theme } from '../../types'
 import withSettings from '../../providers/settings'
 import withTheme from '../../providers/theme'
 import Recipe from './Recipe'
 import recipes from './recipes'
-
-type Params = {
-  Brew: { id: string }
-}
 
 interface BrewProps {
   theme: Theme
