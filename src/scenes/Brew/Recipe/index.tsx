@@ -185,7 +185,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
             title="Finish Brew"
             customStyle={{
               paddingVertical: 20,
-              marginBottom: 32,
+              marginBottom: 16,
             }}
             onPress={this.onFinish}
             type="tertiary"
