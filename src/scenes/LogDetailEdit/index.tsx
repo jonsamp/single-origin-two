@@ -9,6 +9,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Platform,
 } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { connect } from 'react-redux'
@@ -88,53 +89,61 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
           flex: 1,
         }}
       >
-        {!isMaxWidth && <StatusBar animated style="light" />}
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: 16,
-            backgroundColor: isDarkTheme ? theme.grey1 : theme.background,
-            borderBottomWidth: 1,
-            borderBottomColor: theme.border,
-          }}
-        >
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-          >
-            <Feather
-              name="edit-3"
-              size={theme.iconSize}
-              color={theme.foreground}
-              style={{ top: 1, marginRight: 8 }}
-            />
-            <Text
-              style={[
-                type.headline,
-                { color: theme.foreground, fontWeight: '600' },
-              ]}
+        {!isMaxWidth &&
+          Platform.select({ ios: <StatusBar animated style="light" /> })}
+        {Platform.select({
+          ios: (
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: 16,
+                backgroundColor: isDarkTheme ? theme.grey1 : theme.background,
+                borderBottomWidth: 1,
+                borderBottomColor: theme.border,
+              }}
             >
-              Edit Note
-            </Text>
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-          >
-            <TouchableOpacity
-              onPress={() => navigation.goBack()}
-              style={{ paddingRight: 4 }}
-            >
-              <Text style={[type.headline, { color: theme.text }]}>Save</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}
+              >
+                <Feather
+                  name="edit-3"
+                  size={theme.iconSize}
+                  color={theme.foreground}
+                  style={{ top: 1, marginRight: 8 }}
+                />
+                <Text
+                  style={[
+                    type.headline,
+                    { color: theme.foreground, fontWeight: '600' },
+                  ]}
+                >
+                  Edit Note
+                </Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() => navigation.goBack()}
+                  style={{ paddingRight: 4 }}
+                >
+                  <Text style={[type.headline, { color: theme.text }]}>
+                    Save
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          ),
+        })}
+
         <ScrollView
           contentContainerStyle={{
             paddingHorizontal: 12,

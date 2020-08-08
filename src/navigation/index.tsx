@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity, Text, View } from 'react-native'
+import { TouchableOpacity, Text, View, Platform } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -84,8 +84,8 @@ function MenuStack() {
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'flex-start',
-                position: 'absolute',
-                left: 0,
+                // position: 'absolute',
+                // left: 0,
               }}
             >
               <BrewIcon theme={colors} focused={false} size={30} />
@@ -273,12 +273,32 @@ function App({ theme, isDarkTheme }) {
         <Stack.Screen
           name="LogDetailEdit"
           component={LogDetailEdit}
-          options={{ stackPresentation: 'modal', headerShown: false }}
+          options={{
+            stackPresentation: Platform.select({
+              ios: 'modal',
+              android: 'push',
+            }),
+            headerShown: Platform.select({
+              ios: false,
+              android: true,
+            }),
+            title: 'Edit Note',
+          }}
         />
         <Stack.Screen
           name="BrewSettings"
           component={BrewSettings}
-          options={{ stackPresentation: 'modal', title: 'Brew Settings' }}
+          options={{
+            headerShown: Platform.select({
+              ios: false,
+              android: true,
+            }),
+            stackPresentation: Platform.select({
+              ios: 'modal',
+              android: 'push',
+            }),
+            title: 'Brew Settings',
+          }}
         />
         <Stack.Screen
           name="BrewSummary"
