@@ -33,7 +33,9 @@ function Button({
   if (type === 'secondary') {
     buttonStyle = [
       styles.button,
-      { backgroundColor: isDarkTheme ? theme.grey1 : theme.background },
+      {
+        backgroundColor: isDarkTheme ? theme.grey1 : theme.background,
+      },
     ]
     textStyle = [styles.text, { color: theme.foreground }]
   }

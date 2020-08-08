@@ -12,6 +12,7 @@ import withSettings from '../../providers/settings'
 import withTheme, { Theme } from '../../providers/theme'
 import withTracking, { Tracking } from '../../providers/tracking'
 import { Settings } from '../../state/settings/types'
+import ResponsiveScrollView from '../../components/ResponsiveScrollView'
 import Onboarding from './Onboarding'
 import BackgroundImage from './images/background.png'
 
@@ -71,7 +72,9 @@ class Menu extends Component<MenuProps> {
           style={{ flex: 1 }}
           imageStyle={{ opacity: 0.35 }}
         >
-          <ScrollView contentContainerStyle={{ padding: 12, paddingTop: 24 }}>
+          <ResponsiveScrollView
+            contentContainerStyle={{ padding: 12, paddingTop: 24 }}
+          >
             {settings.onboardingVisible && <Onboarding />}
             {this.sortByName(menuRecipes).map(recipe => (
               <ListItem
@@ -93,7 +96,7 @@ class Menu extends Component<MenuProps> {
             {menuRecipes.length === 0 && (
               <ScreenPlaceholder text="To start brewing, tap the settings icon, then Recipes, then select which brew methods you'd like to appear here." />
             )}
-          </ScrollView>
+          </ResponsiveScrollView>
         </ImageBackground>
       </View>
     )

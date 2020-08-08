@@ -66,7 +66,7 @@ function Instructions({
       {icon ? (
         <View
           style={{
-            paddingTop: 20,
+            paddingTop: 18,
             backgroundColor: isDarkTheme ? theme.grey2 : theme.foreground,
             alignItems: 'center',
             width: 44,

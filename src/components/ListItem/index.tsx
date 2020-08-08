@@ -43,6 +43,7 @@ function Item(props: ItemProps) {
             maxHeight: 240,
             borderRadius: 8,
             height: height / 4,
+            elevation: 10,
             backgroundColor: 'black',
             overflow: 'hidden',
           }}

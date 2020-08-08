@@ -77,9 +77,17 @@ function MenuStack() {
         name="Menu"
         component={Menu}
         options={{
-          headerCenter: () => null,
+          headerCenter: () => <View style={{ flex: 1 }} />,
           headerLeft: () => (
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                position: 'absolute',
+                left: 0,
+              }}
+            >
               <BrewIcon theme={colors} focused={false} size={30} />
               <Text
                 style={{ ...type.headline, marginLeft: 10, color: colors.text }}
@@ -265,17 +273,20 @@ function App({ theme, isDarkTheme }) {
         <Stack.Screen
           name="LogDetailEdit"
           component={LogDetailEdit}
-          options={{ stackPresentation: 'modal' }}
+          options={{ stackPresentation: 'modal', headerShown: false }}
         />
         <Stack.Screen
           name="BrewSettings"
           component={BrewSettings}
-          options={{ title: 'Brew Settings' }}
+          options={{ stackPresentation: 'modal', title: 'Brew Settings' }}
         />
         <Stack.Screen
           name="BrewSummary"
           component={BrewSummary}
-          options={{ gestureEnabled: false, title: 'Brew Summary' }}
+          options={{
+            gestureEnabled: false,
+            title: 'Brew Summary',
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

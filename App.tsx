@@ -1,4 +1,5 @@
-import { ScreenOrientation, SplashScreen } from 'expo'
+import { SplashScreen } from 'expo'
+import * as ScreenOrientation from 'expo-screen-orientation'
 import Constants from 'expo-constants'
 import React, { Component } from 'react'
 import { ActivityIndicator, View, Animated } from 'react-native'
@@ -45,7 +46,11 @@ class App extends Component<null, State> {
 
     this._loadFontsAsync()
 
-    if (Constants.platform.ios.userInterfaceIdiom === 'tablet') {
+    if (
+      Constants.platform &&
+      Constants.platform.ios &&
+      Constants.platform.ios.userInterfaceIdiom === 'tablet'
+    ) {
       await ScreenOrientation.lockAsync(
         ScreenOrientation.OrientationLock.DEFAULT
       )

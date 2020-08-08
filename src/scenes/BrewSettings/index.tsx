@@ -1,29 +1,68 @@
-import React, { Component } from 'react'
-import { View } from 'react-native'
+import React from 'react'
+import { View, Text, TouchableOpacity } from 'react-native'
+import { StatusBar } from 'expo-status-bar'
+import { Feather } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
 import ResponsiveScrollView from '../../components/ResponsiveScrollView'
 import withTheme, { Theme } from '../../providers/theme'
 import SettingsDetail from '../Settings/SettingsDetail'
+import type from '../../constants/type'
 
 interface BrewSettingsProps {
   theme: Theme
 }
 
 function BrewSettings({ theme }: BrewSettingsProps) {
+  const navigation = useNavigation()
   return (
-    <ResponsiveScrollView
-      wrapperStyle={{
-        backgroundColor: theme.pageBackground,
-      }}
-      contentContainerStyle={{
-        paddingHorizontal: 0,
-        paddingTop: -24,
-      }}
-    >
-      <SettingsDetail route={{ params: { title: 'brew-settings' } }} />
-      <View style={{ top: -40 }}>
-        <SettingsDetail route={{ params: { title: 'units' } }} />
+    <View style={{ flex: 1 }}>
+      <StatusBar animated style="light" />
+      <View
+        style={{
+          backgroundColor: theme.background,
+          borderBottomWidth: 1,
+          borderBottomColor: theme.border,
+          padding: 16,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}
+        >
+          <Feather
+            name="sliders"
+            color={theme.foreground}
+            size={theme.iconSize}
+          />
+          <Text style={{ ...type.headline, fontWeight: '600', marginLeft: 12 }}>
+            Brew Settings
+          </Text>
+        </View>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text style={type.headline}>Save</Text>
+        </TouchableOpacity>
       </View>
-    </ResponsiveScrollView>
+      <ResponsiveScrollView
+        wrapperStyle={{
+          backgroundColor: theme.pageBackground,
+        }}
+        contentContainerStyle={{
+          paddingHorizontal: 0,
+          paddingTop: -24,
+          marginTop: -24,
+        }}
+      >
+        <SettingsDetail route={{ params: { title: 'brew-settings' } }} />
+        <View style={{ top: -40 }}>
+          <SettingsDetail route={{ params: { title: 'units' } }} />
+        </View>
+      </ResponsiveScrollView>
+    </View>
   )
 }
 

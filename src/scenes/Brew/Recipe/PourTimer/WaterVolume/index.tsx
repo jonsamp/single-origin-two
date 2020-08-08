@@ -32,6 +32,10 @@ class WaterVolume extends Component<WaterVolumeProps> {
       inputRange,
       outputRange: [0, 1],
     })
+    const trackingAnimatedElevation = animatedValue.interpolate({
+      inputRange,
+      outputRange: [0, 10],
+    })
     const trackingAnimatedBorder = animatedValue.interpolate({
       inputRange,
       outputRange: [theme.grey3, theme.primary],
@@ -57,6 +61,7 @@ class WaterVolume extends Component<WaterVolumeProps> {
               transform: [{ scale: trackingAnimatedScale }],
               borderColor: trackingAnimatedBorder,
               shadowOpacity: trackingAnimatedShadow,
+              elevation: trackingAnimatedElevation,
             },
           ]}
         >

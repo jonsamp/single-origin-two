@@ -28,6 +28,7 @@ function Card({
         backgroundColor: isDarkTheme ? theme.grey1 : theme.background,
         borderRadius: 8,
         marginBottom: 32,
+        elevation: 8,
         ...containerStyle,
       }}
     >

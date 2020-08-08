@@ -155,6 +155,7 @@ class RecordBrewAttributes extends Component<
               backgroundColor: isDarkTheme ? theme.grey2 : theme.background,
               borderRadius: 4,
               marginRight: 20,
+              elevation: 5,
             }}
             activeOpacity={1}
           >

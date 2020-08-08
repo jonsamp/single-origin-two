@@ -8,6 +8,7 @@ const defaultButton = {
   paddingHorizontal: 28,
   overflow: 'hidden',
   borderRadius: 4,
+  elevation: 3,
 } as ViewStyle
 
 const styles = StyleSheet.create({
