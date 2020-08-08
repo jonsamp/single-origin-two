@@ -43,7 +43,10 @@ function BrewSettings({ theme }: BrewSettingsProps) {
             Brew Settings
           </Text>
         </View>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={{ paddingRight: 4 }}
+        >
           <Text style={type.headline}>Save</Text>
         </TouchableOpacity>
       </View>
