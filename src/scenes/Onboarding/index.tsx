@@ -57,7 +57,7 @@ function Onboarding(props: OnboardingProps) {
 
   return (
     <>
-      <ResponsiveScrollView>
+      <ResponsiveScrollView contentContainerStyle={{ paddingBottom: 16 }}>
         {onboarding.map(step => (
           <InstructionalCard key={step.title} step={step} />
         ))}
