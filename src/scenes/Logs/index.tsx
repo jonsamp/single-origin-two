@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import ScreenPlaceholder from '../../components/ScreenPlaceholder'
 import recipes from '../../constants/recipes'
 import withTheme from '../../providers/theme'
-import { logDeleted } from '../../state/logs/actions'
 import { selectLogs } from '../../state/logs/selectors'
 import { Logs as LogsType, Theme } from '../../types/index'
 import LogItem from './LogItem'
@@ -14,7 +13,6 @@ interface LogsProps {
   theme: Theme
   logs: LogsType
   isDarkTheme: boolean
-  logDeleted: (props: { timestamp: number }) => void
   navigation: any
 }
 
@@ -26,13 +24,11 @@ const mapStateToProps = state => ({
   logs: selectLogs(state),
 })
 
-const mapDispatchToProps = { logDeleted }
-
 class Logs extends Component<LogsProps, LogsState> {
   byTimestamp = (a, b) => b.timestamp - a.timestamp
 
   render() {
-    const { theme, logs, logDeleted, navigation } = this.props
+    const { theme, logs, navigation } = this.props
 
     return (
       <FlatList
@@ -49,7 +45,6 @@ class Logs extends Component<LogsProps, LogsState> {
                 timestamp: item.timestamp,
               })
             }
-            onRightPress={() => logDeleted({ timestamp: item.timestamp })}
           />
         )}
         extraData={this.state}
@@ -71,7 +66,4 @@ class Logs extends Component<LogsProps, LogsState> {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withTheme(Logs))
+export default connect(mapStateToProps)(withTheme(Logs))

@@ -3,7 +3,7 @@ import { ScrollView, View, ViewStyle } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { width } from '../../constants/layout'
-import withTheme, { Styleguide, Theme } from '../../providers/theme'
+import withTheme, { Styleguide } from '../../providers/theme'
 
 interface ResponsiveScrollViewProps {
   styleguide: Styleguide

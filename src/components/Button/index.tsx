@@ -82,7 +82,9 @@ function Button({
         {loading ? (
           <ActivityIndicator size="small" color="white" />
         ) : (
-          <Text style={textStyle}>{title.toUpperCase()}</Text>
+          <Text style={[textStyle, customTextStyle]}>
+            {title.toUpperCase()}
+          </Text>
         )}
       </TouchableOpacity>
     </View>

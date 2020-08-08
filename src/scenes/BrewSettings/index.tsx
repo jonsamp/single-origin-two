@@ -7,6 +7,7 @@ import ResponsiveScrollView from '../../components/ResponsiveScrollView'
 import withTheme, { Theme } from '../../providers/theme'
 import SettingsDetail from '../Settings/SettingsDetail'
 import type from '../../constants/type'
+import { isMaxWidth } from '../../constants/layout'
 
 interface BrewSettingsProps {
   theme: Theme
@@ -14,9 +15,10 @@ interface BrewSettingsProps {
 
 function BrewSettings({ theme }: BrewSettingsProps) {
   const navigation = useNavigation()
+
   return (
     <View style={{ flex: 1 }}>
-      <StatusBar animated style="light" />
+      {!isMaxWidth && <StatusBar animated style="light" />}
       <View
         style={{
           backgroundColor: theme.background,

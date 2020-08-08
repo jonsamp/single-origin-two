@@ -14,15 +14,16 @@ import { StatusBar } from 'expo-status-bar'
 import { connect } from 'react-redux'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ScrollSelect from '../../components/ScrollSelect'
-import { width } from '../../constants/layout'
+import { isMaxWidth } from '../../constants/layout'
 import recipes from '../../constants/recipes'
 import type from '../../constants/type'
 import withTheme, { Styleguide, Theme } from '../../providers/theme'
 import withTracking, { Tracking } from '../../providers/tracking'
 import ChecklistSetting from '../../scenes/Settings/ChecklistSetting'
-import { logUpdated } from '../../state/logs/actions'
+import { logUpdated, logDeleted } from '../../state/logs/actions'
 import { selectLog } from '../../state/logs/selectors'
 import { Log } from '../../state/logs/types'
+import Button from '../../components/Button'
 
 interface LogDetailEditProps {
   navigation: any
@@ -49,6 +50,7 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = {
   logUpdated,
+  logDeleted,
 }
 
 class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
@@ -67,12 +69,17 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
   }
 
   render() {
-    const { theme, isDarkTheme, log, navigation, styleguide } = this.props
+    const {
+      theme,
+      isDarkTheme,
+      log,
+      navigation,
+      styleguide,
+      logDeleted,
+    } = this.props
     if (!log) {
       return <View style={{ backgroundColor: theme.background, flex: 1 }} />
     }
-
-    const isMaxWidth = width >= styleguide.maxWidth
 
     return (
       <View
@@ -81,7 +88,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
           flex: 1,
         }}
       >
-        <StatusBar animated style="light" />
+        {!isMaxWidth && <StatusBar animated style="light" />}
         <View
           style={{
             flexDirection: 'row',
@@ -89,6 +96,8 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
             alignItems: 'center',
             padding: 16,
             backgroundColor: isDarkTheme ? theme.grey1 : theme.background,
+            borderBottomWidth: 1,
+            borderBottomColor: theme.border,
           }}
         >
           <View
@@ -106,7 +115,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
             <Text
               style={[
                 type.headline,
-                { color: theme.foreground, fontWeight: '700' },
+                { color: theme.foreground, fontWeight: '600' },
               ]}
             >
               Edit Note
@@ -118,7 +127,10 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
               alignItems: 'center',
             }}
           >
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              style={{ paddingRight: 4 }}
+            >
               <Text style={[type.headline, { color: theme.text }]}>Save</Text>
             </TouchableOpacity>
           </View>
@@ -131,11 +143,14 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
           <KeyboardAvoidingView behavior="position">
             <SafeAreaView
               edges={['bottom']}
-              style={
+              style={[
                 isMaxWidth && {
                   alignItems: 'center',
-                }
-              }
+                },
+                {
+                  marginBottom: 16,
+                },
+              ]}
             >
               <View
                 style={
@@ -242,6 +257,16 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                   keyboardAppearance={isDarkTheme ? 'dark' : ('default' as any)}
                   returnKeyType="done"
                   onSubmitEditing={Keyboard.dismiss}
+                />
+                <Button
+                  onPress={() => {
+                    logDeleted({ timestamp: log.timestamp })
+                    navigation.popToTop()
+                  }}
+                  title="Delete Note"
+                  type="secondary"
+                  customStyle={{ marginTop: 24 }}
+                  customTextStyle={{ color: 'red' }}
                 />
               </View>
             </SafeAreaView>
