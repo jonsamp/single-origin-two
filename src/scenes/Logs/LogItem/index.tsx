@@ -1,29 +1,22 @@
 import { Feather } from '@expo/vector-icons'
 import { format } from 'date-fns'
 import React from 'react'
-import { Animated, Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 import recipes from '../../../constants/recipes'
 import type from '../../../constants/type'
 import withTheme from '../../../providers/theme'
 import styles from './styles'
 
-const RightActions = ({ dragX, onPress, theme }) => {
-  const scale = dragX.interpolate({
-    inputRange: [-100, 0],
-    outputRange: [1, 0],
-    extrapolate: 'clamp',
-  })
+const RightActions = ({ onPress, theme }) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={[styles.rightAction, { backgroundColor: '#FF3A3A' }]}>
-        <Animated.View style={{ transform: [{ scale }] }}>
-          <Feather
-            name="trash-2"
-            size={theme.iconSize + 8}
-            color={theme.background}
-          />
-        </Animated.View>
+        <Feather
+          name="trash-2"
+          size={theme.iconSize}
+          color={theme.background}
+        />
       </View>
     </TouchableOpacity>
   )
@@ -34,12 +27,12 @@ const ListItem = ({ log, onPress, onRightPress, theme, isDarkTheme }) => {
 
   return (
     <Swipeable
-      renderRightActions={(_, dragX) => (
-        <RightActions dragX={dragX} onPress={onRightPress} theme={theme} />
+      renderRightActions={() => (
+        <RightActions onPress={onRightPress} theme={theme} />
       )}
     >
       <TouchableOpacity
-        onPress={onPress}
+        onPress={() => onPress()}
         activeOpacity={1}
         style={[
           styles.container,
