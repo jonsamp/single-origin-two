@@ -2,6 +2,7 @@ import * as Notifications from 'expo-notifications'
 import React, { Component } from 'react'
 import { ScrollView, ImageBackground, View } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { sortBy } from 'lodash'
 
 import { StackParams } from '../../navigation'
 import ListItem from '../../components/ListItem'
@@ -46,6 +47,10 @@ class Menu extends Component<MenuProps> {
     }
   }
 
+  sortByName = recipes => {
+    return sortBy(recipes, recipe => `${recipe.title} ${recipe.modifier || ''}`)
+  }
+
   render() {
     const { theme, navigation, settings, tracking } = this.props
 
@@ -68,7 +73,7 @@ class Menu extends Component<MenuProps> {
         >
           <ScrollView contentContainerStyle={{ padding: 12, paddingTop: 24 }}>
             {settings.onboardingVisible && <Onboarding />}
-            {menuRecipes.map(recipe => (
+            {this.sortByName(menuRecipes).map(recipe => (
               <ListItem
                 recipe={recipe}
                 key={recipe.id}
