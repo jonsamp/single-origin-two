@@ -1,6 +1,7 @@
 import * as Amplitude from 'expo-analytics-amplitude'
 import Constants from 'expo-constants'
 import { takeEvery } from 'redux-saga/effects'
+import { Platform } from 'react-native'
 import { eventTracked } from './actions'
 
 let isInitialized = false
@@ -28,7 +29,10 @@ function* handleEventTracked(action) {
   maybeInitialize()
 
   if (options) {
-    Amplitude.logEventWithProperties(event, options)
+    Amplitude.logEventWithProperties(event, {
+      ...options,
+      platform: Platform.OS,
+    })
   } else {
     Amplitude.logEvent(event)
   }
