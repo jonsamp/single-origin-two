@@ -19,6 +19,7 @@ export default StyleSheet.create({
     marginHorizontal: 8,
     marginBottom: 16,
     shadowOpacity: 0,
+    elevation: 0,
   },
   cardStyle: {
     alignItems: 'center',

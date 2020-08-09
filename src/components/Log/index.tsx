@@ -148,7 +148,7 @@ class Log extends Component<LogProps> {
             style={{
               color: theme.foreground,
               ...type.header,
-              fontWeight: '900',
+              fontWeight: 'bold',
               marginVertical: 16,
             }}
           >

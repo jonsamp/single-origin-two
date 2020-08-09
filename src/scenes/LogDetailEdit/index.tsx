@@ -149,7 +149,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
             paddingHorizontal: 12,
           }}
         >
-          <KeyboardAvoidingView behavior="position">
+          <KeyboardAvoidingView behavior="padding">
             <SafeAreaView
               edges={['bottom']}
               style={[
@@ -257,6 +257,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                     padding: 16,
                     paddingTop: 16,
                     marginTop: 16,
+                    textAlignVertical: 'top',
                     ...type.body,
                     color: theme.text,
                   }}
@@ -275,7 +276,6 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                   title="Delete Note"
                   type="secondary"
                   customStyle={{ marginTop: 24 }}
-                  customTextStyle={{ color: 'red' }}
                 />
               </View>
             </SafeAreaView>
