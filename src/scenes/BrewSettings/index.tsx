@@ -1,5 +1,11 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, Platform } from 'react-native'
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Platform,
+  ScrollView,
+} from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { Feather } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
@@ -11,20 +17,26 @@ import { isMaxWidth } from '../../constants/layout'
 
 interface BrewSettingsProps {
   theme: Theme
+  isDarkTheme: boolean
 }
 
-function BrewSettings({ theme }: BrewSettingsProps) {
+function BrewSettings({ theme, isDarkTheme }: BrewSettingsProps) {
   const navigation = useNavigation()
 
   return (
-    <View style={{ flex: 1 }}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: isDarkTheme ? theme.grey2 : theme.grey1,
+      }}
+    >
       {!isMaxWidth &&
         Platform.select({ ios: <StatusBar animated style="light" /> })}
       {Platform.select({
         ios: (
           <View
             style={{
-              backgroundColor: theme.background,
+              backgroundColor: theme.navigationBackground,
               borderBottomWidth: 1,
               borderBottomColor: theme.border,
               padding: 16,
@@ -45,7 +57,12 @@ function BrewSettings({ theme }: BrewSettingsProps) {
                 size={theme.iconSize}
               />
               <Text
-                style={{ ...type.headline, fontWeight: '600', marginLeft: 12 }}
+                style={{
+                  ...type.headline,
+                  fontWeight: '600',
+                  marginLeft: 12,
+                  color: theme.text,
+                }}
               >
                 Brew Settings
               </Text>
@@ -54,15 +71,12 @@ function BrewSettings({ theme }: BrewSettingsProps) {
               onPress={() => navigation.goBack()}
               style={{ paddingRight: 4 }}
             >
-              <Text style={type.headline}>Save</Text>
+              <Text style={[type.headline, { color: theme.text }]}>Save</Text>
             </TouchableOpacity>
           </View>
         ),
       })}
-      <ResponsiveScrollView
-        wrapperStyle={{
-          backgroundColor: theme.pageBackground,
-        }}
+      <ScrollView
         contentContainerStyle={{
           paddingHorizontal: 0,
           paddingTop: -24,
@@ -73,7 +87,7 @@ function BrewSettings({ theme }: BrewSettingsProps) {
         <View style={{ top: -32 }}>
           <SettingsDetail route={{ params: { title: 'units' } }} />
         </View>
-      </ResponsiveScrollView>
+      </ScrollView>
     </View>
   )
 }

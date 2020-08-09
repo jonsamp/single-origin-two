@@ -99,7 +99,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 padding: 16,
-                backgroundColor: isDarkTheme ? theme.grey1 : theme.background,
+                backgroundColor: theme.navigationBackground,
                 borderBottomWidth: 1,
                 borderBottomColor: theme.border,
               }}
