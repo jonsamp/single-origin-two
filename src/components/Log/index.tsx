@@ -176,6 +176,7 @@ class Log extends Component<LogProps> {
                   marginBottom: index === 0 ? 12 : 0,
                   marginHorizontal: 8,
                   shadowOpacity: 0,
+                  elevation: 0,
                   padding: 16,
                 }}
               >
@@ -195,6 +196,7 @@ class Log extends Component<LogProps> {
               marginBottom: 0,
               marginHorizontal: 8,
               shadowOpacity: 0,
+              elevation: 0,
               padding: 16,
             }}
           >
