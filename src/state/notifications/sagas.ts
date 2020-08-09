@@ -12,7 +12,7 @@ function* scheduleNotification({ timestamp }) {
       ios: { sound: true },
     },
     trigger: {
-      seconds: 360000,
+      seconds: 6 * 60, // 6 minutes
     },
   }
 
