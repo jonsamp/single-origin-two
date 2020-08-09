@@ -92,17 +92,5 @@
     "modulePaths": [
       "<rootDir>"
     ]
-  },
-  "hooks": {
-    "postPublish": [
-      {
-        "file": "sentry-expo/upload-sourcemaps",
-        "config": {
-          "organization": "single-origin",
-          "project": "single-origin-two",
-          "authToken": "7e715ec4e145463cb132c5ba1703878d7af7bd875a0b46fc805342c2da5e1226"
-        }
-      }
-    ]
   }
 }
