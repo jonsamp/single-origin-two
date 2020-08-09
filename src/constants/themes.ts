@@ -14,6 +14,7 @@ export const lightTheme = {
     grey3: '#adadad',
     border: '#EFEFEF',
     card: '#F7F7F7',
+    warning: '#FFE982',
     iconSize: 22,
   },
 }
