@@ -156,22 +156,22 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
           Animated.timing(this.shadowAnimatedValue, {
             toValue: 1,
             duration: 200,
-            useNativeDriver: true,
+            useNativeDriver: false,
           }),
           Animated.timing(this.shadowAnimatedValue, {
             toValue: 0,
             duration: 200,
-            useNativeDriver: true,
+            useNativeDriver: false,
           }),
           Animated.timing(this.shadowAnimatedValue, {
             toValue: 1,
             duration: 200,
-            useNativeDriver: true,
+            useNativeDriver: false,
           }),
           Animated.timing(this.shadowAnimatedValue, {
             toValue: 0,
             duration: 200,
-            useNativeDriver: true,
+            useNativeDriver: false,
           }),
         ]).start()
         playSound({ sound: tipSound })
