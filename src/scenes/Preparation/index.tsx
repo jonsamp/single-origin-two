@@ -20,12 +20,13 @@ class Preparation extends Component<PreparationProps> {
   render() {
     const { route, theme, isDarkTheme } = this.props
     const preparation = route.params
-    const prepSteps = isArray(preparation) ? preparation : []
 
-    if (!isArray(preparation)) {
-      Sentry.captureMessage(
-        `Preparation was not an array. It was: ${JSON.stringify(preparation)}.`
-      )
+    let prepSteps
+
+    if (isArray(preparation)) {
+      prepSteps = preparation
+    } else if (!isArray(preparation) && preparation['0']) {
+      prepSteps = Object.values(preparation)
     }
 
     return (
