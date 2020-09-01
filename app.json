@@ -40,7 +40,7 @@
     },
     "android": {
       "useNextNotificationsApi": true,
-      "versionCode": 3,
+      "versionCode": 4,
       "package": "com.jonsamp.singleorigintwo"
     }
   }
