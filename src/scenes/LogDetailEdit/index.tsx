@@ -176,8 +176,8 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                   }}
                 >
                   Rate your {recipes[log.recipeId].title} brewed at{' '}
-                  {format(log.timestamp, 'h:mmA')} on{' '}
-                  {format(log.timestamp, 'MMM D, YYYY')}.
+                  {format(log.timestamp, 'h:mma')} on{' '}
+                  {format(log.timestamp, 'MMM d, yyyy')}.
                 </Text>
                 <Text style={[type.title, { color: theme.foreground }]}>
                   Tasting note

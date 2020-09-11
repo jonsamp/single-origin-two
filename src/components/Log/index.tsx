@@ -156,8 +156,8 @@ class Log extends Component<LogProps> {
           </Text>
           <View>
             <Text style={[type.body, { color: theme.foreground }]}>
-              Brewed at {format(log.timestamp, 'h:mmA')} on{' '}
-              {format(log.timestamp, 'MMM D, YYYY')}
+              Brewed at {format(log.timestamp, 'h:mma')} on{' '}
+              {format(log.timestamp, 'MMM d, yyyy')}
             </Text>
           </View>
         </View>
@@ -260,7 +260,7 @@ class Log extends Component<LogProps> {
                 {this.state.reminderScheduled && (
                   <Text style={[type.callout, { color: theme.background }]}>
                     You'll get a reminder to taste your coffee at{' '}
-                    {format(addMinutes(new Date(), 6), 'h:mmA')}.
+                    {format(addMinutes(new Date(), 6), 'h:mma')}.
                   </Text>
                 )}
               </View>
