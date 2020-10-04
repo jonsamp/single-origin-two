@@ -1,6 +1,6 @@
 import * as Haptics from 'expo-haptics'
 import React, { Component } from 'react'
-import { Animated, View } from 'react-native'
+import { Animated, View, Platform } from 'react-native'
 import Card from '../../../../components/Card'
 import Image from '../../../../components/Image'
 import { height, width } from '../../../../constants/layout'
@@ -88,8 +88,10 @@ class PourTimer extends Component<PourTimerProps, PourTimerState> {
       useNativeDriver: false,
     }).start()
 
-  toggleCountdown = () => {
-    Haptics.selectionAsync()
+  toggleCountdown = async () => {
+    if (Platform.OS === 'ios') {
+      await Haptics.selectionAsync()
+    }
 
     if (this.state.timerRunning) {
       clearInterval(this.interval)

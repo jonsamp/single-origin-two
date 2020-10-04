@@ -1,7 +1,13 @@
 import { Feather } from '@expo/vector-icons'
-import * as Haptic from 'expo-haptics'
+import * as Haptics from 'expo-haptics'
 import React, { Component } from 'react'
-import { Animated, LayoutAnimation, TouchableOpacity, View } from 'react-native'
+import {
+  Platform,
+  Animated,
+  LayoutAnimation,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import SegmentedControl from '@react-native-community/segmented-control'
 
 import Card from '../../../../components/Card'
@@ -42,7 +48,7 @@ class RecordBrewAttributes extends Component<
 
   animatedRotationValue = new Animated.Value(0)
 
-  toggleIsOpen = () => {
+  toggleIsOpen = async () => {
     const config = LayoutAnimation.create(
       200,
       LayoutAnimation.Types.easeOut,
@@ -51,10 +57,12 @@ class RecordBrewAttributes extends Component<
 
     LayoutAnimation.configureNext(config)
 
-    Haptic.selectionAsync()
+    if (Platform.OS === 'ios') {
+      await Haptics.selectionAsync()
+    }
 
     this.setState(
-      prevState => ({ isOpen: !prevState.isOpen }),
+      (prevState) => ({ isOpen: !prevState.isOpen }),
       () => {
         if (this.state.isOpen) {
           this.props.setRecipeState({ key: 'attributesRecorded', value: true })
@@ -107,7 +115,7 @@ class RecordBrewAttributes extends Component<
           grindUnit.getPreferredValueBasedOnPercent(this.props.defaultGrind)
         }
         label="grind"
-        onChange={value =>
+        onChange={(value) =>
           this.props.setRecipeState({
             key: 'grind',
             value,
@@ -124,7 +132,7 @@ class RecordBrewAttributes extends Component<
         max={212}
         defaultValue={this.props.temp}
         label={temperatureUnit.unit.symbol}
-        onChange={value =>
+        onChange={(value) =>
           this.props.setRecipeState({
             key: 'temp',
             value,
@@ -185,7 +193,7 @@ class RecordBrewAttributes extends Component<
               backgroundColor: theme.grey2,
               minHeight: this.state.containerHeight,
             }}
-            onLayout={event => {
+            onLayout={(event) => {
               const { x, y, width, height } = event.nativeEvent.layout
               this.setState({ containerHeight: height })
             }}
@@ -199,10 +207,10 @@ class RecordBrewAttributes extends Component<
               >
                 <SegmentedControl
                   values={recordSettings.map(
-                    name => name.charAt(0).toUpperCase() + name.slice(1)
+                    (name) => name.charAt(0).toUpperCase() + name.slice(1)
                   )}
                   selectedIndex={recordSegmentIndex}
-                  onChange={event => {
+                  onChange={(event) => {
                     this.setState({
                       recordSegmentIndex:
                         event.nativeEvent.selectedSegmentIndex,

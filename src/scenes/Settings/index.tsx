@@ -1,6 +1,6 @@
 import { Feather } from '@expo/vector-icons'
 import React, { Component } from 'react'
-import { Linking, TouchableOpacity, ScrollView } from 'react-native'
+import { Linking, TouchableOpacity, ScrollView, Platform } from 'react-native'
 import withTheme from '../../providers/theme'
 import { Theme } from '../../types/index'
 import Group from './Group'
@@ -45,11 +45,17 @@ class Settings extends Component<SettingsProps> {
             </SettingWrapper>
           </TouchableOpacity> */}
           <TouchableOpacity
-            onPress={() =>
-              Linking.openURL(
-                'https://itunes.apple.com/app/id1480168613?action=write-review'
-              )
-            }
+            onPress={() => {
+              if (Platform.OS === 'ios') {
+                Linking.openURL(
+                  'https://itunes.apple.com/app/id1480168613?action=write-review'
+                )
+              } else {
+                Linking.openURL(
+                  'https://play.google.com/store/apps/details?id=com.jonsamp.singleorigintwo'
+                )
+              }
+            }}
           >
             <SettingWrapper title="Rate Single Origin 2">
               <Feather

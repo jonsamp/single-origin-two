@@ -19,7 +19,7 @@ const { store, persistor } = configureStore()
 
 Sentry.init({
   dsn: 'https://c9996743bbf04225a864e9b985a8be12@sentry.io/1746780',
-  debug: true,
+  debug: false,
 })
 
 Sentry.setRelease(Constants.manifest.revisionId)

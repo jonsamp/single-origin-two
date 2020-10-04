@@ -1,7 +1,14 @@
-import * as Haptic from 'expo-haptics'
+import * as Haptics from 'expo-haptics'
 import { range } from 'lodash'
 import React, { Component, createRef } from 'react'
-import { Animated, Text, TouchableOpacity, View, ViewStyle } from 'react-native'
+import {
+  Animated,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+  Platform,
+} from 'react-native'
 import withSettings from '../../providers/settings'
 import withTheme from '../../providers/theme'
 import { UnitHelpers } from '../../types'
@@ -172,13 +179,15 @@ class ScrollSelect extends Component<ScrollSelectProps> {
                   Math.abs(x - this.currentPosition) >
                   this.SCREEN_WIDTH - 16
                 ) {
-                  await Haptic.selectionAsync()
+                  if (Platform.OS === 'ios') {
+                    await Haptics.selectionAsync()
+                  }
                   this.currentPosition = x
                 }
               },
             }
           )}
-          onMomentumScrollEnd={event => {
+          onMomentumScrollEnd={(event) => {
             const selectionNumber = Math.round(
               event.nativeEvent.contentOffset.x / this.SCREEN_WIDTH
             )
