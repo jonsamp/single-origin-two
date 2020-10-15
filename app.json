@@ -40,7 +40,7 @@
     },
     "android": {
       "useNextNotificationsApi": true,
-      "versionCode": 6,
+      "versionCode": 7,
       "package": "com.jonsamp.singleorigintwo",
       "adaptiveIcon": {
         "foregroundImage": "./assets/android-icon.png",

@@ -206,6 +206,7 @@ class RecordBrewAttributes extends Component<
                 }}
               >
                 <SegmentedControl
+                  appearance={isDarkTheme ? 'dark' : 'light'}
                   values={recordSettings.map(
                     (name) => name.charAt(0).toUpperCase() + name.slice(1)
                   )}
