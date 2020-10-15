@@ -42,9 +42,6 @@ export default function App() {
   }, [])
 
   const isLoadingComplete = useCachedResources()
-  if (!isLoadingComplete) {
-    return null
-  }
 
   return (
     <Provider store={store}>
@@ -58,14 +55,27 @@ export default function App() {
               backgroundColor: 'black',
             }}
           >
-            <ActivityIndicator />
+            <ActivityIndicator color="white" />
           </View>
         }
         persistor={persistor}
       >
         <SafeAreaProvider>
           <AppearanceProvider>
-            <Navigator />
+            {isLoadingComplete ? (
+              <Navigator />
+            ) : (
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: 'black',
+                }}
+              >
+                <ActivityIndicator color="white" />
+              </View>
+            )}
           </AppearanceProvider>
         </SafeAreaProvider>
       </PersistGate>

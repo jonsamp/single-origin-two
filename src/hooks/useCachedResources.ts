@@ -1,5 +1,4 @@
 import * as Font from 'expo-font'
-import * as SplashScreen from 'expo-splash-screen'
 import * as React from 'react'
 
 export function useCachedResources() {
@@ -9,8 +8,6 @@ export function useCachedResources() {
   React.useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
-        SplashScreen.preventAutoHideAsync()
-
         // Load fonts
         await Font.loadAsync({
           Script: require('../../assets/SignPainter-HouseScript.ttf'),
@@ -20,7 +17,6 @@ export function useCachedResources() {
         console.warn(e)
       } finally {
         setLoadingComplete(true)
-        SplashScreen.hideAsync()
       }
     }
 
