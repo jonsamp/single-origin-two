@@ -5,7 +5,7 @@
     "slug": "single-origin-two",
     "privacy": "unlisted",
     "platforms": ["ios", "android"],
-    "version": "38.3",
+    "version": "39",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -40,7 +40,7 @@
     },
     "android": {
       "useNextNotificationsApi": true,
-      "versionCode": 7,
+      "versionCode": 8,
       "package": "com.jonsamp.singleorigintwo",
       "adaptiveIcon": {
         "foregroundImage": "./assets/android-icon.png",
