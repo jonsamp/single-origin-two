@@ -38,7 +38,7 @@ class ScrollSelect extends Component<ScrollSelectProps> {
     defaultValue: undefined,
   }
 
-  scrollViewRef = createRef()
+  scrollViewRef = createRef<any>()
 
   xOffset = new Animated.Value(0)
   SCREEN_WIDTH = Math.round(this.props.containerWidth / 3)
@@ -56,7 +56,11 @@ class ScrollSelect extends Component<ScrollSelectProps> {
     const defaultValueIndex = selectionRange.indexOf(defaultValue)
     const itemPosition = defaultValueIndex * this.SCREEN_WIDTH
 
-    if (this.scrollViewRef) {
+    if (
+      this.scrollViewRef &&
+      this.scrollViewRef.current &&
+      typeof this.scrollViewRef.current.scrollTo === 'function'
+    ) {
       setTimeout(
         () =>
           this.scrollViewRef.current.scrollTo({
@@ -72,7 +76,11 @@ class ScrollSelect extends Component<ScrollSelectProps> {
   onSelectionTap = (index: number) => {
     const itemPosition = index * this.SCREEN_WIDTH
 
-    if (this.scrollViewRef) {
+    if (
+      this.scrollViewRef &&
+      this.scrollViewRef.current &&
+      typeof this.scrollViewRef.current.scrollTo === 'function'
+    ) {
       this.scrollViewRef.current.scrollTo({
         x: itemPosition,
         y: 0,
