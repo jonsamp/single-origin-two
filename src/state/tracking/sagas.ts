@@ -8,12 +8,12 @@ let isInitialized = false
 const { manifest } = Constants
 const apiKey = manifest.extra && manifest.extra.amplitudeApiKey
 
-const initialize = () => {
+const initialize = async () => {
   if (!apiKey) {
     return
   }
 
-  Amplitude.initialize(apiKey)
+  await Amplitude.initializeAsync(apiKey)
   isInitialized = true
 }
 
@@ -29,7 +29,7 @@ function* handleEventTracked(action) {
   maybeInitialize()
 
   if (options) {
-    Amplitude.logEventWithProperties(event, {
+    Amplitude.logEventWithPropertiesAsync(event, {
       ...options,
       platform: Platform.OS,
     })
