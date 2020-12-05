@@ -14,8 +14,8 @@
     },
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#1e1e1f"
+      "resizeMode": "cover",
+      "backgroundColor": "#000000"
     },
     "updates": {
       "fallbackToCacheTimeout": 3000
@@ -44,11 +44,11 @@
       "package": "com.jonsamp.singleorigintwo",
       "adaptiveIcon": {
         "foregroundImage": "./assets/android-icon.png",
-        "backgroundColor": "#1E1E1F"
+        "backgroundColor": "#000000"
       },
       "splash": {
-        "resizeMode": "contain",
-        "backgroundColor": "#1e1e1f"
+        "resizeMode": "cover",
+        "backgroundColor": "#000000"
       },
       "permissions": []
     }

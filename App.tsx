@@ -1,7 +1,8 @@
 import * as ScreenOrientation from 'expo-screen-orientation'
 import Constants from 'expo-constants'
-import React, { useEffect, useState } from 'react'
-import { ActivityIndicator, View } from 'react-native'
+import React, { useState, useEffect, useRef } from 'react'
+import { Animated } from 'react-native'
+import AppLoading from 'expo-app-loading'
 import { AppearanceProvider } from 'react-native-appearance'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -28,9 +29,23 @@ Sentry.init({
 
 export default function App() {
   const [isLoaded, setIsLoaded] = useState(false)
+  const fadeAnim = useRef(new Animated.Value(0)).current
 
-  useEffect(function didMount() {
-    async function modifyOrientation() {
+  useEffect(
+    function onLoadedUpdate() {
+      if (isLoaded) {
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 750,
+          useNativeDriver: true,
+        }).start()
+      }
+    },
+    [isLoaded]
+  )
+
+  async function loadResourcesAndDataAsync() {
+    try {
       if (
         Constants.platform &&
         Constants.platform.ios &&
@@ -40,55 +55,36 @@ export default function App() {
           ScreenOrientation.OrientationLock.DEFAULT
         )
       }
+
+      await Font.loadAsync({
+        Script: require('./assets/SignPainter-HouseScript.ttf'),
+      })
+    } catch (e) {
+      console.warn(e)
+    } finally {
+      return
     }
-
-    modifyOrientation()
-  }, [])
-
-  useEffect(() => {
-    async function loadResourcesAndDataAsync() {
-      try {
-        // Load fonts
-        await Font.loadAsync({
-          Script: require('./assets/SignPainter-HouseScript.ttf'),
-        })
-      } catch (e) {
-        // We might want to provide this error information to an error reporting service
-        console.warn(e)
-      } finally {
-        setIsLoaded(true)
-      }
-    }
-
-    loadResourcesAndDataAsync()
-  }, [])
-
-  const loadingComponent = (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'black',
-      }}
-    >
-      <ActivityIndicator color="white" />
-    </View>
-  )
-
-  if (!isLoaded) {
-    return loadingComponent
   }
 
   return (
     <Provider store={store}>
-      <PersistGate loading={loadingComponent} persistor={persistor}>
+      <PersistGate loading={null} persistor={persistor}>
         <SafeAreaProvider
           style={{ backgroundColor: 'black' }}
           initialMetrics={initialWindowMetrics}
         >
           <AppearanceProvider>
-            {isLoaded ? <Navigator /> : loadingComponent}
+            {isLoaded ? (
+              <Animated.View style={{ opacity: fadeAnim, flex: 1 }}>
+                <Navigator />
+              </Animated.View>
+            ) : (
+              <AppLoading
+                startAsync={loadResourcesAndDataAsync}
+                onFinish={() => setIsLoaded(true)}
+                onError={console.warn}
+              />
+            )}
           </AppearanceProvider>
         </SafeAreaProvider>
       </PersistGate>
