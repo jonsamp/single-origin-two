@@ -1,13 +1,17 @@
 # Releases
 
-How to:
+## 12/5/2020
 
-```
-xcrun altool --upload-app -f ~/Downloads/ -u sampjon@gmail.com -p
-```
+Release channel: 40
+Build number: 2 (iOS) and 10 (Android)
 
-- Add ipa file path
-- password is app specific password from appleid.apple.com
+Notes:
+
+- Updates the AppLoading screen to fade in from black.
+- Makes borderRadius larger on menu items.
+- Makes SafeAreaProvider load faster.
+
+// ... Missed some updates
 
 ## 10/9/2019
 
