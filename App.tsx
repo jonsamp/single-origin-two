@@ -1,17 +1,17 @@
 import * as ScreenOrientation from 'expo-screen-orientation'
 import Constants from 'expo-constants'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 import { AppearanceProvider } from 'react-native-appearance'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import * as Sentry from 'sentry-expo'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import * as Font from 'expo-font'
 
 import Navigator from './src/navigation'
 import configureStore from './src/store/configureStore'
 import { enableScreens } from 'react-native-screens'
-import { useCachedResources } from './src/hooks/useCachedResources'
 
 enableScreens()
 
@@ -24,6 +24,8 @@ Sentry.init({
 })
 
 export default function App() {
+  const [isLoaded, setIsLoaded] = useState(false)
+
   useEffect(function didMount() {
     async function modifyOrientation() {
       if (
@@ -40,7 +42,23 @@ export default function App() {
     modifyOrientation()
   }, [])
 
-  const isLoadingComplete = useCachedResources()
+  useEffect(() => {
+    async function loadResourcesAndDataAsync() {
+      try {
+        // Load fonts
+        await Font.loadAsync({
+          Script: require('../../assets/SignPainter-HouseScript.ttf'),
+        })
+      } catch (e) {
+        // We might want to provide this error information to an error reporting service
+        console.warn(e)
+      } finally {
+        setIsLoaded(true)
+      }
+    }
+
+    loadResourcesAndDataAsync()
+  }, [])
 
   return (
     <Provider store={store}>
@@ -61,7 +79,7 @@ export default function App() {
       >
         <SafeAreaProvider>
           <AppearanceProvider>
-            {isLoadingComplete ? (
+            {isLoaded ? (
               <Navigator />
             ) : (
               <View
