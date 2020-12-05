@@ -167,7 +167,7 @@ function Tabs() {
         name="Menu"
         component={MenuStack}
         options={{
-          tabBarIcon: props => (
+          tabBarIcon: (props) => (
             <BrewIcon focused={props.focused} theme={colors} />
           ),
         }}
@@ -176,7 +176,7 @@ function Tabs() {
         name="Logs"
         component={LogsStack}
         options={{
-          tabBarIcon: props => (
+          tabBarIcon: (props) => (
             <LogsIcon focused={props.focused} theme={colors} />
           ),
         }}
@@ -185,7 +185,7 @@ function Tabs() {
         name="Settings"
         component={SettingsStack}
         options={{
-          tabBarIcon: props => (
+          tabBarIcon: (props) => (
             <SettingsIcon focused={props.focused} theme={colors} />
           ),
         }}
@@ -199,7 +199,7 @@ function App({ theme, isDarkTheme }) {
     <NavigationContainer theme={{ dark: isDarkTheme, colors: theme }}>
       <Stack.Navigator
         screenOptions={{
-          headerTitleStyle: type.headline,
+          headerTitleStyle: type.headline as any,
           headerBackTitleVisible: false,
           headerTintColor: theme.foreground,
           headerStyle: {
