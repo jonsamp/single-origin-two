@@ -143,7 +143,6 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
             </View>
           ),
         })}
-
         <ScrollView
           contentContainerStyle={{
             paddingHorizontal: 12,
@@ -208,7 +207,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                         value: log.tastingNote === 'bitter',
                       },
                     ]}
-                    onChange={value => this.updateLog('tastingNote', value)}
+                    onChange={(value) => this.updateLog('tastingNote', value)}
                     style={
                       isDarkTheme && {
                         backgroundColor: theme.grey1,
@@ -233,7 +232,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                     max={10}
                     defaultValue={log.rating || 5}
                     label="RATING"
-                    onChange={value => this.updateLog('rating', value)}
+                    onChange={(value) => this.updateLog('rating', value)}
                     step={1}
                     style={{
                       backgroundColor: isDarkTheme
@@ -262,7 +261,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                     color: theme.text,
                   }}
                   multiline
-                  onChangeText={value => this.updateLog('notes', value)}
+                  onChangeText={(value) => this.updateLog('notes', value)}
                   value={log.notes}
                   keyboardAppearance={isDarkTheme ? 'dark' : ('default' as any)}
                   returnKeyType="done"

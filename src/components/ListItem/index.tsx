@@ -41,7 +41,7 @@ function Item(props: ItemProps) {
           style={{
             minHeight: 180,
             maxHeight: 240,
-            borderRadius: 8,
+            borderRadius: 12,
             height: height / 4,
             elevation: 10,
             backgroundColor: 'black',

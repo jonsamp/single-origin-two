@@ -6,7 +6,10 @@ import { AppearanceProvider } from 'react-native-appearance'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import * as Sentry from 'sentry-expo'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
+import {
+  SafeAreaProvider,
+  initialWindowMetrics,
+} from 'react-native-safe-area-context'
 import * as Font from 'expo-font'
 
 import Navigator from './src/navigation'
@@ -47,7 +50,7 @@ export default function App() {
       try {
         // Load fonts
         await Font.loadAsync({
-          Script: require('../../assets/SignPainter-HouseScript.ttf'),
+          Script: require('./assets/SignPainter-HouseScript.ttf'),
         })
       } catch (e) {
         // We might want to provide this error information to an error reporting service
@@ -60,39 +63,32 @@ export default function App() {
     loadResourcesAndDataAsync()
   }, [])
 
+  const loadingComponent = (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'black',
+      }}
+    >
+      <ActivityIndicator color="white" />
+    </View>
+  )
+
+  if (!isLoaded) {
+    return loadingComponent
+  }
+
   return (
     <Provider store={store}>
-      <PersistGate
-        loading={
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: 'black',
-            }}
-          >
-            <ActivityIndicator color="white" />
-          </View>
-        }
-        persistor={persistor}
-      >
-        <SafeAreaProvider>
+      <PersistGate loading={loadingComponent} persistor={persistor}>
+        <SafeAreaProvider
+          style={{ backgroundColor: 'black' }}
+          initialMetrics={initialWindowMetrics}
+        >
           <AppearanceProvider>
-            {isLoaded ? (
-              <Navigator />
-            ) : (
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: 'black',
-                }}
-              >
-                <ActivityIndicator color="white" />
-              </View>
-            )}
+            {isLoaded ? <Navigator /> : loadingComponent}
           </AppearanceProvider>
         </SafeAreaProvider>
       </PersistGate>
