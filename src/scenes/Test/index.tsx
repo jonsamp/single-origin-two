@@ -1,52 +1,38 @@
 import React, { useState } from 'react'
-import { Text, View } from 'react-native'
-import ScrollSelect from '../../components/ScrollSelect'
-import { height, width } from '../../constants/layout'
-import SegmentedControl from '@react-native-community/segmented-control'
+import { Text, View, Button } from 'react-native'
 
-interface TestProps {}
+import Slider from '@react-native-community/slider'
 
-function Test(props: TestProps) {
-  const [selected, setSelected] = useState<number | undefined>(0)
+function Test() {
+  const [sliderKey, setSliderKey] = useState('')
+  const [value, setValue] = useState(0)
+
   return (
-    <View>
-      <SegmentedControl
-        values={['One', 'Two']}
-        selectedIndex={selected}
-        onChange={event => {
-          setSelected(event.nativeEvent.selectedSegmentIndex)
+    <View style={{ padding: 32 }}>
+      <Button
+        onPress={() => {
+          setValue(value + 1)
+          setSliderKey(String(value + 1))
         }}
+        title="Add one"
       />
-      <Text>{selected}</Text>
-    </View>
-  )
-  return (
-    <View
-      style={{
-        justifyContent: 'center',
-        flex: 1,
-        padding: 16,
-        backgroundColor: 'grey',
-      }}
-    >
-      <View
-        style={{
-          position: 'absolute',
-          left: width / 2 - 1,
-          width: 1,
-          height,
-          backgroundColor: 'blue',
-          zIndex: 2,
-          // opacity: 0,
+      <Button
+        onPress={() => {
+          setValue(value - 1)
+          setSliderKey(String(value - 1))
         }}
+        title="Substract one"
       />
-      <ScrollSelect
-        unitType="coffeeWeightUnit"
-        min={10}
-        max={20}
-        defaultValue={15}
-        onChange={value => {}}
-        step={1}
+      <Text style={{ fontSize: 24 }}>{value}</Text>
+      <Slider
+        key={sliderKey}
+        value={value}
+        style={{ width: '100%', height: 40 }}
+        minimumValue={0}
+        maximumValue={1}
+        minimumTrackTintColor="#ccc"
+        maximumTrackTintColor="#000000"
+        onValueChange={(value) => setValue(value)}
       />
     </View>
   )

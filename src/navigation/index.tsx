@@ -210,7 +210,7 @@ function App({ theme, isDarkTheme }) {
           },
         }}
       >
-        {/* <Stack.Screen name="Test" component={Test} /> */}
+        <Stack.Screen name="Test" component={Test} />
         <Stack.Screen
           name="Tabs"
           component={Tabs}
