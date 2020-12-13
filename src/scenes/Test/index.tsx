@@ -21,11 +21,15 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated'
 import { PanGestureHandler } from 'react-native-gesture-handler'
+import { useTheme } from '../../providers/theme'
+import { PlusIcon } from './PlusIcon'
+import { MinusIcon } from './MinusIcon'
+import { IncrementButton } from './IncrementButton'
 
 const screenWidth = Dimensions.get('screen').width
 
 const SLIDER_WIDTH = screenWidth * 0.75
-const KNOB_WIDTH = 50
+const KNOB_WIDTH = 44
 const MAX_RANGE = 100
 const sliderRange = SLIDER_WIDTH - KNOB_WIDTH
 const oneStepValue = sliderRange / MAX_RANGE
@@ -52,6 +56,7 @@ async function haptic() {
 }
 
 export default function Slider1() {
+  const { colors } = useTheme()
   const translateX = useSharedValue(getXValue(5))
   const isSliding = useSharedValue(false)
 
@@ -85,25 +90,24 @@ export default function Slider1() {
     },
   })
 
+  const sliderValueStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          scale: withTiming(isSliding.value ? 1.25 : 1, {
+            duration: 75,
+            easing: Easing.linear,
+          }),
+        },
+      ],
+    }
+  })
+
   const scrollTranslationStyle = useAnimatedStyle(() => {
     return {
-      shadowRadius: withTiming(isSliding.value ? 4 : 2, {
-        duration: 100,
-        easing: Easing.linear,
-      }),
-      shadowOpacity: withTiming(isSliding.value ? 0.25 : 0.5, {
-        duration: 100,
-        easing: Easing.linear,
-      }),
       transform: [
         {
           translateX: translateX.value,
-        },
-        {
-          scale: withTiming(isSliding.value ? 1.1 : 1, {
-            duration: 100,
-            easing: Easing.linear,
-          }),
         },
       ],
     }
@@ -121,90 +125,46 @@ export default function Slider1() {
     }
   })
 
+  function increment(value: number) {
+    // TODO: disable the increment button if it's at the min or max
+    // TODO: call the on change call back from here
+
+    haptic()
+
+    translateX.value = withTiming(getXValue(Number(stepText.value) + value), {
+      duration: 100,
+      easing: Easing.linear,
+    })
+  }
+
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          marginBottom: 60,
-          justifyContent: 'space-between',
-          width: SLIDER_WIDTH,
-        }}
-      >
-        <TouchableOpacity
-          onPress={() => {
-            haptic()
-            translateX.value = withTiming(
-              getXValue(Number(stepText.value) - 1),
-              { duration: 100, easing: Easing.linear }
-            )
-          }}
-          style={{
-            backgroundColor: '#ececec',
-            height: 55,
-            width: 55,
-            borderRadius: 25,
-            alignItems: 'center',
-          }}
-        >
-          <Text style={{ fontSize: 40, color: '#585858' }}>-</Text>
-        </TouchableOpacity>
+      <View style={styles.sliderHeaderContainer}>
+        <IncrementButton icon={<MinusIcon />} onPress={() => increment(-1)} />
         <AnimatedTextInput
           underlineColorAndroid="transparent"
           editable={false}
-          style={{
-            fontSize: 72,
-            fontWeight: 'bold',
-            textAlign: 'right',
-            fontFamily: Platform.select({ ios: 'Menlo' }),
-            color: 'black',
-          }}
+          style={[styles.sliderValue, sliderValueStyle]}
           animatedProps={animatedProps}
           value={stepText.value}
         />
-        <TouchableOpacity
-          onPress={() => {
-            haptic()
-            translateX.value = withTiming(
-              getXValue(Number(stepText.value) + 1),
-              { duration: 100, easing: Easing.linear }
-            )
-          }}
-          style={{
-            backgroundColor: '#ececec',
-            height: 55,
-            width: 55,
-            borderRadius: 25,
-            alignItems: 'center',
-          }}
-        >
-          <Text style={{ fontSize: 40, color: '#585858' }}>+</Text>
-        </TouchableOpacity>
+        <IncrementButton icon={<PlusIcon />} onPress={() => increment(1)} />
       </View>
       <View style={styles.slider}>
         <LinearGradient
           colors={['#D9D9D9', '#EFEFEF']}
           locations={[0.2, 0.8]}
-          style={[
-            styles.slider,
-            {
-              position: 'absolute',
-            },
-          ]}
+          style={[styles.slider, styles.track]}
         />
         <PanGestureHandler onGestureEvent={onGestureEvent}>
-          <Animated.View style={[styles.knob, scrollTranslationStyle]}>
+          <Animated.View style={[styles.knobContainer, scrollTranslationStyle]}>
             <LinearGradient
-              colors={['#000000', '#3C3C3C']}
-              locations={[0.3, 0.9]}
-              style={[
-                {
-                  width: 36,
-                  height: 36,
-                  borderRadius: 4,
-                },
+              colors={[
+                '#000000',
+                Platform.select({ ios: '#3C3C3C', android: '#4d4d4d' }),
               ]}
+              locations={[0.3, 0.9]}
+              style={styles.knob}
             />
           </Animated.View>
         </PanGestureHandler>
@@ -221,13 +181,16 @@ const styles = StyleSheet.create({
   slider: {
     height: KNOB_WIDTH / 5,
     width: SLIDER_WIDTH,
-    borderRadius: KNOB_WIDTH / 4 / 2,
+    borderRadius: KNOB_WIDTH / 5 / 2,
     justifyContent: 'center',
   },
-  knob: {
-    height: KNOB_WIDTH,
+  track: {
+    position: 'absolute',
+  },
+  knobContainer: {
     width: KNOB_WIDTH,
-    borderRadius: 10,
+    height: KNOB_WIDTH,
+    borderRadius: 8,
     backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
@@ -235,5 +198,23 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     shadowOffset: { height: 1, width: 0 },
     shadowOpacity: 0.5,
+  },
+  knob: {
+    width: KNOB_WIDTH - 10,
+    height: KNOB_WIDTH - 10,
+    borderRadius: 3,
+  },
+  sliderHeaderContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 60,
+    justifyContent: 'space-between',
+    width: SLIDER_WIDTH,
+  },
+  sliderValue: {
+    fontSize: 60,
+    fontWeight: 'bold',
+    fontFamily: Platform.select({ ios: 'Menlo' }),
+    color: 'black',
   },
 })

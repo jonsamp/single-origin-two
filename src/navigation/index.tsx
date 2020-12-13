@@ -7,7 +7,7 @@ import { createNativeStackNavigator } from 'react-native-screens/native-stack'
 
 import type from '../constants/type'
 import { lightTheme, darkTheme } from '../constants/themes'
-import withTheme, { useTheme } from '../providers/theme'
+import withTheme, { useColorScheme } from '../providers/theme'
 import { styleguide } from '../constants/themes'
 
 import BrewIcon from './icons/BrewIcon'
@@ -59,7 +59,7 @@ const Tab = createBottomTabNavigator<TabParams>()
 const Stack = createNativeStackNavigator<StackParams>()
 
 function MenuStack() {
-  const colorScheme = useTheme()
+  const colorScheme = useColorScheme()
   const { colors } = colorScheme.theme === 'dark' ? darkTheme : lightTheme
 
   return (
@@ -103,7 +103,7 @@ function MenuStack() {
 }
 
 function LogsStack() {
-  const colorScheme = useTheme()
+  const colorScheme = useColorScheme()
   const { colors } = colorScheme.theme === 'dark' ? darkTheme : lightTheme
 
   return (
@@ -127,7 +127,7 @@ function LogsStack() {
 }
 
 function SettingsStack() {
-  const colorScheme = useTheme()
+  const colorScheme = useColorScheme()
   const { colors } = colorScheme.theme === 'dark' ? darkTheme : lightTheme
 
   return (
@@ -151,7 +151,7 @@ function SettingsStack() {
 }
 
 function Tabs() {
-  const colorScheme = useTheme()
+  const colorScheme = useColorScheme()
   const { colors } = colorScheme.theme === 'dark' ? darkTheme : lightTheme
   return (
     <Tab.Navigator

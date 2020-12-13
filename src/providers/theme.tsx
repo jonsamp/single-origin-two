@@ -33,7 +33,21 @@ const mapDispatchToProps = {
   autoThemeUpdated,
 }
 
-export const useTheme = () => useSelector(mapStateToProps)
+export function useColorScheme() {
+  return useSelector(mapStateToProps)
+}
+
+export function useTheme() {
+  const { theme } = useColorScheme()
+  const colors = theme === 'dark' ? darkTheme : lightTheme
+
+  return {
+    ...colors,
+    styleguide,
+    isDarkTheme: theme === 'dark',
+    isLightTheme: theme === 'light',
+  }
+}
 
 function withTheme(WrappedComponent) {
   class Wrapper extends Component<WrapperProps> {
@@ -93,10 +107,7 @@ function withTheme(WrappedComponent) {
     }
   }
 
-  return connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Wrapper)
+  return connect(mapStateToProps, mapDispatchToProps)(Wrapper)
 }
 
 export default withTheme
