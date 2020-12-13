@@ -14,10 +14,11 @@ export function IncrementButton(props: Props) {
   return (
     <TouchableOpacity
       onPress={onPress}
+      activeOpacity={0.6}
       style={[
         styles.container,
         {
-          backgroundColor: colors.grey2,
+          backgroundColor: '#E3E3E3', //colors.grey2,
         },
       ]}
     >

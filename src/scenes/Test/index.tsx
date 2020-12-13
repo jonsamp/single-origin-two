@@ -1,20 +1,26 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { Slider } from './Slider'
+import withSettings from '../../providers/settings'
+import Slider from './Slider'
 
-export default function TestScene() {
+function TestScene(props: any) {
+  const { unitHelpers } = props
+  const { temperatureUnit } = unitHelpers
   return (
     <View>
       <Slider
-        min={150}
+        unitType="temperatureUnit"
+        min={160}
         max={220}
         defaultValue={205}
-        label="grams"
+        label={temperatureUnit.unit.title}
         onChange={(value) => console.log('VALUE: ', value)}
       />
     </View>
   )
 }
+
+export default withSettings(TestScene)
 
 {
   /* <ScrollSelect

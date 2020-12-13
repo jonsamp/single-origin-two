@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   StyleSheet,
   View,
   TextInput,
   Dimensions,
-  TouchableOpacity,
   Text,
   Platform,
 } from 'react-native'
@@ -21,7 +20,11 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated'
 import { PanGestureHandler } from 'react-native-gesture-handler'
+import withSettings from '../../../providers/settings'
 import { useTheme } from '../../../providers/theme'
+import type from '../../../constants/type'
+import { UnitHelpers } from '../../../types'
+
 import { PlusIcon } from './PlusIcon'
 import { MinusIcon } from './MinusIcon'
 import { IncrementButton } from './IncrementButton'
@@ -36,6 +39,8 @@ type Props = {
   defaultValue?: number
   onChange?: (value: number) => void
   label?: string
+  unitHelpers?: UnitHelpers
+  unitType?: string
 }
 
 async function haptic() {
@@ -60,8 +65,35 @@ function clamp(translationX: number, offsetX: number) {
 Animated.addWhitelistedNativeProps({ text: true })
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput)
 
-export function Slider(props: Props) {
-  const { min, max, defaultValue, onChange, label } = props
+function Slider(props: Props) {
+  const {
+    min,
+    max,
+    defaultValue,
+    onChange,
+    label,
+    unitHelpers,
+    unitType,
+  } = props
+
+  const encodeValues = () => {
+    const { unitType, min, max, unitHelpers, defaultValue } = props
+    const unitHelper = unitHelpers[unitType]
+    return {
+      min: unitType ? Math.round(unitHelper.getPreferredValue(min)) : min,
+      max: unitType ? Math.round(unitHelper.getPreferredValue(max)) : max,
+      defaultValue: unitType
+        ? Math.round(unitHelper.getPreferredValue(defaultValue))
+        : defaultValue,
+    }
+  }
+
+  const decodeValue = (value: number) => {
+    const { unitType, unitHelpers } = props
+    return unitType ? unitHelpers[unitType].getStandardValue(value) : value
+  }
+
+  console.log({ encodeValues: encodeValues(), decodeValue: decodeValue(96) })
 
   const sliderRange = SLIDER_WIDTH - KNOB_WIDTH
   const oneStepValue = sliderRange / (max - min)
@@ -156,16 +188,21 @@ export function Slider(props: Props) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.sliderHeaderContainer}>
-        <IncrementButton icon={<MinusIcon />} onPress={() => increment(-1)} />
-        <AnimatedTextInput
-          underlineColorAndroid="transparent"
-          editable={false}
-          style={[styles.sliderValue, sliderValueStyle]}
-          animatedProps={animatedProps}
-          value={stepText.value}
-        />
-        <IncrementButton icon={<PlusIcon />} onPress={() => increment(1)} />
+      <View style={styles.sliderHeaderWrapper}>
+        <View style={styles.sliderHeaderContainer}>
+          <IncrementButton icon={<MinusIcon />} onPress={() => increment(-1)} />
+          <AnimatedTextInput
+            underlineColorAndroid="transparent"
+            editable={false}
+            style={[styles.sliderValue, sliderValueStyle]}
+            animatedProps={animatedProps}
+            value={stepText.value}
+          />
+          <IncrementButton icon={<PlusIcon />} onPress={() => increment(1)} />
+        </View>
+        <Text style={[styles.labelStyle, { color: colors.foreground }]}>
+          {label}
+        </Text>
       </View>
       <View style={styles.slider}>
         <LinearGradient
@@ -190,9 +227,10 @@ export function Slider(props: Props) {
   )
 }
 
+export default withSettings(Slider)
+
 const styles = StyleSheet.create({
   container: {
-    marginTop: 100,
     alignItems: 'center',
     paddingTop: 30,
     paddingBottom: 50,
@@ -223,12 +261,22 @@ const styles = StyleSheet.create({
     height: KNOB_WIDTH - 10,
     borderRadius: 3,
   },
+  sliderHeaderWrapper: {
+    marginBottom: 40,
+    alignItems: 'center',
+  },
   sliderHeaderContainer: {
+    marginBottom: 12,
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 60,
     justifyContent: 'space-between',
     width: SLIDER_WIDTH,
+  },
+  labelStyle: {
+    ...type.callout,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    fontWeight: 'bold',
   },
   sliderValue: {
     fontSize: 60,
