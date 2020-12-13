@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import { TouchableOpacity, StyleSheet } from 'react-native'
-import { useTheme } from '../../providers/theme'
+import { useTheme } from '../../../providers/theme'
 
 type Props = {
   onPress: () => void
