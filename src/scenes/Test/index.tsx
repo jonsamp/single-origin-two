@@ -6,15 +6,39 @@ import Slider from './Slider'
 function TestScene(props: any) {
   const { unitHelpers } = props
   const { temperatureUnit } = unitHelpers
+
+  const min = 160
+  const max = 220
+  const defaultValue = 205
+
   return (
     <View>
       <Slider
+        label={`${temperatureUnit.unit.title}`}
         unitType="temperatureUnit"
-        min={160}
-        max={220}
-        defaultValue={205}
-        label={temperatureUnit.unit.title}
-        onChange={(value) => console.log('VALUE: ', value)}
+        min={
+          unitHelpers['temperatureUnit']
+            ? Math.round(unitHelpers['temperatureUnit'].getPreferredValue(min))
+            : min
+        }
+        max={
+          unitHelpers['temperatureUnit']
+            ? Math.round(unitHelpers['temperatureUnit'].getPreferredValue(max))
+            : max
+        }
+        defaultValue={
+          unitHelpers['temperatureUnit']
+            ? Math.round(
+                unitHelpers['temperatureUnit'].getPreferredValue(defaultValue)
+              )
+            : defaultValue
+        }
+        onChange={(value) =>
+          console.log(
+            'VALUE: ',
+            unitHelpers['temperatureUnit'].getStandardValue(value)
+          )
+        }
       />
     </View>
   )

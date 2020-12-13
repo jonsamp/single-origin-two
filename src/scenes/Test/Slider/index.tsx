@@ -51,7 +51,7 @@ async function haptic() {
 
 function getStepValue(value: number, oneStepValue: number, min: number) {
   'worklet'
-  return Math.ceil(value / oneStepValue) + min
+  return Math.round(value / oneStepValue) + min
 }
 
 function clamp(translationX: number, offsetX: number) {
@@ -76,30 +76,23 @@ function Slider(props: Props) {
     unitType,
   } = props
 
-  const encodeValues = () => {
-    const { unitType, min, max, unitHelpers, defaultValue } = props
-    const unitHelper = unitHelpers[unitType]
-    return {
-      min: unitType ? Math.round(unitHelper.getPreferredValue(min)) : min,
-      max: unitType ? Math.round(unitHelper.getPreferredValue(max)) : max,
-      defaultValue: unitType
-        ? Math.round(unitHelper.getPreferredValue(defaultValue))
-        : defaultValue,
-    }
-  }
-
-  const decodeValue = (value: number) => {
-    const { unitType, unitHelpers } = props
-    return unitType ? unitHelpers[unitType].getStandardValue(value) : value
-  }
-
-  console.log({ encodeValues: encodeValues(), decodeValue: decodeValue(96) })
-
   const sliderRange = SLIDER_WIDTH - KNOB_WIDTH
   const oneStepValue = sliderRange / (max - min)
 
   function getXValue(value: number, min: number = 0) {
-    return Math.floor((value - min) * oneStepValue)
+    // value is the pretty value.
+    // min = 142
+    // value = 342
+    // step = 0.663529
+    // 342 - 142 = 200
+    // 200 * 0.663529
+    // translateX = 132.7058
+    // Math.floor = 132
+    // Math.round = 133
+    // Math.ceil = 133
+    console.log({ value, min, oneStepValue })
+
+    return (value - min) * oneStepValue
   }
 
   const { colors } = useTheme()
@@ -160,7 +153,7 @@ function Slider(props: Props) {
   })
 
   const stepText = useDerivedValue(() => {
-    const step = Math.ceil(translateX.value / oneStepValue) + min
+    const step = Math.round(translateX.value / oneStepValue) + min
 
     return String(step)
   })
@@ -187,7 +180,7 @@ function Slider(props: Props) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.grey2 }]}>
       <View style={styles.sliderHeaderWrapper}>
         <View style={styles.sliderHeaderContainer}>
           <IncrementButton icon={<MinusIcon />} onPress={() => increment(-1)} />
@@ -232,8 +225,8 @@ export default withSettings(Slider)
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    paddingTop: 30,
-    paddingBottom: 50,
+    paddingTop: 40,
+    paddingBottom: KNOB_WIDTH,
   },
   slider: {
     height: KNOB_WIDTH / 5,
@@ -255,6 +248,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     shadowOffset: { height: 1, width: 0 },
     shadowOpacity: 0.5,
+    elevation: 2,
   },
   knob: {
     width: KNOB_WIDTH - 10,

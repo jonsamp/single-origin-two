@@ -5,6 +5,7 @@ import ScrollSelect from '../../../../components/ScrollSelect'
 import withSettings from '../../../../providers/settings'
 import { getValueUnit } from '../../../../scenes/Brew/helpers'
 import { UnitHelpers } from '../../../../types/index'
+import Slider from '../../../../scenes/Test/Slider'
 
 interface YieldQuestionProps {
   unitHelpers: UnitHelpers
@@ -25,15 +26,45 @@ function YieldQuestion({
   return (
     <Card>
       <Question
-        title={`How many ${
-          brewedVolumeUnit.unit.title
-        } would you like your brew to yield?`}
+        title={`How many ${brewedVolumeUnit.unit.title} would you like your brew to yield?`}
         description={`One serving is typically ${getValueUnit(
           brewedVolumeUnit,
           270
         )}.`}
       />
-      <ScrollSelect
+      <Slider
+        key={brewedVolumeUnit.unit.id}
+        label={`${brewedVolumeUnit.unit.title}`}
+        unitType="brewedVolumeUnit"
+        min={
+          unitHelpers['brewedVolumeUnit']
+            ? Math.round(
+                unitHelpers['brewedVolumeUnit'].getPreferredValue(minYield)
+              )
+            : minYield
+        }
+        max={
+          unitHelpers['brewedVolumeUnit']
+            ? Math.round(
+                unitHelpers['brewedVolumeUnit'].getPreferredValue(maxYield)
+              )
+            : maxYield
+        }
+        defaultValue={
+          unitHelpers['brewedVolumeUnit']
+            ? Math.round(
+                unitHelpers['brewedVolumeUnit'].getPreferredValue(defaultValue)
+              )
+            : defaultValue
+        }
+        onChange={(value) =>
+          setRecipeState({
+            key: 'totalVolume',
+            value: unitHelpers['brewedVolumeUnit'].getStandardValue(value),
+          })
+        }
+      />
+      {/* <ScrollSelect
         unitType="brewedVolumeUnit"
         min={minYield}
         max={maxYield}
@@ -45,7 +76,7 @@ function YieldQuestion({
           })
         }
         step={1}
-      />
+      /> */}
     </Card>
   )
 }
