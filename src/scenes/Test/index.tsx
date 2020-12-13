@@ -6,9 +6,9 @@ export default function TestScene() {
   return (
     <View>
       <Slider
-        min={0}
-        max={100}
-        defaultValue={10}
+        min={150}
+        max={220}
+        defaultValue={205}
         label="grams"
         onChange={(value) => console.log('VALUE: ', value)}
       />

@@ -27,11 +27,8 @@ import { MinusIcon } from './MinusIcon'
 import { IncrementButton } from './IncrementButton'
 
 const screenWidth = Dimensions.get('screen').width
-const SLIDER_WIDTH = screenWidth * 0.75
+const SLIDER_WIDTH = screenWidth - 64
 const KNOB_WIDTH = 44
-const MAX_RANGE = 100
-const sliderRange = SLIDER_WIDTH - KNOB_WIDTH
-const oneStepValue = sliderRange / MAX_RANGE
 
 type Props = {
   min?: number
@@ -41,18 +38,23 @@ type Props = {
   label?: string
 }
 
-function getStepValue(value) {
-  return Math.ceil(value / oneStepValue)
-}
-
-function getXValue(value) {
-  return Math.floor(value * oneStepValue)
-}
-
 async function haptic() {
   if (Platform.OS === 'ios') {
     await Haptics.selectionAsync()
   }
+}
+
+function getStepValue(value: number, oneStepValue: number, min: number) {
+  'worklet'
+  return Math.ceil(value / oneStepValue) + min
+}
+
+function clamp(translationX: number, offsetX: number) {
+  'worklet'
+  return Math.min(
+    Math.max(translationX + offsetX, 0),
+    SLIDER_WIDTH - KNOB_WIDTH
+  )
 }
 
 Animated.addWhitelistedNativeProps({ text: true })
@@ -60,23 +62,25 @@ const AnimatedTextInput = Animated.createAnimatedComponent(TextInput)
 
 export function Slider(props: Props) {
   const { min, max, defaultValue, onChange, label } = props
-  const SLIDER_WIDTH = screenWidth * 0.75
+
+  const sliderRange = SLIDER_WIDTH - KNOB_WIDTH
+  const oneStepValue = sliderRange / (max - min)
+
+  function getXValue(value: number, min: number = 0) {
+    return Math.floor((value - min) * oneStepValue)
+  }
 
   const { colors } = useTheme()
-  const translateX = useSharedValue(getXValue(defaultValue))
+  const translateX = useSharedValue(getXValue(defaultValue - min))
   const isSliding = useSharedValue(false)
 
   const onGestureEvent = useAnimatedGestureHandler({
     onStart: (_, ctx: { offsetX: number }) => {
       ctx.offsetX = translateX.value
-      isSliding.value = true
     },
     onActive: (event, ctx) => {
-      const newValue = Math.min(
-        Math.max(event.translationX + ctx.offsetX, 0),
-        SLIDER_WIDTH - KNOB_WIDTH
-      )
-
+      isSliding.value = true
+      const newValue = clamp(event.translationX, ctx.offsetX)
       const prevStep = Math.ceil(translateX.value / oneStepValue)
       const nextStep = Math.ceil(newValue / oneStepValue)
 
@@ -88,9 +92,13 @@ export function Slider(props: Props) {
     onEnd: (event, ctx) => {
       isSliding.value = false
       runOnJS(onChange)(
-        Math.min(
-          Math.max(event.translationX + ctx.offsetX, 0),
-          SLIDER_WIDTH - KNOB_WIDTH
+        getStepValue(
+          Math.min(
+            Math.max(event.translationX + ctx.offsetX, 0),
+            SLIDER_WIDTH - KNOB_WIDTH
+          ),
+          oneStepValue,
+          min
         )
       )
     },
@@ -120,7 +128,7 @@ export function Slider(props: Props) {
   })
 
   const stepText = useDerivedValue(() => {
-    const step = Math.ceil(translateX.value / oneStepValue)
+    const step = Math.ceil(translateX.value / oneStepValue) + min
 
     return String(step)
   })
@@ -132,16 +140,15 @@ export function Slider(props: Props) {
   })
 
   function increment(value: number) {
-    // TODO: disable the increment button if it's at the min or max
-    // TODO: call the on change call back from here
-
     const newValue = Number(stepText.value) + value
 
+    if (newValue > max || newValue < min) {
+      return
+    }
+
     onChange(newValue)
-
     haptic()
-
-    translateX.value = withTiming(getXValue(newValue), {
+    translateX.value = withTiming(getXValue(newValue, min), {
       duration: 100,
       easing: Easing.linear,
     })
@@ -187,6 +194,8 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 100,
     alignItems: 'center',
+    paddingTop: 30,
+    paddingBottom: 50,
   },
   slider: {
     height: KNOB_WIDTH / 5,
