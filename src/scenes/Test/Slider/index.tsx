@@ -80,18 +80,6 @@ function Slider(props: Props) {
   const oneStepValue = sliderRange / (max - min)
 
   function getXValue(value: number, min: number = 0) {
-    // value is the pretty value.
-    // min = 142
-    // value = 342
-    // step = 0.663529
-    // 342 - 142 = 200
-    // 200 * 0.663529
-    // translateX = 132.7058
-    // Math.floor = 132
-    // Math.round = 133
-    // Math.ceil = 133
-    console.log({ value, min, oneStepValue })
-
     return (value - min) * oneStepValue
   }
 
@@ -106,8 +94,8 @@ function Slider(props: Props) {
     onActive: (event, ctx) => {
       isSliding.value = true
       const newValue = clamp(event.translationX, ctx.offsetX)
-      const prevStep = Math.ceil(translateX.value / oneStepValue)
-      const nextStep = Math.ceil(newValue / oneStepValue)
+      const prevStep = Math.round(translateX.value / oneStepValue)
+      const nextStep = Math.round(newValue / oneStepValue)
 
       if (prevStep !== nextStep) {
         runOnJS(haptic)()
@@ -256,11 +244,11 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   sliderHeaderWrapper: {
-    marginBottom: 40,
+    marginBottom: 48,
     alignItems: 'center',
   },
   sliderHeaderContainer: {
-    marginBottom: 12,
+    marginBottom: 8,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
