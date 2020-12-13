@@ -9,7 +9,7 @@ type Props = {
 
 export function IncrementButton(props: Props) {
   const { onPress, icon } = props
-  const { colors } = useTheme()
+  const { colors, isDarkTheme } = useTheme()
 
   return (
     <TouchableOpacity
@@ -18,7 +18,7 @@ export function IncrementButton(props: Props) {
       style={[
         styles.container,
         {
-          backgroundColor: '#E3E3E3', //colors.grey2,
+          backgroundColor: isDarkTheme ? colors.grey1 : '#E3E3E3',
         },
       ]}
     >

@@ -35,7 +35,6 @@ function YieldQuestion({
       <Slider
         key={brewedVolumeUnit.unit.id}
         label={`${brewedVolumeUnit.unit.title}`}
-        unitType="brewedVolumeUnit"
         min={
           unitHelpers['brewedVolumeUnit']
             ? Math.round(

@@ -15,7 +15,6 @@ function TestScene(props: any) {
     <View>
       <Slider
         label={`${temperatureUnit.unit.title}`}
-        unitType="temperatureUnit"
         min={
           unitHelpers['temperatureUnit']
             ? Math.round(unitHelpers['temperatureUnit'].getPreferredValue(min))

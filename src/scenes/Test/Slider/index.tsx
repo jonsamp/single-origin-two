@@ -20,10 +20,8 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated'
 import { PanGestureHandler } from 'react-native-gesture-handler'
-import withSettings from '../../../providers/settings'
 import { useTheme } from '../../../providers/theme'
 import type from '../../../constants/type'
-import { UnitHelpers } from '../../../types'
 
 import { PlusIcon } from './PlusIcon'
 import { MinusIcon } from './MinusIcon'
@@ -31,7 +29,7 @@ import { IncrementButton } from './IncrementButton'
 
 const screenWidth = Dimensions.get('screen').width
 const SLIDER_WIDTH = screenWidth - 64
-const KNOB_WIDTH = 44
+const KNOB_WIDTH = 48
 
 type Props = {
   min?: number
@@ -39,8 +37,6 @@ type Props = {
   defaultValue?: number
   onChange?: (value: number) => void
   label?: string
-  unitHelpers?: UnitHelpers
-  unitType?: string
 }
 
 async function haptic() {
@@ -66,16 +62,8 @@ Animated.addWhitelistedNativeProps({ text: true })
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput)
 
 function Slider(props: Props) {
-  const {
-    min,
-    max,
-    defaultValue,
-    onChange,
-    label,
-    unitHelpers,
-    unitType,
-  } = props
-
+  const { min, max, defaultValue, onChange, label } = props
+  const { colors, isDarkTheme } = useTheme()
   const sliderRange = SLIDER_WIDTH - KNOB_WIDTH
   const oneStepValue = sliderRange / (max - min)
 
@@ -83,7 +71,6 @@ function Slider(props: Props) {
     return (value - min) * oneStepValue
   }
 
-  const { colors } = useTheme()
   const translateX = useSharedValue(getXValue(defaultValue - min))
   const isSliding = useSharedValue(false)
 
@@ -175,29 +162,54 @@ function Slider(props: Props) {
           <AnimatedTextInput
             underlineColorAndroid="transparent"
             editable={false}
-            style={[styles.sliderValue, sliderValueStyle]}
+            style={[
+              styles.sliderValue,
+              sliderValueStyle,
+              { color: colors.foreground },
+            ]}
             animatedProps={animatedProps}
             value={stepText.value}
           />
           <IncrementButton icon={<PlusIcon />} onPress={() => increment(1)} />
         </View>
-        <Text style={[styles.labelStyle, { color: colors.foreground }]}>
+        <Text
+          style={[
+            styles.labelStyle,
+            { color: colors.foreground, opacity: 0.8 },
+          ]}
+        >
           {label}
         </Text>
       </View>
       <View style={styles.slider}>
         <LinearGradient
-          colors={['#D9D9D9', '#EFEFEF']}
+          colors={
+            isDarkTheme
+              ? [colors.background, colors.grey3]
+              : [colors.grey3, colors.background]
+          }
           locations={[0.2, 0.8]}
           style={[styles.slider, styles.track]}
         />
         <PanGestureHandler onGestureEvent={onGestureEvent}>
-          <Animated.View style={[styles.knobContainer, scrollTranslationStyle]}>
+          <Animated.View
+            style={[
+              styles.knobContainer,
+              scrollTranslationStyle,
+              {
+                backgroundColor: isDarkTheme ? '#636363' : colors.foreground,
+              },
+            ]}
+          >
             <LinearGradient
-              colors={[
-                '#000000',
-                Platform.select({ ios: '#3C3C3C', android: '#4d4d4d' }),
-              ]}
+              colors={
+                isDarkTheme
+                  ? ['#545454', '#828282']
+                  : [
+                      colors.foreground,
+                      Platform.select({ ios: '#3C3C3C', android: '#4d4d4d' }),
+                    ]
+              }
               locations={[0.3, 0.9]}
               style={styles.knob}
             />
@@ -208,7 +220,7 @@ function Slider(props: Props) {
   )
 }
 
-export default withSettings(Slider)
+export default Slider
 
 const styles = StyleSheet.create({
   container: {
@@ -224,6 +236,7 @@ const styles = StyleSheet.create({
   },
   track: {
     position: 'absolute',
+    opacity: 0.3,
   },
   knobContainer: {
     width: KNOB_WIDTH,
