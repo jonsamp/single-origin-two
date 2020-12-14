@@ -23,6 +23,25 @@ function YieldQuestion({
   maxYield,
 }: YieldQuestionProps) {
   const { brewedVolumeUnit } = unitHelpers
+  const _min = unitHelpers['brewedVolumeUnit']
+    ? Math.round(unitHelpers['brewedVolumeUnit'].getPreferredValue(minYield))
+    : minYield
+  const _max = unitHelpers['brewedVolumeUnit']
+    ? Math.round(unitHelpers['brewedVolumeUnit'].getPreferredValue(maxYield))
+    : maxYield
+  const _defaultValue = unitHelpers['brewedVolumeUnit']
+    ? Math.round(
+        unitHelpers['brewedVolumeUnit'].getPreferredValue(defaultValue)
+      )
+    : defaultValue
+
+  function onChange(value: number) {
+    setRecipeState({
+      key: 'totalVolume',
+      value: unitHelpers['brewedVolumeUnit'].getStandardValue(value),
+    })
+  }
+
   return (
     <Card>
       <Question
@@ -35,47 +54,11 @@ function YieldQuestion({
       <Slider
         key={brewedVolumeUnit.unit.id}
         label={`${brewedVolumeUnit.unit.title}`}
-        min={
-          unitHelpers['brewedVolumeUnit']
-            ? Math.round(
-                unitHelpers['brewedVolumeUnit'].getPreferredValue(minYield)
-              )
-            : minYield
-        }
-        max={
-          unitHelpers['brewedVolumeUnit']
-            ? Math.round(
-                unitHelpers['brewedVolumeUnit'].getPreferredValue(maxYield)
-              )
-            : maxYield
-        }
-        defaultValue={
-          unitHelpers['brewedVolumeUnit']
-            ? Math.round(
-                unitHelpers['brewedVolumeUnit'].getPreferredValue(defaultValue)
-              )
-            : defaultValue
-        }
-        onChange={(value) =>
-          setRecipeState({
-            key: 'totalVolume',
-            value: unitHelpers['brewedVolumeUnit'].getStandardValue(value),
-          })
-        }
+        min={_min}
+        max={_max}
+        defaultValue={_defaultValue}
+        onChange={onChange}
       />
-      {/* <ScrollSelect
-        unitType="brewedVolumeUnit"
-        min={minYield}
-        max={maxYield}
-        defaultValue={defaultValue}
-        onChange={value =>
-          setRecipeState({
-            key: 'totalVolume',
-            value,
-          })
-        }
-        step={1}
-      /> */}
     </Card>
   )
 }

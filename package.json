@@ -3,9 +3,9 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
-    "start": "expo start",
-    "ios": "expo start --ios",
-    "android": "expo start --android",
+    "start": "~/.volta/bin/expo start",
+    "ios": "~/.volta/bin/expo start --ios",
+    "android": "~/.volta/bin/expo start --android",
     "prettier": "prettier --write './src/**/*.ts*'",
     "compressgifs": "gifsicle --batch --lossy=100 --resize-width=400 --colors 256 -O3 **/*.gif",
     "resizeimages": "mogrify -resize 400 src/**/*.{jpg,png}"
