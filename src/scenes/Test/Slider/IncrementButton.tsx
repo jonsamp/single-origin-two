@@ -29,9 +29,9 @@ export function IncrementButton(props: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    height: 50,
-    width: 50,
-    borderRadius: 25,
+    height: 44,
+    width: 44,
+    borderRadius: 22,
     alignItems: 'center',
     justifyContent: 'center',
   },

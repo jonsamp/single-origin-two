@@ -29,7 +29,7 @@ import { IncrementButton } from './IncrementButton'
 
 const screenWidth = Dimensions.get('screen').width
 const SLIDER_WIDTH = screenWidth - 64
-const KNOB_WIDTH = 48
+const KNOB_WIDTH = 40
 
 type Props = {
   min?: number
@@ -261,6 +261,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   sliderHeaderContainer: {
+    paddingHorizontal: 16,
     marginBottom: 8,
     flexDirection: 'row',
     alignItems: 'center',
@@ -274,7 +275,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   sliderValue: {
-    fontSize: 60,
+    fontSize: 48,
     fontWeight: 'bold',
     fontFamily: Platform.select({ ios: 'Menlo' }),
     color: 'black',
