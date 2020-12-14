@@ -12,11 +12,11 @@ import SegmentedControl from '@react-native-community/segmented-control'
 
 import Card from '../../../../components/Card'
 import Instructions from '../../../../components/Instructions'
-import ScrollSelect from '../../../../components/ScrollSelect'
 import withSettings from '../../../../providers/settings'
 import withTheme from '../../../../providers/theme'
 import { Settings } from '../../../../state/settings/types'
-import { GrindHelper, Theme, Unit } from '../../../../types/index'
+import { GrindHelper, Theme, Unit, UnitHelpers } from '../../../../types'
+import Slider from '../../../../scenes/Test/Slider'
 
 interface RecordBrewAttributesProps {
   theme: Theme
@@ -28,6 +28,7 @@ interface RecordBrewAttributesProps {
   temperatureUnit: { unit: Unit }
   grindUnit: GrindHelper
   isDarkTheme: boolean
+  unitHelpers?: UnitHelpers
 }
 
 interface RecordBrewAttributesState {
@@ -76,14 +77,61 @@ class RecordBrewAttributes extends Component<
     )
   }
 
+  recordGrindComponent = () => {
+    const { grindUnit } = this.props
+
+    return (
+      <Slider
+        label="grind"
+        min={grindUnit.grinder.min}
+        max={grindUnit.grinder.max}
+        defaultValue={
+          this.props.grind ||
+          grindUnit.getPreferredValueBasedOnPercent(this.props.defaultGrind)
+        }
+        onChange={(value) => {
+          this.props.setRecipeState({
+            key: 'grind',
+            value: grindUnit.getPreferredValue(value),
+          })
+        }}
+      />
+    )
+  }
+
+  recordTempComponent = () => {
+    const { unitHelpers, temperatureUnit } = this.props
+    const min = unitHelpers['temperatureUnit']
+      ? Math.round(unitHelpers['temperatureUnit'].getPreferredValue(160))
+      : 160
+    const max = unitHelpers['temperatureUnit']
+      ? Math.round(unitHelpers['temperatureUnit'].getPreferredValue(220))
+      : 220
+    const defaultValue = unitHelpers['temperatureUnit']
+      ? Math.round(
+          unitHelpers['temperatureUnit'].getPreferredValue(this.props.temp)
+        )
+      : this.props.temp
+
+    return (
+      <Slider
+        key={temperatureUnit.unit.id}
+        min={min}
+        max={max}
+        label={temperatureUnit.unit.title}
+        defaultValue={defaultValue}
+        onChange={(value) => {
+          this.props.setRecipeState({
+            key: 'temp',
+            value: unitHelpers['temperatureUnit'].getStandardValue(value),
+          })
+        }}
+      />
+    )
+  }
+
   render() {
-    const {
-      settings,
-      theme,
-      temperatureUnit,
-      grindUnit,
-      isDarkTheme,
-    } = this.props
+    const { settings, theme, isDarkTheme } = this.props
     const { recordSegmentIndex } = this.state
 
     if (!settings.recordGrind && !settings.recordTemp) {
@@ -104,43 +152,6 @@ class RecordBrewAttributes extends Component<
     if (settings.recordTemp && settings.recordGrind) {
       instructions = 'Record your grind setting and water temperature.'
     }
-
-    const recordGrindComponent = (
-      <ScrollSelect
-        unitType="grindUnit"
-        min={grindUnit.grinder.min}
-        max={grindUnit.grinder.max}
-        defaultValue={
-          this.props.grind ||
-          grindUnit.getPreferredValueBasedOnPercent(this.props.defaultGrind)
-        }
-        label="grind"
-        onChange={(value) =>
-          this.props.setRecipeState({
-            key: 'grind',
-            value,
-          })
-        }
-        step={1}
-      />
-    )
-
-    const recordTempComponent = (
-      <ScrollSelect
-        unitType="temperatureUnit"
-        min={160}
-        max={212}
-        defaultValue={this.props.temp}
-        label={temperatureUnit.unit.symbol}
-        onChange={(value) =>
-          this.props.setRecipeState({
-            key: 'temp',
-            value,
-          })
-        }
-        step={1}
-      />
-    )
 
     return (
       <Card>
@@ -219,15 +230,17 @@ class RecordBrewAttributes extends Component<
                   }}
                 />
                 <View>
-                  {recordSegmentIndex === 0 ? recordGrindComponent : null}
-                  {recordSegmentIndex === 1 ? recordTempComponent : null}
+                  {recordSegmentIndex === 0
+                    ? this.recordGrindComponent()
+                    : null}
+                  {recordSegmentIndex === 1 ? this.recordTempComponent() : null}
                 </View>
               </View>
             )}
             {recordSettings.length === 1
               ? recordSettings.includes('grind')
-                ? recordGrindComponent
-                : recordTempComponent
+                ? this.recordGrindComponent()
+                : this.recordTempComponent()
               : null}
           </View>
         ) : null}
