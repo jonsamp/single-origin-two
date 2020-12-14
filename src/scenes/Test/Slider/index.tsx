@@ -130,7 +130,7 @@ function Slider(props: Props) {
   })
 
   const stepText = useDerivedValue(() => {
-    const step = Math.round(translateX.value / oneStepValue) + min
+    const step = getStepValue(translateX.value, oneStepValue, min)
 
     return String(step)
   })
@@ -150,10 +150,7 @@ function Slider(props: Props) {
 
     onChange(newValue)
     haptic()
-    translateX.value = withTiming(getXValue(newValue, min), {
-      duration: 100,
-      easing: Easing.linear,
-    })
+    translateX.value = getXValue(newValue, min)
   }
 
   return (

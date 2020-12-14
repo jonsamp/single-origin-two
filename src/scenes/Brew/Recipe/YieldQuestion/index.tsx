@@ -1,7 +1,6 @@
 import React from 'react'
 import Card from '../../../../components/Card'
 import Question from '../../../../components/Question'
-import ScrollSelect from '../../../../components/ScrollSelect'
 import withSettings from '../../../../providers/settings'
 import { getValueUnit } from '../../../../scenes/Brew/helpers'
 import { UnitHelpers } from '../../../../types/index'
