@@ -44,23 +44,3 @@ function TestScene(props: any) {
 }
 
 export default withSettings(TestScene)
-
-{
-  /* <ScrollSelect
-        unitType="grindUnit"
-        min={grindUnit.grinder.min}
-        max={grindUnit.grinder.max}
-        defaultValue={
-          this.props.grind ||
-          grindUnit.getPreferredValueBasedOnPercent(this.props.defaultGrind)
-        }
-        label="grind"
-        onChange={(value) =>
-          this.props.setRecipeState({
-            key: 'grind',
-            value,
-          })
-        }
-        step={1}
-      /> */
-}

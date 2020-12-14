@@ -14,7 +14,6 @@ import {
 import { StatusBar } from 'expo-status-bar'
 import { connect } from 'react-redux'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import ScrollSelect from '../../components/ScrollSelect'
 import { isMaxWidth } from '../../constants/layout'
 import recipes from '../../constants/recipes'
 import type from '../../constants/type'
@@ -25,6 +24,7 @@ import { logUpdated, logDeleted } from '../../state/logs/actions'
 import { selectLog } from '../../state/logs/selectors'
 import { Log } from '../../state/logs/types'
 import Button from '../../components/Button'
+import Slider from '../../scenes/Test/Slider'
 
 interface LogDetailEditProps {
   navigation: any
@@ -227,13 +227,12 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                     marginBottom: 24,
                   }}
                 >
-                  <ScrollSelect
+                  <Slider
                     min={1}
                     max={10}
                     defaultValue={log.rating || 5}
-                    label="RATING"
+                    label="rating"
                     onChange={(value) => this.updateLog('rating', value)}
-                    step={1}
                     style={{
                       backgroundColor: isDarkTheme
                         ? theme.grey1

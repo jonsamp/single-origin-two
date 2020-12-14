@@ -6,6 +6,7 @@ import {
   Dimensions,
   Text,
   Platform,
+  ViewStyle,
 } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import * as Haptics from 'expo-haptics'
@@ -37,6 +38,7 @@ type Props = {
   defaultValue?: number
   onChange?: (value: number) => void
   label?: string
+  style?: ViewStyle
 }
 
 async function haptic() {
@@ -62,7 +64,7 @@ Animated.addWhitelistedNativeProps({ text: true })
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput)
 
 function Slider(props: Props) {
-  const { min, max, defaultValue, onChange, label } = props
+  const { min, max, defaultValue, onChange, label, style } = props
   const { colors, isDarkTheme } = useTheme()
   const sliderRange = SLIDER_WIDTH - KNOB_WIDTH
   const oneStepValue = sliderRange / (max - min)
@@ -155,7 +157,7 @@ function Slider(props: Props) {
   }
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.grey2 }]}>
+    <View style={[styles.container, { backgroundColor: colors.grey2 }, style]}>
       <View style={styles.sliderHeaderWrapper}>
         <View style={styles.sliderHeaderContainer}>
           <IncrementButton icon={<MinusIcon />} onPress={() => increment(-1)} />
