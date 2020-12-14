@@ -23,13 +23,16 @@ import Animated, {
 import { PanGestureHandler } from 'react-native-gesture-handler'
 import { useTheme } from '../../../providers/theme'
 import type from '../../../constants/type'
+import { styleguide } from '../../../constants/themes'
 
 import { PlusIcon } from './PlusIcon'
 import { MinusIcon } from './MinusIcon'
 import { IncrementButton } from './IncrementButton'
 
+const { maxWidth } = styleguide
 const screenWidth = Dimensions.get('screen').width
-const SLIDER_WIDTH = screenWidth - 64
+const isMaxWidth = screenWidth >= styleguide.maxWidth
+const SLIDER_WIDTH = isMaxWidth ? maxWidth - 64 : screenWidth - 64
 const KNOB_WIDTH = 40
 
 type Props = {
