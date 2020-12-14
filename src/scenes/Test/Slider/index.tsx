@@ -93,16 +93,8 @@ function Slider(props: Props) {
     },
     onEnd: (event, ctx) => {
       isSliding.value = false
-      runOnJS(onChange)(
-        getStepValue(
-          Math.min(
-            Math.max(event.translationX + ctx.offsetX, 0),
-            SLIDER_WIDTH - KNOB_WIDTH
-          ),
-          oneStepValue,
-          min
-        )
-      )
+      const newValue = clamp(event.translationX, ctx.offsetX)
+      runOnJS(onChange)(getStepValue(newValue, oneStepValue, min))
     },
   })
 
@@ -151,6 +143,7 @@ function Slider(props: Props) {
     onChange(newValue)
     haptic()
     translateX.value = getXValue(newValue, min)
+    stepText.value = String(newValue)
   }
 
   return (
