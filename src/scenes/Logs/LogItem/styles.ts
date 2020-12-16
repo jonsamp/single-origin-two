@@ -2,8 +2,7 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 12,
-    paddingVertical: 12,
+    padding: 12,
     justifyContent: 'space-between',
     alignItems: 'center',
   },

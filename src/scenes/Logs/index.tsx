@@ -5,6 +5,7 @@ import ScreenPlaceholder from '../../components/ScreenPlaceholder'
 import recipes from '../../constants/recipes'
 import { useTheme } from '../../providers/theme'
 import { selectLogs } from '../../state/logs/selectors'
+import { logDeleted } from '../../state/logs/actions'
 import { Logs as LogsType, Log } from '../../types/index'
 import LogItem from './LogItem'
 import styles from './styles'
@@ -12,18 +13,27 @@ import styles from './styles'
 interface Props {
   logs: LogsType
   navigation: any
+  logDeleted: (props: { timestamp: number }) => void
 }
 
 const mapStateToProps = (state) => ({
   logs: selectLogs(state),
 })
 
+const mapDispatchToProps = {
+  logDeleted,
+}
+
 function Logs(props: Props) {
-  const { logs, navigation } = props
+  const { logs, navigation, logDeleted } = props
   const { colors } = useTheme()
 
   function byTimestamp(a: Log, b: Log) {
     return b.timestamp - a.timestamp
+  }
+
+  function onDelete(timestamp) {
+    logDeleted({ timestamp })
   }
 
   return (
@@ -36,6 +46,7 @@ function Logs(props: Props) {
       renderItem={({ item }) => (
         <LogItem
           log={item}
+          onDelete={onDelete}
           onPress={() =>
             navigation.navigate('LogDetail', {
               timestamp: item.timestamp,
@@ -60,4 +71,4 @@ function Logs(props: Props) {
   )
 }
 
-export default connect(mapStateToProps)(Logs)
+export default connect(mapStateToProps, mapDispatchToProps)(Logs)

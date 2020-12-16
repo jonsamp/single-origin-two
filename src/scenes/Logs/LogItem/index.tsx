@@ -15,15 +15,18 @@ import Animated, {
   runOnJS,
   Transition,
   Transitioning,
+  withSequence,
 } from 'react-native-reanimated'
 import {
   PanGestureHandler,
   TouchableOpacity,
 } from 'react-native-gesture-handler'
 
+import { width } from '../../../constants/layout'
 import recipes from '../../../constants/recipes'
 import type from '../../../constants/type'
 import { useTheme } from '../../../providers/theme'
+import { Log } from '../../../types'
 import styles from './styles'
 
 function consoleLog(value) {
@@ -31,18 +34,24 @@ function consoleLog(value) {
 }
 
 // TODO:
-// 1. It's important that only one thing is open at once likely? That would mean i need to control all animations from above :(
-// 2. onDelete, I need the parent to call the transitioning animation. If I get that set up, I could call onDelete from the button press or from the scroll too far event.
-// 3. If I scroll too far, I need a haptic, and likely the "delete" word/icon to change, or for the background to get darker.
+// If I scroll too far, I need a haptic, and likely the "delete" word/icon to change, or for the background to get darker.
+// Re-work the layout to make all the items 80px height
+
+type Props = {
+  log: Log
+  onDelete: (timestamp: number) => void
+  onPress: () => void
+}
 
 type GestureContext = {
   startX: number
 }
 
-function ListItem(props) {
-  const { log, onPress } = props
+function ListItem(props: Props) {
+  const { log, onPress, onDelete } = props
   const { colors, isDarkTheme } = useTheme()
   const x = useSharedValue(0)
+  const height = useSharedValue(80)
   const recipe = recipes[log.recipeId]
   const timingConfig = {
     duration: 250,
@@ -52,6 +61,13 @@ function ListItem(props) {
   function _onPress() {
     x.value = withTiming(0, timingConfig)
     onPress()
+  }
+
+  function _onDelete() {
+    x.value = withTiming(-width, timingConfig)
+    height.value = withTiming(0, timingConfig, () => {
+      runOnJS(onDelete)(log.timestamp)
+    })
   }
 
   const gestureHandler = useAnimatedGestureHandler({
@@ -73,7 +89,7 @@ function ListItem(props) {
       if (distanceFromStartTraveled < 0) {
         const distance = Math.abs(distanceFromStartTraveled)
 
-        if (distance > 50) {
+        if (distance > width * 0.1) {
           x.value = withTiming(-100, timingConfig)
         } else if (distance > 0) {
           x.value = withTiming(0, timingConfig)
@@ -95,9 +111,17 @@ function ListItem(props) {
     }
   })
 
+  const animatedHeightStyle = useAnimatedStyle(() => {
+    return {
+      height: height.value,
+    }
+  })
+
   return (
-    <View>
+    <Animated.View style={[animatedHeightStyle, { overflow: 'hidden' }]}>
       <RNTouchableOpacity
+        activeOpacity={1}
+        onPress={_onDelete}
         style={{
           backgroundColor: 'red',
           position: 'absolute',
@@ -197,7 +221,7 @@ function ListItem(props) {
           </TouchableOpacity>
         </Animated.View>
       </PanGestureHandler>
-    </View>
+    </Animated.View>
   )
 }
 
