@@ -13,9 +13,6 @@ import Animated, {
   useAnimatedStyle,
   useAnimatedGestureHandler,
   runOnJS,
-  Transition,
-  Transitioning,
-  withSequence,
 } from 'react-native-reanimated'
 import {
   PanGestureHandler,
@@ -27,6 +24,7 @@ import recipes from '../../../constants/recipes'
 import type from '../../../constants/type'
 import { useTheme } from '../../../providers/theme'
 import { Log } from '../../../types'
+import { TrashIcon } from './TrashIcon'
 import styles from './styles'
 
 function consoleLog(value) {
@@ -35,7 +33,8 @@ function consoleLog(value) {
 
 // TODO:
 // If I scroll too far, I need a haptic, and likely the "delete" word/icon to change, or for the background to get darker.
-// Re-work the layout to make all the items 80px height
+// Re-work the layout to make all the items fit 80px height
+// Add the trash icon.
 
 type Props = {
   log: Log
