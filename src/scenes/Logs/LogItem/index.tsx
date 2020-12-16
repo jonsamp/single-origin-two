@@ -1,7 +1,11 @@
 import { Feather } from '@expo/vector-icons'
 import { format } from 'date-fns'
-import React, { useRef, useState } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import React from 'react'
+import {
+  Text,
+  View,
+  TouchableOpacity as RNTouchableOpacity,
+} from 'react-native'
 import Animated, {
   Easing,
   withTiming,
@@ -12,11 +16,14 @@ import Animated, {
   Transition,
   Transitioning,
 } from 'react-native-reanimated'
-import { PanGestureHandler } from 'react-native-gesture-handler'
+import {
+  PanGestureHandler,
+  TouchableOpacity,
+} from 'react-native-gesture-handler'
 
 import recipes from '../../../constants/recipes'
 import type from '../../../constants/type'
-import withTheme from '../../../providers/theme'
+import { useTheme } from '../../../providers/theme'
 import styles from './styles'
 
 function consoleLog(value) {
@@ -28,27 +35,27 @@ function consoleLog(value) {
 // 2. onDelete, I need the parent to call the transitioning animation. If I get that set up, I could call onDelete from the button press or from the scroll too far event.
 // 3. If I scroll too far, I need a haptic, and likely the "delete" word/icon to change, or for the background to get darker.
 
-const transition = (
-  <Transition.Together>
-    <Transition.In durationMs={500} type="slide-bottom" />
-    <Transition.Change />
-    <Transition.Out durationMs={500} type="slide-bottom" />
-  </Transition.Together>
-)
+type GestureContext = {
+  startX: number
+}
 
-const ListItem = ({ log, onPress, theme, isDarkTheme }) => {
+function ListItem(props) {
+  const { log, onPress } = props
+  const { colors, isDarkTheme } = useTheme()
   const x = useSharedValue(0)
-  const backgroundColorValue = useSharedValue(0)
-  const ref = useRef()
-  const [height, setHeight] = useState('100%')
   const recipe = recipes[log.recipeId]
   const timingConfig = {
     duration: 250,
     easing: Easing.out(Easing.sin),
   }
 
+  function _onPress() {
+    x.value = withTiming(0, timingConfig)
+    onPress()
+  }
+
   const gestureHandler = useAnimatedGestureHandler({
-    onStart: (_, ctx) => {
+    onStart: (_, ctx: GestureContext) => {
       ctx.startX = x.value
     },
     onActive: (event, ctx) => {
@@ -89,38 +96,32 @@ const ListItem = ({ log, onPress, theme, isDarkTheme }) => {
   })
 
   return (
-    <Transitioning.View ref={ref} transition={transition}>
-      <TouchableOpacity
+    <View>
+      <RNTouchableOpacity
         style={{
+          backgroundColor: 'red',
           position: 'absolute',
           right: 0,
-          height: height,
           width: '100%',
-          backgroundColor: 'red',
-        }}
-        onPress={() => {
-          if (ref && ref.current) {
-            ref.current.animateNextTransition()
-            // do something
-            if (height === '100%') {
-              setHeight('10%')
-            } else {
-              setHeight('100%')
-            }
-          }
+          height: '100%',
+          justifyContent: 'center',
+          alignItems: 'flex-end',
+          paddingRight: 16,
         }}
       >
         <Text>Delete</Text>
-      </TouchableOpacity>
+      </RNTouchableOpacity>
       <PanGestureHandler onGestureEvent={gestureHandler}>
         <Animated.View style={animatedStyle}>
           <TouchableOpacity
-            onPress={onPress}
+            onPress={_onPress}
             activeOpacity={1}
             style={[
               styles.container,
               styles.displayHorizontal,
-              { backgroundColor: isDarkTheme ? theme.grey2 : theme.background },
+              {
+                backgroundColor: isDarkTheme ? colors.grey2 : colors.background,
+              },
             ]}
           >
             <View style={[styles.displayHorizontal, { flex: 1 }]}>
@@ -129,24 +130,24 @@ const ListItem = ({ log, onPress, theme, isDarkTheme }) => {
                   styles.iconContainer,
                   {
                     backgroundColor: isDarkTheme
-                      ? theme.grey1
-                      : theme.foreground,
+                      ? colors.grey1
+                      : colors.foreground,
                   },
                 ]}
               >
                 {recipe.icon({
-                  fill: isDarkTheme ? theme.foreground : theme.background,
+                  fill: isDarkTheme ? colors.foreground : colors.background,
                   size: 0.8,
                 })}
               </View>
               <View style={{ flex: 1 }}>
-                <Text style={[type.headline, { color: theme.foreground }]}>
+                <Text style={[type.headline, { color: colors.foreground }]}>
                   {recipe.title} {recipe.modifier}
                 </Text>
                 <Text
                   style={[
                     type.caption,
-                    { color: theme.foreground, opacity: 0.8 },
+                    { color: colors.foreground, opacity: 0.8 },
                   ]}
                 >
                   {format(log.timestamp, 'MMM d, yyyy @ h:mma')}
@@ -156,7 +157,7 @@ const ListItem = ({ log, onPress, theme, isDarkTheme }) => {
                     numberOfLines={1}
                     style={[
                       type.caption,
-                      { color: theme.foreground, opacity: 0.8 },
+                      { color: colors.foreground, opacity: 0.8 },
                     ]}
                   >
                     {log.notes}
@@ -166,7 +167,7 @@ const ListItem = ({ log, onPress, theme, isDarkTheme }) => {
                   <Text
                     style={[
                       type.caption,
-                      { color: theme.foreground, opacity: 0.8 },
+                      { color: colors.foreground, opacity: 0.8 },
                     ]}
                   >
                     Tasting note:{' '}
@@ -178,7 +179,7 @@ const ListItem = ({ log, onPress, theme, isDarkTheme }) => {
                   <Text
                     style={[
                       type.caption,
-                      { color: theme.foreground, opacity: 0.8 },
+                      { color: colors.foreground, opacity: 0.8 },
                     ]}
                   >
                     Rating: {log.rating}
@@ -189,15 +190,15 @@ const ListItem = ({ log, onPress, theme, isDarkTheme }) => {
             <View style={{ marginLeft: 16 }}>
               <Feather
                 name="chevron-right"
-                size={theme.iconSize}
-                color={theme.foreground}
+                size={colors.iconSize}
+                color={colors.foreground}
               />
             </View>
           </TouchableOpacity>
         </Animated.View>
       </PanGestureHandler>
-    </Transitioning.View>
+    </View>
   )
 }
 
-export default withTheme(ListItem)
+export default ListItem
