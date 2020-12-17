@@ -194,7 +194,6 @@ function ListItem(props: Props) {
           <Text
             style={{
               ...type.label,
-              // marginTop: 2,
               color: 'white',
             }}
           >
@@ -230,6 +229,30 @@ function ListItem(props: Props) {
                   fill: isDarkTheme ? colors.foreground : colors.background,
                   size: 0.8,
                 })}
+                {log.rating && (
+                  <View
+                    style={{
+                      width: 20,
+                      height: 20,
+                      backgroundColor: colors.text,
+                      position: 'absolute',
+                      right: 2,
+                      bottom: 2,
+                      borderRadius: 4,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <Text
+                      style={[
+                        type.label,
+                        { color: colors.background, fontWeight: 'bold' },
+                      ]}
+                    >
+                      {log.rating}
+                    </Text>
+                  </View>
+                )}
               </View>
               <View style={{ flex: 1 }}>
                 <Text style={[type.headline, { color: colors.foreground }]}>
@@ -243,7 +266,7 @@ function ListItem(props: Props) {
                 >
                   {format(log.timestamp, 'MMM d, yyyy @ h:mma')}
                 </Text>
-                {log.rating || log.tastingNote || log.notes ? (
+                {log.tastingNote || log.notes ? (
                   <Text
                     numberOfLines={1}
                     style={[
@@ -251,7 +274,6 @@ function ListItem(props: Props) {
                       { color: colors.foreground, opacity: 0.8 },
                     ]}
                   >
-                    {log.rating && `${log.rating} `}
                     {log.tastingNote &&
                       `${
                         log.tastingNote.charAt(0).toUpperCase() +
