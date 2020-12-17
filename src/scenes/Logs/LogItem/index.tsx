@@ -34,9 +34,7 @@ function consoleLog(value) {
 }
 
 // TODO:
-// If I scroll too far, I need a haptic, and likely the "delete" word/icon to change, or for the background to get darker.
 // Re-work the layout to make all the items fit 80px height
-// Add the trash icon.
 
 type Props = {
   log: Log
