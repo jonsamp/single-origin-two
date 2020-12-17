@@ -5,6 +5,7 @@ import {
   Text,
   View,
   TouchableOpacity as RNTouchableOpacity,
+  Platform,
 } from 'react-native'
 import Animated, {
   Easing,
@@ -18,6 +19,7 @@ import {
   PanGestureHandler,
   TouchableOpacity,
 } from 'react-native-gesture-handler'
+import * as Haptics from 'expo-haptics'
 
 import { width } from '../../../constants/layout'
 import recipes from '../../../constants/recipes'
@@ -46,14 +48,26 @@ type GestureContext = {
   startX: number
 }
 
+async function haptic() {
+  if (Platform.OS === 'ios') {
+    await Haptics.selectionAsync()
+  }
+}
+
 function ListItem(props: Props) {
   const { log, onPress, onDelete } = props
   const { colors, isDarkTheme } = useTheme()
   const x = useSharedValue(0)
+  const trashX = useSharedValue(0)
   const height = useSharedValue(80)
   const recipe = recipes[log.recipeId]
   const timingConfig = {
     duration: 250,
+    easing: Easing.out(Easing.sin),
+  }
+
+  const fastTimingConfig = {
+    duration: 150,
     easing: Easing.out(Easing.sin),
   }
 
@@ -77,19 +91,51 @@ function ListItem(props: Props) {
       const distanceFromStartTraveled = event.translationX + ctx.startX
 
       if (distanceFromStartTraveled < 0) {
+        const prevValue = x.value
+        const newValue = distanceFromStartTraveled
+        const halfwayDistance = width * 0.5
+
+        runOnJS(consoleLog)({
+          prevValue,
+          newValue,
+          halfwayDistance,
+        })
+
+        if (
+          (Math.abs(prevValue) < halfwayDistance &&
+            Math.abs(newValue) >= halfwayDistance) ||
+          (Math.abs(prevValue) > halfwayDistance &&
+            Math.abs(newValue) <= halfwayDistance)
+        ) {
+          runOnJS(haptic)()
+        }
+
         x.value = distanceFromStartTraveled
+
+        if (Math.abs(distanceFromStartTraveled) > width * 0.5) {
+          trashX.value = withTiming(distanceFromStartTraveled + 80, {
+            ...fastTimingConfig,
+            duration: 100,
+          })
+        } else {
+          trashX.value = withTiming(0, fastTimingConfig)
+        }
       }
     },
     onEnd: (event, ctx) => {
       const distanceFromStartTraveled = event.translationX + ctx.startX
-      runOnJS(consoleLog)(distanceFromStartTraveled)
+
+      trashX.value = withTiming(0, fastTimingConfig)
 
       // dragged left
       if (distanceFromStartTraveled < 0) {
         const distance = Math.abs(distanceFromStartTraveled)
 
-        if (distance > width * 0.1) {
-          x.value = withTiming(-100, timingConfig)
+        if (distance > width * 0.5) {
+          trashX.value = withTiming(-width + 80, timingConfig)
+          runOnJS(_onDelete)()
+        } else if (distance > width * 0.1) {
+          x.value = withTiming(-80, timingConfig)
         } else if (distance > 0) {
           x.value = withTiming(0, timingConfig)
         }
@@ -110,6 +156,16 @@ function ListItem(props: Props) {
     }
   })
 
+  const animatedTrashStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          translateX: trashX.value,
+        },
+      ],
+    }
+  })
+
   const animatedHeightStyle = useAnimatedStyle(() => {
     return {
       height: height.value,
@@ -122,17 +178,35 @@ function ListItem(props: Props) {
         activeOpacity={1}
         onPress={_onDelete}
         style={{
-          backgroundColor: 'red',
+          backgroundColor: colors.danger,
           position: 'absolute',
           right: 0,
           width: '100%',
           height: '100%',
           justifyContent: 'center',
           alignItems: 'flex-end',
-          paddingRight: 16,
+          paddingRight: 20,
         }}
       >
-        <Text>Delete</Text>
+        <Animated.View
+          style={[
+            {
+              alignItems: 'center',
+            },
+            animatedTrashStyle,
+          ]}
+        >
+          <TrashIcon size={28} />
+          <Text
+            style={{
+              ...type.label,
+              // marginTop: 2,
+              color: 'white',
+            }}
+          >
+            Delete
+          </Text>
+        </Animated.View>
       </RNTouchableOpacity>
       <PanGestureHandler onGestureEvent={gestureHandler}>
         <Animated.View style={animatedStyle}>

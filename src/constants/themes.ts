@@ -15,6 +15,7 @@ export const lightTheme = {
     border: '#EFEFEF',
     card: '#F7F7F7',
     warning: '#FFE982',
+    danger: '#fb2225',
     iconSize: 22,
   },
 }
@@ -36,6 +37,7 @@ export const darkTheme = {
     grey3: '#4F4F4F',
     border: '#2B2B2B',
     card: 'rgb(18, 18, 18)',
+    danger: '#fc2c2d',
     iconSize: 22,
   },
 }

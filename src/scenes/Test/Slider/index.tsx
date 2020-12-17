@@ -145,7 +145,7 @@ function Slider(props: Props) {
 
     onChange(newValue)
     haptic()
-    translateX.value = getXValue(newValue, min)
+    translateX.value = withTiming(getXValue(newValue, min), { duration: 100 })
     stepText.value = String(newValue)
   }
 

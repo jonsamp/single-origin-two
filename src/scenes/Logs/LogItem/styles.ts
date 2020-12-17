@@ -26,6 +26,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 24,
   },
+  deleteButton: {
+    backgroundColor: 'red',
+    position: 'absolute',
+    right: 0,
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    paddingRight: 16,
+  },
 })
 
 export default styles
