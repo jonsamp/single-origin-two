@@ -29,13 +29,6 @@ import { Log } from '../../../types'
 import { TrashIcon } from './TrashIcon'
 import styles from './styles'
 
-function consoleLog(value) {
-  console.log('❄️ ', value)
-}
-
-// TODO:
-// Re-work the layout to make all the items fit 80px height
-
 type Props = {
   log: Log
   onDelete: (timestamp: number) => void
@@ -92,12 +85,6 @@ function ListItem(props: Props) {
         const prevValue = x.value
         const newValue = distanceFromStartTraveled
         const halfwayDistance = width * 0.5
-
-        runOnJS(consoleLog)({
-          prevValue,
-          newValue,
-          halfwayDistance,
-        })
 
         if (
           (Math.abs(prevValue) < halfwayDistance &&
