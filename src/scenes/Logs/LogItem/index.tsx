@@ -175,16 +175,12 @@ function ListItem(props: Props) {
       <RNTouchableOpacity
         activeOpacity={1}
         onPress={_onDelete}
-        style={{
-          backgroundColor: colors.danger,
-          position: 'absolute',
-          right: 0,
-          width: '100%',
-          height: '100%',
-          justifyContent: 'center',
-          alignItems: 'flex-end',
-          paddingRight: 20,
-        }}
+        style={[
+          styles.trashButton,
+          {
+            backgroundColor: colors.danger,
+          },
+        ]}
       >
         <Animated.View
           style={[
@@ -247,7 +243,7 @@ function ListItem(props: Props) {
                 >
                   {format(log.timestamp, 'MMM d, yyyy @ h:mma')}
                 </Text>
-                {log.notes ? (
+                {log.rating || log.tastingNote || log.notes ? (
                   <Text
                     numberOfLines={1}
                     style={[
@@ -255,29 +251,13 @@ function ListItem(props: Props) {
                       { color: colors.foreground, opacity: 0.8 },
                     ]}
                   >
+                    {log.rating && `${log.rating} `}
+                    {log.tastingNote &&
+                      `${
+                        log.tastingNote.charAt(0).toUpperCase() +
+                        log.tastingNote.toString().slice(1)
+                      } `}
                     {log.notes}
-                  </Text>
-                ) : null}
-                {log.tastingNote ? (
-                  <Text
-                    style={[
-                      type.caption,
-                      { color: colors.foreground, opacity: 0.8 },
-                    ]}
-                  >
-                    Tasting note:{' '}
-                    {log.tastingNote.charAt(0).toUpperCase() +
-                      log.tastingNote.toString().slice(1)}
-                  </Text>
-                ) : null}
-                {log.rating ? (
-                  <Text
-                    style={[
-                      type.caption,
-                      { color: colors.foreground, opacity: 0.8 },
-                    ]}
-                  >
-                    Rating: {log.rating}
                   </Text>
                 ) : null}
               </View>

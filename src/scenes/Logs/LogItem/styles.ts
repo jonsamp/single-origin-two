@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 24,
   },
-  deleteButton: {
+  trashButton: {
     backgroundColor: 'red',
     position: 'absolute',
     right: 0,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'flex-end',
-    paddingRight: 16,
+    paddingRight: 20,
   },
 })
 
