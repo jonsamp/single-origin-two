@@ -234,11 +234,11 @@ function ListItem(props: Props) {
                     style={{
                       width: 20,
                       height: 20,
-                      backgroundColor: colors.text,
+                      backgroundColor: colors.primary,
                       position: 'absolute',
-                      right: 2,
-                      bottom: 2,
-                      borderRadius: 4,
+                      right: 4,
+                      bottom: 4,
+                      borderRadius: 2,
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}
@@ -246,7 +246,7 @@ function ListItem(props: Props) {
                     <Text
                       style={[
                         type.label,
-                        { color: colors.background, fontWeight: 'bold' },
+                        { color: 'black', fontWeight: 'bold' },
                       ]}
                     >
                       {log.rating}
