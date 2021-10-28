@@ -1,0 +1,305 @@
+import React from 'react'
+import {
+  TouchableOpacity,
+  Text,
+  View,
+  Platform,
+  useColorScheme,
+} from 'react-native'
+import { Feather } from '@expo/vector-icons'
+import { iconSize } from '@expo/styleguide-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+
+import { defaultTheme, darkTheme } from '../common/theme'
+import type from '../constants/type'
+import withTheme from '../providers/theme'
+
+import BrewIcon from './icons/BrewIcon'
+import LogsIcon from './icons/LogsIcon'
+import SettingsIcon from './icons/SettingsIcon'
+import Logs from '../scenes/Logs'
+import Menu from '../scenes/Menu'
+import Settings from '../scenes/Settings'
+import SettingsDetail from '../scenes/Settings/SettingsDetail'
+import Onboarding from '../scenes/Onboarding'
+import Preparation from '../scenes/Preparation'
+import Brew from '../scenes/Brew'
+import LogDetail from '../scenes/LogDetail'
+import LogDetailEdit from '../scenes/LogDetailEdit'
+import BrewSummary from '../scenes/BrewSummary'
+import BrewSettings from '../scenes/BrewSettings'
+import Test from '../scenes/Test'
+
+export type StackParams = {
+  Brew: {
+    id: string
+    title: string
+  }
+  LogDetail: {
+    timestamp: number
+  }
+  SettingsDetail: {
+    title: string
+  }
+  Menu: undefined
+  MenuStackMain: undefined
+  Tabs: undefined
+  Onboarding: undefined
+  Logs: undefined
+  LogsStackMain: undefined
+  Settings: undefined
+  SettingsStackMain: undefined
+  Preparation: undefined
+  BrewSummary: undefined
+  LogDetailEdit: undefined
+  Test: undefined
+  BrewSettings: undefined
+}
+
+export type TabParams = {
+  Menu: undefined
+  Logs: undefined
+  Settings: undefined
+}
+
+const Tab = createBottomTabNavigator<TabParams>()
+const Stack = createNativeStackNavigator<StackParams>()
+
+function MenuStack() {
+  const colorScheme = useColorScheme()
+  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme
+
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="MenuStackMain"
+        component={Menu}
+        options={{
+          headerTitle: () => <View style={{ flex: 1 }} />,
+          headerLeft: () => (
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+              }}
+            >
+              <BrewIcon theme={theme} focused={false} size={26} />
+              <Text
+                style={{
+                  ...type.headline,
+                  marginLeft: 10,
+                  color: theme.text.default,
+                }}
+              >
+                Single Origin 2
+              </Text>
+            </View>
+          ),
+        }}
+      />
+    </Stack.Navigator>
+  )
+}
+
+function LogsStack() {
+  const colorScheme = useColorScheme()
+  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme
+
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="LogsStackMain"
+        component={Logs}
+        options={{ headerLargeTitle: true, title: 'Notes' }}
+      />
+    </Stack.Navigator>
+  )
+}
+
+function SettingsStack() {
+  const colorScheme = useColorScheme()
+  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme
+
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="SettingsStackMain"
+        component={Settings}
+        options={{ title: 'Settings', headerLargeTitle: true }}
+      />
+    </Stack.Navigator>
+  )
+}
+
+function Tabs() {
+  const colorScheme = useColorScheme()
+  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme
+
+  return (
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Screen
+        name="Menu"
+        component={MenuStack}
+        options={{
+          title: 'Recipes',
+          tabBarIcon: (props) => (
+            <BrewIcon focused={props.focused} theme={theme} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Logs"
+        component={LogsStack}
+        options={{
+          title: 'Notes',
+          tabBarIcon: (props) => (
+            <LogsIcon focused={props.focused} theme={theme} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsStack}
+        options={{
+          tabBarIcon: (props) => (
+            <SettingsIcon focused={props.focused} theme={theme} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  )
+}
+
+function App() {
+  const colorScheme = useColorScheme()
+  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme
+
+  return (
+    <NavigationContainer
+      theme={colorScheme === 'light' ? defaultTheme : darkTheme}
+    >
+      <Stack.Navigator
+        screenOptions={{
+          headerTitleStyle: type.headline as any,
+          headerBackTitleVisible: false,
+          contentStyle: {
+            backgroundColor: theme.background.default,
+          },
+        }}
+      >
+        {/* <Stack.Screen name="Test" component={Test} /> */}
+        <Stack.Screen
+          name="Tabs"
+          component={Tabs}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Onboarding"
+          component={Onboarding}
+          options={{ title: 'Get started' }}
+        />
+        <Stack.Screen
+          name="Brew"
+          component={Brew}
+          options={({ route, navigation }) => ({
+            title: route.params.title,
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={() => navigation.navigate('BrewSettings')}
+                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+              >
+                <Feather
+                  name="sliders"
+                  color={theme.icon.default}
+                  size={iconSize.regular}
+                />
+              </TouchableOpacity>
+            ),
+            headerRightContainerStyle: {
+              right: 8,
+            },
+          })}
+        />
+        <Stack.Screen name="Preparation" component={Preparation} />
+        <Stack.Screen
+          name="SettingsDetail"
+          component={SettingsDetail}
+          options={({ route }) => ({
+            title: route.params.title,
+          })}
+        />
+        <Stack.Screen
+          name="LogDetail"
+          component={LogDetail}
+          options={({ navigation, route }) => ({
+            title: 'Brew Note',
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('LogDetailEdit', {
+                    timestamp: route.params.timestamp,
+                  })
+                }
+                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+              >
+                <Text
+                  style={[
+                    type.headline,
+                    {
+                      color: theme.text.default,
+                    },
+                  ]}
+                >
+                  Edit
+                </Text>
+              </TouchableOpacity>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="LogDetailEdit"
+          component={LogDetailEdit}
+          options={{
+            presentation: Platform.select({
+              ios: 'modal',
+              android: 'card',
+            }),
+            headerShown: Platform.select({
+              ios: false,
+              android: true,
+            }),
+            title: 'Edit Note',
+          }}
+        />
+        <Stack.Screen
+          name="BrewSettings"
+          component={BrewSettings}
+          options={{
+            headerShown: Platform.select({
+              ios: false,
+              android: true,
+            }),
+            presentation: Platform.select({
+              ios: 'modal',
+              android: 'card',
+            }),
+            title: 'Brew Settings',
+          }}
+        />
+        <Stack.Screen
+          name="BrewSummary"
+          component={BrewSummary}
+          options={{
+            gestureEnabled: false,
+            title: 'Brew Summary',
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
+}
+
+export default withTheme(App)
