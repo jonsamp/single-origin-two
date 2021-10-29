@@ -1,80 +1,80 @@
-import React from 'react'
+import React from 'react';
 import {
   TouchableOpacity,
   Text,
   View,
   Platform,
   useColorScheme,
-} from 'react-native'
-import { Feather } from '@expo/vector-icons'
-import { iconSize } from '@expo/styleguide-native'
-import { NavigationContainer } from '@react-navigation/native'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+} from 'react-native';
+import { Feather } from '@expo/vector-icons';
+import { iconSize } from '@expo/styleguide-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { defaultTheme, darkTheme } from '../common/theme'
-import type from '../constants/type'
-import withTheme from '../providers/theme'
+import { defaultTheme, darkTheme } from '../common/theme';
+import type from '../constants/type';
+import withTheme from '../providers/theme';
 
-import BrewIcon from './icons/BrewIcon'
-import LogsIcon from './icons/LogsIcon'
-import SettingsIcon from './icons/SettingsIcon'
-import Logs from '../scenes/Logs'
-import Menu from '../scenes/Menu'
-import Settings from '../scenes/Settings'
-import SettingsDetail from '../scenes/Settings/SettingsDetail'
-import Onboarding from '../scenes/Onboarding'
-import Preparation from '../scenes/Preparation'
-import Brew from '../scenes/Brew'
-import LogDetail from '../scenes/LogDetail'
-import LogDetailEdit from '../scenes/LogDetailEdit'
-import BrewSummary from '../scenes/BrewSummary'
-import BrewSettings from '../scenes/BrewSettings'
-import Test from '../scenes/Test'
+import BrewIcon from './icons/BrewIcon';
+import LogsIcon from './icons/LogsIcon';
+import SettingsIcon from './icons/SettingsIcon';
+import Logs from '../scenes/Logs';
+import Menu from '../scenes/Menu';
+import Settings from '../scenes/Settings';
+import SettingsDetail from '../scenes/Settings/SettingsDetail';
+import Onboarding from '../scenes/Onboarding';
+import Preparation from '../scenes/Preparation';
+import Brew from '../scenes/Brew';
+import LogDetail from '../scenes/LogDetail';
+import LogDetailEdit from '../scenes/LogDetailEdit';
+import BrewSummary from '../scenes/BrewSummary';
+import BrewSettings from '../scenes/BrewSettings';
+import Test from '../scenes/Test';
 
 export type StackParams = {
   Brew: {
-    id: string
-    title: string
-  }
+    id: string;
+    title: string;
+  };
   LogDetail: {
-    timestamp: number
-  }
+    timestamp: number;
+  };
   SettingsDetail: {
-    title: string
-  }
-  Menu: undefined
-  MenuStackMain: undefined
-  Tabs: undefined
-  Onboarding: undefined
-  Logs: undefined
-  LogsStackMain: undefined
-  Settings: undefined
-  SettingsStackMain: undefined
-  Preparation: undefined
-  BrewSummary: undefined
-  LogDetailEdit: undefined
-  Test: undefined
-  BrewSettings: undefined
-}
+    title: string;
+  };
+  Menu: undefined;
+  MenuStackMain: undefined;
+  Tabs: undefined;
+  Onboarding: undefined;
+  Logs: undefined;
+  LogsStackMain: undefined;
+  Settings: undefined;
+  SettingsStackMain: undefined;
+  Preparation: undefined;
+  BrewSummary: undefined;
+  LogDetailEdit: undefined;
+  Test: undefined;
+  BrewSettings: undefined;
+};
 
 export type TabParams = {
-  Menu: undefined
-  Logs: undefined
-  Settings: undefined
-}
+  Menu: undefined;
+  Logs: undefined;
+  Settings: undefined;
+};
 
-const Tab = createBottomTabNavigator<TabParams>()
-const Stack = createNativeStackNavigator<StackParams>()
+const Tab = createBottomTabNavigator<TabParams>();
+const Stack = createNativeStackNavigator<StackParams>();
 
 function MenuStack() {
-  const colorScheme = useColorScheme()
-  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme
+  const colorScheme = useColorScheme();
+  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme;
 
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="MenuStackMain"
+        name='MenuStackMain'
         component={Menu}
         options={{
           headerTitle: () => <View style={{ flex: 1 }} />,
@@ -94,54 +94,54 @@ function MenuStack() {
                   color: theme.text.default,
                 }}
               >
-                Single Origin 2
+                Single Origin
               </Text>
             </View>
           ),
         }}
       />
     </Stack.Navigator>
-  )
+  );
 }
 
 function LogsStack() {
-  const colorScheme = useColorScheme()
-  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme
+  const colorScheme = useColorScheme();
+  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme;
 
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="LogsStackMain"
+        name='LogsStackMain'
         component={Logs}
         options={{ headerLargeTitle: true, title: 'Notes' }}
       />
     </Stack.Navigator>
-  )
+  );
 }
 
 function SettingsStack() {
-  const colorScheme = useColorScheme()
-  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme
+  const colorScheme = useColorScheme();
+  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme;
 
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="SettingsStackMain"
+        name='SettingsStackMain'
         component={Settings}
         options={{ title: 'Settings', headerLargeTitle: true }}
       />
     </Stack.Navigator>
-  )
+  );
 }
 
 function Tabs() {
-  const colorScheme = useColorScheme()
-  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme
+  const colorScheme = useColorScheme();
+  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme;
 
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
-        name="Menu"
+        name='Menu'
         component={MenuStack}
         options={{
           title: 'Recipes',
@@ -151,7 +151,7 @@ function Tabs() {
         }}
       />
       <Tab.Screen
-        name="Logs"
+        name='Logs'
         component={LogsStack}
         options={{
           title: 'Notes',
@@ -161,7 +161,7 @@ function Tabs() {
         }}
       />
       <Tab.Screen
-        name="Settings"
+        name='Settings'
         component={SettingsStack}
         options={{
           tabBarIcon: (props) => (
@@ -170,12 +170,12 @@ function Tabs() {
         }}
       />
     </Tab.Navigator>
-  )
+  );
 }
 
 function App() {
-  const colorScheme = useColorScheme()
-  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme
+  const colorScheme = useColorScheme();
+  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme;
 
   return (
     <NavigationContainer
@@ -192,17 +192,17 @@ function App() {
       >
         {/* <Stack.Screen name="Test" component={Test} /> */}
         <Stack.Screen
-          name="Tabs"
+          name='Tabs'
           component={Tabs}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Onboarding"
+          name='Onboarding'
           component={Onboarding}
           options={{ title: 'Get started' }}
         />
         <Stack.Screen
-          name="Brew"
+          name='Brew'
           component={Brew}
           options={({ route, navigation }) => ({
             title: route.params.title,
@@ -212,7 +212,7 @@ function App() {
                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
               >
                 <Feather
-                  name="sliders"
+                  name='sliders'
                   color={theme.icon.default}
                   size={iconSize.regular}
                 />
@@ -223,16 +223,16 @@ function App() {
             },
           })}
         />
-        <Stack.Screen name="Preparation" component={Preparation} />
+        <Stack.Screen name='Preparation' component={Preparation} />
         <Stack.Screen
-          name="SettingsDetail"
+          name='SettingsDetail'
           component={SettingsDetail}
           options={({ route }) => ({
             title: route.params.title,
           })}
         />
         <Stack.Screen
-          name="LogDetail"
+          name='LogDetail'
           component={LogDetail}
           options={({ navigation, route }) => ({
             title: 'Brew Note',
@@ -260,7 +260,7 @@ function App() {
           })}
         />
         <Stack.Screen
-          name="LogDetailEdit"
+          name='LogDetailEdit'
           component={LogDetailEdit}
           options={{
             presentation: Platform.select({
@@ -275,7 +275,7 @@ function App() {
           }}
         />
         <Stack.Screen
-          name="BrewSettings"
+          name='BrewSettings'
           component={BrewSettings}
           options={{
             headerShown: Platform.select({
@@ -290,7 +290,7 @@ function App() {
           }}
         />
         <Stack.Screen
-          name="BrewSummary"
+          name='BrewSummary'
           component={BrewSummary}
           options={{
             gestureEnabled: false,
@@ -299,7 +299,7 @@ function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
-  )
+  );
 }
 
-export default withTheme(App)
+export default withTheme(App);
