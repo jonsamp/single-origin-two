@@ -9,15 +9,10 @@
     "owner": "jonsamp",
     "privacy": "unlisted",
     "userInterfaceStyle": "automatic",
-    "runtimeVersion": "43",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
       "backgroundColor": "#000000"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/675cb1f0-fa3c-11e8-ac99-6374d9643cb2",
-      "fallbackToCacheTimeout": 3000
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -45,11 +40,6 @@
           }
         }
       ]
-    },
-    "extra": {
-      "eas": {
-        "projectId": "675cb1f0-fa3c-11e8-ac99-6374d9643cb2"
-      }
     }
   }
 }
