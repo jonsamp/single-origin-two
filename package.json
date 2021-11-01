@@ -35,7 +35,7 @@
     "expo-screen-orientation": "~4.0.3",
     "expo-status-bar": "~1.1.0",
     "expo-store-review": "~5.0.3",
-    "expo-updates": "~0.10.6",
+    "expo-updates": "~0.10.9",
     "lodash": "^4.17.21",
     "react": "17.0.1",
     "react-dom": "17.0.1",
