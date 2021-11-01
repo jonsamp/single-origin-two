@@ -1,18 +1,18 @@
-import { Feather } from '@expo/vector-icons'
-import React from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import Card from '../../../components/Card'
-import type from '../../../constants/type'
-import withTheme from '../../../providers/theme'
+import { Feather } from '@expo/vector-icons';
+import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import Card from '../../../components/Card';
+import type from '../../../constants/type';
+import withTheme from '../../../providers/theme';
 
 interface OnboardingProps {
-  theme: any
+  theme: any;
 }
 
 function Onboarding(props: OnboardingProps) {
-  const { theme } = props
-  const navigation = useNavigation()
+  const { theme } = props;
+  const navigation = useNavigation();
 
   return (
     <TouchableOpacity
@@ -29,17 +29,17 @@ function Onboarding(props: OnboardingProps) {
           }}
         >
           <Text style={{ ...type.body, color: theme.foreground }}>
-            Get started with Single Origin 2
+            Get started with Single Origin
           </Text>
           <Feather
-            name="chevron-right"
+            name='chevron-right'
             size={theme.iconSize}
             color={theme.foreground}
           />
         </View>
       </Card>
     </TouchableOpacity>
-  )
+  );
 }
 
-export default withTheme(Onboarding)
+export default withTheme(Onboarding);
