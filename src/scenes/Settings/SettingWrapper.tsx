@@ -1,17 +1,17 @@
-import React, { ReactNode } from 'react'
-import { Text, View, ViewStyle } from 'react-native'
-import withTheme from '../../providers/theme'
-import { Theme } from '../../types/index'
-import styles from './styles'
+import React, { ReactNode } from "react";
+import { Text, View, ViewStyle } from "react-native";
+import withTheme from "../../providers/theme";
+import { Theme } from "../../types/index";
+import styles from "./styles";
 
 interface SettingWrapperProps {
-  children: ReactNode
-  theme: Theme
-  title: string
-  description: string
-  borderTop: boolean
-  isDarkTheme: boolean
-  style: ViewStyle
+  children: ReactNode;
+  theme: Theme;
+  title: string;
+  description: string;
+  borderTop: boolean;
+  isDarkTheme: boolean;
+  style: ViewStyle;
 }
 
 const SettingWrapper = ({
@@ -42,7 +42,7 @@ const SettingWrapper = ({
         <Text
           style={[
             styles.title,
-            { color: theme.foreground, textTransform: 'capitalize' },
+            { color: theme.foreground, textTransform: "capitalize" },
           ]}
         >
           {title}
@@ -64,6 +64,6 @@ const SettingWrapper = ({
       </View>
     ) : null}
   </View>
-)
+);
 
-export default withTheme(SettingWrapper)
+export default withTheme(SettingWrapper);

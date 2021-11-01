@@ -1,17 +1,17 @@
-import React from 'react'
-import { TextInput, ViewStyle } from 'react-native'
-import withTheme from '../../providers/theme'
-import { Theme } from '../../types/index'
-import SettingWrapper from './SettingWrapper'
-import styles from './styles'
+import React from "react";
+import { TextInput, ViewStyle } from "react-native";
+import withTheme from "../../providers/theme";
+import { Theme } from "../../types/index";
+import SettingWrapper from "./SettingWrapper";
+import styles from "./styles";
 
 interface InputSettingProps {
-  value: number
-  onChange: (value: any) => void
-  title: string
-  description: string
-  theme: Theme
-  borderTop: boolean
+  value: number;
+  onChange: (value: any) => void;
+  title: string;
+  description: string;
+  theme: Theme;
+  borderTop: boolean;
 }
 
 const InputSetting = ({
@@ -37,6 +37,6 @@ const InputSetting = ({
       returnKeyType="done"
     />
   </SettingWrapper>
-)
+);
 
-export default withTheme(InputSetting)
+export default withTheme(InputSetting);

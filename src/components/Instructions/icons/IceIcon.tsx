@@ -1,6 +1,6 @@
-import React from 'react'
-import { Path, Svg } from 'react-native-svg'
-import { Icon } from './types'
+import React from "react";
+import { Path, Svg } from "react-native-svg";
+import { Icon } from "./types";
 
 function IceIcon({ fill }: Icon) {
   return (
@@ -11,7 +11,7 @@ function IceIcon({ fill }: Icon) {
         fill={fill}
       />
     </Svg>
-  )
+  );
 }
 
-export default IceIcon
+export default IceIcon;

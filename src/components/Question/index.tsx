@@ -1,12 +1,12 @@
-import React from 'react'
-import { Text, View } from 'react-native'
-import type from '../../constants/type'
-import withTheme from '../../providers/theme'
+import React from "react";
+import { Text, View } from "react-native";
+import type from "../../constants/type";
+import withTheme from "../../providers/theme";
 
 interface QuestionProps {
-  theme: any
-  title: string
-  description: string
+  theme: any;
+  title: string;
+  description: string;
 }
 
 function Question({ title, description, theme }: QuestionProps) {
@@ -33,7 +33,7 @@ function Question({ title, description, theme }: QuestionProps) {
         </Text>
       ) : null}
     </View>
-  )
+  );
 }
 
-export default withTheme(Question)
+export default withTheme(Question);

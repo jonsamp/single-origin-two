@@ -1,27 +1,27 @@
-import React from 'react'
+import React from "react";
 import {
   View,
   Text,
   TouchableOpacity,
   Platform,
   ScrollView,
-} from 'react-native'
-import { StatusBar } from 'expo-status-bar'
-import { Feather } from '@expo/vector-icons'
-import { useNavigation } from '@react-navigation/native'
-import ResponsiveScrollView from '../../components/ResponsiveScrollView'
-import withTheme, { Theme } from '../../providers/theme'
-import SettingsDetail from '../Settings/SettingsDetail'
-import type from '../../constants/type'
-import { isMaxWidth } from '../../constants/layout'
+} from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import ResponsiveScrollView from "../../components/ResponsiveScrollView";
+import withTheme, { Theme } from "../../providers/theme";
+import SettingsDetail from "../Settings/SettingsDetail";
+import type from "../../constants/type";
+import { isMaxWidth } from "../../constants/layout";
 
 interface BrewSettingsProps {
-  theme: Theme
-  isDarkTheme: boolean
+  theme: Theme;
+  isDarkTheme: boolean;
 }
 
 function BrewSettings({ theme, isDarkTheme }: BrewSettingsProps) {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   return (
     <View
@@ -40,15 +40,15 @@ function BrewSettings({ theme, isDarkTheme }: BrewSettingsProps) {
               borderBottomWidth: 1,
               borderBottomColor: theme.border,
               padding: 16,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
             }}
           >
             <View
               style={{
-                flexDirection: 'row',
-                alignItems: 'center',
+                flexDirection: "row",
+                alignItems: "center",
               }}
             >
               <Feather
@@ -59,7 +59,7 @@ function BrewSettings({ theme, isDarkTheme }: BrewSettingsProps) {
               <Text
                 style={{
                   ...type.headline,
-                  fontWeight: '600',
+                  fontWeight: "600",
                   marginLeft: 12,
                   color: theme.text,
                 }}
@@ -83,13 +83,13 @@ function BrewSettings({ theme, isDarkTheme }: BrewSettingsProps) {
           marginTop: -24,
         }}
       >
-        <SettingsDetail route={{ params: { title: 'brew-settings' } }} />
+        <SettingsDetail route={{ params: { title: "brew-settings" } }} />
         <View style={{ top: -32 }}>
-          <SettingsDetail route={{ params: { title: 'units' } }} />
+          <SettingsDetail route={{ params: { title: "units" } }} />
         </View>
       </ScrollView>
     </View>
-  )
+  );
 }
 
-export default withTheme(BrewSettings)
+export default withTheme(BrewSettings);

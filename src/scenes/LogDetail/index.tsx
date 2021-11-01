@@ -1,20 +1,20 @@
-import React, { Component } from 'react'
-import Log from '../../components/Log'
+import React, { Component } from "react";
+import Log from "../../components/Log";
 
 type Props = {
-  timestamp: number
+  timestamp: number;
   route: {
     params: {
-      timestamp: number
-    }
-  }
-}
+      timestamp: number;
+    };
+  };
+};
 
 function LogDetail(props: Props) {
-  const { route } = props
-  const timestamp = route.params && route.params.timestamp
+  const { route } = props;
+  const timestamp = route.params && route.params.timestamp;
 
-  return <Log timestamp={timestamp} />
+  return <Log timestamp={timestamp} />;
 }
 
-export default LogDetail
+export default LogDetail;

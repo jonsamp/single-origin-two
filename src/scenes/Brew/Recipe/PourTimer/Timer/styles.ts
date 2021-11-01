@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native'
-import type from '../../../../../constants/type'
+import { StyleSheet } from "react-native";
+import type from "../../../../../constants/type";
 
 export default StyleSheet.create({
   section: {
@@ -7,13 +7,13 @@ export default StyleSheet.create({
     marginRight: 20,
   },
   timeContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
   },
   timeText: {
     fontSize: 36,
-    fontWeight: '500',
+    fontWeight: "500",
     marginBottom: 12,
     opacity: 0.95,
   },
-})
+});

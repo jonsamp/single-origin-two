@@ -1,14 +1,14 @@
-import React, { useLayoutEffect } from 'react';
-import { View } from 'react-native';
-import { connect } from 'react-redux';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Button from '../../components/Button';
+import React, { useLayoutEffect } from "react";
+import { View } from "react-native";
+import { connect } from "react-redux";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import Button from "../../components/Button";
 // import { HeaderBackButton } from '@react-navigation/stack'
-import Log from '../../components/Log';
-import { width, isMaxWidth, height } from '../../constants/layout';
-import withTheme, { Styleguide, Theme } from '../../providers/theme';
-import { selectLog } from '../../state/logs/selectors';
-import styles from './styles';
+import Log from "../../components/Log";
+import { width, isMaxWidth, height } from "../../constants/layout";
+import withTheme, { Styleguide, Theme } from "../../providers/theme";
+import { selectLog } from "../../state/logs/selectors";
+import styles from "./styles";
 
 interface BrewSummaryProps {
   navigation: any;
@@ -53,7 +53,7 @@ function BrewSummary(props: BrewSummaryProps) {
       />
       <View
         style={{
-          alignItems: 'center',
+          alignItems: "center",
         }}
       >
         <View
@@ -65,8 +65,8 @@ function BrewSummary(props: BrewSummaryProps) {
           ]}
         >
           <Button
-            title='done'
-            type='tertiary'
+            title="done"
+            type="tertiary"
             customStyle={[
               {
                 ...(isMaxWidth

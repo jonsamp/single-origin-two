@@ -1,4 +1,4 @@
 export interface Icon {
-  fill: string
-  size?: number
+  fill: string;
+  size?: number;
 }

@@ -1,9 +1,9 @@
-import React from 'react'
-import { G, Path, Svg } from 'react-native-svg'
-import { Icon } from './types'
+import React from "react";
+import { G, Path, Svg } from "react-native-svg";
+import { Icon } from "./types";
 
 function RecordIcon({ fill }: Icon) {
-  const size = 1.15
+  const size = 1.15;
   return (
     <Svg width={21 * size} height={16 * size} viewBox="0 0 21 16">
       <G fill={fill} fillRule="nonzero">
@@ -11,7 +11,7 @@ function RecordIcon({ fill }: Icon) {
         <Path d="M5.934 3.93l1.274 6.055a1 1 0 1 0 1.957-.412L7.89 3.518a1 1 0 0 0-1.957.412zM12.58 3.577l-1.1 6.06a1 1 0 0 0 1.969.357l1.099-6.06a1 1 0 1 0-1.968-.357z" />
       </G>
     </Svg>
-  )
+  );
 }
 
-export default RecordIcon
+export default RecordIcon;

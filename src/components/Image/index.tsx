@@ -1,7 +1,7 @@
-import React from 'react';
-import { Image as RNImage, ImageStyle, StyleSheet } from 'react-native';
-import { useTailwind } from '../../common/theme';
-import { height } from '../../constants/layout';
+import React from "react";
+import { Image as RNImage, ImageStyle, StyleSheet } from "react-native";
+import { useTailwind } from "../../common/theme";
+import { height } from "../../constants/layout";
 
 type Props = {
   source: number;
@@ -18,14 +18,14 @@ export default function Image(props: Props) {
     <RNImage
       source={source}
       // defaultSource={defaultSource}
-      style={[styles.image, tw('theme.background.default'), style]}
+      style={[styles.image, tw("theme.background.default"), style]}
     />
   );
 }
 
 const styles = StyleSheet.create({
   image: {
-    resizeMode: 'cover',
+    resizeMode: "cover",
     height: height / 5,
   },
 });

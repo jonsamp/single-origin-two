@@ -1,11 +1,11 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 16,
-    width: '100%',
+    width: "100%",
   },
-})
+});
 
-export default styles
+export default styles;

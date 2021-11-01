@@ -1,6 +1,6 @@
-import { Feather } from '@expo/vector-icons'
-import { format } from 'date-fns'
-import React, { Component } from 'react'
+import { Feather } from "@expo/vector-icons";
+import { format } from "date-fns";
+import React, { Component } from "react";
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -10,54 +10,54 @@ import {
   TouchableOpacity,
   View,
   Platform,
-} from 'react-native'
-import { StatusBar } from 'expo-status-bar'
-import { connect } from 'react-redux'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { isMaxWidth } from '../../constants/layout'
-import recipes from '../../constants/recipes'
-import type from '../../constants/type'
-import withTheme, { Styleguide, Theme } from '../../providers/theme'
-import withTracking, { Tracking } from '../../providers/tracking'
-import ChecklistSetting from '../../scenes/Settings/ChecklistSetting'
-import { logUpdated, logDeleted } from '../../state/logs/actions'
-import { selectLog } from '../../state/logs/selectors'
-import { Log } from '../../state/logs/types'
-import Button from '../../components/Button'
-import Slider from '../../components/Slider'
+} from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { connect } from "react-redux";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { isMaxWidth } from "../../constants/layout";
+import recipes from "../../constants/recipes";
+import type from "../../constants/type";
+import withTheme, { Styleguide, Theme } from "../../providers/theme";
+import withTracking, { Tracking } from "../../providers/tracking";
+import ChecklistSetting from "../../scenes/Settings/ChecklistSetting";
+import { logUpdated, logDeleted } from "../../state/logs/actions";
+import { selectLog } from "../../state/logs/selectors";
+import { Log } from "../../state/logs/types";
+import Button from "../../components/Button";
+import Slider from "../../components/Slider";
 
 interface LogDetailEditProps {
-  navigation: any
-  theme: Theme
-  styleguide: Styleguide
-  timestamp: number
-  isDarkTheme: boolean
-  logUpdated: (props: { timestamp: number; log: any }) => void
-  logDeleted: (props: { timestamp: number }) => void
-  log: Log
-  tracking: Tracking
-  route: any
+  navigation: any;
+  theme: Theme;
+  styleguide: Styleguide;
+  timestamp: number;
+  isDarkTheme: boolean;
+  logUpdated: (props: { timestamp: number; log: any }) => void;
+  logDeleted: (props: { timestamp: number }) => void;
+  log: Log;
+  tracking: Tracking;
+  route: any;
 }
 
 interface LogDetailEditState {
-  rating?: number
-  tastingNote?: string
-  notes?: string
+  rating?: number;
+  tastingNote?: string;
+  notes?: string;
 }
 
 const mapStateToProps = (state, props) => ({
   log: selectLog(state, props.route.params.timestamp),
-})
+});
 
 const mapDispatchToProps = {
   logUpdated,
   logDeleted,
-}
+};
 
 class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
   componentDidMount() {
-    const { tracking } = this.props
-    tracking.track(tracking.events.RATING_VIEWED)
+    const { tracking } = this.props;
+    tracking.track(tracking.events.RATING_VIEWED);
   }
 
   updateLog = (key, value) => {
@@ -66,20 +66,14 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
       log: {
         [key]: value,
       },
-    })
-  }
+    });
+  };
 
   render() {
-    const {
-      theme,
-      isDarkTheme,
-      log,
-      navigation,
-      styleguide,
-      logDeleted,
-    } = this.props
+    const { theme, isDarkTheme, log, navigation, styleguide, logDeleted } =
+      this.props;
     if (!log) {
-      return <View style={{ backgroundColor: theme.background, flex: 1 }} />
+      return <View style={{ backgroundColor: theme.background, flex: 1 }} />;
     }
 
     return (
@@ -95,9 +89,9 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
           ios: (
             <View
               style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
                 padding: 16,
                 backgroundColor: theme.navigationBackground,
                 borderBottomWidth: 1,
@@ -106,8 +100,8 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
             >
               <View
                 style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
+                  flexDirection: "row",
+                  alignItems: "center",
                 }}
               >
                 <Feather
@@ -119,7 +113,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                 <Text
                   style={[
                     type.headline,
-                    { color: theme.foreground, fontWeight: '600' },
+                    { color: theme.foreground, fontWeight: "600" },
                   ]}
                 >
                   Edit Note
@@ -127,8 +121,8 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
               </View>
               <View
                 style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
+                  flexDirection: "row",
+                  alignItems: "center",
                 }}
               >
                 <TouchableOpacity
@@ -150,10 +144,10 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
         >
           <KeyboardAvoidingView behavior="padding">
             <SafeAreaView
-              edges={['bottom']}
+              edges={["bottom"]}
               style={[
                 isMaxWidth && {
-                  alignItems: 'center',
+                  alignItems: "center",
                 },
                 {
                   marginBottom: 16,
@@ -174,9 +168,9 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                     color: theme.foreground,
                   }}
                 >
-                  Rate your {recipes[log.recipeId].title} brewed at{' '}
-                  {format(log.timestamp, 'h:mma')} on{' '}
-                  {format(log.timestamp, 'MMM d, yyyy')}.
+                  Rate your {recipes[log.recipeId].title} brewed at{" "}
+                  {format(log.timestamp, "h:mma")} on{" "}
+                  {format(log.timestamp, "MMM d, yyyy")}.
                 </Text>
                 <Text style={[type.title, { color: theme.foreground }]}>
                   Tasting note
@@ -184,7 +178,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                 <View
                   style={{
                     borderRadius: 8,
-                    overflow: 'hidden',
+                    overflow: "hidden",
                     marginTop: 16,
                     marginBottom: 24,
                   }}
@@ -192,22 +186,22 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                   <ChecklistSetting
                     items={[
                       {
-                        title: 'Sour',
-                        id: 'sour',
-                        value: log.tastingNote === 'sour',
+                        title: "Sour",
+                        id: "sour",
+                        value: log.tastingNote === "sour",
                       },
                       {
-                        title: 'Sweet',
-                        id: 'sweet',
-                        value: log.tastingNote === 'sweet',
+                        title: "Sweet",
+                        id: "sweet",
+                        value: log.tastingNote === "sweet",
                       },
                       {
-                        title: 'Bitter',
-                        id: 'bitter',
-                        value: log.tastingNote === 'bitter',
+                        title: "Bitter",
+                        id: "bitter",
+                        value: log.tastingNote === "bitter",
                       },
                     ]}
-                    onChange={(value) => this.updateLog('tastingNote', value)}
+                    onChange={(value) => this.updateLog("tastingNote", value)}
                     style={
                       isDarkTheme && {
                         backgroundColor: theme.grey1,
@@ -222,7 +216,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                 <View
                   style={{
                     borderRadius: 8,
-                    overflow: 'hidden',
+                    overflow: "hidden",
                     marginTop: 16,
                     marginBottom: 24,
                   }}
@@ -232,7 +226,7 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                     max={10}
                     defaultValue={log.rating || 5}
                     label="rating"
-                    onChange={(value) => this.updateLog('rating', value)}
+                    onChange={(value) => this.updateLog("rating", value)}
                     style={{
                       backgroundColor: isDarkTheme
                         ? theme.grey1
@@ -255,14 +249,14 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                     padding: 16,
                     paddingTop: 16,
                     marginTop: 16,
-                    textAlignVertical: 'top',
+                    textAlignVertical: "top",
                     ...type.body,
                     color: theme.text,
                   }}
                   multiline
-                  onChangeText={(value) => this.updateLog('notes', value)}
+                  onChangeText={(value) => this.updateLog("notes", value)}
                   value={log.notes}
-                  keyboardAppearance={isDarkTheme ? 'dark' : ('default' as any)}
+                  keyboardAppearance={isDarkTheme ? "dark" : ("default" as any)}
                   returnKeyType="done"
                   onSubmitEditing={Keyboard.dismiss}
                 />
@@ -280,8 +274,8 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
                 </Text>
                 <Button
                   onPress={() => {
-                    logDeleted({ timestamp: log.timestamp })
-                    navigation.popToTop()
+                    logDeleted({ timestamp: log.timestamp });
+                    navigation.popToTop();
                   }}
                   title="Delete Note"
                   type="secondary"
@@ -291,11 +285,11 @@ class LogDetailEdit extends Component<LogDetailEditProps, LogDetailEditState> {
           </KeyboardAvoidingView>
         </ScrollView>
       </View>
-    )
+    );
   }
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withTracking(withTheme(LogDetailEdit)))
+)(withTracking(withTheme(LogDetailEdit)));

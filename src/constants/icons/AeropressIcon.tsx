@@ -1,6 +1,6 @@
-import React from 'react'
-import { Path, Rect, Svg } from 'react-native-svg'
-import { Icon } from './types'
+import React from "react";
+import { Path, Rect, Svg } from "react-native-svg";
+import { Icon } from "./types";
 
 function AeropressIcon({ fill, size = 1 }: Icon) {
   return (
@@ -59,7 +59,7 @@ function AeropressIcon({ fill, size = 1 }: Icon) {
         fill={fill}
       />
     </Svg>
-  )
+  );
 }
 
-export default AeropressIcon
+export default AeropressIcon;

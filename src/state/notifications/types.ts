@@ -1,3 +1,3 @@
 export interface Notifications {
-  status: string
+  status: string;
 }

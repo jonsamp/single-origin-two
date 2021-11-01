@@ -1,11 +1,11 @@
-import { StyleSheet, TextStyle } from 'react-native'
-import type from '../../constants/type'
+import { StyleSheet, TextStyle } from "react-native";
+import type from "../../constants/type";
 
 const styles = StyleSheet.create({
   row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   title: type.body as TextStyle,
   subContainer: {
@@ -20,6 +20,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     paddingLeft: 13,
   },
-})
+});
 
-export default styles
+export default styles;

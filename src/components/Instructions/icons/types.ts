@@ -1,3 +1,3 @@
 export interface Icon {
-  fill: string
+  fill: string;
 }

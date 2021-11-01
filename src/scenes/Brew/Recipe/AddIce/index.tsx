@@ -1,15 +1,15 @@
-import React from 'react'
-import Card from '../../../../components/Card'
-import Instructions from '../../../../components/Instructions'
-import withSettings from '../../../../providers/settings'
+import React from "react";
+import Card from "../../../../components/Card";
+import Instructions from "../../../../components/Instructions";
+import withSettings from "../../../../providers/settings";
 
 interface AddIceProps {
-  unitHelpers: any
-  volume: number
+  unitHelpers: any;
+  volume: number;
 }
 
 function AddIce({ unitHelpers, volume }: AddIceProps) {
-  const { waterVolumeUnit } = unitHelpers
+  const { waterVolumeUnit } = unitHelpers;
 
   return (
     <Card>
@@ -20,7 +20,7 @@ function AddIce({ unitHelpers, volume }: AddIceProps) {
         icon="IceIcon"
       />
     </Card>
-  )
+  );
 }
 
-export default withSettings(AddIce)
+export default withSettings(AddIce);

@@ -1,17 +1,17 @@
-import React, { Component } from 'react'
-import { Text, TextStyle, View } from 'react-native'
-import type from '../../constants/type'
-import withTheme from '../../providers/theme'
-import { Theme } from '../../types/index'
+import React, { Component } from "react";
+import { Text, TextStyle, View } from "react-native";
+import type from "../../constants/type";
+import withTheme from "../../providers/theme";
+import { Theme } from "../../types/index";
 
 interface PrivacyPolicyProps {
-  theme: Theme
+  theme: Theme;
 }
 
 class PrivacyPolicy extends Component<PrivacyPolicyProps> {
   render() {
-    const { theme } = this.props
-    const paragraph = { color: theme.foreground, marginBottom: 16 }
+    const { theme } = this.props;
+    const paragraph = { color: theme.foreground, marginBottom: 16 };
 
     return (
       <View style={{ padding: 16 }}>
@@ -36,7 +36,7 @@ class PrivacyPolicy extends Component<PrivacyPolicyProps> {
           and register the Application. Registration with us is optional.
           However, please keep in mind that you may not be able to use some of
           the features offered by the Application unless you register with us.
-          {'\n\n'}
+          {"\n\n"}
           When you register with us and use the Application, you generally
           provide (a) your name, email address, user name, password and other
           registration information, such as country and city of residence; (b)
@@ -45,7 +45,7 @@ class PrivacyPolicy extends Component<PrivacyPolicyProps> {
           information you provide us when you contact us for help; (d) credit
           card information for purchase and use of the Application, and; (e)
           information you enter into our system when using the Application, such
-          as contact information and project management information. {'\n\n'}
+          as contact information and project management information. {"\n\n"}
           We may also use the information you provided us to contact your from
           time to time to provide you with important information, required
           notices and marketing promotions.
@@ -59,14 +59,14 @@ class PrivacyPolicy extends Component<PrivacyPolicyProps> {
           device you use, your mobile devices unique device ID, your mobile
           operating system, the type of mobile Internet browsers you use, and
           information about the way you use the Application.
-          {'\n\n'}
+          {"\n\n"}
           Single Origin collects statistical data to help to ensure the
           Application is free of bugs and devise any suggestions to improve the
           overall user experience. The data is strictly limited to the nature of
           the use of the Application, such as interacting with the Application's
           user interface and browsing and interacting with media content
           rendered within the Application.
-          {'\n\n'}
+          {"\n\n"}
           In an event of an Application bug, we may collect some diagnostical
           information about your mobile device, like the amount of available
           memory, the date and time and any information entered into the
@@ -95,17 +95,17 @@ class PrivacyPolicy extends Component<PrivacyPolicyProps> {
           external services to help us improve the Application and our service.
           We will share your information with third parties only in the ways
           that are described in this privacy statement.
-          {'\n\n'}
+          {"\n\n"}
           We may disclose User Provided and Automatically Collected Information:
-          {'\n\n'}• as required by law, such as to comply with a subpoena, or
+          {"\n\n"}• as required by law, such as to comply with a subpoena, or
           similar legal process;
-          {'\n\n'}• when we believe in good faith that disclosure is necessary
+          {"\n\n"}• when we believe in good faith that disclosure is necessary
           to protect our rights, protect your safety or the safety of others,
           investigate fraud, or respond to a government request;
-          {'\n\n'}• with our trusted services providers who work on our behalf,
+          {"\n\n"}• with our trusted services providers who work on our behalf,
           do not have an independent use of the information we disclose to them,
           and have agreed to adhere to the rules set forth in this privacy
-          statement. {'\n\n'}
+          statement. {"\n\n"}
           If Jon Samp is involved in a merger, acquisition, or sale of all or a
           portion of its assets, you will be notified via email and/or a
           prominent notice on our Web site of any change in ownership or uses of
@@ -132,7 +132,7 @@ class PrivacyPolicy extends Component<PrivacyPolicyProps> {
         <Text style={[type.body, paragraph] as TextStyle}>
           We will retain User Provided data for as long as you use the
           Application and no longer that is essential in compliance to law.
-          {'\n\n'}
+          {"\n\n"}
           We will retain Automatically Collected Information for up to 12 months
           and thereafter may store it in an aggregate. The aggregation of the
           data aims to diminish any personal informations and provide a general
@@ -148,7 +148,7 @@ class PrivacyPolicy extends Component<PrivacyPolicyProps> {
         </Text>
         <Text style={[type.body, paragraph] as TextStyle}>
           You have the right to request:
-          {'\n\n'}
+          {"\n\n"}
           Access to the personal data we hold about you, free of charge in most
           cases. The correction of your personal data when incorrect, out of
           date or incomplete. For example, when you withdraw consent, or object
@@ -156,7 +156,7 @@ class PrivacyPolicy extends Component<PrivacyPolicyProps> {
           which we hold the data has come to an end (such as the end of a
           warranty). That we stop using your personal data for direct marketing
           (either through specific channels, or all channels).
-          {'\n\n'}
+          {"\n\n"}
           That we stop any consent-based processing of your personal data after
           you withdraw that consent. Review by a Partner of any decision made
           based solely on automatic processing of your data (i.e. where no human
@@ -166,7 +166,7 @@ class PrivacyPolicy extends Component<PrivacyPolicyProps> {
           if it is inaccurate. To ask for your information, please contact Data
           Manager sampjon@gmail.com. To ask for your information to be amended,
           please update your online account, or contact our Support team.
-          {'\n\n'}
+          {"\n\n"}
           If we choose not to action your request we will explain to you the
           reasons for our refusal.
         </Text>
@@ -283,8 +283,8 @@ class PrivacyPolicy extends Component<PrivacyPolicyProps> {
           via email at sampjon@gmail.com
         </Text>
       </View>
-    )
+    );
   }
 }
 
-export default withTheme(PrivacyPolicy)
+export default withTheme(PrivacyPolicy);

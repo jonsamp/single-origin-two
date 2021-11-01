@@ -1,6 +1,6 @@
-import React from 'react'
-import { Path, Svg } from 'react-native-svg'
-import { Icon } from './types'
+import React from "react";
+import { Path, Svg } from "react-native-svg";
+import { Icon } from "./types";
 
 function Clever3CupIcon({ fill, size = 1 }: Icon) {
   return (
@@ -40,7 +40,7 @@ function Clever3CupIcon({ fill, size = 1 }: Icon) {
         strokeLinecap="round"
       />
     </Svg>
-  )
+  );
 }
 
-export default Clever3CupIcon
+export default Clever3CupIcon;

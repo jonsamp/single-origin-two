@@ -1,15 +1,15 @@
-import React, { ReactNode } from 'react'
-import { TouchableOpacity } from 'react-native'
-import { useTailwind } from '../../common/theme'
+import React, { ReactNode } from "react";
+import { TouchableOpacity } from "react-native";
+import { useTailwind } from "../../common/theme";
 
 type Props = {
-  onPress: () => void
-  icon: ReactNode
-}
+  onPress: () => void;
+  icon: ReactNode;
+};
 
 export function IncrementButton(props: Props) {
-  const { onPress, icon } = props
-  const tw = useTailwind()
+  const { onPress, icon } = props;
+  const tw = useTailwind();
 
   return (
     <TouchableOpacity
@@ -17,10 +17,10 @@ export function IncrementButton(props: Props) {
       onPress={onPress}
       activeOpacity={0.6}
       style={tw(
-        'h-12 w-12 rounded-full items-center justify-center theme.background.quaternary'
+        "h-12 w-12 rounded-full items-center justify-center theme.background.quaternary"
       )}
     >
       {icon}
     </TouchableOpacity>
-  )
+  );
 }

@@ -1,13 +1,13 @@
-import React from 'react'
-import Svg, { Path } from 'react-native-svg'
+import React from "react";
+import Svg, { Path } from "react-native-svg";
 
 type Props = {
-  size?: number
-  fill?: string
-}
+  size?: number;
+  fill?: string;
+};
 
 export function TrashIcon(props: Props) {
-  const { size = 24, fill = 'white' } = props
+  const { size = 24, fill = "white" } = props;
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
       <Path
@@ -15,5 +15,5 @@ export function TrashIcon(props: Props) {
         fill={fill}
       />
     </Svg>
-  )
+  );
 }

@@ -1,6 +1,6 @@
-import React from 'react'
-import { Path, Svg } from 'react-native-svg'
-import { Icon } from './types'
+import React from "react";
+import { Path, Svg } from "react-native-svg";
+import { Icon } from "./types";
 
 function WaterIcon({ fill }: Icon) {
   return (
@@ -11,7 +11,7 @@ function WaterIcon({ fill }: Icon) {
         fillRule="evenodd"
       />
     </Svg>
-  )
+  );
 }
 
-export default WaterIcon
+export default WaterIcon;

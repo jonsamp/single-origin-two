@@ -1,9 +1,9 @@
-import React from 'react'
-import Svg, { Path } from 'react-native-svg'
-import { useTheme } from '../../common/theme'
+import React from "react";
+import Svg, { Path } from "react-native-svg";
+import { useTheme } from "../../common/theme";
 
 export function PlusIcon() {
-  const { theme } = useTheme()
+  const { theme } = useTheme();
 
   return (
     <Svg width={12} height={12} viewBox="0 0 12 12" fill="none">
@@ -14,5 +14,5 @@ export function PlusIcon() {
         strokeLinecap="round"
       />
     </Svg>
-  )
+  );
 }

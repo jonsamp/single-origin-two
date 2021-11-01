@@ -1,65 +1,65 @@
-import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake'
-import React, { Component } from 'react'
-import { View } from 'react-native'
-import { connect } from 'react-redux'
-import { withSafeAreaInsets } from 'react-native-safe-area-context'
+import { activateKeepAwake, deactivateKeepAwake } from "expo-keep-awake";
+import React, { Component } from "react";
+import { View } from "react-native";
+import { connect } from "react-redux";
+import { withSafeAreaInsets } from "react-native-safe-area-context";
 
-import Button from '../../../components/Button'
-import { isMaxWidth, height } from '../../../constants/layout'
-import withSettings from '../../../providers/settings'
-import withTheme, { Styleguide } from '../../../providers/theme'
-import { logAdded } from '../../../state/logs/actions'
-import { selectRecentLog } from '../../../state/logs/selectors'
-import { Log } from '../../../state/logs/types'
-import { Settings } from '../../../state/settings/types'
-import { Recipe as RecipeType } from '../../../types'
-import { UnitHelpers } from '../../../types/index'
-import AddIce from './AddIce'
-import BoilWater from './BoilWater'
-import GrindCoffee from './GrindCoffee'
-import IceToggle from './IceToggle'
-import Notes from './Notes'
-import PourTimer from './PourTimer'
-import Preparation from './Preparation'
-import RecordBrewAttributes from './RecordBrewAttributes'
-import YieldQuestion from './YieldQuestion'
+import Button from "../../../components/Button";
+import { isMaxWidth, height } from "../../../constants/layout";
+import withSettings from "../../../providers/settings";
+import withTheme, { Styleguide } from "../../../providers/theme";
+import { logAdded } from "../../../state/logs/actions";
+import { selectRecentLog } from "../../../state/logs/selectors";
+import { Log } from "../../../state/logs/types";
+import { Settings } from "../../../state/settings/types";
+import { Recipe as RecipeType } from "../../../types";
+import { UnitHelpers } from "../../../types/index";
+import AddIce from "./AddIce";
+import BoilWater from "./BoilWater";
+import GrindCoffee from "./GrindCoffee";
+import IceToggle from "./IceToggle";
+import Notes from "./Notes";
+import PourTimer from "./PourTimer";
+import Preparation from "./Preparation";
+import RecordBrewAttributes from "./RecordBrewAttributes";
+import YieldQuestion from "./YieldQuestion";
 
 interface RecipeProps {
-  settings: Settings
-  unitHelpers: UnitHelpers
-  recipe: RecipeType
-  logAdded: (props: any) => void
-  recentLog: Log
-  styleguide: Styleguide
-  navigation: any
+  settings: Settings;
+  unitHelpers: UnitHelpers;
+  recipe: RecipeType;
+  logAdded: (props: any) => void;
+  recentLog: Log;
+  styleguide: Styleguide;
+  navigation: any;
   insets: {
-    bottom: number
-  }
+    bottom: number;
+  };
 }
 
 interface RecipeState {
-  grind: number
-  temp: number
-  timestamp: number
-  totalBrewTime: number
-  attributesRecorded: boolean
-  totalVolume: number
-  randomKey: number
-  isIced: boolean
+  grind: number;
+  temp: number;
+  timestamp: number;
+  totalBrewTime: number;
+  attributesRecorded: boolean;
+  totalVolume: number;
+  randomKey: number;
+  isIced: boolean;
 }
 
 const mapStateToProps = (state, props) => ({
   recentLog: selectRecentLog(state, props.recipe.id),
-})
+});
 
-const mapDispatchToProps = { logAdded }
+const mapDispatchToProps = { logAdded };
 
 class Recipe extends Component<RecipeProps, RecipeState> {
   static defaultProps = {
     settings: {},
     unitHelpers: {},
     navigation: {},
-  }
+  };
 
   state = {
     randomKey: 1,
@@ -71,22 +71,22 @@ class Recipe extends Component<RecipeProps, RecipeState> {
     totalVolume:
       this.props.recentLog.totalVolume || this.props.recipe.defaultTotalVolume,
     isIced: false,
-  }
+  };
 
   componentDidMount() {
-    activateKeepAwake()
+    activateKeepAwake();
   }
 
   componentWillUnmount() {
-    deactivateKeepAwake()
+    deactivateKeepAwake();
   }
 
-  setRecipeState = ({ key, value }) => this.setState({ [key]: value } as any)
+  setRecipeState = ({ key, value }) => this.setState({ [key]: value } as any);
 
-  onIsIcedChange = (value) => this.setState({ isIced: value })
+  onIsIcedChange = (value) => this.setState({ isIced: value });
 
   onFinish = () => {
-    const { navigation, recipe, settings, logAdded } = this.props
+    const { navigation, recipe, settings, logAdded } = this.props;
     const {
       timestamp,
       totalVolume,
@@ -94,7 +94,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
       temp,
       totalBrewTime,
       attributesRecorded,
-    } = this.state
+    } = this.state;
     const log = {
       timestamp,
       totalVolume,
@@ -115,30 +115,30 @@ class Recipe extends Component<RecipeProps, RecipeState> {
           }
         : null),
       recipeId: recipe.id,
-    }
+    };
 
-    logAdded({ log })
+    logAdded({ log });
     this.setState({ randomKey: Math.random() }, () => {
-      navigation.navigate('BrewSummary', { timestamp })
-    })
-  }
+      navigation.navigate("BrewSummary", { timestamp });
+    });
+  };
 
   render() {
-    const { recipe, settings, unitHelpers, recentLog, styleguide } = this.props
-    const { grindUnit, temperatureUnit } = unitHelpers
-    const { minYield, maxYield, defaultGrind } = recipe
-    const { totalVolume, grind, temp } = this.state
-    const coffeeWeight = Math.round(totalVolume / settings.ratio)
+    const { recipe, settings, unitHelpers, recentLog, styleguide } = this.props;
+    const { grindUnit, temperatureUnit } = unitHelpers;
+    const { minYield, maxYield, defaultGrind } = recipe;
+    const { totalVolume, grind, temp } = this.state;
+    const coffeeWeight = Math.round(totalVolume / settings.ratio);
     const totalPourVolume = this.state.isIced
       ? Math.round(totalVolume * 0.666)
-      : totalVolume
+      : totalVolume;
     const longestSecond = recipe.steps
       .filter((s) => s.second)
       .map((s) => s.second)
-      .sort((a, b) => b - a)[0]
+      .sort((a, b) => b - a)[0];
 
     return (
-      <View style={isMaxWidth && { alignItems: 'center' }}>
+      <View style={isMaxWidth && { alignItems: "center" }}>
         <View style={isMaxWidth && { width: styleguide.maxWidth }}>
           <Preparation
             recipe={recipe.title.toLowerCase()}
@@ -201,11 +201,11 @@ class Recipe extends Component<RecipeProps, RecipeState> {
           />
         </View>
       </View>
-    )
+    );
   }
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withSafeAreaInsets(withSettings(withTheme(Recipe))))
+)(withSafeAreaInsets(withSettings(withTheme(Recipe))));

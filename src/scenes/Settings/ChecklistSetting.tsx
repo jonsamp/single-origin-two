@@ -1,19 +1,19 @@
-import { Feather } from '@expo/vector-icons'
-import React from 'react'
-import { TouchableOpacity, ViewStyle } from 'react-native'
-import withTheme from '../../providers/theme'
-import { MenuItem, Theme } from '../../types'
-import SettingWrapper from './SettingWrapper'
+import { Feather } from "@expo/vector-icons";
+import React from "react";
+import { TouchableOpacity, ViewStyle } from "react-native";
+import withTheme from "../../providers/theme";
+import { MenuItem, Theme } from "../../types";
+import SettingWrapper from "./SettingWrapper";
 
 interface ChecklistSettingProps {
-  theme: Theme
-  onChange: (id: string) => void
-  items: EnhancedMenuItem[]
-  style: ViewStyle
+  theme: Theme;
+  onChange: (id: string) => void;
+  items: EnhancedMenuItem[];
+  style: ViewStyle;
 }
 
 interface EnhancedMenuItem extends MenuItem {
-  value: boolean
+  value: boolean;
 }
 
 const ChecklistSetting = ({
@@ -25,7 +25,7 @@ const ChecklistSetting = ({
   items.map((item, index) => (
     <TouchableOpacity onPress={() => onChange(item.id)} key={item.id}>
       <SettingWrapper
-        title={`${item.title}${item.modifier ? ` ${item.modifier}` : ''}`}
+        title={`${item.title}${item.modifier ? ` ${item.modifier}` : ""}`}
         style={{
           ...style,
           ...(index === items.length - 1 ? { borderBottomWidth: 0 } : null),
@@ -40,6 +40,6 @@ const ChecklistSetting = ({
         ) : null}
       </SettingWrapper>
     </TouchableOpacity>
-  ))
+  ));
 
-export default withTheme(ChecklistSetting)
+export default withTheme(ChecklistSetting);

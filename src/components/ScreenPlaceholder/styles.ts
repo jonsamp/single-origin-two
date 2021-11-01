@@ -1,18 +1,18 @@
-import { StyleSheet } from 'react-native'
-import type from '../../constants/type'
+import { StyleSheet } from "react-native";
+import type from "../../constants/type";
 
 const styles = StyleSheet.create({
   placeholderContainer: {
     borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 32,
     marginTop: 24,
   },
   placeholderText: {
     ...type.body,
-    textAlign: 'center',
+    textAlign: "center",
   },
-})
+});
 
-export default styles
+export default styles;

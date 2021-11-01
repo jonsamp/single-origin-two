@@ -1,5 +1,5 @@
-import React from 'react'
-import { Svg, G, Rect } from 'react-native-svg'
+import React from "react";
+import { Svg, G, Rect } from "react-native-svg";
 
 function PauseIcon() {
   return (
@@ -9,7 +9,7 @@ function PauseIcon() {
         <Rect x="7.481" width="4.707" height="14.363" rx="1" />
       </G>
     </Svg>
-  )
+  );
 }
 
-export default PauseIcon
+export default PauseIcon;

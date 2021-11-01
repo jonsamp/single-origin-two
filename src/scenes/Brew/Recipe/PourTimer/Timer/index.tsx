@@ -1,19 +1,19 @@
-import React, { Component } from 'react'
-import { Text, View, Platform } from 'react-native'
-import Button from '../../../../../components/Button'
-import formatSeconds from '../../../../../helpers/formatSeconds'
-import { useTheme } from '../../../../../providers/theme'
-import styles from './styles'
+import React, { Component } from "react";
+import { Text, View, Platform } from "react-native";
+import Button from "../../../../../components/Button";
+import formatSeconds from "../../../../../helpers/formatSeconds";
+import { useTheme } from "../../../../../providers/theme";
+import styles from "./styles";
 
 type Props = {
-  timerRunning: boolean
-  toggleCountdown: () => void
-  second: number
-}
+  timerRunning: boolean;
+  toggleCountdown: () => void;
+  second: number;
+};
 
 function Timer(props: Props) {
-  const { toggleCountdown, timerRunning, second } = props
-  const { colors } = useTheme()
+  const { toggleCountdown, timerRunning, second } = props;
+  const { colors } = useTheme();
 
   return (
     <View style={styles.section}>
@@ -22,9 +22,9 @@ function Timer(props: Props) {
           style={[
             styles.timeText,
             {
-              fontFamily: Platform.select({ ios: 'Menlo-Bold' }),
+              fontFamily: Platform.select({ ios: "Menlo-Bold" }),
               color: colors.foreground,
-              fontWeight: Platform.select({ android: '700', ios: '500' }),
+              fontWeight: Platform.select({ android: "700", ios: "500" }),
             },
           ]}
         >
@@ -32,12 +32,12 @@ function Timer(props: Props) {
         </Text>
       </View>
       <Button
-        type={timerRunning ? 'secondary' : 'primary'}
-        title={timerRunning ? 'stop' : 'start'}
+        type={timerRunning ? "secondary" : "primary"}
+        title={timerRunning ? "stop" : "start"}
         onPress={toggleCountdown}
       />
     </View>
-  )
+  );
 }
 
-export default Timer
+export default Timer;

@@ -1,6 +1,6 @@
-import { Svg, G, Path } from 'react-native-svg'
-import React from 'react'
-import { Icon } from './types'
+import { Svg, G, Path } from "react-native-svg";
+import React from "react";
+import { Icon } from "./types";
 
 function CleverIcon({ fill, size = 1 }: Icon) {
   return (
@@ -11,7 +11,7 @@ function CleverIcon({ fill, size = 1 }: Icon) {
         <Path d="M27.422 2.283a1 1 0 0 1-.051-2c4.999-.127 7.794 1.428 7.794 4.767 0 3.232-4.146 6.197-12.336 9.293a1 1 0 0 1-.707-1.87c7.396-2.797 11.043-5.404 11.043-7.423 0-1.914-1.718-2.87-5.743-2.767zM20.254 20.725H8.712c-.871 0-1.626.5-1.992 1.23h15.527a2.229 2.229 0 0 0-1.993-1.23zm-11.542-2h11.542a4.229 4.229 0 0 1 4.23 4.23 1 1 0 0 1-1 1h-18a1 1 0 0 1-1-1 4.229 4.229 0 0 1 4.228-4.23z" />
       </G>
     </Svg>
-  )
+  );
 }
 
-export default CleverIcon
+export default CleverIcon;

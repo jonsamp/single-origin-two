@@ -1,6 +1,6 @@
-import React from 'react'
-import { Path, Svg } from 'react-native-svg'
-import { Icon } from './types'
+import React from "react";
+import { Path, Svg } from "react-native-svg";
+import { Icon } from "./types";
 
 function EvaSoloIcon({ fill, size = 1 }: Icon) {
   return (
@@ -32,7 +32,7 @@ function EvaSoloIcon({ fill, size = 1 }: Icon) {
         strokeLinejoin="round"
       />
     </Svg>
-  )
+  );
 }
 
-export default EvaSoloIcon
+export default EvaSoloIcon;

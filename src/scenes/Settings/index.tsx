@@ -1,21 +1,21 @@
-import { Feather } from '@expo/vector-icons'
-import React, { Component } from 'react'
-import { Linking, TouchableOpacity, ScrollView, Platform } from 'react-native'
-import withTheme from '../../providers/theme'
-import { Theme } from '../../types/index'
-import Group from './Group'
-import Section from './Section'
-import SettingWrapper from './SettingWrapper'
+import { Feather } from "@expo/vector-icons";
+import React, { Component } from "react";
+import { Linking, TouchableOpacity, ScrollView, Platform } from "react-native";
+import withTheme from "../../providers/theme";
+import { Theme } from "../../types/index";
+import Group from "./Group";
+import Section from "./Section";
+import SettingWrapper from "./SettingWrapper";
 
 interface SettingsProps {
-  theme: Theme
-  isDarkTheme: boolean
-  navigation: any
+  theme: Theme;
+  isDarkTheme: boolean;
+  navigation: any;
 }
 
 class Settings extends Component<SettingsProps> {
   render() {
-    const { theme } = this.props
+    const { theme } = this.props;
 
     return (
       <ScrollView style={{ backgroundColor: theme.pageBackground }}>
@@ -46,14 +46,14 @@ class Settings extends Component<SettingsProps> {
           </TouchableOpacity> */}
           <TouchableOpacity
             onPress={() => {
-              if (Platform.OS === 'ios') {
+              if (Platform.OS === "ios") {
                 Linking.openURL(
-                  'https://itunes.apple.com/app/id1480168613?action=write-review'
-                )
+                  "https://itunes.apple.com/app/id1480168613?action=write-review"
+                );
               } else {
                 Linking.openURL(
-                  'https://play.google.com/store/apps/details?id=com.jonsamp.singleorigintwo'
-                )
+                  "https://play.google.com/store/apps/details?id=com.jonsamp.singleorigintwo"
+                );
               }
             }}
           >
@@ -80,8 +80,8 @@ class Settings extends Component<SettingsProps> {
           </TouchableOpacity> */}
         </Section>
       </ScrollView>
-    )
+    );
   }
 }
 
-export default withTheme(Settings)
+export default withTheme(Settings);

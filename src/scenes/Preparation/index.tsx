@@ -1,32 +1,32 @@
-import React, { Component } from 'react'
-import * as Sentry from 'sentry-expo'
-import { isArray } from 'lodash'
-import InstructionalCard from '../../components/InstructionalCard'
-import ResponsiveScrollView from '../../components/ResponsiveScrollView'
-import withTheme, { Theme } from '../../providers/theme'
+import React, { Component } from "react";
+import * as Sentry from "sentry-expo";
+import { isArray } from "lodash";
+import InstructionalCard from "../../components/InstructionalCard";
+import ResponsiveScrollView from "../../components/ResponsiveScrollView";
+import withTheme, { Theme } from "../../providers/theme";
 
 interface PreparationProps {
-  navigation: any
-  route: any
-  theme: Theme
-  isDarkTheme: boolean
+  navigation: any;
+  route: any;
+  theme: Theme;
+  isDarkTheme: boolean;
   preparation: Array<{
-    image?: number
-    text: string
-  }>
+    image?: number;
+    text: string;
+  }>;
 }
 
 class Preparation extends Component<PreparationProps> {
   render() {
-    const { route, theme, isDarkTheme } = this.props
-    const preparation = route.params
+    const { route, theme, isDarkTheme } = this.props;
+    const preparation = route.params;
 
-    let prepSteps
+    let prepSteps;
 
     if (isArray(preparation)) {
-      prepSteps = preparation
-    } else if (!isArray(preparation) && preparation['0']) {
-      prepSteps = Object.values(preparation)
+      prepSteps = preparation;
+    } else if (!isArray(preparation) && preparation["0"]) {
+      prepSteps = Object.values(preparation);
     }
 
     return (
@@ -42,8 +42,8 @@ class Preparation extends Component<PreparationProps> {
           />
         ))}
       </ResponsiveScrollView>
-    )
+    );
   }
 }
 
-export default withTheme(Preparation)
+export default withTheme(Preparation);

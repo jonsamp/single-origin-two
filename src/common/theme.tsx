@@ -1,15 +1,15 @@
-import { create } from 'tailwind-rn'
-import styles from 'tailwind-rn/styles.json'
+import { create } from "tailwind-rn";
+import styles from "tailwind-rn/styles.json";
 import {
   useTheme as RNUseTheme,
   DefaultTheme,
   DarkTheme,
-} from '@react-navigation/native'
+} from "@react-navigation/native";
 import {
   lightTheme,
   darkTheme as styleguideDarkTheme,
-} from '@expo/styleguide-native'
-import { typography } from './typography'
+} from "@expo/styleguide-native";
+import { typography } from "./typography";
 
 export const defaultTheme = {
   dark: false,
@@ -24,11 +24,11 @@ export const defaultTheme = {
   theme: {
     ...lightTheme,
     brand: {
-      default: '#00b78e',
-      dark: '#00A57D',
+      default: "#00b78e",
+      dark: "#00A57D",
     },
   },
-}
+};
 
 export const darkTheme = {
   dark: true,
@@ -43,68 +43,68 @@ export const darkTheme = {
   theme: {
     ...styleguideDarkTheme,
     brand: {
-      default: '#00CA9D',
-      dark: '#00CA9D',
+      default: "#00CA9D",
+      dark: "#00CA9D",
     },
   },
-}
+};
 
 type Theme = {
-  dark: boolean
-  colors: Colors
+  dark: boolean;
+  colors: Colors;
   theme: typeof lightTheme & {
     brand: {
-      default: string
-      dark: string
-    }
-  }
-}
+      default: string;
+      dark: string;
+    };
+  };
+};
 
 type Colors = {
-  background: string
-  shadow: string
-  border: string
-  card: string
-  primary: string
-  text: string
-  notification: string
-}
+  background: string;
+  shadow: string;
+  border: string;
+  card: string;
+  primary: string;
+  text: string;
+  notification: string;
+};
 
 export function useTheme() {
-  const theme = RNUseTheme()
+  const theme = RNUseTheme();
 
-  return theme as Theme
+  return theme as Theme;
 }
 
 export function useTailwind() {
   // @ts-ignore
-  const { theme, dark } = RNUseTheme()
+  const { theme, dark } = RNUseTheme();
 
   const custom = create({
     ...styles,
-    'theme.background.default': {
+    "theme.background.default": {
       backgroundColor: theme.background.default,
     },
-    'theme.background.overlay': {
+    "theme.background.overlay": {
       backgroundColor: theme.background.overlay,
     },
-    'theme.background.secondary': {
+    "theme.background.secondary": {
       backgroundColor: theme.background.secondary,
     },
-    'theme.background.tertiary': {
+    "theme.background.tertiary": {
       backgroundColor: theme.background.tertiary,
     },
-    'theme.background.quaternary': {
+    "theme.background.quaternary": {
       backgroundColor: theme.background.quaternary,
     },
-    'theme.border.default': {
+    "theme.border.default": {
       borderColor: theme.border.default,
     },
-    'theme.text.default': {
+    "theme.text.default": {
       color: theme.text.default,
     },
     ...typography,
-  })
+  });
 
-  return custom.tailwind
+  return custom.tailwind;
 }

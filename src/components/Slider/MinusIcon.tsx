@@ -1,9 +1,9 @@
-import React from 'react'
-import Svg, { Path } from 'react-native-svg'
-import { useTheme } from '../../common/theme'
+import React from "react";
+import Svg, { Path } from "react-native-svg";
+import { useTheme } from "../../common/theme";
 
 export function MinusIcon() {
-  const { theme } = useTheme()
+  const { theme } = useTheme();
 
   return (
     <Svg width={13} height={2} viewBox="0 0 13 2" fill="none">
@@ -14,5 +14,5 @@ export function MinusIcon() {
         strokeLinecap="round"
       />
     </Svg>
-  )
+  );
 }

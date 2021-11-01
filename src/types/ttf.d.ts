@@ -1,4 +1,4 @@
-declare module '*.ttf' {
-  const fontUrl: any
-  export default fontUrl
+declare module "*.ttf" {
+  const fontUrl: any;
+  export default fontUrl;
 }

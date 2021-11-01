@@ -1,6 +1,6 @@
-import React from 'react'
-import { Path, Svg } from 'react-native-svg'
-import { Icon } from './types'
+import React from "react";
+import { Path, Svg } from "react-native-svg";
+import { Icon } from "./types";
 
 function V6001Icon({ fill, size = 1 }: Icon) {
   return (
@@ -40,7 +40,7 @@ function V6001Icon({ fill, size = 1 }: Icon) {
         strokeLinejoin="round"
       />
     </Svg>
-  )
+  );
 }
 
-export default V6001Icon
+export default V6001Icon;

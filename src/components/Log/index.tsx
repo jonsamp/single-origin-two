@@ -1,133 +1,133 @@
-import { Feather } from '@expo/vector-icons'
-import { addMinutes, format } from 'date-fns'
-import React, { Component } from 'react'
-import { Text, TouchableOpacity, View, ViewStyle } from 'react-native'
-import { connect } from 'react-redux'
-import Card from '../../components/Card'
-import ResponsiveScrollView from '../../components/ResponsiveScrollView'
-import recipes from '../../constants/recipes'
-import type from '../../constants/type'
-import formatSeconds from '../../helpers/formatSeconds'
-import withSettings from '../../providers/settings'
-import withTheme, { Theme } from '../../providers/theme'
-import withTracking, { Tracking } from '../../providers/tracking'
-import { selectLog } from '../../state/logs/selectors'
-import { Log as LogType } from '../../state/logs/types'
+import { Feather } from "@expo/vector-icons";
+import { addMinutes, format } from "date-fns";
+import React, { Component } from "react";
+import { Text, TouchableOpacity, View, ViewStyle } from "react-native";
+import { connect } from "react-redux";
+import Card from "../../components/Card";
+import ResponsiveScrollView from "../../components/ResponsiveScrollView";
+import recipes from "../../constants/recipes";
+import type from "../../constants/type";
+import formatSeconds from "../../helpers/formatSeconds";
+import withSettings from "../../providers/settings";
+import withTheme, { Theme } from "../../providers/theme";
+import withTracking, { Tracking } from "../../providers/tracking";
+import { selectLog } from "../../state/logs/selectors";
+import { Log as LogType } from "../../state/logs/types";
 import {
   notificationsReset,
   reminderCancelled,
   reminderRequested,
-} from '../../state/notifications/actions'
-import { selectNotifications } from '../../state/notifications/selectors'
-import { Notifications } from '../../state/notifications/types'
-import { Settings } from '../../state/settings/types'
-import { UnitHelpers } from '../../types/index'
-import styles from './styles'
+} from "../../state/notifications/actions";
+import { selectNotifications } from "../../state/notifications/selectors";
+import { Notifications } from "../../state/notifications/types";
+import { Settings } from "../../state/settings/types";
+import { UnitHelpers } from "../../types/index";
+import styles from "./styles";
 
 interface LogProps {
-  settings: Settings
-  theme: Theme
-  log: LogType
-  unitHelpers: UnitHelpers
-  isDarkTheme: boolean
-  reminderRequested: (props: { timestamp: number }) => void
-  notificationsReset: () => void
-  reminderCancelled: () => void
-  withReminder: boolean
-  notifications: Notifications
-  tracking: Tracking
-  style: ViewStyle
+  settings: Settings;
+  theme: Theme;
+  log: LogType;
+  unitHelpers: UnitHelpers;
+  isDarkTheme: boolean;
+  reminderRequested: (props: { timestamp: number }) => void;
+  notificationsReset: () => void;
+  reminderCancelled: () => void;
+  withReminder: boolean;
+  notifications: Notifications;
+  tracking: Tracking;
+  style: ViewStyle;
 }
 
 const mapStateToProps = (state, props) => {
   return {
     log: selectLog(state, props.timestamp),
     notifications: selectNotifications(state),
-  }
-}
+  };
+};
 
 const mapDispatchToProps = {
   reminderRequested,
   notificationsReset,
   reminderCancelled,
-}
+};
 
 class Log extends Component<LogProps> {
   state = {
     reminderScheduled: false,
-  }
+  };
 
   toggleReminder = async () => {
     if (!this.state.reminderScheduled) {
       await this.props.reminderRequested({
         timestamp: this.props.log.timestamp,
-      })
+      });
       return this.setState({
         reminderScheduled: true,
-      })
+      });
     } else {
-      await this.props.reminderCancelled()
+      await this.props.reminderCancelled();
       return this.setState({
         reminderScheduled: false,
-      })
+      });
     }
-  }
+  };
 
   componentDidMount() {
-    const { tracking, withReminder, log } = this.props
+    const { tracking, withReminder, log } = this.props;
     if (withReminder) {
-      this.props.notificationsReset()
+      this.props.notificationsReset();
     }
 
     tracking.track(tracking.events.LOG_VIEWED, {
       isAfterRecipe: withReminder,
       ...log,
-    })
+    });
   }
 
   capitalizeFirstLetter = (string) => {
     return (
       string.toString().charAt(0).toUpperCase() + string.toString().slice(1)
-    )
-  }
+    );
+  };
 
   render() {
-    const { theme, log, unitHelpers, isDarkTheme, withReminder } = this.props
-    const recipe = recipes[log.recipeId]
+    const { theme, log, unitHelpers, isDarkTheme, withReminder } = this.props;
+    const recipe = recipes[log.recipeId];
     const logConfig = {
       totalVolume: (val) => ({
         value: `${unitHelpers.waterVolumeUnit.getPreferredValue(val)}${
           unitHelpers.waterVolumeUnit.unit.symbol
         }`,
-        label: 'Volume brewed',
+        label: "Volume brewed",
       }),
       temp: (val) => ({
         value: `${unitHelpers.temperatureUnit.getPreferredValue(val)}${
           unitHelpers.temperatureUnit.unit.symbol
         }`,
-        label: 'Temperature',
+        label: "Temperature",
       }),
       grind: (val) => ({
         value: unitHelpers.grindUnit.getPreferredValue(val),
-        label: 'Grind setting',
+        label: "Grind setting",
       }),
       totalBrewTime: (val) => ({
         value: formatSeconds(val < 0 ? 0 : val),
-        label: 'Brew time',
+        label: "Brew time",
       }),
       ratio: (val) => ({
         value: `1:${val}`,
-        label: 'Ratio',
+        label: "Ratio",
       }),
-      tastingNote: 'Tasting Note',
-      rating: 'Rating',
-      notes: 'Notes',
-    }
+      tastingNote: "Tasting Note",
+      rating: "Rating",
+      notes: "Notes",
+    };
     const logStats = Object.keys(log)
       .filter(
-        (logKey) => logConfig[logKey] && typeof logConfig[logKey] === 'function'
+        (logKey) => logConfig[logKey] && typeof logConfig[logKey] === "function"
       )
-      .map((logKey) => logConfig[logKey](log[logKey]))
+      .map((logKey) => logConfig[logKey](log[logKey]));
 
     return (
       <ResponsiveScrollView
@@ -136,7 +136,7 @@ class Log extends Component<LogProps> {
         }}
         style={this.props.style}
       >
-        <View style={{ alignItems: 'center' }}>
+        <View style={{ alignItems: "center" }}>
           {recipe.icon({
             fill: theme.foreground,
             size: 2,
@@ -145,7 +145,7 @@ class Log extends Component<LogProps> {
             style={{
               color: theme.foreground,
               ...type.header,
-              fontWeight: 'bold',
+              fontWeight: "bold",
               marginVertical: 16,
             }}
           >
@@ -153,20 +153,20 @@ class Log extends Component<LogProps> {
           </Text>
           <View>
             <Text style={[type.body, { color: theme.foreground }]}>
-              Brewed at {format(log.timestamp, 'h:mma')} on{' '}
-              {format(log.timestamp, 'MMM d, yyyy')}
+              Brewed at {format(log.timestamp, "h:mma")} on{" "}
+              {format(log.timestamp, "MMM d, yyyy")}
             </Text>
           </View>
         </View>
         <View style={{ marginTop: 24 }}>
-          {['tastingNote', 'rating']
+          {["tastingNote", "rating"]
             .filter((key) => log[key])
             .map((key, index) => (
               <Card
                 key={key}
                 style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
+                  flexDirection: "row",
+                  justifyContent: "space-between",
                 }}
                 containerStyle={{
                   marginTop: 4,
@@ -211,7 +211,7 @@ class Log extends Component<LogProps> {
           </Card>
         ) : null}
 
-        {withReminder && this.props.notifications.status !== 'denied' ? (
+        {withReminder && this.props.notifications.status !== "denied" ? (
           <TouchableOpacity onPress={this.toggleReminder} activeOpacity={0.75}>
             <Card
               containerStyle={{
@@ -226,8 +226,8 @@ class Log extends Component<LogProps> {
                   : theme.background,
               }}
               style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
+                flexDirection: "row",
+                justifyContent: "space-between",
                 backgroundColor: this.state.reminderScheduled
                   ? theme.primary
                   : isDarkTheme
@@ -244,20 +244,20 @@ class Log extends Component<LogProps> {
                         ? theme.background
                         : theme.foreground,
                       fontWeight: this.state.reminderScheduled
-                        ? 'bold'
-                        : 'normal',
+                        ? "bold"
+                        : "normal",
                       marginBottom: 4,
                     },
                   ]}
                 >
                   {this.state.reminderScheduled
-                    ? 'Tasting reminder scheduled'
-                    : 'Send a tasting reminder'}
+                    ? "Tasting reminder scheduled"
+                    : "Send a tasting reminder"}
                 </Text>
                 {this.state.reminderScheduled && (
                   <Text style={[type.callout, { color: theme.background }]}>
-                    You'll get a reminder to taste your coffee at{' '}
-                    {format(addMinutes(new Date(), 6), 'h:mma')}.
+                    You'll get a reminder to taste your coffee at{" "}
+                    {format(addMinutes(new Date(), 6), "h:mma")}.
                   </Text>
                 )}
               </View>
@@ -278,7 +278,7 @@ class Log extends Component<LogProps> {
             </Card>
           </TouchableOpacity>
         ) : null}
-        {withReminder && this.props.notifications.status === 'denied' ? (
+        {withReminder && this.props.notifications.status === "denied" ? (
           <Card
             containerStyle={{
               marginTop: 16,
@@ -287,8 +287,8 @@ class Log extends Component<LogProps> {
               padding: 16,
             }}
             style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
+              flexDirection: "row",
+              justifyContent: "space-between",
             }}
           >
             <View style={{ flex: 1 }}>
@@ -329,11 +329,11 @@ class Log extends Component<LogProps> {
           ))}
         </View>
       </ResponsiveScrollView>
-    )
+    );
   }
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withTracking(withTheme(withSettings(Log))))
+)(withTracking(withTheme(withSettings(Log))));

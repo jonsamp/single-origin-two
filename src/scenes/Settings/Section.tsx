@@ -1,24 +1,24 @@
-import React, { Component, ReactNode } from 'react'
-import { Text, TextStyle, View } from 'react-native'
-import type from '../../constants/type'
-import withTheme from '../../providers/theme'
-import { Theme } from '../../types/index'
-import styles from './styles'
+import React, { Component, ReactNode } from "react";
+import { Text, TextStyle, View } from "react-native";
+import type from "../../constants/type";
+import withTheme from "../../providers/theme";
+import { Theme } from "../../types/index";
+import styles from "./styles";
 
 interface SectionProps {
-  title: string
-  description: string
-  theme: Theme
-  children: ReactNode
+  title: string;
+  description: string;
+  theme: Theme;
+  children: ReactNode;
 }
 
 class Section extends Component<SectionProps> {
   static defaultProps = {
-    title: '',
-  }
+    title: "",
+  };
 
   render() {
-    const { title, description, theme, children } = this.props
+    const { title, description, theme, children } = this.props;
 
     return (
       <View>
@@ -69,8 +69,8 @@ class Section extends Component<SectionProps> {
         ) : null}
         <View style={{ backgroundColor: theme.background }}>{children}</View>
       </View>
-    )
+    );
   }
 }
 
-export default withTheme(Section)
+export default withTheme(Section);

@@ -1,11 +1,11 @@
-import React from 'react'
-import { G, Path, Svg } from 'react-native-svg'
-import { Icon } from './types'
+import React from "react";
+import { G, Path, Svg } from "react-native-svg";
+import { Icon } from "./types";
 
 export default function BrewIcon(props: Icon) {
-  const { focused, theme, size } = props
-  const width = size || 36
-  const height = width * 0.75
+  const { focused, theme, size } = props;
+  const width = size || 36;
+  const height = width * 0.75;
 
   return (
     <Svg width={width} height={height} viewBox="0 0 36 27">
@@ -21,5 +21,5 @@ export default function BrewIcon(props: Icon) {
         <Path d="M11.631 20.406c4.497 1.525 9.22 1.493 14.17-.096-.41-3.928-1.574-5.713-3.493-5.352-2.878.54-4.466.543-7.27 0-2.802-.544-3.407 5.448-3.407 5.448z" />
       </G>
     </Svg>
-  )
+  );
 }

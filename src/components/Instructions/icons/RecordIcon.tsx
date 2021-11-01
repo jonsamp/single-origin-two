@@ -1,6 +1,6 @@
-import React from 'react'
-import { G, Path, Svg } from 'react-native-svg'
-import { Icon } from './types'
+import React from "react";
+import { G, Path, Svg } from "react-native-svg";
+import { Icon } from "./types";
 
 function RecordIcon({ fill }: Icon) {
   return (
@@ -13,7 +13,7 @@ function RecordIcon({ fill }: Icon) {
         />
       </G>
     </Svg>
-  )
+  );
 }
 
-export default RecordIcon
+export default RecordIcon;

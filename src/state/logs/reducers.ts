@@ -1,8 +1,8 @@
-import { handleActions } from 'redux-actions'
-import * as actions from './actions'
-import { Logs } from './types'
+import { handleActions } from "redux-actions";
+import * as actions from "./actions";
+import { Logs } from "./types";
 
-const initialState = {}
+const initialState = {};
 
 const reducers = {
   [actions.logAdded]: (logs: Logs, { payload: { log } }) => ({
@@ -17,10 +17,10 @@ const reducers = {
     },
   }),
   [actions.logDeleted]: (logs: Logs, { payload: { timestamp } }) => {
-    const updated = { ...logs }
-    delete updated[timestamp]
-    return updated
+    const updated = { ...logs };
+    delete updated[timestamp];
+    return updated;
   },
-}
+};
 
-export default handleActions(reducers, initialState)
+export default handleActions(reducers, initialState);
