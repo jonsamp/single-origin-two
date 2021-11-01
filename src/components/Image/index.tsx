@@ -1,26 +1,26 @@
-import React from 'react'
-import { Image as RNImage, ImageStyle, StyleSheet } from 'react-native'
-import { useTailwind } from '../../common/theme'
-import { height } from '../../constants/layout'
+import React from 'react';
+import { Image as RNImage, ImageStyle, StyleSheet } from 'react-native';
+import { useTailwind } from '../../common/theme';
+import { height } from '../../constants/layout';
 
 type Props = {
-  source: number
-  defaultSource?: number
-  style?: ImageStyle
-  isPlaying?: boolean
-}
+  source: number;
+  defaultSource?: number;
+  style?: ImageStyle;
+  isPlaying?: boolean;
+};
 
 export default function Image(props: Props) {
-  const { source, defaultSource, style } = props
-  const tw = useTailwind()
+  const { source, defaultSource, style } = props;
+  const tw = useTailwind();
 
   return (
     <RNImage
       source={source}
-      defaultSource={defaultSource}
+      // defaultSource={defaultSource}
       style={[styles.image, tw('theme.background.default'), style]}
     />
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     height: height / 5,
   },
-})
+});
