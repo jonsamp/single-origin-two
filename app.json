@@ -9,9 +9,7 @@
     "owner": "jonsamp",
     "privacy": "unlisted",
     "userInterfaceStyle": "automatic",
-    "runtimeVersion": {
-      "policy": "sdkVersion"
-    },
+    "runtimeVersion": "43.0.0",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "cover",
