@@ -27,8 +27,8 @@ const { store, persistor } = configureStore();
 
 Sentry.init({
   dsn: 'https://c9996743bbf04225a864e9b985a8be12@sentry.io/1746780',
-  enableInExpoDevelopment: false,
-  debug: false,
+  enableInExpoDevelopment: true,
+  debug: true,
 });
 
 export default function App() {

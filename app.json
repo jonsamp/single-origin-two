@@ -6,7 +6,6 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "description": "Learn to brew specialty coffee.",
-    "owner": "jonsamp",
     "privacy": "unlisted",
     "userInterfaceStyle": "automatic",
     "runtimeVersion": "43.0.0",
@@ -24,7 +23,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.jonsamp.singleorigintwo",
-      "buildNumber": "1"
+      "buildNumber": "2"
     },
     "android": {
       "versionCode": 18,
@@ -35,6 +34,7 @@
       "permissions": [],
       "package": "com.jonsamp.singleorigintwo"
     },
+    "plugins": ["sentry-expo"],
     "hooks": {
       "postPublish": [
         {
