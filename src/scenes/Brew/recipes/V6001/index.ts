@@ -7,10 +7,10 @@ import Default from '../V60/images/default.png';
 import Pour from '../V60/images/pour.gif';
 import WetFilter from '../V60/images/wetfilter.png';
 
-import { StepType } from '../types';
+import { StepType, BrewRecipeName } from '../types';
 
 export default {
-  id: 'V6001',
+  id: BrewRecipeName.V6001,
   title: 'V60 #01',
   minYield: 100,
   maxYield: 500,

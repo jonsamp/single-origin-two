@@ -7,10 +7,10 @@ import Finish from '../Chemex/images/finish.gif';
 import Pour from '../Chemex/images/pour.gif';
 import WetFilter from '../Chemex/images/wetfilter.gif';
 
-import { StepType } from '../types';
+import { StepType, BrewRecipeName } from '../types';
 
 export default {
-  id: 'Chemex3Cup',
+  id: BrewRecipeName.Chemex3Cup,
   title: 'Chemex 3 Cup',
   minYield: 120,
   maxYield: 550,

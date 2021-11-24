@@ -8,10 +8,10 @@ import Pour from '../FrenchPress3Cup/images/pour.gif';
 import Press from '../FrenchPress3Cup/images/press.gif';
 import PressTheFrench from '../FrenchPress3Cup/images/press-tutorial.jpg';
 
-import { StepType } from '../types';
+import { StepType, BrewRecipeName } from '../types';
 
 export default {
-  id: 'FrenchPress8Cup',
+  id: BrewRecipeName.FrenchPress8Cup,
   title: 'French Press 8 Cup',
   minYield: 200,
   maxYield: 1200,

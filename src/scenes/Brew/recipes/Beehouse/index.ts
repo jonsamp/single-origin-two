@@ -7,10 +7,10 @@ import Finish from './images/finish.gif';
 import Pour from './images/pour.gif';
 import WetFilter from './images/wetfilter.png';
 
-import { StepType } from '../types';
+import { StepType, BrewRecipeName } from '../types';
 
 export default {
-  id: 'Beehouse',
+  id: BrewRecipeName.Beehouse,
   title: 'Beehouse',
   minYield: 142,
   maxYield: 567,

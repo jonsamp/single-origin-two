@@ -8,10 +8,10 @@ import Drain from './images/drain.gif';
 import Pour from './images/pour.gif';
 import WetFilter from './images/wet-filter.jpg';
 
-import { StepType } from '../types';
+import { StepType, BrewRecipeName } from '../types';
 
 export default {
-  id: 'Clever',
+  id: BrewRecipeName.Clever,
   title: 'Clever',
   minYield: 142,
   maxYield: 516,

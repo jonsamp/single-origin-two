@@ -8,10 +8,10 @@ import Draining from './images/draining.gif';
 import Pour from './images/pour.gif';
 import WetFilter from './images/wet-filter.jpg';
 
-import { StepType } from '../types';
+import { StepType, BrewRecipeName } from '../types';
 
 export default {
-  id: 'KalitaWave185',
+  id: BrewRecipeName.KalitaWave185,
   title: 'Kalita Wave 185',
   minYield: 100,
   maxYield: 700,

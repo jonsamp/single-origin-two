@@ -5,8 +5,9 @@ import { spacing } from '@expo/styleguide-native';
 import withSettings from '../../providers/settings';
 import { useTailwind } from '../../common/theme';
 import Recipe from './Recipe';
-import recipes, { BrewRecipeName } from './recipes';
+import recipes from './recipes';
 import { useNavigation } from '@react-navigation/core';
+import { BrewRecipeName } from './recipes/types';
 
 type Props = {
   route: {

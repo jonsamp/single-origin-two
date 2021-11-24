@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import { BrewRecipeName } from '../scenes/Brew/recipes';
+import { BrewRecipeName } from '../scenes/Brew/recipes/types';
 
 import AeropressIcon from './icons/AeropressIcon';
 import BeehouseIcon from './icons/BeehouseIcon';

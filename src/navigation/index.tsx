@@ -46,7 +46,10 @@ export type RootStackParamList = {
     timestamp: number;
   };
   Onboarding: undefined;
-  Preparation: undefined;
+  Preparation: {
+    image?: number;
+    text: string;
+  }[];
   SettingsDetail: {
     title: string;
   };

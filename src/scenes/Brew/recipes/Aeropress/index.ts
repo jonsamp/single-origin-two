@@ -8,10 +8,10 @@ import Finish from './images/finish.gif';
 import Pour from './images/pour.gif';
 import Press from './images/press.gif';
 
-import { StepType } from '../types';
+import { StepType, BrewRecipeName } from '../types';
 
 export default {
-  id: 'Aeropress',
+  id: BrewRecipeName.Aeropress,
   title: 'Aeropress',
   minYield: 180,
   maxYield: 300,

@@ -8,10 +8,10 @@ import Serve from './images/serve.gif';
 import Stir from './images/stir.gif';
 import Wait from './images/wait.gif';
 
-import { StepType } from '../types';
+import { StepType, BrewRecipeName } from '../types';
 
 export default {
-  id: 'EvaSolo',
+  id: BrewRecipeName.EvaSolo,
   title: 'Eva Solo',
   minYield: 288,
   maxYield: 640,
