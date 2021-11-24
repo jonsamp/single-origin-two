@@ -5,8 +5,6 @@ import { Animated } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { StatusBar } from 'expo-status-bar';
 
-import * as Updates from 'expo-updates';
-
 import { AppearanceProvider } from 'react-native-appearance';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
