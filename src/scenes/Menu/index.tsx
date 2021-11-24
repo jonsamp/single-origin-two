@@ -10,23 +10,22 @@ import MenuItem from '../../components/MenuItem';
 import ScreenPlaceholder from '../../components/ScreenPlaceholder';
 import { recipes, Recipe } from '../../constants/recipes';
 import withSettings from '../../providers/settings';
-import withTheme, { Theme } from '../../providers/theme';
 import withTracking, { Tracking } from '../../providers/tracking';
 import { Settings } from '../../state/settings/types';
 import ResponsiveScrollView from '../../components/ResponsiveScrollView';
 import Onboarding from './Onboarding';
 import BackgroundImage from './images/background.png';
 import { useNavigation } from '@react-navigation/core';
+import { useTailwind } from '../../common/theme';
 
 interface Props {
-  theme: Theme;
-  isDarkTheme: boolean;
   settings: Settings;
   tracking: Tracking;
 }
 
 function Menu(props: Props) {
-  const { theme, settings, tracking } = props;
+  const { settings, tracking } = props;
+  const tw = useTailwind();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const selectedRecipes = Object.keys(settings.recipes).filter(
     (settingsRecipe) =>
@@ -77,12 +76,7 @@ function Menu(props: Props) {
   }
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: theme.pageBackground,
-      }}
-    >
+    <View style={tw('flex-1 theme.background.default')}>
       <ImageBackground
         source={BackgroundImage}
         style={{ flex: 1 }}
@@ -108,4 +102,4 @@ function Menu(props: Props) {
   );
 }
 
-export default withTracking(withSettings(withTheme(Menu)));
+export default withTracking(withSettings(Menu));

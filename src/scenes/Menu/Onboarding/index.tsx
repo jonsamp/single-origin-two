@@ -2,18 +2,16 @@ import { Feather } from '@expo/vector-icons';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { iconSize, spacing } from '@expo/styleguide-native';
+
 import Card from '../../../components/Card';
-import type from '../../../constants/type';
-import withTheme from '../../../providers/theme';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../navigation';
+import { useTailwind, useTheme } from '../../../common/theme';
 
-interface OnboardingProps {
-  theme: any;
-}
-
-function Onboarding(props: OnboardingProps) {
-  const { theme } = props;
+function Onboarding() {
+  const { theme } = useTheme();
+  const tw = useTailwind();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   return (
@@ -21,22 +19,15 @@ function Onboarding(props: OnboardingProps) {
       onPress={() => navigation.navigate('Onboarding')}
       activeOpacity={0.7}
     >
-      <Card containerStyle={{ marginBottom: 24 }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: 20,
-          }}
-        >
-          <Text style={{ ...type.body, color: theme.foreground }}>
+      <Card containerStyle={{ marginBottom: spacing[6] }}>
+        <View style={tw('flex-row justify-between items-center p-5')}>
+          <Text style={tw('body theme.text.default')}>
             Get started with Single Origin
           </Text>
           <Feather
             name='chevron-right'
-            size={theme.iconSize}
-            color={theme.foreground}
+            size={iconSize.regular}
+            color={theme.icon.default}
           />
         </View>
       </Card>
@@ -44,4 +35,4 @@ function Onboarding(props: OnboardingProps) {
   );
 }
 
-export default withTheme(Onboarding);
+export default Onboarding;
