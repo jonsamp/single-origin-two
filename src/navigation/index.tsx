@@ -1,61 +1,60 @@
-import React from "react";
+import React from 'react';
 import {
   TouchableOpacity,
   Text,
   View,
   Platform,
   useColorScheme,
-} from "react-native";
-import { Feather } from "@expo/vector-icons";
-import { iconSize } from "@expo/styleguide-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+} from 'react-native';
+import { Feather } from '@expo/vector-icons';
+import { iconSize } from '@expo/styleguide-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { defaultTheme, darkTheme } from "../common/theme";
-import type from "../constants/type";
-import withTheme from "../providers/theme";
+import { defaultTheme, darkTheme } from '../common/theme';
+import type from '../constants/type';
+import withTheme from '../providers/theme';
 
-import BrewIcon from "./icons/BrewIcon";
-import LogsIcon from "./icons/LogsIcon";
-import SettingsIcon from "./icons/SettingsIcon";
-import Logs from "../scenes/Logs";
-import Menu from "../scenes/Menu";
-import Settings from "../scenes/Settings";
-import SettingsDetail from "../scenes/Settings/SettingsDetail";
-import Onboarding from "../scenes/Onboarding";
-import Preparation from "../scenes/Preparation";
-import Brew from "../scenes/Brew";
-import LogDetail from "../scenes/LogDetail";
-import LogDetailEdit from "../scenes/LogDetailEdit";
-import BrewSummary from "../scenes/BrewSummary";
-import BrewSettings from "../scenes/BrewSettings";
-import Test from "../scenes/Test";
+import BrewIcon from './icons/BrewIcon';
+import LogsIcon from './icons/LogsIcon';
+import SettingsIcon from './icons/SettingsIcon';
+import Logs from '../scenes/Logs';
+import Menu from '../scenes/Menu';
+import Settings from '../scenes/Settings';
+import SettingsDetail from '../scenes/Settings/SettingsDetail';
+import Onboarding from '../scenes/Onboarding';
+import Preparation from '../scenes/Preparation';
+import Brew from '../scenes/Brew';
+import LogDetail from '../scenes/LogDetail';
+import LogDetailEdit from '../scenes/LogDetailEdit';
+import BrewSummary from '../scenes/BrewSummary';
+import BrewSettings from '../scenes/BrewSettings';
+import Test from '../scenes/Test';
 
-export type StackParams = {
+export type RootStackParamList = {
   Brew: {
     id: string;
     title: string;
   };
+  BrewSettings: undefined;
+  BrewSummary: undefined;
   LogDetail: {
     timestamp: number;
   };
+  LogDetailEdit: {
+    timestamp: number;
+  };
+  Onboarding: undefined;
+  Preparation: undefined;
   SettingsDetail: {
     title: string;
   };
-  Menu: undefined;
-  MenuStackMain: undefined;
   Tabs: undefined;
-  Onboarding: undefined;
-  Logs: undefined;
+  MenuStackMain: undefined;
   LogsStackMain: undefined;
-  Settings: undefined;
-  SettingsStackMain: undefined;
-  Preparation: undefined;
-  BrewSummary: undefined;
-  LogDetailEdit: undefined;
   Test: undefined;
-  BrewSettings: undefined;
+  SettingsStackMain: undefined;
 };
 
 export type TabParams = {
@@ -65,25 +64,25 @@ export type TabParams = {
 };
 
 const Tab = createBottomTabNavigator<TabParams>();
-const Stack = createNativeStackNavigator<StackParams>();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function MenuStack() {
   const colorScheme = useColorScheme();
-  const { theme } = colorScheme === "dark" ? darkTheme : defaultTheme;
+  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme;
 
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="MenuStackMain"
+        name='MenuStackMain'
         component={Menu}
         options={{
           headerTitle: () => <View style={{ flex: 1 }} />,
           headerLeft: () => (
             <View
               style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "flex-start",
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
               }}
             >
               <BrewIcon theme={theme} focused={false} size={26} />
@@ -106,14 +105,14 @@ function MenuStack() {
 
 function LogsStack() {
   const colorScheme = useColorScheme();
-  const { theme } = colorScheme === "dark" ? darkTheme : defaultTheme;
+  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme;
 
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="LogsStackMain"
+        name='LogsStackMain'
         component={Logs}
-        options={{ headerLargeTitle: true, title: "Notes" }}
+        options={{ headerLargeTitle: true, title: 'Notes' }}
       />
     </Stack.Navigator>
   );
@@ -121,14 +120,14 @@ function LogsStack() {
 
 function SettingsStack() {
   const colorScheme = useColorScheme();
-  const { theme } = colorScheme === "dark" ? darkTheme : defaultTheme;
+  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme;
 
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="SettingsStackMain"
+        name='SettingsStackMain'
         component={Settings}
-        options={{ title: "Settings", headerLargeTitle: true }}
+        options={{ title: 'Settings', headerLargeTitle: true }}
       />
     </Stack.Navigator>
   );
@@ -136,32 +135,32 @@ function SettingsStack() {
 
 function Tabs() {
   const colorScheme = useColorScheme();
-  const { theme } = colorScheme === "dark" ? darkTheme : defaultTheme;
+  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme;
 
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
-        name="Menu"
+        name='Menu'
         component={MenuStack}
         options={{
-          title: "Recipes",
+          title: 'Recipes',
           tabBarIcon: (props) => (
             <BrewIcon focused={props.focused} theme={theme} />
           ),
         }}
       />
       <Tab.Screen
-        name="Logs"
+        name='Logs'
         component={LogsStack}
         options={{
-          title: "Notes",
+          title: 'Notes',
           tabBarIcon: (props) => (
             <LogsIcon focused={props.focused} theme={theme} />
           ),
         }}
       />
       <Tab.Screen
-        name="Settings"
+        name='Settings'
         component={SettingsStack}
         options={{
           tabBarIcon: (props) => (
@@ -175,11 +174,11 @@ function Tabs() {
 
 function App() {
   const colorScheme = useColorScheme();
-  const { theme } = colorScheme === "dark" ? darkTheme : defaultTheme;
+  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme;
 
   return (
     <NavigationContainer
-      theme={colorScheme === "light" ? defaultTheme : darkTheme}
+      theme={colorScheme === 'light' ? defaultTheme : darkTheme}
     >
       <Stack.Navigator
         screenOptions={{
@@ -192,27 +191,27 @@ function App() {
       >
         {/* <Stack.Screen name="Test" component={Test} /> */}
         <Stack.Screen
-          name="Tabs"
+          name='Tabs'
           component={Tabs}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Onboarding"
+          name='Onboarding'
           component={Onboarding}
-          options={{ title: "Get started" }}
+          options={{ title: 'Get started' }}
         />
         <Stack.Screen
-          name="Brew"
+          name='Brew'
           component={Brew}
           options={({ route, navigation }) => ({
             title: route.params.title,
             headerRight: () => (
               <TouchableOpacity
-                onPress={() => navigation.navigate("BrewSettings")}
+                onPress={() => navigation.navigate('BrewSettings')}
                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
               >
                 <Feather
-                  name="sliders"
+                  name='sliders'
                   color={theme.icon.default}
                   size={iconSize.regular}
                 />
@@ -223,23 +222,23 @@ function App() {
             },
           })}
         />
-        <Stack.Screen name="Preparation" component={Preparation} />
+        <Stack.Screen name='Preparation' component={Preparation} />
         <Stack.Screen
-          name="SettingsDetail"
+          name='SettingsDetail'
           component={SettingsDetail}
           options={({ route }) => ({
             title: route.params.title,
           })}
         />
         <Stack.Screen
-          name="LogDetail"
+          name='LogDetail'
           component={LogDetail}
           options={({ navigation, route }) => ({
-            title: "Brew Note",
+            title: 'Brew Note',
             headerRight: () => (
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate("LogDetailEdit", {
+                  navigation.navigate('LogDetailEdit', {
                     timestamp: route.params.timestamp,
                   })
                 }
@@ -260,22 +259,22 @@ function App() {
           })}
         />
         <Stack.Screen
-          name="LogDetailEdit"
+          name='LogDetailEdit'
           component={LogDetailEdit}
           options={{
             presentation: Platform.select({
-              ios: "modal",
-              android: "card",
+              ios: 'modal',
+              android: 'card',
             }),
             headerShown: Platform.select({
               ios: false,
               android: true,
             }),
-            title: "Edit Note",
+            title: 'Edit Note',
           }}
         />
         <Stack.Screen
-          name="BrewSettings"
+          name='BrewSettings'
           component={BrewSettings}
           options={{
             headerShown: Platform.select({
@@ -283,18 +282,18 @@ function App() {
               android: true,
             }),
             presentation: Platform.select({
-              ios: "modal",
-              android: "card",
+              ios: 'modal',
+              android: 'card',
             }),
-            title: "Brew Settings",
+            title: 'Brew Settings',
           }}
         />
         <Stack.Screen
-          name="BrewSummary"
+          name='BrewSummary'
           component={BrewSummary}
           options={{
             gestureEnabled: false,
-            title: "Brew Summary",
+            title: 'Brew Summary',
           }}
         />
       </Stack.Navigator>

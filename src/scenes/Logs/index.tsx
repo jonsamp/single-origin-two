@@ -1,16 +1,16 @@
-import React from "react";
-import { View } from "react-native";
-import { connect } from "react-redux";
-import { FlatList } from "react-native-gesture-handler";
+import React from 'react';
+import { View } from 'react-native';
+import { connect } from 'react-redux';
+import { FlatList } from 'react-native-gesture-handler';
 
-import ScreenPlaceholder from "../../components/ScreenPlaceholder";
-import recipes from "../../constants/recipes";
-import { useTheme } from "../../providers/theme";
-import { selectLogs } from "../../state/logs/selectors";
-import { logDeleted } from "../../state/logs/actions";
-import { Logs as LogsType, Log } from "../../types/index";
-import LogItem from "./LogItem";
-import styles from "./styles";
+import ScreenPlaceholder from '../../components/ScreenPlaceholder';
+import { recipes } from '../../constants/recipes';
+import { useTheme } from '../../providers/theme';
+import { selectLogs } from '../../state/logs/selectors';
+import { logDeleted } from '../../state/logs/actions';
+import { Logs as LogsType, Log } from '../../types/index';
+import LogItem from './LogItem';
+import styles from './styles';
 
 interface Props {
   logs: LogsType;
@@ -34,7 +34,7 @@ function Logs(props: Props) {
     return b.timestamp - a.timestamp;
   }
 
-  function onDelete(timestamp) {
+  function onDelete(timestamp: number) {
     logDeleted({ timestamp });
   }
 
@@ -50,7 +50,7 @@ function Logs(props: Props) {
           log={item}
           onDelete={onDelete}
           onPress={() =>
-            navigation.navigate("LogDetail", {
+            navigation.navigate('LogDetail', {
               timestamp: item.timestamp,
             })
           }
@@ -67,7 +67,7 @@ function Logs(props: Props) {
         />
       )}
       ListEmptyComponent={
-        <ScreenPlaceholder text="Notes of each brew will appear here once you complete a brew." />
+        <ScreenPlaceholder text='Notes of each brew will appear here once you complete a brew.' />
       }
     />
   );

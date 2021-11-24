@@ -1,13 +1,13 @@
-import React from "react";
-import { Text, TouchableOpacity, View, ImageBackground } from "react-native";
-import { shadows } from "@expo/styleguide-native";
-import { useTheme, useTailwind } from "../../common/theme";
-import { MenuItem as MenuItemT } from "../../types/index";
-import { height } from "../../constants/layout";
-import { ArrowIcon } from "./icons/ArrowIcon";
+import React from 'react';
+import { Text, TouchableOpacity, View, ImageBackground } from 'react-native';
+import { shadows } from '@expo/styleguide-native';
+import { useTheme, useTailwind } from '../../common/theme';
+import { height } from '../../constants/layout';
+import { ArrowIcon } from './icons/ArrowIcon';
+import { Recipe } from '../../constants/recipes';
 
 type Props = {
-  recipe: MenuItemT;
+  recipe: Recipe;
   onPress?: () => void;
 };
 
@@ -17,12 +17,12 @@ export default function MenuItem(props: Props) {
   const tw = useTailwind();
 
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.8} style={tw("mb-8")}>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.8} style={tw('mb-8')}>
       <View style={shadows.medium}>
         <ImageBackground
           source={recipe.image}
           style={[
-            tw("rounded-2xl overflow-hidden bg-black"),
+            tw('rounded-2xl overflow-hidden bg-black'),
             {
               minHeight: 200,
               maxHeight: 240,
@@ -35,15 +35,15 @@ export default function MenuItem(props: Props) {
             opacity: 0.65,
           }}
         >
-          <View style={tw("p-5")}>
-            <Text style={tw("scriptTitle text-white")}>{recipe.title}</Text>
-            <Text style={tw("subheader text-white font-normal")}>
+          <View style={tw('p-5')}>
+            <Text style={tw('scriptTitle text-white')}>{recipe.title}</Text>
+            <Text style={tw('subheader text-white font-normal')}>
               {recipe.modifier}
             </Text>
           </View>
           <View
             style={[
-              tw("absolute bottom-0 right-0 m-5 rounded-full"),
+              tw('absolute bottom-0 right-0 m-5 rounded-full'),
               {
                 backgroundColor: theme.brand.default,
               },

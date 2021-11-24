@@ -15,7 +15,7 @@ import { StatusBar } from "expo-status-bar";
 import { connect } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { isMaxWidth } from "../../constants/layout";
-import recipes from "../../constants/recipes";
+import {recipes} from "../../constants/recipes";
 import type from "../../constants/type";
 import withTheme, { Styleguide, Theme } from "../../providers/theme";
 import withTracking, { Tracking } from "../../providers/tracking";
