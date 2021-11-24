@@ -1,38 +1,38 @@
-import React from "react";
-import { ScrollView, View } from "react-native";
-import { Theme } from "../../types";
-import withSettings from "../../providers/settings";
-import withTheme from "../../providers/theme";
-import Recipe from "./Recipe";
-import recipes from "./recipes";
+import React from 'react';
+import { ScrollView, View } from 'react-native';
+import { spacing } from '@expo/styleguide-native';
 
-interface BrewProps {
-  theme: Theme;
-  isDarkTheme: boolean;
-  route: any;
-  navigation: any;
-}
+import withSettings from '../../providers/settings';
+import { useTailwind } from '../../common/theme';
+import Recipe from './Recipe';
+import recipes, { BrewRecipeName } from './recipes';
+import { useNavigation } from '@react-navigation/core';
 
-function Brew(props: BrewProps) {
-  const { theme, isDarkTheme, route, navigation } = props;
+type Props = {
+  route: {
+    params: {
+      id: BrewRecipeName;
+    };
+  };
+};
+
+function Brew(props: Props) {
+  const { route } = props;
+  const navigation = useNavigation();
+  const tw = useTailwind();
   const { id } = route.params;
   const recipe = recipes[id];
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: isDarkTheme ? theme.background : theme.grey1,
-      }}
-    >
+    <View style={tw('flex-1 theme.background.default')}>
       <ScrollView
         contentContainerStyle={{
-          padding: 12,
-          alignItems: "center",
-          paddingTop: 32,
+          padding: spacing[3],
+          alignItems: 'center',
+          paddingTop: spacing[8],
         }}
       >
-        <View style={{ width: "100%" }}>
+        <View style={tw('w-full')}>
           <Recipe recipe={recipe} navigation={navigation} />
         </View>
       </ScrollView>
@@ -40,4 +40,4 @@ function Brew(props: BrewProps) {
   );
 }
 
-export default withSettings(withTheme(Brew));
+export default withSettings(Brew);

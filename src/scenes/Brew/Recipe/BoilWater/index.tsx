@@ -1,14 +1,15 @@
-import React from "react";
-import Card from "../../../../components/Card";
-import Instructions from "../../../../components/Instructions";
-import withSettings from "../../../../providers/settings";
+import React from 'react';
+import Card from '../../../../components/Card';
+import Instructions from '../../../../components/Instructions';
+import withSettings from '../../../../providers/settings';
 
-interface BoilWaterProps {
+type Props = {
   unitHelpers: any;
   volume: number;
-}
+};
 
-function BoilWater({ unitHelpers, volume }: BoilWaterProps) {
+function BoilWater(props: Props) {
+  const { unitHelpers, volume } = props;
   const { waterVolumeUnit, temperatureUnit } = unitHelpers;
 
   return (
@@ -19,7 +20,7 @@ function BoilWater({ unitHelpers, volume }: BoilWaterProps) {
         }** of water to **${temperatureUnit.getPreferredValue(205)}${
           temperatureUnit.unit.symbol
         }** (nearly boiling).`}
-        icon="WaterIcon"
+        icon='WaterIcon'
       />
     </Card>
   );

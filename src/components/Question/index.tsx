@@ -1,34 +1,22 @@
-import React from "react";
-import { Text, View } from "react-native";
-import type from "../../constants/type";
-import withTheme from "../../providers/theme";
+import React from 'react';
+import { Text, View } from 'react-native';
 
-interface QuestionProps {
-  theme: any;
+import { useTailwind } from '../../common/theme';
+
+type Props = {
   title: string;
   description: string;
-}
+};
 
-function Question({ title, description, theme }: QuestionProps) {
+function Question(props: Props) {
+  const { title, description } = props;
+  const tw = useTailwind();
+
   return (
-    <View style={{ padding: 20 }}>
-      <Text
-        style={{
-          ...type.headline,
-          color: theme.foreground,
-        }}
-      >
-        {title}
-      </Text>
+    <View style={tw('p-5')}>
+      <Text style={tw('headline theme.text.default')}>{title}</Text>
       {description ? (
-        <Text
-          style={{
-            ...type.callout,
-            opacity: 0.9,
-            color: theme.foreground,
-            marginTop: 4,
-          }}
-        >
+        <Text style={tw('callout theme.text.secondary mt-1')}>
           {description}
         </Text>
       ) : null}
@@ -36,4 +24,4 @@ function Question({ title, description, theme }: QuestionProps) {
   );
 }
 
-export default withTheme(Question);
+export default Question;

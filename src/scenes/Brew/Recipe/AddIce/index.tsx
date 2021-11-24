@@ -1,14 +1,15 @@
-import React from "react";
-import Card from "../../../../components/Card";
-import Instructions from "../../../../components/Instructions";
-import withSettings from "../../../../providers/settings";
+import React from 'react';
+import Card from '../../../../components/Card';
+import Instructions from '../../../../components/Instructions';
+import withSettings from '../../../../providers/settings';
 
-interface AddIceProps {
+type Props = {
   unitHelpers: any;
   volume: number;
-}
+};
 
-function AddIce({ unitHelpers, volume }: AddIceProps) {
+function AddIce(props: Props) {
+  const { unitHelpers, volume } = props;
   const { waterVolumeUnit } = unitHelpers;
 
   return (
@@ -17,7 +18,7 @@ function AddIce({ unitHelpers, volume }: AddIceProps) {
         text={`Add **${waterVolumeUnit.getPreferredValue(volume)} ${
           waterVolumeUnit.unit.title
         }** of ice to your carafe or mug.`}
-        icon="IceIcon"
+        icon='IceIcon'
       />
     </Card>
   );

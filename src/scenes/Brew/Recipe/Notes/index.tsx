@@ -1,15 +1,17 @@
-import React from "react";
-import Card from "../../../../components/Card";
-import Instructions from "../../../../components/Instructions";
+import React from 'react';
+import Card from '../../../../components/Card';
+import Instructions from '../../../../components/Instructions';
 
-interface NotesProps {
+type Props = {
   text: string;
-}
+};
 
-function Notes({ text }: NotesProps) {
+function Notes(props: Props) {
+  const { text } = props;
+
   return (
     <Card>
-      <Instructions text={"Your notes from last time:"} hint={text.trim()} />
+      <Instructions text={'Your notes from last time:'} hint={text.trim()} />
     </Card>
   );
 }

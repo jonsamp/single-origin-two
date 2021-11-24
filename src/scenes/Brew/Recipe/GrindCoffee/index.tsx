@@ -1,54 +1,46 @@
-import React from "react";
-import { Image, View } from "react-native";
-import Card from "../../../../components/Card";
-import Instructions from "../../../../components/Instructions";
-import { height, width } from "../../../../constants/layout";
-import withSettings from "../../../../providers/settings";
-import withTheme, { Styleguide } from "../../../../providers/theme";
-import { getValueUnit } from "../../../../scenes/Brew/helpers";
-import { Log } from "../../../../state/logs/types";
+import React from 'react';
+import { Image, View } from 'react-native';
+import Card from '../../../../components/Card';
+import Instructions from '../../../../components/Instructions';
+import { height, isMaxWidth } from '../../../../constants/layout';
+import withSettings from '../../../../providers/settings';
+import { Styleguide } from '../../../../providers/theme';
+import { getValueUnit } from '../../../../scenes/Brew/helpers';
+import { Log } from '../../../../state/logs/types';
 
-interface GrindCoffeeProps {
+type Props = {
   unitHelpers: any;
   coffeeWeight: number;
   defaultGrind: number;
   title: string;
   recentLog: Log;
-  styleguide: Styleguide;
-}
+};
 
-function GrindCoffee({
-  unitHelpers,
-  coffeeWeight,
-  defaultGrind,
-  title,
-  recentLog,
-  styleguide,
-}: GrindCoffeeProps) {
+function GrindCoffee(props: Props) {
+  const { unitHelpers, coffeeWeight, defaultGrind, title, recentLog } = props;
   const { coffeeWeightUnit, grindUnit } = unitHelpers;
-  const isMaxWidth = width > styleguide.maxWidth;
   let recommendation;
-  let grindFromLastTime = "";
+  let grindFromLastTime = '';
 
   if (recentLog.grind) {
     grindFromLastTime = ` you brewed with a grind setting of ${recentLog.grind} and`;
   }
 
-  if (recentLog.tastingNote === "bitter") {
+  if (recentLog.tastingNote === 'bitter') {
     recommendation = `Last time${grindFromLastTime} your coffee was bitter. Try grinding your coffee coarser this time.`;
-  } else if (recentLog.tastingNote === "sour") {
+  } else if (recentLog.tastingNote === 'sour') {
     recommendation = `Last time${grindFromLastTime} your coffee was sour. Try grinding your coffee finer this time.`;
   }
 
   return (
     <Card>
-      <View style={isMaxWidth && { flexDirection: "row-reverse" }}>
-        {grindUnit.grinder.shortTitle === "grinder" ? (
+      <View style={isMaxWidth && { flexDirection: 'row-reverse' }}>
+        {grindUnit.grinder.shortTitle === 'grinder' ? (
           <Image
             source={grindUnit.getGrindSetting(defaultGrind).image}
             style={{
-              resizeMode: "cover",
-              width: "100%",
+              resizeMode: 'cover',
+              width: '100%',
               height: height / 5,
             }}
           />
@@ -62,7 +54,7 @@ function GrindCoffee({
           }** with your ${
             grindUnit.grinder.shortTitle
           }, then add the grounds to your ${title.toLowerCase()}.`}
-          icon="GrindIcon"
+          icon='GrindIcon'
           hint={recommendation}
         />
       </View>
@@ -70,4 +62,4 @@ function GrindCoffee({
   );
 }
 
-export default withSettings(withTheme(GrindCoffee));
+export default withSettings(GrindCoffee);

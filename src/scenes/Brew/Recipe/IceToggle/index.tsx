@@ -1,21 +1,23 @@
-import React from "react";
-import { Switch, View } from "react-native";
-import Card from "../../../../components/Card";
-import Instructions from "../../../../components/Instructions";
-import withSettings from "../../../../providers/settings";
+import React from 'react';
+import { Switch, View } from 'react-native';
+import Card from '../../../../components/Card';
+import Instructions from '../../../../components/Instructions';
+import withSettings from '../../../../providers/settings';
 
-interface AddIceProps {
+type Props = {
   value: boolean;
   onChange: (value: boolean) => void;
-}
+};
 
-function AddIce({ onChange, value }: AddIceProps) {
+function AddIce(props: Props) {
+  const { onChange, value } = props;
+
   return (
     <Card>
       <View
-        style={{ flexDirection: "row", alignItems: "center", paddingRight: 20 }}
+        style={{ flexDirection: 'row', alignItems: 'center', paddingRight: 20 }}
       >
-        <Instructions text="Make this brew iced" />
+        <Instructions text='Make this brew iced' />
         <Switch value={value} onValueChange={onChange} />
       </View>
     </Card>
