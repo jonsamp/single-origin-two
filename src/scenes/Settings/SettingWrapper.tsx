@@ -1,69 +1,44 @@
-import React, { ReactNode } from "react";
-import { Text, View, ViewStyle } from "react-native";
-import withTheme from "../../providers/theme";
-import { Theme } from "../../types/index";
-import styles from "./styles";
+import React, { ReactNode } from 'react';
+import { Text, View, ViewStyle } from 'react-native';
 
-interface SettingWrapperProps {
+import { useTailwind } from '../../common/theme';
+
+type Props = {
   children: ReactNode;
-  theme: Theme;
   title: string;
-  description: string;
-  borderTop: boolean;
-  isDarkTheme: boolean;
-  style: ViewStyle;
-}
+  description?: string;
+  borderTop?: boolean;
+  style?: ViewStyle;
+};
 
-const SettingWrapper = ({
-  children,
-  theme,
-  title,
-  description,
-  borderTop,
-  isDarkTheme,
-  style,
-}: SettingWrapperProps) => (
-  <View
-    style={{ backgroundColor: isDarkTheme ? theme.background : theme.grey1 }}
-  >
-    <View
-      style={{
-        padding: 12,
-        paddingHorizontal: 16,
-        borderBottomWidth: 1,
-        borderBottomColor: theme.border,
-        backgroundColor: isDarkTheme ? theme.grey2 : theme.background,
-        borderTopWidth: borderTop ? 1 : 0,
-        borderTopColor: theme.border,
-        ...style,
-      }}
-    >
-      <View style={styles.row}>
-        <Text
-          style={[
-            styles.title,
-            { color: theme.foreground, textTransform: "capitalize" },
-          ]}
-        >
-          {title}
-        </Text>
-        {children}
-      </View>
-    </View>
-    {description ? (
+const SettingWrapper = (props: Props) => {
+  const { children, title, description, borderTop = false, style } = props;
+  const tw = useTailwind();
+
+  return (
+    <View style={tw('theme.background.default')}>
       <View
-        style={{
-          padding: 16,
-          paddingTop: 8,
-          paddingBottom: 32,
-        }}
+        style={[
+          tw(
+            `px-4 h-12 justify-center border-b theme.border.default ${
+              borderTop ? 'border-t' : ''
+            } theme.background.overlay`
+          ),
+          style,
+        ]}
       >
-        <Text style={[styles.description, { color: theme.foreground }]}>
-          {description}
-        </Text>
+        <View style={tw('flex-row justify-between items-center')}>
+          <Text style={tw('body theme.text.default capitalize')}>{title}</Text>
+          {children}
+        </View>
       </View>
-    ) : null}
-  </View>
-);
+      {description ? (
+        <View style={tw('px-4 pt-2 pb-8')}>
+          <Text style={tw('caption theme.text.secondary')}>{description}</Text>
+        </View>
+      ) : null}
+    </View>
+  );
+};
 
-export default withTheme(SettingWrapper);
+export default SettingWrapper;

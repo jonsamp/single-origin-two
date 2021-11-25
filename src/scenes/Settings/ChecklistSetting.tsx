@@ -1,45 +1,50 @@
-import { Feather } from "@expo/vector-icons";
-import React from "react";
-import { TouchableOpacity, ViewStyle } from "react-native";
-import withTheme from "../../providers/theme";
-import { MenuItem, Theme } from "../../types";
-import SettingWrapper from "./SettingWrapper";
+import { iconSize } from '@expo/styleguide-native';
+import { Feather } from '@expo/vector-icons';
+import React, { Fragment } from 'react';
+import { TouchableOpacity, ViewStyle } from 'react-native';
 
-interface ChecklistSettingProps {
-  theme: Theme;
+import { useTheme } from '../../common/theme';
+import { MenuItem } from '../../types';
+import SettingWrapper from './SettingWrapper';
+
+type Props = {
   onChange: (id: string) => void;
   items: EnhancedMenuItem[];
-  style: ViewStyle;
-}
+  style?: ViewStyle;
+};
 
 interface EnhancedMenuItem extends MenuItem {
   value: boolean;
 }
 
-const ChecklistSetting = ({
-  theme,
-  onChange,
-  items,
-  style,
-}: ChecklistSettingProps) =>
-  items.map((item, index) => (
-    <TouchableOpacity onPress={() => onChange(item.id)} key={item.id}>
-      <SettingWrapper
-        title={`${item.title}${item.modifier ? ` ${item.modifier}` : ""}`}
-        style={{
-          ...style,
-          ...(index === items.length - 1 ? { borderBottomWidth: 0 } : null),
-        }}
-      >
-        {item.value ? (
-          <Feather
-            name="check"
-            size={theme.iconSize - 3}
-            color={theme.primary}
-          />
-        ) : null}
-      </SettingWrapper>
-    </TouchableOpacity>
-  ));
+function ChecklistSetting(props: Props) {
+  const { onChange, items, style } = props;
+  const { theme } = useTheme();
 
-export default withTheme(ChecklistSetting);
+  return (
+    <Fragment>
+      {items.map((item, index) => (
+        <TouchableOpacity onPress={() => onChange(item.id)} key={item.id}>
+          <SettingWrapper
+            title={`${item.title}${item.modifier ? ` ${item.modifier}` : ''}`}
+            style={{
+              ...style,
+              ...(index === items.length - 1 ? { borderBottomWidth: 0 } : null),
+              ...{ borderBottomWidth: 1 },
+            }}
+          >
+            {item.value ? (
+              <Feather
+                name='check'
+                size={iconSize.regular - 3}
+                color={theme.icon.default}
+              />
+            ) : null}
+          </SettingWrapper>
+        </TouchableOpacity>
+      ))}
+    </Fragment>
+  );
+}
+
+export default ChecklistSetting;

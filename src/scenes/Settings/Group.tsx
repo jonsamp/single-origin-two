@@ -1,37 +1,29 @@
 import { Feather } from '@expo/vector-icons';
 import React from 'react';
-import { Text, TextStyle, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import type from '../../constants/type';
-import withTheme from '../../providers/theme';
-import { Theme } from '../../types/index';
 import { StackNavigationProp } from '@react-navigation/stack';
+
 import { RootStackParamList } from '../../navigation';
+import { useTailwind, useTheme } from '../../common/theme';
+import { iconSize } from '@expo/styleguide-native';
 
-interface GroupProps {
+type Props = {
   title: string;
-  theme: Theme;
-  isDarkTheme?: boolean;
   onPress?: () => void;
-}
+};
 
-function Group(props: GroupProps) {
-  const { title, theme, isDarkTheme, onPress } = props;
+function Group(props: Props) {
+  const { title, onPress } = props;
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const { theme } = useTheme();
+  const tw = useTailwind();
 
   return (
     <TouchableOpacity
-      style={{
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: 12,
-        paddingLeft: 16,
-        backgroundColor: isDarkTheme ? theme.grey2 : theme.background,
-        borderBottomColor: theme.border,
-        borderBottomWidth: 1,
-      }}
+      style={tw(
+        'flex-1 flex-row justify-between items-center h-12 px-4 theme.background.overlay border-b theme.border.default'
+      )}
       onPress={() => {
         if (onPress) {
           return onPress();
@@ -39,17 +31,14 @@ function Group(props: GroupProps) {
         navigation.navigate('SettingsDetail', { title });
       }}
     >
-      <Text style={[type.body, { color: theme.text }] as TextStyle}>
-        {title}
-      </Text>
+      <Text style={tw('body theme.text.default')}>{title}</Text>
       <Feather
         name='chevron-right'
-        size={theme.iconSize}
-        color={theme.text}
-        style={{ opacity: 0.65 }}
+        size={iconSize.regular}
+        color={theme.icon.secondary}
       />
     </TouchableOpacity>
   );
 }
 
-export default withTheme(Group);
+export default Group;
