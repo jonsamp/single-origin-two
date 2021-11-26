@@ -1,31 +1,22 @@
-import React from "react";
-import { Text, View } from "react-native";
-import withTheme from "../../providers/theme";
-import { Theme } from "../../types";
-import styles from "./styles";
+import React from 'react';
+import { Text, View } from 'react-native';
 
-interface ScreenPlaceholderProps {
-  theme: Theme;
+import { useTailwind } from '../../common/theme';
+import styles from './styles';
+
+type Props = {
   text: string;
-}
+};
 
-function ScreenPlaceholder(props: ScreenPlaceholderProps) {
-  const { theme, text } = props;
+function ScreenPlaceholder(props: Props) {
+  const { text } = props;
+  const tw = useTailwind();
+
   return (
     <View style={styles.placeholderContainer}>
-      <Text
-        style={[
-          styles.placeholderText,
-          {
-            color: theme.foreground,
-            opacity: 0.75,
-          },
-        ]}
-      >
-        {text}
-      </Text>
+      <Text style={[tw('theme.text.secondary body text-center')]}>{text}</Text>
     </View>
   );
 }
 
-export default withTheme(ScreenPlaceholder);
+export default ScreenPlaceholder;

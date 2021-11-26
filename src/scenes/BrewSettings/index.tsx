@@ -1,77 +1,51 @@
-import React from "react";
+import React from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
   Platform,
   ScrollView,
-} from "react-native";
-import { StatusBar } from "expo-status-bar";
-import { Feather } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import ResponsiveScrollView from "../../components/ResponsiveScrollView";
-import withTheme, { Theme } from "../../providers/theme";
-import SettingsDetail from "../Settings/SettingsDetail";
-import type from "../../constants/type";
-import { isMaxWidth } from "../../constants/layout";
+} from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
-interface BrewSettingsProps {
-  theme: Theme;
-  isDarkTheme: boolean;
-}
+import SettingsDetail from '../Settings/SettingsDetail';
+import { isMaxWidth } from '../../constants/layout';
+import { useTailwind, useTheme } from '../../common/theme';
+import { iconSize, spacing } from '@expo/styleguide-native';
 
-function BrewSettings({ theme, isDarkTheme }: BrewSettingsProps) {
+function BrewSettings() {
   const navigation = useNavigation();
+  const tw = useTailwind();
+  const { theme } = useTheme();
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: isDarkTheme ? theme.grey2 : theme.grey1,
-      }}
-    >
+    <View style={tw('flex-1 theme.background.default')}>
       {!isMaxWidth &&
-        Platform.select({ ios: <StatusBar animated style="light" /> })}
+        Platform.select({ ios: <StatusBar animated style='light' /> })}
       {Platform.select({
         ios: (
           <View
-            style={{
-              backgroundColor: theme.navigationBackground,
-              borderBottomWidth: 1,
-              borderBottomColor: theme.border,
-              padding: 16,
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
+            style={tw(
+              'theme.background.secondary border-b theme.border.default p-4 flex-row items-center justify-between'
+            )}
           >
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
+            <View style={tw('flex-row items-center')}>
               <Feather
-                name="sliders"
-                color={theme.foreground}
-                size={theme.iconSize}
+                name='sliders'
+                color={theme.icon.default}
+                size={iconSize.regular}
               />
-              <Text
-                style={{
-                  ...type.headline,
-                  fontWeight: "600",
-                  marginLeft: 12,
-                  color: theme.text,
-                }}
-              >
+              <Text style={tw('headline ml-3 theme.text.default')}>
                 Brew Settings
               </Text>
             </View>
             <TouchableOpacity
               onPress={() => navigation.goBack()}
-              style={{ paddingRight: 4 }}
+              style={tw('pr-1')}
             >
-              <Text style={[type.headline, { color: theme.text }]}>Save</Text>
+              <Text style={tw('headline theme.text.default')}>Save</Text>
             </TouchableOpacity>
           </View>
         ),
@@ -79,17 +53,17 @@ function BrewSettings({ theme, isDarkTheme }: BrewSettingsProps) {
       <ScrollView
         contentContainerStyle={{
           paddingHorizontal: 0,
-          paddingTop: -24,
-          marginTop: -24,
+          paddingTop: -spacing[6],
+          marginTop: -spacing[6],
         }}
       >
-        <SettingsDetail route={{ params: { title: "brew-settings" } }} />
-        <View style={{ top: -32 }}>
-          <SettingsDetail route={{ params: { title: "units" } }} />
+        <SettingsDetail route={{ params: { title: 'brew-settings' } }} />
+        <View style={{ top: -spacing[8] }}>
+          <SettingsDetail route={{ params: { title: 'units' } }} />
         </View>
       </ScrollView>
     </View>
   );
 }
 
-export default withTheme(BrewSettings);
+export default BrewSettings;
