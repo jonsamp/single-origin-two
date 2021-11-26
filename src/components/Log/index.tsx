@@ -5,7 +5,7 @@ import { Text, TouchableOpacity, View, ViewStyle } from "react-native";
 import { connect } from "react-redux";
 import Card from "../../components/Card";
 import ResponsiveScrollView from "../../components/ResponsiveScrollView";
-import {recipes} from "../../constants/recipes";
+import { recipes } from "../../constants/recipes";
 import type from "../../constants/type";
 import formatSeconds from "../../helpers/formatSeconds";
 import withSettings from "../../providers/settings";

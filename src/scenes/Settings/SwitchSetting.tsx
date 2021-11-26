@@ -1,6 +1,6 @@
-import React from 'react';
-import { Switch } from 'react-native';
-import SettingWrapper from './SettingWrapper';
+import React from "react";
+import { Switch } from "react-native";
+import SettingWrapper from "./SettingWrapper";
 
 type Props = {
   value: boolean;

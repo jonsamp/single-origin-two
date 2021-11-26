@@ -1,12 +1,12 @@
-import { Feather } from '@expo/vector-icons';
-import { format } from 'date-fns';
-import React from 'react';
+import { Feather } from "@expo/vector-icons";
+import { format } from "date-fns";
+import React from "react";
 import {
   Text,
   View,
   TouchableOpacity as RNTouchableOpacity,
   Platform,
-} from 'react-native';
+} from "react-native";
 import Animated, {
   Easing,
   withTiming,
@@ -14,21 +14,21 @@ import Animated, {
   useAnimatedStyle,
   useAnimatedGestureHandler,
   runOnJS,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 import {
   PanGestureHandler,
   TouchableOpacity,
-} from 'react-native-gesture-handler';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
-import * as Haptics from 'expo-haptics';
+} from "react-native-gesture-handler";
+import Swipeable from "react-native-gesture-handler/Swipeable";
+import * as Haptics from "expo-haptics";
 
-import { width, height as screenHeight } from '../../../constants/layout';
-import { recipes } from '../../../constants/recipes';
-import type from '../../../constants/type';
-import { useTheme } from '../../../providers/theme';
-import { Log } from '../../../types';
-import { TrashIcon } from './TrashIcon';
-import styles from './styles';
+import { width, height as screenHeight } from "../../../constants/layout";
+import { recipes } from "../../../constants/recipes";
+import type from "../../../constants/type";
+import { useTheme } from "../../../providers/theme";
+import { Log } from "../../../types";
+import { TrashIcon } from "./TrashIcon";
+import styles from "./styles";
 
 type Props = {
   log: Log;
@@ -41,7 +41,7 @@ type GestureContext = {
 };
 
 async function haptic() {
-  if (Platform.OS === 'ios') {
+  if (Platform.OS === "ios") {
     await Haptics.selectionAsync();
   }
 }
@@ -154,7 +154,7 @@ function ListItem(props: Props) {
   });
 
   return (
-    <Animated.View style={[animatedHeightStyle, { overflow: 'hidden' }]}>
+    <Animated.View style={[animatedHeightStyle, { overflow: "hidden" }]}>
       <RNTouchableOpacity
         activeOpacity={1}
         onPress={_onDelete}
@@ -168,7 +168,7 @@ function ListItem(props: Props) {
         <Animated.View
           style={[
             {
-              alignItems: 'center',
+              alignItems: "center",
             },
             animatedTrashStyle,
           ]}
@@ -177,7 +177,7 @@ function ListItem(props: Props) {
           <Text
             style={{
               ...type.label,
-              color: 'white',
+              color: "white",
             }}
           >
             Delete
@@ -221,18 +221,18 @@ function ListItem(props: Props) {
                       width: 20,
                       height: 20,
                       backgroundColor: colors.primary,
-                      position: 'absolute',
+                      position: "absolute",
                       right: 4,
                       bottom: 4,
                       borderRadius: 2,
-                      alignItems: 'center',
-                      justifyContent: 'center',
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
                     <Text
                       style={[
                         type.label,
-                        { color: 'black', fontWeight: 'bold' },
+                        { color: "black", fontWeight: "bold" },
                       ]}
                     >
                       {log.rating}
@@ -250,7 +250,7 @@ function ListItem(props: Props) {
                     { color: colors.foreground, opacity: 0.8 },
                   ]}
                 >
-                  {format(log.timestamp, 'MMM d, yyyy @ h:mma')}
+                  {format(log.timestamp, "MMM d, yyyy @ h:mma")}
                 </Text>
                 {log.tastingNote || log.notes ? (
                   <Text
@@ -272,7 +272,7 @@ function ListItem(props: Props) {
             </View>
             <View style={{ marginLeft: 16 }}>
               <Feather
-                name='chevron-right'
+                name="chevron-right"
                 size={colors.iconSize}
                 color={colors.foreground}
               />

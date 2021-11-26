@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import { useTailwind } from '../../common/theme';
-import Image from '../../components/Image';
-import Card from '../Card';
-import Instructions from '../Instructions';
+import { useTailwind } from "../../common/theme";
+import Image from "../../components/Image";
+import Card from "../Card";
+import Instructions from "../Instructions";
 
 type Props = {
   step: {
@@ -23,8 +23,8 @@ export default function InstructionalCard(props: Props) {
       {step.title ? (
         <Instructions
           text={step.title}
-          textStyle={tw('title p-0')}
-          style={tw('pb-4 border-b-2 theme.border.default')}
+          textStyle={tw("title p-0")}
+          style={tw("pb-4 border-b-2 theme.border.default")}
         />
       ) : null}
       {step.description ? <Instructions text={step.description} /> : null}

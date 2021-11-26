@@ -1,7 +1,7 @@
-import React from 'react';
-import Card from '../../../../components/Card';
-import Instructions from '../../../../components/Instructions';
-import withSettings from '../../../../providers/settings';
+import React from "react";
+import Card from "../../../../components/Card";
+import Instructions from "../../../../components/Instructions";
+import withSettings from "../../../../providers/settings";
 
 type Props = {
   unitHelpers: any;
@@ -20,7 +20,7 @@ function BoilWater(props: Props) {
         }** of water to **${temperatureUnit.getPreferredValue(205)}${
           temperatureUnit.unit.symbol
         }** (nearly boiling).`}
-        icon='WaterIcon'
+        icon="WaterIcon"
       />
     </Card>
   );

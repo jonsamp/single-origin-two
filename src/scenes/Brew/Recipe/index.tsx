@@ -1,28 +1,28 @@
-import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
-import React, { Component } from 'react';
-import { View } from 'react-native';
-import { connect } from 'react-redux';
-import { withSafeAreaInsets } from 'react-native-safe-area-context';
+import { activateKeepAwake, deactivateKeepAwake } from "expo-keep-awake";
+import React, { Component } from "react";
+import { View } from "react-native";
+import { connect } from "react-redux";
+import { withSafeAreaInsets } from "react-native-safe-area-context";
 
-import Button from '../../../components/Button';
-import { isMaxWidth, height } from '../../../constants/layout';
-import withSettings from '../../../providers/settings';
-import withTheme, { Styleguide } from '../../../providers/theme';
-import { logAdded } from '../../../state/logs/actions';
-import { selectRecentLog } from '../../../state/logs/selectors';
-import { Log } from '../../../state/logs/types';
-import { Settings } from '../../../state/settings/types';
-import { UnitHelpers } from '../../../types/index';
-import AddIce from './AddIce';
-import BoilWater from './BoilWater';
-import GrindCoffee from './GrindCoffee';
-import IceToggle from './IceToggle';
-import Notes from './Notes';
-import PourTimer from './PourTimer';
-import Preparation from './Preparation';
-import RecordBrewAttributes from './RecordBrewAttributes';
-import YieldQuestion from './YieldQuestion';
-import { BrewRecipe } from '../recipes/types';
+import Button from "../../../components/Button";
+import { isMaxWidth, height } from "../../../constants/layout";
+import withSettings from "../../../providers/settings";
+import withTheme, { Styleguide } from "../../../providers/theme";
+import { logAdded } from "../../../state/logs/actions";
+import { selectRecentLog } from "../../../state/logs/selectors";
+import { Log } from "../../../state/logs/types";
+import { Settings } from "../../../state/settings/types";
+import { UnitHelpers } from "../../../types/index";
+import AddIce from "./AddIce";
+import BoilWater from "./BoilWater";
+import GrindCoffee from "./GrindCoffee";
+import IceToggle from "./IceToggle";
+import Notes from "./Notes";
+import PourTimer from "./PourTimer";
+import Preparation from "./Preparation";
+import RecordBrewAttributes from "./RecordBrewAttributes";
+import YieldQuestion from "./YieldQuestion";
+import { BrewRecipe } from "../recipes/types";
 
 interface RecipeProps {
   settings: Settings;
@@ -119,7 +119,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
 
     logAdded({ log });
     this.setState({ randomKey: Math.random() }, () => {
-      navigation.navigate('BrewSummary', { timestamp });
+      navigation.navigate("BrewSummary", { timestamp });
     });
   };
 
@@ -138,7 +138,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
       .sort((a, b) => b - a)[0];
 
     return (
-      <View style={isMaxWidth && { alignItems: 'center' }}>
+      <View style={isMaxWidth && { alignItems: "center" }}>
         <View style={isMaxWidth && { width: styleguide.maxWidth }}>
           <Preparation recipe={recipe.id} preparation={recipe.preparation} />
           <YieldQuestion
@@ -180,7 +180,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
             key={this.state.randomKey + settings.bloomDuration}
           />
           <Button
-            title='Finish Brew'
+            title="Finish Brew"
             customStyle={{
               ...(isMaxWidth
                 ? {
@@ -193,7 +193,7 @@ class Recipe extends Component<RecipeProps, RecipeState> {
                   }),
             }}
             onPress={this.onFinish}
-            type='tertiary'
+            type="tertiary"
           />
         </View>
       </View>

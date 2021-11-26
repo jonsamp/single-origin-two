@@ -1,7 +1,7 @@
-import React from 'react';
-import Card from '../../../../components/Card';
-import Instructions from '../../../../components/Instructions';
-import withSettings from '../../../../providers/settings';
+import React from "react";
+import Card from "../../../../components/Card";
+import Instructions from "../../../../components/Instructions";
+import withSettings from "../../../../providers/settings";
 
 type Props = {
   unitHelpers: any;
@@ -18,7 +18,7 @@ function AddIce(props: Props) {
         text={`Add **${waterVolumeUnit.getPreferredValue(volume)} ${
           waterVolumeUnit.unit.title
         }** of ice to your carafe or mug.`}
-        icon='IceIcon'
+        icon="IceIcon"
       />
     </Card>
   );

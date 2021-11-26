@@ -1,11 +1,11 @@
-import { iconSize } from '@expo/styleguide-native';
-import { Feather } from '@expo/vector-icons';
-import React, { Fragment } from 'react';
-import { TouchableOpacity, ViewStyle } from 'react-native';
+import { iconSize } from "@expo/styleguide-native";
+import { Feather } from "@expo/vector-icons";
+import React, { Fragment } from "react";
+import { TouchableOpacity, ViewStyle } from "react-native";
 
-import { useTheme } from '../../common/theme';
-import { MenuItem } from '../../types';
-import SettingWrapper from './SettingWrapper';
+import { useTheme } from "../../common/theme";
+import { MenuItem } from "../../types";
+import SettingWrapper from "./SettingWrapper";
 
 type Props = {
   onChange: (id: string) => void;
@@ -26,7 +26,7 @@ function ChecklistSetting(props: Props) {
       {items.map((item, index) => (
         <TouchableOpacity onPress={() => onChange(item.id)} key={item.id}>
           <SettingWrapper
-            title={`${item.title}${item.modifier ? ` ${item.modifier}` : ''}`}
+            title={`${item.title}${item.modifier ? ` ${item.modifier}` : ""}`}
             style={{
               ...style,
               ...(index === items.length - 1 ? { borderBottomWidth: 0 } : null),
@@ -35,7 +35,7 @@ function ChecklistSetting(props: Props) {
           >
             {item.value ? (
               <Feather
-                name='check'
+                name="check"
                 size={iconSize.regular - 3}
                 color={theme.icon.default}
               />

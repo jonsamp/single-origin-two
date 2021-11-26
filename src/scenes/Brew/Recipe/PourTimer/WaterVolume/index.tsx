@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { Text, View, Platform, TextInput } from 'react-native';
+import React, { useEffect, useRef } from "react";
+import { Text, View, Platform, TextInput } from "react-native";
 
 import Animated, {
   useSharedValue,
@@ -9,11 +9,11 @@ import Animated, {
   Easing,
   interpolate,
   interpolateColor,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 
-import { UnitHelper } from '../../../../../types';
-import { useTheme } from '../../../../../providers/theme';
-import styles from './styles';
+import { UnitHelper } from "../../../../../types";
+import { useTheme } from "../../../../../providers/theme";
+import styles from "./styles";
 
 interface Props {
   volume: number;
@@ -77,7 +77,7 @@ function WaterVolume(props: Props) {
       colors.background,
     ]);
 
-    if (waterVolumeUnit.unit.id === 'cups') {
+    if (waterVolumeUnit.unit.id === "cups") {
       const formattedValue = volumeValue.value * 0.01;
 
       return {
@@ -86,7 +86,7 @@ function WaterVolume(props: Props) {
       };
     }
 
-    if (waterVolumeUnit.unit.id === 'ounces') {
+    if (waterVolumeUnit.unit.id === "ounces") {
       const formattedValue = volumeValue.value * 0.035274;
 
       return {
@@ -148,17 +148,17 @@ function WaterVolume(props: Props) {
       </Text>
       <Animated.View style={[styles.trackingContainer, animatedContainerStyle]}>
         <AnimatedTextInput
-          underlineColorAndroid='transparent'
+          underlineColorAndroid="transparent"
           editable={false}
           animatedProps={animatedProps}
           style={[
             {
               fontSize: 28,
-              fontWeight: 'bold',
-              fontFamily: Platform.select({ ios: 'Menlo' }),
+              fontWeight: "bold",
+              fontFamily: Platform.select({ ios: "Menlo" }),
             },
           ]}
-          value={'0'}
+          value={"0"}
         />
         <Animated.Text
           style={[styles.trackingLabelText, animatedTextColor]}
