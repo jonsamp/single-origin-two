@@ -1,8 +1,7 @@
-import React from "react";
-import { Text, View } from "react-native";
+import React from 'react';
+import { Text, View } from 'react-native';
 
-import { useTailwind } from "../../common/theme";
-import styles from "./styles";
+import { useTailwind } from '../../common/theme';
 
 type Props = {
   text: string;
@@ -13,8 +12,8 @@ function ScreenPlaceholder(props: Props) {
   const tw = useTailwind();
 
   return (
-    <View style={styles.placeholderContainer}>
-      <Text style={[tw("theme.text.secondary body text-center")]}>{text}</Text>
+    <View style={tw('items-center justify-center p-8 mt-6 rounded-md')}>
+      <Text style={[tw('theme.text.secondary body text-center')]}>{text}</Text>
     </View>
   );
 }

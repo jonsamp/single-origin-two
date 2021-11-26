@@ -1,13 +1,11 @@
-import React, { Component } from "react";
-import Log from "../../components/Log";
+import { RouteProp } from '@react-navigation/core';
+import React from 'react';
+import Log from '../../components/Log';
+import { RootStackParamList } from '../../navigation';
 
 type Props = {
   timestamp: number;
-  route: {
-    params: {
-      timestamp: number;
-    };
-  };
+  route: RouteProp<RootStackParamList, 'LogDetail'>;
 };
 
 function LogDetail(props: Props) {

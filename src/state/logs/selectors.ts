@@ -1,5 +1,5 @@
-import { createSelector } from "reselect";
-import { State } from "../../state/types";
+import { createSelector } from 'reselect';
+import { State } from '../../state/types';
 
 export const selectLogs = (state: State) => state.logs;
 
@@ -12,7 +12,7 @@ export const selectLog = createSelector(
 export const selectRecentLog = createSelector(
   selectLogs,
   (_: State, recipeId: string) => recipeId,
-  (logs = {}, recipeId = "") => {
+  (logs = {}, recipeId = '') => {
     return (
       Object.values(logs)
         .sort((a, b) => b.timestamp - a.timestamp)

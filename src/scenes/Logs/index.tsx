@@ -1,41 +1,35 @@
-import React from "react";
-import { View } from "react-native";
-import { connect } from "react-redux";
-import { FlatList } from "react-native-gesture-handler";
+import React from 'react';
+import { View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { FlatList } from 'react-native-gesture-handler';
 
-import ScreenPlaceholder from "../../components/ScreenPlaceholder";
-import { recipes } from "../../constants/recipes";
-import { useTheme } from "../../providers/theme";
-import { selectLogs } from "../../state/logs/selectors";
-import { logDeleted } from "../../state/logs/actions";
-import { Logs as LogsType, Log } from "../../types/index";
-import LogItem from "./LogItem";
-import styles from "./styles";
+import ScreenPlaceholder from '../../components/ScreenPlaceholder';
+import { recipes } from '../../constants/recipes';
+import { selectLogs } from '../../state/logs/selectors';
+import { logDeleted } from '../../state/logs/actions';
+import { Logs as LogsType, Log } from '../../types/index';
+import LogItem from './LogItem';
+import { useTailwind, useTheme } from '../../common/theme';
 
-interface Props {
+type Props = {
   logs: LogsType;
   navigation: any;
   logDeleted: (props: { timestamp: number }) => void;
-}
-
-const mapStateToProps = (state) => ({
-  logs: selectLogs(state),
-});
-
-const mapDispatchToProps = {
-  logDeleted,
 };
 
 function Logs(props: Props) {
-  const { logs, navigation, logDeleted } = props;
-  const { colors } = useTheme();
+  const { navigation } = props;
+  const { theme, dark } = useTheme();
+  const tw = useTailwind();
+  const dispatch = useDispatch();
+  const logs = useSelector(selectLogs);
 
   function byTimestamp(a: Log, b: Log) {
     return b.timestamp - a.timestamp;
   }
 
   function onDelete(timestamp: number) {
-    logDeleted({ timestamp });
+    dispatch(logDeleted({ timestamp }));
   }
 
   return (
@@ -50,7 +44,7 @@ function Logs(props: Props) {
           log={item}
           onDelete={onDelete}
           onPress={() =>
-            navigation.navigate("LogDetail", {
+            navigation.navigate('LogDetail', {
               timestamp: item.timestamp,
             })
           }
@@ -59,18 +53,18 @@ function Logs(props: Props) {
       ItemSeparatorComponent={() => (
         <View
           style={[
-            styles.separator,
+            tw('flex-1 h-0'),
             {
-              backgroundColor: colors.border,
+              backgroundColor: theme.border.default,
             },
           ]}
         />
       )}
       ListEmptyComponent={
-        <ScreenPlaceholder text="Notes of each brew will appear here once you complete a brew." />
+        <ScreenPlaceholder text='Notes of each brew will appear here once you complete a brew.' />
       }
     />
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Logs);
+export default Logs;

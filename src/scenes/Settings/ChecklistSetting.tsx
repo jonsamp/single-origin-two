@@ -27,8 +27,7 @@ function ChecklistSetting(props: Props) {
           <SettingWrapper
             title={`${item.title}${item.modifier ? ` ${item.modifier}` : ''}`}
             style={{
-              ...(index === items.length - 1 ? { borderBottomWidth: 0 } : null),
-              ...{ borderBottomWidth: 1 },
+              ...{ borderBottomWidth: 1 }, // TODO: this is a different design
             }}
           >
             {item.value ? (
