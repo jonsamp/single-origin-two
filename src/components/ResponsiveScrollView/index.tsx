@@ -7,12 +7,12 @@ import { useTailwind } from '../../common/theme';
 import { isMaxWidth } from '../../constants/layout';
 import { styleguide } from '../../constants/themes';
 
-interface Props {
+type Props = {
   children: ReactNode;
   style: ViewStyle;
   wrapperStyle: ViewStyle;
   contentContainerStyle?: ViewStyle;
-}
+};
 
 function ResponsiveScrollView(props: Props) {
   const { children, wrapperStyle, style, contentContainerStyle } = props;

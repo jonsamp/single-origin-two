@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getVerboseSetting, grinders } from "../constants/grinders";
-import { units } from "../constants/units";
-import { settingUpdated } from "../state/settings/actions";
-import { selectSettings } from "../state/settings/selectors";
-import { Settings as SettingsType } from "../state/settings/types";
-import { State } from "../state/types";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getVerboseSetting, grinders } from '../constants/grinders';
+import { units } from '../constants/units';
+import { settingUpdated } from '../state/settings/actions';
+import { selectSettings } from '../state/settings/selectors';
+import { Settings as SettingsType } from '../state/settings/types';
+import { State } from '../state/types';
 
 export type Settings = SettingsType;
 
@@ -63,7 +63,7 @@ function withSettings(WrappedComponent) {
       getGrindSetting: (percent: number) => {
         const { grinderType } = this.props.settings;
 
-        if (grinderType === "generic") {
+        if (grinderType === 'generic') {
           return getVerboseSetting(percent);
         }
 
@@ -74,7 +74,7 @@ function withSettings(WrappedComponent) {
         };
       },
       grinder: grinders[this.props.settings.grinderType],
-      unit: { symbol: "grind" },
+      unit: { symbol: 'grind' },
     });
 
     getPreferredValue = (unit: string) => (value: number) =>
@@ -91,10 +91,10 @@ function withSettings(WrappedComponent) {
           settings={settings}
           settingUpdated={settingUpdated}
           unitHelpers={{
-            brewedVolumeUnit: this.getUnitHelper("brewedVolumeUnit"),
-            coffeeWeightUnit: this.getUnitHelper("coffeeWeightUnit"),
-            waterVolumeUnit: this.getUnitHelper("waterVolumeUnit"),
-            temperatureUnit: this.getUnitHelper("temperatureUnit"),
+            brewedVolumeUnit: this.getUnitHelper('brewedVolumeUnit'),
+            coffeeWeightUnit: this.getUnitHelper('coffeeWeightUnit'),
+            waterVolumeUnit: this.getUnitHelper('waterVolumeUnit'),
+            temperatureUnit: this.getUnitHelper('temperatureUnit'),
             grindUnit: this.getGrindHelper(),
           }}
         />
