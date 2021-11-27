@@ -17,6 +17,6 @@
     "production": {}
   },
   "cli": {
-    "version": ">= 0.36.1"
+    "version": ">= 0.38.1"
   }
 }
