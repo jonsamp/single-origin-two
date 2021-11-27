@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import trackingEvents from "../constants/trackingEvents";
-import { selectSettings } from "../state/settings/selectors";
-import { Settings } from "../state/settings/types";
-import { eventTracked } from "../state/tracking/actions";
-import { State } from "../state/types";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import trackingEvents from '../constants/trackingEvents';
+import { selectSettings } from '../state/settings/selectors';
+import { Settings } from '../state/settings/types';
+import { eventTracked } from '../state/tracking/actions';
+import { State } from '../state/types';
 
 export interface Tracking {
   track: (event: string, options?: object) => void;

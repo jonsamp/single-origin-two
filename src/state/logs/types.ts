@@ -1,8 +1,8 @@
-export interface Logs {
+export type Logs = {
   [i: number]: Log;
-}
+};
 
-export interface Log {
+export type Log = {
   timestamp: number;
   totalVolume: number;
   totalBrewTime: number;
@@ -13,4 +13,4 @@ export interface Log {
   rating?: number;
   tastingNote?: string;
   notes?: string;
-}
+};

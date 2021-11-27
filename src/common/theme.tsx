@@ -1,15 +1,15 @@
-import { create } from "tailwind-rn";
-import styles from "tailwind-rn/styles.json";
+import { create } from 'tailwind-rn';
+import styles from 'tailwind-rn/styles.json';
 import {
   useTheme as RNUseTheme,
   DefaultTheme,
   DarkTheme,
-} from "@react-navigation/native";
+} from '@react-navigation/native';
 import {
   lightTheme,
   darkTheme as styleguideDarkTheme,
-} from "@expo/styleguide-native";
-import { typography } from "./typography";
+} from '@expo/styleguide-native';
+import { typography } from './typography';
 
 export const defaultTheme = {
   dark: false,
@@ -24,8 +24,8 @@ export const defaultTheme = {
   theme: {
     ...lightTheme,
     brand: {
-      default: "#00b78e",
-      dark: "#00A57D",
+      default: '#00b78e',
+      dark: '#00A57D',
     },
   },
 };
@@ -43,8 +43,8 @@ export const darkTheme = {
   theme: {
     ...styleguideDarkTheme,
     brand: {
-      default: "#00CA9D",
-      dark: "#00CA9D",
+      default: '#00CA9D',
+      dark: '#00CA9D',
     },
   },
 };
@@ -78,32 +78,32 @@ export function useTheme() {
 
 export function useTailwind() {
   // @ts-ignore
-  const { theme, dark } = RNUseTheme();
+  const { theme, dark, colors } = RNUseTheme();
 
   const custom = create({
     ...styles,
-    "theme.background.default": {
+    'theme.background.default': {
       backgroundColor: theme.background.default,
     },
-    "theme.background.overlay": {
+    'theme.background.overlay': {
       backgroundColor: theme.background.overlay,
     },
-    "theme.background.secondary": {
+    'theme.background.secondary': {
       backgroundColor: theme.background.secondary,
     },
-    "theme.background.tertiary": {
+    'theme.background.tertiary': {
       backgroundColor: theme.background.tertiary,
     },
-    "theme.background.quaternary": {
+    'theme.background.quaternary': {
       backgroundColor: theme.background.quaternary,
     },
-    "theme.border.default": {
+    'theme.border.default': {
       borderColor: theme.border.default,
     },
-    "theme.text.default": {
+    'theme.text.default': {
       color: theme.text.default,
     },
-    "theme.text.secondary": {
+    'theme.text.secondary': {
       color: theme.text.secondary,
     },
     ...typography,
