@@ -1,48 +1,25 @@
-import React, { useLayoutEffect } from "react";
-import { View } from "react-native";
-import { connect } from "react-redux";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Button from "../../components/Button";
-// import { HeaderBackButton } from '@react-navigation/stack'
-import Log from "../../components/Log";
-import { width, isMaxWidth, height } from "../../constants/layout";
-import withTheme, { Styleguide, Theme } from "../../providers/theme";
-import { selectLog } from "../../state/logs/selectors";
-import styles from "./styles";
+import React from 'react';
+import { View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Button from '../../components/Button';
+import Log from '../../components/Log';
+import { isMaxWidth, height } from '../../constants/layout';
+import styles from './styles';
+import { styleguide } from '../../constants/themes';
+import { RouteProp, useNavigation } from '@react-navigation/core';
+import { RootStackParamList } from '../../navigation';
 
-interface BrewSummaryProps {
-  navigation: any;
-  styleguide: Styleguide;
-  route: any;
-  theme: Theme;
-}
-
-const mapStateToProps = (state, props) => {
-  const { timestamp } = props.route.params;
-  return {
-    log: selectLog(state, timestamp),
-  };
+type Props = {
+  route: RouteProp<RootStackParamList, 'BrewSummary'>;
 };
 
-function BrewSummary(props: BrewSummaryProps) {
-  const { navigation, route, styleguide, theme } = props;
+function BrewSummary(props: Props) {
+  const { route } = props;
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
-  const onBack = () => navigation.popToTop();
 
-  // useLayoutEffect(() => {
-  //   navigation.setOptions({
-  //     headerLeft: () => (
-  //       <HeaderBackButton
-  //         onPress={onBack}
-  //         labelVisible={false}
-  //         tintColor={theme.foreground}
-  //         style={{
-  //           left: -16,
-  //         }}
-  //       />
-  //     ),
-  //   })
-  // }, [navigation])
+  //@ts-ignore poptotop does exist on navigation
+  const onBack = () => navigation.popToTop();
 
   return (
     <View style={{ flex: 1 }}>
@@ -53,7 +30,7 @@ function BrewSummary(props: BrewSummaryProps) {
       />
       <View
         style={{
-          alignItems: "center",
+          alignItems: 'center',
         }}
       >
         <View
@@ -65,8 +42,8 @@ function BrewSummary(props: BrewSummaryProps) {
           ]}
         >
           <Button
-            title="done"
-            type="tertiary"
+            title='done'
+            type='tertiary'
             customStyle={[
               {
                 ...(isMaxWidth
@@ -88,4 +65,4 @@ function BrewSummary(props: BrewSummaryProps) {
   );
 }
 
-export default connect(mapStateToProps)(withTheme(BrewSummary));
+export default BrewSummary;

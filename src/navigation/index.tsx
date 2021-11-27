@@ -38,7 +38,9 @@ export type RootStackParamList = {
     title: string;
   };
   BrewSettings: undefined;
-  BrewSummary: undefined;
+  BrewSummary: {
+    timestamp: number;
+  };
   LogDetail: {
     timestamp: number;
   };
