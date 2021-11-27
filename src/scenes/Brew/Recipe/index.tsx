@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/core';
 
 import Button from '../../../components/Button';
 import { isMaxWidth, height } from '../../../constants/layout';
@@ -21,7 +22,6 @@ import Preparation from './Preparation';
 import RecordBrewAttributes from './RecordBrewAttributes';
 import YieldQuestion from './YieldQuestion';
 import { BrewRecipe } from '../recipes/types';
-import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../navigation';
 import { styleguide } from '../../../constants/themes';
