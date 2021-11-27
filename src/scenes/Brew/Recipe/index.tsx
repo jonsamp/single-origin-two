@@ -1,3 +1,4 @@
+import { shadows } from '@expo/styleguide-native';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
@@ -6,6 +7,7 @@ import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useTailwind, useTheme } from '../../../common/theme';
 import { useSettings } from '../../../common/useSettings';
 import Button from '../../../components/Button';
 import { isMaxWidth, height } from '../../../constants/layout';
@@ -35,6 +37,8 @@ function Recipe(props: RecipeProps) {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const dispatch = useDispatch();
+  const { dark } = useTheme();
+  const tw = useTailwind();
   const recentLog = useSelector((state: State) => selectRecentLog(state, recipe.id));
   const [recipeState, _setRecipeState] = useState({
     randomKey: 1,
@@ -135,22 +139,13 @@ function Recipe(props: RecipeProps) {
           setRecipeState={setRecipeState}
           key={recipeState.randomKey + settings.bloomDuration}
         />
-        <Button
-          title="Finish Brew"
-          customStyle={{
-            ...(isMaxWidth
-              ? {
-                  marginBottom: insets.bottom + 16,
-                }
-              : {
-                  paddingBottom: insets.bottom + height + 4,
-                  marginHorizontal: -16,
-                  marginBottom: -height,
-                }),
-          }}
-          onPress={onFinish}
-          type="tertiary"
-        />
+        <View
+          style={[
+            tw(`${dark ? 'theme.background.secondary' : 'theme.background.quaternary'} -m-4 p-4`),
+            { paddingBottom: insets.bottom },
+          ]}>
+          <Button title="Finish Brew" onPress={onFinish} type="tertiary" />
+        </View>
       </View>
     </View>
   );

@@ -3,6 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useTailwind, useTheme } from '../../common/theme';
 import Button from '../../components/Button';
 import Log from '../../components/Log';
 import { isMaxWidth, height } from '../../constants/layout';
@@ -18,6 +19,8 @@ function BrewSummary(props: Props) {
   const { route } = props;
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
+  const tw = useTailwind();
+  const { dark } = useTheme();
 
   //@ts-ignore poptotop does exist on navigation
   const onBack = () => navigation.popToTop();
@@ -26,35 +29,13 @@ function BrewSummary(props: Props) {
     <View style={{ flex: 1 }}>
       <Log timestamp={route.params.timestamp} withReminder style={{ paddingBottom: 120 }} />
       <View
-        style={{
-          alignItems: 'center',
-        }}>
-        <View
-          style={[
-            styles.buttonContainer,
-            isMaxWidth && {
-              width: styleguide.maxWidth,
-            },
-          ]}>
-          <Button
-            title="done"
-            type="tertiary"
-            customStyle={[
-              {
-                ...(isMaxWidth
-                  ? {
-                      marginBottom: insets.bottom + 16,
-                    }
-                  : {
-                      paddingBottom: insets.bottom + height,
-                      marginHorizontal: -16,
-                      marginBottom: -height,
-                    }),
-              },
-            ]}
-            onPress={onBack}
-          />
-        </View>
+        style={[
+          tw(
+            `${dark ? 'theme.background.secondary' : 'theme.background.quaternary'} -m-4 px-8 py-4`
+          ),
+          { paddingBottom: insets.bottom + 16 },
+        ]}>
+        <Button title="Done" onPress={onBack} type="tertiary" />
       </View>
     </View>
   );

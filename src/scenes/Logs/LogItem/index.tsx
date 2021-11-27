@@ -38,7 +38,7 @@ async function haptic() {
 
 function ListItem(props: Props) {
   const { log, onPress, onDelete } = props;
-  const { theme, colors } = useTheme();
+  const { theme } = useTheme();
   const tw = useTailwind();
   const x = useSharedValue(0);
   const trashX = useSharedValue(0);

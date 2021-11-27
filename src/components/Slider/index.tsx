@@ -186,7 +186,7 @@ function Slider(props: Props) {
         <PanGestureHandler onGestureEvent={onGestureEvent}>
           <Animated.View
             style={[
-              tw('justify-center items-center rounded-lg'),
+              tw('justify-center items-center rounded-full'),
               styles.knobContainer,
               scrollTranslationStyle,
               {
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
   knob: {
     width: KNOB_WIDTH - 10,
     height: KNOB_WIDTH - 10,
-    borderRadius: 3,
+    borderRadius: 16,
   },
   sliderHeaderContainer: {
     width: SLIDER_WIDTH,

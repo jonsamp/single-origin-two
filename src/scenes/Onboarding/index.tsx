@@ -30,7 +30,7 @@ function Onboarding() {
     {
       title: 'Record your grind and temperature',
       description:
-        'When you record your grind setting and temperature, Single Origin 2 can give you better suggestions next time you brew.',
+        'When you record your grind setting and temperature, Single Origin can give you better suggestions next time you brew.',
       image: null,
     },
     {

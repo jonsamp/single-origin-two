@@ -39,7 +39,7 @@ function Settings() {
               );
             }
           }}>
-          <SettingWrapper title="Rate Single Origin 2">
+          <SettingWrapper title="Rate Single Origin">
             <Feather name="star" size={iconSize.regular} color={theme.icon.secondary} />
           </SettingWrapper>
         </TouchableOpacity>
