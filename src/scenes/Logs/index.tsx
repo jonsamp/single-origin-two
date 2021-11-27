@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useTailwind, useTheme } from '../../common/theme';
+import { useTailwind } from '../../common/theme';
 import ScreenPlaceholder from '../../components/ScreenPlaceholder';
 import { Separator } from '../../components/Separator';
 import { recipes } from '../../constants/recipes';
@@ -19,7 +19,6 @@ type Props = {
 
 function Logs(props: Props) {
   const { navigation } = props;
-  const { theme } = useTheme();
   const tw = useTailwind();
   const dispatch = useDispatch();
   const logs = useSelector(selectLogs);

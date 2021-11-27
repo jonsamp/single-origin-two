@@ -7,16 +7,14 @@ type Props = {
   value: boolean;
   onChange: (value: boolean) => void;
   title: string;
-  description?: string;
-  borderTop?: boolean;
   disabled?: boolean;
 };
 
 const SwitchSetting = (props: Props) => {
-  const { title, description, value, onChange, borderTop, disabled } = props;
+  const { title, value, onChange, disabled } = props;
 
   return (
-    <SettingWrapper title={title} description={description} borderTop={borderTop}>
+    <SettingWrapper title={title}>
       <Switch value={value} onValueChange={(v) => onChange(v)} disabled={disabled} />
     </SettingWrapper>
   );

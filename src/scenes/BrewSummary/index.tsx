@@ -6,10 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTailwind, useTheme } from '../../common/theme';
 import Button from '../../components/Button';
 import Log from '../../components/Log';
-import { isMaxWidth, height } from '../../constants/layout';
-import { styleguide } from '../../constants/themes';
 import { RootStackParamList } from '../../navigation';
-import styles from './styles';
 
 type Props = {
   route: RouteProp<RootStackParamList, 'BrewSummary'>;

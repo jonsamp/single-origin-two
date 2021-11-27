@@ -1,4 +1,3 @@
-import { shadows } from '@expo/styleguide-native';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
@@ -10,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTailwind, useTheme } from '../../../common/theme';
 import { useSettings } from '../../../common/useSettings';
 import Button from '../../../components/Button';
-import { isMaxWidth, height } from '../../../constants/layout';
+import { isMaxWidth } from '../../../constants/layout';
 import { styleguide } from '../../../constants/themes';
 import { RootStackParamList } from '../../../navigation';
 import { logAdded } from '../../../state/logs/actions';
