@@ -75,7 +75,7 @@ export interface PourEvent {
 export interface RecipeConfig {
   title: string;
   id: string;
-  icon: ({ fill: string, size: number }) => ReactNode;
+  icon: ({ fill, size }: { fill: string; size: number }) => ReactNode;
 }
 
 export interface Recipe {

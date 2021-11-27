@@ -23,15 +23,17 @@ interface Props {
 Animated.addWhitelistedNativeProps({ text: true });
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
-function usePrevious(value) {
-  const ref = useRef();
+function usePrevious(value: number) {
+  const ref = useRef<number>();
+
   useEffect(() => {
     ref.current = value;
   });
+
   return ref.current;
 }
 
-let timeout;
+let timeout: NodeJS.Timeout;
 
 function WaterVolume(props: Props) {
   const { volume, waterVolumeUnit, pourVelocity = 130 } = props;

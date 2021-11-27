@@ -8,7 +8,6 @@ import { TouchableOpacity, Text, View, Platform, useColorScheme } from 'react-na
 
 import { defaultTheme, darkTheme } from '../common/theme';
 import type from '../constants/type';
-import withTheme from '../providers/theme';
 import Brew from '../scenes/Brew';
 import BrewSettings from '../scenes/BrewSettings';
 import BrewSummary from '../scenes/BrewSummary';
@@ -268,4 +267,4 @@ function App() {
   );
 }
 
-export default withTheme(App);
+export default App;

@@ -4,7 +4,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { reminderCancelled, reminderDenied, reminderRequested } from './actions';
 
-function* scheduleNotification({ timestamp }) {
+function* scheduleNotification({ timestamp }: { timestamp: number }) {
   const localNotification = {
     content: {
       title: 'Taste your coffee.',
@@ -26,7 +26,7 @@ function* cancelAllNotifications() {
   yield call(Notifications.cancelAllScheduledNotificationsAsync);
 }
 
-function* handleReminderRequested({ payload: { timestamp } }) {
+function* handleReminderRequested({ payload: { timestamp } }: { payload: { timestamp: number } }) {
   const {
     permissions: { notifications },
   } = yield call(Permissions.getAsync, Permissions.NOTIFICATIONS);

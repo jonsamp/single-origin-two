@@ -1,5 +1,6 @@
 import * as Amplitude from 'expo-analytics-amplitude';
 import { Platform } from 'react-native';
+import { Action } from 'redux-actions';
 import { takeEvery } from 'redux-saga/effects';
 
 import { AMPLITUDE_API_KEY } from '../../helpers/analytics';
@@ -23,7 +24,7 @@ const maybeInitialize = () => {
   }
 };
 
-function* handleEventTracked(action) {
+function* handleEventTracked(action: Action<any>) {
   const { event, options } = action.payload;
 
   maybeInitialize();
