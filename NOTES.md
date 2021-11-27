@@ -10,6 +10,8 @@ After that, make a hooke for `withTracking()` (`useTracking()`).
 
 After that, fix lint/prettier/tsc.
 
+Might look for `colors` and `styles.`, since those are old styles.
+
 ## August 8, 2021
 
 Added tailwind and @expo/styleguide-native. The goal is to remove `withTheme()`, and replace styles and colors with `theme` and `tw()`.
