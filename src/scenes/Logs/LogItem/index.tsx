@@ -1,3 +1,4 @@
+import { iconSize } from '@expo/styleguide-native';
 import { Feather } from '@expo/vector-icons';
 import { format } from 'date-fns';
 import * as Haptics from 'expo-haptics';
@@ -13,13 +14,11 @@ import Animated, {
   runOnJS,
 } from 'react-native-reanimated';
 
+import { useTailwind, useTheme } from '../../../common/theme';
 import { width } from '../../../constants/layout';
 import { recipes } from '../../../constants/recipes';
-import type from '../../../constants/type';
-import { useTheme } from '../../../providers/theme';
 import { Log } from '../../../types';
 import { TrashIcon } from './TrashIcon';
-import styles from './styles';
 
 type Props = {
   log: Log;
@@ -39,7 +38,8 @@ async function haptic() {
 
 function ListItem(props: Props) {
   const { log, onPress, onDelete } = props;
-  const { colors, isDarkTheme } = useTheme();
+  const { theme, colors } = useTheme();
+  const tw = useTailwind();
   const x = useSharedValue(0);
   const trashX = useSharedValue(0);
   const height = useSharedValue(80);
@@ -143,31 +143,19 @@ function ListItem(props: Props) {
   });
 
   return (
-    <Animated.View style={[animatedHeightStyle, { overflow: 'hidden' }]}>
+    <Animated.View style={[animatedHeightStyle, tw('overflow-hidden')]}>
       <RNTouchableOpacity
         activeOpacity={1}
         onPress={() => _onDelete()}
         style={[
-          styles.trashButton,
+          tw('absolute right-0 w-full h-full justify-center items-end pr-5'),
           {
-            backgroundColor: colors.danger,
+            backgroundColor: 'red', // TODO: update this to a real color
           },
         ]}>
-        <Animated.View
-          style={[
-            {
-              alignItems: 'center',
-            },
-            animatedTrashStyle,
-          ]}>
+        <Animated.View style={[tw('items-center'), animatedTrashStyle]}>
           <TrashIcon size={28} />
-          <Text
-            style={{
-              ...type.label,
-              color: 'white',
-            }}>
-            Delete
-          </Text>
+          <Text style={[tw('label'), { color: 'white' }]}>Delete</Text>
         </Animated.View>
       </RNTouchableOpacity>
       <PanGestureHandler onGestureEvent={gestureHandler} activeOffsetX={[-20, 20]}>
@@ -175,23 +163,14 @@ function ListItem(props: Props) {
           <TouchableOpacity
             onPress={() => _onPress()}
             activeOpacity={1}
-            style={[
-              styles.container,
-              styles.displayHorizontal,
-              {
-                backgroundColor: isDarkTheme ? colors.grey2 : colors.background,
-              },
-            ]}>
-            <View style={[styles.displayHorizontal, { flex: 1 }]}>
+            style={tw('theme.background.overlay p-3 justify-between items-center flex-row')}>
+            <View style={tw('flex-1 flex-row')}>
               <View
-                style={[
-                  styles.iconContainer,
-                  {
-                    backgroundColor: isDarkTheme ? colors.grey1 : colors.foreground,
-                  },
-                ]}>
+                style={tw(
+                  'theme.background.tertiary h-14 w-14 items-center justify-center rounded-lg mr-3'
+                )}>
                 {recipe.icon({
-                  fill: isDarkTheme ? colors.foreground : colors.background,
+                  fill: theme.icon.default,
                   size: 0.8,
                 })}
                 {log.rating && (
@@ -207,23 +186,19 @@ function ListItem(props: Props) {
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}>
-                    <Text style={[type.label, { color: 'black', fontWeight: 'bold' }]}>
-                      {log.rating}
-                    </Text>
+                    <Text style={[tw('label'), { color: 'black' }]}>{log.rating}</Text>
                   </View>
                 )}
               </View>
-              <View style={{ flex: 1 }}>
-                <Text style={[type.headline, { color: colors.foreground }]}>
+              <View style={tw('flex-1')}>
+                <Text style={tw('headline theme.text.default')}>
                   {recipe.title} {recipe.modifier}
                 </Text>
-                <Text style={[type.caption, { color: colors.foreground, opacity: 0.8 }]}>
+                <Text style={tw('caption theme.text.secondary')}>
                   {format(log.timestamp, 'MMM d, yyyy @ h:mma')}
                 </Text>
                 {log.tastingNote || log.notes ? (
-                  <Text
-                    numberOfLines={1}
-                    style={[type.caption, { color: colors.foreground, opacity: 0.8 }]}>
+                  <Text numberOfLines={1} style={tw('caption theme.text.secondary')}>
                     {log.tastingNote &&
                       `${
                         log.tastingNote.charAt(0).toUpperCase() +
@@ -234,8 +209,8 @@ function ListItem(props: Props) {
                 ) : null}
               </View>
             </View>
-            <View style={{ marginLeft: 16 }}>
-              <Feather name="chevron-right" size={colors.iconSize} color={colors.foreground} />
+            <View style={tw('ml-4')}>
+              <Feather name="chevron-right" size={iconSize.regular} color={theme.icon.secondary} />
             </View>
           </TouchableOpacity>
         </Animated.View>

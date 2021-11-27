@@ -53,7 +53,7 @@ function Logs(props: Props) {
       ItemSeparatorComponent={() => (
         <View
           style={[
-            tw('flex-1 h-0'),
+            tw('flex-1 h-px ml-3'),
             {
               backgroundColor: theme.border.default,
             },

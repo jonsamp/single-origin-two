@@ -1,8 +1,8 @@
 import React from 'react';
-import { Switch, View } from 'react-native';
+import { Switch, Text } from 'react-native';
 
+import { useTailwind } from '../../../../common/theme';
 import Card from '../../../../components/Card';
-import Instructions from '../../../../components/Instructions';
 import withSettings from '../../../../providers/settings';
 
 type Props = {
@@ -12,13 +12,12 @@ type Props = {
 
 function AddIce(props: Props) {
   const { onChange, value } = props;
+  const tw = useTailwind();
 
   return (
-    <Card>
-      <View style={{ flexDirection: 'row', alignItems: 'center', paddingRight: 20 }}>
-        <Instructions text="Make this brew iced" />
-        <Switch value={value} onValueChange={onChange} />
-      </View>
+    <Card style={tw('p-4 flex-row items-center justify-between')}>
+      <Text style={tw('body theme.text.default')}>Make this brew iced</Text>
+      <Switch value={value} onValueChange={onChange} />
     </Card>
   );
 }

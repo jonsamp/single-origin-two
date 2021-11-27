@@ -1,3 +1,4 @@
+import { shadows } from '@expo/styleguide-native';
 import { Feather } from '@expo/vector-icons';
 import SegmentedControl from '@react-native-community/segmented-control';
 import * as Haptics from 'expo-haptics';
@@ -149,20 +150,22 @@ class RecordBrewAttributes extends Component<RecordBrewAttributesProps, RecordBr
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-          <Instructions text={instructions} icon="RecordIcon" />
+          <View style={{ flex: 1 }}>
+            {instructions && (
+              <Instructions text={instructions} icon="RecordIcon" textStyle={{ flex: 1 }} />
+            )}
+          </View>
           <TouchableOpacity
             onPress={this.toggleIsOpen}
-            style={{
-              padding: 8,
-              shadowColor: 'rgba(0,0,0,0.2)',
-              shadowRadius: 4,
-              shadowOffset: { height: 2, width: 0 },
-              shadowOpacity: 1,
-              backgroundColor: isDarkTheme ? theme.grey2 : theme.background,
-              borderRadius: 4,
-              marginRight: 20,
-              elevation: 5,
-            }}
+            style={[
+              {
+                padding: 4,
+                backgroundColor: isDarkTheme ? theme.grey2 : theme.background,
+                borderRadius: 8,
+                marginRight: 20,
+              },
+              shadows.tiny,
+            ]}
             activeOpacity={1}>
             <Animated.View
               style={{

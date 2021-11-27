@@ -148,7 +148,7 @@ function Slider(props: Props) {
   }
 
   return (
-    <View style={[tw(`pt-10 items-center pb-12 theme.background.tertiary`), style]}>
+    <View style={[tw(`pt-10 items-center pb-12 theme.background.secondary`), style]}>
       <View style={tw('mb-12 items-center')}>
         <View
           style={[

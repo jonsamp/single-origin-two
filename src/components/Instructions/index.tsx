@@ -43,7 +43,7 @@ export default function Instructions(props: Props) {
       {IconComponent ? (
         <View
           style={[
-            tw('pt-4 items-center w-12'),
+            tw('pt-5 items-center w-12'),
             {
               backgroundColor: dark ? theme.background.secondary : theme.text.default,
             },
