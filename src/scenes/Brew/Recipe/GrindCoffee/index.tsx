@@ -5,7 +5,6 @@ import Card from '../../../../components/Card';
 import Instructions from '../../../../components/Instructions';
 import { height, isMaxWidth } from '../../../../constants/layout';
 import withSettings from '../../../../providers/settings';
-import { Styleguide } from '../../../../providers/theme';
 import { getValueUnit } from '../../../../scenes/Brew/helpers';
 import { Log } from '../../../../state/logs/types';
 

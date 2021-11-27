@@ -47,7 +47,7 @@ function WaterVolume(props: Props) {
 
   useEffect(
     function didUpdate() {
-      const differenceToAdd = volume - Number(prevVolume || 0);
+      const differenceToAdd = volume - Number(prevVolume ?? 0);
 
       if (differenceToAdd > 0) {
         if (timeout) {

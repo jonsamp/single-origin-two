@@ -2,10 +2,9 @@ import React from 'react';
 import { View } from 'react-native';
 
 import Slider from '../../components/Slider';
-import { recipes } from '../../constants/recipes';
 import withSettings from '../../providers/settings';
 
-function TestScene(props: any) {
+function TestScene() {
   return (
     <View style={{ padding: 16 }}>
       <Slider />

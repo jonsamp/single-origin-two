@@ -4,7 +4,6 @@ import * as Haptics from 'expo-haptics';
 import React from 'react';
 import { Text, View, TouchableOpacity as RNTouchableOpacity, Platform } from 'react-native';
 import { PanGestureHandler, TouchableOpacity } from 'react-native-gesture-handler';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
 import Animated, {
   Easing,
   withTiming,
@@ -14,7 +13,7 @@ import Animated, {
   runOnJS,
 } from 'react-native-reanimated';
 
-import { width, height as screenHeight } from '../../../constants/layout';
+import { width } from '../../../constants/layout';
 import { recipes } from '../../../constants/recipes';
 import type from '../../../constants/type';
 import { useTheme } from '../../../providers/theme';
@@ -147,7 +146,7 @@ function ListItem(props: Props) {
     <Animated.View style={[animatedHeightStyle, { overflow: 'hidden' }]}>
       <RNTouchableOpacity
         activeOpacity={1}
-        onPress={_onDelete}
+        onPress={() => _onDelete()}
         style={[
           styles.trashButton,
           {
@@ -174,7 +173,7 @@ function ListItem(props: Props) {
       <PanGestureHandler onGestureEvent={gestureHandler} activeOffsetX={[-20, 20]}>
         <Animated.View style={animatedStyle}>
           <TouchableOpacity
-            onPress={_onPress}
+            onPress={() => _onPress()}
             activeOpacity={1}
             style={[
               styles.container,

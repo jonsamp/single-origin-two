@@ -44,11 +44,7 @@ export default function App() {
 
   async function loadResourcesAndDataAsync() {
     try {
-      if (
-        Constants.platform &&
-        Constants.platform.ios &&
-        Constants.platform.ios.userInterfaceIdiom === 'tablet'
-      ) {
+      if (Constants.platform?.ios?.userInterfaceIdiom === 'tablet') {
         await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.DEFAULT);
       }
 

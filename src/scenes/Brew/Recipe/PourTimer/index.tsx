@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Animated, View } from 'react-native';
+import { View } from 'react-native';
 
 import Card from '../../../../components/Card';
 import Image from '../../../../components/Image';
 import { height, width } from '../../../../constants/layout';
 import playSound from '../../../../helpers/playSound';
 import withSettings from '../../../../providers/settings';
-import { useTheme, Styleguide, Theme } from '../../../../providers/theme';
+import { useTheme } from '../../../../providers/theme';
 import { Settings } from '../../../../state/settings/types';
 import { Recipe, UnitHelpers } from '../../../../types';
 import { withBloomFn } from '../../helpers';

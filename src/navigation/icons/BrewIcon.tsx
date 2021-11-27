@@ -5,7 +5,7 @@ import { Icon } from './types';
 
 export default function BrewIcon(props: Icon) {
   const { focused, theme, size } = props;
-  const width = size || 36;
+  const width = size ?? 36;
   const height = width * 0.75;
 
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Path, Rect, Svg } from 'react-native-svg';
+import { Path, Svg } from 'react-native-svg';
 
 import { Icon } from './types';
 

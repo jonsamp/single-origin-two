@@ -60,7 +60,7 @@ function withTheme(WrappedComponent: any) {
     }
 
     componentWillUnmount() {
-      if (this.themeListener && this.themeListener.remove) {
+      if (this?.themeListener?.remove) {
         this.themeListener.remove();
       }
     }

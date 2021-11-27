@@ -20,7 +20,7 @@ import Onboarding from '../scenes/Onboarding';
 import Preparation from '../scenes/Preparation';
 import Settings from '../scenes/Settings';
 import SettingsDetail from '../scenes/Settings/SettingsDetail';
-import Test from '../scenes/Test';
+// import Test from '../scenes/Test';
 import BrewIcon from './icons/BrewIcon';
 import LogsIcon from './icons/LogsIcon';
 import SettingsIcon from './icons/SettingsIcon';
@@ -101,9 +101,6 @@ function MenuStack() {
 }
 
 function LogsStack() {
-  const colorScheme = useColorScheme();
-  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme;
-
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -116,9 +113,6 @@ function LogsStack() {
 }
 
 function SettingsStack() {
-  const colorScheme = useColorScheme();
-  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme;
-
   return (
     <Stack.Navigator>
       <Stack.Screen

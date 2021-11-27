@@ -19,7 +19,7 @@ type Props = {
 
 function Logs(props: Props) {
   const { navigation } = props;
-  const { theme, dark } = useTheme();
+  const { theme } = useTheme();
   const tw = useTailwind();
   const dispatch = useDispatch();
   const logs = useSelector(selectLogs);
@@ -42,7 +42,7 @@ function Logs(props: Props) {
       renderItem={({ item }) => (
         <LogItem
           log={item}
-          onDelete={onDelete}
+          onDelete={(timestamp) => onDelete(timestamp)}
           onPress={() =>
             navigation.navigate('LogDetail', {
               timestamp: item.timestamp,

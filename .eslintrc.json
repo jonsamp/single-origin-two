@@ -25,7 +25,8 @@
               "order": "asc"
             }
           }
-        ]
+        ],
+        "react/jsx-no-bind": "off"
       }
     }
   ]

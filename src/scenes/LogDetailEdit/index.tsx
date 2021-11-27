@@ -148,7 +148,7 @@ function LogDetailEdit(props: Props) {
                 <Slider
                   min={1}
                   max={10}
-                  defaultValue={log.rating || 5}
+                  defaultValue={log.rating ?? 5}
                   label="rating"
                   onChange={(value) => updateLog('rating', value)}
                 />

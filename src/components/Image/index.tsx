@@ -12,7 +12,7 @@ type Props = {
 };
 
 export default function Image(props: Props) {
-  const { source, defaultSource, style } = props;
+  const { source, style } = props;
   const tw = useTailwind();
 
   return (

@@ -42,7 +42,7 @@ function Recipe(props: RecipeProps) {
   const [recipeState, _setRecipeState] = useState({
     randomKey: 1,
     grind: recentLog.grind,
-    temp: recentLog.temp || 205,
+    temp: recentLog.temp ?? 205,
     timestamp: new Date().getTime(),
     totalBrewTime: 0,
     attributesRecorded: false,
@@ -82,7 +82,7 @@ function Recipe(props: RecipeProps) {
       ...(attributesRecorded && settings.recordGrind
         ? {
             grind:
-              grind || unitHelpers.grindUnit.getPreferredValueBasedOnPercent(recipe.defaultGrind),
+              grind ?? unitHelpers.grindUnit.getPreferredValueBasedOnPercent(recipe.defaultGrind),
           }
         : null),
       ...(attributesRecorded && settings.recordTemp

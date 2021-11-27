@@ -29,15 +29,7 @@ type Props = {
 const PROGRESS_BAR_HEIGHT = 6;
 
 function StepFunction(props: Props) {
-  const {
-    second,
-    volume,
-    timerRunning,
-    recipe,
-    currentStepDuration,
-    unitHelpers,
-    pourVelocity = 130,
-  } = props;
+  const { second, volume, timerRunning, recipe, unitHelpers, pourVelocity = 130 } = props;
   const { waterVolumeUnit } = unitHelpers;
   const totalTime = Math.max(...Object.keys(recipe).map((n) => Number(n)));
   const { colors, styleguide } = useTheme();
@@ -203,6 +195,8 @@ function StepFunction(props: Props) {
     if (!nextEvent) {
       return '';
     }
+
+    return '';
   }
 
   const instructionsStyle = useAnimatedStyle(() => {

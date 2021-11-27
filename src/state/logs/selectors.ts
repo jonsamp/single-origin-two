@@ -17,6 +17,6 @@ export const selectRecentLog = createSelector(
   (logs, recipeId = ''): Log => {
     return (Object.values(logs)
       .sort((a, b) => b.timestamp - a.timestamp)
-      .find((log) => log.recipeId === recipeId) || {}) as Log;
+      .find((log) => log.recipeId === recipeId) ?? {}) as Log;
   }
 );

@@ -11,7 +11,7 @@ type Props = {
 
 function LogDetail(props: Props) {
   const { route } = props;
-  const timestamp = route.params && route.params.timestamp;
+  const timestamp = route.params.timestamp;
 
   return <Log timestamp={timestamp} />;
 }

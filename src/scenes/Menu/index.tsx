@@ -41,14 +41,7 @@ function Menu(props: Props) {
   }, []);
 
   function handleNotification(event: Notifications.NotificationResponse) {
-    if (
-      event &&
-      event.notification &&
-      event.notification.request &&
-      event.notification.request.content &&
-      event.notification.request.content.data &&
-      event.notification.request.content.data.timestamp
-    ) {
+    if (event?.notification?.request?.content?.data?.timestamp) {
       const { timestamp } = event.notification.request.content.data;
 
       if (timestamp && typeof timestamp === 'number') {
@@ -58,7 +51,7 @@ function Menu(props: Props) {
   }
 
   function sortByName(recipes: Recipe[]) {
-    return sortBy(recipes, (recipe) => `${recipe.title} ${recipe.modifier || ''}`);
+    return sortBy(recipes, (recipe) => `${recipe.title} ${recipe.modifier ?? ''}`);
   }
 
   function onMenuItemPress(recipe: Recipe) {

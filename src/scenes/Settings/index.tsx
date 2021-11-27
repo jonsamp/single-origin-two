@@ -4,7 +4,6 @@ import React from 'react';
 import { Linking, TouchableOpacity, ScrollView, Platform } from 'react-native';
 
 import { useTailwind, useTheme } from '../../common/theme';
-import { Theme } from '../../types/index';
 import Group from './Group';
 import Section from './Section';
 import SettingWrapper from './SettingWrapper';
