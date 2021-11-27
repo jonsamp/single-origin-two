@@ -1,5 +1,15 @@
 # Notes
 
+## November 27, 2021
+
+Finished with removing `withTheme()`.
+
+After that, make a hook for `withSettings()` (`useSettings()`).
+
+After that, make a hooke for `withTracking()` (`useTracking()`).
+
+After that, fix lint/prettier/tsc.
+
 ## August 8, 2021
 
 Added tailwind and @expo/styleguide-native. The goal is to remove `withTheme()`, and replace styles and colors with `theme` and `tw()`.
