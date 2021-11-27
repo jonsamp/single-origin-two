@@ -5,6 +5,7 @@
     "ios": "expo start --ios",
     "android": "expo start --android",
     "prettier": "prettier --write './src/**/*.ts*'",
+    "lint": "eslint .",
     "compressgifs": "gifsicle --batch --lossy=100 --resize-width=400 --colors 256 -O3 **/*.gif",
     "resizeimages": "mogrify -resize 400 src/**/*.{jpg,png}"
   },
@@ -67,6 +68,7 @@
     "@types/react-redux": "^7.1.20",
     "@types/redux-actions": "^2.6.2",
     "babel-preset-expo": "^8.5.1",
+    "eslint": "^8.3.0",
     "prettier": "^2.4.1",
     "typescript": "~4.3.5"
   },
