@@ -1,22 +1,16 @@
-import { Feather } from "@expo/vector-icons";
-import * as Haptics from "expo-haptics";
-import React, { Component } from "react";
-import {
-  Platform,
-  Animated,
-  LayoutAnimation,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import SegmentedControl from "@react-native-community/segmented-control";
+import { Feather } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics';
+import React, { Component } from 'react';
+import { Platform, Animated, LayoutAnimation, TouchableOpacity, View } from 'react-native';
+import SegmentedControl from '@react-native-community/segmented-control';
 
-import Card from "../../../../components/Card";
-import Instructions from "../../../../components/Instructions";
-import withSettings from "../../../../providers/settings";
-import withTheme from "../../../../providers/theme";
-import { Settings } from "../../../../state/settings/types";
-import { GrindHelper, Theme, Unit, UnitHelpers } from "../../../../types";
-import Slider from "../../../../components/Slider";
+import Card from '../../../../components/Card';
+import Instructions from '../../../../components/Instructions';
+import withSettings from '../../../../providers/settings';
+import withTheme from '../../../../providers/theme';
+import { Settings } from '../../../../state/settings/types';
+import { GrindHelper, Theme, Unit, UnitHelpers } from '../../../../types';
+import Slider from '../../../../components/Slider';
 
 interface RecordBrewAttributesProps {
   theme: Theme;
@@ -37,10 +31,7 @@ interface RecordBrewAttributesState {
   containerHeight: number;
 }
 
-class RecordBrewAttributes extends Component<
-  RecordBrewAttributesProps,
-  RecordBrewAttributesState
-> {
+class RecordBrewAttributes extends Component<RecordBrewAttributesProps, RecordBrewAttributesState> {
   state = {
     recordSegmentIndex: 0,
     isOpen: false,
@@ -58,7 +49,7 @@ class RecordBrewAttributes extends Component<
 
     LayoutAnimation.configureNext(config);
 
-    if (Platform.OS === "ios") {
+    if (Platform.OS === 'ios') {
       await Haptics.selectionAsync();
     }
 
@@ -66,7 +57,7 @@ class RecordBrewAttributes extends Component<
       (prevState) => ({ isOpen: !prevState.isOpen }),
       () => {
         if (this.state.isOpen) {
-          this.props.setRecipeState({ key: "attributesRecorded", value: true });
+          this.props.setRecipeState({ key: 'attributesRecorded', value: true });
         }
 
         Animated.spring(this.animatedRotationValue, {
@@ -86,12 +77,11 @@ class RecordBrewAttributes extends Component<
         min={grindUnit.grinder.min}
         max={grindUnit.grinder.max}
         defaultValue={
-          this.props.grind ||
-          grindUnit.getPreferredValueBasedOnPercent(this.props.defaultGrind)
+          this.props.grind || grindUnit.getPreferredValueBasedOnPercent(this.props.defaultGrind)
         }
         onChange={(value) => {
           this.props.setRecipeState({
-            key: "grind",
+            key: 'grind',
             value: grindUnit.getPreferredValue(value),
           });
         }}
@@ -101,16 +91,14 @@ class RecordBrewAttributes extends Component<
 
   recordTempComponent = () => {
     const { unitHelpers, temperatureUnit } = this.props;
-    const min = unitHelpers["temperatureUnit"]
-      ? Math.round(unitHelpers["temperatureUnit"].getPreferredValue(160))
+    const min = unitHelpers['temperatureUnit']
+      ? Math.round(unitHelpers['temperatureUnit'].getPreferredValue(160))
       : 160;
-    const max = unitHelpers["temperatureUnit"]
-      ? Math.round(unitHelpers["temperatureUnit"].getPreferredValue(220))
+    const max = unitHelpers['temperatureUnit']
+      ? Math.round(unitHelpers['temperatureUnit'].getPreferredValue(220))
       : 220;
-    const defaultValue = unitHelpers["temperatureUnit"]
-      ? Math.round(
-          unitHelpers["temperatureUnit"].getPreferredValue(this.props.temp)
-        )
+    const defaultValue = unitHelpers['temperatureUnit']
+      ? Math.round(unitHelpers['temperatureUnit'].getPreferredValue(this.props.temp))
       : this.props.temp;
 
     return (
@@ -122,8 +110,8 @@ class RecordBrewAttributes extends Component<
         defaultValue={defaultValue}
         onChange={(value) => {
           this.props.setRecipeState({
-            key: "temp",
-            value: unitHelpers["temperatureUnit"].getStandardValue(value),
+            key: 'temp',
+            value: unitHelpers['temperatureUnit'].getStandardValue(value),
           });
         }}
       />
@@ -141,25 +129,25 @@ class RecordBrewAttributes extends Component<
     const recordSettings = [];
     let instructions;
     if (settings.recordGrind) {
-      recordSettings.push("grind");
-      instructions = "Record your grind setting.";
+      recordSettings.push('grind');
+      instructions = 'Record your grind setting.';
     }
     if (settings.recordTemp) {
-      recordSettings.push("temperature");
-      instructions = "Record your water temperature.";
+      recordSettings.push('temperature');
+      instructions = 'Record your water temperature.';
     }
 
     if (settings.recordTemp && settings.recordGrind) {
-      instructions = "Record your grind setting and water temperature.";
+      instructions = 'Record your grind setting and water temperature.';
     }
 
     return (
       <Card>
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
           }}
         >
           <Instructions text={instructions} icon="RecordIcon" />
@@ -167,7 +155,7 @@ class RecordBrewAttributes extends Component<
             onPress={this.toggleIsOpen}
             style={{
               padding: 8,
-              shadowColor: "rgba(0,0,0,0.2)",
+              shadowColor: 'rgba(0,0,0,0.2)',
               shadowRadius: 4,
               shadowOffset: { height: 2, width: 0 },
               shadowOpacity: 1,
@@ -184,17 +172,13 @@ class RecordBrewAttributes extends Component<
                   {
                     rotate: this.animatedRotationValue.interpolate({
                       inputRange: [0, 1],
-                      outputRange: ["0deg", "-180deg"],
+                      outputRange: ['0deg', '-180deg'],
                     }),
                   },
                 ],
               }}
             >
-              <Feather
-                name="chevron-down"
-                size={theme.iconSize}
-                color={theme.foreground}
-              />
+              <Feather name="chevron-down" size={theme.iconSize} color={theme.foreground} />
             </Animated.View>
           </TouchableOpacity>
         </View>
@@ -219,31 +203,28 @@ class RecordBrewAttributes extends Component<
                 <SegmentedControl
                   backgroundColor={
                     isDarkTheme
-                      ? Platform.select({ android: "#212121" })
-                      : Platform.select({ android: "#dddddd" })
+                      ? Platform.select({ android: '#212121' })
+                      : Platform.select({ android: '#dddddd' })
                   }
-                  appearance={isDarkTheme ? "dark" : "light"}
+                  appearance={isDarkTheme ? 'dark' : 'light'}
                   values={recordSettings.map(
                     (name) => name.charAt(0).toUpperCase() + name.slice(1)
                   )}
                   selectedIndex={recordSegmentIndex}
                   onChange={(event) => {
                     this.setState({
-                      recordSegmentIndex:
-                        event.nativeEvent.selectedSegmentIndex,
+                      recordSegmentIndex: event.nativeEvent.selectedSegmentIndex,
                     });
                   }}
                 />
                 <View>
-                  {recordSegmentIndex === 0
-                    ? this.recordGrindComponent()
-                    : null}
+                  {recordSegmentIndex === 0 ? this.recordGrindComponent() : null}
                   {recordSegmentIndex === 1 ? this.recordTempComponent() : null}
                 </View>
               </View>
             )}
             {recordSettings.length === 1
-              ? recordSettings.includes("grind")
+              ? recordSettings.includes('grind')
                 ? this.recordGrindComponent()
                 : this.recordTempComponent()
               : null}

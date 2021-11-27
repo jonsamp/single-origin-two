@@ -1,12 +1,12 @@
-import React from "react";
-import { StyleSheet, ViewStyle } from "react-native";
-import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
-import { shadows } from "@expo/styleguide-native";
-import { useTheme } from "../../common/theme";
-import { typography } from "../../common/typography";
+import React from 'react';
+import { StyleSheet, ViewStyle } from 'react-native';
+import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
+import { shadows } from '@expo/styleguide-native';
+import { useTheme } from '../../common/theme';
+import { typography } from '../../common/typography';
 
 type Props = {
-  type?: "normal" | "secondary" | "tertiary" | "outline";
+  type?: 'normal' | 'secondary' | 'tertiary' | 'outline';
   onPress?: () => void;
   title: string;
   customStyle?: object;
@@ -16,15 +16,7 @@ type Props = {
 };
 
 export default function Button(props: Props) {
-  const {
-    type,
-    onPress,
-    title,
-    disabled,
-    customStyle,
-    customTextStyle,
-    loading,
-  } = props;
+  const { type, onPress, title, disabled, customStyle, customTextStyle, loading } = props;
   const { theme, dark } = useTheme();
 
   let buttonStyle = [styles.button, { backgroundColor: theme.brand.default }];
@@ -36,23 +28,17 @@ export default function Button(props: Props) {
     customTextStyle,
   ];
 
-  if (type === "secondary") {
-    buttonStyle = [
-      styles.button,
-      { backgroundColor: theme.button.secondary.background },
-    ];
+  if (type === 'secondary') {
+    buttonStyle = [styles.button, { backgroundColor: theme.button.secondary.background }];
     textStyle = [styles.text, { color: theme.button.secondary.foreground }];
   }
 
-  if (type === "tertiary") {
-    buttonStyle = [
-      styles.button,
-      { backgroundColor: theme.button.tertiary.background },
-    ];
+  if (type === 'tertiary') {
+    buttonStyle = [styles.button, { backgroundColor: theme.button.tertiary.background }];
     textStyle = [styles.text, { color: theme.button.tertiary.foreground }];
   }
 
-  if (type === "outline") {
+  if (type === 'outline') {
     buttonStyle = [
       styles.buttonOutline,
       {
@@ -85,9 +71,7 @@ export default function Button(props: Props) {
         {loading ? (
           <ActivityIndicator size="small" color={theme.background.default} />
         ) : (
-          <Text style={[textStyle, customTextStyle]}>
-            {title.toUpperCase()}
-          </Text>
+          <Text style={[textStyle, customTextStyle]}>{title.toUpperCase()}</Text>
         )}
       </TouchableOpacity>
     </View>
@@ -95,18 +79,18 @@ export default function Button(props: Props) {
 }
 
 const defaultButton = {
-  alignItems: "center",
-  justifyContent: "center",
+  alignItems: 'center',
+  justifyContent: 'center',
   paddingVertical: 14,
   paddingHorizontal: 28,
-  overflow: "hidden",
+  overflow: 'hidden',
   borderRadius: 6,
 } as ViewStyle;
 
 const styles = StyleSheet.create({
   text: {
     ...typography.callout,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     letterSpacing: 0.65,
   },
   buttonContainer: shadows.button,
@@ -115,14 +99,14 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   textOutline: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     letterSpacing: 0.65,
   },
   buttonOutline: {
     ...defaultButton,
     paddingVertical: 12,
     paddingHorizontal: 26,
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     borderWidth: 2,
   },
 });

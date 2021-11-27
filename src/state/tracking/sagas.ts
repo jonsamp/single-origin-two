@@ -1,8 +1,8 @@
-import * as Amplitude from "expo-analytics-amplitude";
-import { takeEvery } from "redux-saga/effects";
-import { Platform } from "react-native";
-import { eventTracked } from "./actions";
-import { AMPLITUDE_API_KEY } from "../../helpers/analytics";
+import * as Amplitude from 'expo-analytics-amplitude';
+import { takeEvery } from 'redux-saga/effects';
+import { Platform } from 'react-native';
+import { eventTracked } from './actions';
+import { AMPLITUDE_API_KEY } from '../../helpers/analytics';
 
 let isInitialized = false;
 const apiKey = AMPLITUDE_API_KEY;

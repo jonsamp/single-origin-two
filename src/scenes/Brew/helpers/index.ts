@@ -1,4 +1,4 @@
-import { Settings } from "../../../state/settings/types";
+import { Settings } from '../../../state/settings/types';
 
 interface TipTextProps {
   text: string;
@@ -26,13 +26,12 @@ export const formatTipText = ({
   const value = getPreferredValue(volumePercent * totalVolume);
 
   return text
-    .replace("**seconds**", `${secondsLeft} seconds`)
-    .replace("**grams**", `${value} ${unit.title}`);
+    .replace('**seconds**', `${secondsLeft} seconds`)
+    .replace('**grams**', `${value} ${unit.title}`);
 };
 
 export const getValueUnit = (unitType: any, value: number) =>
   `${unitType.getPreferredValue(value)} ${unitType.unit.title}`;
 
-export const withBloomFn =
-  (props: { settings: Settings }) => (duration: number) =>
-    props.settings.bloomDuration + duration;
+export const withBloomFn = (props: { settings: Settings }) => (duration: number) =>
+  props.settings.bloomDuration + duration;

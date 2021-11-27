@@ -1,16 +1,16 @@
-import { handleActions } from "redux-actions";
-import * as actions from "./actions";
-import { Notifications } from "./types";
+import { handleActions } from 'redux-actions';
+import * as actions from './actions';
+import { Notifications } from './types';
 
 const initialState = {
-  status: "",
+  status: '',
 };
 
 const reducers = {
   [actions.notificationsReset]: (notifications: Notifications) => initialState,
   [actions.reminderDenied]: (notifications: Notifications) => ({
     ...notifications,
-    status: "denied",
+    status: 'denied',
   }),
 };
 

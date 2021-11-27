@@ -1,3 +1,3 @@
-import { createAction } from "redux-actions";
+import { createAction } from 'redux-actions';
 
-export const eventTracked = createAction("tracking/EVENT_TRACKED");
+export const eventTracked = createAction('tracking/EVENT_TRACKED');

@@ -1,17 +1,17 @@
-import AddGrounds from "./images/addgrounds.png";
-import AfterBloom from "./images/afterbloom.gif";
-import Finish from "./images/afterfinish.gif";
-import AfterPour from "./images/afterpour.gif";
-import Bloom from "./images/bloom.gif";
-import Default from "./images/default.png";
-import Pour from "./images/pour.gif";
-import WetFilter from "./images/wetfilter.png";
+import AddGrounds from './images/addgrounds.png';
+import AfterBloom from './images/afterbloom.gif';
+import Finish from './images/afterfinish.gif';
+import AfterPour from './images/afterpour.gif';
+import Bloom from './images/bloom.gif';
+import Default from './images/default.png';
+import Pour from './images/pour.gif';
+import WetFilter from './images/wetfilter.png';
 
-import { StepType, BrewRecipeName } from "../types";
+import { StepType, BrewRecipeName } from '../types';
 
 export default {
   id: BrewRecipeName.V60,
-  title: "V60 #02",
+  title: 'V60 #02',
   minYield: 100,
   maxYield: 700,
   defaultGrind: 0.5,
@@ -21,14 +21,14 @@ export default {
   preparation: [
     {
       image: WetFilter,
-      text: "Rinse the entire filter with hot water, then discard the excess water.",
+      text: 'Rinse the entire filter with hot water, then discard the excess water.',
     },
     {
       image: AddGrounds,
-      text: "Place the filter inside the V60, add the coffee grouds, then place on top of a carafe or mug.",
+      text: 'Place the filter inside the V60, add the coffee grouds, then place on top of a carafe or mug.',
     },
     {
-      text: "Then put it all on a scale and zero the scale.",
+      text: 'Then put it all on a scale and zero the scale.',
     },
   ],
   steps: [

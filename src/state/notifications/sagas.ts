@@ -1,16 +1,12 @@
-import * as Notifications from "expo-notifications";
-import * as Permissions from "expo-permissions";
-import { call, put, takeLatest } from "redux-saga/effects";
-import {
-  reminderCancelled,
-  reminderDenied,
-  reminderRequested,
-} from "./actions";
+import * as Notifications from 'expo-notifications';
+import * as Permissions from 'expo-permissions';
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { reminderCancelled, reminderDenied, reminderRequested } from './actions';
 
 function* scheduleNotification({ timestamp }) {
   const localNotification = {
     content: {
-      title: "Taste your coffee.",
+      title: 'Taste your coffee.',
       body: `Tap here to rate your brew.`,
       data: { timestamp },
       ios: { sound: true },
@@ -35,12 +31,12 @@ function* handleReminderRequested({ payload: { timestamp } }) {
   } = yield call(Permissions.getAsync, Permissions.NOTIFICATIONS);
 
   // this only happens if you haven't ever asked or determined in the settings
-  if (notifications.status !== "granted") {
+  if (notifications.status !== 'granted') {
     const {
       permissions: { notifications: answer },
     } = yield call(Permissions.askAsync, Permissions.NOTIFICATIONS);
 
-    if (answer.status !== "granted") {
+    if (answer.status !== 'granted') {
       return yield put(reminderDenied());
     }
   }

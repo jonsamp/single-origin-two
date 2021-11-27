@@ -1,5 +1,5 @@
-import React from "react";
-import { Svg, G, Rect } from "react-native-svg";
+import React from 'react';
+import { Svg, G, Rect } from 'react-native-svg';
 
 function PauseIcon() {
   return (

@@ -50,9 +50,7 @@ function LogDetailEdit(props: Props) {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const tw = useTailwind();
-  const log = useSelector((state: State) =>
-    selectLog(state, route.params.timestamp)
-  );
+  const log = useSelector((state: State) => selectLog(state, route.params.timestamp));
 
   useEffect(function didMount() {
     tracking.track(tracking.events.RATING_VIEWED);
@@ -82,8 +80,7 @@ function LogDetailEdit(props: Props) {
 
   return (
     <View style={tw('theme.background.default flex-1')}>
-      {!isMaxWidth &&
-        Platform.select({ ios: <StatusBar animated style='light' /> })}
+      {!isMaxWidth && Platform.select({ ios: <StatusBar animated style="light" /> })}
       {Platform.select({
         ios: (
           <View
@@ -93,7 +90,7 @@ function LogDetailEdit(props: Props) {
           >
             <View style={tw('flex-row items-center')}>
               <Feather
-                name='edit-3'
+                name="edit-3"
                 size={iconSize.regular}
                 color={theme.icon.default}
                 style={{ top: spacing[0], marginRight: spacing[2] }}
@@ -101,10 +98,7 @@ function LogDetailEdit(props: Props) {
               <Text style={tw('headline theme.text.default')}>Edit Note</Text>
             </View>
             <View style={tw('flex-row items-center')}>
-              <TouchableOpacity
-                onPress={() => navigation.goBack()}
-                style={tw('pr-1')}
-              >
+              <TouchableOpacity onPress={() => navigation.goBack()} style={tw('pr-1')}>
                 <Text style={tw('headline theme.text.default')}>Save</Text>
               </TouchableOpacity>
             </View>
@@ -116,11 +110,8 @@ function LogDetailEdit(props: Props) {
           paddingHorizontal: spacing[3],
         }}
       >
-        <KeyboardAvoidingView behavior='padding'>
-          <SafeAreaView
-            edges={['bottom']}
-            style={tw(`${isMaxWidth ? 'items-center' : ''} mb-4`)}
-          >
+        <KeyboardAvoidingView behavior="padding">
+          <SafeAreaView edges={['bottom']} style={tw(`${isMaxWidth ? 'items-center' : ''} mb-4`)}>
             <View
               style={
                 isMaxWidth && {
@@ -129,9 +120,8 @@ function LogDetailEdit(props: Props) {
               }
             >
               <Text style={tw('body mb-6 mt-4 theme.text.default')}>
-                Rate your {recipes[log.recipeId].title} brewed at{' '}
-                {format(log.timestamp, 'h:mma')} on{' '}
-                {format(log.timestamp, 'MMM d, yyyy')}.
+                Rate your {recipes[log.recipeId].title} brewed at {format(log.timestamp, 'h:mma')}{' '}
+                on {format(log.timestamp, 'MMM d, yyyy')}.
               </Text>
               <Text style={tw('title theme.text.default')}>Tasting note</Text>
               <View style={tw('rounded-md overflow-hidden mt-4 mb-6')}>
@@ -162,7 +152,7 @@ function LogDetailEdit(props: Props) {
                   min={1}
                   max={10}
                   defaultValue={log.rating || 5}
-                  label='rating'
+                  label="rating"
                   onChange={(value) => updateLog('rating', value)}
                 />
               </View>
@@ -175,16 +165,14 @@ function LogDetailEdit(props: Props) {
                 onChangeText={(value) => updateLog('notes', value)}
                 value={log.notes}
                 keyboardAppearance={isDarkTheme ? 'dark' : 'default'}
-                returnKeyType='done'
+                returnKeyType="done"
                 onSubmitEditing={Keyboard.dismiss}
               />
-              <Text style={tw('title theme.text.default mt-8 mb-4')}>
-                Delete note
-              </Text>
+              <Text style={tw('title theme.text.default mt-8 mb-4')}>Delete note</Text>
               <Button
                 onPress={() => onDeleteLog(log.timestamp)}
-                title='Delete Note'
-                type='secondary'
+                title="Delete Note"
+                type="secondary"
               />
             </View>
           </SafeAreaView>

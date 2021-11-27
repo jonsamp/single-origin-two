@@ -1,5 +1,5 @@
 export interface Settings {
-  theme: "light" | "dark";
+  theme: 'light' | 'dark';
   ratio: number;
   bloomDuration: number;
   recordTemp: boolean;
@@ -18,6 +18,6 @@ export interface Settings {
   };
 }
 
-type WeightUnits = "grams" | "ounces" | "cups";
+type WeightUnits = 'grams' | 'ounces' | 'cups';
 
-type TemperatureUnits = "fahrenheit" | "celsius";
+type TemperatureUnits = 'fahrenheit' | 'celsius';

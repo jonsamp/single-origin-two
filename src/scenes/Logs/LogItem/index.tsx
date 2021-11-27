@@ -1,12 +1,7 @@
 import { Feather } from '@expo/vector-icons';
 import { format } from 'date-fns';
 import React from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity as RNTouchableOpacity,
-  Platform,
-} from 'react-native';
+import { Text, View, TouchableOpacity as RNTouchableOpacity, Platform } from 'react-native';
 import Animated, {
   Easing,
   withTiming,
@@ -15,10 +10,7 @@ import Animated, {
   useAnimatedGestureHandler,
   runOnJS,
 } from 'react-native-reanimated';
-import {
-  PanGestureHandler,
-  TouchableOpacity,
-} from 'react-native-gesture-handler';
+import { PanGestureHandler, TouchableOpacity } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import * as Haptics from 'expo-haptics';
 
@@ -83,10 +75,8 @@ function ListItem(props: Props) {
         const halfwayDistance = width * 0.5;
 
         if (
-          (Math.abs(prevValue) < halfwayDistance &&
-            Math.abs(newValue) >= halfwayDistance) ||
-          (Math.abs(prevValue) > halfwayDistance &&
-            Math.abs(newValue) <= halfwayDistance)
+          (Math.abs(prevValue) < halfwayDistance && Math.abs(newValue) >= halfwayDistance) ||
+          (Math.abs(prevValue) > halfwayDistance && Math.abs(newValue) <= halfwayDistance)
         ) {
           runOnJS(haptic)();
         }
@@ -184,10 +174,7 @@ function ListItem(props: Props) {
           </Text>
         </Animated.View>
       </RNTouchableOpacity>
-      <PanGestureHandler
-        onGestureEvent={gestureHandler}
-        activeOffsetX={[-20, 20]}
-      >
+      <PanGestureHandler onGestureEvent={gestureHandler} activeOffsetX={[-20, 20]}>
         <Animated.View style={animatedStyle}>
           <TouchableOpacity
             onPress={_onPress}
@@ -205,9 +192,7 @@ function ListItem(props: Props) {
                 style={[
                   styles.iconContainer,
                   {
-                    backgroundColor: isDarkTheme
-                      ? colors.grey1
-                      : colors.foreground,
+                    backgroundColor: isDarkTheme ? colors.grey1 : colors.foreground,
                   },
                 ]}
               >
@@ -229,12 +214,7 @@ function ListItem(props: Props) {
                       justifyContent: 'center',
                     }}
                   >
-                    <Text
-                      style={[
-                        type.label,
-                        { color: 'black', fontWeight: 'bold' },
-                      ]}
-                    >
+                    <Text style={[type.label, { color: 'black', fontWeight: 'bold' }]}>
                       {log.rating}
                     </Text>
                   </View>
@@ -244,21 +224,13 @@ function ListItem(props: Props) {
                 <Text style={[type.headline, { color: colors.foreground }]}>
                   {recipe.title} {recipe.modifier}
                 </Text>
-                <Text
-                  style={[
-                    type.caption,
-                    { color: colors.foreground, opacity: 0.8 },
-                  ]}
-                >
+                <Text style={[type.caption, { color: colors.foreground, opacity: 0.8 }]}>
                   {format(log.timestamp, 'MMM d, yyyy @ h:mma')}
                 </Text>
                 {log.tastingNote || log.notes ? (
                   <Text
                     numberOfLines={1}
-                    style={[
-                      type.caption,
-                      { color: colors.foreground, opacity: 0.8 },
-                    ]}
+                    style={[type.caption, { color: colors.foreground, opacity: 0.8 }]}
                   >
                     {log.tastingNote &&
                       `${
@@ -271,11 +243,7 @@ function ListItem(props: Props) {
               </View>
             </View>
             <View style={{ marginLeft: 16 }}>
-              <Feather
-                name='chevron-right'
-                size={colors.iconSize}
-                color={colors.foreground}
-              />
+              <Feather name="chevron-right" size={colors.iconSize} color={colors.foreground} />
             </View>
           </TouchableOpacity>
         </Animated.View>

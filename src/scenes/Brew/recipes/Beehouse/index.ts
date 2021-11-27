@@ -1,17 +1,17 @@
-import AddGrounds from "./images/addgrounds.png";
-import AfterBloom from "./images/afterbloom.gif";
-import AfterPour from "./images/afterpour.gif";
-import Bloom from "./images/bloom.gif";
-import Default from "./images/default.png";
-import Finish from "./images/finish.gif";
-import Pour from "./images/pour.gif";
-import WetFilter from "./images/wetfilter.png";
+import AddGrounds from './images/addgrounds.png';
+import AfterBloom from './images/afterbloom.gif';
+import AfterPour from './images/afterpour.gif';
+import Bloom from './images/bloom.gif';
+import Default from './images/default.png';
+import Finish from './images/finish.gif';
+import Pour from './images/pour.gif';
+import WetFilter from './images/wetfilter.png';
 
-import { StepType, BrewRecipeName } from "../types";
+import { StepType, BrewRecipeName } from '../types';
 
 export default {
   id: BrewRecipeName.Beehouse,
-  title: "Beehouse",
+  title: 'Beehouse',
   minYield: 142,
   maxYield: 567,
   defaultGrind: 0.5,
@@ -21,14 +21,14 @@ export default {
   preparation: [
     {
       image: WetFilter,
-      text: "Rinse the entire filter with hot water, then discard the excess water.",
+      text: 'Rinse the entire filter with hot water, then discard the excess water.',
     },
     {
       image: AddGrounds,
-      text: "Place the filter inside the Beehouse, add the coffee grouds, then place on top of a carafe or mug.",
+      text: 'Place the filter inside the Beehouse, add the coffee grouds, then place on top of a carafe or mug.',
     },
     {
-      text: "Then put it all on a scale and zero the scale.",
+      text: 'Then put it all on a scale and zero the scale.',
     },
   ],
   steps: [

@@ -23,11 +23,7 @@ function BrewSummary(props: Props) {
 
   return (
     <View style={{ flex: 1 }}>
-      <Log
-        timestamp={route.params.timestamp}
-        withReminder
-        style={{ paddingBottom: 120 }}
-      />
+      <Log timestamp={route.params.timestamp} withReminder style={{ paddingBottom: 120 }} />
       <View
         style={{
           alignItems: 'center',
@@ -42,8 +38,8 @@ function BrewSummary(props: Props) {
           ]}
         >
           <Button
-            title='done'
-            type='tertiary'
+            title="done"
+            type="tertiary"
             customStyle={[
               {
                 ...(isMaxWidth

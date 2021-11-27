@@ -31,11 +31,7 @@ function ChecklistSetting(props: Props) {
             }}
           >
             {item.value ? (
-              <Feather
-                name='check'
-                size={iconSize.regular - 3}
-                color={theme.icon.default}
-              />
+              <Feather name="check" size={iconSize.regular - 3} color={theme.icon.default} />
             ) : null}
           </SettingWrapper>
         </TouchableOpacity>

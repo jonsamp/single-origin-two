@@ -71,9 +71,7 @@ function Log(props: Props) {
     notes: 'Notes',
   };
   const logStats = Object.keys(log)
-    .filter(
-      (logKey) => logConfig[logKey] && typeof logConfig[logKey] === 'function'
-    )
+    .filter((logKey) => logConfig[logKey] && typeof logConfig[logKey] === 'function')
     .map((logKey) => logConfig[logKey](log[logKey as keyof LogType]));
 
   useEffect(function didMount() {
@@ -106,10 +104,7 @@ function Log(props: Props) {
   }
 
   return (
-    <ResponsiveScrollView
-      wrapperStyle={tw('theme.background.default')}
-      style={style}
-    >
+    <ResponsiveScrollView wrapperStyle={tw('theme.background.default')} style={style}>
       <View style={tw('items-center')}>
         {recipe.icon({
           fill: theme.icon.default,
@@ -120,8 +115,7 @@ function Log(props: Props) {
         </Text>
         <View>
           <Text style={tw('body theme.text.default')}>
-            Brewed at {format(log.timestamp, 'h:mma')} on{' '}
-            {format(log.timestamp, 'MMM d, yyyy')}
+            Brewed at {format(log.timestamp, 'h:mma')} on {format(log.timestamp, 'MMM d, yyyy')}
           </Text>
         </View>
       </View>
@@ -137,9 +131,7 @@ function Log(props: Props) {
                 ...{ elevation: 0, shadowOpacity: 0 },
               }}
             >
-              <Text style={tw('headline theme.text.default')}>
-                {logConfig[key]}
-              </Text>
+              <Text style={tw('headline theme.text.default')}>{logConfig[key]}</Text>
               <Text style={tw('body theme.text.default')}>
                 {capitalizeFirstLetter(log[key as keyof LogType] as string)}
               </Text>
@@ -167,9 +159,7 @@ function Log(props: Props) {
           >
             <View style={tw('flex-1 mr-8')}>
               <Text style={tw('headline theme.text.default')}>
-                {reminderScheduled
-                  ? 'Tasting reminder scheduled'
-                  : 'Send a tasting reminder'}
+                {reminderScheduled ? 'Tasting reminder scheduled' : 'Send a tasting reminder'}
               </Text>
               {reminderScheduled && (
                 <Text style={tw('body theme.text.secondary')}>
@@ -179,17 +169,9 @@ function Log(props: Props) {
               )}
             </View>
             {reminderScheduled ? (
-              <Feather
-                name='check-square'
-                size={iconSize.regular}
-                color={theme.icon.default}
-              />
+              <Feather name="check-square" size={iconSize.regular} color={theme.icon.default} />
             ) : (
-              <Feather
-                name='plus-square'
-                size={iconSize.regular}
-                color={theme.icon.default}
-              />
+              <Feather name="plus-square" size={iconSize.regular} color={theme.icon.default} />
             )}
           </Card>
         </TouchableOpacity>
@@ -200,9 +182,7 @@ function Log(props: Props) {
           style={tw('flex-row justify-between')}
         >
           <View style={tw('flex-1 mr-8')}>
-            <Text style={tw('headline theme.text.default mb-1')}>
-              Send a tasting reminder
-            </Text>
+            <Text style={tw('headline theme.text.default mb-1')}>Send a tasting reminder</Text>
             <Text style={tw('body theme.text.secondary')}>
               To send reminders, turn on notification permissions in Settings.
             </Text>
@@ -213,13 +193,8 @@ function Log(props: Props) {
       <View style={tw('flex-row flex-wrap mt-4')}>
         {logStats.map((stat) => (
           <View style={tw('w-6/12')} key={stat.label}>
-            <Card
-              containerStyle={tw('px-2 mb-4')}
-              style={tw('items-center py-8')}
-            >
-              <Text style={tw('header mb-2 theme.text.default')}>
-                {stat.value}
-              </Text>
+            <Card containerStyle={tw('px-2 mb-4')} style={tw('items-center py-8')}>
+              <Text style={tw('header mb-2 theme.text.default')}>{stat.value}</Text>
               <Text style={tw('body theme.text.default')}>{stat.label}</Text>
             </Card>
           </View>

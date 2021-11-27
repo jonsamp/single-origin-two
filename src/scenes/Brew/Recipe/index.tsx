@@ -38,9 +38,7 @@ function Recipe(props: RecipeProps) {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const dispatch = useDispatch();
-  const recentLog = useSelector((state: State) =>
-    selectRecentLog(state, recipe.id)
-  );
+  const recentLog = useSelector((state: State) => selectRecentLog(state, recipe.id));
   const [recipeState, _setRecipeState] = useState({
     randomKey: 1,
     grind: recentLog.grind,
@@ -60,13 +58,7 @@ function Recipe(props: RecipeProps) {
     };
   }, []);
 
-  function setRecipeState({
-    key,
-    value,
-  }: {
-    key: string;
-    value: number | boolean;
-  }) {
+  function setRecipeState({ key, value }: { key: string; value: number | boolean }) {
     _setRecipeState((prevRecipeState) => ({
       ...prevRecipeState,
       [key]: value,
@@ -81,14 +73,7 @@ function Recipe(props: RecipeProps) {
   }
 
   function onFinish() {
-    const {
-      timestamp,
-      totalVolume,
-      grind,
-      temp,
-      totalBrewTime,
-      attributesRecorded,
-    } = recipeState;
+    const { timestamp, totalVolume, grind, temp, totalBrewTime, attributesRecorded } = recipeState;
     const log = {
       timestamp,
       totalVolume,
@@ -97,10 +82,7 @@ function Recipe(props: RecipeProps) {
       ...(attributesRecorded && settings.recordGrind
         ? {
             grind:
-              grind ||
-              unitHelpers.grindUnit.getPreferredValueBasedOnPercent(
-                recipe.defaultGrind
-              ),
+              grind || unitHelpers.grindUnit.getPreferredValueBasedOnPercent(recipe.defaultGrind),
           }
         : null),
       ...(attributesRecorded && settings.recordTemp
@@ -120,9 +102,7 @@ function Recipe(props: RecipeProps) {
   const { minYield, maxYield, defaultGrind } = recipe;
   const { totalVolume, grind, temp } = recipeState;
   const coffeeWeight = Math.round(totalVolume / settings.ratio);
-  const totalPourVolume = recipeState.isIced
-    ? Math.round(totalVolume * 0.666)
-    : totalVolume;
+  const totalPourVolume = recipeState.isIced ? Math.round(totalVolume * 0.666) : totalVolume;
   const longestSecond = recipe.steps
     .filter((s) => s.second)
     .map((s) => s.second)
@@ -138,9 +118,7 @@ function Recipe(props: RecipeProps) {
           minYield={minYield}
           maxYield={maxYield}
         />
-        {recipe.iced && (
-          <IceToggle value={recipeState.isIced} onChange={onIsIcedChange} />
-        )}
+        {recipe.iced && <IceToggle value={recipeState.isIced} onChange={onIsIcedChange} />}
         {recentLog.notes ? <Notes text={recentLog.notes} /> : null}
         <BoilWater volume={totalPourVolume} />
         <GrindCoffee
@@ -150,9 +128,7 @@ function Recipe(props: RecipeProps) {
           recentLog={recentLog}
           recipeDuration={longestSecond + settings.bloomDuration}
         />
-        {recipeState.isIced && (
-          <AddIce volume={Math.round(totalVolume * 0.333)} />
-        )}
+        {recipeState.isIced && <AddIce volume={Math.round(totalVolume * 0.333)} />}
         <RecordBrewAttributes
           setRecipeState={setRecipeState}
           defaultGrind={defaultGrind}
@@ -168,7 +144,7 @@ function Recipe(props: RecipeProps) {
           key={recipeState.randomKey + settings.bloomDuration}
         />
         <Button
-          title='Finish Brew'
+          title="Finish Brew"
           customStyle={{
             ...(isMaxWidth
               ? {
@@ -181,7 +157,7 @@ function Recipe(props: RecipeProps) {
                 }),
           }}
           onPress={onFinish}
-          type='tertiary'
+          type="tertiary"
         />
       </View>
     </View>

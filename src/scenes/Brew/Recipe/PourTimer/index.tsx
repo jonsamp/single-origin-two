@@ -1,21 +1,21 @@
-import React, { useRef, useState, useEffect } from "react";
-import { Animated, View } from "react-native";
-import Card from "../../../../components/Card";
-import Image from "../../../../components/Image";
-import { height, width } from "../../../../constants/layout";
-import playSound from "../../../../helpers/playSound";
-import withSettings from "../../../../providers/settings";
-import { useTheme, Styleguide, Theme } from "../../../../providers/theme";
-import { Settings } from "../../../../state/settings/types";
-import { Recipe } from "../../../../types";
-import { UnitHelpers } from "../../../../types/index";
-import { withBloomFn } from "../../helpers";
-import addWaterSound from "../../sounds/add-water.mp3";
-import tipSound from "../../sounds/tip.mp3";
-import Step from "./Step";
-import styles from "./styles";
-import Timer from "./Timer";
-import WaterVolume from "./WaterVolume";
+import React, { useRef, useState, useEffect } from 'react';
+import { Animated, View } from 'react-native';
+import Card from '../../../../components/Card';
+import Image from '../../../../components/Image';
+import { height, width } from '../../../../constants/layout';
+import playSound from '../../../../helpers/playSound';
+import withSettings from '../../../../providers/settings';
+import { useTheme, Styleguide, Theme } from '../../../../providers/theme';
+import { Settings } from '../../../../state/settings/types';
+import { Recipe } from '../../../../types';
+import { UnitHelpers } from '../../../../types/index';
+import { withBloomFn } from '../../helpers';
+import addWaterSound from '../../sounds/add-water.mp3';
+import tipSound from '../../sounds/tip.mp3';
+import Step from './Step';
+import styles from './styles';
+import Timer from './Timer';
+import WaterVolume from './WaterVolume';
 
 type Props = {
   unitHelpers: UnitHelpers;
@@ -70,7 +70,7 @@ function PourTimerFunction(props: Props) {
       const step = _recipe[second];
 
       setRecipeState({
-        key: "totalBrewTime",
+        key: 'totalBrewTime',
         value: second,
       });
 
@@ -99,13 +99,13 @@ function PourTimerFunction(props: Props) {
           }, lengthOfStep);
         }
 
-        if (step.type === "pour") {
+        if (step.type === 'pour') {
           setCurrentStepDuration(Math.round(lengthOfStep / 1000));
           setVolumePercent(step.volumePercent);
           playSound({ sound: addWaterSound });
         }
 
-        if (step.type === "tip") {
+        if (step.type === 'tip') {
           setCurrentStepDuration(5);
           playSound({ sound: tipSound });
         }
@@ -123,7 +123,7 @@ function PourTimerFunction(props: Props) {
           left: -16,
           width: maxWidth + 32,
           borderRadius: maxWidth >= styleguide.maxWidth ? 4 : 0,
-          overflow: "hidden",
+          overflow: 'hidden',
         }}
       >
         <Image
@@ -146,11 +146,7 @@ function PourTimerFunction(props: Props) {
             pourVelocity={recipe.pourVelocity}
           />
           <View style={[styles.container, { backgroundColor: colors.grey2 }]}>
-            <Timer
-              toggleCountdown={toggleCountdown}
-              timerRunning={timerRunning}
-              second={second}
-            />
+            <Timer toggleCountdown={toggleCountdown} timerRunning={timerRunning} second={second} />
             <WaterVolume
               volume={volume * volumePercent}
               waterVolumeUnit={unitHelpers.waterVolumeUnit}

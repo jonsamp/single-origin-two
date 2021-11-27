@@ -1,6 +1,6 @@
-import React from "react";
-import { Path, Svg } from "react-native-svg";
-import { Icon } from "./types";
+import React from 'react';
+import { Path, Svg } from 'react-native-svg';
+import { Icon } from './types';
 
 function CleverIcon({ fill, size = 1 }: Icon) {
   return (
@@ -21,12 +21,7 @@ function CleverIcon({ fill, size = 1 }: Icon) {
         strokeWidth="2"
         strokeLinejoin="round"
       />
-      <Path
-        d="M21.8009 17.4722H5.94444"
-        stroke={fill}
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
+      <Path d="M21.8009 17.4722H5.94444" stroke={fill} strokeWidth="2" strokeLinecap="round" />
       <Path
         d="M14.1315 17.5616L12.6074 21.3137"
         stroke={fill}

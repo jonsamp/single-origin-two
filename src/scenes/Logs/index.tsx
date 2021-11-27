@@ -61,7 +61,7 @@ function Logs(props: Props) {
         />
       )}
       ListEmptyComponent={
-        <ScreenPlaceholder text='Notes of each brew will appear here once you complete a brew.' />
+        <ScreenPlaceholder text="Notes of each brew will appear here once you complete a brew." />
       }
     />
   );

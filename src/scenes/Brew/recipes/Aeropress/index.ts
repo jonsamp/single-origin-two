@@ -1,18 +1,18 @@
-import AfterBloom from "./images/afterbloom.gif";
-import AfterPour from "./images/afterpour.gif";
-import AfterPress from "./images/afterpress.gif";
-import AttachLid from "./images/attachlid.gif";
-import Bloom from "./images/bloom.gif";
-import Default from "./images/default.jpg";
-import Finish from "./images/finish.gif";
-import Pour from "./images/pour.gif";
-import Press from "./images/press.gif";
+import AfterBloom from './images/afterbloom.gif';
+import AfterPour from './images/afterpour.gif';
+import AfterPress from './images/afterpress.gif';
+import AttachLid from './images/attachlid.gif';
+import Bloom from './images/bloom.gif';
+import Default from './images/default.jpg';
+import Finish from './images/finish.gif';
+import Pour from './images/pour.gif';
+import Press from './images/press.gif';
 
-import { StepType, BrewRecipeName } from "../types";
+import { StepType, BrewRecipeName } from '../types';
 
 export default {
   id: BrewRecipeName.Aeropress,
-  title: "Aeropress",
+  title: 'Aeropress',
   minYield: 180,
   maxYield: 300,
   defaultGrind: 0.3,
@@ -20,7 +20,7 @@ export default {
   defaultSource: Default,
   preparation: [
     {
-      text: "Insert the plunger about 1cm into the brew chamber and set on the scale in the inverted/upside-down position. Add the ground coffee to the aeropress.",
+      text: 'Insert the plunger about 1cm into the brew chamber and set on the scale in the inverted/upside-down position. Add the ground coffee to the aeropress.',
     },
     {
       text: "Once the coffee is brewing, you'll add the filter and cap to the aeropress.",
@@ -47,7 +47,7 @@ export default {
     {
       second: 65,
       type: StepType.Tip,
-      text: "Attach the cap and filter.",
+      text: 'Attach the cap and filter.',
       duration: 10000,
       image: AttachLid,
       afterImage: AttachLid,
@@ -55,7 +55,7 @@ export default {
     {
       second: 75,
       type: StepType.Tip,
-      text: "Plunge the aeropress.",
+      text: 'Plunge the aeropress.',
       duration: 30000,
       image: Press,
       afterImage: AfterPress,

@@ -1,4 +1,4 @@
-import { Audio } from "expo-av";
+import { Audio } from 'expo-av';
 
 export default async function playSound({ sound }) {
   const soundObject = new Audio.Sound();
@@ -6,6 +6,6 @@ export default async function playSound({ sound }) {
     await soundObject.loadAsync(sound);
     await soundObject.playAsync();
   } catch (error) {
-    console.log("Error playing sound: ", error);
+    console.log('Error playing sound: ', error);
   }
 }

@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import InstructionalCard from "../../components/InstructionalCard";
-import ResponsiveScrollView from "../../components/ResponsiveScrollView";
-import { RouteProp } from "@react-navigation/core";
-import { RootStackParamList } from "../../navigation";
-import { PreparationStep } from "../Brew/recipes/types";
+import InstructionalCard from '../../components/InstructionalCard';
+import ResponsiveScrollView from '../../components/ResponsiveScrollView';
+import { RouteProp } from '@react-navigation/core';
+import { RootStackParamList } from '../../navigation';
+import { PreparationStep } from '../Brew/recipes/types';
 
 interface Props {
-  route: RouteProp<RootStackParamList, "Preparation">;
+  route: RouteProp<RootStackParamList, 'Preparation'>;
   preparation: PreparationStep[];
 }
 

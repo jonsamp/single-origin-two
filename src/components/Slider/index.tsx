@@ -1,16 +1,8 @@
-import React from "react";
-import {
-  StyleSheet,
-  View,
-  TextInput,
-  Dimensions,
-  Text,
-  Platform,
-  ViewStyle,
-} from "react-native";
-import { palette, shadows } from "@expo/styleguide-native";
-import { LinearGradient } from "expo-linear-gradient";
-import * as Haptics from "expo-haptics";
+import React from 'react';
+import { StyleSheet, View, TextInput, Dimensions, Text, Platform, ViewStyle } from 'react-native';
+import { palette, shadows } from '@expo/styleguide-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import * as Haptics from 'expo-haptics';
 import Animated, {
   useSharedValue,
   useAnimatedGestureHandler,
@@ -20,18 +12,18 @@ import Animated, {
   runOnJS,
   withTiming,
   Easing,
-} from "react-native-reanimated";
-import { PanGestureHandler } from "react-native-gesture-handler";
-import { useTheme } from "../../common/theme";
-import { useTailwind } from "../../common/theme";
-import { styleguide } from "../../constants/themes";
+} from 'react-native-reanimated';
+import { PanGestureHandler } from 'react-native-gesture-handler';
+import { useTheme } from '../../common/theme';
+import { useTailwind } from '../../common/theme';
+import { styleguide } from '../../constants/themes';
 
-import { PlusIcon } from "./PlusIcon";
-import { MinusIcon } from "./MinusIcon";
-import { IncrementButton } from "./IncrementButton";
+import { PlusIcon } from './PlusIcon';
+import { MinusIcon } from './MinusIcon';
+import { IncrementButton } from './IncrementButton';
 
 const { maxWidth } = styleguide;
-const screenWidth = Dimensions.get("screen").width;
+const screenWidth = Dimensions.get('screen').width;
 const isMaxWidth = screenWidth >= styleguide.maxWidth;
 const SLIDER_WIDTH = isMaxWidth ? maxWidth - 64 : screenWidth - 64;
 const KNOB_WIDTH = 42;
@@ -46,22 +38,19 @@ type Props = {
 };
 
 async function haptic() {
-  if (Platform.OS === "ios") {
+  if (Platform.OS === 'ios') {
     await Haptics.selectionAsync();
   }
 }
 
 function getStepValue(value: number, oneStepValue: number, min: number) {
-  "worklet";
+  'worklet';
   return Math.round(value / oneStepValue) + min;
 }
 
 function clamp(translationX: number, offsetX: number) {
-  "worklet";
-  return Math.min(
-    Math.max(translationX + offsetX, 0),
-    SLIDER_WIDTH - KNOB_WIDTH
-  );
+  'worklet';
+  return Math.min(Math.max(translationX + offsetX, 0), SLIDER_WIDTH - KNOB_WIDTH);
 }
 
 Animated.addWhitelistedNativeProps({ text: true });
@@ -73,7 +62,7 @@ function Slider(props: Props) {
     max = 100,
     defaultValue = 50,
     onChange = () => {},
-    label = "Label",
+    label = 'Label',
     style,
   } = props;
   const { dark } = useTheme();
@@ -160,13 +149,11 @@ function Slider(props: Props) {
   }
 
   return (
-    <View
-      style={[tw(`pt-10 items-center pb-12 theme.background.tertiary`), style]}
-    >
-      <View style={tw("mb-12 items-center")}>
+    <View style={[tw(`pt-10 items-center pb-12 theme.background.tertiary`), style]}>
+      <View style={tw('mb-12 items-center')}>
         <View
           style={[
-            tw("px-4 mb-2 flex-row items-center justify-between"),
+            tw('px-4 mb-2 flex-row items-center justify-between'),
             styles.sliderHeaderContainer,
           ]}
         >
@@ -174,11 +161,7 @@ function Slider(props: Props) {
           <AnimatedTextInput
             underlineColorAndroid="transparent"
             editable={false}
-            style={[
-              tw("theme.text.default font-bold"),
-              styles.sliderValue,
-              sliderValueStyle,
-            ]}
+            style={[tw('theme.text.default font-bold'), styles.sliderValue, sliderValueStyle]}
             animatedProps={animatedProps}
             value={stepText.value}
           />
@@ -186,33 +169,31 @@ function Slider(props: Props) {
         </View>
         <Text
           style={[
-            tw("callout font-bold uppercase theme.text.default opacity-80"),
+            tw('callout font-bold uppercase theme.text.default opacity-80'),
             styles.labelStyle,
           ]}
         >
           {label}
         </Text>
       </View>
-      <View style={[tw("justify-center"), styles.slider]}>
+      <View style={[tw('justify-center'), styles.slider]}>
         <LinearGradient
           colors={
             dark
-              ? [palette.dark.gray["000"], palette.dark.gray[500]]
+              ? [palette.dark.gray['000'], palette.dark.gray[500]]
               : [palette.light.gray[500], palette.light.white]
           }
           locations={[0.2, 0.8]}
-          style={[styles.slider, tw("absolute opacity-40")]}
+          style={[styles.slider, tw('absolute opacity-40')]}
         />
         <PanGestureHandler onGestureEvent={onGestureEvent}>
           <Animated.View
             style={[
-              tw("justify-center items-center rounded-lg"),
+              tw('justify-center items-center rounded-lg'),
               styles.knobContainer,
               scrollTranslationStyle,
               {
-                backgroundColor: dark
-                  ? palette.dark.gray[500]
-                  : palette.light.white,
+                backgroundColor: dark ? palette.dark.gray[500] : palette.light.white,
                 top: dark ? 0 : -2,
               },
             ]}
@@ -259,6 +240,6 @@ const styles = StyleSheet.create({
   },
   sliderValue: {
     fontSize: 48,
-    fontFamily: Platform.select({ ios: "Menlo" }),
+    fontFamily: Platform.select({ ios: 'Menlo' }),
   },
 });

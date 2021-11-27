@@ -1,16 +1,11 @@
-import React from "react";
-import { Path, Rect, Svg } from "react-native-svg";
-import { Icon } from "./types";
+import React from 'react';
+import { Path, Rect, Svg } from 'react-native-svg';
+import { Icon } from './types';
 
 function AeropressIcon({ fill, size = 1 }: Icon) {
   return (
     <Svg width={size * 23} height={size * 42} viewBox="0 0 23 42" fill="none">
-      <Path
-        d="M20.9727 40.0181H2.81711"
-        stroke={fill}
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
+      <Path d="M20.9727 40.0181H2.81711" stroke={fill} strokeWidth="2" strokeLinecap="round" />
       <Path
         d="M17.8614 40.0181L17.8614 8.79749"
         stroke={fill}

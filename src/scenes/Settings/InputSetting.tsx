@@ -1,8 +1,8 @@
-import React from "react";
-import { TextInput } from "react-native";
+import React from 'react';
+import { TextInput } from 'react-native';
 
-import { useTailwind } from "../../common/theme";
-import SettingWrapper from "./SettingWrapper";
+import { useTailwind } from '../../common/theme';
+import SettingWrapper from './SettingWrapper';
 
 type Props = {
   value: number;
@@ -17,15 +17,11 @@ function InputSetting(props: Props) {
   const tw = useTailwind();
 
   return (
-    <SettingWrapper
-      title={title}
-      description={description}
-      borderTop={borderTop}
-    >
+    <SettingWrapper title={title} description={description} borderTop={borderTop}>
       <TextInput
         value={value.toString()}
         style={tw(
-          "body rounded-md px-3 py-1 pb-1.5 border theme.border.default theme.text.default"
+          'body rounded-md px-3 py-1 pb-1.5 border theme.border.default theme.text.default'
         )}
         keyboardType="number-pad"
         maxLength={2}

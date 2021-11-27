@@ -33,9 +33,7 @@ function ResponsiveScrollView(props: Props) {
           style,
         ]}
       >
-        <View style={isMaxWidth && { width: styleguide.maxWidth }}>
-          {children}
-        </View>
+        <View style={isMaxWidth && { width: styleguide.maxWidth }}>{children}</View>
       </ScrollView>
     </View>
   );

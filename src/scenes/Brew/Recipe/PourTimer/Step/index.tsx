@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { View, Platform } from "react-native";
+import React, { useEffect, useState } from 'react';
+import { View, Platform } from 'react-native';
 import Animated, {
   Easing,
   useSharedValue,
@@ -7,14 +7,14 @@ import Animated, {
   useAnimatedStyle,
   interpolate,
   withSequence,
-} from "react-native-reanimated";
+} from 'react-native-reanimated';
 
-import { useTheme } from "../../../../../providers/theme";
-import withSettings from "../../../../../providers/settings";
-import { width, isMaxWidth } from "../../../../../constants/layout";
-import Instructions from "../../../../../components/Instructions";
-import formatSeconds from "../../../../../helpers/formatSeconds";
-import { Recipe, UnitHelpers } from "../../../../../types";
+import { useTheme } from '../../../../../providers/theme';
+import withSettings from '../../../../../providers/settings';
+import { width, isMaxWidth } from '../../../../../constants/layout';
+import Instructions from '../../../../../components/Instructions';
+import formatSeconds from '../../../../../helpers/formatSeconds';
+import { Recipe, UnitHelpers } from '../../../../../types';
 
 type Props = {
   recipe: Recipe;
@@ -41,86 +41,78 @@ function StepFunction(props: Props) {
   const { waterVolumeUnit } = unitHelpers;
   const totalTime = Math.max(...Object.keys(recipe).map((n) => Number(n)));
   const { colors, styleguide } = useTheme();
-  const [nextStepText, setNextStepText] = useState("");
+  const [nextStepText, setNextStepText] = useState('');
   const stepAnimatedValue = useSharedValue(0);
   const progressValue = useSharedValue(0);
 
   const beforeTimerStart = !timerRunning && second === -3;
 
   // result used for the progress bar below the step text.
-  const recipeWithEventDurations = Object.keys(recipe).reduce(
-    (acc, recipeKey) => {
-      const event = recipe[recipeKey];
+  const recipeWithEventDurations = Object.keys(recipe).reduce((acc, recipeKey) => {
+    const event = recipe[recipeKey];
 
-      // If we have a duration, then use it
-      if (event.duration) {
-        return {
-          ...acc,
-          [recipeKey]: {
-            ...event,
-            duration: event.duration,
-          },
-        };
+    // If we have a duration, then use it
+    if (event.duration) {
+      return {
+        ...acc,
+        [recipeKey]: {
+          ...event,
+          duration: event.duration,
+        },
+      };
+    }
+
+    // If it's pour event, then look for any previous pour events, and find the volume percent difference.
+    // Then use the volume percent difference between the previous pour and the current one to find the volume to add
+    // Then use that to calculate duration.
+    if (event.type === 'pour') {
+      let previousVolumePercent = 0;
+
+      const pourEventKeys = Object.keys(recipe).filter((_recipeKey) => {
+        return recipe[_recipeKey].type === 'pour';
+      });
+
+      const currentEventPourIndex = pourEventKeys.findIndex((key) => key === recipeKey);
+
+      const previousPourIndex = currentEventPourIndex > 0 ? currentEventPourIndex - 1 : null;
+
+      if (previousPourIndex !== null) {
+        previousVolumePercent = recipe[pourEventKeys[previousPourIndex]].volumePercent;
       }
 
-      // If it's pour event, then look for any previous pour events, and find the volume percent difference.
-      // Then use the volume percent difference between the previous pour and the current one to find the volume to add
-      // Then use that to calculate duration.
-      if (event.type === "pour") {
-        let previousVolumePercent = 0;
-
-        const pourEventKeys = Object.keys(recipe).filter((_recipeKey) => {
-          return recipe[_recipeKey].type === "pour";
-        });
-
-        const currentEventPourIndex = pourEventKeys.findIndex(
-          (key) => key === recipeKey
-        );
-
-        const previousPourIndex =
-          currentEventPourIndex > 0 ? currentEventPourIndex - 1 : null;
-
-        if (previousPourIndex !== null) {
-          previousVolumePercent =
-            recipe[pourEventKeys[previousPourIndex]].volumePercent;
-        }
-
-        const differenceInVolumePercent =
-          event.volumePercent - previousVolumePercent;
-        const volumeToAdd = differenceInVolumePercent * volume;
-        const durationOfPour = volumeToAdd * pourVelocity;
-
-        return {
-          ...acc,
-          [recipeKey]: {
-            ...event,
-            duration: Math.round(durationOfPour),
-          },
-        };
-      }
+      const differenceInVolumePercent = event.volumePercent - previousVolumePercent;
+      const volumeToAdd = differenceInVolumePercent * volume;
+      const durationOfPour = volumeToAdd * pourVelocity;
 
       return {
         ...acc,
         [recipeKey]: {
           ...event,
-          duration: 5000,
+          duration: Math.round(durationOfPour),
         },
       };
-    },
-    {}
-  );
+    }
+
+    return {
+      ...acc,
+      [recipeKey]: {
+        ...event,
+        duration: 5000,
+      },
+    };
+  }, {});
 
   function getNextStepText(second: number) {
     const nextStep = recipe[getStepKey(second)];
     let _nextStepText = nextStepText;
 
-    if (!nextStep || nextStep.type === "finish") {
-      _nextStepText = "End of brew.";
-    } else if (nextStep.type === "pour") {
+    if (!nextStep || nextStep.type === 'finish') {
+      _nextStepText = 'End of brew.';
+    } else if (nextStep.type === 'pour') {
       _nextStepText = `Pour up to **${waterVolumeUnit
         .getPreferredValue(volume * nextStep.volumePercent)
         .toLocaleString()} ${waterVolumeUnit.unit.title}** of water.`;
-    } else if (nextStep.type === "tip") {
+    } else if (nextStep.type === 'tip') {
       _nextStepText = nextStep.text;
     }
 
@@ -143,10 +135,7 @@ function StepFunction(props: Props) {
     }
 
     return Object.keys(recipeWithEventDurations).find((eventKey) => {
-      return (
-        Number(eventKey) + recipeWithEventDurations[eventKey].duration / 1000 >=
-        second
-      );
+      return Number(eventKey) + recipeWithEventDurations[eventKey].duration / 1000 >= second;
     });
   }
 
@@ -182,41 +171,37 @@ function StepFunction(props: Props) {
     const countdownToNextStep = Number(nextEvent) - second <= 5;
 
     if (beforeBrewStart) {
-      return `Over **${formatSeconds(
-        totalTime
-      )}**, pour over **${waterVolumeUnit
+      return `Over **${formatSeconds(totalTime)}**, pour over **${waterVolumeUnit
         .getPreferredValue(volume)
-        .toLocaleString()} ${
-        waterVolumeUnit.unit.title
-      }** of water. Press **Start** to begin.`;
+        .toLocaleString()} ${waterVolumeUnit.unit.title}** of water. Press **Start** to begin.`;
     }
 
     if (isDuringStep()) {
-      return "Now";
+      return 'Now';
     }
 
     if (brewCountdown) {
-      return `In **${second * -1}** second${second === -1 ? "" : "s"}`;
+      return `In **${second * -1}** second${second === -1 ? '' : 's'}`;
     }
 
     if (countdownToNextStep) {
       const secondsLeft = Number(nextEvent) - second;
-      return `In **${secondsLeft}** second${secondsLeft === 1 ? "" : "s"}`;
+      return `In **${secondsLeft}** second${secondsLeft === 1 ? '' : 's'}`;
     }
 
     if (foreshadowNextStep) {
       const types = {
-        pour: "Next pour",
-        tip: "Next step",
-        finish: "Brew will finish",
+        pour: 'Next pour',
+        tip: 'Next step',
+        finish: 'Brew will finish',
       };
-      return `${
-        types[recipe[nextEvent].type] || "Next step"
-      } at **${formatSeconds(Number(nextEvent))}**`;
+      return `${types[recipe[nextEvent].type] || 'Next step'} at **${formatSeconds(
+        Number(nextEvent)
+      )}**`;
     }
 
     if (!nextEvent) {
-      return "";
+      return '';
     }
   }
 
@@ -253,17 +238,14 @@ function StepFunction(props: Props) {
           style={{
             padding: 0,
             minHeight: Platform.select({ android: 30 }),
-            justifyContent: Platform.select({ android: "center" }),
+            justifyContent: Platform.select({ android: 'center' }),
           }}
           twStyle="p-0"
         />
         {!beforeTimerStart && (
           <View style={{ minHeight: 30 }}>
             <Animated.View
-              style={[
-                instructionsStyle,
-                { marginTop: Platform.select({ ios: 4, android: 0 }) },
-              ]}
+              style={[instructionsStyle, { marginTop: Platform.select({ ios: 4, android: 0 }) }]}
             >
               <Instructions
                 text={nextStepText}
@@ -282,11 +264,11 @@ function StepFunction(props: Props) {
       </View>
       <View
         style={{
-          width: "100%",
+          width: '100%',
           height: PROGRESS_BAR_HEIGHT,
           backgroundColor: colors.primary,
           opacity: 0.25,
-          position: "absolute",
+          position: 'absolute',
           bottom: 0,
         }}
       />
@@ -302,7 +284,7 @@ function StepFunction(props: Props) {
       {Object.keys(recipeWithEventDurations)
         .filter((recipeWidthEventDurationKey) => {
           const event = recipeWithEventDurations[recipeWidthEventDurationKey];
-          return event.type !== "finish";
+          return event.type !== 'finish';
         })
         .map((recipeWidthEventDurationKey) => {
           const _width = isMaxWidth ? styleguide.maxWidth : width;
@@ -317,11 +299,9 @@ function StepFunction(props: Props) {
                 width: _width * percentOfTotalTime,
                 backgroundColor: colors.primary,
                 opacity: 0.35,
-                position: "absolute",
+                position: 'absolute',
                 bottom: 0,
-                left:
-                  ((Number(recipeWidthEventDurationKey) - 1) / totalTime) *
-                  _width,
+                left: ((Number(recipeWidthEventDurationKey) - 1) / totalTime) * _width,
               }}
             />
           );

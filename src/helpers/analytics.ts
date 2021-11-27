@@ -1,16 +1,16 @@
-import * as Amplitude from "expo-analytics-amplitude";
+import * as Amplitude from 'expo-analytics-amplitude';
 
 export const events = {
-  MENU_VIEWED: "MENU_VIEWED",
-  RECIPE_TAPPED: "RECIPE_TAPPED",
-  RECIPE_SUMMARY_VIEWED: "RECIPE_SUMMARY_VIEWED",
-  LOGS_VIEWED: "LOGS_VIEWED",
-  LOG_TAPPED: "LOG_TAPPED",
-  SETTINGS_VIEWED: "SETTINGS_VIEWED",
-  SETTINGS_CHANGED: "SETTINGS_CHANGED",
+  MENU_VIEWED: 'MENU_VIEWED',
+  RECIPE_TAPPED: 'RECIPE_TAPPED',
+  RECIPE_SUMMARY_VIEWED: 'RECIPE_SUMMARY_VIEWED',
+  LOGS_VIEWED: 'LOGS_VIEWED',
+  LOG_TAPPED: 'LOG_TAPPED',
+  SETTINGS_VIEWED: 'SETTINGS_VIEWED',
+  SETTINGS_CHANGED: 'SETTINGS_CHANGED',
 };
 
-export const AMPLITUDE_API_KEY = "b7b8d9d386e9d6ccf3d6f69e941bbaaf";
+export const AMPLITUDE_API_KEY = 'b7b8d9d386e9d6ccf3d6f69e941bbaaf';
 
 let isInitialized = false;
 const apiKey = AMPLITUDE_API_KEY;
