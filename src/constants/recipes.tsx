@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
 
 import { BrewRecipeName } from '../scenes/Brew/recipes/types';
-
 import AeropressIcon from './icons/AeropressIcon';
 import BeehouseIcon from './icons/BeehouseIcon';
 import Chemex3CupIcon from './icons/Chemex3CupIcon';
@@ -15,16 +14,16 @@ import V6001Icon from './icons/V6001Icon';
 import V60Icon from './icons/V60Icon';
 import AeropressImage from './recipeImages/aeropress-card.jpg';
 import BeehouseImage from './recipeImages/beehouse-card.png';
-import ChemexImage from './recipeImages/chemex-card.png';
 import Chemex3CupImage from './recipeImages/chemex-3-cup-card.png';
+import ChemexImage from './recipeImages/chemex-card.png';
 import CleverImage from './recipeImages/clever-card.png';
 import EvaSoloImage from './recipeImages/eva-solo-card.png';
-import FrenchPressImage from './recipeImages/french-press-card.png';
 import FrenchPress3CupImage from './recipeImages/french-press-3-cup-card.png';
 import FrenchPress8CupImage from './recipeImages/french-press-8-cup-card.png';
+import FrenchPressImage from './recipeImages/french-press-card.png';
 import KalitaWaveImage from './recipeImages/kalita-wave-card.png';
-import V60Image from './recipeImages/v60-card.jpg';
 import V6001Image from './recipeImages/v60-01-card.png';
+import V60Image from './recipeImages/v60-card.jpg';
 
 export type Recipe = {
   title: string;

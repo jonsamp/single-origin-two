@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, Platform } from 'react-native';
+
 import Button from '../../../../../components/Button';
 import formatSeconds from '../../../../../helpers/formatSeconds';
 import { useTheme } from '../../../../../providers/theme';
@@ -26,8 +27,7 @@ function Timer(props: Props) {
               color: colors.foreground,
               fontWeight: Platform.select({ android: '700', ios: '500' }),
             },
-          ]}
-        >
+          ]}>
           {formatSeconds(second < 0 ? 0 : second)}
         </Text>
       </View>

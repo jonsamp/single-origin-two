@@ -1,7 +1,10 @@
 import { Feather } from '@expo/vector-icons';
 import { format } from 'date-fns';
+import * as Haptics from 'expo-haptics';
 import React from 'react';
 import { Text, View, TouchableOpacity as RNTouchableOpacity, Platform } from 'react-native';
+import { PanGestureHandler, TouchableOpacity } from 'react-native-gesture-handler';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 import Animated, {
   Easing,
   withTiming,
@@ -10,9 +13,6 @@ import Animated, {
   useAnimatedGestureHandler,
   runOnJS,
 } from 'react-native-reanimated';
-import { PanGestureHandler, TouchableOpacity } from 'react-native-gesture-handler';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
-import * as Haptics from 'expo-haptics';
 
 import { width, height as screenHeight } from '../../../constants/layout';
 import { recipes } from '../../../constants/recipes';
@@ -153,23 +153,20 @@ function ListItem(props: Props) {
           {
             backgroundColor: colors.danger,
           },
-        ]}
-      >
+        ]}>
         <Animated.View
           style={[
             {
               alignItems: 'center',
             },
             animatedTrashStyle,
-          ]}
-        >
+          ]}>
           <TrashIcon size={28} />
           <Text
             style={{
               ...type.label,
               color: 'white',
-            }}
-          >
+            }}>
             Delete
           </Text>
         </Animated.View>
@@ -185,8 +182,7 @@ function ListItem(props: Props) {
               {
                 backgroundColor: isDarkTheme ? colors.grey2 : colors.background,
               },
-            ]}
-          >
+            ]}>
             <View style={[styles.displayHorizontal, { flex: 1 }]}>
               <View
                 style={[
@@ -194,8 +190,7 @@ function ListItem(props: Props) {
                   {
                     backgroundColor: isDarkTheme ? colors.grey1 : colors.foreground,
                   },
-                ]}
-              >
+                ]}>
                 {recipe.icon({
                   fill: isDarkTheme ? colors.foreground : colors.background,
                   size: 0.8,
@@ -212,8 +207,7 @@ function ListItem(props: Props) {
                       borderRadius: 2,
                       alignItems: 'center',
                       justifyContent: 'center',
-                    }}
-                  >
+                    }}>
                     <Text style={[type.label, { color: 'black', fontWeight: 'bold' }]}>
                       {log.rating}
                     </Text>
@@ -230,8 +224,7 @@ function ListItem(props: Props) {
                 {log.tastingNote || log.notes ? (
                   <Text
                     numberOfLines={1}
-                    style={[type.caption, { color: colors.foreground, opacity: 0.8 }]}
-                  >
+                    style={[type.caption, { color: colors.foreground, opacity: 0.8 }]}>
                     {log.tastingNote &&
                       `${
                         log.tastingNote.charAt(0).toUpperCase() +

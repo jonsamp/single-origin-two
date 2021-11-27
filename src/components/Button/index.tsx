@@ -1,7 +1,14 @@
-import React from 'react';
-import { StyleSheet, ViewStyle } from 'react-native';
-import { ActivityIndicator, Text, TouchableOpacity, View } from 'react-native';
 import { shadows } from '@expo/styleguide-native';
+import React from 'react';
+import {
+  StyleSheet,
+  ViewStyle,
+  ActivityIndicator,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+
 import { useTheme } from '../../common/theme';
 import { typography } from '../../common/typography';
 
@@ -54,8 +61,7 @@ export default function Button(props: Props) {
       <TouchableOpacity
         style={[buttonStyle, styles.disabled, customStyle]}
         onPress={() => {}}
-        activeOpacity={0.5}
-      >
+        activeOpacity={0.5}>
         <Text style={[textStyle, customTextStyle]}>{title.toUpperCase()}</Text>
       </TouchableOpacity>
     );
@@ -66,8 +72,7 @@ export default function Button(props: Props) {
       <TouchableOpacity
         style={[buttonStyle, customStyle]}
         onPress={onPress}
-        activeOpacity={loading ? 1 : 0.6}
-      >
+        activeOpacity={loading ? 1 : 0.6}>
         {loading ? (
           <ActivityIndicator size="small" color={theme.background.default} />
         ) : (

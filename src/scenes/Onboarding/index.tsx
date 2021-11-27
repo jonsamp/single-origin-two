@@ -1,5 +1,6 @@
-import React from 'react';
 import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+
 import Button from '../../components/Button';
 import InstructionalCard from '../../components/InstructionalCard';
 import ResponsiveScrollView from '../../components/ResponsiveScrollView';

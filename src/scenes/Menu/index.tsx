@@ -1,22 +1,22 @@
+import { useNavigation } from '@react-navigation/core';
+import { StackNavigationProp } from '@react-navigation/stack';
 import * as Notifications from 'expo-notifications';
+import { sortBy } from 'lodash';
 import React, { useEffect } from 'react';
 import { ImageBackground, View } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { sortBy } from 'lodash';
 import { interpolateColor } from 'react-native-reanimated';
 
-import { RootStackParamList } from '../../navigation';
+import { useTailwind } from '../../common/theme';
 import MenuItem from '../../components/MenuItem';
+import ResponsiveScrollView from '../../components/ResponsiveScrollView';
 import ScreenPlaceholder from '../../components/ScreenPlaceholder';
 import { recipes, Recipe } from '../../constants/recipes';
+import { RootStackParamList } from '../../navigation';
 import withSettings from '../../providers/settings';
 import withTracking, { Tracking } from '../../providers/tracking';
 import { Settings } from '../../state/settings/types';
-import ResponsiveScrollView from '../../components/ResponsiveScrollView';
 import Onboarding from './Onboarding';
 import BackgroundImage from './images/background.png';
-import { useNavigation } from '@react-navigation/core';
-import { useTailwind } from '../../common/theme';
 
 interface Props {
   settings: Settings;

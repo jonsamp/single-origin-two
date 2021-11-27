@@ -1,17 +1,22 @@
+import { useNavigation } from '@react-navigation/core';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/core';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '../../../components/Button';
 import { isMaxWidth, height } from '../../../constants/layout';
+import { styleguide } from '../../../constants/themes';
+import { RootStackParamList } from '../../../navigation';
 import withSettings from '../../../providers/settings';
 import { logAdded } from '../../../state/logs/actions';
 import { selectRecentLog } from '../../../state/logs/selectors';
 import { Settings } from '../../../state/settings/types';
+import { State } from '../../../state/types';
 import { UnitHelpers } from '../../../types/index';
+import { BrewRecipe } from '../recipes/types';
 import AddIce from './AddIce';
 import BoilWater from './BoilWater';
 import GrindCoffee from './GrindCoffee';
@@ -21,11 +26,6 @@ import PourTimer from './PourTimer';
 import Preparation from './Preparation';
 import RecordBrewAttributes from './RecordBrewAttributes';
 import YieldQuestion from './YieldQuestion';
-import { BrewRecipe } from '../recipes/types';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../../navigation';
-import { styleguide } from '../../../constants/themes';
-import { State } from '../../../state/types';
 
 interface RecipeProps {
   settings: Settings;

@@ -1,3 +1,4 @@
+import { StepType, BrewRecipeName } from '../types';
 import AddGrounds from './images/addgrounds.png';
 import AfterBloom from './images/afterbloom.gif';
 import AfterPour from './images/afterpour.gif';
@@ -6,8 +7,6 @@ import Default from './images/default.png';
 import Finish from './images/finish.gif';
 import Pour from './images/pour.gif';
 import WetFilter from './images/wetfilter.png';
-
-import { StepType, BrewRecipeName } from '../types';
 
 export default {
   id: BrewRecipeName.Beehouse,

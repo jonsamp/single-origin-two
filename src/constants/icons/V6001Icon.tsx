@@ -1,5 +1,6 @@
 import React from 'react';
 import { Path, Svg } from 'react-native-svg';
+
 import { Icon } from './types';
 
 function V6001Icon({ fill, size = 1 }: Icon) {

@@ -1,5 +1,6 @@
-import React from 'react';
 import { SettingsIcon as ExpoSettingsIcon } from '@expo/styleguide-native';
+import React from 'react';
+
 import { Icon } from './types';
 
 export default function SettingsIcon(props: Icon) {

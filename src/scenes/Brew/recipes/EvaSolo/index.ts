@@ -1,3 +1,4 @@
+import { StepType, BrewRecipeName } from '../types';
 import AddGrounds from './images/addgrounds.png';
 import AddWater from './images/addwater.gif';
 import AttachSleeve from './images/attachsleeve.gif';
@@ -7,8 +8,6 @@ import RemoveLid from './images/removelid.png';
 import Serve from './images/serve.gif';
 import Stir from './images/stir.gif';
 import Wait from './images/wait.gif';
-
-import { StepType, BrewRecipeName } from '../types';
 
 export default {
   id: BrewRecipeName.EvaSolo,

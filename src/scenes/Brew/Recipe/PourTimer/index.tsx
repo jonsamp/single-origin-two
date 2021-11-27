@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Animated, View } from 'react-native';
+
 import Card from '../../../../components/Card';
 import Image from '../../../../components/Image';
 import { height, width } from '../../../../constants/layout';
@@ -7,15 +8,14 @@ import playSound from '../../../../helpers/playSound';
 import withSettings from '../../../../providers/settings';
 import { useTheme, Styleguide, Theme } from '../../../../providers/theme';
 import { Settings } from '../../../../state/settings/types';
-import { Recipe } from '../../../../types';
-import { UnitHelpers } from '../../../../types/index';
+import { Recipe, UnitHelpers } from '../../../../types';
 import { withBloomFn } from '../../helpers';
 import addWaterSound from '../../sounds/add-water.mp3';
 import tipSound from '../../sounds/tip.mp3';
 import Step from './Step';
-import styles from './styles';
 import Timer from './Timer';
 import WaterVolume from './WaterVolume';
+import styles from './styles';
 
 type Props = {
   unitHelpers: UnitHelpers;
@@ -38,7 +38,7 @@ function formatRecipe(recipe, settings) {
 function PourTimerFunction(props: Props) {
   const { unitHelpers, recipe, settings, volume, setRecipeState } = props;
   const { colors, styleguide } = useTheme();
-  let interval = useRef<NodeJS.Timeout>();
+  const interval = useRef<NodeJS.Timeout>();
   const [timerRunning, setTimerRunning] = useState(false);
   const [second, setSecond] = useState(-3);
   const [volumePercent, setVolumePercent] = useState(0);
@@ -56,7 +56,6 @@ function PourTimerFunction(props: Props) {
         clearInterval(interval.current);
       }
       setTimerRunning(false);
-      return;
     } else {
       interval.current = setInterval(() => {
         setSecond((prevState) => prevState + 1);
@@ -124,8 +123,7 @@ function PourTimerFunction(props: Props) {
           width: maxWidth + 32,
           borderRadius: maxWidth >= styleguide.maxWidth ? 4 : 0,
           overflow: 'hidden',
-        }}
-      >
+        }}>
         <Image
           source={image}
           defaultSource={recipe.defaultSource}

@@ -88,18 +88,18 @@ export interface Recipe {
   iced: boolean;
   defaultSource: number;
   pourVelocity: number;
-  preparation: Array<{
+  preparation: {
     image?: number;
     text: string;
-  }>;
-  steps: Array<{
+  }[];
+  steps: {
     start?: boolean;
     second?: number;
     type: string;
     volumePercent?: number;
     image?: number;
     afterImage?: number;
-  }>;
+  }[];
 }
 
 export interface Log {

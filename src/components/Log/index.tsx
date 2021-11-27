@@ -4,8 +4,8 @@ import { addMinutes, format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTailwind, useTheme } from '../../common/theme';
 
+import { useTailwind, useTheme } from '../../common/theme';
 import Card from '../../components/Card';
 import ResponsiveScrollView from '../../components/ResponsiveScrollView';
 import { recipes } from '../../constants/recipes';
@@ -129,8 +129,7 @@ function Log(props: Props) {
               containerStyle={{
                 ...tw(`mt-1 ${index === 0 ? 'mb-3' : ''} mx-2`),
                 ...{ elevation: 0, shadowOpacity: 0 },
-              }}
-            >
+              }}>
               <Text style={tw('headline theme.text.default')}>{logConfig[key]}</Text>
               <Text style={tw('body theme.text.default')}>
                 {capitalizeFirstLetter(log[key as keyof LogType] as string)}
@@ -144,8 +143,7 @@ function Log(props: Props) {
           containerStyle={{
             ...tw('mb-0 mx-2'),
             ...{ shadowOpacity: 0, elevation: 0 },
-          }}
-        >
+          }}>
           <Text style={tw('headline theme.text.default mb-1')}>Notes</Text>
           <Text style={tw('body theme.text.default')}>{log.notes.trim()}</Text>
         </Card>
@@ -155,8 +153,7 @@ function Log(props: Props) {
         <TouchableOpacity onPress={toggleReminder} activeOpacity={0.75}>
           <Card
             containerStyle={tw('mt-4 mb-0 mx-2 p-4 theme.background.overlay')}
-            style={tw('flex-row justify-between')}
-          >
+            style={tw('flex-row justify-between')}>
             <View style={tw('flex-1 mr-8')}>
               <Text style={tw('headline theme.text.default')}>
                 {reminderScheduled ? 'Tasting reminder scheduled' : 'Send a tasting reminder'}
@@ -179,8 +176,7 @@ function Log(props: Props) {
       {withReminder && notifications.status === 'denied' ? (
         <Card
           containerStyle={tw('mt-4 mb-0 mx-2 p-4 theme.background.overlay')}
-          style={tw('flex-row justify-between')}
-        >
+          style={tw('flex-row justify-between')}>
           <View style={tw('flex-1 mr-8')}>
             <Text style={tw('headline theme.text.default mb-1')}>Send a tasting reminder</Text>
             <Text style={tw('body theme.text.secondary')}>

@@ -1,5 +1,8 @@
+import { iconSize, spacing } from '@expo/styleguide-native';
 import { Feather } from '@expo/vector-icons';
+import { RouteProp, useNavigation } from '@react-navigation/native';
 import { format } from 'date-fns';
+import { StatusBar } from 'expo-status-bar';
 import React, { useEffect } from 'react';
 import {
   Keyboard,
@@ -11,25 +14,22 @@ import {
   View,
   Platform,
 } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { useDispatch, useSelector } from 'react-redux';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { RouteProp, useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { useTailwind, useTheme } from '../../common/theme';
+import Button from '../../components/Button';
+import Slider from '../../components/Slider';
 import { isMaxWidth } from '../../constants/layout';
 import { recipes } from '../../constants/recipes';
+import { RootStackParamList } from '../../navigation';
 import { Styleguide, Theme } from '../../providers/theme';
 import withTracking, { Tracking } from '../../providers/tracking';
 import ChecklistSetting from '../../scenes/Settings/ChecklistSetting';
 import { logUpdated, logDeleted } from '../../state/logs/actions';
 import { selectLog } from '../../state/logs/selectors';
 import { Log } from '../../state/logs/types';
-import Button from '../../components/Button';
-import Slider from '../../components/Slider';
-import { RootStackParamList } from '../../navigation';
 import { State } from '../../state/types';
-import { useTailwind, useTheme } from '../../common/theme';
-import { iconSize, spacing } from '@expo/styleguide-native';
 
 type Props = {
   navigation: any;
@@ -86,8 +86,7 @@ function LogDetailEdit(props: Props) {
           <View
             style={tw(
               'flex-row justify-between items-center p-4 theme.background.secondary border-b theme.border.default'
-            )}
-          >
+            )}>
             <View style={tw('flex-row items-center')}>
               <Feather
                 name="edit-3"
@@ -108,8 +107,7 @@ function LogDetailEdit(props: Props) {
       <ScrollView
         contentContainerStyle={{
           paddingHorizontal: spacing[3],
-        }}
-      >
+        }}>
         <KeyboardAvoidingView behavior="padding">
           <SafeAreaView edges={['bottom']} style={tw(`${isMaxWidth ? 'items-center' : ''} mb-4`)}>
             <View
@@ -117,8 +115,7 @@ function LogDetailEdit(props: Props) {
                 isMaxWidth && {
                   width: styleguide.maxWidth,
                 }
-              }
-            >
+              }>
               <Text style={tw('body mb-6 mt-4 theme.text.default')}>
                 Rate your {recipes[log.recipeId].title} brewed at {format(log.timestamp, 'h:mma')}{' '}
                 on {format(log.timestamp, 'MMM d, yyyy')}.

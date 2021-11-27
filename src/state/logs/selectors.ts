@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+
 import { State } from '../../state/types';
 import { Log } from './types';
 

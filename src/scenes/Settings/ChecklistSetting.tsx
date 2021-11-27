@@ -21,22 +21,21 @@ function ChecklistSetting(props: Props) {
   const { theme } = useTheme();
 
   return (
-    <Fragment>
+    <>
       {items.map((item, index) => (
         <TouchableOpacity onPress={() => onChange(item.id)} key={item.id}>
           <SettingWrapper
             title={`${item.title}${item.modifier ? ` ${item.modifier}` : ''}`}
             style={{
               ...{ borderBottomWidth: 1 }, // TODO: this is a different design
-            }}
-          >
+            }}>
             {item.value ? (
               <Feather name="check" size={iconSize.regular - 3} color={theme.icon.default} />
             ) : null}
           </SettingWrapper>
         </TouchableOpacity>
       ))}
-    </Fragment>
+    </>
   );
 }
 

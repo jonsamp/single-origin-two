@@ -1,6 +1,7 @@
+import { shadows } from '@expo/styleguide-native';
 import React, { ReactNode } from 'react';
 import { View, ViewStyle } from 'react-native';
-import { shadows } from '@expo/styleguide-native';
+
 import { useTailwind } from '../../common/theme';
 
 type Props = {

@@ -1,15 +1,15 @@
 import React from 'react';
 import { View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
 import { FlatList } from 'react-native-gesture-handler';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { useTailwind, useTheme } from '../../common/theme';
 import ScreenPlaceholder from '../../components/ScreenPlaceholder';
 import { recipes } from '../../constants/recipes';
-import { selectLogs } from '../../state/logs/selectors';
 import { logDeleted } from '../../state/logs/actions';
+import { selectLogs } from '../../state/logs/selectors';
 import { Logs as LogsType, Log } from '../../types/index';
 import LogItem from './LogItem';
-import { useTailwind, useTheme } from '../../common/theme';
 
 type Props = {
   logs: LogsType;

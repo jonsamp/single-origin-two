@@ -1,23 +1,19 @@
-import * as ScreenOrientation from 'expo-screen-orientation';
+import AppLoading from 'expo-app-loading';
 import Constants from 'expo-constants';
+import * as Font from 'expo-font';
+import * as ScreenOrientation from 'expo-screen-orientation';
+import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect, useRef } from 'react';
 import { Animated } from 'react-native';
-import AppLoading from 'expo-app-loading';
-import { StatusBar } from 'expo-status-bar';
-
 import { AppearanceProvider } from 'react-native-appearance';
+import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
+import { enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import * as Sentry from 'sentry-expo';
-import {
-  SafeAreaProvider,
-  initialWindowMetrics,
-} from 'react-native-safe-area-context';
-import * as Font from 'expo-font';
 
 import Navigator from './src/navigation';
 import configureStore from './src/store/configureStore';
-import { enableScreens } from 'react-native-screens';
 
 enableScreens();
 
@@ -53,9 +49,7 @@ export default function App() {
         Constants.platform.ios &&
         Constants.platform.ios.userInterfaceIdiom === 'tablet'
       ) {
-        await ScreenOrientation.lockAsync(
-          ScreenOrientation.OrientationLock.DEFAULT
-        );
+        await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.DEFAULT);
       }
 
       await Font.loadAsync({
@@ -70,12 +64,11 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <StatusBar style='auto' />
+      <StatusBar style="auto" />
       <PersistGate loading={null} persistor={persistor}>
         <SafeAreaProvider
           style={{ backgroundColor: 'black' }}
-          initialMetrics={initialWindowMetrics}
-        >
+          initialMetrics={initialWindowMetrics}>
           <AppearanceProvider>
             {isLoaded ? (
               <Animated.View style={{ opacity: fadeAnim, flex: 1 }}>

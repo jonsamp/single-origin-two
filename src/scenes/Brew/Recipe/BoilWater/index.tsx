@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Card from '../../../../components/Card';
 import Instructions from '../../../../components/Instructions';
 import withSettings from '../../../../providers/settings';

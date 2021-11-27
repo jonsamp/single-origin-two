@@ -2,6 +2,7 @@ import { iconSize } from '@expo/styleguide-native';
 import { Feather } from '@expo/vector-icons';
 import React from 'react';
 import { Linking, TouchableOpacity, ScrollView, Platform } from 'react-native';
+
 import { useTailwind, useTheme } from '../../common/theme';
 import { Theme } from '../../types/index';
 import Group from './Group';
@@ -32,8 +33,7 @@ function Settings() {
                 'https://play.google.com/store/apps/details?id=com.jonsamp.singleorigintwo'
               );
             }
-          }}
-        >
+          }}>
           <SettingWrapper title="Rate Single Origin 2">
             <Feather name="star" size={iconSize.regular} color={theme.icon.secondary} />
           </SettingWrapper>

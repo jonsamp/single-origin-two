@@ -1,5 +1,6 @@
 import React from 'react';
 import { Path, Svg } from 'react-native-svg';
+
 import { Icon } from './types';
 
 function Clever3CupIcon({ fill, size = 1 }: Icon) {

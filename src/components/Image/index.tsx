@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image as RNImage, ImageStyle, StyleSheet } from 'react-native';
+
 import { useTailwind } from '../../common/theme';
 import { height } from '../../constants/layout';
 

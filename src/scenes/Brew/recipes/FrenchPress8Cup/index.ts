@@ -5,9 +5,8 @@ import Bloom from '../FrenchPress3Cup/images/bloom.gif';
 import Default from '../FrenchPress3Cup/images/default.jpg';
 import Finish from '../FrenchPress3Cup/images/finish.gif';
 import Pour from '../FrenchPress3Cup/images/pour.gif';
-import Press from '../FrenchPress3Cup/images/press.gif';
 import PressTheFrench from '../FrenchPress3Cup/images/press-tutorial.jpg';
-
+import Press from '../FrenchPress3Cup/images/press.gif';
 import { StepType, BrewRecipeName } from '../types';
 
 export default {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import trackingEvents from '../constants/trackingEvents';
 import { selectSettings } from '../state/settings/selectors';
 import { Settings } from '../state/settings/types';

@@ -1,30 +1,29 @@
+import { iconSize } from '@expo/styleguide-native';
+import { Feather } from '@expo/vector-icons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { TouchableOpacity, Text, View, Platform, useColorScheme } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import { iconSize } from '@expo/styleguide-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { defaultTheme, darkTheme } from '../common/theme';
 import type from '../constants/type';
 import withTheme from '../providers/theme';
-
+import Brew from '../scenes/Brew';
+import BrewSettings from '../scenes/BrewSettings';
+import BrewSummary from '../scenes/BrewSummary';
+import LogDetail from '../scenes/LogDetail';
+import LogDetailEdit from '../scenes/LogDetailEdit';
+import Logs from '../scenes/Logs';
+import Menu from '../scenes/Menu';
+import Onboarding from '../scenes/Onboarding';
+import Preparation from '../scenes/Preparation';
+import Settings from '../scenes/Settings';
+import SettingsDetail from '../scenes/Settings/SettingsDetail';
+import Test from '../scenes/Test';
 import BrewIcon from './icons/BrewIcon';
 import LogsIcon from './icons/LogsIcon';
 import SettingsIcon from './icons/SettingsIcon';
-import Logs from '../scenes/Logs';
-import Menu from '../scenes/Menu';
-import Settings from '../scenes/Settings';
-import SettingsDetail from '../scenes/Settings/SettingsDetail';
-import Onboarding from '../scenes/Onboarding';
-import Preparation from '../scenes/Preparation';
-import Brew from '../scenes/Brew';
-import LogDetail from '../scenes/LogDetail';
-import LogDetailEdit from '../scenes/LogDetailEdit';
-import BrewSummary from '../scenes/BrewSummary';
-import BrewSettings from '../scenes/BrewSettings';
-import Test from '../scenes/Test';
 
 export type RootStackParamList = {
   Brew: {
@@ -83,16 +82,14 @@ function MenuStack() {
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'flex-start',
-              }}
-            >
+              }}>
               <BrewIcon theme={theme} focused={false} size={26} />
               <Text
                 style={{
                   ...type.headline,
                   marginLeft: 10,
                   color: theme.text.default,
-                }}
-              >
+                }}>
                 Single Origin
               </Text>
             </View>
@@ -179,8 +176,7 @@ function App() {
           contentStyle: {
             backgroundColor: theme.background.default,
           },
-        }}
-      >
+        }}>
         {/* <Stack.Screen name="Test" component={Test} /> */}
         <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
         <Stack.Screen name="Onboarding" component={Onboarding} options={{ title: 'Get started' }} />
@@ -192,8 +188,7 @@ function App() {
             headerRight: () => (
               <TouchableOpacity
                 onPress={() => navigation.navigate('BrewSettings')}
-                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-              >
+                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
                 <Feather name="sliders" color={theme.icon.default} size={iconSize.regular} />
               </TouchableOpacity>
             ),
@@ -222,16 +217,14 @@ function App() {
                     timestamp: route.params.timestamp,
                   })
                 }
-                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-              >
+                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
                 <Text
                   style={[
                     type.headline,
                     {
                       color: theme.text.default,
                     },
-                  ]}
-                >
+                  ]}>
                   Edit
                 </Text>
               </TouchableOpacity>

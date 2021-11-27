@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import { getVerboseSetting, grinders } from '../constants/grinders';
 import { units } from '../constants/units';
 import { settingUpdated } from '../state/settings/actions';

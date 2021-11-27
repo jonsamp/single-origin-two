@@ -1,13 +1,13 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, Platform, ScrollView } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import { iconSize, spacing } from '@expo/styleguide-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { View, Text, TouchableOpacity, Platform, ScrollView } from 'react-native';
 
-import SettingsDetail from '../Settings/SettingsDetail';
-import { isMaxWidth } from '../../constants/layout';
 import { useTailwind, useTheme } from '../../common/theme';
-import { iconSize, spacing } from '@expo/styleguide-native';
+import { isMaxWidth } from '../../constants/layout';
+import SettingsDetail from '../Settings/SettingsDetail';
 
 function BrewSettings() {
   const navigation = useNavigation();
@@ -22,8 +22,7 @@ function BrewSettings() {
           <View
             style={tw(
               'theme.background.secondary border-b theme.border.default p-4 flex-row items-center justify-between'
-            )}
-          >
+            )}>
             <View style={tw('flex-row items-center')}>
               <Feather name="sliders" color={theme.icon.default} size={iconSize.regular} />
               <Text style={tw('headline ml-3 theme.text.default')}>Brew Settings</Text>
@@ -39,8 +38,7 @@ function BrewSettings() {
           paddingHorizontal: 0,
           paddingTop: -spacing[6],
           marginTop: -spacing[6],
-        }}
-      >
+        }}>
         <SettingsDetail route={{ params: { title: 'brew-settings' } }} />
         <View style={{ top: -spacing[8] }}>
           <SettingsDetail route={{ params: { title: 'units' } }} />

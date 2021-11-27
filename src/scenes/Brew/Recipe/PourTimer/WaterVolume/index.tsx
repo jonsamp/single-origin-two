@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { Text, View, Platform, TextInput } from 'react-native';
-
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -11,8 +10,8 @@ import Animated, {
   interpolateColor,
 } from 'react-native-reanimated';
 
-import { UnitHelper } from '../../../../../types';
 import { useTheme } from '../../../../../providers/theme';
+import { UnitHelper } from '../../../../../types';
 import styles from './styles';
 
 interface Props {
@@ -150,7 +149,7 @@ function WaterVolume(props: Props) {
               fontFamily: Platform.select({ ios: 'Menlo' }),
             },
           ]}
-          value={'0'}
+          value="0"
         />
         <Animated.Text style={[styles.trackingLabelText, animatedTextColor]} numberOfLines={1}>
           {waterVolumeUnit.unit.title}

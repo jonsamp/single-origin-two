@@ -1,4 +1,5 @@
 import { StyleSheet, TextStyle } from 'react-native';
+
 import type from '../../constants/type';
 
 const styles = StyleSheet.create({

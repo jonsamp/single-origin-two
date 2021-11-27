@@ -6,7 +6,6 @@ import Default from '../Chemex/images/default.jpg';
 import Finish from '../Chemex/images/finish.gif';
 import Pour from '../Chemex/images/pour.gif';
 import WetFilter from '../Chemex/images/wetfilter.gif';
-
 import { StepType, BrewRecipeName } from '../types';
 
 export default {

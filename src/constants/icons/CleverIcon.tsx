@@ -1,5 +1,6 @@
-import { Svg, G, Path } from 'react-native-svg';
 import React from 'react';
+import { Svg, G, Path } from 'react-native-svg';
+
 import { Icon } from './types';
 
 function CleverIcon({ fill, size = 1 }: Icon) {

@@ -6,7 +6,6 @@ import Bloom from '../V60/images/bloom.gif';
 import Default from '../V60/images/default.png';
 import Pour from '../V60/images/pour.gif';
 import WetFilter from '../V60/images/wetfilter.png';
-
 import { StepType, BrewRecipeName } from '../types';
 
 export default {

@@ -1,12 +1,12 @@
+import { iconSize } from '@expo/styleguide-native';
 import { Feather } from '@expo/vector-icons';
-import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import React from 'react';
+import { Text, TouchableOpacity } from 'react-native';
 
-import { RootStackParamList } from '../../navigation';
 import { useTailwind, useTheme } from '../../common/theme';
-import { iconSize } from '@expo/styleguide-native';
+import { RootStackParamList } from '../../navigation';
 
 type Props = {
   title: string;
@@ -29,8 +29,7 @@ function Group(props: Props) {
           return onPress();
         }
         navigation.navigate('SettingsDetail', { title });
-      }}
-    >
+      }}>
       <Text style={tw('body theme.text.default')}>{title}</Text>
       <Feather name="chevron-right" size={iconSize.regular} color={theme.icon.secondary} />
     </TouchableOpacity>

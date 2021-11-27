@@ -1,3 +1,4 @@
+import { StepType, BrewRecipeName } from '../types';
 import AddGrounds from './images/addgrounds.jpg';
 import AfterBloom from './images/afterbloom.gif';
 import AttachLid from './images/attachlid.gif';
@@ -5,10 +6,8 @@ import Bloom from './images/bloom.gif';
 import Default from './images/default.jpg';
 import Finish from './images/finish.gif';
 import Pour from './images/pour.gif';
-import Press from './images/press.gif';
 import PressTheFrench from './images/press-tutorial.jpg';
-
-import { StepType, BrewRecipeName } from '../types';
+import Press from './images/press.gif';
 
 export default {
   id: BrewRecipeName.FrenchPress3Cup,

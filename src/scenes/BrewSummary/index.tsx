@@ -1,13 +1,14 @@
+import { RouteProp, useNavigation } from '@react-navigation/core';
 import React from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import Button from '../../components/Button';
 import Log from '../../components/Log';
 import { isMaxWidth, height } from '../../constants/layout';
-import styles from './styles';
 import { styleguide } from '../../constants/themes';
-import { RouteProp, useNavigation } from '@react-navigation/core';
 import { RootStackParamList } from '../../navigation';
+import styles from './styles';
 
 type Props = {
   route: RouteProp<RootStackParamList, 'BrewSummary'>;
@@ -27,16 +28,14 @@ function BrewSummary(props: Props) {
       <View
         style={{
           alignItems: 'center',
-        }}
-      >
+        }}>
         <View
           style={[
             styles.buttonContainer,
             isMaxWidth && {
               width: styleguide.maxWidth,
             },
-          ]}
-        >
+          ]}>
           <Button
             title="done"
             type="tertiary"

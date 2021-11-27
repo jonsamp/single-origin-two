@@ -11,7 +11,6 @@ import KalitaWave155 from './KalitaWave155';
 import KalitaWave185 from './KalitaWave185';
 import V60 from './V60';
 import V6001 from './V6001';
-
 import { BrewRecipe } from './types';
 
 const recipes: { [i: string]: BrewRecipe } = {

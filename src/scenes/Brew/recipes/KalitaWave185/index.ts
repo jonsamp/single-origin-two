@@ -1,3 +1,4 @@
+import { StepType, BrewRecipeName } from '../types';
 import AddGrounds from './images/add-grounds.jpg';
 import AfterBloom from './images/afterbloom.gif';
 import Finish from './images/afterfinish.gif';
@@ -7,8 +8,6 @@ import Default from './images/default.jpg';
 import Draining from './images/draining.gif';
 import Pour from './images/pour.gif';
 import WetFilter from './images/wet-filter.jpg';
-
-import { StepType, BrewRecipeName } from '../types';
 
 export default {
   id: BrewRecipeName.KalitaWave185,

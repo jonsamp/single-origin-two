@@ -25,8 +25,7 @@ const SettingWrapper = (props: Props) => {
             } theme.background.overlay`
           ),
           style,
-        ]}
-      >
+        ]}>
         <View style={tw('flex-row justify-between items-center')}>
           <Text style={tw('body theme.text.default capitalize')}>{title}</Text>
           {children}

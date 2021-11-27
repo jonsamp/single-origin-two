@@ -1,16 +1,16 @@
 import { Feather } from '@expo/vector-icons';
+import SegmentedControl from '@react-native-community/segmented-control';
 import * as Haptics from 'expo-haptics';
 import React, { Component } from 'react';
 import { Platform, Animated, LayoutAnimation, TouchableOpacity, View } from 'react-native';
-import SegmentedControl from '@react-native-community/segmented-control';
 
 import Card from '../../../../components/Card';
 import Instructions from '../../../../components/Instructions';
+import Slider from '../../../../components/Slider';
 import withSettings from '../../../../providers/settings';
 import withTheme from '../../../../providers/theme';
 import { Settings } from '../../../../state/settings/types';
 import { GrindHelper, Theme, Unit, UnitHelpers } from '../../../../types';
-import Slider from '../../../../components/Slider';
 
 interface RecordBrewAttributesProps {
   theme: Theme;
@@ -148,8 +148,7 @@ class RecordBrewAttributes extends Component<RecordBrewAttributesProps, RecordBr
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-          }}
-        >
+          }}>
           <Instructions text={instructions} icon="RecordIcon" />
           <TouchableOpacity
             onPress={this.toggleIsOpen}
@@ -164,8 +163,7 @@ class RecordBrewAttributes extends Component<RecordBrewAttributesProps, RecordBr
               marginRight: 20,
               elevation: 5,
             }}
-            activeOpacity={1}
-          >
+            activeOpacity={1}>
             <Animated.View
               style={{
                 transform: [
@@ -176,8 +174,7 @@ class RecordBrewAttributes extends Component<RecordBrewAttributesProps, RecordBr
                     }),
                   },
                 ],
-              }}
-            >
+              }}>
               <Feather name="chevron-down" size={theme.iconSize} color={theme.foreground} />
             </Animated.View>
           </TouchableOpacity>
@@ -191,15 +188,13 @@ class RecordBrewAttributes extends Component<RecordBrewAttributesProps, RecordBr
             onLayout={(event) => {
               const { height } = event.nativeEvent.layout;
               this.setState({ containerHeight: height });
-            }}
-          >
+            }}>
             {recordSettings.length > 1 && (
               <View
                 style={{
                   paddingHorizontal: 16,
                   marginTop: 16,
-                }}
-              >
+                }}>
                 <SegmentedControl
                   backgroundColor={
                     isDarkTheme

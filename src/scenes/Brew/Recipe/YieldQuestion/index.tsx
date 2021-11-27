@@ -1,10 +1,11 @@
 import React from 'react';
+
 import Card from '../../../../components/Card';
 import Question from '../../../../components/Question';
+import Slider from '../../../../components/Slider';
 import withSettings from '../../../../providers/settings';
 import { getValueUnit } from '../../../../scenes/Brew/helpers';
 import { UnitHelpers } from '../../../../types/index';
-import Slider from '../../../../components/Slider';
 
 type Props = {
   unitHelpers: UnitHelpers;

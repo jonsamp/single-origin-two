@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Text, View } from 'react-native';
+
 import { useTailwind } from '../../common/theme';
 import { Theme } from '../../types/index';
 

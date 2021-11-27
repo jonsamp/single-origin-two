@@ -1,3 +1,4 @@
+import { StepType, BrewRecipeName } from '../types';
 import AddGrounds from './images/addgrounds.gif';
 import AfterBloom from './images/afterbloom.gif';
 import AfterPour from './images/afterpour.gif';
@@ -6,8 +7,6 @@ import Default from './images/default.jpg';
 import Finish from './images/finish.gif';
 import Pour from './images/pour.gif';
 import WetFilter from './images/wetfilter.gif';
-
-import { StepType, BrewRecipeName } from '../types';
 
 export default {
   id: BrewRecipeName.Chemex,

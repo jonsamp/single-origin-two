@@ -1,5 +1,6 @@
 import { RouteProp } from '@react-navigation/core';
 import React from 'react';
+
 import Log from '../../components/Log';
 import { RootStackParamList } from '../../navigation';
 

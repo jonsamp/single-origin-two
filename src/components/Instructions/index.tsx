@@ -1,13 +1,14 @@
 import React from 'react';
 import { Text, TextStyle, View, ViewStyle, StyleSheet } from 'react-native';
-import { typography } from '../../common/typography';
+
 import { useTailwind, useTheme } from '../../common/theme';
+import { typography } from '../../common/typography';
 import GrindIcon from './icons/GrindIcon';
+import IceIcon from './icons/IceIcon';
 import PrepIcon from './icons/PrepIcon';
 import RecordIcon from './icons/RecordIcon';
 import TipIcon from './icons/TipIcon';
 import WaterIcon from './icons/WaterIcon';
-import IceIcon from './icons/IceIcon';
 
 const icons = {
   WaterIcon,
@@ -46,8 +47,7 @@ export default function Instructions(props: Props) {
             {
               backgroundColor: dark ? theme.background.secondary : theme.text.default,
             },
-          ]}
-        >
+          ]}>
           <IconComponent fill={dark ? theme.icon.default : theme.background.overlay} />
         </View>
       ) : null}
@@ -63,8 +63,7 @@ export default function Instructions(props: Props) {
                   color: theme.brand.dark,
                   fontWeight: 'bold',
                 }
-              }
-            >
+              }>
               {part.replace(/\*/g, '')}
             </Text>
           ))}
@@ -78,8 +77,7 @@ export default function Instructions(props: Props) {
                 borderWidth: StyleSheet.hairlineWidth,
                 borderColor: theme.border.warning,
               },
-            ]}
-          >
+            ]}>
             <Text
               style={[
                 typography.body,
@@ -87,8 +85,7 @@ export default function Instructions(props: Props) {
                   color: theme.text.warning,
                 },
                 textStyle,
-              ]}
-            >
+              ]}>
               {hint}
             </Text>
           </View>

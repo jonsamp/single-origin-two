@@ -7,7 +7,6 @@ import Default from '../KalitaWave185/images/default.jpg';
 import Draining from '../KalitaWave185/images/draining.gif';
 import Pour from '../KalitaWave185/images/pour.gif';
 import WetFilter from '../KalitaWave185/images/wet-filter.jpg';
-
 import { StepType, BrewRecipeName } from '../types';
 
 export default {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Path, Rect, Svg } from 'react-native-svg';
+
 import { Icon } from './types';
 
 function AeropressIcon({ fill, size = 1 }: Icon) {

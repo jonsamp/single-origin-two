@@ -2,8 +2,8 @@ import { spacing } from '@expo/styleguide-native';
 import React, { ReactNode } from 'react';
 import { ScrollView, View, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTailwind } from '../../common/theme';
 
+import { useTailwind } from '../../common/theme';
 import { isMaxWidth } from '../../constants/layout';
 import { styleguide } from '../../constants/themes';
 
@@ -31,8 +31,7 @@ function ResponsiveScrollView(props: Props) {
             ...contentContainerStyle,
           },
           style,
-        ]}
-      >
+        ]}>
         <View style={isMaxWidth && { width: styleguide.maxWidth }}>{children}</View>
       </ScrollView>
     </View>

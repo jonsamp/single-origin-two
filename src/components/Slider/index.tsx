@@ -1,8 +1,9 @@
+import { palette, shadows } from '@expo/styleguide-native';
+import * as Haptics from 'expo-haptics';
+import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { StyleSheet, View, TextInput, Dimensions, Text, Platform, ViewStyle } from 'react-native';
-import { palette, shadows } from '@expo/styleguide-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import * as Haptics from 'expo-haptics';
+import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, {
   useSharedValue,
   useAnimatedGestureHandler,
@@ -13,14 +14,12 @@ import Animated, {
   withTiming,
   Easing,
 } from 'react-native-reanimated';
-import { PanGestureHandler } from 'react-native-gesture-handler';
-import { useTheme } from '../../common/theme';
-import { useTailwind } from '../../common/theme';
-import { styleguide } from '../../constants/themes';
 
-import { PlusIcon } from './PlusIcon';
-import { MinusIcon } from './MinusIcon';
+import { useTheme, useTailwind } from '../../common/theme';
+import { styleguide } from '../../constants/themes';
 import { IncrementButton } from './IncrementButton';
+import { MinusIcon } from './MinusIcon';
+import { PlusIcon } from './PlusIcon';
 
 const { maxWidth } = styleguide;
 const screenWidth = Dimensions.get('screen').width;
@@ -155,8 +154,7 @@ function Slider(props: Props) {
           style={[
             tw('px-4 mb-2 flex-row items-center justify-between'),
             styles.sliderHeaderContainer,
-          ]}
-        >
+          ]}>
           <IncrementButton icon={<MinusIcon />} onPress={() => increment(-1)} />
           <AnimatedTextInput
             underlineColorAndroid="transparent"
@@ -171,8 +169,7 @@ function Slider(props: Props) {
           style={[
             tw('callout font-bold uppercase theme.text.default opacity-80'),
             styles.labelStyle,
-          ]}
-        >
+          ]}>
           {label}
         </Text>
       </View>
@@ -196,8 +193,7 @@ function Slider(props: Props) {
                 backgroundColor: dark ? palette.dark.gray[500] : palette.light.white,
                 top: dark ? 0 : -2,
               },
-            ]}
-          >
+            ]}>
             <LinearGradient
               colors={
                 dark

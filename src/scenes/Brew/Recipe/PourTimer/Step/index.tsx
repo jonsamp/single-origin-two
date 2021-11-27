@@ -9,11 +9,11 @@ import Animated, {
   withSequence,
 } from 'react-native-reanimated';
 
-import { useTheme } from '../../../../../providers/theme';
-import withSettings from '../../../../../providers/settings';
-import { width, isMaxWidth } from '../../../../../constants/layout';
 import Instructions from '../../../../../components/Instructions';
+import { width, isMaxWidth } from '../../../../../constants/layout';
 import formatSeconds from '../../../../../helpers/formatSeconds';
+import withSettings from '../../../../../providers/settings';
+import { useTheme } from '../../../../../providers/theme';
 import { Recipe, UnitHelpers } from '../../../../../types';
 
 type Props = {
@@ -230,8 +230,7 @@ function StepFunction(props: Props) {
           padding: 24,
           paddingBottom: 24 + PROGRESS_BAR_HEIGHT,
           minHeight: Platform.select({ android: 120 }),
-        }}
-      >
+        }}>
         <Instructions
           text={getText()}
           textStyle={{ fontSize: 20, lineHeight: 30 }}
@@ -245,8 +244,7 @@ function StepFunction(props: Props) {
         {!beforeTimerStart && (
           <View style={{ minHeight: 30 }}>
             <Animated.View
-              style={[instructionsStyle, { marginTop: Platform.select({ ios: 4, android: 0 }) }]}
-            >
+              style={[instructionsStyle, { marginTop: Platform.select({ ios: 4, android: 0 }) }]}>
               <Instructions
                 text={nextStepText}
                 style={{

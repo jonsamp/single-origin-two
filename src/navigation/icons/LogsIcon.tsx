@@ -1,5 +1,6 @@
 import React from 'react';
 import { G, Path, Svg } from 'react-native-svg';
+
 import { Icon } from './types';
 
 export default function LogsIcon(props: Icon) {

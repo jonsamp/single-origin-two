@@ -1,12 +1,14 @@
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import React, { Fragment } from 'react';
 import { ScrollView, View, Text } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RouteProp } from '@react-navigation/native';
 import { withSafeAreaInsets } from 'react-native-safe-area-context';
-import { RootStackParamList } from '../../navigation';
+
+import { useTailwind } from '../../common/theme';
 import { grinders } from '../../constants/grinders';
 import { recipes } from '../../constants/recipes';
 import { tempUnits, weightUnits } from '../../constants/units';
+import { RootStackParamList } from '../../navigation';
 import withSettings from '../../providers/settings';
 import { Settings as SettingsType } from '../../state/settings/types';
 import ChecklistSetting from './ChecklistSetting';
@@ -14,9 +16,8 @@ import Group from './Group';
 import InputSetting from './InputSetting';
 import PrivacyPolicy from './PrivacyPolicy';
 import Section from './Section';
-import SwitchSetting from './SwitchSetting';
 import SettingWrapper from './SettingWrapper';
-import { useTailwind } from '../../common/theme';
+import SwitchSetting from './SwitchSetting';
 
 type Props = {
   settings: SettingsType;
@@ -64,7 +65,7 @@ function SettingsDetail(props: Props) {
   switch (groupName.toLowerCase().replace(' ', '-')) {
     case 'brew-settings':
       children = (
-        <Fragment>
+        <>
           <Section>
             <InputSetting
               title="Coffee to water ratio"
@@ -92,12 +93,12 @@ function SettingsDetail(props: Props) {
               onChange={(value) => settingUpdated({ setting: 'recordTemp', value })}
             />
           </Section>
-        </Fragment>
+        </>
       );
       break;
     case 'grinder':
       children = (
-        <Fragment>
+        <>
           <Section>
             <ChecklistSetting
               items={createChecklistItems({
@@ -107,12 +108,12 @@ function SettingsDetail(props: Props) {
               onChange={(value) => settingUpdated({ setting: 'grinderType', value })}
             />
           </Section>
-        </Fragment>
+        </>
       );
       break;
     case 'units':
       children = (
-        <Fragment>
+        <>
           <Section title="Temperature units">
             <ChecklistSetting
               items={createChecklistItems({
@@ -124,8 +125,7 @@ function SettingsDetail(props: Props) {
           </Section>
           <Section
             title="Brewed coffee volume units"
-            description="The units that represent the volume of brewed coffee you’d like to make."
-          >
+            description="The units that represent the volume of brewed coffee you’d like to make.">
             <ChecklistSetting
               items={createChecklistItems({
                 list: weightUnits,
@@ -136,8 +136,7 @@ function SettingsDetail(props: Props) {
           </Section>
           <Section
             title="Coffee weight units"
-            description="The units that represent the weight of coffee beans you’ll need to grind."
-          >
+            description="The units that represent the weight of coffee beans you’ll need to grind.">
             <ChecklistSetting
               items={createChecklistItems({
                 list: weightUnits,
@@ -148,8 +147,7 @@ function SettingsDetail(props: Props) {
           </Section>
           <Section
             title="Water volume units"
-            description="The units that represent the weight of water you’ll need to pour over."
-          >
+            description="The units that represent the weight of water you’ll need to pour over.">
             <ChecklistSetting
               items={createChecklistItems({
                 list: weightUnits,
@@ -158,24 +156,24 @@ function SettingsDetail(props: Props) {
               onChange={(value) => settingUpdated({ setting: 'waterVolumeUnit', value })}
             />
           </Section>
-        </Fragment>
+        </>
       );
       break;
     case 'recipes':
       children = (
-        <Fragment>
+        <>
           <Section>
             <ChecklistSetting
               items={createRecipesCheckList()}
               onChange={(recipe) => recipeUpdated({ recipe })}
             />
           </Section>
-        </Fragment>
+        </>
       );
       break;
     case 'app':
       children = (
-        <Fragment>
+        <>
           <Section>
             <Group title="View Get Started" onPress={() => navigation.navigate('Onboarding')} />
             <SwitchSetting
@@ -188,16 +186,16 @@ function SettingsDetail(props: Props) {
           <SettingWrapper title="Version" borderTop>
             <Text style={tw('body theme.text.default')}>43 (3)</Text>
           </SettingWrapper>
-        </Fragment>
+        </>
       );
       break;
     case 'privacy-policy':
       children = (
-        <Fragment>
+        <>
           <Section>
             <PrivacyPolicy />
           </Section>
-        </Fragment>
+        </>
       );
       break;
     default:

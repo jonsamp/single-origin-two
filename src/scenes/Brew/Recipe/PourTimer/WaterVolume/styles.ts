@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+
 import type from '../../../../../constants/type';
 
 export default StyleSheet.create({

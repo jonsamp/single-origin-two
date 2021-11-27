@@ -1,10 +1,11 @@
+import { shadows } from '@expo/styleguide-native';
 import React from 'react';
 import { Text, TouchableOpacity, View, ImageBackground } from 'react-native';
-import { shadows } from '@expo/styleguide-native';
+
 import { useTheme, useTailwind } from '../../common/theme';
 import { height } from '../../constants/layout';
-import { ArrowIcon } from './icons/ArrowIcon';
 import { Recipe } from '../../constants/recipes';
+import { ArrowIcon } from './icons/ArrowIcon';
 
 type Props = {
   recipe: Recipe;
@@ -33,8 +34,7 @@ export default function MenuItem(props: Props) {
             minHeight: 200,
             maxHeight: 240,
             opacity: 0.65,
-          }}
-        >
+          }}>
           <View style={tw('p-5')}>
             <Text style={tw('scriptTitle text-white')}>{recipe.title}</Text>
             <Text style={tw('subheader text-white font-normal')}>{recipe.modifier}</Text>
@@ -45,8 +45,7 @@ export default function MenuItem(props: Props) {
               {
                 backgroundColor: theme.brand.default,
               },
-            ]}
-          >
+            ]}>
             <ArrowIcon color={theme.background.default} />
           </View>
         </ImageBackground>

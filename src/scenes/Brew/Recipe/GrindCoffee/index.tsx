@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, View } from 'react-native';
+
 import Card from '../../../../components/Card';
 import Instructions from '../../../../components/Instructions';
 import { height, isMaxWidth } from '../../../../constants/layout';
