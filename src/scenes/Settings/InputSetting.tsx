@@ -8,16 +8,14 @@ type Props = {
   value: number;
   onChange: (value: any) => void;
   title: string;
-  description: string;
-  borderTop?: boolean;
 };
 
 function InputSetting(props: Props) {
-  const { title, description, value, onChange, borderTop = false } = props;
+  const { title, value, onChange } = props;
   const tw = useTailwind();
 
   return (
-    <SettingWrapper title={title} description={description} borderTop={borderTop}>
+    <SettingWrapper title={title}>
       <TextInput
         value={value.toString()}
         style={tw(

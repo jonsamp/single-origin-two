@@ -1,10 +1,10 @@
 import React from 'react';
-import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useTailwind, useTheme } from '../../common/theme';
 import ScreenPlaceholder from '../../components/ScreenPlaceholder';
+import { Separator } from '../../components/Separator';
 import { recipes } from '../../constants/recipes';
 import { logDeleted } from '../../state/logs/actions';
 import { selectLogs } from '../../state/logs/selectors';
@@ -50,16 +50,7 @@ function Logs(props: Props) {
           }
         />
       )}
-      ItemSeparatorComponent={() => (
-        <View
-          style={[
-            tw('flex-1 h-px'),
-            {
-              backgroundColor: theme.border.default,
-            },
-          ]}
-        />
-      )}
+      ItemSeparatorComponent={() => <Separator />}
       ListEmptyComponent={
         <ScreenPlaceholder text="Notes of each brew will appear here once you complete a brew." />
       }

@@ -6,6 +6,6 @@ export default async function playSound({ sound }: { sound: number }) {
     await soundObject.loadAsync(sound);
     await soundObject.playAsync();
   } catch (error) {
-    console.log('Error playing sound: ', error);
+    console.error('Error playing sound: ', error);
   }
 }

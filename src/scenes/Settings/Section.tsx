@@ -14,20 +14,17 @@ function Section(props: Props) {
   const tw = useTailwind();
 
   return (
-    <View>
-      <View
-        style={tw(
-          `${description ? '' : 'border-b'} theme.border.default pb-2 ${title ? 'pt-6' : ''}`
-        )}>
+    <>
+      <View style={tw(`pb-2 ${title ? 'pt-6' : ''}`)}>
         <Text style={tw('label theme.text.secondary pl-4')}>{title.toUpperCase()}</Text>
       </View>
+      <View style={tw('rounded-lg overflow-hidden theme.background.overlay')}>{children}</View>
       {description ? (
-        <View style={tw('px-4 pb-2 border-b theme.border.default -mt-1')}>
+        <View style={tw('px-4 pb-2 pt-2')}>
           <Text style={tw('caption theme.text.secondary')}>{description}</Text>
         </View>
       ) : null}
-      <View>{children}</View>
-    </View>
+    </>
   );
 }
 

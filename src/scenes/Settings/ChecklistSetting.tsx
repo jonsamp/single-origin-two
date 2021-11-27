@@ -4,6 +4,7 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import { useTheme } from '../../common/theme';
+import { Separator } from '../../components/Separator';
 import SettingWrapper from './SettingWrapper';
 
 type Props = {
@@ -22,17 +23,14 @@ function ChecklistSetting(props: Props) {
 
   return (
     <>
-      {items.map((item) => (
+      {items.map((item, index) => (
         <TouchableOpacity onPress={() => onChange(item.id)} key={item.id}>
-          <SettingWrapper
-            title={`${item.title}${item.modifier ? ` ${item.modifier}` : ''}`}
-            style={{
-              ...{ borderBottomWidth: 1 }, // TODO: this is a different design
-            }}>
+          <SettingWrapper title={`${item.title}${item.modifier ? ` ${item.modifier}` : ''}`}>
             {item.value ? (
               <Feather name="check" size={iconSize.regular - 3} color={theme.icon.default} />
             ) : null}
           </SettingWrapper>
+          {items.length === index + 1 ? null : <Separator />}
         </TouchableOpacity>
       ))}
     </>

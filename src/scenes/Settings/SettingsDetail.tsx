@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTailwind } from '../../common/theme';
 import { useSettings } from '../../common/useSettings';
+import { Separator } from '../../components/Separator';
 import { grinders } from '../../constants/grinders';
 import { recipes } from '../../constants/recipes';
 import { tempUnits, weightUnits } from '../../constants/units';
@@ -66,20 +67,21 @@ function SettingsDetail(props: Props) {
     case 'brew-settings':
       children = (
         <>
-          <Section>
+          <Section description="Grams of water to grams of coffee ratio. Smaller numbers produce stronger coffee. Default: 16.">
             <InputSetting
               title="Coffee to water ratio"
-              description="Grams of water to grams of coffee ratio. Smaller numbers produce stronger coffee. Default: 16."
               value={settings.ratio}
               onChange={(value) => settingUpdated({ key: 'ratio', value })}
             />
+          </Section>
+          <Section description="The number of seconds for the bloom. Default: 45 seconds.">
             <InputSetting
               title="Bloom time"
-              description="The number of seconds for the bloom. Default: 45 seconds."
               value={settings.bloomDuration}
               onChange={(value) => settingUpdated({ key: 'bloomDuration', value })}
-              borderTop
             />
+          </Section>
+          <Section description="Record temperature and grind setting while brewing.">
             <SwitchSetting
               title="Record grind setting"
               value={settings.recordGrind}
@@ -88,7 +90,6 @@ function SettingsDetail(props: Props) {
             />
             <SwitchSetting
               title="Record temperature"
-              description="Record temperature and grind setting while brewing."
               value={settings.recordTemp}
               onChange={(value) => settingUpdated({ key: 'recordTemp', value })}
             />
@@ -176,16 +177,19 @@ function SettingsDetail(props: Props) {
         <>
           <Section>
             <Group title="View Get Started" onPress={() => navigation.navigate('Onboarding')} />
+          </Section>
+          <Section description="Single Origin anonymously collects usage analytics of the app. This helps us develop new features and improve the overall user experience. If you prefer not to share your data, tap the toggle button to opt-out.">
             <SwitchSetting
               title="Share anonymous data"
-              description="Single Origin anonymously collects usage analytics of the app. This helps us develop new features and improve the overall user experience. If you prefer not to share your data, tap the toggle button to opt-out."
               value={settings.shareTrackingData}
               onChange={(value) => settingUpdated({ key: 'shareTrackingData', value })}
             />
           </Section>
-          <SettingWrapper title="Version" borderTop>
-            <Text style={tw('body theme.text.default')}>43 (3)</Text>
-          </SettingWrapper>
+          <Section>
+            <SettingWrapper title="Version">
+              <Text style={tw('body theme.text.default')}>43 (3)</Text>
+            </SettingWrapper>
+          </Section>
         </>
       );
       break;
@@ -203,7 +207,7 @@ function SettingsDetail(props: Props) {
   }
 
   return (
-    <View style={tw('flex-1 theme.background.screen')}>
+    <View style={tw('flex-1 theme.background.screen px-4')}>
       <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom }}>{children}</ScrollView>
     </View>
   );

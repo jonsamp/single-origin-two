@@ -33,12 +33,7 @@ function BrewSettings() {
           </View>
         ),
       })}
-      <ScrollView
-        contentContainerStyle={{
-          paddingHorizontal: 0,
-          paddingTop: -spacing[6],
-          marginTop: -spacing[6],
-        }}>
+      <ScrollView>
         <SettingsDetail title="brew-settings" />
         <View style={{ top: -spacing[8] }}>
           <SettingsDetail title="units" />

@@ -45,8 +45,6 @@ function PourTimerFunction(props: Props) {
   const [image, setImage] = useState(recipe.defaultSource);
   const _recipe = formatRecipe(recipe, settings);
 
-  console.log(_recipe);
-
   useEffect(function didMount() {
     return interval.current && clearInterval(interval.current);
   }, []);

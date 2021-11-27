@@ -4,6 +4,7 @@ import React from 'react';
 import { Linking, TouchableOpacity, ScrollView, Platform } from 'react-native';
 
 import { useTailwind, useTheme } from '../../common/theme';
+import { Separator } from '../../components/Separator';
 import Group from './Group';
 import Section from './Section';
 import SettingWrapper from './SettingWrapper';
@@ -13,16 +14,21 @@ function Settings() {
   const tw = useTailwind();
 
   return (
-    <ScrollView style={tw('theme.background.screen')}>
+    <ScrollView style={tw('theme.background.screen px-4')}>
       <Section title="Brewing">
         <Group title="Brew Settings" />
+        <Separator />
         <Group title="Grinder" />
+        <Separator />
         <Group title="Units" />
+        <Separator />
         <Group title="Recipes" />
       </Section>
       <Section title="General">
         <Group title="App" />
+        <Separator />
         <Group title="Privacy Policy" />
+        <Separator />
         <TouchableOpacity
           onPress={() => {
             if (Platform.OS === 'ios') {

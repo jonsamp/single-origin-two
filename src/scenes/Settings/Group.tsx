@@ -21,9 +21,7 @@ function Group(props: Props) {
 
   return (
     <TouchableOpacity
-      style={tw(
-        'flex-1 flex-row justify-between items-center h-12 px-4 theme.background.overlay border-b theme.border.default'
-      )}
+      style={tw('flex-1 flex-row justify-between items-center h-12 px-4')}
       onPress={() => {
         if (onPress) {
           return onPress();

@@ -175,17 +175,14 @@ function ListItem(props: Props) {
                 })}
                 {log.rating && (
                   <View
-                    style={{
-                      width: 20,
-                      height: 20,
-                      backgroundColor: colors.primary,
-                      position: 'absolute',
-                      right: 4,
-                      bottom: 4,
-                      borderRadius: 2,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
+                    style={[
+                      tw(
+                        'w-5 h-5 absolute right-1 bottom-1 rounded-full items-center justify-center'
+                      ),
+                      {
+                        backgroundColor: theme.brand.default,
+                      },
+                    ]}>
                     <Text style={[tw('label'), { color: 'black' }]}>{log.rating}</Text>
                   </View>
                 )}
