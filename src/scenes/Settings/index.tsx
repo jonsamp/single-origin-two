@@ -13,7 +13,7 @@ function Settings() {
   const tw = useTailwind();
 
   return (
-    <ScrollView style={tw('theme.background.default')}>
+    <ScrollView style={tw('theme.background.screen')}>
       <Section title="Brewing">
         <Group title="Brew Settings" />
         <Group title="Grinder" />

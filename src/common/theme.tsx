@@ -72,10 +72,13 @@ export function useTheme() {
 
 export function useTailwind() {
   // @ts-ignore
-  const { theme } = RNUseTheme();
+  const { theme, dark } = RNUseTheme();
 
   const custom = create({
     ...styles,
+    'theme.background.screen': {
+      backgroundColor: dark ? theme.background.default : theme.background.secondary,
+    },
     'theme.background.default': {
       backgroundColor: theme.background.default,
     },

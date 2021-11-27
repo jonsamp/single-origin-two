@@ -60,7 +60,7 @@ function Menu() {
   }
 
   return (
-    <View style={tw('flex-1 theme.background.default')}>
+    <View style={tw('flex-1 theme.background.screen')}>
       <ImageBackground source={BackgroundImage} style={{ flex: 1 }} imageStyle={{ opacity: 0.35 }}>
         <ResponsiveScrollView contentContainerStyle={{ padding: 12, paddingTop: 24 }}>
           {settings.onboardingVisible && <Onboarding />}

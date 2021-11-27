@@ -70,13 +70,13 @@ function LogDetailEdit(props: Props) {
   }
 
   return (
-    <View style={tw('theme.background.default flex-1')}>
+    <View style={tw('theme.background.screen flex-1')}>
       {!isMaxWidth && Platform.select({ ios: <StatusBar animated style="light" /> })}
       {Platform.select({
         ios: (
           <View
             style={tw(
-              'flex-row justify-between items-center p-4 theme.background.secondary border-b theme.border.default'
+              'flex-row justify-between items-center p-4 theme.background.default border-b theme.border.default'
             )}>
             <View style={tw('flex-row items-center')}>
               <Feather
@@ -135,13 +135,14 @@ function LogDetailEdit(props: Props) {
                 />
               </View>
               <Text style={tw('title theme.text.default')}>Overall rating</Text>
-              <View style={tw('rounded-md overflow-hidden mt-4 mb-6')}>
+              <View style={tw('rounded-md overflow-hidden mt-4 mb-6 border theme.border.default')}>
                 <Slider
                   min={1}
                   max={10}
                   defaultValue={log.rating ?? 5}
                   label="rating"
                   onChange={(value) => updateLog('rating', value)}
+                  style={tw('theme.background.default')}
                 />
               </View>
               <Text style={tw('title theme.text.default')}>Notes</Text>

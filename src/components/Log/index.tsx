@@ -102,7 +102,7 @@ function Log(props: Props) {
   }
 
   return (
-    <ResponsiveScrollView wrapperStyle={tw('theme.background.default')} style={style}>
+    <ResponsiveScrollView wrapperStyle={tw('theme.background.screen')} style={style}>
       <View style={tw('items-center')}>
         {recipe.icon({
           fill: theme.icon.default,

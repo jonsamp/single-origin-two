@@ -23,10 +23,10 @@ const initialState = {
 const reducers = {
   [actions.settingUpdated.toString()]: (
     settings: Settings,
-    { payload: { setting, value } }: { payload: { setting: keyof Settings; value: any } }
+    { payload: { key, value } }: { payload: { key: keyof Settings; value: any } }
   ) => ({
     ...settings,
-    [setting]: value,
+    [key]: value,
   }),
 };
 

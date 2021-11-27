@@ -203,7 +203,7 @@ function SettingsDetail(props: Props) {
   }
 
   return (
-    <View style={tw('flex-1 theme.background.default')}>
+    <View style={tw('flex-1 theme.background.screen')}>
       <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom }}>{children}</ScrollView>
     </View>
   );

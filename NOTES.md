@@ -1,6 +1,10 @@
 # Notes
 
-## November 27, 2021
+## November 27, 2021 (afternoon)
+
+Removed providers, removed global types, and added hooks for tracking and settings.
+
+## November 27, 2021 (2AM)
 
 Finished with removing `withTheme()`.
 

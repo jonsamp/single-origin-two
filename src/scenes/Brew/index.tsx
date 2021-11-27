@@ -18,7 +18,7 @@ function Brew(props: Props) {
   const recipe = recipes[id];
 
   return (
-    <View style={tw('flex-1 theme.background.default')}>
+    <View style={tw('flex-1 theme.background.screen')}>
       <ScrollView contentContainerStyle={tw('p-3 items-center pt-8')}>
         <View style={tw('w-full')}>
           <Recipe recipe={recipe} />

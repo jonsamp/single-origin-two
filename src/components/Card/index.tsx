@@ -15,7 +15,7 @@ function Card(props: Props) {
   const tw = useTailwind();
 
   return (
-    <View style={[shadows.small, tw('rounded-lg mb-8'), containerStyle]}>
+    <View style={[shadows.tiny, tw('rounded-lg mb-8'), containerStyle]}>
       <View style={[tw('theme.background.overlay rounded-lg overflow-hidden'), style]}>
         {children}
       </View>

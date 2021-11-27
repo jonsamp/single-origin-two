@@ -16,7 +16,7 @@ const SettingWrapper = (props: Props) => {
   const tw = useTailwind();
 
   return (
-    <View style={tw('theme.background.default')}>
+    <View style={tw('theme.background.screen')}>
       <View
         style={[
           tw(

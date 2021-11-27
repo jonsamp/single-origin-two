@@ -15,7 +15,10 @@ function Section(props: Props) {
 
   return (
     <View>
-      <View style={tw(`mt-6 ${description ? '' : 'border-b'} theme.border.default pb-2`)}>
+      <View
+        style={tw(
+          `${description ? '' : 'border-b'} theme.border.default pb-2 ${title ? 'pt-6' : ''}`
+        )}>
         <Text style={tw('label theme.text.secondary pl-4')}>{title.toUpperCase()}</Text>
       </View>
       {description ? (

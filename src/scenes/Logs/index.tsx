@@ -34,7 +34,7 @@ function Logs(props: Props) {
 
   return (
     <FlatList
-      contentContainerStyle={{ paddingTop: 16 }}
+      contentContainerStyle={tw('pt-4 theme.background.screen')}
       data={Object.values(logs)
         .filter((log) => log && recipes[log.recipeId])
         .sort(byTimestamp)}
@@ -53,7 +53,7 @@ function Logs(props: Props) {
       ItemSeparatorComponent={() => (
         <View
           style={[
-            tw('flex-1 h-px ml-3'),
+            tw('flex-1 h-px'),
             {
               backgroundColor: theme.border.default,
             },

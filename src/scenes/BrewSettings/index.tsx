@@ -15,13 +15,13 @@ function BrewSettings() {
   const { theme } = useTheme();
 
   return (
-    <View style={tw('flex-1 theme.background.default')}>
+    <View style={tw('flex-1')}>
       {!isMaxWidth && Platform.select({ ios: <StatusBar animated style="light" /> })}
       {Platform.select({
         ios: (
           <View
             style={tw(
-              'theme.background.secondary border-b theme.border.default p-4 flex-row items-center justify-between'
+              'theme.background.default border-b theme.border.default p-4 flex-row items-center justify-between'
             )}>
             <View style={tw('flex-row items-center')}>
               <Feather name="sliders" color={theme.icon.default} size={iconSize.regular} />

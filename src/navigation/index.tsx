@@ -155,7 +155,7 @@ function Tabs() {
 
 function App() {
   const colorScheme = useColorScheme();
-  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme;
+  const { theme, dark } = colorScheme === 'dark' ? darkTheme : defaultTheme;
 
   return (
     <NavigationContainer theme={colorScheme === 'light' ? defaultTheme : darkTheme}>
@@ -164,7 +164,7 @@ function App() {
           headerTitleStyle: type.headline as any,
           headerBackTitleVisible: false,
           contentStyle: {
-            backgroundColor: theme.background.default,
+            backgroundColor: dark ? theme.background.default : theme.background.secondary,
           },
         }}>
         {/* <Stack.Screen name="Test" component={Test} /> */}
