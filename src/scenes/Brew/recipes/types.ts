@@ -25,6 +25,17 @@ export type PreparationStep = {
   text: string;
 };
 
+export type BrewStep = {
+  start?: boolean;
+  type: StepType;
+  volumePercent?: number;
+  image: number;
+  afterImage: number;
+  duration?: number;
+  text?: string;
+  second?: number;
+};
+
 export type BrewRecipe = {
   id: BrewRecipeName;
   title: string;
@@ -34,12 +45,7 @@ export type BrewRecipe = {
   defaultTotalVolume: number;
   defaultSource: number;
   iced?: boolean;
+  pourVelocity?: number;
   preparation: PreparationStep[];
-  steps: {
-    start?: boolean;
-    type: StepType;
-    volumePercent?: number;
-    image: number;
-    afterImage: number;
-  }[];
+  steps: BrewStep[];
 };

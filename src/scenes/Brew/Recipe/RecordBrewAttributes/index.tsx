@@ -10,16 +10,15 @@ import { useSettings } from '../../../../common/useSettings';
 import Card from '../../../../components/Card';
 import Instructions from '../../../../components/Instructions';
 import Slider from '../../../../components/Slider';
-import { GrindHelper, Unit } from '../../../../types';
+import { GrindHelper, Unit } from '../../../../state/settings/types';
 
 type Props = {
-  grind: number;
+  grind?: number;
   defaultGrind: number;
   temp: number;
   setRecipeState: (props: { key: string; value: any }) => void;
   temperatureUnit: { unit: Unit };
   grindUnit: GrindHelper;
-  isDarkTheme: boolean;
 };
 
 function RecordBrewAttributes(props: Props) {
@@ -65,7 +64,7 @@ function RecordBrewAttributes(props: Props) {
         label={grindUnit.grinder.shortTitle}
         min={grindUnit.grinder.min}
         max={grindUnit.grinder.max}
-        defaultValue={grind || grindUnit.getPreferredValueBasedOnPercent(defaultGrind)}
+        defaultValue={grind ?? grindUnit.getPreferredValueBasedOnPercent(defaultGrind)}
         onChange={(value) => {
           setRecipeState({
             key: 'grind',
@@ -78,13 +77,13 @@ function RecordBrewAttributes(props: Props) {
 
   function recordTempComponent() {
     const min = unitHelpers?.temperatureUnit
-      ? Math.round(unitHelpers?.temperatureUnit.getPreferredValue(160))
+      ? Math.round(unitHelpers.temperatureUnit.getPreferredValue(160))
       : 160;
-    const max = unitHelpers?.temperatureUnit
-      ? Math.round(unitHelpers?.temperatureUnit.getPreferredValue(220))
+    const max = unitHelpers.temperatureUnit
+      ? Math.round(unitHelpers.temperatureUnit.getPreferredValue(220))
       : 220;
-    const defaultValue = unitHelpers?.temperatureUnit
-      ? Math.round(unitHelpers?.temperatureUnit.getPreferredValue(temp))
+    const defaultValue = unitHelpers.temperatureUnit
+      ? Math.round(unitHelpers.temperatureUnit.getPreferredValue(temp))
       : temp;
 
     return (

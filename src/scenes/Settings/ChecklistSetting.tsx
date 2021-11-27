@@ -1,6 +1,6 @@
 import { iconSize } from '@expo/styleguide-native';
 import { Feather } from '@expo/vector-icons';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import { useTheme } from '../../common/theme';
@@ -22,7 +22,7 @@ function ChecklistSetting(props: Props) {
 
   return (
     <>
-      {items.map((item, index) => (
+      {items.map((item) => (
         <TouchableOpacity onPress={() => onChange(item.id)} key={item.id}>
           <SettingWrapper
             title={`${item.title}${item.modifier ? ` ${item.modifier}` : ''}`}

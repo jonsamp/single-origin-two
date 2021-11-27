@@ -8,8 +8,8 @@ const initialState = {
 };
 
 const reducers = {
-  [actions.notificationsReset]: (notifications: Notifications) => initialState,
-  [actions.reminderDenied]: (notifications: Notifications) => ({
+  [actions.notificationsReset.toString()]: (_: Notifications) => initialState,
+  [actions.reminderDenied.toString()]: (notifications: Notifications) => ({
     ...notifications,
     status: 'denied',
   }),

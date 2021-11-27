@@ -26,7 +26,11 @@ function* cancelAllNotifications() {
   yield call(Notifications.cancelAllScheduledNotificationsAsync);
 }
 
-function* handleReminderRequested({ payload: { timestamp } }: { payload: { timestamp: number } }) {
+function* handleReminderRequested({
+  payload: { timestamp },
+}: {
+  payload: { timestamp: number };
+}): any {
   const {
     permissions: { notifications },
   } = yield call(Permissions.getAsync, Permissions.NOTIFICATIONS);

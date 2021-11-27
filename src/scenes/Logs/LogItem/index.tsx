@@ -17,7 +17,7 @@ import Animated, {
 import { useTailwind, useTheme } from '../../../common/theme';
 import { width } from '../../../constants/layout';
 import { recipes } from '../../../constants/recipes';
-import { Log } from '../../../types';
+import { Log } from '../../../state/logs/types';
 import { TrashIcon } from './TrashIcon';
 
 type Props = {

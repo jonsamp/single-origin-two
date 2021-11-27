@@ -11,7 +11,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { useTailwind, useTheme } from '../../../../../common/theme';
-import { UnitHelper } from '../../../../../types';
+import { UnitHelper } from '../../../../../state/settings/types';
 
 interface Props {
   volume: number;
@@ -152,7 +152,7 @@ function WaterVolume(props: Props) {
         <AnimatedTextInput
           underlineColorAndroid="transparent"
           editable={false}
-          animatedProps={animatedProps}
+          animatedProps={animatedProps as any}
           style={[
             {
               fontSize: 28,

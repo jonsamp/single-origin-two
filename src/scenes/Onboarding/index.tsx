@@ -55,7 +55,7 @@ function Onboarding() {
 
   function onFinish() {
     settingUpdated({
-      setting: 'onboardingVisible',
+      key: 'onboardingVisible',
       value: false,
     });
     navigation.goBack();

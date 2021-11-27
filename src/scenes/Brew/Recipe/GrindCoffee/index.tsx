@@ -9,7 +9,6 @@ import { getValueUnit } from '../../../../scenes/Brew/helpers';
 import { Log } from '../../../../state/logs/types';
 
 type Props = {
-  unitHelpers: any;
   coffeeWeight: number;
   defaultGrind: number;
   title: string;

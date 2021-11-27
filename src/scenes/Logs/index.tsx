@@ -8,7 +8,7 @@ import ScreenPlaceholder from '../../components/ScreenPlaceholder';
 import { recipes } from '../../constants/recipes';
 import { logDeleted } from '../../state/logs/actions';
 import { selectLogs } from '../../state/logs/selectors';
-import { Logs as LogsType, Log } from '../../types/index';
+import { Logs as LogsType, Log } from '../../state/logs/types';
 import LogItem from './LogItem';
 
 type Props = {

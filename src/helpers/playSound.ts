@@ -1,6 +1,6 @@
 import { Audio } from 'expo-av';
 
-export default async function playSound({ sound }) {
+export default async function playSound({ sound }: { sound: number }) {
   const soundObject = new Audio.Sound();
   try {
     await soundObject.loadAsync(sound);

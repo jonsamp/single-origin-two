@@ -26,3 +26,35 @@ export interface Settings {
     [i: string]: boolean;
   };
 }
+
+export interface UnitHelper {
+  getPreferredValue: (value: number) => number;
+  getStandardValue: (value: number) => number;
+  unit: Unit;
+}
+
+export interface GrindHelper {
+  getPreferredValue: (value: number) => number;
+  getPreferredValueBasedOnPercent: (percent: number) => number;
+  getStandardValue: (value: number) => number;
+  getGrindSetting: (percent: number) => {
+    title: string;
+    image?: any;
+  };
+  grinder: Grinder;
+  unit: { symbol: string };
+}
+
+export interface Unit {
+  title: string;
+  id: string;
+  symbol: string;
+}
+
+interface Grinder {
+  title: string;
+  shortTitle: string;
+  id: string;
+  min: number;
+  max: number;
+}

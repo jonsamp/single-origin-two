@@ -1,4 +1,4 @@
-import { RouteProp, useNavigation } from '@react-navigation/core';
+import { RouteProp } from '@react-navigation/core';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 
@@ -13,7 +13,6 @@ type Props = {
 
 function Brew(props: Props) {
   const { route } = props;
-  const navigation = useNavigation();
   const tw = useTailwind();
   const { id } = route.params;
   const recipe = recipes[id];
@@ -22,7 +21,7 @@ function Brew(props: Props) {
     <View style={tw('flex-1 theme.background.default')}>
       <ScrollView contentContainerStyle={tw('p-3 items-center pt-8')}>
         <View style={tw('w-full')}>
-          <Recipe recipe={recipe} navigation={navigation} />
+          <Recipe recipe={recipe} />
         </View>
       </ScrollView>
     </View>

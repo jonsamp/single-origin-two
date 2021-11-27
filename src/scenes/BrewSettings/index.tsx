@@ -39,9 +39,9 @@ function BrewSettings() {
           paddingTop: -spacing[6],
           marginTop: -spacing[6],
         }}>
-        <SettingsDetail route={{ params: { title: 'brew-settings' } }} />
+        <SettingsDetail title="brew-settings" />
         <View style={{ top: -spacing[8] }}>
-          <SettingsDetail route={{ params: { title: 'units' } }} />
+          <SettingsDetail title="units" />
         </View>
       </ScrollView>
     </View>

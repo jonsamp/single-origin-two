@@ -1,4 +1,4 @@
-export default function formatSeconds(seconds: number) {
+export default function formatSeconds(seconds: number): string {
   // Hours, minutes and seconds
   const hrs = ~~(seconds / 3600);
   const mins = ~~((seconds % 3600) / 60);

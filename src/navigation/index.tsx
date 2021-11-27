@@ -9,6 +9,7 @@ import { TouchableOpacity, Text, View, Platform, useColorScheme } from 'react-na
 import { defaultTheme, darkTheme } from '../common/theme';
 import type from '../constants/type';
 import Brew from '../scenes/Brew';
+import { PreparationStep } from '../scenes/Brew/recipes/types';
 import BrewSettings from '../scenes/BrewSettings';
 import BrewSummary from '../scenes/BrewSummary';
 import LogDetail from '../scenes/LogDetail';
@@ -40,11 +41,7 @@ export type RootStackParamList = {
     timestamp: number;
   };
   Onboarding: undefined;
-  Preparation: {
-    image?: number;
-    text: string;
-    timestamp: number;
-  }[];
+  Preparation: PreparationStep[];
   SettingsDetail: {
     title: string;
   };

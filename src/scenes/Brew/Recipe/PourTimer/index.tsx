@@ -8,8 +8,9 @@ import Image from '../../../../components/Image';
 import { height, width } from '../../../../constants/layout';
 import { styleguide } from '../../../../constants/themes';
 import playSound from '../../../../helpers/playSound';
-import { Recipe } from '../../../../types';
+import { Settings } from '../../../../state/settings/types';
 import { withBloomFn } from '../../helpers';
+import { BrewRecipe, BrewStep } from '../../recipes/types';
 import addWaterSound from '../../sounds/add-water.mp3';
 import tipSound from '../../sounds/tip.mp3';
 import Step from './Step';
@@ -17,17 +18,17 @@ import Timer from './Timer';
 import WaterVolume from './WaterVolume';
 
 type Props = {
-  recipe: Recipe;
+  recipe: BrewRecipe;
   volume: number;
   setRecipeState: (props: any) => void;
 };
 
-function formatRecipe(recipe, settings) {
+function formatRecipe(recipe: BrewRecipe, settings: Settings): { [i: string]: BrewStep } {
   const withBloom = withBloomFn({ settings });
   return recipe.steps.reduce((acc, step) => {
     return {
       ...acc,
-      ...(step.start ? { 0: step } : { [withBloom(step.second)]: step }),
+      ...(step.start ? { 0: step } : { [withBloom(step.second ?? 0)]: step }),
     };
   }, {});
 }
@@ -44,13 +45,15 @@ function PourTimerFunction(props: Props) {
   const [image, setImage] = useState(recipe.defaultSource);
   const _recipe = formatRecipe(recipe, settings);
 
+  console.log(_recipe);
+
   useEffect(function didMount() {
     return interval.current && clearInterval(interval.current);
   }, []);
 
   function toggleCountdown() {
     if (timerRunning) {
-      if (interval) {
+      if (interval.current) {
         clearInterval(interval.current);
       }
       setTimerRunning(false);
@@ -81,7 +84,7 @@ function PourTimerFunction(props: Props) {
 
           // 130 is default pour velocity
           // 750 is adding 1/4 of a second so the animation of the pour tracker has time to finish
-          lengthOfStep = volumeToAdd * (recipe.pourVelocity || 130) + 250;
+          lengthOfStep = volumeToAdd * (recipe.pourVelocity ?? 130) + 250;
         } else {
           lengthOfStep = 5000;
         }
@@ -98,7 +101,7 @@ function PourTimerFunction(props: Props) {
 
         if (step.type === 'pour') {
           setCurrentStepDuration(Math.round(lengthOfStep / 1000));
-          setVolumePercent(step.volumePercent);
+          setVolumePercent(step.volumePercent ?? 0);
           playSound({ sound: addWaterSound });
         }
 

@@ -23,10 +23,9 @@ import { selectNotifications } from '../../state/notifications/selectors';
 import { State } from '../../state/types';
 
 type Props = {
-  log: LogType;
-  withReminder: boolean;
-  style: ViewStyle;
   timestamp: number;
+  withReminder?: boolean;
+  style?: ViewStyle;
 };
 
 function Log(props: Props) {

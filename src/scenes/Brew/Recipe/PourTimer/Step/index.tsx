@@ -15,10 +15,12 @@ import Instructions from '../../../../../components/Instructions';
 import { width, isMaxWidth } from '../../../../../constants/layout';
 import { styleguide } from '../../../../../constants/themes';
 import formatSeconds from '../../../../../helpers/formatSeconds';
-import { Recipe } from '../../../../../types';
+import { BrewStep } from '../../../recipes/types';
 
 type Props = {
-  recipe: Recipe;
+  recipe: {
+    [i: string]: BrewStep;
+  };
   second: number;
   volume: number;
   timerRunning: boolean;
@@ -41,7 +43,9 @@ function StepFunction(props: Props) {
   const beforeTimerStart = !timerRunning && second === -3;
 
   // result used for the progress bar below the step text.
-  const recipeWithEventDurations = Object.keys(recipe).reduce((acc, recipeKey) => {
+  const recipeWithEventDurations: {
+    [i: string]: BrewStep & { duration: number };
+  } = Object.keys(recipe).reduce((acc, recipeKey) => {
     const event = recipe[recipeKey];
 
     // If we have a duration, then use it
@@ -70,10 +74,10 @@ function StepFunction(props: Props) {
       const previousPourIndex = currentEventPourIndex > 0 ? currentEventPourIndex - 1 : null;
 
       if (previousPourIndex !== null) {
-        previousVolumePercent = recipe[pourEventKeys[previousPourIndex]].volumePercent;
+        previousVolumePercent = recipe[pourEventKeys[previousPourIndex]].volumePercent ?? 0;
       }
 
-      const differenceInVolumePercent = event.volumePercent - previousVolumePercent;
+      const differenceInVolumePercent = (event.volumePercent ?? 0) - previousVolumePercent;
       const volumeToAdd = differenceInVolumePercent * volume;
       const durationOfPour = volumeToAdd * pourVelocity;
 
@@ -96,17 +100,17 @@ function StepFunction(props: Props) {
   }, {});
 
   function getNextStepText(second: number) {
-    const nextStep = recipe[getStepKey(second)];
+    const nextStep = recipe[getStepKey(second) ?? 0];
     let _nextStepText = nextStepText;
 
     if (!nextStep || nextStep.type === 'finish') {
       _nextStepText = 'End of brew.';
     } else if (nextStep.type === 'pour') {
       _nextStepText = `Pour up to **${waterVolumeUnit
-        .getPreferredValue(volume * nextStep.volumePercent)
+        .getPreferredValue(volume * (nextStep.volumePercent ?? 0))
         .toLocaleString()} ${waterVolumeUnit.unit.title}** of water.`;
     } else if (nextStep.type === 'tip') {
-      _nextStepText = nextStep.text;
+      _nextStepText = nextStep.text ?? '';
     }
 
     if (_nextStepText !== nextStepText) {
@@ -127,9 +131,16 @@ function StepFunction(props: Props) {
       return 0;
     }
 
-    return Object.keys(recipeWithEventDurations).find((eventKey) => {
-      return Number(eventKey) + recipeWithEventDurations[eventKey].duration / 1000 >= second;
+    const nextStepKey = Object.keys(recipeWithEventDurations).find((eventKey) => {
+      const event = recipeWithEventDurations[eventKey];
+      if (event?.duration) {
+        return Number(eventKey) + event.duration / 1000 >= second;
+      }
+
+      return null;
     });
+
+    return nextStepKey ?? 0;
   }
 
   useEffect(function didMount() {

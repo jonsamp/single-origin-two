@@ -30,7 +30,7 @@ const maybeInitialize = () => {
   }
 };
 
-export const track = ({ event, options }) => {
+export const track = ({ event, options }: { event: string; options: any }) => {
   maybeInitialize();
 
   if (options) {

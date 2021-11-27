@@ -5,7 +5,6 @@ import Card from '../../../../components/Card';
 import Instructions from '../../../../components/Instructions';
 
 type Props = {
-  unitHelpers: any;
   volume: number;
 };
 

@@ -100,10 +100,6 @@ function Recipe(props: RecipeProps) {
   const { totalVolume, grind, temp } = recipeState;
   const coffeeWeight = Math.round(totalVolume / settings.ratio);
   const totalPourVolume = recipeState.isIced ? Math.round(totalVolume * 0.666) : totalVolume;
-  const longestSecond = recipe.steps
-    .filter((s) => s.second)
-    .map((s) => s.second)
-    .sort((a, b) => b - a)[0];
 
   return (
     <View style={isMaxWidth && { alignItems: 'center' }}>
@@ -123,7 +119,6 @@ function Recipe(props: RecipeProps) {
           defaultGrind={defaultGrind}
           title={recipe.title}
           recentLog={recentLog}
-          recipeDuration={longestSecond + settings.bloomDuration}
         />
         {recipeState.isIced && <AddIce volume={Math.round(totalVolume * 0.333)} />}
         <RecordBrewAttributes

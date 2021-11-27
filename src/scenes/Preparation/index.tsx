@@ -4,11 +4,9 @@ import React from 'react';
 import InstructionalCard from '../../components/InstructionalCard';
 import ResponsiveScrollView from '../../components/ResponsiveScrollView';
 import { RootStackParamList } from '../../navigation';
-import { PreparationStep } from '../Brew/recipes/types';
 
 interface Props {
   route: RouteProp<RootStackParamList, 'Preparation'>;
-  preparation: PreparationStep[];
 }
 
 function Preparation(props: Props) {

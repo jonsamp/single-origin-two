@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image as RNImage, ImageStyle, StyleSheet } from 'react-native';
+import { Image as RNImage, ImageStyle } from 'react-native';
 
 import { useTailwind } from '../../common/theme';
 import { height } from '../../constants/layout';
@@ -18,15 +18,14 @@ export default function Image(props: Props) {
   return (
     <RNImage
       source={source}
-      // defaultSource={defaultSource}
-      style={[styles.image, tw('theme.background.default'), style]}
+      style={[
+        {
+          resizeMode: 'cover',
+          height: height / 5,
+        },
+        tw('theme.background.default'),
+        style,
+      ]}
     />
   );
 }
-
-const styles = StyleSheet.create({
-  image: {
-    resizeMode: 'cover',
-    height: height / 5,
-  },
-});

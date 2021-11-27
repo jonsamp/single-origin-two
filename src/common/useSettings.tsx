@@ -35,7 +35,7 @@ export function useSettings() {
     return {
       getPreferredValue: getPreferredValue(unit),
       getStandardValue: getStandardValue(unit),
-      unit: units[settings[unit]],
+      unit: units[settings[unit as keyof typeof settings] as keyof typeof units],
     };
   }
 
@@ -43,7 +43,7 @@ export function useSettings() {
     return {
       getPreferredValue: (v: number) => v,
       getPreferredValueBasedOnPercent: (percent: number) => {
-        const grinder = grinders[settings.grinderType];
+        const grinder = grinders[settings.grinderType as keyof typeof grinders];
         const range = grinder.max - grinder.min;
         return Math.round(range * percent);
       },
@@ -55,32 +55,39 @@ export function useSettings() {
           return getVerboseSetting(percent);
         }
 
-        const grinder = grinders[grinderType];
+        const grinder = grinders[grinderType as keyof typeof grinders];
         const range = grinder.max - grinder.min;
         return {
           title: `#${Math.round(range * percent)}`,
+          image: null,
         };
       },
-      grinder: grinders[settings.grinderType],
+      grinder: grinders[settings.grinderType as keyof typeof grinders],
       unit: { symbol: 'grind' },
     };
   }
 
   function getPreferredValue(unit: string) {
     return function getPreferredValueInner(value: number) {
-      return conversions[settings[unit]].preferredConversion(value);
+      return Number(
+        conversions[
+          settings[unit as keyof typeof settings] as keyof typeof units
+        ].preferredConversion(Number(value))
+      );
     };
   }
 
   function getStandardValue(unit: string) {
     return function getStandardValueInner(value: number) {
-      return conversions[settings[unit]].standardConversion(value);
+      return conversions[
+        settings[unit as keyof typeof settings] as keyof typeof units
+      ].standardConversion(value);
     };
   }
 
   return {
     settings,
-    settingUpdated: (args) => dispatch(settingUpdated(args)),
+    settingUpdated: (args: { key: string; value: any }) => dispatch(settingUpdated(args)),
     unitHelpers: {
       brewedVolumeUnit: getUnitHelper('brewedVolumeUnit'),
       coffeeWeightUnit: getUnitHelper('coffeeWeightUnit'),

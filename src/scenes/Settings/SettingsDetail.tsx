@@ -1,4 +1,4 @@
-import { RouteProp } from '@react-navigation/native';
+import { RouteProp, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { ScrollView, View, Text } from 'react-native';
@@ -19,22 +19,29 @@ import SettingWrapper from './SettingWrapper';
 import SwitchSetting from './SwitchSetting';
 
 type Props = {
-  navigation: StackNavigationProp<RootStackParamList, 'SettingsDetail'>;
-  route: RouteProp<RootStackParamList, 'SettingsDetail'>;
+  route?: RouteProp<RootStackParamList, 'SettingsDetail'>;
+  title?: string;
 };
 
 function SettingsDetail(props: Props) {
-  const { navigation, route } = props;
+  const { route, title } = props;
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList, 'SettingsDetail'>>();
   const { settings, settingUpdated } = useSettings();
   const insets = useSafeAreaInsets();
   const tw = useTailwind();
-  const groupName = route.params.title;
+  const groupName = route?.params?.title ?? title;
   let children;
 
-  function createChecklistItems({ list, settingName }) {
+  function createChecklistItems({
+    list,
+    settingName,
+  }: {
+    list: { [i: string]: any };
+    settingName: string;
+  }) {
     return Object.values(list).map((item: any) => ({
       ...item,
-      value: item.id === settings[settingName],
+      value: item.id === settings[settingName as keyof typeof settings],
     }));
   }
 
@@ -45,9 +52,9 @@ function SettingsDetail(props: Props) {
     }));
   }
 
-  function recipeUpdated({ recipe }) {
+  function recipeUpdated({ recipe }: { recipe: string }) {
     return settingUpdated({
-      setting: 'recipes',
+      key: 'recipes',
       value: {
         ...settings.recipes,
         [recipe]: !settings.recipes[recipe],
@@ -55,7 +62,7 @@ function SettingsDetail(props: Props) {
     });
   }
 
-  switch (groupName.toLowerCase().replace(' ', '-')) {
+  switch ((groupName ?? '').toLowerCase().replace(' ', '-')) {
     case 'brew-settings':
       children = (
         <>
@@ -64,26 +71,26 @@ function SettingsDetail(props: Props) {
               title="Coffee to water ratio"
               description="Grams of water to grams of coffee ratio. Smaller numbers produce stronger coffee. Default: 16."
               value={settings.ratio}
-              onChange={(value) => settingUpdated({ setting: 'ratio', value })}
+              onChange={(value) => settingUpdated({ key: 'ratio', value })}
             />
             <InputSetting
               title="Bloom time"
               description="The number of seconds for the bloom. Default: 45 seconds."
               value={settings.bloomDuration}
-              onChange={(value) => settingUpdated({ setting: 'bloomDuration', value })}
+              onChange={(value) => settingUpdated({ key: 'bloomDuration', value })}
               borderTop
             />
             <SwitchSetting
               title="Record grind setting"
               value={settings.recordGrind}
-              onChange={(value) => settingUpdated({ setting: 'recordGrind', value })}
+              onChange={(value) => settingUpdated({ key: 'recordGrind', value })}
               borderTop
             />
             <SwitchSetting
               title="Record temperature"
               description="Record temperature and grind setting while brewing."
               value={settings.recordTemp}
-              onChange={(value) => settingUpdated({ setting: 'recordTemp', value })}
+              onChange={(value) => settingUpdated({ key: 'recordTemp', value })}
             />
           </Section>
         </>
@@ -98,7 +105,7 @@ function SettingsDetail(props: Props) {
                 list: grinders,
                 settingName: 'grinderType',
               })}
-              onChange={(value) => settingUpdated({ setting: 'grinderType', value })}
+              onChange={(value) => settingUpdated({ key: 'grinderType', value })}
             />
           </Section>
         </>
@@ -113,7 +120,7 @@ function SettingsDetail(props: Props) {
                 list: tempUnits,
                 settingName: 'temperatureUnit',
               })}
-              onChange={(value) => settingUpdated({ setting: 'temperatureUnit', value })}
+              onChange={(value) => settingUpdated({ key: 'temperatureUnit', value })}
             />
           </Section>
           <Section
@@ -124,7 +131,7 @@ function SettingsDetail(props: Props) {
                 list: weightUnits,
                 settingName: 'brewedVolumeUnit',
               })}
-              onChange={(value) => settingUpdated({ setting: 'brewedVolumeUnit', value })}
+              onChange={(value) => settingUpdated({ key: 'brewedVolumeUnit', value })}
             />
           </Section>
           <Section
@@ -135,7 +142,7 @@ function SettingsDetail(props: Props) {
                 list: weightUnits,
                 settingName: 'coffeeWeightUnit',
               })}
-              onChange={(value) => settingUpdated({ setting: 'coffeeWeightUnit', value })}
+              onChange={(value) => settingUpdated({ key: 'coffeeWeightUnit', value })}
             />
           </Section>
           <Section
@@ -146,7 +153,7 @@ function SettingsDetail(props: Props) {
                 list: weightUnits,
                 settingName: 'waterVolumeUnit',
               })}
-              onChange={(value) => settingUpdated({ setting: 'waterVolumeUnit', value })}
+              onChange={(value) => settingUpdated({ key: 'waterVolumeUnit', value })}
             />
           </Section>
         </>
@@ -173,7 +180,7 @@ function SettingsDetail(props: Props) {
               title="Share anonymous data"
               description="Single Origin anonymously collects usage analytics of the app. This helps us develop new features and improve the overall user experience. If you prefer not to share your data, tap the toggle button to opt-out."
               value={settings.shareTrackingData}
-              onChange={(value) => settingUpdated({ setting: 'shareTrackingData', value })}
+              onChange={(value) => settingUpdated({ key: 'shareTrackingData', value })}
             />
           </Section>
           <SettingWrapper title="Version" borderTop>
