@@ -1,10 +1,9 @@
 import React from 'react';
 import { Text, View, Platform } from 'react-native';
 
+import { useTailwind } from '../../../../../common/theme';
 import Button from '../../../../../components/Button';
 import formatSeconds from '../../../../../helpers/formatSeconds';
-import { useTheme } from '../../../../../providers/theme';
-import styles from './styles';
 
 type Props = {
   timerRunning: boolean;
@@ -14,17 +13,20 @@ type Props = {
 
 function Timer(props: Props) {
   const { toggleCountdown, timerRunning, second } = props;
-  const { colors } = useTheme();
+  const tw = useTailwind();
 
   return (
-    <View style={styles.section}>
-      <View style={styles.timeContainer}>
+    <View style={tw('flex-1 mr-5')}>
+      <View style={tw('flex-row justify-center flex-1')}>
         <Text
           style={[
-            styles.timeText,
+            tw('mb-3 theme.text.default'),
+            {
+              fontSize: 36,
+              fontWeight: '500',
+            },
             {
               fontFamily: Platform.select({ ios: 'Menlo-Bold' }),
-              color: colors.foreground,
               fontWeight: Platform.select({ android: '700', ios: '500' }),
             },
           ]}>

@@ -1,20 +1,14 @@
-import { spacing } from '@expo/styleguide-native';
-import { useNavigation } from '@react-navigation/core';
+import { RouteProp, useNavigation } from '@react-navigation/core';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 
 import { useTailwind } from '../../common/theme';
-import withSettings from '../../providers/settings';
+import { RootStackParamList } from '../../navigation';
 import Recipe from './Recipe';
 import recipes from './recipes';
-import { BrewRecipeName } from './recipes/types';
 
 type Props = {
-  route: {
-    params: {
-      id: BrewRecipeName;
-    };
-  };
+  route: RouteProp<RootStackParamList, 'Brew'>;
 };
 
 function Brew(props: Props) {
@@ -26,12 +20,7 @@ function Brew(props: Props) {
 
   return (
     <View style={tw('flex-1 theme.background.default')}>
-      <ScrollView
-        contentContainerStyle={{
-          padding: spacing[3],
-          alignItems: 'center',
-          paddingTop: spacing[8],
-        }}>
+      <ScrollView contentContainerStyle={tw('p-3 items-center pt-8')}>
         <View style={tw('w-full')}>
           <Recipe recipe={recipe} navigation={navigation} />
         </View>
@@ -40,4 +29,4 @@ function Brew(props: Props) {
   );
 }
 
-export default withSettings(Brew);
+export default Brew;

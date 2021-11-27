@@ -2,7 +2,6 @@ import React from 'react';
 import { View } from 'react-native';
 
 import Slider from '../../components/Slider';
-import withSettings from '../../providers/settings';
 
 function TestScene() {
   return (
@@ -12,4 +11,4 @@ function TestScene() {
   );
 }
 
-export default withSettings(TestScene);
+export default TestScene;

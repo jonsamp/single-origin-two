@@ -9,18 +9,18 @@ import Animated, {
   withSequence,
 } from 'react-native-reanimated';
 
+import { useTheme } from '../../../../../common/theme';
+import { useSettings } from '../../../../../common/useSettings';
 import Instructions from '../../../../../components/Instructions';
 import { width, isMaxWidth } from '../../../../../constants/layout';
+import { styleguide } from '../../../../../constants/themes';
 import formatSeconds from '../../../../../helpers/formatSeconds';
-import withSettings from '../../../../../providers/settings';
-import { useTheme } from '../../../../../providers/theme';
-import { Recipe, UnitHelpers } from '../../../../../types';
+import { Recipe } from '../../../../../types';
 
 type Props = {
   recipe: Recipe;
   second: number;
   volume: number;
-  unitHelpers: UnitHelpers;
   timerRunning: boolean;
   currentStepDuration: number;
   pourVelocity?: number;
@@ -29,10 +29,11 @@ type Props = {
 const PROGRESS_BAR_HEIGHT = 6;
 
 function StepFunction(props: Props) {
-  const { second, volume, timerRunning, recipe, unitHelpers, pourVelocity = 130 } = props;
+  const { second, volume, timerRunning, recipe, pourVelocity = 130 } = props;
+  const { unitHelpers } = useSettings();
   const { waterVolumeUnit } = unitHelpers;
+  const { theme } = useTheme();
   const totalTime = Math.max(...Object.keys(recipe).map((n) => Number(n)));
-  const { colors, styleguide } = useTheme();
   const [nextStepText, setNextStepText] = useState('');
   const stepAnimatedValue = useSharedValue(0);
   const progressValue = useSharedValue(0);
@@ -258,7 +259,7 @@ function StepFunction(props: Props) {
         style={{
           width: '100%',
           height: PROGRESS_BAR_HEIGHT,
-          backgroundColor: colors.primary,
+          backgroundColor: theme.brand.default,
           opacity: 0.25,
           position: 'absolute',
           bottom: 0,
@@ -268,7 +269,7 @@ function StepFunction(props: Props) {
         style={[
           {
             height: PROGRESS_BAR_HEIGHT,
-            backgroundColor: colors.primary,
+            backgroundColor: theme.brand.default,
           },
           progressStyle,
         ]}
@@ -289,7 +290,7 @@ function StepFunction(props: Props) {
               style={{
                 height: PROGRESS_BAR_HEIGHT,
                 width: _width * percentOfTotalTime,
-                backgroundColor: colors.primary,
+                backgroundColor: theme.brand.default,
                 opacity: 0.35,
                 position: 'absolute',
                 bottom: 0,
@@ -302,4 +303,4 @@ function StepFunction(props: Props) {
   );
 }
 
-export default withSettings(StepFunction);
+export default StepFunction;

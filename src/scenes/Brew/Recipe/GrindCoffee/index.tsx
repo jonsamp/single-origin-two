@@ -1,10 +1,10 @@
 import React from 'react';
 import { Image, View } from 'react-native';
 
+import { useSettings } from '../../../../common/useSettings';
 import Card from '../../../../components/Card';
 import Instructions from '../../../../components/Instructions';
 import { height, isMaxWidth } from '../../../../constants/layout';
-import withSettings from '../../../../providers/settings';
 import { getValueUnit } from '../../../../scenes/Brew/helpers';
 import { Log } from '../../../../state/logs/types';
 
@@ -17,7 +17,8 @@ type Props = {
 };
 
 function GrindCoffee(props: Props) {
-  const { unitHelpers, coffeeWeight, defaultGrind, title, recentLog } = props;
+  const { coffeeWeight, defaultGrind, title, recentLog } = props;
+  const { unitHelpers } = useSettings();
   const { coffeeWeightUnit, grindUnit } = unitHelpers;
   let recommendation;
   let grindFromLastTime = '';
@@ -59,4 +60,4 @@ function GrindCoffee(props: Props) {
   );
 }
 
-export default withSettings(GrindCoffee);
+export default GrindCoffee;

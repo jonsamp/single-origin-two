@@ -2,38 +2,31 @@ import { handleActions } from 'redux-actions';
 
 import { recipes } from '../../constants/recipes';
 import * as actions from './actions';
-import { Settings } from './types';
+import { Settings, WeightUnits, TemperatureUnits } from './types';
 
 const initialState = {
-  theme: 'light',
   ratio: 16,
   bloomDuration: 30,
   recordTemp: true,
   recordGrind: true,
   grinderType: 'generic',
-  temperatureUnit: 'fahrenheit',
-  brewedVolumeUnit: 'ounces',
-  coffeeWeightUnit: 'grams',
-  waterVolumeUnit: 'grams',
+  temperatureUnit: TemperatureUnits.Fahrenheit,
+  brewedVolumeUnit: WeightUnits.Ounces,
+  coffeeWeightUnit: WeightUnits.Grams,
+  waterVolumeUnit: WeightUnits.Grams,
   shareTrackingData: true,
   onboardingVisible: true,
   submittedRating: false,
-  autoTheme: false,
   recipes: Object.values(recipes).reduce((acc, r) => ({ ...acc, [r.id]: true }), {}),
 };
 
 const reducers = {
-  [actions.settingUpdated.toString()]: (settings: Settings, { payload: { setting, value } }) => ({
+  [actions.settingUpdated.toString()]: (
+    settings: Settings,
+    { payload: { setting, value } }: { payload: { setting: keyof Settings; value: any } }
+  ) => ({
     ...settings,
     [setting]: value,
-  }),
-  [actions.themeUpdated.toString()]: (settings: Settings, { payload: { theme } }) => ({
-    ...settings,
-    theme,
-  }),
-  [actions.autoThemeUpdated.toString()]: (settings: Settings, { payload: { autoTheme } }) => ({
-    ...settings,
-    autoTheme,
   }),
 };
 

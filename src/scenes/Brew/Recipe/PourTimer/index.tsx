@@ -1,26 +1,23 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { View } from 'react-native';
 
+import { useTailwind } from '../../../../common/theme';
+import { useSettings } from '../../../../common/useSettings';
 import Card from '../../../../components/Card';
 import Image from '../../../../components/Image';
 import { height, width } from '../../../../constants/layout';
+import { styleguide } from '../../../../constants/themes';
 import playSound from '../../../../helpers/playSound';
-import withSettings from '../../../../providers/settings';
-import { useTheme } from '../../../../providers/theme';
-import { Settings } from '../../../../state/settings/types';
-import { Recipe, UnitHelpers } from '../../../../types';
+import { Recipe } from '../../../../types';
 import { withBloomFn } from '../../helpers';
 import addWaterSound from '../../sounds/add-water.mp3';
 import tipSound from '../../sounds/tip.mp3';
 import Step from './Step';
 import Timer from './Timer';
 import WaterVolume from './WaterVolume';
-import styles from './styles';
 
 type Props = {
-  unitHelpers: UnitHelpers;
   recipe: Recipe;
-  settings: Settings;
   volume: number;
   setRecipeState: (props: any) => void;
 };
@@ -36,8 +33,9 @@ function formatRecipe(recipe, settings) {
 }
 
 function PourTimerFunction(props: Props) {
-  const { unitHelpers, recipe, settings, volume, setRecipeState } = props;
-  const { colors, styleguide } = useTheme();
+  const { recipe, volume, setRecipeState } = props;
+  const { unitHelpers, settings } = useSettings();
+  const tw = useTailwind();
   const interval = useRef<NodeJS.Timeout>();
   const [timerRunning, setTimerRunning] = useState(false);
   const [second, setSecond] = useState(-3);
@@ -118,22 +116,21 @@ function PourTimerFunction(props: Props) {
   return (
     <View>
       <View
-        style={{
-          left: -16,
-          width: maxWidth + 32,
-          borderRadius: maxWidth >= styleguide.maxWidth ? 4 : 0,
-          overflow: 'hidden',
-        }}>
+        style={[
+          tw(`-left-4 ${maxWidth >= styleguide.maxWidth ? 'rounded-md' : ''} overflow-hidden`),
+          { width: maxWidth + 32 },
+        ]}>
         <Image
           source={image}
           defaultSource={recipe.defaultSource}
           isPlaying={timerRunning}
           style={{
             height: height / 4,
+            width: maxWidth + 32,
           }}
         />
       </View>
-      <View style={{ top: -24 }}>
+      <View style={tw('-top-6')}>
         <Card containerStyle={{ shadowOpacity: 0.2, elevation: 5 }}>
           <Step
             recipe={_recipe}
@@ -143,7 +140,7 @@ function PourTimerFunction(props: Props) {
             currentStepDuration={currentStepDuration}
             pourVelocity={recipe.pourVelocity}
           />
-          <View style={[styles.container, { backgroundColor: colors.grey2 }]}>
+          <View style={tw('theme.background.secondary px-5 py-10 flex-row')}>
             <Timer toggleCountdown={toggleCountdown} timerRunning={timerRunning} second={second} />
             <WaterVolume
               volume={volume * volumePercent}
@@ -157,4 +154,4 @@ function PourTimerFunction(props: Props) {
   );
 }
 
-export default withSettings(PourTimerFunction);
+export default PourTimerFunction;

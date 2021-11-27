@@ -1,8 +1,8 @@
 import React from 'react';
 
+import { useSettings } from '../../../../common/useSettings';
 import Card from '../../../../components/Card';
 import Instructions from '../../../../components/Instructions';
-import withSettings from '../../../../providers/settings';
 
 type Props = {
   unitHelpers: any;
@@ -10,7 +10,8 @@ type Props = {
 };
 
 function AddIce(props: Props) {
-  const { unitHelpers, volume } = props;
+  const { volume } = props;
+  const { unitHelpers } = useSettings();
   const { waterVolumeUnit } = unitHelpers;
 
   return (
@@ -25,4 +26,4 @@ function AddIce(props: Props) {
   );
 }
 
-export default withSettings(AddIce);
+export default AddIce;

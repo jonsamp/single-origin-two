@@ -18,42 +18,33 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useTailwind, useTheme } from '../../common/theme';
+import { useTracking } from '../../common/useTracking';
 import Button from '../../components/Button';
 import Slider from '../../components/Slider';
 import { isMaxWidth } from '../../constants/layout';
 import { recipes } from '../../constants/recipes';
+import { styleguide } from '../../constants/themes';
 import { RootStackParamList } from '../../navigation';
-import { Styleguide, Theme } from '../../providers/theme';
-import withTracking, { Tracking } from '../../providers/tracking';
 import ChecklistSetting from '../../scenes/Settings/ChecklistSetting';
 import { logUpdated, logDeleted } from '../../state/logs/actions';
 import { selectLog } from '../../state/logs/selectors';
-import { Log } from '../../state/logs/types';
 import { State } from '../../state/types';
 
 type Props = {
-  navigation: any;
-  theme: Theme;
-  styleguide: Styleguide;
-  timestamp: number;
-  isDarkTheme: boolean;
-  logUpdated: (props: { timestamp: number; log: any }) => void;
-  logDeleted: (props: { timestamp: number }) => void;
-  log: Log;
-  tracking: Tracking;
   route: RouteProp<RootStackParamList, 'LogDetailEdit'>;
 };
 
 function LogDetailEdit(props: Props) {
-  const { isDarkTheme, styleguide, tracking, route } = props;
-  const { theme } = useTheme();
+  const { route } = props;
+  const { track, events } = useTracking();
+  const { theme, dark } = useTheme();
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const tw = useTailwind();
   const log = useSelector((state: State) => selectLog(state, route.params.timestamp));
 
   useEffect(function didMount() {
-    tracking.track(tracking.events.RATING_VIEWED);
+    track(events.RATING_VIEWED);
   }, []);
 
   function updateLog(key: string, value: string | number) {
@@ -161,7 +152,7 @@ function LogDetailEdit(props: Props) {
                 multiline
                 onChangeText={(value) => updateLog('notes', value)}
                 value={log.notes}
-                keyboardAppearance={isDarkTheme ? 'dark' : 'default'}
+                keyboardAppearance={dark ? 'dark' : 'default'}
                 returnKeyType="done"
                 onSubmitEditing={Keyboard.dismiss}
               />
@@ -179,4 +170,4 @@ function LogDetailEdit(props: Props) {
   );
 }
 
-export default withTracking(LogDetailEdit);
+export default LogDetailEdit;

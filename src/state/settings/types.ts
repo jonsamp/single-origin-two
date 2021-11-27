@@ -1,5 +1,15 @@
+export enum WeightUnits {
+  Grams = 'grams',
+  Ounces = 'ounces',
+  Cups = 'cups',
+}
+
+export enum TemperatureUnits {
+  Fahrenheit = 'fahrenheit',
+  Celsius = 'celsius',
+}
+
 export interface Settings {
-  theme: 'light' | 'dark';
   ratio: number;
   bloomDuration: number;
   recordTemp: boolean;
@@ -12,12 +22,7 @@ export interface Settings {
   shareTrackingData: boolean;
   onboardingVisible: boolean;
   submittedRating: boolean;
-  autoTheme: boolean;
   recipes: {
     [i: string]: boolean;
   };
 }
-
-type WeightUnits = 'grams' | 'ounces' | 'cups';
-
-type TemperatureUnits = 'fahrenheit' | 'celsius';

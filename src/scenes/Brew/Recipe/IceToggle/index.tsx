@@ -3,7 +3,6 @@ import { Switch, Text } from 'react-native';
 
 import { useTailwind } from '../../../../common/theme';
 import Card from '../../../../components/Card';
-import withSettings from '../../../../providers/settings';
 
 type Props = {
   value: boolean;
@@ -22,4 +21,4 @@ function AddIce(props: Props) {
   );
 }
 
-export default withSettings(AddIce);
+export default AddIce;

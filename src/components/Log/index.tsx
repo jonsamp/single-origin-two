@@ -6,12 +6,12 @@ import { Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useTailwind, useTheme } from '../../common/theme';
+import { useSettings } from '../../common/useSettings';
+import { useTracking } from '../../common/useTracking';
 import Card from '../../components/Card';
 import ResponsiveScrollView from '../../components/ResponsiveScrollView';
 import { recipes } from '../../constants/recipes';
 import formatSeconds from '../../helpers/formatSeconds';
-import withSettings from '../../providers/settings';
-import withTracking, { Tracking } from '../../providers/tracking';
 import { selectLog } from '../../state/logs/selectors';
 import { Log as LogType } from '../../state/logs/types';
 import {
@@ -21,19 +21,18 @@ import {
 } from '../../state/notifications/actions';
 import { selectNotifications } from '../../state/notifications/selectors';
 import { State } from '../../state/types';
-import { UnitHelpers } from '../../types/index';
 
 type Props = {
   log: LogType;
-  unitHelpers: UnitHelpers;
   withReminder: boolean;
-  tracking: Tracking;
   style: ViewStyle;
   timestamp: number;
 };
 
 function Log(props: Props) {
-  const { unitHelpers, withReminder, tracking, style, timestamp } = props;
+  const { withReminder, style, timestamp } = props;
+  const { track, events } = useTracking();
+  const { unitHelpers } = useSettings();
   const [reminderScheduled, setReminderScheduled] = useState(false);
   const { theme } = useTheme();
   const dispatch = useDispatch();
@@ -79,7 +78,7 @@ function Log(props: Props) {
       dispatch(notificationsReset());
     }
 
-    tracking.track(tracking.events.LOG_VIEWED, {
+    track(events.LOG_VIEWED, {
       isAfterRecipe: withReminder,
       ...log,
     });
@@ -200,4 +199,4 @@ function Log(props: Props) {
   );
 }
 
-export default withTracking(withSettings(Log));
+export default Log;

@@ -1,16 +1,15 @@
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { ScrollView, View, Text } from 'react-native';
-import { withSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTailwind } from '../../common/theme';
+import { useSettings } from '../../common/useSettings';
 import { grinders } from '../../constants/grinders';
 import { recipes } from '../../constants/recipes';
 import { tempUnits, weightUnits } from '../../constants/units';
 import { RootStackParamList } from '../../navigation';
-import withSettings from '../../providers/settings';
-import { Settings as SettingsType } from '../../state/settings/types';
 import ChecklistSetting from './ChecklistSetting';
 import Group from './Group';
 import InputSetting from './InputSetting';
@@ -20,20 +19,14 @@ import SettingWrapper from './SettingWrapper';
 import SwitchSetting from './SwitchSetting';
 
 type Props = {
-  settings: SettingsType;
-  settingUpdated: (props: any) => void;
   navigation: StackNavigationProp<RootStackParamList, 'SettingsDetail'>;
   route: RouteProp<RootStackParamList, 'SettingsDetail'>;
-  isDarkTheme: boolean;
-  toggleTheme: () => void;
-  toggleAutoTheme: () => void;
-  insets: {
-    bottom: number;
-  };
 };
 
 function SettingsDetail(props: Props) {
-  const { settings, settingUpdated, navigation, route, insets } = props;
+  const { navigation, route } = props;
+  const { settings, settingUpdated } = useSettings();
+  const insets = useSafeAreaInsets();
   const tw = useTailwind();
   const groupName = route.params.title;
   let children;
@@ -209,4 +202,4 @@ function SettingsDetail(props: Props) {
   );
 }
 
-export default withSettings(withSafeAreaInsets(SettingsDetail));
+export default SettingsDetail;

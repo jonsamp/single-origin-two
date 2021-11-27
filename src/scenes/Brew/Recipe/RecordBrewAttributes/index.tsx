@@ -5,16 +5,14 @@ import * as Haptics from 'expo-haptics';
 import React, { useRef, useState } from 'react';
 import { Platform, Animated, LayoutAnimation, TouchableOpacity, View } from 'react-native';
 
-import { useTheme } from '../../../../common/theme';
+import { useTailwind, useTheme } from '../../../../common/theme';
+import { useSettings } from '../../../../common/useSettings';
 import Card from '../../../../components/Card';
 import Instructions from '../../../../components/Instructions';
 import Slider from '../../../../components/Slider';
-import withSettings from '../../../../providers/settings';
-import { Settings } from '../../../../state/settings/types';
-import { GrindHelper, Unit, UnitHelpers } from '../../../../types';
+import { GrindHelper, Unit } from '../../../../types';
 
 type Props = {
-  settings: Settings;
   grind: number;
   defaultGrind: number;
   temp: number;
@@ -22,20 +20,12 @@ type Props = {
   temperatureUnit: { unit: Unit };
   grindUnit: GrindHelper;
   isDarkTheme: boolean;
-  unitHelpers?: UnitHelpers;
 };
 
 function RecordBrewAttributes(props: Props) {
-  const {
-    settings,
-    grind,
-    defaultGrind,
-    temp,
-    setRecipeState,
-    temperatureUnit,
-    grindUnit,
-    unitHelpers,
-  } = props;
+  const { grind, defaultGrind, temp, setRecipeState, temperatureUnit, grindUnit } = props;
+  const { settings, unitHelpers } = useSettings();
+  const tw = useTailwind();
   const { theme, dark } = useTheme();
   const [state, setState] = useState({
     recordSegmentIndex: 0,
@@ -137,27 +127,16 @@ function RecordBrewAttributes(props: Props) {
 
   return (
     <Card>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
-        <View style={{ flex: 1 }}>
-          {instructions && (
-            <Instructions text={instructions} icon="RecordIcon" textStyle={{ flex: 1 }} />
-          )}
+      <View style={tw('flex-row justify-between items-center')}>
+        <View style={tw('flex-1')}>
+          {instructions && <Instructions text={instructions} icon="RecordIcon" />}
         </View>
         <TouchableOpacity
           onPress={toggleIsOpen}
           style={[
+            tw('p-1 rounded-md mr-5 theme.border.default border'),
             {
-              padding: 4,
               backgroundColor: theme.button.secondary.background,
-              borderRadius: 6,
-              marginRight: 20,
-              borderColor: theme.border.default,
-              borderWidth: 1,
             },
           ]}
           activeOpacity={1}>
@@ -191,11 +170,7 @@ function RecordBrewAttributes(props: Props) {
             setState((prevState) => ({ ...prevState, containerHeight: height }));
           }}>
           {recordSettings.length > 1 && (
-            <View
-              style={{
-                paddingHorizontal: 16,
-                marginTop: 16,
-              }}>
+            <View style={tw('px-4 mt-4')}>
               <SegmentedControl
                 backgroundColor={
                   dark
@@ -229,4 +204,4 @@ function RecordBrewAttributes(props: Props) {
   );
 }
 
-export default withSettings(RecordBrewAttributes);
+export default RecordBrewAttributes;

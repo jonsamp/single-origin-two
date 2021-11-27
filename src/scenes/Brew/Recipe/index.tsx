@@ -6,16 +6,14 @@ import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useSettings } from '../../../common/useSettings';
 import Button from '../../../components/Button';
 import { isMaxWidth, height } from '../../../constants/layout';
 import { styleguide } from '../../../constants/themes';
 import { RootStackParamList } from '../../../navigation';
-import withSettings from '../../../providers/settings';
 import { logAdded } from '../../../state/logs/actions';
 import { selectRecentLog } from '../../../state/logs/selectors';
-import { Settings } from '../../../state/settings/types';
 import { State } from '../../../state/types';
-import { UnitHelpers } from '../../../types/index';
 import { BrewRecipe } from '../recipes/types';
 import AddIce from './AddIce';
 import BoilWater from './BoilWater';
@@ -28,13 +26,12 @@ import RecordBrewAttributes from './RecordBrewAttributes';
 import YieldQuestion from './YieldQuestion';
 
 interface RecipeProps {
-  settings: Settings;
-  unitHelpers: UnitHelpers;
   recipe: BrewRecipe;
 }
 
 function Recipe(props: RecipeProps) {
-  const { recipe, settings, unitHelpers } = props;
+  const { recipe } = props;
+  const { settings, unitHelpers } = useSettings();
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const dispatch = useDispatch();
@@ -164,4 +161,4 @@ function Recipe(props: RecipeProps) {
   );
 }
 
-export default withSettings(Recipe);
+export default Recipe;

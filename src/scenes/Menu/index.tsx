@@ -7,24 +7,19 @@ import { ImageBackground, View } from 'react-native';
 import { interpolateColor } from 'react-native-reanimated';
 
 import { useTailwind } from '../../common/theme';
+import { useSettings } from '../../common/useSettings';
+import { useTracking } from '../../common/useTracking';
 import MenuItem from '../../components/MenuItem';
 import ResponsiveScrollView from '../../components/ResponsiveScrollView';
 import ScreenPlaceholder from '../../components/ScreenPlaceholder';
 import { recipes, Recipe } from '../../constants/recipes';
 import { RootStackParamList } from '../../navigation';
-import withSettings from '../../providers/settings';
-import withTracking, { Tracking } from '../../providers/tracking';
-import { Settings } from '../../state/settings/types';
 import Onboarding from './Onboarding';
 import BackgroundImage from './images/background.png';
 
-interface Props {
-  settings: Settings;
-  tracking: Tracking;
-}
-
-function Menu(props: Props) {
-  const { settings, tracking } = props;
+function Menu() {
+  const { settings } = useSettings();
+  const { track, events } = useTracking();
   const tw = useTailwind();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const selectedRecipes = Object.keys(settings.recipes).filter(
@@ -59,7 +54,7 @@ function Menu(props: Props) {
       id: recipe.id,
       title: `${recipe.title}${recipe.modifier ? ` ${recipe.modifier}` : ''}`,
     });
-    tracking.track(tracking.events.RECIPE_TAPPED, {
+    track(events.RECIPE_TAPPED, {
       id: recipe.id,
     });
   }
@@ -81,4 +76,4 @@ function Menu(props: Props) {
   );
 }
 
-export default withTracking(withSettings(Menu));
+export default Menu;

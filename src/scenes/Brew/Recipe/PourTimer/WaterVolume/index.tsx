@@ -10,9 +10,8 @@ import Animated, {
   interpolateColor,
 } from 'react-native-reanimated';
 
-import { useTheme } from '../../../../../providers/theme';
+import { useTailwind, useTheme } from '../../../../../common/theme';
 import { UnitHelper } from '../../../../../types';
-import styles from './styles';
 
 interface Props {
   volume: number;
@@ -37,8 +36,9 @@ let timeout: NodeJS.Timeout;
 
 function WaterVolume(props: Props) {
   const { volume, waterVolumeUnit, pourVelocity = 130 } = props;
+  const tw = useTailwind();
+  const { theme } = useTheme();
   const prevVolume = usePrevious(volume);
-  const { colors } = useTheme();
   const volumeValue = useSharedValue(0);
   const isCountingValue = useSharedValue(0);
   const inputRange = [0, 1];
@@ -74,8 +74,8 @@ function WaterVolume(props: Props) {
 
   const animatedProps = useAnimatedProps(() => {
     const colorValue = interpolateColor(isCountingValue.value, inputRange, [
-      colors.foreground,
-      colors.background,
+      theme.text.default,
+      theme.background.default,
     ]);
 
     if (waterVolumeUnit.unit.id === 'cups') {
@@ -105,8 +105,8 @@ function WaterVolume(props: Props) {
   // @ts-ignore
   const animatedTextColor = useAnimatedStyle(() => {
     const colorValue = interpolateColor(isCountingValue.value, inputRange, [
-      colors.foreground,
-      colors.background,
+      theme.text.default,
+      theme.background.default,
     ]);
 
     return {
@@ -117,12 +117,12 @@ function WaterVolume(props: Props) {
   // @ts-ignore
   const animatedContainerStyle = useAnimatedStyle(() => {
     const backgroundColorValue = interpolateColor(isCountingValue.value, inputRange, [
-      colors.background,
-      colors.primary,
+      theme.background.default,
+      theme.brand.default,
     ]);
     const borderColorValue = interpolateColor(isCountingValue.value, inputRange, [
-      colors.grey3,
-      colors.primary,
+      theme.border.default,
+      theme.brand.default,
     ]);
     const scaleValue = interpolate(isCountingValue.value, inputRange, [1, 1.2]);
     const elevationValue = interpolate(isCountingValue.value, inputRange, [0, 10]);
@@ -137,9 +137,18 @@ function WaterVolume(props: Props) {
   }, [isCountingValue]);
 
   return (
-    <View style={styles.section}>
-      <Text style={[styles.labelText, { color: colors.foreground }]}>WATER VOLUME</Text>
-      <Animated.View style={[styles.trackingContainer, animatedContainerStyle]}>
+    <View style={tw('flex-1 justify-around')}>
+      <Text style={tw('label text-center mb-3 theme.text.default')}>WATER VOLUME</Text>
+      <Animated.View
+        style={[
+          tw('py-3 justify-center items-center border rounded-lg mx-2'),
+          {
+            shadowColor: 'rgba(82,181,146,1)',
+            shadowRadius: 12,
+            shadowOffset: { height: 2, width: 0 },
+          },
+          animatedContainerStyle,
+        ]}>
         <AnimatedTextInput
           underlineColorAndroid="transparent"
           editable={false}
@@ -153,7 +162,7 @@ function WaterVolume(props: Props) {
           ]}
           value="0"
         />
-        <Animated.Text style={[styles.trackingLabelText, animatedTextColor]} numberOfLines={1}>
+        <Animated.Text style={[tw('label text-center pb-1'), animatedTextColor]} numberOfLines={1}>
           {waterVolumeUnit.unit.title}
         </Animated.Text>
       </Animated.View>
