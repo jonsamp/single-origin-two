@@ -77,7 +77,7 @@ export function useTailwind() {
   const custom = create({
     ...styles,
     'theme.background.screen': {
-      backgroundColor: dark ? theme.background.default : theme.background.secondary,
+      backgroundColor: dark ? theme.background.default : theme.background.tertiary,
     },
     'theme.background.default': {
       backgroundColor: theme.background.default,

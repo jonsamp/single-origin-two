@@ -33,7 +33,7 @@ function Logs(props: Props) {
 
   return (
     <FlatList
-      contentContainerStyle={tw('pt-4 theme.background.screen')}
+      contentContainerStyle={tw('pt-4 theme.background.screen flex-1')}
       data={Object.values(logs)
         .filter((log) => log && recipes[log.recipeId])
         .sort(byTimestamp)}
