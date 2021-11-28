@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTailwind } from '../../common/theme';
 import { useSettings } from '../../common/useSettings';
+import { Separator } from '../../components/Separator';
 import { grinders } from '../../constants/grinders';
 import { recipes } from '../../constants/recipes';
 import { tempUnits, weightUnits } from '../../constants/units';
@@ -86,6 +87,7 @@ function SettingsDetail(props: Props) {
               value={settings.recordGrind}
               onChange={(value) => settingUpdated({ key: 'recordGrind', value })}
             />
+            <Separator />
             <SwitchSetting
               title="Record temperature"
               value={settings.recordTemp}
