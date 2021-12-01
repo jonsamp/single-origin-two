@@ -19,7 +19,7 @@ export default function MenuItem(props: Props) {
 
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.8} style={tw('mb-8')}>
-      <View style={shadows.tiny}>
+      <View style={shadows.small}>
         <ImageBackground
           source={recipe.image}
           style={[
