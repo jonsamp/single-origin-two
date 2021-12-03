@@ -8,6 +8,7 @@
     "description": "Learn to brew specialty coffee.",
     "privacy": "unlisted",
     "userInterfaceStyle": "automatic",
+    "owner": "jonsamp",
     "runtimeVersion": {
       "policy": "sdkVersion"
     },
