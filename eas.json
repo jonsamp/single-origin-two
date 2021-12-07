@@ -17,10 +17,7 @@
     "preview": {
       "extends": "base",
       "distribution": "internal",
-      "channel": "preview",
-      "ios": {
-        "simulator": true
-      }
+      "channel": "preview"
     },
     "production": {
       "extends": "base",
