@@ -8,7 +8,6 @@ import { Separator } from '../../components/Separator';
 import Group from './Group';
 import Section from './Section';
 import SettingWrapper from './SettingWrapper';
-import BrewSettingsBlenderImageDark from './icons/brew-settings-dark-blender.png';
 import BrewSettingsImageDark from './icons/brew-settings-dark.png';
 import BrewSettingsImage from './icons/brew-settings.png';
 import GrinderImageDark from './icons/grinder-dark.png';

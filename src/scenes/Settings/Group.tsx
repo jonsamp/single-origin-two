@@ -30,7 +30,12 @@ function Group(props: Props) {
         navigation.navigate('SettingsDetail', { title });
       }}>
       <View style={tw('flex-row flex-1 items-center')}>
-        {icon && <Image source={icon} style={tw('h-9 w-9 mr-3 rounded-lg overflow-hidden')} />}
+        {icon && (
+          <Image
+            source={icon}
+            style={tw('h-8 w-8 mr-3.5 rounded-md overflow-hidden theme.background.tertiary')}
+          />
+        )}
         <Text style={tw('body theme.text.default')}>{title}</Text>
       </View>
       <Feather name="chevron-right" size={iconSize.large} color={theme.icon.secondary} />
