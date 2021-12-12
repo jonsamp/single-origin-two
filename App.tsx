@@ -62,27 +62,25 @@ export default function App() {
   return (
     <Provider store={store}>
       <StatusBar style="auto" />
-      <GestureHandlerRootView>
-        <PersistGate loading={null} persistor={persistor}>
-          <SafeAreaProvider
-            style={{ backgroundColor: 'black' }}
-            initialMetrics={initialWindowMetrics}>
-            <AppearanceProvider>
-              {isLoaded ? (
-                <Animated.View style={{ opacity: fadeAnim, flex: 1 }}>
-                  <Navigator />
-                </Animated.View>
-              ) : (
-                <AppLoading
-                  startAsync={loadResourcesAndDataAsync}
-                  onFinish={() => setIsLoaded(true)}
-                  onError={console.warn}
-                />
-              )}
-            </AppearanceProvider>
-          </SafeAreaProvider>
-        </PersistGate>
-      </GestureHandlerRootView>
+      <PersistGate loading={null} persistor={persistor}>
+        <SafeAreaProvider
+          style={{ backgroundColor: 'black' }}
+          initialMetrics={initialWindowMetrics}>
+          <AppearanceProvider>
+            {isLoaded ? (
+              <Animated.View style={{ opacity: fadeAnim, flex: 1 }}>
+                <Navigator />
+              </Animated.View>
+            ) : (
+              <AppLoading
+                startAsync={loadResourcesAndDataAsync}
+                onFinish={() => setIsLoaded(true)}
+                onError={console.warn}
+              />
+            )}
+          </AppearanceProvider>
+        </SafeAreaProvider>
+      </PersistGate>
     </Provider>
   );
 }

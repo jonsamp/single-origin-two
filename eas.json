@@ -15,7 +15,6 @@
       }
     },
     "preview": {
-      "extends": "base",
       "distribution": "internal",
       "channel": "preview",
       "ios": {
@@ -31,6 +30,6 @@
     "production": {}
   },
   "cli": {
-    "version": ">= 0.39.0"
+    "version": ">= 0.40.0"
   }
 }
