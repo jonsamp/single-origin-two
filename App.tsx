@@ -6,6 +6,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect, useRef } from 'react';
 import { Animated } from 'react-native';
 import { AppearanceProvider } from 'react-native-appearance';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
@@ -61,25 +62,27 @@ export default function App() {
   return (
     <Provider store={store}>
       <StatusBar style="auto" />
-      <PersistGate loading={null} persistor={persistor}>
-        <SafeAreaProvider
-          style={{ backgroundColor: 'black' }}
-          initialMetrics={initialWindowMetrics}>
-          <AppearanceProvider>
-            {isLoaded ? (
-              <Animated.View style={{ opacity: fadeAnim, flex: 1 }}>
-                <Navigator />
-              </Animated.View>
-            ) : (
-              <AppLoading
-                startAsync={loadResourcesAndDataAsync}
-                onFinish={() => setIsLoaded(true)}
-                onError={console.warn}
-              />
-            )}
-          </AppearanceProvider>
-        </SafeAreaProvider>
-      </PersistGate>
+      <GestureHandlerRootView>
+        <PersistGate loading={null} persistor={persistor}>
+          <SafeAreaProvider
+            style={{ backgroundColor: 'black' }}
+            initialMetrics={initialWindowMetrics}>
+            <AppearanceProvider>
+              {isLoaded ? (
+                <Animated.View style={{ opacity: fadeAnim, flex: 1 }}>
+                  <Navigator />
+                </Animated.View>
+              ) : (
+                <AppLoading
+                  startAsync={loadResourcesAndDataAsync}
+                  onFinish={() => setIsLoaded(true)}
+                  onError={console.warn}
+                />
+              )}
+            </AppearanceProvider>
+          </SafeAreaProvider>
+        </PersistGate>
+      </GestureHandlerRootView>
     </Provider>
   );
 }
