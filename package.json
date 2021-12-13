@@ -60,7 +60,6 @@
   "devDependencies": {
     "@babel/core": "~7.12.9",
     "@babel/preset-typescript": "^7.16.0",
-    "@types/expo": "^33.0.1",
     "@types/jest": "^27.0.3",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.64.12",
