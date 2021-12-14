@@ -86,7 +86,7 @@ function MenuStack() {
                   marginLeft: 10,
                   color: theme.text.default,
                 }}>
-                Single Origin
+                Coffee App
               </Text>
             </View>
           ),

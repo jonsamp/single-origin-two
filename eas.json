@@ -1,11 +1,6 @@
 {
   "build": {
-    "base": {
-      "node": "16.0.0",
-      "expoCli": "5.0.0"
-    },
     "development": {
-      "extends": "base",
       "developmentClient": true,
       "distribution": "internal",
       "ios": {
@@ -16,15 +11,10 @@
       }
     },
     "preview": {
-      "extends": "base",
       "distribution": "internal",
-      "channel": "preview",
-      "ios": {
-        "simulator": true
-      }
+      "channel": "preview"
     },
     "production": {
-      "extends": "base",
       "channel": "production"
     }
   },
