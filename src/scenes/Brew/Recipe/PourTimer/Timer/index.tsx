@@ -34,7 +34,7 @@ function Timer(props: Props) {
         </Text>
       </View>
       <Button
-        type={timerRunning ? 'secondary' : 'normal'}
+        type={timerRunning ? 'outline' : 'normal'}
         title={timerRunning ? 'stop' : 'start'}
         onPress={toggleCountdown}
       />

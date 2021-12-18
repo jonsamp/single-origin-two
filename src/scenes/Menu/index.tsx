@@ -5,6 +5,7 @@ import { sortBy } from 'lodash';
 import React, { useEffect } from 'react';
 import { ImageBackground, View } from 'react-native';
 import { interpolateColor } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTailwind } from '../../common/theme';
 import { useSettings } from '../../common/useSettings';
@@ -21,6 +22,7 @@ function Menu() {
   const { settings } = useSettings();
   const { track, events } = useTracking();
   const tw = useTailwind();
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const selectedRecipes = Object.keys(settings.recipes).filter(
     (settingsRecipe) => settings.recipes[settingsRecipe] && recipes[settingsRecipe]
@@ -60,7 +62,7 @@ function Menu() {
   }
 
   return (
-    <View style={tw('flex-1 theme.background.screen')}>
+    <View style={[tw('flex-1 theme.background.screen'), { paddingTop: insets.top }]}>
       <ImageBackground source={BackgroundImage} style={{ flex: 1 }} imageStyle={{ opacity: 0.35 }}>
         <ResponsiveScrollView contentContainerStyle={{ padding: 12, paddingTop: 24 }}>
           {settings.onboardingVisible && <Onboarding />}

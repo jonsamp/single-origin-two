@@ -62,36 +62,9 @@ const Tab = createBottomTabNavigator<TabParams>();
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function MenuStack() {
-  const colorScheme = useColorScheme();
-  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme;
-
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="MenuStackMain"
-        component={Menu}
-        options={{
-          headerTitle: () => <View style={{ flex: 1 }} />,
-          headerLeft: () => (
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'flex-start',
-              }}>
-              <BrewIcon theme={theme} focused={false} size={26} />
-              <Text
-                style={{
-                  ...type.headline,
-                  marginLeft: 10,
-                  color: theme.text.default,
-                }}>
-                Single Origin
-              </Text>
-            </View>
-          ),
-        }}
-      />
+      <Stack.Screen name="MenuStackMain" component={Menu} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }

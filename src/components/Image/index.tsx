@@ -12,12 +12,13 @@ type Props = {
 };
 
 export default function Image(props: Props) {
-  const { source, style } = props;
+  const { source, style, defaultSource } = props;
   const tw = useTailwind();
 
   return (
     <RNImage
       source={source}
+      defaultSource={defaultSource}
       style={[
         {
           resizeMode: 'cover',

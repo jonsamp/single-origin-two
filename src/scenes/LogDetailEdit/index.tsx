@@ -161,7 +161,7 @@ function LogDetailEdit(props: Props) {
               <Button
                 onPress={() => onDeleteLog(log.timestamp)}
                 title="Delete Note"
-                type="secondary"
+                type="outline"
               />
             </View>
           </SafeAreaView>

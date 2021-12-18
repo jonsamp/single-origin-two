@@ -5,7 +5,7 @@ import { Icon } from './types';
 
 function RecordIcon({ fill }: Icon) {
   return (
-    <Svg width="20" height="22">
+    <Svg width="20" height="22" viewBox="0 0 20 22" style={{ top: -4 }}>
       <G fill={fill} fillRule="evenodd">
         <Path d="M19.333 7.4l-1.322-1.322a.426.426 0 0 0-.617 0l-1.41 1.41-5.467 5.555a.334.334 0 0 0-.088.176l-.396 1.763a.379.379 0 0 0 .44.441l1.763-.397c.089 0 .133-.044.177-.088l3.614-3.614 3.306-3.306a.53.53 0 0 0 0-.617z" />
         <Path

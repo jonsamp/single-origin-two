@@ -23,16 +23,12 @@ export default function MenuItem(props: Props) {
         <ImageBackground
           source={recipe.image}
           style={[
-            tw('rounded-2xl overflow-hidden bg-black'),
+            tw('rounded-xl overflow-hidden bg-black'),
             {
-              minHeight: 200,
-              maxHeight: 240,
-              height: height / 4,
+              height: height / 5,
             },
           ]}
           imageStyle={{
-            minHeight: 200,
-            maxHeight: 240,
             opacity: 0.65,
           }}>
           <View style={tw('p-5')}>
