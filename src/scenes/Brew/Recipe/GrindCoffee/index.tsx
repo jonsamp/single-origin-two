@@ -1,10 +1,10 @@
 import React from 'react';
-import { Image, View } from 'react-native';
+import { Image } from 'react-native';
 
 import { useSettings } from '../../../../common/useSettings';
 import Card from '../../../../components/Card';
 import Instructions from '../../../../components/Instructions';
-import { height, isMaxWidth } from '../../../../constants/layout';
+import { height } from '../../../../constants/layout';
 import { getValueUnit } from '../../../../scenes/Brew/helpers';
 import { Log } from '../../../../state/logs/types';
 
@@ -34,27 +34,25 @@ function GrindCoffee(props: Props) {
 
   return (
     <Card>
-      <View style={isMaxWidth && { flexDirection: 'row-reverse' }}>
-        {grindUnit.grinder.shortTitle === 'grinder' ? (
-          <Image
-            source={grindUnit.getGrindSetting(defaultGrind).image}
-            style={{
-              resizeMode: 'cover',
-              width: '100%',
-              height: height / 5,
-            }}
-          />
-        ) : null}
-        <Instructions
-          text={`Grind **${getValueUnit(coffeeWeightUnit, coffeeWeight)}** of coffee to **${
-            grindUnit.getGrindSetting(defaultGrind).title
-          }** with your ${
-            grindUnit.grinder.shortTitle
-          }, then add the grounds to your ${title.toLowerCase()}.`}
-          icon="GrindIcon"
-          hint={recommendation}
+      {grindUnit.grinder.shortTitle === 'grinder' ? (
+        <Image
+          source={grindUnit.getGrindSetting(defaultGrind).image}
+          style={{
+            resizeMode: 'cover',
+            width: '100%',
+            height: height / 5,
+          }}
         />
-      </View>
+      ) : null}
+      <Instructions
+        text={`Grind **${getValueUnit(coffeeWeightUnit, coffeeWeight)}** of coffee to **${
+          grindUnit.getGrindSetting(defaultGrind).title
+        }** with your ${
+          grindUnit.grinder.shortTitle
+        }, then add the grounds to your ${title.toLowerCase()}.`}
+        icon="GrindIcon"
+        hint={recommendation}
+      />
     </Card>
   );
 }
