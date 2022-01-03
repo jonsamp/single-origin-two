@@ -36,6 +36,6 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Publish update
-        run: eas update --branch $(echo ${{ github.ref }} | sed 's|refs/heads/||') --message "${{ github.event.head_commit.message }}"
-      - name: Create preview build
-        run: eas build --profile preview --platform ios --non-interactive
+        run: eas update --auto
+      # - name: Create preview build
+      #   run: eas build --profile preview --platform ios --non-interactive

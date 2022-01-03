@@ -1,7 +1,7 @@
 import { iconSize } from '@expo/styleguide-native';
 import { Feather } from '@expo/vector-icons';
 import React from 'react';
-import { Linking, TouchableOpacity, ScrollView, Platform } from 'react-native';
+import { Linking, TouchableOpacity, ScrollView, Platform, Image } from 'react-native';
 
 import { useTailwind, useTheme } from '../../common/theme';
 import { Separator } from '../../components/Separator';
@@ -20,6 +20,8 @@ import UnitsImage from './icons/units.png';
 function Settings() {
   const { theme, dark } = useTheme();
   const tw = useTailwind();
+
+  console.log(Image.resolveAssetSource(GrinderImageDark));
 
   return (
     <ScrollView style={tw('theme.background.screen px-4')}>
