@@ -1,5 +1,5 @@
 import { iconSize } from '@expo/styleguide-native';
-import { Feather } from '@expo/vector-icons';
+import Feather from '@expo/vector-icons/Feather';
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';

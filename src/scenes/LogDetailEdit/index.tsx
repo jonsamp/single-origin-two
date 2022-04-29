@@ -1,5 +1,5 @@
 import { iconSize, spacing } from '@expo/styleguide-native';
-import { Feather } from '@expo/vector-icons';
+import Feather from '@expo/vector-icons/Feather';
 import { RouteProp, useNavigation } from '@react-navigation/native';
 import { format } from 'date-fns';
 import { StatusBar } from 'expo-status-bar';

@@ -1,5 +1,5 @@
 import { iconSize } from '@expo/styleguide-native';
-import { Feather } from '@expo/vector-icons';
+import Feather from '@expo/vector-icons/Feather';
 import React from 'react';
 import { Linking, TouchableOpacity, ScrollView, Platform, Image } from 'react-native';
 
