@@ -21,8 +21,6 @@ function Settings() {
   const { theme, dark } = useTheme();
   const tw = useTailwind();
 
-  console.log(Image.resolveAssetSource(GrinderImageDark));
-
   return (
     <ScrollView style={tw('theme.background.screen px-4')}>
       <Section title="Brewing">
