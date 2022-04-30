@@ -1,11 +1,10 @@
-import AppLoading from 'expo-app-loading';
 import Constants from 'expo-constants';
 import * as Font from 'expo-font';
 import * as ScreenOrientation from 'expo-screen-orientation';
+import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Animated } from 'react-native';
-import { AppearanceProvider } from 'react-native-appearance';
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
@@ -26,36 +25,51 @@ Sentry.init({
 });
 
 export default function App() {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [appIsReady, setAppIsReady] = useState(false);
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  useEffect(
-    function onLoadedUpdate() {
-      if (isLoaded) {
-        Animated.timing(fadeAnim, {
-          toValue: 1,
-          duration: 666,
-          useNativeDriver: true,
-        }).start();
-      }
-    },
-    [isLoaded]
-  );
+  useEffect(() => {
+    async function prepare() {
+      try {
+        if (Constants.platform?.ios?.userInterfaceIdiom === 'tablet') {
+          await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.DEFAULT);
+        }
 
-  async function loadResourcesAndDataAsync() {
-    try {
-      if (Constants.platform?.ios?.userInterfaceIdiom === 'tablet') {
-        await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.DEFAULT);
-      }
+        // Keep the splash screen visible while we fetch resources
+        await SplashScreen.preventAutoHideAsync();
 
-      await Font.loadAsync({
-        Script: require('./assets/SignPainter-HouseScript.ttf'),
-      });
-    } catch (e) {
-      console.warn(e);
-    } finally {
-      return;
+        await Font.loadAsync({
+          Script: require('./assets/SignPainter-HouseScript.ttf'),
+        });
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        // Tell the application to render
+        setAppIsReady(true);
+      }
     }
+
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      // This tells the splash screen to hide immediately! If we call this after
+      // `setAppIsReady`, then we may see a blank screen while the app is
+      // loading its initial state and rendering its first pixels. So instead,
+      // we hide the splash screen once we know the root view has already
+      // performed layout.
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 666,
+        useNativeDriver: true,
+      }).start();
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
   }
 
   return (
@@ -65,19 +79,9 @@ export default function App() {
         <SafeAreaProvider
           style={{ backgroundColor: 'black' }}
           initialMetrics={initialWindowMetrics}>
-          <AppearanceProvider>
-            {isLoaded ? (
-              <Animated.View style={{ opacity: fadeAnim, flex: 1 }}>
-                <Navigator />
-              </Animated.View>
-            ) : (
-              <AppLoading
-                startAsync={loadResourcesAndDataAsync}
-                onFinish={() => setIsLoaded(true)}
-                onError={console.warn}
-              />
-            )}
-          </AppearanceProvider>
+          <Animated.View style={{ opacity: fadeAnim, flex: 1 }} onLayout={onLayoutRootView}>
+            <Navigator />
+          </Animated.View>
         </SafeAreaProvider>
       </PersistGate>
     </Provider>

@@ -17,8 +17,10 @@ function SettingWrapper(props: Props) {
     <View style={tw('theme.background.screen')}>
       <View style={[tw(`px-4 h-12 justify-center theme.background.overlay`), style]}>
         <View style={tw('flex-row justify-between items-center')}>
-          <Text style={tw('body theme.text.default capitalize')}>{title}</Text>
-          {children}
+          <>
+            <Text style={tw('body theme.text.default capitalize')}>{title}</Text>
+            {children}
+          </>
         </View>
       </View>
     </View>
