@@ -6,7 +6,6 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect, useRef } from 'react';
 import { Animated } from 'react-native';
 import { AppearanceProvider } from 'react-native-appearance';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';

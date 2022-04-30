@@ -1,7 +1,7 @@
 import { iconSize } from '@expo/styleguide-native';
 import Feather from '@expo/vector-icons/Feather';
 import React from 'react';
-import { Linking, TouchableOpacity, ScrollView, Platform, Image } from 'react-native';
+import { Linking, TouchableOpacity, ScrollView, Platform } from 'react-native';
 
 import { useTailwind, useTheme } from '../../common/theme';
 import { Separator } from '../../components/Separator';
