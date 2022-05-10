@@ -129,7 +129,7 @@ function App() {
           headerTitleStyle: type.headline as any,
           headerBackTitleVisible: false,
           contentStyle: {
-            backgroundColor: dark ? theme.background.default : theme.background.secondary,
+            backgroundColor: theme.background.screen,
           },
         }}>
         {/* <Stack.Screen name="Test" component={Test} /> */}

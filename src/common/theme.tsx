@@ -9,7 +9,7 @@ export const defaultTheme = {
   dark: false,
   colors: {
     primary: lightTheme.icon.default,
-    background: lightTheme.background.default,
+    background: lightTheme.background.screen,
     card: lightTheme.background.overlay,
     text: lightTheme.text.default,
     border: lightTheme.border.default,
@@ -27,7 +27,7 @@ export const defaultTheme = {
 export const darkTheme = {
   dark: true,
   colors: {
-    background: styleguideDarkTheme.background.default,
+    background: styleguideDarkTheme.background.screen,
     border: styleguideDarkTheme.border.default,
     card: styleguideDarkTheme.background.overlay,
     primary: styleguideDarkTheme.icon.default,
@@ -77,7 +77,7 @@ export function useTailwind() {
   const custom = create({
     ...styles,
     'theme.background.screen': {
-      backgroundColor: dark ? theme.background.default : theme.background.tertiary,
+      backgroundColor: theme.background.screen,
     },
     'theme.background.default': {
       backgroundColor: theme.background.default,
