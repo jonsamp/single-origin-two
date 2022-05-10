@@ -72,11 +72,7 @@ function MenuStack() {
 function LogsStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="LogsStackMain"
-        component={Logs}
-        options={{ headerLargeTitle: true, title: 'Notes' }}
-      />
+      <Stack.Screen name="LogsStackMain" component={Logs} options={{ title: 'Notes' }} />
     </Stack.Navigator>
   );
 }
@@ -84,11 +80,7 @@ function LogsStack() {
 function SettingsStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="SettingsStackMain"
-        component={Settings}
-        options={{ title: 'Settings', headerLargeTitle: true }}
-      />
+      <Stack.Screen name="SettingsStackMain" component={Settings} options={{ title: 'Settings' }} />
     </Stack.Navigator>
   );
 }
