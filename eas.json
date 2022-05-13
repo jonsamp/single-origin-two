@@ -6,7 +6,11 @@
     },
     "preview": {
       "distribution": "internal",
-      "channel": "preview"
+      "channel": "preview",
+      "ios": {
+        "simulator": true,
+        "image": "macos-monterey-12.3-xcode-13.3"
+      }
     },
     "production": {
       "channel": "production"
