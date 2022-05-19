@@ -187,7 +187,7 @@ function SettingsDetail(props: Props) {
           </Section>
           <Section>
             <SettingWrapper title="Version">
-              <Text style={tw('body theme.text.default')}>45 (1)</Text>
+              <Text style={tw('body theme.text.default')}>45 (2)</Text>
             </SettingWrapper>
           </Section>
         </>
