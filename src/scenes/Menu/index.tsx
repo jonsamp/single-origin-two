@@ -14,7 +14,6 @@ import ResponsiveScrollView from '../../components/ResponsiveScrollView';
 import ScreenPlaceholder from '../../components/ScreenPlaceholder';
 import { recipes, Recipe } from '../../constants/recipes';
 import { RootStackParamList } from '../../navigation';
-import Onboarding from './Onboarding';
 import BackgroundImage from './images/background.png';
 
 function Menu() {

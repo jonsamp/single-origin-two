@@ -120,7 +120,7 @@ function Tabs() {
 
 function App() {
   const colorScheme = useColorScheme();
-  const { theme, dark } = colorScheme === 'dark' ? darkTheme : defaultTheme;
+  const { theme } = colorScheme === 'dark' ? darkTheme : defaultTheme;
 
   return (
     <NavigationContainer theme={colorScheme === 'light' ? defaultTheme : darkTheme}>

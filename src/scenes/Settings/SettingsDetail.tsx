@@ -1,5 +1,4 @@
-import { RouteProp, useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
+import { RouteProp } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView, View, Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -12,7 +11,6 @@ import { recipes } from '../../constants/recipes';
 import { tempUnits, weightUnits } from '../../constants/units';
 import { RootStackParamList } from '../../navigation';
 import ChecklistSetting from './ChecklistSetting';
-import Group from './Group';
 import InputSetting from './InputSetting';
 import PrivacyPolicy from './PrivacyPolicy';
 import Section from './Section';
@@ -26,7 +24,6 @@ type Props = {
 
 function SettingsDetail(props: Props) {
   const { route, title } = props;
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList, 'SettingsDetail'>>();
   const { settings, settingUpdated } = useSettings();
   const insets = useSafeAreaInsets();
   const tw = useTailwind();

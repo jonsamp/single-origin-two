@@ -72,7 +72,7 @@ export function useTheme() {
 
 export function useTailwind() {
   // @ts-ignore
-  const { theme, dark } = RNUseTheme();
+  const { theme } = RNUseTheme();
 
   const custom = create({
     ...styles,
