@@ -19,7 +19,6 @@ export interface Settings {
   brewedVolumeUnit: WeightUnits;
   coffeeWeightUnit: WeightUnits;
   waterVolumeUnit: WeightUnits;
-  shareTrackingData: boolean;
   onboardingVisible: boolean;
   submittedRating: boolean;
   recipes: {

@@ -9,7 +9,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTailwind } from '../../common/theme';
 import { useSettings } from '../../common/useSettings';
-import { useTracking } from '../../common/useTracking';
 import MenuItem from '../../components/MenuItem';
 import ResponsiveScrollView from '../../components/ResponsiveScrollView';
 import ScreenPlaceholder from '../../components/ScreenPlaceholder';
@@ -20,7 +19,6 @@ import BackgroundImage from './images/background.png';
 
 function Menu() {
   const { settings } = useSettings();
-  const { track, events } = useTracking();
   const tw = useTailwind();
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -55,9 +53,6 @@ function Menu() {
     navigation.navigate('Brew', {
       id: recipe.id,
       title: `${recipe.title}${recipe.modifier ? ` ${recipe.modifier}` : ''}`,
-    });
-    track(events.RECIPE_TAPPED, {
-      id: recipe.id,
     });
   }
 

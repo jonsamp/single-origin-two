@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useTailwind, useTheme } from '../../common/theme';
 import { useSettings } from '../../common/useSettings';
-import { useTracking } from '../../common/useTracking';
 import Card from '../../components/Card';
 import ResponsiveScrollView from '../../components/ResponsiveScrollView';
 import { recipes } from '../../constants/recipes';
@@ -30,7 +29,6 @@ type Props = {
 
 function Log(props: Props) {
   const { withReminder, style, timestamp } = props;
-  const { track, events } = useTracking();
   const { unitHelpers } = useSettings();
   const [reminderScheduled, setReminderScheduled] = useState(false);
   const { theme } = useTheme();
@@ -76,11 +74,6 @@ function Log(props: Props) {
     if (withReminder) {
       dispatch(notificationsReset());
     }
-
-    track(events.LOG_VIEWED, {
-      isAfterRecipe: withReminder,
-      ...log,
-    });
   }, []);
 
   async function toggleReminder() {

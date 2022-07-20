@@ -1,33 +1,29 @@
 {
-  "root": true,
-  "extends": ["universe/node", "universe/web", "universe/shared/typescript-analysis"],
-  "settings": {
-    "import/resolver": {
-      "alias": {
-        "map": [["~", "."]],
-        "extensions": [".ts", ".js", ".tsx", ".jsx", ".json"]
-      }
-    }
+  "env": {
+    "browser": true,
+    "es2021": true
   },
-  "overrides": [
-    {
-      "files": ["*.ts", "*.tsx", "*.d.ts"],
-      "parserOptions": {
-        "project": "./tsconfig.json"
-      },
-      "rules": {
-        "import/order": [
-          "warn",
-          {
-            "groups": [["external", "builtin"], "internal", ["parent", "sibling"]],
-            "newlines-between": "always",
-            "alphabetize": {
-              "order": "asc"
-            }
-          }
-        ],
-        "react/jsx-no-bind": "off"
+  "extends": ["plugin:react/recommended", "airbnb"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint"],
+  "rules": {
+    "import/order": [
+      "warn",
+      {
+        "groups": [["external", "builtin"], "internal", ["parent", "sibling"]],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc"
+        }
       }
-    }
-  ]
+    ],
+    "react/jsx-no-bind": "off"
+  }
 }

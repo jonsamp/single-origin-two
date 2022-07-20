@@ -178,13 +178,6 @@ function SettingsDetail(props: Props) {
           {/* <Section>
             <Group title="View Get Started" onPress={() => navigation.navigate('Onboarding')} />
           </Section> */}
-          <Section description="Single Origin anonymously collects usage analytics of the app. This helps us develop new features and improve the overall user experience. If you prefer not to share your data, tap the toggle button to opt-out.">
-            <SwitchSetting
-              title="Share anonymous data"
-              value={settings.shareTrackingData}
-              onChange={(value) => settingUpdated({ key: 'shareTrackingData', value })}
-            />
-          </Section>
           <Section>
             <SettingWrapper title="Version">
               <Text style={tw('body theme.text.default')}>45 (2)</Text>

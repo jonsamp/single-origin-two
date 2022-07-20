@@ -3,7 +3,7 @@ import Feather from '@expo/vector-icons/Feather';
 import { RouteProp, useNavigation } from '@react-navigation/native';
 import { format } from 'date-fns';
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -18,7 +18,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useTailwind, useTheme } from '../../common/theme';
-import { useTracking } from '../../common/useTracking';
 import Button from '../../components/Button';
 import Slider from '../../components/Slider';
 import { isMaxWidth } from '../../constants/layout';
@@ -36,16 +35,11 @@ type Props = {
 
 function LogDetailEdit(props: Props) {
   const { route } = props;
-  const { track, events } = useTracking();
   const { theme, dark } = useTheme();
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const tw = useTailwind();
   const log = useSelector((state: State) => selectLog(state, route.params.timestamp));
-
-  useEffect(function didMount() {
-    track(events.RATING_VIEWED);
-  }, []);
 
   function updateLog(key: string, value: string | number) {
     dispatch(

@@ -1,5 +1,10 @@
 # Notes
 
+## July 20, 2022
+
+- Upgrading to SDK 46.
+- Removed Amplitude since it's no longer included in Expo's SDK. Adding the real library (@amplitude/react-native@latest) requires a prebuilt project. Since I don't use the tracking data, removing it entirely (useTracking hook and shareTrackingData setting).
+
 ## November 27, 2021 (afternoon)
 
 Removed providers, removed global types, and added hooks for tracking and settings.
@@ -10,7 +15,7 @@ Finished with removing `withTheme()`.
 
 After that, make a hook for `withSettings()` (`useSettings()`).
 
-After that, make a hooke for `withTracking()` (`useTracking()`).
+After that, make a hook for `withTracking()` (`useTracking()`).
 
 After that, fix lint/prettier/tsc.
 

@@ -14,7 +14,6 @@ const initialState = {
   brewedVolumeUnit: WeightUnits.Ounces,
   coffeeWeightUnit: WeightUnits.Grams,
   waterVolumeUnit: WeightUnits.Grams,
-  shareTrackingData: true,
   onboardingVisible: true,
   submittedRating: false,
   recipes: Object.values(recipes).reduce((acc, r) => ({ ...acc, [r.id]: true }), {}),
