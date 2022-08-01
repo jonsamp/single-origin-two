@@ -18,7 +18,7 @@ function Onboarding() {
     <TouchableOpacity onPress={() => navigation.navigate('Onboarding')} activeOpacity={0.7}>
       <Card containerStyle={{ marginBottom: spacing[6] }}>
         <View style={tw('flex-row justify-between items-center p-5')}>
-          <Text style={tw('body theme.text.default')}>Get started with Single Origin</Text>
+          <Text style={tw('body theme.text.default')}>👋 Get started with Single Origin</Text>
           <Feather name="chevron-right" size={iconSize.regular} color={theme.icon.default} />
         </View>
       </Card>

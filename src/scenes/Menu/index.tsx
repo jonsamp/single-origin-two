@@ -14,6 +14,7 @@ import ResponsiveScrollView from '../../components/ResponsiveScrollView';
 import ScreenPlaceholder from '../../components/ScreenPlaceholder';
 import { recipes, Recipe } from '../../constants/recipes';
 import { RootStackParamList } from '../../navigation';
+import Onboarding from './Onboarding';
 import BackgroundImage from './images/background.png';
 
 function Menu() {
@@ -59,7 +60,7 @@ function Menu() {
     <View style={[tw('flex-1 theme.background.screen'), { paddingTop: insets.top }]}>
       <ImageBackground source={BackgroundImage} style={{ flex: 1 }} imageStyle={{ opacity: 0.35 }}>
         <ResponsiveScrollView contentContainerStyle={{ padding: 12, paddingTop: 24 }}>
-          {/* {settings.onboardingVisible && <Onboarding />} */}
+          {settings.onboardingVisible && <Onboarding />}
           {sortByName(menuRecipes).map((recipe) => (
             <MenuItem recipe={recipe} key={recipe.id} onPress={() => onMenuItemPress(recipe)} />
           ))}
