@@ -56,6 +56,8 @@ function Menu() {
     });
   }
 
+  console.log('something');
+
   return (
     <View style={[tw('flex-1 theme.background.screen'), { paddingTop: insets.top }]}>
       <ImageBackground source={BackgroundImage} style={{ flex: 1 }} imageStyle={{ opacity: 0.35 }}>
