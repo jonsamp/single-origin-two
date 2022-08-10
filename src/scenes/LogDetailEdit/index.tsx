@@ -1,4 +1,4 @@
-import { iconSize, spacing } from '@expo/styleguide-native';
+import { iconSize, spacing, typography } from '@expo/styleguide-native';
 import Feather from '@expo/vector-icons/Feather';
 import { RouteProp, useNavigation } from '@react-navigation/native';
 import { format } from 'date-fns';
@@ -8,7 +8,6 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   ScrollView,
-  Text,
   TextInput,
   TouchableOpacity,
   View,
@@ -16,10 +15,12 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind, useTheme } from '../../common/theme';
+import { useTheme } from '../../common/theme';
 import Button from '../../components/Button';
 import Slider from '../../components/Slider';
+import { Text } from '../../components/Text';
 import { isMaxWidth } from '../../constants/layout';
 import { recipes } from '../../constants/recipes';
 import { styleguide } from '../../constants/themes';
@@ -60,17 +61,17 @@ function LogDetailEdit(props: Props) {
   }
 
   if (!log) {
-    return <View style={tw('theme.background.default flex-1')} />;
+    return <View style={tw('bg-default dark:bg-default-dark flex-1')} />;
   }
 
   return (
-    <View style={tw('theme.background.screen flex-1')}>
+    <View style={tw('bg-screen dark:bg-screen-dark flex-1')}>
       {!isMaxWidth && Platform.select({ ios: <StatusBar animated style="light" /> })}
       {Platform.select({
         ios: (
           <View
             style={tw(
-              'flex-row justify-between items-center p-4 theme.background.default border-b theme.border.default'
+              'flex-row justify-between items-center p-4 bg-default dark:bg-default-dark border-b border-default dark:border-default-dark'
             )}>
             <View style={tw('flex-row items-center')}>
               <Feather
@@ -79,11 +80,11 @@ function LogDetailEdit(props: Props) {
                 color={theme.icon.default}
                 style={{ top: spacing[0], marginRight: spacing[2] }}
               />
-              <Text style={tw('headline theme.text.default')}>Edit Note</Text>
+              <Text type="headline">Edit Note</Text>
             </View>
             <View style={tw('flex-row items-center')}>
               <TouchableOpacity onPress={() => navigation.goBack()} style={tw('pr-1')}>
-                <Text style={tw('headline theme.text.default')}>Save</Text>
+                <Text type="headline">Save</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -101,11 +102,11 @@ function LogDetailEdit(props: Props) {
                   width: styleguide.maxWidth,
                 }
               }>
-              <Text style={tw('body mb-6 mt-4 theme.text.default')}>
+              <Text style={tw('mb-6 mt-4')}>
                 Rate your {recipes[log.recipeId].title} brewed at {format(log.timestamp, 'h:mma')}{' '}
                 on {format(log.timestamp, 'MMM d, yyyy')}.
               </Text>
-              <Text style={tw('title theme.text.default')}>Tasting note</Text>
+              <Text type="title">Tasting note</Text>
               <View style={tw('rounded-md overflow-hidden mt-4 mb-6')}>
                 <ChecklistSetting
                   items={[
@@ -128,22 +129,28 @@ function LogDetailEdit(props: Props) {
                   onChange={(value) => updateLog('tastingNote', value)}
                 />
               </View>
-              <Text style={tw('title theme.text.default')}>Overall rating</Text>
-              <View style={tw('rounded-md overflow-hidden mt-4 mb-6 border theme.border.default')}>
+              <Text type="title">Overall rating</Text>
+              <View
+                style={tw(
+                  'rounded-md overflow-hidden mt-4 mb-6 border border-default dark:border-default-dark'
+                )}>
                 <Slider
                   min={1}
                   max={10}
                   defaultValue={log.rating ?? 5}
                   label="rating"
                   onChange={(value) => updateLog('rating', value)}
-                  style={tw('theme.background.default')}
+                  style={tw('bg-default dark:bg-default-dark')}
                 />
               </View>
-              <Text style={tw('title theme.text.default')}>Notes</Text>
+              <Text type="title">Notes</Text>
               <TextInput
-                style={tw(
-                  'h-40 theme.border.default border rounded-md theme.background.overlay p-4 mt-4 body theme.text.default'
-                )}
+                style={[
+                  tw(
+                    'text-default dark:text-default-dark h-40 border-default dark:border-default-dark border rounded-md bg-overlay dark:bg-overlay-dark p-4 mt-4'
+                  ),
+                  typography.body,
+                ]}
                 multiline
                 onChangeText={(value) => updateLog('notes', value)}
                 value={log.notes}
@@ -151,7 +158,9 @@ function LogDetailEdit(props: Props) {
                 returnKeyType="done"
                 onSubmitEditing={Keyboard.dismiss}
               />
-              <Text style={tw('title theme.text.default mt-8 mb-4')}>Delete note</Text>
+              <Text type="title" style={tw('mt-8 mb-4')}>
+                Delete note
+              </Text>
               <Button
                 onPress={() => onDeleteLog(log.timestamp)}
                 title="Delete Note"

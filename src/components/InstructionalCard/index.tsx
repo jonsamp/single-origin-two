@@ -1,6 +1,6 @@
 import React from 'react';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind } from '../../common/theme';
 import Image from '../../components/Image';
 import Card from '../Card';
 import Instructions from '../Instructions';

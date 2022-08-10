@@ -3,6 +3,9 @@
 ## August 9, 2022
 
 - Removed onboarding
+- Upgrading to tailwind-rn 4+
+  - [ ] make conponents for the text components that have the correct styles applied.
+  - [ ] figure out which colors match the theme colors from the styleguide.
 
 ## July 20, 2022
 
@@ -36,7 +39,7 @@ How to:
 1. Import tailwind
 
 ```tsx
-import { useTailwind } from '../../common/theme';
+import { useTailwind } from 'tailwind-rn';
 ```
 
 2. Add hook

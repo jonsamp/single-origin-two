@@ -1,11 +1,12 @@
-import { shadows } from '@expo/styleguide-native';
+import { shadows, ArrowRightIcon } from '@expo/styleguide-native';
 import React from 'react';
-import { Text, TouchableOpacity, View, ImageBackground } from 'react-native';
+import { TouchableOpacity, View, ImageBackground } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTheme, useTailwind } from '../../common/theme';
+import { useTheme } from '../../common/theme';
+import { Text } from '../../components/Text';
 import { height } from '../../constants/layout';
 import { Recipe } from '../../constants/recipes';
-import { ArrowIcon } from './icons/ArrowIcon';
 
 type Props = {
   recipe: Recipe;
@@ -32,17 +33,19 @@ export default function MenuItem(props: Props) {
             opacity: 0.65,
           }}>
           <View style={tw('p-5')}>
-            <Text style={tw('scriptTitle text-white')}>{recipe.title}</Text>
-            <Text style={tw('subheader text-white font-normal')}>{recipe.modifier}</Text>
+            <Text type="scriptTitle" style={tw('text-white')}>
+              {recipe.title}
+            </Text>
+            <Text style={tw('text-white')}>{recipe.modifier}</Text>
           </View>
           <View
             style={[
-              tw('absolute bottom-0 right-0 m-5 rounded-full'),
+              tw('absolute bottom-0 right-0 m-5 rounded-full p-2'),
               {
                 backgroundColor: theme.brand.default,
               },
             ]}>
-            <ArrowIcon color={theme.background.default} />
+            <ArrowRightIcon />
           </View>
         </ImageBackground>
       </View>

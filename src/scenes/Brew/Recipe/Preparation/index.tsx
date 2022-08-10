@@ -4,8 +4,9 @@ import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind, useTheme } from '../../../../common/theme';
+import { useTheme } from '../../../../common/theme';
 import Card from '../../../../components/Card';
 import Instructions from '../../../../components/Instructions';
 import { RootStackParamList } from '../../../../navigation';

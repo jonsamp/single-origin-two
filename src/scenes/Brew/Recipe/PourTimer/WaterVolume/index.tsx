@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Text, View, Platform, TextInput } from 'react-native';
+import { View, Platform, TextInput } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -9,8 +9,11 @@ import Animated, {
   interpolate,
   interpolateColor,
 } from 'react-native-reanimated';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind, useTheme } from '../../../../../common/theme';
+import { useTheme } from '../../../../../common/theme';
+import { typography } from '../../../../../common/typography';
+import { Text } from '../../../../../components/Text';
 import { UnitHelper } from '../../../../../state/settings/types';
 
 interface Props {
@@ -138,7 +141,9 @@ function WaterVolume(props: Props) {
 
   return (
     <View style={tw('flex-1 justify-around')}>
-      <Text style={tw('label text-center mb-3 theme.text.default')}>WATER VOLUME</Text>
+      <Text type="label" style={tw('text-center mb-3')}>
+        WATER VOLUME
+      </Text>
       <Animated.View
         style={[
           tw('py-3 justify-center items-center border rounded-lg mx-2'),
@@ -154,6 +159,7 @@ function WaterVolume(props: Props) {
           editable={false}
           animatedProps={animatedProps as any}
           style={[
+            tw('text-default dark:text-default-dark'),
             {
               fontSize: 28,
               fontWeight: 'bold',
@@ -162,7 +168,13 @@ function WaterVolume(props: Props) {
           ]}
           value="0"
         />
-        <Animated.Text style={[tw('label text-center pb-1'), animatedTextColor]} numberOfLines={1}>
+        <Animated.Text
+          style={[
+            tw('text-center pb-1 text-default dark:text-default-dark'),
+            typography.label,
+            animatedTextColor,
+          ]}
+          numberOfLines={1}>
           {waterVolumeUnit.unit.title}
         </Animated.Text>
       </Animated.View>

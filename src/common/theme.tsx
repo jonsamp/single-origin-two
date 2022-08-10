@@ -1,7 +1,6 @@
 import { lightTheme, darkTheme as styleguideDarkTheme } from '@expo/styleguide-native';
 import { useTheme as RNUseTheme, DefaultTheme, DarkTheme } from '@react-navigation/native';
-import { create } from 'tailwind-rn';
-import styles from 'tailwind-rn/styles.json';
+import { useTailwind as useTailWindRN } from 'tailwind-rn';
 
 import { typography } from './typography';
 
@@ -70,41 +69,19 @@ export function useTheme() {
   return theme as Theme;
 }
 
-export function useTailwind() {
-  // @ts-ignore
-  const { theme } = RNUseTheme();
+export function useTailwind(): any {
+  // const { theme } = RNUseTheme();
 
-  const custom = create({
-    ...styles,
-    'theme.background.screen': {
-      backgroundColor: theme.background.screen,
-    },
-    'theme.background.default': {
-      backgroundColor: theme.background.default,
-    },
-    'theme.background.overlay': {
-      backgroundColor: theme.background.overlay,
-    },
-    'theme.background.secondary': {
-      backgroundColor: theme.background.secondary,
-    },
-    'theme.background.tertiary': {
-      backgroundColor: theme.background.tertiary,
-    },
-    'theme.background.quaternary': {
-      backgroundColor: theme.background.quaternary,
-    },
-    'theme.border.default': {
-      borderColor: theme.border.default,
-    },
-    'theme.text.default': {
-      color: theme.text.default,
-    },
-    'theme.text.secondary': {
-      color: theme.text.secondary,
-    },
-    ...typography,
-  });
+  // const custom = create({
+  //   ...styles,
+  //   'theme.border.default': {
+  //     borderColor: theme.border.default,
+  //   },
+  //   'theme.text.secondary': {
+  //     color: theme.text.secondary,
+  //   },
+  //   ...typography,
+  // });
 
-  return custom.tailwind;
+  return useTailWindRN;
 }

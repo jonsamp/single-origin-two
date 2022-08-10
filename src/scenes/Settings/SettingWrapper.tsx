@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react';
-import { Text, View, ViewStyle } from 'react-native';
+import { View, ViewStyle } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind } from '../../common/theme';
+import { Text } from '../../components/Text';
 
 type Props = {
   children: ReactNode;
@@ -14,11 +15,11 @@ function SettingWrapper(props: Props) {
   const tw = useTailwind();
 
   return (
-    <View style={tw('theme.background.screen')}>
-      <View style={[tw(`px-4 h-12 justify-center theme.background.overlay`), style]}>
+    <View style={tw('bg-screen dark:bg-screen-dark')}>
+      <View style={[tw(`px-4 h-12 justify-center bg-overlay dark:bg-overlay-dark`), style]}>
         <View style={tw('flex-row justify-between items-center')}>
           <>
-            <Text style={tw('body theme.text.default capitalize')}>{title}</Text>
+            <Text style={tw('capitalize')}>{title}</Text>
             {children}
           </>
         </View>

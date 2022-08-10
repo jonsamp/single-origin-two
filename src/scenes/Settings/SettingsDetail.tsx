@@ -1,11 +1,12 @@
 import { RouteProp } from '@react-navigation/native';
 import React from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind } from '../../common/theme';
 import { useSettings } from '../../common/useSettings';
 import { Separator } from '../../components/Separator';
+import { Text } from '../../components/Text';
 import { grinders } from '../../constants/grinders';
 import { recipes } from '../../constants/recipes';
 import { tempUnits, weightUnits } from '../../constants/units';
@@ -174,7 +175,7 @@ function SettingsDetail(props: Props) {
         <>
           <Section>
             <SettingWrapper title="Version">
-              <Text style={tw('body theme.text.default')}>46 (1)</Text>
+              <Text>46 (1)</Text>
             </SettingWrapper>
           </Section>
         </>
@@ -194,7 +195,7 @@ function SettingsDetail(props: Props) {
   }
 
   return (
-    <View style={tw('flex-1 theme.background.screen px-4')}>
+    <View style={tw('flex-1 bg-screen dark:bg-screen-dark px-4')}>
       <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom }}>{children}</ScrollView>
     </View>
   );

@@ -6,8 +6,8 @@ import React, { useEffect } from 'react';
 import { ImageBackground, View } from 'react-native';
 import { interpolateColor } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind } from '../../common/theme';
 import { useSettings } from '../../common/useSettings';
 import MenuItem from '../../components/MenuItem';
 import ResponsiveScrollView from '../../components/ResponsiveScrollView';
@@ -56,7 +56,7 @@ function Menu() {
   }
 
   return (
-    <View style={[tw('flex-1 theme.background.screen'), { paddingTop: insets.top }]}>
+    <View style={[tw('flex-1 bg-screen  dark:bg-screen-dark'), { paddingTop: insets.top }]}>
       <ImageBackground source={BackgroundImage} style={{ flex: 1 }} imageStyle={{ opacity: 0.35 }}>
         <ResponsiveScrollView contentContainerStyle={{ padding: 12, paddingTop: 24 }}>
           {sortByName(menuRecipes).map((recipe) => (

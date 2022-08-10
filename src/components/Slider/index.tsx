@@ -2,7 +2,7 @@ import { palette, shadows } from '@expo/styleguide-native';
 import * as Haptics from 'expo-haptics';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import { StyleSheet, View, TextInput, Dimensions, Text, Platform, ViewStyle } from 'react-native';
+import { StyleSheet, View, TextInput, Dimensions, Platform, ViewStyle } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, {
   useSharedValue,
@@ -14,8 +14,10 @@ import Animated, {
   withTiming,
   Easing,
 } from 'react-native-reanimated';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTheme, useTailwind } from '../../common/theme';
+import { useTheme } from '../../common/theme';
+import { Text } from '../../components/Text';
 import { styleguide } from '../../constants/themes';
 import { IncrementButton } from './IncrementButton';
 import { MinusIcon } from './MinusIcon';
@@ -37,9 +39,9 @@ type Props = {
 };
 
 async function haptic() {
-  if (Platform.OS === 'ios') {
-    await Haptics.selectionAsync();
-  }
+  // if (Platform.OS === 'ios') {
+  //   await Haptics.selectionAsync();
+  // }
 }
 
 function getStepValue(value: number, oneStepValue: number, min: number) {
@@ -148,7 +150,7 @@ function Slider(props: Props) {
   }
 
   return (
-    <View style={[tw(`pt-10 items-center pb-12 theme.background.secondary`), style]}>
+    <View style={[tw(`pt-10 items-center pb-12 bg-secondary dark:bg-secondary-dark`), style]}>
       <View style={tw('mb-12 items-center')}>
         <View
           style={[
@@ -159,17 +161,17 @@ function Slider(props: Props) {
           <AnimatedTextInput
             underlineColorAndroid="transparent"
             editable={false}
-            style={[tw('theme.text.default font-bold'), styles.sliderValue, sliderValueStyle]}
+            style={[
+              tw('font-bold text-default dark:text-default-dark'),
+              styles.sliderValue,
+              sliderValueStyle,
+            ]}
             animatedProps={animatedProps}
             value={stepText.value}
           />
           <IncrementButton icon={<PlusIcon />} onPress={() => increment(1)} />
         </View>
-        <Text
-          style={[
-            tw('callout font-bold uppercase theme.text.default opacity-80'),
-            styles.labelStyle,
-          ]}>
+        <Text type="callout" style={[tw('font-bold uppercase   opacity-80'), styles.labelStyle]}>
           {label}
         </Text>
       </View>

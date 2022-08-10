@@ -1,8 +1,9 @@
 import SegmentedControl from '@react-native-community/segmented-control';
 import React, { useState } from 'react';
 import { Platform, View } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind, useTheme } from '../../../../common/theme';
+import { useTheme } from '../../../../common/theme';
 import { useSettings } from '../../../../common/useSettings';
 import Card from '../../../../components/Card';
 import Instructions from '../../../../components/Instructions';
