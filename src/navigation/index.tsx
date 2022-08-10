@@ -16,7 +16,6 @@ import LogDetail from '../scenes/LogDetail';
 import LogDetailEdit from '../scenes/LogDetailEdit';
 import Logs from '../scenes/Logs';
 import Menu from '../scenes/Menu';
-import Onboarding from '../scenes/Onboarding';
 import Preparation from '../scenes/Preparation';
 import Settings from '../scenes/Settings';
 import SettingsDetail from '../scenes/Settings/SettingsDetail';
@@ -40,7 +39,6 @@ export type RootStackParamList = {
   LogDetailEdit: {
     timestamp: number;
   };
-  Onboarding: undefined;
   Preparation: PreparationStep[];
   SettingsDetail: {
     title: string;
@@ -134,7 +132,6 @@ function App() {
         }}>
         {/* <Stack.Screen name="Test" component={Test} /> */}
         <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
-        <Stack.Screen name="Onboarding" component={Onboarding} options={{ title: 'Get started' }} />
         <Stack.Screen
           name="Brew"
           component={Brew}

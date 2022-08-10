@@ -59,7 +59,6 @@ function Menu() {
     <View style={[tw('flex-1 theme.background.screen'), { paddingTop: insets.top }]}>
       <ImageBackground source={BackgroundImage} style={{ flex: 1 }} imageStyle={{ opacity: 0.35 }}>
         <ResponsiveScrollView contentContainerStyle={{ padding: 12, paddingTop: 24 }}>
-          {/* {settings.onboardingVisible && <Onboarding />} */}
           {sortByName(menuRecipes).map((recipe) => (
             <MenuItem recipe={recipe} key={recipe.id} onPress={() => onMenuItemPress(recipe)} />
           ))}

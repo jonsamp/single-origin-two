@@ -172,9 +172,6 @@ function SettingsDetail(props: Props) {
     case 'app':
       children = (
         <>
-          {/* <Section>
-            <Group title="View Get Started" onPress={() => navigation.navigate('Onboarding')} />
-          </Section> */}
           <Section>
             <SettingWrapper title="Version">
               <Text style={tw('body theme.text.default')}>46 (1)</Text>
