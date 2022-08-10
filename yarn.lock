@@ -4317,10 +4317,10 @@ expo-asset@~8.6.1:
     path-browserify "^1.0.0"
     url-parse "^1.5.9"
 
-expo-av@~12.0.3:
-  version "12.0.3"
-  resolved "https://registry.yarnpkg.com/expo-av/-/expo-av-12.0.3.tgz#f242215c992f03299236f902e0938cfd2b2fa5f4"
-  integrity sha512-iY3AAJFJHBRtCrCziC9n6+Cb/uls3MzCB1Svs906BE8rxQ94yyOW2Nds7T+9CfCFNUAOlGvWjf/OXgHljzLXqQ==
+expo-av@~12.0.4:
+  version "12.0.4"
+  resolved "https://registry.yarnpkg.com/expo-av/-/expo-av-12.0.4.tgz#00cf2da76c0c718a1d316f188247dee85ce512c2"
+  integrity sha512-wq3wx6J1aacZEPZce9TK1+o4YTAOWyb5cJ4CqfsgHcXeUdHyO3qbva/5uecigpEYlCxOlWYFhAz2T0dQ7nWSpQ==
   dependencies:
     "@expo/config-plugins" "~5.0.0"
 

@@ -244,14 +244,14 @@
   border-bottom-width: 1px
 }
 
-.border-warning {
-  --tw-border-opacity: 1;
-  border-color: rgb(255 235 135 / var(--tw-border-opacity))
-}
-
 .border-default {
   --tw-border-opacity: 1;
   border-color: rgb(225 228 232 / var(--tw-border-opacity))
+}
+
+.border-warning {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 235 135 / var(--tw-border-opacity))
 }
 
 .bg-overlay {
@@ -437,21 +437,6 @@
   text-align: center
 }
 
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem
-}
-
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem
-}
-
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem
@@ -459,10 +444,6 @@
 
 .font-bold {
   font-weight: 700
-}
-
-.font-semibold {
-  font-weight: 600
 }
 
 .uppercase {
@@ -488,19 +469,14 @@
   color: rgb(255 255 255 / var(--tw-text-opacity))
 }
 
-.text-secondary {
-  --tw-text-opacity: 1;
-  color: rgb(89 95 104 / var(--tw-text-opacity))
-}
-
 .text-default {
   --tw-text-opacity: 1;
   color: rgb(27 31 35 / var(--tw-text-opacity))
 }
 
-.text-green-300 {
+.text-secondary {
   --tw-text-opacity: 1;
-  color: rgb(134 239 172 / var(--tw-text-opacity))
+  color: rgb(89 95 104 / var(--tw-text-opacity))
 }
 
 .text-black {
@@ -517,14 +493,14 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .dark\:border-warning-dark {
-    --tw-border-opacity: 1;
-    border-color: rgb(102 75 20 / var(--tw-border-opacity))
-  }
-
   .dark\:border-default-dark {
     --tw-border-opacity: 1;
     border-color: rgb(50 55 62 / var(--tw-border-opacity))
+  }
+
+  .dark\:border-warning-dark {
+    --tw-border-opacity: 1;
+    border-color: rgb(102 75 20 / var(--tw-border-opacity))
   }
 
   .dark\:bg-overlay-dark {
@@ -577,18 +553,13 @@
     color: rgb(250 226 150 / var(--tw-text-opacity))
   }
 
-  .dark\:text-secondary-dark {
-    --tw-text-opacity: 1;
-    color: rgb(155 164 176 / var(--tw-text-opacity))
-  }
-
-  .dark\:text-default {
-    --tw-text-opacity: 1;
-    color: rgb(27 31 35 / var(--tw-text-opacity))
-  }
-
   .dark\:text-default-dark {
     --tw-text-opacity: 1;
     color: rgb(188 195 205 / var(--tw-text-opacity))
+  }
+
+  .dark\:text-secondary-dark {
+    --tw-text-opacity: 1;
+    color: rgb(155 164 176 / var(--tw-text-opacity))
   }
 }
