@@ -7,7 +7,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTailwind } from 'tailwind-rn';
 
-import { useTheme } from '../../../common/theme';
 import { useSettings } from '../../../common/useSettings';
 import Button from '../../../components/Button';
 import { isMaxWidth } from '../../../constants/layout';
@@ -37,7 +36,6 @@ function Recipe(props: RecipeProps) {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const dispatch = useDispatch();
-  const { dark } = useTheme();
   const tw = useTailwind();
   const recentLog = useSelector((state: State) => selectRecentLog(state, recipe.id));
   const [recipeState, _setRecipeState] = useState({

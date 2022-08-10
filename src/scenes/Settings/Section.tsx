@@ -21,7 +21,10 @@ function Section(props: Props) {
           {title.toUpperCase()}
         </Text>
       </View>
-      <View style={tw('rounded-lg overflow-hidden bg-overlay dark:bg-overlay-dark')}>
+      <View
+        style={tw(
+          'rounded-lg border border-default dark:border-default-dark overflow-hidden bg-overlay dark:bg-overlay-dark'
+        )}>
         {children}
       </View>
       {description ? (

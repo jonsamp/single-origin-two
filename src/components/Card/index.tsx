@@ -1,4 +1,3 @@
-import { shadows } from '@expo/styleguide-native';
 import React, { ReactNode } from 'react';
 import { View, ViewStyle } from 'react-native';
 import { useTailwind } from 'tailwind-rn';
@@ -14,8 +13,14 @@ function Card(props: Props) {
   const tw = useTailwind();
 
   return (
-    <View style={[shadows.micro, tw('rounded-lg mb-8'), containerStyle]}>
-      <View style={[tw('bg-overlay dark:bg-overlay-dark rounded-lg overflow-hidden'), style]}>
+    <View style={[tw('rounded-lg mb-8'), containerStyle]}>
+      <View
+        style={[
+          tw(
+            'bg-overlay dark:bg-overlay-dark rounded-lg overflow-hidden border border-default dark:border-default-dark'
+          ),
+          style,
+        ]}>
         {children}
       </View>
     </View>
