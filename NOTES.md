@@ -1,5 +1,9 @@
 # Notes
 
+## August 9, 2022
+
+- Removed onboarding
+
 ## July 20, 2022
 
 - Upgrading to SDK 46.
