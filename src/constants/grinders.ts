@@ -6,6 +6,13 @@ import mediumCoarse from './images/medium-coarse.jpeg';
 import mediumFine from './images/medium-fine.jpeg';
 import medium from './images/medium.jpeg';
 
+export enum GrindRange {
+  EXTRA_FINE = 'extra-fine',
+  FINE = 'fine',
+  MEDIUM_FINE = 'medium-fine',
+  MEDIUM = 'medium',
+}
+
 const grinders = {
   generic: {
     title: 'Generic grinder (1-10)',
@@ -55,6 +62,24 @@ const grinders = {
     id: 'ode',
     min: 1,
     max: 11,
+    ranges: {
+      [GrindRange.EXTRA_FINE]: {
+        from: 1,
+        to: 2,
+      },
+      [GrindRange.FINE]: {
+        from: 2,
+        to: 3,
+      },
+      [GrindRange.MEDIUM_FINE]: {
+        from: 3,
+        to: 4,
+      },
+      [GrindRange.MEDIUM]: {
+        from: 4,
+        to: 11,
+      },
+    },
   },
 };
 

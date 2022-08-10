@@ -1,3 +1,4 @@
+import { GrindRange } from '../../../../constants/grinders';
 import { StepType, BrewRecipeName } from '../types';
 import AfterBloom from './images/afterbloom.gif';
 import AfterPour from './images/afterpour.gif';
@@ -15,6 +16,7 @@ export default {
   minYield: 180,
   maxYield: 300,
   defaultGrind: 0.3,
+  grindRange: GrindRange.FINE,
   defaultTotalVolume: 240,
   defaultSource: Default,
   preparation: [

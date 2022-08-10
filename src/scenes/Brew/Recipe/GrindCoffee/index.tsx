@@ -13,14 +13,21 @@ type Props = {
   defaultGrind: number;
   title: string;
   recentLog: Log;
+  grindRange?: {
+    from: number;
+    to: number;
+  };
 };
 
 function GrindCoffee(props: Props) {
-  const { coffeeWeight, defaultGrind, title, recentLog } = props;
+  const { coffeeWeight, defaultGrind, title, recentLog, grindRange } = props;
   const { unitHelpers } = useSettings();
   const { coffeeWeightUnit, grindUnit } = unitHelpers;
   let recommendation;
   let grindFromLastTime = '';
+  const grinderSetting =
+    grindUnit.getGrindRange(grindRange ?? null)?.title ??
+    grindUnit.getGrindSetting(defaultGrind).title;
 
   if (recentLog.grind) {
     grindFromLastTime = ` you brewed with a grind setting of ${recentLog.grind} and`;
@@ -45,9 +52,10 @@ function GrindCoffee(props: Props) {
         />
       ) : null}
       <Instructions
-        text={`Grind **${getValueUnit(coffeeWeightUnit, coffeeWeight)}** of coffee to **${
-          grindUnit.getGrindSetting(defaultGrind).title
-        }** with your ${
+        text={`Grind **${getValueUnit(
+          coffeeWeightUnit,
+          coffeeWeight
+        )}** of coffee to **${grinderSetting}** with your ${
           grindUnit.grinder.shortTitle
         }, then add the grounds to your ${title.toLowerCase()}.`}
         icon="GrindIcon"

@@ -121,6 +121,7 @@ function Recipe(props: RecipeProps) {
           defaultGrind={defaultGrind}
           title={recipe.title}
           recentLog={recentLog}
+          grindRange={recipe.grindRange}
         />
         {recipeState.isIced && <AddIce volume={Math.round(totalVolume * 0.333)} />}
         <RecordBrewAttributes

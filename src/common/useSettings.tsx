@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import { grinders, getVerboseSetting } from '../constants/grinders';
+import { grinders, getVerboseSetting, GrindRange } from '../constants/grinders';
 import { units } from '../constants/units';
 import { settingUpdated } from '../state/settings/actions';
 import { selectSettings } from '../state/settings/selectors';
@@ -42,7 +42,8 @@ export function useSettings() {
   function getGrindHelper() {
     return {
       getPreferredValue: (v: number) => v,
-      getPreferredValueBasedOnPercent: (percent: number) => {
+      // TODO: update these to accept a range
+      getPreferredValueBasedOnPercent: (percent: number): number => {
         const grinder = grinders[settings.grinderType as keyof typeof grinders];
         const range = grinder.max - grinder.min;
         return Math.round(range * percent);
@@ -61,6 +62,29 @@ export function useSettings() {
           title: `#${Math.round(range * percent)}`,
           image: null,
         };
+      },
+      getGrindRange: (range: GrindRange | null) => {
+        if (!range) {
+          return {};
+        }
+        const grinder = grinders[settings.grinderType as keyof typeof grinders];
+
+        if (grinder.ranges) {
+          const grinderSetting = grinder.ranges[range];
+
+          return {
+            title: `between a ${grinderSetting.from} and a ${grinderSetting.to} setting`,
+          };
+        }
+      },
+      getPreferredValueBasedOnRange: (range: GrindRange) => {
+        const grinder = grinders[settings.grinderType as keyof typeof grinders];
+
+        if (grinder.ranges) {
+          const grinderSetting = grinder.ranges[range];
+
+          return Math.round((grinderSetting.from + grinderSetting.to) / 2);
+        }
       },
       grinder: grinders[settings.grinderType as keyof typeof grinders],
       unit: { symbol: 'grind' },
