@@ -106,7 +106,7 @@ function Recipe(props: RecipeProps) {
   const totalPourVolume = recipeState.isIced ? Math.round(totalVolume * 0.666) : totalVolume;
 
   return (
-    <View style={isMaxWidth && { alignItems: 'center' }}>
+    <View style={tw(`${isMaxWidth ? 'items-center' : ''}`)}>
       <View style={isMaxWidth && { width: styleguide.maxWidth }}>
         <Preparation recipe={recipe.id} preparation={recipe.preparation} />
         <YieldQuestion
@@ -141,13 +141,7 @@ function Recipe(props: RecipeProps) {
         />
         <View
           style={[
-            tw(
-              `${
-                dark
-                  ? 'bg-secondary dark:bg-secondary-dark'
-                  : 'bg-quaternary dark:bg-quaternary-dark'
-              } -m-4 p-4`
-            ),
+            tw('bg-quaternary dark:bg-secondary-dark -m-4 p-4'),
             { paddingBottom: insets.bottom },
           ]}>
           <Button title="Finish Brew" onPress={onFinish} type="tertiary" />
