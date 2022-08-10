@@ -1,4 +1,4 @@
-import Constants from 'expo-constants';
+import * as Device from 'expo-device';
 import * as Font from 'expo-font';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import * as SplashScreen from 'expo-splash-screen';
@@ -33,9 +33,10 @@ export default function App() {
   useEffect(() => {
     async function prepare() {
       try {
-        // if (Constants.platform?.ios?.userInterfaceIdiom === 'tablet') {
-        //   await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.DEFAULT);
-        // }
+        const deviceType = await Device.getDeviceTypeAsync();
+        if (deviceType === Device.DeviceType.TABLET) {
+          await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.DEFAULT);
+        }
 
         // Keep the splash screen visible while we fetch resources
         await SplashScreen.preventAutoHideAsync();

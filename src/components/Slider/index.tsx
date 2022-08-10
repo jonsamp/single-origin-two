@@ -39,9 +39,9 @@ type Props = {
 };
 
 async function haptic() {
-  // if (Platform.OS === 'ios') {
-  //   await Haptics.selectionAsync();
-  // }
+  if (Platform.OS === 'ios') {
+    await Haptics.selectionAsync();
+  }
 }
 
 function getStepValue(value: number, oneStepValue: number, min: number) {
