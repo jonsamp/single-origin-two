@@ -1,5 +1,4 @@
-import { iconSize, CheckIcon } from '@expo/styleguide-native';
-import Feather from '@expo/vector-icons/Feather';
+import { CheckIcon } from '@expo/styleguide-native';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 
