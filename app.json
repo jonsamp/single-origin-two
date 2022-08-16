@@ -46,8 +46,6 @@
         }
       ]
     },
-    "runtimeVersion": {
-      "policy": "sdkVersion"
-    }
+    "runtimeVersion": "46.1"
   }
 }
