@@ -1,9 +1,8 @@
 import React from 'react';
-import { TextStyle, View, ViewStyle, StyleSheet } from 'react-native';
+import { TextStyle, View, ViewStyle } from 'react-native';
 import { useTailwind } from 'tailwind-rn';
 
 import { useTheme } from '../../common/theme';
-import { typography } from '../../common/typography';
 import { Text } from '../../components/Text';
 import GrindIcon from './icons/GrindIcon';
 import IceIcon from './icons/IceIcon';

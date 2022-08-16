@@ -1,4 +1,4 @@
-import { GrindRange } from '../../../../constants/grinders';
+import { GrindRangeName } from '../../../../constants/grinders';
 import { StepType, BrewRecipeName } from '../types';
 import AddGrounds from './images/add-grounds.jpg';
 import AfterBloom from './images/afterbloom.gif';
@@ -15,7 +15,7 @@ export default {
   title: 'Kalita Wave 185',
   minYield: 100,
   maxYield: 700,
-  grindRange: GrindRange.MEDIUM,
+  grindRangeName: GrindRangeName.MEDIUM,
   defaultTotalVolume: 340,
   defaultSource: Default,
   iced: true,

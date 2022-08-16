@@ -1,4 +1,4 @@
-import { GrindRange } from '../../../../constants/grinders';
+import { GrindRangeName } from '../../../../constants/grinders';
 import { StepType, BrewRecipeName } from '../types';
 import AfterBloom from './images/afterbloom.gif';
 import AfterPour from './images/afterpour.gif';
@@ -15,7 +15,7 @@ export default {
   title: 'Aeropress',
   minYield: 180,
   maxYield: 300,
-  grindRange: GrindRange.FINE,
+  grindRangeName: GrindRangeName.FINE,
   defaultTotalVolume: 240,
   defaultSource: Default,
   preparation: [

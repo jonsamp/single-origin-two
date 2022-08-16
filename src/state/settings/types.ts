@@ -1,4 +1,4 @@
-import { GrindRange } from '../../constants/grinders';
+import { GrindRangeName } from '../../constants/grinders';
 
 export enum WeightUnits {
   Grams = 'grams',
@@ -37,13 +37,9 @@ export interface GrindHelper {
   getPreferredValue: (value: number) => number;
   getPreferredValueBasedOnPercent: (percent: number) => number;
   getStandardValue: (value: number) => number;
-  getGrindSetting: (percent: number) => {
-    title: string;
-    image?: any;
-  };
   grinder: Grinder;
   unit: { symbol: string };
-  getPreferredValueBasedOnRange: (grindRange: GrindRange) => number;
+  getPreferredValueBasedOnRange: (grindRange: GrindRangeName) => number;
 }
 
 export interface Unit {

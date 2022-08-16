@@ -1,4 +1,4 @@
-import { GrindRange } from '../../../../constants/grinders';
+import { GrindRangeName } from '../../../../constants/grinders';
 import AddGrounds from '../KalitaWave185/images/add-grounds.jpg';
 import AfterBloom from '../KalitaWave185/images/afterbloom.gif';
 import Finish from '../KalitaWave185/images/afterfinish.gif';
@@ -15,7 +15,7 @@ export default {
   title: 'Kalita Wave 155',
   minYield: 100,
   maxYield: 500,
-  grindRange: GrindRange.MEDIUM,
+  grindRangeName: GrindRangeName.MEDIUM,
   defaultTotalVolume: 340,
   defaultSource: Default,
   iced: true,

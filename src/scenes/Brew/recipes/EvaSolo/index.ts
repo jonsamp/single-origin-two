@@ -1,4 +1,4 @@
-import { GrindRange } from '../../../../constants/grinders';
+import { GrindRangeName } from '../../../../constants/grinders';
 import { StepType, BrewRecipeName } from '../types';
 import AddGrounds from './images/addgrounds.png';
 import AddWater from './images/addwater.gif';
@@ -15,7 +15,7 @@ export default {
   title: 'Eva Solo',
   minYield: 288,
   maxYield: 640,
-  grindRange: GrindRange.MEDIUM_COARSE,
+  grindRangeName: GrindRangeName.MEDIUM_COARSE,
   defaultTotalVolume: 432,
   defaultSource: Default,
   pourVelocity: 40,

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import { grinders, getVerboseSetting, GrindRange } from '../constants/grinders';
+import { grinders, GrindRangeName } from '../constants/grinders';
 import { units } from '../constants/units';
 import { settingUpdated } from '../state/settings/actions';
 import { selectSettings } from '../state/settings/selectors';
@@ -42,50 +42,13 @@ export function useSettings() {
   function getGrindHelper() {
     return {
       getPreferredValue: (v: number) => v,
-      // TODO: update these to accept a range
-      getPreferredValueBasedOnPercent: (percent: number): number => {
+      getPreferredValueBasedOnRange: (grindRangeName: GrindRangeName): number => {
         const grinder = grinders[settings.grinderType as keyof typeof grinders];
-        const range = grinder.max - grinder.min;
-        return Math.round(range * percent);
+        const grindRange = grinder.ranges[grindRangeName];
+        const average = (grindRange.from + grindRange.to) / 2;
+        return Math.floor(average);
       },
       getStandardValue: (v: number) => v,
-      getGrindSetting: (percent: number) => {
-        const { grinderType } = settings;
-
-        if (grinderType === 'generic') {
-          return getVerboseSetting(percent);
-        }
-
-        const grinder = grinders[grinderType as keyof typeof grinders];
-        const range = grinder.max - grinder.min;
-        return {
-          title: `#${Math.round(range * percent)}`,
-          image: null,
-        };
-      },
-      getGrindRange: (range: GrindRange) => {
-        if (!range) {
-          return {};
-        }
-        const grinder = grinders[settings.grinderType as keyof typeof grinders];
-
-        if (grinder.ranges) {
-          const grinderSetting = grinder.ranges[range];
-
-          return {
-            title: `between a ${grinderSetting.from} and a ${grinderSetting.to} setting`,
-          };
-        }
-      },
-      getPreferredValueBasedOnRange: (range: GrindRange) => {
-        const grinder = grinders[settings.grinderType as keyof typeof grinders];
-
-        if (grinder.ranges) {
-          const grinderSetting = grinder.ranges[range];
-
-          return Math.round((grinderSetting.from + grinderSetting.to) / 2);
-        }
-      },
       grinder: grinders[settings.grinderType as keyof typeof grinders],
       unit: { symbol: 'grind' },
     };

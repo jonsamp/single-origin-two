@@ -6,7 +6,7 @@ import mediumCoarse from './images/medium-coarse.jpeg';
 import mediumFine from './images/medium-fine.jpeg';
 import medium from './images/medium.jpeg';
 
-export enum GrindRange {
+export enum GrindRangeName {
   EXTRA_FINE = 'extra-fine',
   FINE = 'fine',
   MEDIUM_FINE = 'medium-fine',
@@ -16,25 +16,30 @@ export enum GrindRange {
   EXTRA_COARSE = 'extra-coarse',
 }
 
-export function getVerboseSetting(grindRange: GrindRange) {
-  return String(grindRange).replace('-', '');
+export type GrindRange = {
+  from: number;
+  to: number;
+};
+
+export function getVerboseSetting(grindRange: GrindRangeName) {
+  return String(grindRange).replace('-', ' ');
 }
 
-export function getGrindImage(grindRange: GrindRange) {
+export function getGrindImage(grindRange: GrindRangeName) {
   switch (grindRange) {
-    case GrindRange.EXTRA_FINE:
+    case GrindRangeName.EXTRA_FINE:
       return extraFine;
-    case GrindRange.FINE:
+    case GrindRangeName.FINE:
       return fine;
-    case GrindRange.MEDIUM_FINE:
+    case GrindRangeName.MEDIUM_FINE:
       return mediumFine;
-    case GrindRange.MEDIUM:
+    case GrindRangeName.MEDIUM:
       return medium;
-    case GrindRange.MEDIUM_COARSE:
+    case GrindRangeName.MEDIUM_COARSE:
       return mediumCoarse;
-    case GrindRange.COARSE:
+    case GrindRangeName.COARSE:
       return coarse;
-    case GrindRange.EXTRA_COARSE:
+    case GrindRangeName.EXTRA_COARSE:
       return extraCoarse;
   }
 }
@@ -46,31 +51,31 @@ export const grinders = {
     min: 1,
     max: 10,
     ranges: {
-      [GrindRange.EXTRA_FINE]: {
+      [GrindRangeName.EXTRA_FINE]: {
         from: 1,
         to: 2,
       },
-      [GrindRange.FINE]: {
+      [GrindRangeName.FINE]: {
         from: 2,
         to: 3,
       },
-      [GrindRange.MEDIUM_FINE]: {
+      [GrindRangeName.MEDIUM_FINE]: {
         from: 3,
         to: 4,
       },
-      [GrindRange.MEDIUM]: {
+      [GrindRangeName.MEDIUM]: {
         from: 4,
         to: 6,
       },
-      [GrindRange.MEDIUM_COARSE]: {
+      [GrindRangeName.MEDIUM_COARSE]: {
         from: 6,
         to: 7,
       },
-      [GrindRange.COARSE]: {
+      [GrindRangeName.COARSE]: {
         from: 7,
         to: 8,
       },
-      [GrindRange.EXTRA_COARSE]: {
+      [GrindRangeName.EXTRA_COARSE]: {
         from: 8,
         to: 10,
       },
@@ -82,31 +87,31 @@ export const grinders = {
     min: 1,
     max: 40,
     ranges: {
-      [GrindRange.EXTRA_FINE]: {
+      [GrindRangeName.EXTRA_FINE]: {
         from: 1,
         to: 5,
       },
-      [GrindRange.FINE]: {
+      [GrindRangeName.FINE]: {
         from: 5,
         to: 10,
       },
-      [GrindRange.MEDIUM_FINE]: {
+      [GrindRangeName.MEDIUM_FINE]: {
         from: 10,
         to: 15,
       },
-      [GrindRange.MEDIUM]: {
+      [GrindRangeName.MEDIUM]: {
         from: 15,
         to: 20,
       },
-      [GrindRange.MEDIUM_COARSE]: {
+      [GrindRangeName.MEDIUM_COARSE]: {
         from: 20,
         to: 25,
       },
-      [GrindRange.COARSE]: {
+      [GrindRangeName.COARSE]: {
         from: 25,
         to: 30,
       },
-      [GrindRange.EXTRA_COARSE]: {
+      [GrindRangeName.EXTRA_COARSE]: {
         from: 30,
         to: 40,
       },
@@ -118,31 +123,31 @@ export const grinders = {
     min: 1,
     max: 40,
     ranges: {
-      [GrindRange.EXTRA_FINE]: {
+      [GrindRangeName.EXTRA_FINE]: {
         from: 1,
         to: 5,
       },
-      [GrindRange.FINE]: {
+      [GrindRangeName.FINE]: {
         from: 5,
         to: 10,
       },
-      [GrindRange.MEDIUM_FINE]: {
+      [GrindRangeName.MEDIUM_FINE]: {
         from: 10,
         to: 15,
       },
-      [GrindRange.MEDIUM]: {
+      [GrindRangeName.MEDIUM]: {
         from: 15,
         to: 20,
       },
-      [GrindRange.MEDIUM_COARSE]: {
+      [GrindRangeName.MEDIUM_COARSE]: {
         from: 20,
         to: 25,
       },
-      [GrindRange.COARSE]: {
+      [GrindRangeName.COARSE]: {
         from: 25,
         to: 30,
       },
-      [GrindRange.EXTRA_COARSE]: {
+      [GrindRangeName.EXTRA_COARSE]: {
         from: 30,
         to: 40,
       },
@@ -154,31 +159,31 @@ export const grinders = {
     min: 0,
     max: 10,
     ranges: {
-      [GrindRange.EXTRA_FINE]: {
+      [GrindRangeName.EXTRA_FINE]: {
         from: 0,
         to: 1,
       },
-      [GrindRange.FINE]: {
+      [GrindRangeName.FINE]: {
         from: 1,
         to: 2,
       },
-      [GrindRange.MEDIUM_FINE]: {
+      [GrindRangeName.MEDIUM_FINE]: {
         from: 2,
         to: 4,
       },
-      [GrindRange.MEDIUM]: {
+      [GrindRangeName.MEDIUM]: {
         from: 4,
         to: 6,
       },
-      [GrindRange.MEDIUM_COARSE]: {
+      [GrindRangeName.MEDIUM_COARSE]: {
         from: 6,
         to: 7,
       },
-      [GrindRange.COARSE]: {
+      [GrindRangeName.COARSE]: {
         from: 7,
         to: 8,
       },
-      [GrindRange.EXTRA_COARSE]: {
+      [GrindRangeName.EXTRA_COARSE]: {
         from: 8,
         to: 10,
       },
@@ -190,31 +195,31 @@ export const grinders = {
     min: 1,
     max: 18,
     ranges: {
-      [GrindRange.EXTRA_FINE]: {
+      [GrindRangeName.EXTRA_FINE]: {
         from: 1,
         to: 2,
       },
-      [GrindRange.FINE]: {
+      [GrindRangeName.FINE]: {
         from: 2,
         to: 4,
       },
-      [GrindRange.MEDIUM_FINE]: {
+      [GrindRangeName.MEDIUM_FINE]: {
         from: 4,
         to: 7,
       },
-      [GrindRange.MEDIUM]: {
+      [GrindRangeName.MEDIUM]: {
         from: 7,
         to: 10,
       },
-      [GrindRange.MEDIUM_COARSE]: {
+      [GrindRangeName.MEDIUM_COARSE]: {
         from: 10,
         to: 13,
       },
-      [GrindRange.COARSE]: {
+      [GrindRangeName.COARSE]: {
         from: 13,
         to: 16,
       },
-      [GrindRange.EXTRA_COARSE]: {
+      [GrindRangeName.EXTRA_COARSE]: {
         from: 17,
         to: 18,
       },
@@ -226,31 +231,31 @@ export const grinders = {
     min: 0,
     max: 16,
     ranges: {
-      [GrindRange.EXTRA_FINE]: {
+      [GrindRangeName.EXTRA_FINE]: {
         from: 0,
         to: 2,
       },
-      [GrindRange.FINE]: {
+      [GrindRangeName.FINE]: {
         from: 2,
         to: 4,
       },
-      [GrindRange.MEDIUM_FINE]: {
+      [GrindRangeName.MEDIUM_FINE]: {
         from: 4,
         to: 6,
       },
-      [GrindRange.MEDIUM]: {
+      [GrindRangeName.MEDIUM]: {
         from: 6,
         to: 8,
       },
-      [GrindRange.MEDIUM_COARSE]: {
+      [GrindRangeName.MEDIUM_COARSE]: {
         from: 8,
         to: 10,
       },
-      [GrindRange.COARSE]: {
+      [GrindRangeName.COARSE]: {
         from: 10,
         to: 12,
       },
-      [GrindRange.EXTRA_COARSE]: {
+      [GrindRangeName.EXTRA_COARSE]: {
         from: 12,
         to: 16,
       },
@@ -262,31 +267,31 @@ export const grinders = {
     min: 1,
     max: 11,
     ranges: {
-      [GrindRange.EXTRA_FINE]: {
+      [GrindRangeName.EXTRA_FINE]: {
         from: 1,
         to: 2,
       },
-      [GrindRange.FINE]: {
+      [GrindRangeName.FINE]: {
         from: 2,
         to: 3,
       },
-      [GrindRange.MEDIUM_FINE]: {
+      [GrindRangeName.MEDIUM_FINE]: {
         from: 3,
         to: 4,
       },
-      [GrindRange.MEDIUM]: {
+      [GrindRangeName.MEDIUM]: {
         from: 4,
         to: 6,
       },
-      [GrindRange.MEDIUM_COARSE]: {
+      [GrindRangeName.MEDIUM_COARSE]: {
         from: 6,
         to: 7,
       },
-      [GrindRange.COARSE]: {
+      [GrindRangeName.COARSE]: {
         from: 7,
         to: 10,
       },
-      [GrindRange.EXTRA_COARSE]: {
+      [GrindRangeName.EXTRA_COARSE]: {
         from: 10,
         to: 11,
       },

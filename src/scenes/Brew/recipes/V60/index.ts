@@ -1,4 +1,4 @@
-import { GrindRange } from '../../../../constants/grinders';
+import { GrindRangeName } from '../../../../constants/grinders';
 import { StepType, BrewRecipeName } from '../types';
 import AddGrounds from './images/addgrounds.png';
 import AfterBloom from './images/afterbloom.gif';
@@ -14,7 +14,7 @@ export default {
   title: 'V60 #02',
   minYield: 100,
   maxYield: 700,
-  grindRange: GrindRange.MEDIUM,
+  grindRangeName: GrindRangeName.MEDIUM,
   defaultTotalVolume: 340,
   defaultSource: Default,
   iced: true,

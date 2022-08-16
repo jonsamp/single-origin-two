@@ -1,4 +1,4 @@
-import { GrindRange } from '../../../../constants/grinders';
+import { GrindRangeName } from '../../../../constants/grinders';
 import { StepType, BrewRecipeName } from '../types';
 import AddGrounds from './images/addgrounds.png';
 import AfterBloom from './images/afterbloom.gif';
@@ -14,7 +14,7 @@ export default {
   title: 'Beehouse',
   minYield: 142,
   maxYield: 567,
-  grindRange: GrindRange.MEDIUM_FINE,
+  grindRangeName: GrindRangeName.MEDIUM_FINE,
   defaultTotalVolume: 340,
   defaultSource: Default,
   iced: true,

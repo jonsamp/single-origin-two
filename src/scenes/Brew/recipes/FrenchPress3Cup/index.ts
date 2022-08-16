@@ -1,4 +1,4 @@
-import { GrindRange } from '../../../../constants/grinders';
+import { GrindRangeName } from '../../../../constants/grinders';
 import { StepType, BrewRecipeName } from '../types';
 import AddGrounds from './images/addgrounds.jpg';
 import AfterBloom from './images/afterbloom.gif';
@@ -15,7 +15,7 @@ export default {
   title: 'French Press 3 Cup',
   minYield: 200,
   maxYield: 352,
-  grindRange: GrindRange.COARSE,
+  grindRangeName: GrindRangeName.COARSE,
   defaultTotalVolume: 272,
   defaultSource: Default,
   pourVelocity: 40,

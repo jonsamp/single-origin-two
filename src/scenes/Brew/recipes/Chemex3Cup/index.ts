@@ -1,4 +1,4 @@
-import { GrindRange } from '../../../../constants/grinders';
+import { GrindRangeName } from '../../../../constants/grinders';
 import AddGrounds from '../Chemex/images/addgrounds.gif';
 import AfterBloom from '../Chemex/images/afterbloom.gif';
 import AfterPour from '../Chemex/images/afterpour.gif';
@@ -14,7 +14,7 @@ export default {
   title: 'Chemex 3 Cup',
   minYield: 120,
   maxYield: 550,
-  grindRange: GrindRange.MEDIUM,
+  grindRangeName: GrindRangeName.MEDIUM,
   defaultTotalVolume: 360,
   defaultSource: Default,
   iced: true,

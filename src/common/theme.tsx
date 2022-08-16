@@ -2,8 +2,6 @@ import { lightTheme, darkTheme as styleguideDarkTheme } from '@expo/styleguide-n
 import { useTheme as RNUseTheme, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { useTailwind as useTailWindRN } from 'tailwind-rn';
 
-import { typography } from './typography';
-
 export const defaultTheme = {
   dark: false,
   colors: {

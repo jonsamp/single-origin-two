@@ -1,4 +1,4 @@
-import { GrindRange } from '../../../../constants/grinders';
+import { GrindRangeName } from '../../../../constants/grinders';
 import { StepType, BrewRecipeName } from '../types';
 import AddGrounds from './images/addgrounds.gif';
 import AfterBloom from './images/afterbloom.gif';
@@ -14,7 +14,7 @@ export default {
   title: 'Chemex',
   minYield: 200,
   maxYield: 1200,
-  grindRange: GrindRange.MEDIUM,
+  grindRangeName: GrindRangeName.MEDIUM,
   defaultTotalVolume: 720,
   defaultSource: Default,
   iced: true,
