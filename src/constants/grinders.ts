@@ -6,95 +6,295 @@ import mediumCoarse from './images/medium-coarse.jpeg';
 import mediumFine from './images/medium-fine.jpeg';
 import medium from './images/medium.jpeg';
 
-const grinders = {
+export enum GrindRangeName {
+  EXTRA_FINE = 'extra-fine',
+  FINE = 'fine',
+  MEDIUM_FINE = 'medium-fine',
+  MEDIUM = 'medium',
+  MEDIUM_COARSE = 'medium-coarse',
+  COARSE = 'coarse',
+  EXTRA_COARSE = 'extra-coarse',
+}
+
+export type GrindRange = {
+  from: number;
+  to: number;
+};
+
+export function getVerboseSetting(grindRange: GrindRangeName) {
+  return String(grindRange).replace('-', ' ');
+}
+
+export function getGrindImage(grindRange: GrindRangeName) {
+  switch (grindRange) {
+    case GrindRangeName.EXTRA_FINE:
+      return extraFine;
+    case GrindRangeName.FINE:
+      return fine;
+    case GrindRangeName.MEDIUM_FINE:
+      return mediumFine;
+    case GrindRangeName.MEDIUM:
+      return medium;
+    case GrindRangeName.MEDIUM_COARSE:
+      return mediumCoarse;
+    case GrindRangeName.COARSE:
+      return coarse;
+    case GrindRangeName.EXTRA_COARSE:
+      return extraCoarse;
+  }
+}
+
+export const grinders = {
   generic: {
-    title: 'Generic grinder (1-10)',
-    shortTitle: 'grinder',
     id: 'generic',
+    title: 'Generic grinder',
     min: 1,
     max: 10,
+    ranges: {
+      [GrindRangeName.EXTRA_FINE]: {
+        from: 1,
+        to: 2,
+      },
+      [GrindRangeName.FINE]: {
+        from: 2,
+        to: 3,
+      },
+      [GrindRangeName.MEDIUM_FINE]: {
+        from: 3,
+        to: 4,
+      },
+      [GrindRangeName.MEDIUM]: {
+        from: 4,
+        to: 6,
+      },
+      [GrindRangeName.MEDIUM_COARSE]: {
+        from: 6,
+        to: 7,
+      },
+      [GrindRangeName.COARSE]: {
+        from: 7,
+        to: 8,
+      },
+      [GrindRangeName.EXTRA_COARSE]: {
+        from: 8,
+        to: 10,
+      },
+    },
   },
   encore: {
-    title: 'Baratza Encore (1-40)',
-    shortTitle: 'Baratza Encore',
     id: 'encore',
+    title: 'Baratza Encore',
     min: 1,
     max: 40,
+    ranges: {
+      [GrindRangeName.EXTRA_FINE]: {
+        from: 1,
+        to: 5,
+      },
+      [GrindRangeName.FINE]: {
+        from: 5,
+        to: 10,
+      },
+      [GrindRangeName.MEDIUM_FINE]: {
+        from: 10,
+        to: 15,
+      },
+      [GrindRangeName.MEDIUM]: {
+        from: 15,
+        to: 20,
+      },
+      [GrindRangeName.MEDIUM_COARSE]: {
+        from: 20,
+        to: 25,
+      },
+      [GrindRangeName.COARSE]: {
+        from: 25,
+        to: 30,
+      },
+      [GrindRangeName.EXTRA_COARSE]: {
+        from: 30,
+        to: 40,
+      },
+    },
   },
   virtuoso: {
-    title: 'Baratza Virtuoso (1-40)',
-    shortTitle: 'Baratza Virtuoso',
     id: 'virtuoso',
+    title: 'Baratza Virtuoso',
     min: 1,
     max: 40,
+    ranges: {
+      [GrindRangeName.EXTRA_FINE]: {
+        from: 1,
+        to: 5,
+      },
+      [GrindRangeName.FINE]: {
+        from: 5,
+        to: 10,
+      },
+      [GrindRangeName.MEDIUM_FINE]: {
+        from: 10,
+        to: 15,
+      },
+      [GrindRangeName.MEDIUM]: {
+        from: 15,
+        to: 20,
+      },
+      [GrindRangeName.MEDIUM_COARSE]: {
+        from: 20,
+        to: 25,
+      },
+      [GrindRangeName.COARSE]: {
+        from: 25,
+        to: 30,
+      },
+      [GrindRangeName.EXTRA_COARSE]: {
+        from: 30,
+        to: 40,
+      },
+    },
   },
   infinity: {
-    title: 'Capresso Infinity (0-10)',
-    shortTitle: 'Capresso Infinity',
     id: 'infinity',
+    title: 'Capresso Infinity',
     min: 0,
     max: 10,
+    ranges: {
+      [GrindRangeName.EXTRA_FINE]: {
+        from: 0,
+        to: 1,
+      },
+      [GrindRangeName.FINE]: {
+        from: 1,
+        to: 2,
+      },
+      [GrindRangeName.MEDIUM_FINE]: {
+        from: 2,
+        to: 4,
+      },
+      [GrindRangeName.MEDIUM]: {
+        from: 4,
+        to: 6,
+      },
+      [GrindRangeName.MEDIUM_COARSE]: {
+        from: 6,
+        to: 7,
+      },
+      [GrindRangeName.COARSE]: {
+        from: 7,
+        to: 8,
+      },
+      [GrindRangeName.EXTRA_COARSE]: {
+        from: 8,
+        to: 10,
+      },
+    },
   },
   cuisinart: {
-    title: 'Cuisinart DBM-8 (1-18)',
-    shortTitle: 'Capresso DBM-8',
     id: 'cuisinart',
+    title: 'Cuisinart DBM-8',
     min: 1,
     max: 18,
+    ranges: {
+      [GrindRangeName.EXTRA_FINE]: {
+        from: 1,
+        to: 2,
+      },
+      [GrindRangeName.FINE]: {
+        from: 2,
+        to: 4,
+      },
+      [GrindRangeName.MEDIUM_FINE]: {
+        from: 4,
+        to: 7,
+      },
+      [GrindRangeName.MEDIUM]: {
+        from: 7,
+        to: 10,
+      },
+      [GrindRangeName.MEDIUM_COARSE]: {
+        from: 10,
+        to: 13,
+      },
+      [GrindRangeName.COARSE]: {
+        from: 13,
+        to: 16,
+      },
+      [GrindRangeName.EXTRA_COARSE]: {
+        from: 17,
+        to: 18,
+      },
+    },
   },
   mahlkonigEK43: {
-    title: 'Mahlkönig EK43 (0-16)',
-    shortTitle: 'Mahlkönig EK43',
     id: 'mahlkonigEK43',
+    title: 'Mahlkönig EK43',
     min: 0,
     max: 16,
+    ranges: {
+      [GrindRangeName.EXTRA_FINE]: {
+        from: 0,
+        to: 2,
+      },
+      [GrindRangeName.FINE]: {
+        from: 2,
+        to: 4,
+      },
+      [GrindRangeName.MEDIUM_FINE]: {
+        from: 4,
+        to: 6,
+      },
+      [GrindRangeName.MEDIUM]: {
+        from: 6,
+        to: 8,
+      },
+      [GrindRangeName.MEDIUM_COARSE]: {
+        from: 8,
+        to: 10,
+      },
+      [GrindRangeName.COARSE]: {
+        from: 10,
+        to: 12,
+      },
+      [GrindRangeName.EXTRA_COARSE]: {
+        from: 12,
+        to: 16,
+      },
+    },
   },
   ode: {
-    title: 'Fellow Ode (1 - 11)',
-    shortTitle: 'Fellow Ode',
     id: 'ode',
+    title: 'Fellow Ode',
     min: 1,
     max: 11,
+    ranges: {
+      [GrindRangeName.EXTRA_FINE]: {
+        from: 1,
+        to: 2,
+      },
+      [GrindRangeName.FINE]: {
+        from: 2,
+        to: 3,
+      },
+      [GrindRangeName.MEDIUM_FINE]: {
+        from: 3,
+        to: 4,
+      },
+      [GrindRangeName.MEDIUM]: {
+        from: 4,
+        to: 6,
+      },
+      [GrindRangeName.MEDIUM_COARSE]: {
+        from: 6,
+        to: 7,
+      },
+      [GrindRangeName.COARSE]: {
+        from: 7,
+        to: 10,
+      },
+      [GrindRangeName.EXTRA_COARSE]: {
+        from: 10,
+        to: 11,
+      },
+    },
   },
 };
-
-const getVerboseSetting = (percent: number) => {
-  const interval = 0.14285714286;
-  if (percent <= interval) {
-    return {
-      title: 'extra fine',
-      image: extraFine,
-    };
-  } else if (percent <= interval * 2) {
-    return {
-      title: 'fine',
-      image: fine,
-    };
-  } else if (percent <= interval * 3) {
-    return {
-      title: 'medium fine',
-      image: mediumFine,
-    };
-  } else if (percent <= interval * 4) {
-    return {
-      title: 'medium',
-      image: medium,
-    };
-  } else if (percent <= interval * 5) {
-    return {
-      title: 'medium coarse',
-      image: mediumCoarse,
-    };
-  } else if (percent <= interval * 6) {
-    return {
-      title: 'coarse',
-      image: coarse,
-    };
-  }
-  return {
-    title: 'extra coarse',
-    image: extraCoarse,
-  };
-};
-
-export { grinders, getVerboseSetting };

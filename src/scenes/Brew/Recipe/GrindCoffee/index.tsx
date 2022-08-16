@@ -4,39 +4,63 @@ import { Image } from 'react-native';
 import { useSettings } from '../../../../common/useSettings';
 import Card from '../../../../components/Card';
 import Instructions from '../../../../components/Instructions';
+import { getGrindImage, getVerboseSetting } from '../../../../constants/grinders';
 import { height } from '../../../../constants/layout';
 import { getValueUnit } from '../../../../scenes/Brew/helpers';
 import { Log } from '../../../../state/logs/types';
+import { BrewRecipe } from '../../recipes/types';
 
 type Props = {
   coffeeWeight: number;
-  defaultGrind: number;
-  title: string;
   recentLog: Log;
+  recipe: BrewRecipe;
 };
 
 function GrindCoffee(props: Props) {
-  const { coffeeWeight, defaultGrind, title, recentLog } = props;
+  const { coffeeWeight, recentLog, recipe } = props;
   const { unitHelpers } = useSettings();
   const { coffeeWeightUnit, grindUnit } = unitHelpers;
-  let recommendation;
-  let grindFromLastTime = '';
 
-  if (recentLog.grind) {
-    grindFromLastTime = ` you brewed with a grind setting of ${recentLog.grind} and`;
+  function getHint() {
+    let recommendation;
+    let grindFromLastTime = '';
+
+    if (recentLog.grind) {
+      grindFromLastTime = ` you brewed with a grind setting of ${recentLog.grind} and`;
+    }
+
+    if (recentLog.tastingNote === 'bitter') {
+      recommendation = `Last time${grindFromLastTime} your coffee was bitter. Try grinding your coffee coarser this time.`;
+    } else if (recentLog.tastingNote === 'sour') {
+      recommendation = `Last time${grindFromLastTime} your coffee was sour. Try grinding your coffee finer this time.`;
+    }
+
+    return recommendation;
   }
 
-  if (recentLog.tastingNote === 'bitter') {
-    recommendation = `Last time${grindFromLastTime} your coffee was bitter. Try grinding your coffee coarser this time.`;
-  } else if (recentLog.tastingNote === 'sour') {
-    recommendation = `Last time${grindFromLastTime} your coffee was sour. Try grinding your coffee finer this time.`;
+  function getInstructions() {
+    const grinder = grindUnit.grinder;
+    const grindRange = grinder.ranges[recipe.grindRangeName];
+    const coffeeWeightDescription = getValueUnit(coffeeWeightUnit, coffeeWeight);
+    let grinderTitle = grinder.id === 'generic' ? 'grinder' : grinder.title;
+    let grindSettingDescription = `between the ${grindRange.from} and ${grindRange.to} settings`;
+
+    if (grindRange.from === grindRange.to) {
+      grindSettingDescription = `on the ${grindRange.from} setting`;
+    }
+
+    if (grinder.id === 'generic') {
+      grindSettingDescription = `to a ${getVerboseSetting(recipe.grindRangeName)} coarseness`;
+    }
+
+    return `Grind **${coffeeWeightDescription}** of coffee **${grindSettingDescription}** with your ${grinderTitle}, then add the grounds to your ${recipe.title.toLowerCase()}.`;
   }
 
   return (
     <Card>
-      {grindUnit.grinder.shortTitle === 'grinder' ? (
+      {grindUnit.grinder.id === 'generic' ? (
         <Image
-          source={grindUnit.getGrindSetting(defaultGrind).image}
+          source={getGrindImage(recipe.grindRangeName)}
           style={{
             resizeMode: 'cover',
             width: '100%',
@@ -44,15 +68,7 @@ function GrindCoffee(props: Props) {
           }}
         />
       ) : null}
-      <Instructions
-        text={`Grind **${getValueUnit(coffeeWeightUnit, coffeeWeight)}** of coffee to **${
-          grindUnit.getGrindSetting(defaultGrind).title
-        }** with your ${
-          grindUnit.grinder.shortTitle
-        }, then add the grounds to your ${title.toLowerCase()}.`}
-        icon="GrindIcon"
-        hint={recommendation}
-      />
+      <Instructions text={getInstructions()} icon="GrindIcon" hint={getHint()} />
     </Card>
   );
 }

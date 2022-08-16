@@ -1,3 +1,5 @@
+import { GrindRangeName } from '../../../constants/grinders';
+
 export enum StepType {
   Pour = 'pour',
   Tip = 'tip',
@@ -41,7 +43,7 @@ export type BrewRecipe = {
   title: string;
   minYield: number;
   maxYield: number;
-  defaultGrind: number;
+  grindRangeName: GrindRangeName;
   defaultTotalVolume: number;
   defaultSource: number;
   iced?: boolean;

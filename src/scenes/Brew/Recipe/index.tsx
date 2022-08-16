@@ -81,7 +81,7 @@ function Recipe(props: RecipeProps) {
       ...(attributesRecorded && settings.recordGrind
         ? {
             grind:
-              grind ?? unitHelpers.grindUnit.getPreferredValueBasedOnPercent(recipe.defaultGrind),
+              grind ?? unitHelpers.grindUnit.getPreferredValueBasedOnRange(recipe.grindRangeName),
           }
         : null),
       ...(attributesRecorded && settings.recordTemp
@@ -97,8 +97,7 @@ function Recipe(props: RecipeProps) {
     navigation.navigate('BrewSummary', { timestamp });
   }
 
-  const { grindUnit, temperatureUnit } = unitHelpers;
-  const { minYield, maxYield, defaultGrind } = recipe;
+  const { minYield, maxYield } = recipe;
   const { totalVolume, grind, temp } = recipeState;
   const coffeeWeight = Math.round(totalVolume / settings.ratio);
   const totalPourVolume = recipeState.isIced ? Math.round(totalVolume * 0.666) : totalVolume;
@@ -116,20 +115,13 @@ function Recipe(props: RecipeProps) {
         {recipe.iced && <IceToggle value={recipeState.isIced} onChange={onIsIcedChange} />}
         {recentLog.notes ? <Notes text={recentLog.notes} /> : null}
         <BoilWater volume={totalPourVolume} />
-        <GrindCoffee
-          coffeeWeight={coffeeWeight}
-          defaultGrind={defaultGrind}
-          title={recipe.title}
-          recentLog={recentLog}
-        />
+        <GrindCoffee coffeeWeight={coffeeWeight} recentLog={recentLog} recipe={recipe} />
         {recipeState.isIced && <AddIce volume={Math.round(totalVolume * 0.333)} />}
         <RecordBrewAttributes
           setRecipeState={setRecipeState}
-          defaultGrind={defaultGrind}
           grind={grind}
           temp={temp}
-          grindUnit={grindUnit}
-          temperatureUnit={temperatureUnit}
+          grindRangeName={recipe.grindRangeName}
         />
         <PourTimer
           recipe={recipe}

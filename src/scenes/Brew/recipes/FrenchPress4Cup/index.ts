@@ -1,3 +1,4 @@
+import { GrindRangeName } from '../../../../constants/grinders';
 import AddGrounds from '../FrenchPress3Cup/images/addgrounds.jpg';
 import AfterBloom from '../FrenchPress3Cup/images/afterbloom.gif';
 import AttachLid from '../FrenchPress3Cup/images/attachlid.gif';
@@ -14,7 +15,7 @@ export default {
   title: 'French Press 4 Cup',
   minYield: 200,
   maxYield: 640,
-  defaultGrind: 0.85,
+  grindRangeName: GrindRangeName.COARSE,
   defaultTotalVolume: 432,
   pourVelocity: 40,
   defaultSource: Default,
