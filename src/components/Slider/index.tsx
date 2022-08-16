@@ -46,12 +46,17 @@ async function haptic() {
 
 function getStepValue(value: number, oneStepValue: number, min: number) {
   'worklet';
-  return Math.round(value / oneStepValue) + min;
+  return value / oneStepValue + min;
 }
 
 function clamp(translationX: number, offsetX: number) {
   'worklet';
   return Math.min(Math.max(translationX + offsetX, 0), SLIDER_WIDTH - KNOB_WIDTH);
+}
+
+function getXValue(value: number, min: number = 0, oneStepValue: number) {
+  'worklet';
+  return (value - min) * oneStepValue;
 }
 
 Animated.addWhitelistedNativeProps({ text: true });
@@ -70,12 +75,7 @@ function Slider(props: Props) {
   const tw = useTailwind();
   const sliderRange = SLIDER_WIDTH - KNOB_WIDTH;
   const oneStepValue = sliderRange / (max - min);
-
-  function getXValue(value: number, min: number = 0) {
-    return (value - min) * oneStepValue;
-  }
-
-  const translateX = useSharedValue(getXValue(defaultValue - min));
+  const translateX = useSharedValue(getXValue(defaultValue, min, oneStepValue));
   const isSliding = useSharedValue(false);
 
   const onGestureEvent = useAnimatedGestureHandler({
@@ -126,8 +126,8 @@ function Slider(props: Props) {
   const stepText = useDerivedValue(() => {
     const step = getStepValue(translateX.value, oneStepValue, min);
 
-    return String(step);
-  });
+    return String(step.toFixed(0));
+  }, [translateX.value]);
 
   const animatedProps: any = useAnimatedProps(() => {
     return {
@@ -144,9 +144,7 @@ function Slider(props: Props) {
 
     onChange(newValue);
     haptic();
-    translateX.value = withTiming(getXValue(newValue, min), { duration: 100 });
-    // @ts-ignore stepText.value is readonly. Setting to update the text on screen.
-    stepText.value = String(newValue);
+    translateX.value = withTiming(getXValue(newValue, min, oneStepValue), { duration: 100 });
   }
 
   return (
@@ -167,7 +165,7 @@ function Slider(props: Props) {
               sliderValueStyle,
             ]}
             animatedProps={animatedProps}
-            value={stepText.value}
+            defaultValue={String(defaultValue)}
           />
           <IncrementButton icon={<PlusIcon />} onPress={() => increment(1)} />
         </View>
