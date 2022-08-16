@@ -145,8 +145,10 @@ function Log(props: Props) {
       {withReminder && notifications.status !== 'denied' ? (
         <TouchableOpacity onPress={toggleReminder} activeOpacity={0.75}>
           <Card
-            containerStyle={tw('mt-4 mb-0 mx-2 p-4 bg-overlay dark:bg-overlay-dark')}
-            style={tw('flex-row justify-between')}>
+            containerStyle={tw(
+              'mt-4 mb-0 mx-2 p-4 bg-overlay dark:bg-overlay-dark border border-default dark:border-default-dark'
+            )}
+            style={tw('flex-row justify-between border-0')}>
             <View style={tw('flex-1 mr-8')}>
               <Text type="headline">
                 {reminderScheduled ? 'Tasting reminder scheduled' : 'Send a tasting reminder'}
