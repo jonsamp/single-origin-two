@@ -42,7 +42,6 @@ function GrindCoffee(props: Props) {
     const grinder = grindUnit.grinder;
     const grindRange = grinder.ranges[recipe.grindRangeName];
     const coffeeWeightDescription = getValueUnit(coffeeWeightUnit, coffeeWeight);
-    console.log(grinder);
     let grinderTitle = grinder.id === 'generic' ? 'grinder' : grinder.title;
     let grindSettingDescription = `between the ${grindRange.from} and ${grindRange.to} settings`;
 
