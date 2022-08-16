@@ -2,7 +2,7 @@
   "expo": {
     "name": "Single Origin",
     "slug": "single-origin-two",
-    "version": "46.0",
+    "version": "46.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "description": "Learn to brew specialty coffee.",
@@ -47,7 +47,7 @@
       ]
     },
     "runtimeVersion": {
-      "policy": "sdkVersion"
+      "policy": "appVersion"
     }
   }
 }
