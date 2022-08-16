@@ -15,7 +15,6 @@ export default {
   title: 'Aeropress',
   minYield: 180,
   maxYield: 300,
-  defaultGrind: 0.3,
   grindRange: GrindRange.FINE,
   defaultTotalVolume: 240,
   defaultSource: Default,

@@ -1,3 +1,4 @@
+import { GrindRange } from '../../../../constants/grinders';
 import AddGrounds from '../V60/images/addgrounds.png';
 import AfterBloom from '../V60/images/afterbloom.gif';
 import Finish from '../V60/images/afterfinish.gif';
@@ -13,7 +14,7 @@ export default {
   title: 'V60 #01',
   minYield: 100,
   maxYield: 500,
-  defaultGrind: 0.5,
+  grindRange: GrindRange.MEDIUM,
   defaultTotalVolume: 280,
   defaultSource: Default,
   iced: true,

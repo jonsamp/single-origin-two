@@ -4,6 +4,7 @@ import { Image } from 'react-native';
 import { useSettings } from '../../../../common/useSettings';
 import Card from '../../../../components/Card';
 import Instructions from '../../../../components/Instructions';
+import { getGrindImage, GrindRange } from '../../../../constants/grinders';
 import { height } from '../../../../constants/layout';
 import { getValueUnit } from '../../../../scenes/Brew/helpers';
 import { Log } from '../../../../state/logs/types';
@@ -13,10 +14,7 @@ type Props = {
   defaultGrind: number;
   title: string;
   recentLog: Log;
-  grindRange?: {
-    from: number;
-    to: number;
-  };
+  grindRange: GrindRange;
 };
 
 function GrindCoffee(props: Props) {
@@ -26,8 +24,7 @@ function GrindCoffee(props: Props) {
   let recommendation;
   let grindFromLastTime = '';
   const grinderSetting =
-    grindUnit.getGrindRange(grindRange ?? null)?.title ??
-    grindUnit.getGrindSetting(defaultGrind).title;
+    grindUnit.getGrindRange(grindRange).title ?? grindUnit.getGrindSetting(defaultGrind).title;
 
   if (recentLog.grind) {
     grindFromLastTime = ` you brewed with a grind setting of ${recentLog.grind} and`;
@@ -39,11 +36,13 @@ function GrindCoffee(props: Props) {
     recommendation = `Last time${grindFromLastTime} your coffee was sour. Try grinding your coffee finer this time.`;
   }
 
+  function getHint() {} //TODO:
+
   return (
     <Card>
-      {grindUnit.grinder.shortTitle === 'grinder' ? (
+      {grindUnit.grinder.id === 'generic' ? (
         <Image
-          source={grindUnit.getGrindSetting(defaultGrind).image}
+          source={getGrindImage(grindRange)}
           style={{
             resizeMode: 'cover',
             width: '100%',
@@ -56,7 +55,7 @@ function GrindCoffee(props: Props) {
           coffeeWeightUnit,
           coffeeWeight
         )}** of coffee to **${grinderSetting}** with your ${
-          grindUnit.grinder.shortTitle
+          grindUnit.grinder.title
         }, then add the grounds to your ${title.toLowerCase()}.`}
         icon="GrindIcon"
         hint={recommendation}

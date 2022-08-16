@@ -1,3 +1,5 @@
+import { GrindRange } from '../../constants/grinders';
+
 export enum WeightUnits {
   Grams = 'grams',
   Ounces = 'ounces',
@@ -41,6 +43,7 @@ export interface GrindHelper {
   };
   grinder: Grinder;
   unit: { symbol: string };
+  getPreferredValueBasedOnRange: (grindRange: GrindRange) => number;
 }
 
 export interface Unit {

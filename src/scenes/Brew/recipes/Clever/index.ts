@@ -1,3 +1,4 @@
+import { GrindRange } from '../../../../constants/grinders';
 import { StepType, BrewRecipeName } from '../types';
 import AddGrounds from './images/add-grounds.jpg';
 import AfterBloom from './images/afterbloom.gif';
@@ -14,7 +15,7 @@ export default {
   title: 'Clever',
   minYield: 142,
   maxYield: 516,
-  defaultGrind: 0.75,
+  grindRange: GrindRange.MEDIUM,
   defaultTotalVolume: 340,
   defaultSource: Default,
   preparation: [

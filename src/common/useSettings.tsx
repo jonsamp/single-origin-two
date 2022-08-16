@@ -63,7 +63,7 @@ export function useSettings() {
           image: null,
         };
       },
-      getGrindRange: (range: GrindRange | null) => {
+      getGrindRange: (range: GrindRange) => {
         if (!range) {
           return {};
         }

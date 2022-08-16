@@ -80,8 +80,7 @@ function Recipe(props: RecipeProps) {
       ratio: settings.ratio,
       ...(attributesRecorded && settings.recordGrind
         ? {
-            grind:
-              grind ?? unitHelpers.grindUnit.getPreferredValueBasedOnPercent(recipe.defaultGrind),
+            grind: grind ?? unitHelpers.grindUnit.getPreferredValueBasedOnRange(recipe.grindRange),
           }
         : null),
       ...(attributesRecorded && settings.recordTemp
@@ -98,7 +97,7 @@ function Recipe(props: RecipeProps) {
   }
 
   const { grindUnit, temperatureUnit } = unitHelpers;
-  const { minYield, maxYield, defaultGrind } = recipe;
+  const { minYield, maxYield } = recipe;
   const { totalVolume, grind, temp } = recipeState;
   const coffeeWeight = Math.round(totalVolume / settings.ratio);
   const totalPourVolume = recipeState.isIced ? Math.round(totalVolume * 0.666) : totalVolume;
@@ -118,15 +117,13 @@ function Recipe(props: RecipeProps) {
         <BoilWater volume={totalPourVolume} />
         <GrindCoffee
           coffeeWeight={coffeeWeight}
-          defaultGrind={defaultGrind}
-          title={recipe.title}
           recentLog={recentLog}
+          title={recipe.title}
           grindRange={recipe.grindRange}
         />
         {recipeState.isIced && <AddIce volume={Math.round(totalVolume * 0.333)} />}
         <RecordBrewAttributes
           setRecipeState={setRecipeState}
-          defaultGrind={defaultGrind}
           grind={grind}
           temp={temp}
           grindUnit={grindUnit}
