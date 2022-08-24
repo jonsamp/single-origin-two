@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'build:development')
     steps:
+      - uses: actions/checkout@v2
       - uses: ./.github/workflows/setup
       - name: Development build
         run: eas build --profile development --platform ios
@@ -17,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'build:preview')
     steps:
+      - uses: actions/checkout@v2
       - uses: ./.github/workflows/setup
       - name: Preview build
         run: eas build --profile preview --platform ios
