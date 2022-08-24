@@ -5,7 +5,7 @@ on:
 
 jobs:
   build-development:
-    name: EAS Build
+    name: 'EAS Build: Development'
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'build:development')
     steps:
@@ -14,7 +14,7 @@ jobs:
       - name: Development build
         run: eas build --profile development --platform ios
   build-preview:
-    name: EAS Build
+    name: 'EAS Build: Preview'
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'build:preview')
     steps:
