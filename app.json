@@ -46,6 +46,8 @@
         }
       ]
     },
-    "runtimeVersion": "46.1"
+    "runtimeVersion": {
+      "policy": "appVersion"
+    }
   }
 }

@@ -1,5 +1,11 @@
 # Notes
 
+## August 16, 2022
+
+- TODO: make sure when recording grind setting and temp, that they actually get recorded.
+- Fixed a bug where the incrementing a slider with the plus and minus buttons sometimes would not show the correct value.
+- Updated the grind instructions to display a range of grind settings.
+
 ## August 9, 2022 - August 10, 2022
 
 - Removed onboarding
