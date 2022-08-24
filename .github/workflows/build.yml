@@ -7,6 +7,7 @@ jobs:
   setup:
     name: 'Setup'
     runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'build:preview') || contains(github.event.pull_request.labels.*.name, 'build:production')
     steps:
       - name: Check for EXPO_TOKEN
         run: |
@@ -19,15 +20,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 16.x
-
-      - name: Expo GitHub Action
-        uses: expo/expo-github-action@v7
-        with:
-          expo-version: latest
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
-          expo-cache: true
-          eas-cache: true
 
       - name: Find cache
         id: yarn-cache-dir-path
@@ -52,6 +44,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Expo GitHub Action
+        uses: expo/expo-github-action@v7
+        with:
+          expo-version: latest
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+          expo-cache: true
+          eas-cache: true
 
       - name: Build development profile
         run: eas build --profile development --platform ios
