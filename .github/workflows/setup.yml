@@ -1,15 +1,8 @@
-name: build-development
-on:
-  pull_request:
-    types: [labeled, reopened, synchronize, opened]
+name: yarn-install
 
-jobs:
-  update:
-    name: EAS Build
-    runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'build:development')
-    steps:
-      - name: Check for EXPO_TOKEN
+runs:
+  steps:
+    - name: Check for EXPO_TOKEN
         run: |
           if [ -z "${{ secrets.EXPO_TOKEN }}" ]; then
             echo "You must provide an EXPO_TOKEN secret linked to this project's Expo account in this repo's secrets. Learn more: https://docs.expo.dev/eas-update/github-actions"
@@ -26,5 +19,15 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
           expo-cache: true
           eas-cache: true
-      - name: Build development build
-        run: eas build --profile development --platform ios
+      - name: Find cache
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Restore cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        run: yarn install
