@@ -18,4 +18,79 @@ jobs:
           expo-token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Build on EAS
-        run: npx eas-cli build --profile development --platform ios --non-interactive
+        run: npx eas-cli build --profile development --platform ios --non-interactive --no-wait
+  build-preview:
+    name: 'EAS Build: Preview'
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'build:preview')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup
+        uses: ./.github/internal-actions/setup
+        with:
+          expo-token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Build on EAS
+        run: npx eas-cli build --profile preview --platform ios --non-interactive --no-wait
+  build-production:
+    name: 'EAS Build: Production'
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'build:production')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup
+        uses: ./.github/internal-actions/setup
+        with:
+          expo-token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Build on EAS
+        run: npx eas-cli build --profile production --platform ios --non-interactive --no-wait
+  build-development-simulator:
+    name: 'EAS Build: Development Simulator'
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'build:development-simulator')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup
+        uses: ./.github/internal-actions/setup
+        with:
+          expo-token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Build on EAS
+        run: npx eas-cli build --profile development-simulator --platform ios --non-interactive --no-wait
+  build-preview-simulator:
+    name: 'EAS Build: Preview Simulator'
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'build:preview-simulator')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup
+        uses: ./.github/internal-actions/setup
+        with:
+          expo-token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Build on EAS
+        run: npx eas-cli build --profile preview-simulator --platform ios --non-interactive --no-wait
+  build-production-simulator:
+    name: 'EAS Build: Production Simulator'
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'build:production-simulator')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup
+        uses: ./.github/internal-actions/setup
+        with:
+          expo-token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Build on EAS
+        run: npx eas-cli build --profile production-simulator --platform ios --non-interactive --no-wait
