@@ -38,7 +38,7 @@ function RecordBrewAttributes(props: Props) {
         onChange={(value) => {
           setRecipeState({
             key: 'grind',
-            value: grindUnit.getPreferredValue(value),
+            value: grindUnit.getPreferredValue(Math.round(value)),
           });
         }}
       />
@@ -66,7 +66,7 @@ function RecordBrewAttributes(props: Props) {
         onChange={(value) => {
           setRecipeState({
             key: 'temp',
-            value: unitHelpers?.temperatureUnit.getStandardValue(value),
+            value: unitHelpers?.temperatureUnit.getStandardValue(Math.round(value)),
           });
         }}
       />
