@@ -44,7 +44,6 @@ function Recipe(props: RecipeProps) {
     temp: recentLog.temp ?? 205,
     timestamp: new Date().getTime(),
     totalBrewTime: 0,
-    attributesRecorded: false,
     totalVolume: recentLog.totalVolume || recipe.defaultTotalVolume,
     isIced: false,
   });
@@ -72,19 +71,20 @@ function Recipe(props: RecipeProps) {
   }
 
   function onFinish() {
-    const { timestamp, totalVolume, grind, temp, totalBrewTime, attributesRecorded } = recipeState;
+    const { timestamp, totalVolume, grind, temp, totalBrewTime } = recipeState;
+
     const log = {
       timestamp,
       totalVolume,
       totalBrewTime,
       ratio: settings.ratio,
-      ...(attributesRecorded && settings.recordGrind
+      ...(settings.recordGrind
         ? {
             grind:
               grind ?? unitHelpers.grindUnit.getPreferredValueBasedOnRange(recipe.grindRangeName),
           }
         : null),
-      ...(attributesRecorded && settings.recordTemp
+      ...(settings.recordTemp
         ? {
             temp,
           }

@@ -107,7 +107,7 @@ function LogDetailEdit(props: Props) {
                 on {format(log.timestamp, 'MMM d, yyyy')}.
               </Text>
               <Text type="title">Tasting note</Text>
-              <View style={tw('rounded-md overflow-hidden mt-4 mb-6')}>
+              <View style={tw('rounded-md overflow-hidden mt-4 mb-6 border border-default')}>
                 <ChecklistSetting
                   items={[
                     {
