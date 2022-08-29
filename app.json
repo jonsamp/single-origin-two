@@ -21,7 +21,8 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.jonsamp.singleorigintwo"
+      "bundleIdentifier": "com.jonsamp.singleorigintwo",
+      "buildNumber": "2"
     },
     "android": {
       "versionCode": 21,
