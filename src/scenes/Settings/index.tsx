@@ -2,8 +2,9 @@ import { iconSize } from '@expo/styleguide-native';
 import Feather from '@expo/vector-icons/Feather';
 import React from 'react';
 import { Linking, TouchableOpacity, ScrollView, Platform } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind, useTheme } from '../../common/theme';
+import { useTheme } from '../../common/theme';
 import { Separator } from '../../components/Separator';
 import Group from './Group';
 import Section from './Section';
@@ -22,7 +23,7 @@ function Settings() {
   const tw = useTailwind();
 
   return (
-    <ScrollView style={tw('theme.background.screen px-4')}>
+    <ScrollView style={tw('bg-screen dark:bg-screen-dark px-4')}>
       <Section title="Brewing">
         <Group title="Brew Settings" icon={dark ? BrewSettingsImageDark : BrewSettingsImage} />
         <Separator leftWidth="w-16" />

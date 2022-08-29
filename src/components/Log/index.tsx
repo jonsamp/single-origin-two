@@ -2,13 +2,15 @@ import { iconSize, WarningIcon } from '@expo/styleguide-native';
 import Feather from '@expo/vector-icons/Feather';
 import { addMinutes, format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
-import { Text, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { TouchableOpacity, View, ViewStyle } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind, useTheme } from '../../common/theme';
+import { useTheme } from '../../common/theme';
 import { useSettings } from '../../common/useSettings';
 import Card from '../../components/Card';
 import ResponsiveScrollView from '../../components/ResponsiveScrollView';
+import { Text } from '../../components/Text';
 import { recipes } from '../../constants/recipes';
 import formatSeconds from '../../helpers/formatSeconds';
 import { selectLog } from '../../state/logs/selectors';
@@ -95,17 +97,17 @@ function Log(props: Props) {
   }
 
   return (
-    <ResponsiveScrollView wrapperStyle={tw('theme.background.screen')} style={style}>
+    <ResponsiveScrollView wrapperStyle={tw('bg-screen dark:bg-screen-dark')} style={style}>
       <View style={tw('items-center')}>
         {recipe.icon({
           fill: theme.icon.default,
           size: 2,
         })}
-        <Text style={tw('theme.text.default header my-4')}>
+        <Text type="header" style={tw('my-4')}>
           {recipe.title} {recipe.modifier}
         </Text>
         <View>
-          <Text style={tw('body theme.text.default')}>
+          <Text>
             Brewed at {format(log.timestamp, 'h:mma')} on {format(log.timestamp, 'MMM d, yyyy')}
           </Text>
         </View>
@@ -121,10 +123,8 @@ function Log(props: Props) {
                 ...tw(`mt-1 ${index === 0 ? 'mb-3' : ''} mx-2`),
                 ...{ elevation: 0, shadowOpacity: 0 },
               }}>
-              <Text style={tw('headline theme.text.default')}>{logConfig[key]}</Text>
-              <Text style={tw('body theme.text.default')}>
-                {capitalizeFirstLetter(log[key as keyof LogType] as string)}
-              </Text>
+              <Text type="headline">{logConfig[key]}</Text>
+              <Text>{capitalizeFirstLetter(log[key as keyof LogType] as string)}</Text>
             </Card>
           ))}
       </View>
@@ -135,22 +135,26 @@ function Log(props: Props) {
             ...tw('mb-0 mx-2'),
             ...{ shadowOpacity: 0, elevation: 0 },
           }}>
-          <Text style={tw('headline theme.text.default mb-1')}>Notes</Text>
-          <Text style={tw('body theme.text.default')}>{log.notes.trim()}</Text>
+          <Text type="headline" style={tw('mb-1')}>
+            Notes
+          </Text>
+          <Text>{log.notes.trim()}</Text>
         </Card>
       ) : null}
 
       {withReminder && notifications.status !== 'denied' ? (
         <TouchableOpacity onPress={toggleReminder} activeOpacity={0.75}>
           <Card
-            containerStyle={tw('mt-4 mb-0 mx-2 p-4 theme.background.overlay')}
-            style={tw('flex-row justify-between')}>
+            containerStyle={tw(
+              'mt-4 mb-0 mx-2 p-4 bg-overlay dark:bg-overlay-dark border border-default dark:border-default-dark'
+            )}
+            style={tw('flex-row justify-between border-0')}>
             <View style={tw('flex-1 mr-8')}>
-              <Text style={tw('headline theme.text.default')}>
+              <Text type="headline">
                 {reminderScheduled ? 'Tasting reminder scheduled' : 'Send a tasting reminder'}
               </Text>
               {reminderScheduled && (
-                <Text style={tw('body theme.text.secondary')}>
+                <Text theme="secondary">
                   You'll get a reminder to taste your coffee at{' '}
                   {format(addMinutes(new Date(), 6), 'h:mma')}.
                 </Text>
@@ -166,11 +170,13 @@ function Log(props: Props) {
       ) : null}
       {withReminder && notifications.status === 'denied' ? (
         <Card
-          containerStyle={tw('mt-4 mb-0 mx-2 p-4 theme.background.overlay')}
+          containerStyle={tw('mt-4 mb-0 mx-2 p-4 bg-overlay dark:bg-overlay-dark')}
           style={tw('flex-row justify-between')}>
           <View style={tw('flex-1 mr-8')}>
-            <Text style={tw('headline theme.text.default mb-1')}>Send a tasting reminder</Text>
-            <Text style={tw('body theme.text.secondary')}>
+            <Text type="headline" style={tw('mb-1')}>
+              Send a tasting reminder
+            </Text>
+            <Text theme="secondary">
               To send reminders, turn on notification permissions in Settings.
             </Text>
           </View>
@@ -181,8 +187,10 @@ function Log(props: Props) {
         {logStats.map((stat) => (
           <View style={tw('w-6/12')} key={stat.label}>
             <Card containerStyle={tw('px-2 mb-4')} style={tw('items-center py-8')}>
-              <Text style={tw('header mb-2 theme.text.default')}>{stat.value}</Text>
-              <Text style={tw('body theme.text.default')}>{stat.label}</Text>
+              <Text type="header" style={tw('mb-2')}>
+                {stat.value}
+              </Text>
+              <Text>{stat.label}</Text>
             </Card>
           </View>
         ))}

@@ -5,8 +5,8 @@ import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind, useTheme } from '../../../common/theme';
 import { useSettings } from '../../../common/useSettings';
 import Button from '../../../components/Button';
 import { isMaxWidth } from '../../../constants/layout';
@@ -36,7 +36,6 @@ function Recipe(props: RecipeProps) {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const dispatch = useDispatch();
-  const { dark } = useTheme();
   const tw = useTailwind();
   const recentLog = useSelector((state: State) => selectRecentLog(state, recipe.id));
   const [recipeState, _setRecipeState] = useState({
@@ -45,7 +44,6 @@ function Recipe(props: RecipeProps) {
     temp: recentLog.temp ?? 205,
     timestamp: new Date().getTime(),
     totalBrewTime: 0,
-    attributesRecorded: false,
     totalVolume: recentLog.totalVolume || recipe.defaultTotalVolume,
     isIced: false,
   });
@@ -73,19 +71,20 @@ function Recipe(props: RecipeProps) {
   }
 
   function onFinish() {
-    const { timestamp, totalVolume, grind, temp, totalBrewTime, attributesRecorded } = recipeState;
+    const { timestamp, totalVolume, grind, temp, totalBrewTime } = recipeState;
+
     const log = {
       timestamp,
       totalVolume,
       totalBrewTime,
       ratio: settings.ratio,
-      ...(attributesRecorded && settings.recordGrind
+      ...(settings.recordGrind
         ? {
             grind:
-              grind ?? unitHelpers.grindUnit.getPreferredValueBasedOnPercent(recipe.defaultGrind),
+              grind ?? unitHelpers.grindUnit.getPreferredValueBasedOnRange(recipe.grindRangeName),
           }
         : null),
-      ...(attributesRecorded && settings.recordTemp
+      ...(settings.recordTemp
         ? {
             temp,
           }
@@ -98,14 +97,13 @@ function Recipe(props: RecipeProps) {
     navigation.navigate('BrewSummary', { timestamp });
   }
 
-  const { grindUnit, temperatureUnit } = unitHelpers;
-  const { minYield, maxYield, defaultGrind } = recipe;
+  const { minYield, maxYield } = recipe;
   const { totalVolume, grind, temp } = recipeState;
   const coffeeWeight = Math.round(totalVolume / settings.ratio);
   const totalPourVolume = recipeState.isIced ? Math.round(totalVolume * 0.666) : totalVolume;
 
   return (
-    <View style={isMaxWidth && { alignItems: 'center' }}>
+    <View style={tw(`${isMaxWidth ? 'items-center' : ''}`)}>
       <View style={isMaxWidth && { width: styleguide.maxWidth }}>
         <Preparation recipe={recipe.id} preparation={recipe.preparation} />
         <YieldQuestion
@@ -117,20 +115,13 @@ function Recipe(props: RecipeProps) {
         {recipe.iced && <IceToggle value={recipeState.isIced} onChange={onIsIcedChange} />}
         {recentLog.notes ? <Notes text={recentLog.notes} /> : null}
         <BoilWater volume={totalPourVolume} />
-        <GrindCoffee
-          coffeeWeight={coffeeWeight}
-          defaultGrind={defaultGrind}
-          title={recipe.title}
-          recentLog={recentLog}
-        />
+        <GrindCoffee coffeeWeight={coffeeWeight} recentLog={recentLog} recipe={recipe} />
         {recipeState.isIced && <AddIce volume={Math.round(totalVolume * 0.333)} />}
         <RecordBrewAttributes
           setRecipeState={setRecipeState}
-          defaultGrind={defaultGrind}
           grind={grind}
           temp={temp}
-          grindUnit={grindUnit}
-          temperatureUnit={temperatureUnit}
+          grindRangeName={recipe.grindRangeName}
         />
         <PourTimer
           recipe={recipe}
@@ -140,7 +131,7 @@ function Recipe(props: RecipeProps) {
         />
         <View
           style={[
-            tw(`${dark ? 'theme.background.secondary' : 'theme.background.quaternary'} -m-4 p-4`),
+            tw('bg-quaternary dark:bg-secondary-dark -m-4 p-4'),
             { paddingBottom: insets.bottom },
           ]}>
           <Button title="Finish Brew" onPress={onFinish} type="tertiary" />

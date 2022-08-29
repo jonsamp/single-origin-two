@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { View } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind } from '../../../../common/theme';
 import { useSettings } from '../../../../common/useSettings';
 import Card from '../../../../components/Card';
 import Image from '../../../../components/Image';
@@ -141,7 +141,7 @@ function PourTimerFunction(props: Props) {
             currentStepDuration={currentStepDuration}
             pourVelocity={recipe.pourVelocity}
           />
-          <View style={tw('theme.background.secondary px-5 py-10 flex-row')}>
+          <View style={tw('bg-secondary dark:bg-secondary-dark px-5 py-10 flex-row')}>
             <Timer toggleCountdown={toggleCountdown} timerRunning={timerRunning} second={second} />
             <WaterVolume
               volume={volume * volumePercent}

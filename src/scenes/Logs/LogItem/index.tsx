@@ -3,7 +3,7 @@ import Feather from '@expo/vector-icons/Feather';
 import { format } from 'date-fns';
 import * as Haptics from 'expo-haptics';
 import React from 'react';
-import { Text, View, TouchableOpacity as RNTouchableOpacity, Platform } from 'react-native';
+import { View, TouchableOpacity as RNTouchableOpacity, Platform } from 'react-native';
 import { PanGestureHandler, TouchableOpacity } from 'react-native-gesture-handler';
 import Animated, {
   Easing,
@@ -13,8 +13,10 @@ import Animated, {
   useAnimatedGestureHandler,
   runOnJS,
 } from 'react-native-reanimated';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind, useTheme } from '../../../common/theme';
+import { useTheme } from '../../../common/theme';
+import { Text } from '../../../components/Text';
 import { width } from '../../../constants/layout';
 import { recipes } from '../../../constants/recipes';
 import { Log } from '../../../state/logs/types';
@@ -155,7 +157,9 @@ function ListItem(props: Props) {
         ]}>
         <Animated.View style={[tw('items-center'), animatedTrashStyle]}>
           <TrashIcon size={28} />
-          <Text style={[tw('label'), { color: 'white' }]}>Delete</Text>
+          <Text type="label" style={[tw('text-white')]}>
+            Delete
+          </Text>
         </Animated.View>
       </RNTouchableOpacity>
       <PanGestureHandler onGestureEvent={gestureHandler} activeOffsetX={[-20, 20]}>
@@ -163,11 +167,11 @@ function ListItem(props: Props) {
           <TouchableOpacity
             onPress={() => _onPress()}
             activeOpacity={1}
-            style={tw('theme.background.overlay p-3 justify-between items-center flex-row')}>
+            style={tw('bg-overlay dark:bg-overlay-dark p-3 justify-between items-center flex-row')}>
             <View style={tw('flex-1 flex-row')}>
               <View
                 style={tw(
-                  'theme.background.tertiary h-14 w-14 items-center justify-center rounded-lg mr-3'
+                  'bg-tertiary dark:bg-tertiary-dark h-14 w-14 items-center justify-center rounded-lg mr-3'
                 )}>
                 {recipe.icon({
                   fill: theme.icon.default,
@@ -183,19 +187,21 @@ function ListItem(props: Props) {
                         backgroundColor: theme.brand.default,
                       },
                     ]}>
-                    <Text style={[tw('label'), { color: 'black' }]}>{log.rating}</Text>
+                    <Text type="label" style={tw('text-black')}>
+                      {log.rating}
+                    </Text>
                   </View>
                 )}
               </View>
               <View style={tw('flex-1')}>
-                <Text style={tw('headline theme.text.default')}>
+                <Text type="headline">
                   {recipe.title} {recipe.modifier}
                 </Text>
-                <Text style={tw('caption theme.text.secondary')}>
+                <Text type="caption" theme="secondary">
                   {format(log.timestamp, 'MMM d, yyyy @ h:mma')}
                 </Text>
                 {log.tastingNote || log.notes ? (
-                  <Text numberOfLines={1} style={tw('caption theme.text.secondary')}>
+                  <Text type="caption" theme="secondary" numberOfLines={1}>
                     {log.tastingNote &&
                       `${
                         log.tastingNote.charAt(0).toUpperCase() +

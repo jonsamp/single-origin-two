@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind } from '../../common/theme';
+import { Text } from '../../components/Text';
 
 type Props = {
   title?: string;
@@ -16,12 +17,21 @@ function Section(props: Props) {
   return (
     <>
       <View style={tw(`pb-2 ${title ? 'pt-6' : ''}`)}>
-        <Text style={tw('label theme.text.secondary pl-4')}>{title.toUpperCase()}</Text>
+        <Text type="label" theme="secondary" style={tw('pl-4')}>
+          {title.toUpperCase()}
+        </Text>
       </View>
-      <View style={tw('rounded-lg overflow-hidden theme.background.overlay')}>{children}</View>
+      <View
+        style={tw(
+          'rounded-lg border border-default dark:border-default-dark overflow-hidden bg-overlay dark:bg-overlay-dark'
+        )}>
+        {children}
+      </View>
       {description ? (
         <View style={tw('px-4 pb-2 pt-2')}>
-          <Text style={tw('caption theme.text.secondary')}>{description}</Text>
+          <Text type="caption" theme="secondary">
+            {description}
+          </Text>
         </View>
       ) : null}
     </>

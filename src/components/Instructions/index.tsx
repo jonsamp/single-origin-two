@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, TextStyle, View, ViewStyle, StyleSheet } from 'react-native';
+import { TextStyle, View, ViewStyle } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind, useTheme } from '../../common/theme';
-import { typography } from '../../common/typography';
+import { useTheme } from '../../common/theme';
+import { Text } from '../../components/Text';
 import GrindIcon from './icons/GrindIcon';
 import IceIcon from './icons/IceIcon';
 import PrepIcon from './icons/PrepIcon';
@@ -52,17 +53,12 @@ export default function Instructions(props: Props) {
         </View>
       ) : null}
       <View style={[tw(`p-4 flex-1 ${twStyle ? twStyle : ''}`), style]}>
-        <Text style={[tw('body theme.text.default'), textStyle]}>
+        <Text style={textStyle}>
           {text.split(specialWordCaptureGroup).map((part, index) => (
             <Text
               key={part + index}
               style={
-                part.match(specialWordRegex) && {
-                  ...typography.body,
-                  fontSize: 19,
-                  color: theme.brand.dark,
-                  fontWeight: 'bold',
-                }
+                part.match(specialWordRegex) && tw('font-bold text-brand dark:text-brand-dark')
               }>
               {part.replace(/\*/g, '')}
             </Text>
@@ -71,23 +67,11 @@ export default function Instructions(props: Props) {
         {hint ? (
           <View
             style={[
-              tw('p-3 rounded-md mt-4'),
-              {
-                backgroundColor: theme.background.warning,
-                borderWidth: StyleSheet.hairlineWidth,
-                borderColor: theme.border.warning,
-              },
+              tw(
+                'p-3 rounded-md mt-4 bg-warning dark:bg-warning-dark border border-warning dark:border-warning-dark'
+              ),
             ]}>
-            <Text
-              style={[
-                typography.body,
-                {
-                  color: theme.text.warning,
-                },
-                textStyle,
-              ]}>
-              {hint}
-            </Text>
+            <Text style={[tw('text-warning dark:text-warning-dark'), textStyle]}>{hint}</Text>
           </View>
         ) : null}
       </View>

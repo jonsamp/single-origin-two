@@ -2,7 +2,7 @@ import { palette, shadows } from '@expo/styleguide-native';
 import * as Haptics from 'expo-haptics';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import { StyleSheet, View, TextInput, Dimensions, Text, Platform, ViewStyle } from 'react-native';
+import { StyleSheet, View, TextInput, Dimensions, Platform, ViewStyle } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, {
   useSharedValue,
@@ -14,8 +14,10 @@ import Animated, {
   withTiming,
   Easing,
 } from 'react-native-reanimated';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTheme, useTailwind } from '../../common/theme';
+import { useTheme } from '../../common/theme';
+import { Text } from '../../components/Text';
 import { styleguide } from '../../constants/themes';
 import { IncrementButton } from './IncrementButton';
 import { MinusIcon } from './MinusIcon';
@@ -44,12 +46,17 @@ async function haptic() {
 
 function getStepValue(value: number, oneStepValue: number, min: number) {
   'worklet';
-  return Math.round(value / oneStepValue) + min;
+  return value / oneStepValue + min;
 }
 
 function clamp(translationX: number, offsetX: number) {
   'worklet';
   return Math.min(Math.max(translationX + offsetX, 0), SLIDER_WIDTH - KNOB_WIDTH);
+}
+
+function getXValue(value: number, min: number = 0, oneStepValue: number) {
+  'worklet';
+  return (value - min) * oneStepValue;
 }
 
 Animated.addWhitelistedNativeProps({ text: true });
@@ -68,12 +75,7 @@ function Slider(props: Props) {
   const tw = useTailwind();
   const sliderRange = SLIDER_WIDTH - KNOB_WIDTH;
   const oneStepValue = sliderRange / (max - min);
-
-  function getXValue(value: number, min: number = 0) {
-    return (value - min) * oneStepValue;
-  }
-
-  const translateX = useSharedValue(getXValue(defaultValue - min));
+  const translateX = useSharedValue(getXValue(defaultValue, min, oneStepValue));
   const isSliding = useSharedValue(false);
 
   const onGestureEvent = useAnimatedGestureHandler({
@@ -124,8 +126,8 @@ function Slider(props: Props) {
   const stepText = useDerivedValue(() => {
     const step = getStepValue(translateX.value, oneStepValue, min);
 
-    return String(step);
-  });
+    return String(step.toFixed(0));
+  }, [translateX.value]);
 
   const animatedProps: any = useAnimatedProps(() => {
     return {
@@ -142,13 +144,11 @@ function Slider(props: Props) {
 
     onChange(newValue);
     haptic();
-    translateX.value = withTiming(getXValue(newValue, min), { duration: 100 });
-    // @ts-ignore stepText.value is readonly. Setting to update the text on screen.
-    stepText.value = String(newValue);
+    translateX.value = withTiming(getXValue(newValue, min, oneStepValue), { duration: 100 });
   }
 
   return (
-    <View style={[tw(`pt-10 items-center pb-12 theme.background.secondary`), style]}>
+    <View style={[tw(`pt-10 items-center pb-12 bg-secondary dark:bg-secondary-dark`), style]}>
       <View style={tw('mb-12 items-center')}>
         <View
           style={[
@@ -159,17 +159,17 @@ function Slider(props: Props) {
           <AnimatedTextInput
             underlineColorAndroid="transparent"
             editable={false}
-            style={[tw('theme.text.default font-bold'), styles.sliderValue, sliderValueStyle]}
+            style={[
+              tw('font-bold text-default dark:text-default-dark'),
+              styles.sliderValue,
+              sliderValueStyle,
+            ]}
             animatedProps={animatedProps}
-            value={stepText.value}
+            defaultValue={String(defaultValue)}
           />
           <IncrementButton icon={<PlusIcon />} onPress={() => increment(1)} />
         </View>
-        <Text
-          style={[
-            tw('callout font-bold uppercase theme.text.default opacity-80'),
-            styles.labelStyle,
-          ]}>
+        <Text type="callout" style={[tw('font-bold uppercase   opacity-80'), styles.labelStyle]}>
           {label}
         </Text>
       </View>

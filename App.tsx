@@ -1,4 +1,4 @@
-import Constants from 'expo-constants';
+import * as Device from 'expo-device';
 import * as Font from 'expo-font';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import * as SplashScreen from 'expo-splash-screen';
@@ -10,9 +10,11 @@ import { enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import * as Sentry from 'sentry-expo';
+import { TailwindProvider } from 'tailwind-rn';
 
 import Navigator from './src/navigation';
 import configureStore from './src/store/configureStore';
+import utilities from './tailwind.json';
 
 enableScreens();
 
@@ -31,7 +33,8 @@ export default function App() {
   useEffect(() => {
     async function prepare() {
       try {
-        if (Constants.platform?.ios?.userInterfaceIdiom === 'tablet') {
+        const deviceType = await Device.getDeviceTypeAsync();
+        if (deviceType === Device.DeviceType.TABLET) {
           await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.DEFAULT);
         }
 
@@ -74,16 +77,18 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <StatusBar style="auto" />
-      <PersistGate loading={null} persistor={persistor}>
-        <SafeAreaProvider
-          style={{ backgroundColor: 'black' }}
-          initialMetrics={initialWindowMetrics}>
-          <Animated.View style={{ opacity: fadeAnim, flex: 1 }} onLayout={onLayoutRootView}>
-            <Navigator />
-          </Animated.View>
-        </SafeAreaProvider>
-      </PersistGate>
+      <TailwindProvider utilities={utilities}>
+        <StatusBar style="auto" />
+        <PersistGate loading={null} persistor={persistor}>
+          <SafeAreaProvider
+            style={{ backgroundColor: 'black' }}
+            initialMetrics={initialWindowMetrics}>
+            <Animated.View style={{ opacity: fadeAnim, flex: 1 }} onLayout={onLayoutRootView}>
+              <Navigator />
+            </Animated.View>
+          </SafeAreaProvider>
+        </PersistGate>
+      </TailwindProvider>
     </Provider>
   );
 }

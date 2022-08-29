@@ -1,5 +1,26 @@
 # Notes
 
+## August 16, 2022
+
+- TODO: make sure when recording grind setting and temp, that they actually get recorded.
+- Fixed a bug where the incrementing a slider with the plus and minus buttons sometimes would not show the correct value.
+- Updated the grind instructions to display a range of grind settings.
+
+## August 9, 2022 - August 10, 2022
+
+- Removed onboarding
+- Upgraded to tailwind-rn 4+
+- Include grind ranges:
+  - Add grind ranges to each grinder + make enums for them all
+  - Add a grind range to all recipes that it should show
+  - Then figure out how it would work with saving data for a particular grinder + ranges. Can I let people edit a grinder that already exists?
+  - Then I need to add UI to let people add a custom grinder
+    - Add a "Add grinder" button that goes to a new route.
+    - New route needs to let people input name of grinder, specify low to highest range, then lets the user input from/to for each coarseness, then they can save. There doesn't really need to be validation for the nubmers, since there could be overlap. I could fill in all the numbers be default with using math.
+    - Then let people edit them with an "edit" button in the top right.
+    - Once saved in settings, then I need to update the "grind coffee" step to get the saved grinder if there is one. If not, then fall back to the one selected.
+    - If I let people update the existing ones, I need a "reset to default" on them (that only exists for the grinders I provide).
+
 ## July 20, 2022
 
 - Upgrading to SDK 46.
@@ -32,7 +53,7 @@ How to:
 1. Import tailwind
 
 ```tsx
-import { useTailwind } from '../../common/theme';
+import { useTailwind } from 'tailwind-rn';
 ```
 
 2. Add hook

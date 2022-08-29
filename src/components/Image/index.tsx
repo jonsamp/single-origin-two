@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image as RNImage, ImageStyle } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind } from '../../common/theme';
 import { height } from '../../constants/layout';
 
 type Props = {
@@ -24,7 +24,7 @@ export default function Image(props: Props) {
           resizeMode: 'cover',
           height: height / 5,
         },
-        tw('theme.background.default'),
+        tw('bg-white dark:bg-black'),
         style,
       ]}
     />

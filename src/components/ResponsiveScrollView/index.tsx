@@ -2,8 +2,8 @@ import { spacing } from '@expo/styleguide-native';
 import React, { ReactNode } from 'react';
 import { ScrollView, View, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind } from '../../common/theme';
 import { isMaxWidth } from '../../constants/layout';
 import { styleguide } from '../../constants/themes';
 

@@ -1,28 +1,32 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind } from '../../common/theme';
+import { Text } from '../../components/Text';
 
 function PrivacyPolicy() {
-  const paragraph = 'theme.text.default mb-4';
   const tw = useTailwind();
 
   return (
-    <View style={tw('p-4 theme.background.overlay')}>
-      <Text style={tw(`title ${paragraph}`)}>Privacy Policy</Text>
+    <View style={tw('p-4 bg-overlay dark:bg-overlay-dark')}>
+      <Text type="title" style={tw('mb-4')}>
+        Privacy Policy
+      </Text>
 
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text style={tw('mb-4')}>
         This privacy policy governs your use of the software application Single Origin
         (“Application”) for mobile devices that was created by Jon Samp. Please read this policy and
         our Mobile Terms and Conditions carefully; by using the App you confirm to have understood
         and agreed to them.
       </Text>
 
-      <Text style={tw(`headline ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
         What information does the Application obtain and how is it used?
       </Text>
-      <Text style={tw(`headline ${paragraph}`)}>User Provided Information</Text>
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
+        User Provided Information
+      </Text>
+      <Text style={tw('mb-4')}>
         The Application obtains the information you provide when you download and register the
         Application. Registration with us is optional. However, please keep in mind that you may not
         be able to use some of the features offered by the Application unless you register with us.
@@ -37,8 +41,10 @@ function PrivacyPolicy() {
         We may also use the information you provided us to contact your from time to time to provide
         you with important information, required notices and marketing promotions.
       </Text>
-      <Text style={tw(`headline ${paragraph}`)}>Automatically Collected Information</Text>
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
+        Automatically Collected Information
+      </Text>
+      <Text style={tw('mb-4')}>
         In addition, the Application may collect certain information automatically, including, but
         not limited to, the type of mobile device you use, your mobile devices unique device ID,
         your mobile operating system, the type of mobile Internet browsers you use, and information
@@ -55,10 +61,10 @@ function PrivacyPolicy() {
         entered into the Application at the time of the software crash that.
       </Text>
 
-      <Text style={tw(`headline ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
         Does the Application collect precise real time location information of the device?
       </Text>
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text style={tw('mb-4')}>
         This Application does not collect precise, real-time information about the location of your
         mobile device using either IP address or GPS (Global Positioning System). However we do
         collect IP address information provided to us by your ISP (Internet Service Provider) and
@@ -66,10 +72,10 @@ function PrivacyPolicy() {
         compliance with the data retention period.
       </Text>
 
-      <Text style={tw(`headline ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
         Do third parties see and/or have access to information obtained by the Application?
       </Text>
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text style={tw('mb-4')}>
         Only aggregated, anonymized data is periodically transmitted to external services to help us
         improve the Application and our service. We will share your information with third parties
         only in the ways that are described in this privacy statement.
@@ -88,8 +94,10 @@ function PrivacyPolicy() {
         information.
       </Text>
 
-      <Text style={tw(`headline ${paragraph}`)}>What are my opt-out rights?</Text>
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
+        What are my opt-out rights?
+      </Text>
+      <Text style={tw('mb-4')}>
         You can stop all collection of information by the Application easily by uninstalling the
         Application. You may use the standard uninstall processes as may be available as part of
         your mobile device or via the mobile application marketplace or network. You can also
@@ -97,10 +105,10 @@ function PrivacyPolicy() {
         application by simply reviewing your Data Sharing inside the Application's Settings screen.
       </Text>
 
-      <Text style={tw(`headline ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
         Data Retention Policy, Managing Your Information
       </Text>
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text style={tw('mb-4')}>
         We will retain User Provided data for as long as you use the Application and no longer that
         is essential in compliance to law.
         {'\n\n'}
@@ -110,9 +118,13 @@ function PrivacyPolicy() {
         Application by a large group of audience.
       </Text>
 
-      <Text style={tw(`headline ${paragraph}`)}>What are your rights over your personal data?</Text>
-      <Text style={tw(`headline ${paragraph}`)}>An overview of your different rights</Text>
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
+        What are your rights over your personal data?
+      </Text>
+      <Text type="headline" style={tw('mb-4')}>
+        An overview of your different rights
+      </Text>
+      <Text style={tw('mb-4')}>
         You have the right to request:
         {'\n\n'}
         Access to the personal data we hold about you, free of charge in most cases. The correction
@@ -133,29 +145,37 @@ function PrivacyPolicy() {
         If we choose not to action your request we will explain to you the reasons for our refusal.
       </Text>
 
-      <Text style={tw(`headline ${paragraph}`)}>Your right to withdraw consent</Text>
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
+        Your right to withdraw consent
+      </Text>
+      <Text style={tw('mb-4')}>
         Whenever you have given us your consent to use your personal data, you have the right to
         change your mind at any time and withdraw that consent.
       </Text>
-      <Text style={tw(`headline ${paragraph}`)}>Where we rely on our legitimate interest</Text>
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
+        Where we rely on our legitimate interest
+      </Text>
+      <Text style={tw('mb-4')}>
         In cases where we are processing your personal data on the basis of our legitimate interest,
         you can ask us to stop for reasons connected to your individual situation. We must then do
         so unless we believe we have a legitimate overriding reason to continue processing your
         personal data.
       </Text>
 
-      <Text style={tw(`headline ${paragraph}`)}>Checking your identity</Text>
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
+        Checking your identity
+      </Text>
+      <Text style={tw('mb-4')}>
         To protect the confidentiality of your information, we will ask you to verify your identity
         before proceeding with any request you make under this Privacy Policy. If you have
         authorised a third party to submit a request on your behalf, we will ask them to prove they
         have your permission to act.
       </Text>
 
-      <Text style={tw(`headline ${paragraph}`)}>Security</Text>
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
+        Security
+      </Text>
+      <Text style={tw('mb-4')}>
         We are concerned about safeguarding the confidentiality of your information. We provide
         physical, electronic, and procedural safeguards to protect information we process and
         maintain. For example, we limit access to this information to authorized employees and
@@ -165,16 +185,20 @@ function PrivacyPolicy() {
         breaches.
       </Text>
 
-      <Text style={tw(`headline ${paragraph}`)}>Changes</Text>
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
+        Changes
+      </Text>
+      <Text style={tw('mb-4')}>
         This Privacy Policy may be updated from time to time for any reason. We will notify you of
         any changes to our Privacy Policy by posting the new Privacy Policy located at
         https://www.singleoriginapp.com/privacy-policy.html. You are advised to consult this Privacy
         Policy regularly for any changes, as continued use is deemed approval of all changes.
       </Text>
 
-      <Text style={tw(`headline ${paragraph}`)}>Your Consent</Text>
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
+        Your Consent
+      </Text>
+      <Text style={tw('mb-4')}>
         By using the Application, you are consenting to our processing of your information as set
         forth in this Privacy Policy now and as amended by us. "Processing,” means using cookies on
         a computer/hand held device or using or touching information in any way, including, but not
@@ -184,37 +208,43 @@ function PrivacyPolicy() {
         Kingdom privacy standards.
       </Text>
 
-      <Text style={tw(`headline ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
         California Online Privacy Protection Act Compliance
       </Text>
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text style={tw('mb-4')}>
         We comply with the California Online Privacy Protection Act. We therefore will not
         distribute your personal information to outside parties without your consent.
       </Text>
 
-      <Text style={tw(`headline ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
         Children’s Online Privacy Protection Act Compliance
       </Text>
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text style={tw('mb-4')}>
         We never collect or maintain information at our website from those we actually know are
         under 16, and no part of our website is structured to attract anyone under 16.
       </Text>
 
-      <Text style={tw(`headline ${paragraph}`)}>Information for European Union Customers</Text>
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
+        Information for European Union Customers
+      </Text>
+      <Text style={tw('mb-4')}>
         By using Single Origin and providing your information, you authorize us to collect, use, and
         store your information outside of the European Union.
       </Text>
 
-      <Text style={tw(`headline ${paragraph}`)}>International Transfers of Information</Text>
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
+        International Transfers of Information
+      </Text>
+      <Text style={tw('mb-4')}>
         Information may be processed, stored, and used outside of the country in which you are
         located. Data privacy laws vary across jurisdictions, and different laws may be applicable
         to your data depending on where it is processed, stored, or used.
       </Text>
 
-      <Text style={tw(`headline ${paragraph}`)}>Contact us</Text>
-      <Text style={tw(`body ${paragraph}`)}>
+      <Text type="headline" style={tw('mb-4')}>
+        Contact us
+      </Text>
+      <Text style={tw('mb-4')}>
         If you have any questions regarding privacy while using the Application, or have questions
         about our practices, please contact us via email at sampjon@gmail.com
       </Text>

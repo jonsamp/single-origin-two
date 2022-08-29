@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind } from '../../common/theme';
+import { Text } from '../../components/Text';
 
 type Props = {
   title: string;
@@ -14,9 +15,11 @@ function Question(props: Props) {
 
   return (
     <View style={tw('p-5')}>
-      <Text style={tw('headline theme.text.default')}>{title}</Text>
+      <Text type="headline">{title}</Text>
       {description ? (
-        <Text style={tw('callout theme.text.secondary mt-1')}>{description}</Text>
+        <Text type="callout" theme="secondary" style={tw('mt-1')}>
+          {description}
+        </Text>
       ) : null}
     </View>
   );

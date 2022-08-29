@@ -1,8 +1,8 @@
 import React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind } from '../../common/theme';
 import ScreenPlaceholder from '../../components/ScreenPlaceholder';
 import { Separator } from '../../components/Separator';
 import { recipes } from '../../constants/recipes';
@@ -33,7 +33,7 @@ function Logs(props: Props) {
 
   return (
     <FlatList
-      contentContainerStyle={tw('pt-4 theme.background.screen flex-1')}
+      contentContainerStyle={tw('pt-4 bg-screen dark:bg-screen-dark flex-1')}
       data={Object.values(logs)
         .filter((log) => log && recipes[log.recipeId])
         .sort(byTimestamp)}

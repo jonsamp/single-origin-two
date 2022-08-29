@@ -1,26 +1,26 @@
 import SegmentedControl from '@react-native-community/segmented-control';
 import React, { useState } from 'react';
 import { Platform, View } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind, useTheme } from '../../../../common/theme';
+import { useTheme } from '../../../../common/theme';
 import { useSettings } from '../../../../common/useSettings';
 import Card from '../../../../components/Card';
 import Instructions from '../../../../components/Instructions';
 import Slider from '../../../../components/Slider';
-import { GrindHelper, Unit } from '../../../../state/settings/types';
+import { GrindRangeName } from '../../../../constants/grinders';
 
 type Props = {
   grind?: number;
-  defaultGrind: number;
   temp: number;
   setRecipeState: (props: { key: string; value: any }) => void;
-  temperatureUnit: { unit: Unit };
-  grindUnit: GrindHelper;
+  grindRangeName: GrindRangeName;
 };
 
 function RecordBrewAttributes(props: Props) {
-  const { grind, defaultGrind, temp, setRecipeState, temperatureUnit, grindUnit } = props;
+  const { grind, temp, setRecipeState, grindRangeName } = props;
   const { settings, unitHelpers } = useSettings();
+  const { grindUnit, temperatureUnit } = unitHelpers;
   const tw = useTailwind();
   const { theme, dark } = useTheme();
   const [state, setState] = useState({
@@ -31,14 +31,14 @@ function RecordBrewAttributes(props: Props) {
   function recordGrindComponent() {
     return (
       <Slider
-        label={grindUnit.grinder.shortTitle}
+        label={grindUnit.grinder.id === 'generic' ? 'grinder' : grindUnit.grinder.title}
         min={grindUnit.grinder.min}
         max={grindUnit.grinder.max}
-        defaultValue={grind ?? grindUnit.getPreferredValueBasedOnPercent(defaultGrind)}
+        defaultValue={grind ?? grindUnit.getPreferredValueBasedOnRange(grindRangeName)}
         onChange={(value) => {
           setRecipeState({
             key: 'grind',
-            value: grindUnit.getPreferredValue(value),
+            value: grindUnit.getPreferredValue(Math.round(value)),
           });
         }}
       />
@@ -66,7 +66,7 @@ function RecordBrewAttributes(props: Props) {
         onChange={(value) => {
           setRecipeState({
             key: 'temp',
-            value: unitHelpers?.temperatureUnit.getStandardValue(value),
+            value: unitHelpers?.temperatureUnit.getStandardValue(Math.round(value)),
           });
         }}
       />

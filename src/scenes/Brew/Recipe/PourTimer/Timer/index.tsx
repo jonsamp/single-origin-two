@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, View, Platform } from 'react-native';
+import { View, Platform } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind } from '../../../../../common/theme';
 import Button from '../../../../../components/Button';
+import { Text } from '../../../../../components/Text';
 import formatSeconds from '../../../../../helpers/formatSeconds';
 
 type Props = {
@@ -20,11 +21,7 @@ function Timer(props: Props) {
       <View style={tw('flex-row justify-center flex-1')}>
         <Text
           style={[
-            tw('mb-3 theme.text.default'),
-            {
-              fontSize: 36,
-              fontWeight: '500',
-            },
+            tw('mb-3 text-4xl'),
             {
               fontFamily: Platform.select({ ios: 'Menlo-Bold' }),
               fontWeight: Platform.select({ android: '700', ios: '500' }),

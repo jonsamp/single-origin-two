@@ -1,16 +1,10 @@
 import { shadows } from '@expo/styleguide-native';
 import React from 'react';
-import {
-  StyleSheet,
-  ViewStyle,
-  ActivityIndicator,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { StyleSheet, ViewStyle, ActivityIndicator, TouchableOpacity, View } from 'react-native';
 
 import { useTheme } from '../../common/theme';
 import { typography } from '../../common/typography';
+import { Text } from '../../components/Text';
 
 type Props = {
   type?: 'normal' | 'secondary' | 'tertiary' | 'outline';

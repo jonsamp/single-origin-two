@@ -4,9 +4,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { TouchableOpacity, Text, Platform, useColorScheme } from 'react-native';
+import { TouchableOpacity, Platform, useColorScheme } from 'react-native';
 
 import { defaultTheme, darkTheme } from '../common/theme';
+import { Text } from '../components/Text';
 import type from '../constants/type';
 import Brew from '../scenes/Brew';
 import { PreparationStep } from '../scenes/Brew/recipes/types';
@@ -16,7 +17,6 @@ import LogDetail from '../scenes/LogDetail';
 import LogDetailEdit from '../scenes/LogDetailEdit';
 import Logs from '../scenes/Logs';
 import Menu from '../scenes/Menu';
-import Onboarding from '../scenes/Onboarding';
 import Preparation from '../scenes/Preparation';
 import Settings from '../scenes/Settings';
 import SettingsDetail from '../scenes/Settings/SettingsDetail';
@@ -40,7 +40,6 @@ export type RootStackParamList = {
   LogDetailEdit: {
     timestamp: number;
   };
-  Onboarding: undefined;
   Preparation: PreparationStep[];
   SettingsDetail: {
     title: string;
@@ -95,7 +94,6 @@ function Tabs() {
         name="Menu"
         component={MenuStack}
         options={{
-          title: 'Recipes',
           tabBarIcon: (props) => <BrewIcon focused={props.focused} theme={theme} />,
         }}
       />
@@ -128,13 +126,9 @@ function App() {
         screenOptions={{
           headerTitleStyle: type.headline as any,
           headerBackTitleVisible: false,
-          contentStyle: {
-            backgroundColor: theme.background.screen,
-          },
         }}>
         {/* <Stack.Screen name="Test" component={Test} /> */}
         <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
-        <Stack.Screen name="Onboarding" component={Onboarding} options={{ title: 'Get started' }} />
         <Stack.Screen
           name="Brew"
           component={Brew}
@@ -173,15 +167,7 @@ function App() {
                   })
                 }
                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
-                <Text
-                  style={[
-                    type.headline,
-                    {
-                      color: theme.text.default,
-                    },
-                  ]}>
-                  Edit
-                </Text>
+                <Text type="headline">Edit</Text>
               </TouchableOpacity>
             ),
           })}

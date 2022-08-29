@@ -1,8 +1,9 @@
 import React from 'react';
-import { Switch, Text } from 'react-native';
+import { Switch } from 'react-native';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind } from '../../../../common/theme';
 import Card from '../../../../components/Card';
+import { Text } from '../../../../components/Text';
 
 type Props = {
   value: boolean;
@@ -15,7 +16,7 @@ function AddIce(props: Props) {
 
   return (
     <Card style={tw('p-4 flex-row items-center justify-between')}>
-      <Text style={tw('body theme.text.default')}>Make this brew iced</Text>
+      <Text>Make this brew iced</Text>
       <Switch value={value} onValueChange={onChange} />
     </Card>
   );

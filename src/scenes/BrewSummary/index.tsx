@@ -2,8 +2,9 @@ import { RouteProp, useNavigation } from '@react-navigation/core';
 import React from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTailwind } from 'tailwind-rn';
 
-import { useTailwind, useTheme } from '../../common/theme';
+import { useTheme } from '../../common/theme';
 import Button from '../../components/Button';
 import Log from '../../components/Log';
 import { RootStackParamList } from '../../navigation';
@@ -28,7 +29,9 @@ function BrewSummary(props: Props) {
       <View
         style={[
           tw(
-            `${dark ? 'theme.background.secondary' : 'theme.background.quaternary'} -m-4 px-8 py-4`
+            `${
+              dark ? 'bg-secondary dark:bg-secondary-dark' : 'bg-quaternary dark:bg-quaternary-dark'
+            } -m-4 px-8 py-4`
           ),
           { paddingBottom: insets.bottom + 16 },
         ]}>

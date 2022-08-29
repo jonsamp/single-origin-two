@@ -1,7 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-
-import { useTailwind } from '../common/theme';
+import { useTailwind } from 'tailwind-rn';
 
 type Props = {
   leftWidth?: string;
@@ -13,8 +12,8 @@ export function Separator(props: Props) {
 
   return (
     <View style={[tw('flex-row overflow-hidden'), { height: 1 }]}>
-      <View style={tw(`w-4 theme.background.overlay ${leftWidth ?? ''}`)} />
-      <View style={[tw('flex-1 border theme.border.default')]} />
+      <View style={tw(`w-4 bg-overlay dark:bg-overlay-dark ${leftWidth ?? ''}`)} />
+      <View style={[tw('flex-1 border border-default dark:border-default-dark')]} />
     </View>
   );
 }
