@@ -34,7 +34,6 @@
     "production": {}
   },
   "cli": {
-    "version": ">= 0.40.0",
-    "appVersionSource": "remote"
+    "version": ">= 0.40.0"
   }
 }
