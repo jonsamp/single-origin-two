@@ -9,7 +9,8 @@
       "channel": "preview"
     },
     "production": {
-      "channel": "main"
+      "channel": "main",
+      "autoIncrement": true
     },
     "development-simulator": {
       "developmentClient": true,
@@ -34,6 +35,7 @@
     "production": {}
   },
   "cli": {
-    "version": ">= 0.40.0"
+    "version": ">= 0.40.0",
+    "appVersionSource": "remote"
   }
 }

@@ -48,7 +48,7 @@ jobs:
           expo-token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Build on EAS
-        run: npx eas-cli build --profile production --platform ios --non-interactive --no-wait
+        run: npx eas-cli build --profile production --platform ios --non-interactive --no-wait --auto-submit
   build-development-simulator:
     name: 'EAS Build: Development Simulator'
     runs-on: ubuntu-latest

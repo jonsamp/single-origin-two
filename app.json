@@ -21,11 +21,9 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.jonsamp.singleorigintwo",
-      "buildNumber": "2"
+      "bundleIdentifier": "com.jonsamp.singleorigintwo"
     },
     "android": {
-      "versionCode": 21,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#000000"
