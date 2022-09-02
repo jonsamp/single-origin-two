@@ -32,7 +32,13 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "appleId": "sampjon@gmail.com",
+        "ascAppId": "1480168613",
+        "appleTeamId": "NLUVE3B2AS"
+      }
+    }
   },
   "cli": {
     "version": ">= 0.40.0",
