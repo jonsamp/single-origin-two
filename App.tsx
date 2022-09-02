@@ -1,10 +1,11 @@
 import * as Device from 'expo-device';
 import * as Font from 'expo-font';
+import * as Notifications from 'expo-notifications';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Animated } from 'react-native';
+import { Animated, Text } from 'react-native';
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
@@ -29,8 +30,22 @@ Sentry.init({
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
   const fadeAnim = useRef(new Animated.Value(0)).current;
+  const [token, setToken] = useState({});
 
   useEffect(() => {
+    async function getToken() {
+      try {
+        const result = await Notifications.getExpoPushTokenAsync();
+        console.log('😂');
+        console.log(result);
+        setToken(result);
+      } catch (error) {
+        console.log('😂');
+        console.error(error);
+        setToken({ error });
+      }
+    }
+
     async function prepare() {
       try {
         const deviceType = await Device.getDeviceTypeAsync();
@@ -53,6 +68,7 @@ export default function App() {
     }
 
     prepare();
+    getToken();
   }, []);
 
   const onLayoutRootView = useCallback(async () => {
@@ -84,6 +100,7 @@ export default function App() {
             style={{ backgroundColor: 'black' }}
             initialMetrics={initialWindowMetrics}>
             <Animated.View style={{ opacity: fadeAnim, flex: 1 }} onLayout={onLayoutRootView}>
+              <Text style={{ color: 'red', padding: 40 }}>{JSON.stringify(token, null, 2)}</Text>
               <Navigator />
             </Animated.View>
           </SafeAreaProvider>
