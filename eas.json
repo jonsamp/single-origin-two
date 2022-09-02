@@ -9,7 +9,8 @@
       "channel": "preview"
     },
     "production": {
-      "channel": "main"
+      "channel": "main",
+      "autoIncrement": true
     },
     "development-simulator": {
       "developmentClient": true,
@@ -31,9 +32,16 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "appleId": "sampjon@gmail.com",
+        "ascAppId": "1480168613",
+        "appleTeamId": "NLUVE3B2AS"
+      }
+    }
   },
   "cli": {
-    "version": ">= 0.40.0"
+    "version": ">= 0.40.0",
+    "appVersionSource": "remote"
   }
 }
