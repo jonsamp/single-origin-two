@@ -1,60 +1,54 @@
 {
-  "expo": {
-    "name": "Single Origin",
-    "slug": "single-origin-two",
-    "version": "46.1",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "description": "Learn to brew specialty coffee.",
-    "privacy": "unlisted",
-    "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "cover",
+  "name": "Single Origin",
+  "slug": "single-origin-two",
+  "version": "46.1",
+  "orientation": "portrait",
+  "icon": "./assets/icon.png",
+  "description": "Learn to brew specialty coffee.",
+  "privacy": "unlisted",
+  "userInterfaceStyle": "automatic",
+  "splash": {
+    "image": "./assets/splash.png",
+    "resizeMode": "cover",
+    "backgroundColor": "#000000"
+  },
+  "updates": {
+    "enabled": true,
+    "fallbackToCacheTimeout": 3000,
+    "url": "https://u.expo.dev/675cb1f0-fa3c-11e8-ac99-6374d9643cb2"
+  },
+  "assetBundlePatterns": ["**/*"],
+  "ios": {
+    "supportsTablet": true,
+    "bundleIdentifier": "com.jonsamp.singleorigintwo"
+  },
+  "android": {
+    "adaptiveIcon": {
+      "foregroundImage": "./assets/adaptive-icon.png",
       "backgroundColor": "#000000"
     },
-    "updates": {
-      "enabled": true,
-      "fallbackToCacheTimeout": 3000,
-      "url": "https://u.expo.dev/675cb1f0-fa3c-11e8-ac99-6374d9643cb2"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.jonsamp.singleorigintwo"
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#000000"
-      },
-      "permissions": [],
-      "package": "com.jonsamp.singleorigintwo"
-    },
-    "plugins": [
-      "sentry-expo"
-    ],
-    "hooks": {
-      "postPublish": [
-        {
-          "file": "sentry-expo/upload-sourcemaps",
-          "config": {
-            "organization": "single-origin",
-            "project": "single-origin-two",
-            "authToken": "7e715ec4e145463cb132c5ba1703878d7af7bd875a0b46fc805342c2da5e1226"
-          }
+    "permissions": [],
+    "package": "com.jonsamp.singleorigintwo"
+  },
+  "plugins": ["sentry-expo"],
+  "hooks": {
+    "postPublish": [
+      {
+        "file": "sentry-expo/upload-sourcemaps",
+        "config": {
+          "organization": "single-origin",
+          "project": "single-origin-two",
+          "authToken": "7e715ec4e145463cb132c5ba1703878d7af7bd875a0b46fc805342c2da5e1226"
         }
-      ]
-    },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "675cb1f0-fa3c-11e8-ac99-6374d9643cb2"
       }
+    ]
+  },
+  "runtimeVersion": {
+    "policy": "appVersion"
+  },
+  "extra": {
+    "eas": {
+      "projectId": "675cb1f0-fa3c-11e8-ac99-6374d9643cb2"
     }
   }
 }
