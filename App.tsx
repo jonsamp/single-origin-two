@@ -1,9 +1,12 @@
+import Constants from 'expo-constants';
 import * as Device from 'expo-device';
 import * as Font from 'expo-font';
 import * as Notifications from 'expo-notifications';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
+import { UpdateEventType } from 'expo-updates';
+import * as Update from 'expo-updates';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Animated, Text } from 'react-native';
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
@@ -36,12 +39,8 @@ export default function App() {
     async function getToken() {
       try {
         const result = await Notifications.getExpoPushTokenAsync();
-        console.log('😂');
-        console.log(result);
         setToken(result);
       } catch (error) {
-        console.log('😂');
-        console.error(error);
         setToken({ error });
       }
     }
@@ -100,7 +99,7 @@ export default function App() {
             style={{ backgroundColor: 'black' }}
             initialMetrics={initialWindowMetrics}>
             <Animated.View style={{ opacity: fadeAnim, flex: 1 }} onLayout={onLayoutRootView}>
-              <Text style={{ color: 'red', padding: 40 }}>{JSON.stringify(token, null, 2)}</Text>
+              <Text style={{ color: 'red', padding: 40 }}>Update 1: {Update.runtimeVersion}</Text>
               <Navigator />
             </Animated.View>
           </SafeAreaProvider>
