@@ -4,7 +4,7 @@ import * as ScreenOrientation from 'expo-screen-orientation';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Animated } from 'react-native';
+import { Animated, View, Text } from 'react-native';
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
@@ -86,6 +86,9 @@ export default function App() {
             style={{ backgroundColor: 'black' }}
             initialMetrics={initialWindowMetrics}>
             <Animated.View style={{ opacity: fadeAnim, flex: 1 }} onLayout={onLayoutRootView}>
+              <View style={{ paddingHorizontal: 20, paddingVertical: 100 }}>
+                <Text style={{ color: 'red' }}>Testing code signed update: 5</Text>
+              </View>
               <Navigator />
             </Animated.View>
           </SafeAreaProvider>

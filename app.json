@@ -19,7 +19,7 @@
       "url": "https://u.expo.dev/675cb1f0-fa3c-11e8-ac99-6374d9643cb2",
       "codeSigningCertificate": "./certs/certificate.pem",
       "codeSigningMetadata": {
-        "keyid": "main",
+        "keyid": "main-new",
         "alg": "rsa-v1_5-sha256"
       }
     },
@@ -54,7 +54,7 @@
       ]
     },
     "runtimeVersion": {
-      "policy": "appVersion"
+      "policy": "sdkVersion"
     },
     "extra": {
       "eas": {
