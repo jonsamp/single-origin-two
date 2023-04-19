@@ -75,6 +75,8 @@ export default function App() {
     return null;
   }
 
+  console.log('testing')
+
   return (
     <Provider store={store}>
       <TailwindProvider utilities={utilities}>
