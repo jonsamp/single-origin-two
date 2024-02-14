@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake';
+import { activateKeepAwakeAsync, deactivateKeepAwakeAsync } from 'expo-keep-awake';
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -49,10 +49,10 @@ function Recipe(props: RecipeProps) {
   });
 
   useEffect(function didMount() {
-    activateKeepAwake();
+    activateKeepAwakeAsync();
 
     return function willUnmount() {
-      deactivateKeepAwake();
+      deactivateKeepAwakeAsync();
     };
   }, []);
 

@@ -16,3 +16,7 @@ web-build/
 
 yarn-error.log
 android-credentials
+.envrc
+
+ios/
+android/
