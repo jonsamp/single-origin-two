@@ -1,5 +1,4 @@
 import * as Notifications from 'expo-notifications';
-import * as Permissions from 'expo-permissions';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { reminderCancelled, reminderDenied, reminderRequested } from './actions';
@@ -31,22 +30,24 @@ function* handleReminderRequested({
 }: {
   payload: { timestamp: number };
 }): any {
-  const {
-    permissions: { notifications },
-  } = yield call(Permissions.getAsync, Permissions.NOTIFICATIONS);
+  // const {
+  //   permissions: { notifications },
+  // } = yield call(Permissions.getAsync, Permissions.NOTIFICATIONS);
 
   // this only happens if you haven't ever asked or determined in the settings
-  if (notifications.status !== 'granted') {
-    const {
-      permissions: { notifications: answer },
-    } = yield call(Permissions.askAsync, Permissions.NOTIFICATIONS);
+  // if (notifications.status !== 'granted') {
+    // const {
+    //   permissions: { notifications: answer },
+    // } = yield call(Permissions.askAsync, Permissions.NOTIFICATIONS);
 
-    if (answer.status !== 'granted') {
-      return yield put(reminderDenied());
-    }
-  }
+    // if (answer.status !== 'granted') {
+    //   return yield put(reminderDenied());
+    // }
+  // }
 
-  yield call(scheduleNotification, { timestamp });
+  // yield call(scheduleNotification, { timestamp });
+
+  console.log('Reminder requested', timestamp);
 }
 
 function* handleReminderCancelled() {
